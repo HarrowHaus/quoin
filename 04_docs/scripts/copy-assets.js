@@ -16,9 +16,26 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const labRoot = path.resolve(here, "..", "..");
 const publicDir = path.resolve(here, "..", "public");
 
-const ACTIVE_TOKEN_PACK = "tokens-baseline"; // change here to re-skin the docs site
-const tokensCssSrc = path.join(labRoot, "02_reference-packs", ACTIVE_TOKEN_PACK, "tokens.css");
+// Active pack for the docs site. "baseline" lives at
+// 02_reference-packs/tokens-baseline; any harvested pack lives at
+// 03_harvest/packs/tokens-{name}. The path resolver below handles both.
+const ACTIVE_TOKEN_PACK = "tokens-geist";
+const tokensCssSrc = (await resolveActivePack(ACTIVE_TOKEN_PACK));
 const shimCssSrc = path.join(labRoot, "02_reference-packs", "demos", "shared", "tailwind-shim.css");
+
+async function resolveActivePack(name) {
+  const candidates = [
+    path.join(labRoot, "02_reference-packs", name, "tokens.css"),
+    path.join(labRoot, "03_harvest", "packs", name, "tokens.css")
+  ];
+  for (const c of candidates) {
+    try {
+      await fs.access(c);
+      return c;
+    } catch {}
+  }
+  throw new Error(`tokens.css not found for active pack "${name}"`);
+}
 
 await fs.mkdir(publicDir, { recursive: true });
 await fs.copyFile(tokensCssSrc, path.join(publicDir, "tokens.css"));
