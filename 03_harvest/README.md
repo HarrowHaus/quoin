@@ -199,8 +199,34 @@ When in doubt, omit the pack and document the omission in `REPORT.md`.
 - `03_harvest/holding/` — packs that failed the bar with a note.
 - `03_harvest/REPORT.md` — per-pack mapping decisions, ambiguous
   translations, gaps, omissions, and operator-verification asks.
-- `03_harvest/validate.js` — extended validator that asserts the
-  attribution block is present and license-coherent on every pack.
+- `03_harvest/validate.js` — validator that asserts the attribution
+  block is present and license-coherent on every pack and runs a
+  compile-test through the Phase 1 compiler.
+
+## Operator review aids
+
+Three runnable artefacts that compress the operator's manual review
+from hours into ~15 minutes:
+
+1. **Smoke gallery** — `node 03_harvest/smoke-gallery.js`. Renders the
+   canonical Phase-2 showcase page against every harvested token pack
+   and emits a single index page that links each rendering for
+   side-by-side visual review. Output:
+   `03_harvest/smoke-gallery/dist/index.html`.
+
+2. **Tier-B verification** — `node 03_harvest/verify-tier-b.js`.
+   Fetches each Tier-B pack's canonical upstream token source, saves
+   the raw payload, and writes a side-by-side colour-value comparison
+   at `03_harvest/verify-tier-b/REPORT.md`. Some sources have moved /
+   restructured; those are reported as `fetch failed` and the pack
+   remains a manual ask.
+
+3. **Dogfooding test** — see
+   [`dogfood/harrowhaus/REPORT.md`](dogfood/harrowhaus/REPORT.md). A
+   complete Harrow Haus marketing page built using only harvested
+   packs + a project-local `quoin.tokens.json`. Zero hand-written CSS.
+   Exercises the Phase 3 acceptance gate from
+   [`PHASE_GATES.md`](../PHASE_GATES.md).
 
 ## Exit criteria
 
