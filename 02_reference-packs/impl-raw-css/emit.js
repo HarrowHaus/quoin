@@ -13,10 +13,61 @@
 export function emit(input) {
   const { primitive } = input;
   const emitter = EMITTERS[primitive.name];
-  if (!emitter) {
-    throw new Error(`No emitter for primitive: ${primitive.name}`);
-  }
+  if (!emitter) return genericFallback(input);
   return emitter(input);
+}
+
+/**
+ * Generic fallback for any primitive without a dedicated emit fn.
+ * Emits the declared structure.element with an inline style attribute
+ * built from the primitive's token map. Makes impl-raw-css future-proof
+ * for any new vocab pack that declares primitives with the standard
+ * token shape.
+ */
+function genericFallback(input) {
+  const { primitive, attributes, children } = input;
+  const cssFor = {
+    background: "background",
+    color: "color",
+    borderColor: "border-color",
+    borderRadius: "border-radius",
+    fontSize: "font-size",
+    fontFamily: "font-family",
+    letterSpacing: "letter-spacing",
+    lineHeight: "line-height",
+    maxWidth: "max-width",
+    padding: "padding",
+    gap: "gap",
+    ringColor: "box-shadow"
+  };
+  const decls = {};
+  if (primitive.tokens.borderColor) {
+    decls.border = `1px solid var(${normaliseRef(primitive.tokens.borderColor)})`;
+  }
+  for (const [property, ref] of Object.entries(primitive.tokens)) {
+    if (property === "borderColor") continue; // handled above
+    const cssProp = cssFor[property];
+    if (!cssProp) continue;
+    const v = `var(${normaliseRef(ref)})`;
+    decls[cssProp] = property === "ringColor" ? `0 0 0 2px ${v}` : v;
+  }
+  const passthroughAttrs = {};
+  for (const [k, v] of Object.entries(attributes.specific)) {
+    if (k === "gap" || k === "width" || k === "min-cell-width" || k === "summary") continue;
+    passthroughAttrs[k] = v;
+  }
+  return {
+    html: el(
+      primitive.structure.element,
+      { ...(primitive.structure.attributes ?? {}), ...passthroughAttrs, style: style(decls) },
+      children,
+      primitive.children === "none"
+    )
+  };
+}
+
+function normaliseRef(ref) {
+  return ref.startsWith("--") ? ref : `--${ref}`;
 }
 
 export default emit;

@@ -24,10 +24,77 @@
 export function emit(input) {
   const { primitive } = input;
   const emitter = EMITTERS[primitive.name];
-  if (!emitter) {
-    throw new Error(`No emitter for primitive: ${primitive.name}`);
-  }
+  if (!emitter) return genericFallback(input);
   return emitter(input);
+}
+
+/**
+ * Generic fallback emitter for any primitive without a dedicated emit
+ * function. Uses the primitive's declared `structure.element` as the
+ * HTML tag and emits Tailwind arbitrary-value classes for every token
+ * reference in the primitive's `tokens` map. This makes impl-tailwind
+ * future-proof for any new vocabulary pack that declares primitives
+ * with the standard token shape.
+ *
+ * The mapping from token-property name to Tailwind utility is the same
+ * one used inside the per-primitive emitters above:
+ *   background      -> bg-[var(...)]
+ *   color           -> text-[var(...)]
+ *   borderColor     -> border-[var(...)]
+ *   borderRadius    -> rounded-[var(...)]
+ *   fontSize        -> text-[var(...)]
+ *   fontFamily      -> font-[var(...)]
+ *   letterSpacing   -> tracking-[var(...)]
+ *   lineHeight      -> leading-[var(...)]
+ *   maxWidth        -> max-w-[var(...)]
+ *   padding         -> p-[var(...)]
+ *   gap             -> gap-[var(...)]
+ *   ringColor       -> ring-[var(...)]
+ */
+function genericFallback(input) {
+  const { primitive, tokens, attributes, children } = input;
+  const utilityFor = {
+    background: "bg",
+    color: "text",
+    borderColor: "border",
+    borderRadius: "rounded",
+    fontSize: "text",
+    fontFamily: "font",
+    letterSpacing: "tracking",
+    lineHeight: "leading",
+    maxWidth: "max-w",
+    padding: "p",
+    gap: "gap",
+    ringColor: "ring"
+  };
+  const cls = [];
+  // borderColor implies border line on layout containers.
+  if (primitive.tokens.borderColor) cls.push("border");
+  for (const [property, tokenRef] of Object.entries(primitive.tokens)) {
+    const utility = utilityFor[property];
+    if (!utility) continue;
+    // tokens[property] is the resolved raw value; primitive.tokens[property]
+    // is the original reference (e.g. "--accent"). We emit the arbitrary-
+    // value class against the reference, not the resolved value.
+    const ref = tokenRef.startsWith("--") ? tokenRef : `--${tokenRef}`;
+    cls.push(`${utility}-[var(${ref})]`);
+    void tokens;
+  }
+  // Pass through any primitive-specific attributes the emitter shouldn't
+  // strip (id, data-*, aria-*, name, type, etc.).
+  const passthroughAttrs = {};
+  for (const [k, v] of Object.entries(attributes.specific)) {
+    if (k === "gap" || k === "width" || k === "min-cell-width" || k === "summary") continue;
+    passthroughAttrs[k] = v;
+  }
+  return {
+    html: el(
+      primitive.structure.element,
+      mergeAttrs(structureAttrs(primitive), { ...passthroughAttrs, class: cls.join(" ") }),
+      children,
+      primitive.children === "none"
+    )
+  };
 }
 
 export default emit;
