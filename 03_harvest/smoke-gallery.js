@@ -18,7 +18,14 @@ const COMPILER_DIST = path.resolve(LAB_ROOT, "01_compiler", "dist");
 const REF_PACKS = path.resolve(LAB_ROOT, "02_reference-packs");
 const HARVEST_PACKS = path.join(__dirname, "packs");
 const OUT = path.join(__dirname, "smoke-gallery", "dist");
-const SHOWCASE_HTML = path.join(REF_PACKS, "demos", "showcase-tailwind", "source.html");
+/**
+ * The "signature" source is purpose-built to expose each token pack's
+ * identity. It exercises every status colour (info/success/warning/
+ * critical), every surface layer, every button intent, and the type
+ * pairing — so each pack hits ~30% of the page in colour instead of
+ * the ~3% the editorial showcase managed.
+ */
+const SHOWCASE_HTML = path.join(__dirname, "smoke-source.html");
 const SHIM_CSS = path.join(REF_PACKS, "demos", "shared", "tailwind-shim.css");
 
 const url = (p) => pathToFileURL(p).href;

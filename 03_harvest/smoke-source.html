@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Signature showcase — Quoin smoke gallery</title>
+    <link rel="stylesheet" href="./tokens.css" />
+    <link rel="stylesheet" href="./impl.css" />
+  </head>
+  <body class="min-h-screen" style="background: var(--surface); color: var(--text); font-family: var(--font-sans)">
+
+    <wayfinder>
+      <a href="/">Home</a>
+      <a href="/work">Work</a>
+      <a href="/docs">Docs</a>
+      <a href="/contact">Contact</a>
+    </wayfinder>
+
+    <canvas-block>
+      <stack gap="loose">
+
+        <breadcrumb-trail>
+          <a href="/">Home</a>
+          <span>/</span>
+          <a href="/system">System</a>
+          <span>/</span>
+          <span>Signature</span>
+        </breadcrumb-trail>
+
+        <stack>
+          <authority-mark>Signature</authority-mark>
+          <lead-graf>
+            Every status colour, every surface layer, every interactive
+            primitive at full strength. This page is built to expose a
+            token pack's identity at a glance.
+          </lead-graf>
+        </stack>
+
+        <stack>
+          <recede-block>Actions</recede-block>
+          <cluster>
+            <primary-action>Primary action</primary-action>
+            <secondary-action>Secondary</secondary-action>
+            <destructive-action>Destructive</destructive-action>
+          </cluster>
+        </stack>
+
+        <stack>
+          <recede-block>Status</recede-block>
+          <alert-band intent="info">Informational. Build queue depth normal.</alert-band>
+          <alert-band intent="success">Build complete. Three new packs published.</alert-band>
+          <alert-band intent="warning">Cache reduced. Next build may be slower than usual.</alert-band>
+          <alert-band intent="critical">Build failed. One token reference unresolved in the active pack.</alert-band>
+        </stack>
+
+        <stack>
+          <recede-block>State</recede-block>
+          <cluster>
+            <active-zone>
+              <frame>
+                <recede-block>Selected row</recede-block>
+                <reading-flow><p>Active selection ring shown by border-emphasis + accent.</p></reading-flow>
+              </frame>
+            </active-zone>
+            <pending-block>
+              <reading-flow><p>Loading invoices…</p></reading-flow>
+            </pending-block>
+            <resolved-mark>Saved.</resolved-mark>
+          </cluster>
+        </stack>
+
+        <stack>
+          <recede-block>Navigation</recede-block>
+          <segment-control>
+            <button role="tab" aria-selected="true">Day</button>
+            <button role="tab">Week</button>
+            <button role="tab">Month</button>
+            <button role="tab">Year</button>
+          </segment-control>
+        </stack>
+
+        <stack>
+          <recede-block>Surfaces</recede-block>
+          <density-grid min-cell-width="240px">
+            <emphasis-card>
+              <stack>
+                <authority-mark weight="normal">Emphasis card</authority-mark>
+                <recede-block>Elevated surface with border. Card-class radius.</recede-block>
+              </stack>
+            </emphasis-card>
+            <panel>
+              <stack>
+                <authority-mark weight="normal">Panel</authority-mark>
+                <recede-block>Sectioned area on surface-elevated. Panel padding.</recede-block>
+              </stack>
+            </panel>
+            <frame>
+              <stack>
+                <authority-mark weight="normal">Frame</authority-mark>
+                <recede-block>Bounded container with structural border.</recede-block>
+              </stack>
+            </frame>
+          </density-grid>
+        </stack>
+
+        <stack>
+          <recede-block>Editorial</recede-block>
+          <emphasis-card>
+            <stack>
+              <authority-mark weight="emphasize">A line about the brand</authority-mark>
+              <reading-flow>
+                <p>
+                  Body prose sits inside reading-flow at the pack's chosen
+                  measure and leading. The font-display token sets the
+                  headline above; the font-sans token sets this paragraph.
+                  Together they expose the type pairing the source system
+                  intended.
+                </p>
+              </reading-flow>
+              <cluster>
+                <primary-action>Continue</primary-action>
+                <secondary-action>Cancel</secondary-action>
+              </cluster>
+            </stack>
+          </emphasis-card>
+
+          <pull-quote>
+            The grid is a refusal of chance.
+          </pull-quote>
+
+          <aside-note>
+            Cf. Müller-Brockmann, <em>Grid Systems</em> (1981), p. 41.
+          </aside-note>
+        </stack>
+
+        <stack>
+          <recede-block>Data</recede-block>
+          <key-value-list>
+            <dt>Surface</dt><dd>Default page background.</dd>
+            <dt>Accent</dt><dd>Primary brand colour.</dd>
+            <dt>Critical</dt><dd>Destructive / error.</dd>
+            <dt>Success</dt><dd>Positive resolution.</dd>
+            <dt>Warning</dt><dd>Caution.</dd>
+            <dt>Info</dt><dd>Neutral informational.</dd>
+          </key-value-list>
+
+          <code-block>
+            <code>--accent: oklch(60% 0.18 250);</code>
+          </code-block>
+        </stack>
+
+        <colophon>
+          Signature showcase. Composed in Quoin v0.1.
+          Pack identity ⟶ accent + status palette + type pairing + surface layering.
+        </colophon>
+
+      </stack>
+    </canvas-block>
+  </body>
+</html>
