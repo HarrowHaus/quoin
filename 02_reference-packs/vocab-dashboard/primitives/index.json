@@ -1,0 +1,260 @@
+[
+  {
+    "name": "wayfinder",
+    "category": "navigation",
+    "role": "Primary site or app navigation.",
+    "attributes": {
+      "intent":  { "values": ["primary", "secondary"], "default": "primary" },
+      "density": { "values": ["sparse", "normal", "dense"], "default": "dense" }
+    },
+    "tokens": {
+      "background": "--surface",
+      "color": "--text",
+      "borderColor": "--border"
+    },
+    "structure": { "element": "nav" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "breadcrumb-trail",
+    "category": "navigation",
+    "role": "Hierarchical position indicator.",
+    "attributes": {
+      "weight": { "values": ["recede", "normal"], "default": "recede" }
+    },
+    "tokens": {
+      "color": "--text-recede"
+    },
+    "structure": {
+      "element": "nav",
+      "attributes": { "aria-label": "breadcrumb" }
+    },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "segment-control",
+    "category": "navigation",
+    "role": "Tabbed or segmented selection of mutually exclusive options.",
+    "attributes": {
+      "density": { "values": ["sparse", "normal", "dense"], "default": "dense" }
+    },
+    "tokens": {
+      "background": "--surface-recessed",
+      "borderRadius": "--radius-md"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": { "role": "tablist" }
+    },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "jump-list",
+    "category": "navigation",
+    "role": "Anchor-style internal page navigation (table of contents, on-page nav).",
+    "attributes": {
+      "density": { "values": ["sparse", "normal", "dense"], "default": "dense" }
+    },
+    "tokens": {
+      "color": "--text-recede",
+      "gap": "--space-stack-compact"
+    },
+    "structure": { "element": "nav" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "paginator",
+    "category": "navigation",
+    "role": "Sequential navigation between paged content.",
+    "attributes": {
+      "density": { "values": ["sparse", "normal", "dense"], "default": "normal" }
+    },
+    "tokens": {
+      "color": "--text",
+      "borderColor": "--border"
+    },
+    "structure": { "element": "nav" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+
+  {
+    "name": "active-zone",
+    "category": "state",
+    "role": "Currently selected or in-focus region.",
+    "attributes": {
+      "intent": { "values": ["primary", "secondary"], "default": "primary" }
+    },
+    "tokens": {
+      "background": "--surface-elevated",
+      "borderColor": "--border-emphasis",
+      "ringColor": "--accent"
+    },
+    "structure": { "element": "div" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "pending-block",
+    "category": "state",
+    "role": "Loading or processing state placeholder.",
+    "attributes": {
+      "weight": { "values": ["recede", "normal"], "default": "recede" }
+    },
+    "tokens": {
+      "background": "--surface-recessed",
+      "color": "--text-recede"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": { "role": "status" }
+    },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "resolved-mark",
+    "category": "state",
+    "role": "Completion or success indicator.",
+    "attributes": {
+      "intent": { "values": ["success", "primary"], "default": "success" }
+    },
+    "tokens": { "color": "--success" },
+    "structure": { "element": "div" },
+    "children": "phrasing-content",
+    "scope": "block"
+  },
+  {
+    "name": "alert-band",
+    "category": "state",
+    "role": "System messaging strip.",
+    "attributes": {
+      "intent": { "values": ["info", "success", "warning", "critical"], "default": "info" }
+    },
+    "tokens": {
+      "background": "--info",
+      "color": "--text-on-info"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": { "role": "alert" }
+    },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "empty-state",
+    "category": "state",
+    "role": "No-content placeholder with optional call to action.",
+    "attributes": {
+      "weight": { "values": ["recede", "normal"], "default": "recede" }
+    },
+    "tokens": {
+      "color": "--text-recede",
+      "padding": "--space-panel"
+    },
+    "structure": { "element": "div" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+
+  {
+    "name": "primary-action",
+    "category": "interactive",
+    "role": "Main call-to-action button.",
+    "attributes": {
+      "intent": { "values": ["primary", "secondary"], "default": "primary" },
+      "weight": { "values": ["normal", "emphasize"], "default": "emphasize" }
+    },
+    "tokens": {
+      "background": "--accent",
+      "color": "--text-on-accent",
+      "borderRadius": "--radius-md"
+    },
+    "structure": {
+      "element": "button",
+      "attributes": { "type": "button" }
+    },
+    "children": "phrasing-content",
+    "scope": "inline"
+  },
+  {
+    "name": "secondary-action",
+    "category": "interactive",
+    "role": "Supporting button or link-action.",
+    "attributes": {
+      "intent": { "values": ["primary", "secondary"], "default": "secondary" }
+    },
+    "tokens": {
+      "borderColor": "--border",
+      "color": "--text",
+      "borderRadius": "--radius-md"
+    },
+    "structure": {
+      "element": "button",
+      "attributes": { "type": "button" }
+    },
+    "children": "phrasing-content",
+    "scope": "inline"
+  },
+  {
+    "name": "destructive-action",
+    "category": "interactive",
+    "role": "Action requiring confirmation due to irreversibility.",
+    "attributes": {
+      "intent": { "values": ["critical"], "default": "critical" }
+    },
+    "tokens": {
+      "background": "--critical",
+      "color": "--text-on-critical",
+      "borderRadius": "--radius-md"
+    },
+    "structure": {
+      "element": "button",
+      "attributes": { "type": "button" }
+    },
+    "children": "phrasing-content",
+    "scope": "inline"
+  },
+  {
+    "name": "input-cell",
+    "category": "interactive",
+    "role": "Text input field.",
+    "attributes": {
+      "density": { "values": ["sparse", "normal", "dense"], "default": "dense" },
+      "intent":  { "values": ["primary", "secondary"], "default": "primary" },
+      "type":        { "values": [], "default": "text", "specific": true },
+      "name":        { "values": [], "default": "",     "specific": true },
+      "placeholder": { "values": [], "default": "",     "specific": true }
+    },
+    "tokens": {
+      "borderColor": "--border",
+      "color": "--text",
+      "borderRadius": "--radius-md",
+      "background": "--surface"
+    },
+    "structure": { "element": "input" },
+    "children": "none",
+    "scope": "inline"
+  },
+  {
+    "name": "disclosure",
+    "category": "interactive",
+    "role": "Collapsible content region.",
+    "attributes": {
+      "summary": { "values": [], "default": "Details", "specific": true }
+    },
+    "tokens": {
+      "borderColor": "--border",
+      "color": "--text",
+      "borderRadius": "--radius-md"
+    },
+    "structure": { "element": "details" },
+    "children": "flow-content",
+    "scope": "block"
+  }
+]

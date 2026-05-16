@@ -1,0 +1,19 @@
+{
+  "name": "@quoin/vocab-dashboard",
+  "version": "0.1.0",
+  "description": "Dashboard vocabulary pack for Quoin — 15 navigation, state, and interactive primitives.",
+  "license": "MIT",
+  "main": "./primitives/index.json",
+  "files": [
+    "quoin.pack.json",
+    "primitives/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "vocabulary", "dashboard", "data-dense", "ui"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "02_reference-packs/vocab-dashboard"
+  }
+}

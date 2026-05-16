@@ -1,0 +1,19 @@
+{
+  "name": "@quoin/vocab-editorial",
+  "version": "0.1.0",
+  "description": "Editorial vocabulary pack for Quoin — 21 primitives covering editorial, layout, and content categories.",
+  "license": "MIT",
+  "main": "./primitives/index.json",
+  "files": [
+    "quoin.pack.json",
+    "primitives/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "vocabulary", "editorial", "essay", "documentation"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "02_reference-packs/vocab-editorial"
+  }
+}

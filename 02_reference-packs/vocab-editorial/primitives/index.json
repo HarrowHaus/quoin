@@ -1,0 +1,340 @@
+[
+  {
+    "name": "authority-mark",
+    "category": "editorial",
+    "role": "Dominant editorial mark; the primary headline-class element of a view.",
+    "attributes": {
+      "intent": { "values": ["primary", "secondary"], "default": "primary" },
+      "weight": { "values": ["normal", "emphasize", "dominate"], "default": "dominate" }
+    },
+    "tokens": {
+      "fontSize": "--type-size-display",
+      "fontFamily": "--font-display",
+      "color": "--text-emphasis",
+      "letterSpacing": "--tracking-tight",
+      "lineHeight": "--leading-tight"
+    },
+    "structure": { "element": "h1" },
+    "children": "phrasing-content",
+    "scope": "block"
+  },
+  {
+    "name": "recede-block",
+    "category": "editorial",
+    "role": "Content that intentionally backs off. Supporting role, lower visual weight.",
+    "attributes": {
+      "intent": { "values": ["primary", "secondary", "tertiary", "supporting"], "default": "supporting" },
+      "weight": { "values": ["recede", "normal"], "default": "recede" }
+    },
+    "tokens": {
+      "fontSize": "--type-size-base",
+      "color": "--text-recede"
+    },
+    "structure": { "element": "div" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "emphasis-card",
+    "category": "editorial",
+    "role": "Single highlighted content unit with structural separation from surrounding flow.",
+    "attributes": {
+      "intent": { "values": ["primary", "secondary", "tertiary"], "default": "primary" },
+      "weight": { "values": ["normal", "emphasize"], "default": "emphasize" },
+      "density": { "values": ["sparse", "normal", "dense"], "default": "normal" }
+    },
+    "tokens": {
+      "background": "--surface-elevated",
+      "borderColor": "--border",
+      "padding": "--space-card",
+      "borderRadius": "--radius-card"
+    },
+    "structure": { "element": "section" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "reading-flow",
+    "category": "editorial",
+    "role": "Long-form body text container with optimised reading-line measure and rhythm.",
+    "attributes": {
+      "register": { "values": ["formal", "editorial", "technical"], "default": "editorial" },
+      "density":  { "values": ["sparse", "normal", "dense"], "default": "normal" }
+    },
+    "tokens": {
+      "fontSize": "--type-size-base",
+      "color": "--text",
+      "lineHeight": "--leading-prose",
+      "maxWidth": "--measure-prose"
+    },
+    "structure": { "element": "div" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "aside-note",
+    "category": "editorial",
+    "role": "Parenthetical content set apart from main flow.",
+    "attributes": {
+      "intent": { "values": ["tertiary", "supporting"], "default": "tertiary" },
+      "scope":  { "values": ["block", "inline"], "default": "block" }
+    },
+    "tokens": {
+      "background": "--surface-recessed",
+      "color": "--text-recede",
+      "borderColor": "--border"
+    },
+    "structure": { "element": "aside" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "lead-graf",
+    "category": "editorial",
+    "role": "Opening paragraph with elevated weight.",
+    "attributes": {
+      "weight": { "values": ["normal", "emphasize"], "default": "emphasize" }
+    },
+    "tokens": {
+      "fontSize": "--type-size-xl",
+      "color": "--text-emphasis",
+      "lineHeight": "--leading-prose"
+    },
+    "structure": { "element": "p" },
+    "children": "phrasing-content",
+    "scope": "block"
+  },
+  {
+    "name": "colophon",
+    "category": "editorial",
+    "role": "Metadata footer of an article or page.",
+    "attributes": {
+      "register": { "values": ["formal", "technical"], "default": "formal" },
+      "weight":   { "values": ["recede", "normal"], "default": "recede" }
+    },
+    "tokens": {
+      "fontSize": "--type-size-sm",
+      "color": "--text-recede",
+      "fontFamily": "--font-mono",
+      "letterSpacing": "--tracking-wide"
+    },
+    "structure": { "element": "footer" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "pull-quote",
+    "category": "editorial",
+    "role": "Extracted emphasis pulled from surrounding body.",
+    "attributes": {
+      "weight": { "values": ["normal", "emphasize"], "default": "emphasize" }
+    },
+    "tokens": {
+      "fontSize": "--type-size-3xl",
+      "color": "--text-emphasis",
+      "fontFamily": "--font-display",
+      "borderColor": "--border-emphasis"
+    },
+    "structure": { "element": "blockquote" },
+    "children": "phrasing-content",
+    "scope": "block"
+  },
+
+  {
+    "name": "stack",
+    "category": "layout",
+    "role": "Vertical arrangement with consistent rhythm between children.",
+    "attributes": {
+      "density": { "values": ["sparse", "normal", "dense"], "default": "normal" },
+      "gap":     { "values": ["compact", "comfortable", "loose"], "default": "comfortable", "specific": true }
+    },
+    "tokens": { "gap": "--space-stack-normal" },
+    "structure": { "element": "div" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "cluster",
+    "category": "layout",
+    "role": "Horizontal arrangement that wraps. Used for tags, action groups, inline collections.",
+    "attributes": {
+      "density": { "values": ["sparse", "normal", "dense"], "default": "normal" }
+    },
+    "tokens": { "gap": "--space-inline-normal" },
+    "structure": { "element": "div" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "frame",
+    "category": "layout",
+    "role": "Bounded container with optional structural lines.",
+    "attributes": {
+      "weight":  { "values": ["normal", "emphasize"], "default": "normal" },
+      "density": { "values": ["sparse", "normal", "dense"], "default": "normal" }
+    },
+    "tokens": {
+      "borderColor": "--border",
+      "padding": "--space-frame",
+      "borderRadius": "--radius-frame"
+    },
+    "structure": { "element": "div" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "density-grid",
+    "category": "layout",
+    "role": "Content-dense grid for dashboards, indexes, gallery surfaces.",
+    "attributes": {
+      "density":        { "values": ["normal", "dense", "ultra"], "default": "dense" },
+      "intent":         { "values": ["primary", "secondary"], "default": "primary" },
+      "min-cell-width": { "values": [], "default": "200px", "specific": true }
+    },
+    "tokens": { "gap": "--space-inline-tight" },
+    "structure": { "element": "div" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "panel",
+    "category": "layout",
+    "role": "Sectioned area within a larger layout.",
+    "attributes": {
+      "weight":  { "values": ["normal", "emphasize"], "default": "normal" },
+      "density": { "values": ["sparse", "normal", "dense"], "default": "normal" }
+    },
+    "tokens": {
+      "background": "--surface-elevated",
+      "padding": "--space-panel"
+    },
+    "structure": { "element": "section" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "rail",
+    "category": "layout",
+    "role": "Fixed-width sidebar.",
+    "attributes": {
+      "weight": { "values": ["normal", "recede"], "default": "normal" },
+      "width":  { "values": ["compact", "comfortable"], "default": "comfortable", "specific": true }
+    },
+    "tokens": {
+      "borderColor": "--border",
+      "padding": "--space-panel"
+    },
+    "structure": { "element": "aside" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "canvas-block",
+    "category": "layout",
+    "role": "Flexible work area; the primary content region of a layout.",
+    "attributes": {
+      "density": { "values": ["sparse", "normal", "dense"], "default": "normal" }
+    },
+    "tokens": { "padding": "--space-panel" },
+    "structure": { "element": "main" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+
+  {
+    "name": "media-frame",
+    "category": "content",
+    "role": "Image or video container with optional caption.",
+    "attributes": {
+      "weight":  { "values": ["normal", "emphasize"], "default": "normal" },
+      "density": { "values": ["sparse", "normal", "dense"], "default": "normal" }
+    },
+    "tokens": {
+      "borderRadius": "--radius-media",
+      "borderColor": "--border"
+    },
+    "structure": { "element": "figure" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "figure-cite",
+    "category": "content",
+    "role": "Illustrated reference with attribution.",
+    "attributes": {
+      "register": { "values": ["formal", "editorial"], "default": "editorial" },
+      "weight":   { "values": ["normal", "recede"], "default": "normal" }
+    },
+    "tokens": {
+      "color": "--text-recede",
+      "gap": "--space-stack-compact"
+    },
+    "structure": { "element": "figure" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "data-table",
+    "category": "content",
+    "role": "Tabular data presentation.",
+    "attributes": {
+      "density": { "values": ["sparse", "normal", "dense"], "default": "normal" }
+    },
+    "tokens": {
+      "color": "--text",
+      "borderColor": "--border",
+      "gap": "--space-inline-tight"
+    },
+    "structure": { "element": "div" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "key-value-list",
+    "category": "content",
+    "role": "Definition-list-style key/value pairs.",
+    "attributes": {
+      "density":  { "values": ["sparse", "normal", "dense"], "default": "normal" },
+      "register": { "values": ["formal", "technical"], "default": "formal" }
+    },
+    "tokens": {
+      "color": "--text",
+      "gap": "--space-stack-compact"
+    },
+    "structure": { "element": "dl" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "timeline-stack",
+    "category": "content",
+    "role": "Sequential events arranged temporally.",
+    "attributes": {
+      "density": { "values": ["sparse", "normal", "dense"], "default": "normal" }
+    },
+    "tokens": {
+      "borderColor": "--border",
+      "color": "--text",
+      "gap": "--space-stack-normal"
+    },
+    "structure": { "element": "ol" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "code-block",
+    "category": "content",
+    "role": "Block-level code presentation.",
+    "attributes": {
+      "density": { "values": ["sparse", "normal", "dense"], "default": "normal" }
+    },
+    "tokens": {
+      "fontFamily": "--font-mono",
+      "background": "--surface-recessed",
+      "borderRadius": "--radius-md"
+    },
+    "structure": { "element": "pre" },
+    "children": "flow-content",
+    "scope": "block"
+  }
+]
