@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Get started — Quoin docs</title>
+    <link rel="stylesheet" href="/tokens.css" />
+    <link rel="stylesheet" href="/impl.css" />
+    <link rel="stylesheet" href="/site.css" />
+  </head>
+  <body class="min-h-screen" style="background: var(--surface); color: var(--text); font-family: var(--font-sans)">
+
+    <wayfinder>
+      <a href="/">Quoin</a>
+      <a href="/spec/">Spec</a>
+      <a href="/playground/">Playground</a>
+      <a href="/packs/">Packs</a>
+      <a href="/start/">Get started</a>
+      <a href="https://github.com/harrowhaus/quoin">GitHub</a>
+    </wayfinder>
+
+    <canvas-block>
+      <stack gap="loose">
+        <breadcrumb-trail>
+          <a href="/">Home</a>
+          <span>/</span>
+          <span>Get started</span>
+        </breadcrumb-trail>
+
+        <authority-mark>Get started</authority-mark>
+
+        <lead-graf>
+          Five minutes if you've used Tailwind. The flow: install the compiler,
+          install one pack of each type, write a page, build.
+        </lead-graf>
+
+        <stack>
+          <authority-mark weight="emphasize">1. Install</authority-mark>
+          <reading-flow>
+            <p>
+              The compiler runs at build time. You'll also want one token
+              pack, one vocabulary pack, and one implementation pack. The
+              defaults below are a safe starting point — swap any of them
+              later without changing your source.
+            </p>
+          </reading-flow>
+          <code-block>
+<code>npm install --save-dev @quoin/compiler
+npm install @quoin/tokens-baseline @quoin/vocab-editorial @quoin/impl-tailwind</code>
+          </code-block>
+        </stack>
+
+        <stack>
+          <authority-mark weight="emphasize">2. Wire the Vite plugin</authority-mark>
+          <reading-flow>
+            <p>
+              The plugin processes <code>index.html</code> and any other HTML
+              file Vite picks up. It transforms every Quoin semantic element
+              into standard HTML using your active pack stack.
+            </p>
+          </reading-flow>
+          <code-block>
+<code>// vite.config.ts
+import { defineConfig } from "vite";
+import { quoin } from "@quoin/compiler/vite";
+
+export default defineConfig({
+  plugins: [
+    quoin({
+      tokenPack: "@quoin/tokens-baseline",
+      vocabularyPacks: ["@quoin/vocab-editorial"],
+      implementationPack: "@quoin/impl-tailwind",
+      projectTokens: {
+        // Override any semantic token without forking a pack.
+        // accent: "oklch(58% 0.18 250)",
+        // "font-display": "Inter, system-ui, sans-serif"
+      }
+    })
+  ]
+});</code>
+          </code-block>
+        </stack>
+
+        <stack>
+          <authority-mark weight="emphasize">3. Write a page</authority-mark>
+          <reading-flow>
+            <p>
+              Author in semantic elements. The compiler resolves each tag
+              against the active vocabulary pack, applies your token
+              values, and emits standard HTML and CSS at build time.
+            </p>
+          </reading-flow>
+          <code-block>
+<code>&lt;!-- src/index.html --&gt;
+&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;link rel="stylesheet" href="/tokens.css" /&gt;
+    &lt;link rel="stylesheet" href="/styles.css" /&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;canvas-block&gt;
+      &lt;stack gap="loose"&gt;
+        &lt;authority-mark&gt;My first Quoin page&lt;/authority-mark&gt;
+        &lt;lead-graf&gt;
+          A short intro. The headline and this paragraph are semantic
+          elements; the compiler is doing the styling work.
+        &lt;/lead-graf&gt;
+        &lt;reading-flow&gt;
+          &lt;p&gt;Body prose lives inside reading-flow…&lt;/p&gt;
+        &lt;/reading-flow&gt;
+        &lt;cluster&gt;
+          &lt;primary-action&gt;Save&lt;/primary-action&gt;
+          &lt;secondary-action&gt;Cancel&lt;/secondary-action&gt;
+        &lt;/cluster&gt;
+      &lt;/stack&gt;
+    &lt;/canvas-block&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code>
+          </code-block>
+        </stack>
+
+        <stack>
+          <authority-mark weight="emphasize">4. Build</authority-mark>
+          <code-block>
+<code>npm run build</code>
+          </code-block>
+          <reading-flow>
+            <p>
+              <code>dist/index.html</code> contains zero Quoin tags. The
+              <code>&lt;authority-mark&gt;</code> compiled to an
+              <code>&lt;h1&gt;</code>, <code>&lt;primary-action&gt;</code>
+              compiled to a <code>&lt;button&gt;</code>, and Tailwind
+              classes (or inline styles, if you used <code>impl-raw-css</code>)
+              do the visual work.
+            </p>
+          </reading-flow>
+        </stack>
+
+        <stack>
+          <authority-mark weight="emphasize">Where next</authority-mark>
+          <feature-grid min-cell-width="260px">
+            <feature-cell>
+              <stack>
+                <lead-graf weight="emphasize"><a href="/spec/primitives/">36 v1 primitives</a></lead-graf>
+                <recede-block>The full vocabulary: editorial, layout, navigation, state, content, interactive.</recede-block>
+              </stack>
+            </feature-cell>
+            <feature-cell>
+              <stack>
+                <lead-graf weight="emphasize"><a href="/packs/">Switch packs</a></lead-graf>
+                <recede-block>Forty harvested token packs covering most major open-source design systems.</recede-block>
+              </stack>
+            </feature-cell>
+            <feature-cell>
+              <stack>
+                <lead-graf weight="emphasize"><a href="/playground/">Try in the playground</a></lead-graf>
+                <recede-block>Type semantic markup; see compiled HTML, CSS, and visual render in real time.</recede-block>
+              </stack>
+            </feature-cell>
+            <feature-cell>
+              <stack>
+                <lead-graf weight="emphasize"><a href="/migrate/tailwind/">Coming from Tailwind?</a></lead-graf>
+                <recede-block>Side-by-side translation. Plus DaisyUI and shadcn/ui migration guides.</recede-block>
+              </stack>
+            </feature-cell>
+          </feature-grid>
+        </stack>
+
+        <colophon>Get started authored in Quoin. Source: 04_docs/start/index.html.</colophon>
+      </stack>
+    </canvas-block>
+  </body>
+</html>

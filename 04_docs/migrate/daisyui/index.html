@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Migrate from DaisyUI — Quoin docs</title>
+    <link rel="stylesheet" href="/tokens.css" />
+    <link rel="stylesheet" href="/impl.css" />
+    <link rel="stylesheet" href="/site.css" />
+  </head>
+  <body class="min-h-screen" style="background: var(--surface); color: var(--text); font-family: var(--font-sans)">
+
+    <wayfinder>
+      <a href="/">Quoin</a>
+      <a href="/spec/">Spec</a>
+      <a href="/playground/">Playground</a>
+      <a href="/packs/">Packs</a>
+      <a href="/start/">Get started</a>
+      <a href="https://github.com/harrowhaus/quoin">GitHub</a>
+    </wayfinder>
+
+    <canvas-block>
+      <stack gap="loose">
+        <breadcrumb-trail>
+          <a href="/">Home</a>
+          <span>/</span>
+          <span>Migrate</span>
+          <span>/</span>
+          <span>From DaisyUI</span>
+        </breadcrumb-trail>
+
+        <authority-mark>Migrate from DaisyUI</authority-mark>
+
+        <lead-graf>
+          DaisyUI proved that semantic compression on top of Tailwind works.
+          Quoin extends the same compression one layer higher — from class
+          names to elements. If you like DaisyUI, you'll find Quoin
+          familiar; the move is mostly a syntax shift.
+        </lead-graf>
+
+        <alert-band intent="info">
+          DaisyUI is the prior art that validated this whole direction. Quoin's vocabulary borrows the same semantic instinct (alert, badge, card, divider) and lifts it from <code>class</code> attributes into element names.
+        </alert-band>
+
+        <stack>
+          <authority-mark weight="emphasize">The shape of the change</authority-mark>
+          <reading-flow>
+            <p>
+              DaisyUI ships a Tailwind plugin that adds semantic class names
+              like <code>btn-primary</code>, <code>alert alert-warning</code>,
+              <code>card card-bordered</code>. Quoin lifts those into HTML
+              element names, with the same naming convention preserved in
+              <code>@quoin/vocab-daisy</code>.
+            </p>
+          </reading-flow>
+          <code-block>
+<code>&lt;!-- DaisyUI --&gt;
+&lt;button class="btn btn-primary"&gt;Save&lt;/button&gt;
+
+&lt;div role="alert" class="alert alert-warning"&gt;
+  Build will run with reduced cache.
+&lt;/div&gt;
+
+&lt;div class="card card-bordered bg-base-100"&gt;
+  &lt;div class="card-body"&gt;
+    &lt;h2 class="card-title"&gt;Key takeaway&lt;/h2&gt;
+    &lt;p&gt;The aesthetic is the swappable vendor.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code>
+          </code-block>
+          <code-block>
+<code>&lt;!-- Quoin --&gt;
+&lt;primary-action&gt;Save&lt;/primary-action&gt;
+
+&lt;alert-tile intent="warning"&gt;
+  Build will run with reduced cache.
+&lt;/alert-tile&gt;
+
+&lt;card-bordered&gt;
+  &lt;stack&gt;
+    &lt;lead-graf weight="emphasize"&gt;Key takeaway&lt;/lead-graf&gt;
+    &lt;reading-flow&gt;
+      &lt;p&gt;The aesthetic is the swappable vendor.&lt;/p&gt;
+    &lt;/reading-flow&gt;
+  &lt;/stack&gt;
+&lt;/card-bordered&gt;</code>
+          </code-block>
+        </stack>
+
+        <stack>
+          <authority-mark weight="emphasize">Translation table</authority-mark>
+          <data-table>
+            <table style="width: 100%; border-collapse: collapse; font-size: var(--type-size-sm)">
+              <thead>
+                <tr>
+                  <th style="text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border)">DaisyUI</th>
+                  <th style="text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border)">Quoin (vocab-daisy)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td style="padding: 0.5rem 0.75rem"><code>btn btn-primary</code></td><td style="padding: 0.5rem 0.75rem"><code>&lt;primary-action&gt;</code></td></tr>
+                <tr><td style="padding: 0.5rem 0.75rem"><code>btn btn-outline</code></td><td style="padding: 0.5rem 0.75rem"><code>&lt;secondary-action&gt;</code></td></tr>
+                <tr><td style="padding: 0.5rem 0.75rem"><code>btn btn-error</code></td><td style="padding: 0.5rem 0.75rem"><code>&lt;destructive-action&gt;</code></td></tr>
+                <tr><td style="padding: 0.5rem 0.75rem"><code>alert alert-info</code></td><td style="padding: 0.5rem 0.75rem"><code>&lt;alert-tile intent="info"&gt;</code></td></tr>
+                <tr><td style="padding: 0.5rem 0.75rem"><code>alert alert-warning</code></td><td style="padding: 0.5rem 0.75rem"><code>&lt;alert-tile intent="warning"&gt;</code></td></tr>
+                <tr><td style="padding: 0.5rem 0.75rem"><code>badge badge-primary</code></td><td style="padding: 0.5rem 0.75rem"><code>&lt;badge-tag intent="primary"&gt;</code></td></tr>
+                <tr><td style="padding: 0.5rem 0.75rem"><code>card card-bordered</code></td><td style="padding: 0.5rem 0.75rem"><code>&lt;card-bordered&gt;</code></td></tr>
+                <tr><td style="padding: 0.5rem 0.75rem"><code>divider</code></td><td style="padding: 0.5rem 0.75rem"><code>&lt;divider-line&gt;</code></td></tr>
+                <tr><td style="padding: 0.5rem 0.75rem"><code>indicator-item</code></td><td style="padding: 0.5rem 0.75rem"><code>&lt;indicator-dot&gt;</code></td></tr>
+                <tr><td style="padding: 0.5rem 0.75rem"><code>modal</code></td><td style="padding: 0.5rem 0.75rem"><code>&lt;modal-shell&gt;</code></td></tr>
+                <tr><td style="padding: 0.5rem 0.75rem"><code>tabs</code></td><td style="padding: 0.5rem 0.75rem"><code>&lt;segment-control&gt;</code></td></tr>
+                <tr><td style="padding: 0.5rem 0.75rem"><code>breadcrumbs</code></td><td style="padding: 0.5rem 0.75rem"><code>&lt;breadcrumb-trail&gt;</code></td></tr>
+                <tr><td style="padding: 0.5rem 0.75rem"><code>navbar</code></td><td style="padding: 0.5rem 0.75rem"><code>&lt;wayfinder&gt;</code></td></tr>
+              </tbody>
+            </table>
+          </data-table>
+        </stack>
+
+        <stack>
+          <authority-mark weight="emphasize">Recommended pack stack</authority-mark>
+          <code-block>
+<code>npm install @quoin/tokens-baseline @quoin/vocab-daisy @quoin/vocab-editorial @quoin/impl-tailwind</code>
+          </code-block>
+          <reading-flow>
+            <p>
+              <code>vocab-daisy</code> adds the alert / badge / card /
+              divider / indicator / modal primitives that match the DaisyUI
+              instinct. <code>vocab-editorial</code> covers the
+              long-form reading primitives DaisyUI doesn't ship.
+              <code>impl-tailwind</code> emits Tailwind v4 classes you already
+              know.
+            </p>
+          </reading-flow>
+        </stack>
+
+        <stack>
+          <authority-mark weight="emphasize">Theming</authority-mark>
+          <reading-flow>
+            <p>
+              DaisyUI ships ~35 named themes via CSS variables. Quoin's
+              equivalent is the token-pack mechanism: pick any of the
+              <a href="/packs/">forty harvested packs</a> or supply a
+              project-local <code>quoin.tokens.json</code> override. Same
+              CSS-variable approach, broader pack ecosystem.
+            </p>
+          </reading-flow>
+        </stack>
+
+        <colophon>Migration guide authored in Quoin. Source: 04_docs/migrate/daisyui/index.html.</colophon>
+      </stack>
+    </canvas-block>
+  </body>
+</html>

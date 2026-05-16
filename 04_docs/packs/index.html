@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pack browser — Quoin docs</title>
+    <link rel="stylesheet" href="/tokens.css" />
+    <link rel="stylesheet" href="/impl.css" />
+    <link rel="stylesheet" href="/site.css" />
+  </head>
+  <body class="min-h-screen" style="background: var(--surface); color: var(--text); font-family: var(--font-sans)">
+
+    <wayfinder>
+      <a href="/">Quoin</a>
+      <a href="/spec/">Spec</a>
+      <a href="/playground/">Playground</a>
+      <a href="/packs/">Packs</a>
+      <a href="/start/">Get started</a>
+      <a href="https://github.com/harrowhaus/quoin">GitHub</a>
+    </wayfinder>
+
+    <canvas-block>
+      <stack gap="loose">
+        <breadcrumb-trail>
+          <a href="/">Home</a>
+          <span>/</span>
+          <span>Packs</span>
+        </breadcrumb-trail>
+
+        <authority-mark>Pack browser</authority-mark>
+
+        <lead-graf>
+          Every Quoin pack. Five reference packs that ship as the canonical
+          starting point, plus harvested packs translating major open-source
+          design systems onto the Quoin token / vocabulary contracts.
+        </lead-graf>
+
+        <alert-band intent="info">
+          The catalog is populated from the local <code>02_reference-packs/</code> and <code>03_harvest/packs/</code> directories until Phase 5 publishes packs to npm. After publication, the same page queries <code>https://registry.npmjs.org/@quoin/*</code> at build time and emits the same shape.
+        </alert-band>
+
+        <stack>
+          <cluster>
+            <input-cell type="search" name="q" placeholder="Search packs by name, tag, or source system…" />
+          </cluster>
+          <segment-control>
+            <button role="tab" type="button" data-filter="all" aria-selected="true">All</button>
+            <button role="tab" type="button" data-filter="token">Token</button>
+            <button role="tab" type="button" data-filter="vocabulary">Vocabulary</button>
+            <button role="tab" type="button" data-filter="implementation">Implementation</button>
+          </segment-control>
+        </stack>
+
+        <div id="pack-counts" style="font-size: var(--type-size-sm); color: var(--text-recede)">Loading catalog…</div>
+
+        <density-grid id="pack-grid" min-cell-width="320px">
+          <recede-block>Loading…</recede-block>
+        </density-grid>
+
+        <colophon>Pack browser authored in Quoin. Source: 04_docs/packs/index.html. Catalog: 04_docs/generated/packs.json.</colophon>
+      </stack>
+    </canvas-block>
+
+    <script type="module" src="/src/packs/main.ts"></script>
+  </body>
+</html>

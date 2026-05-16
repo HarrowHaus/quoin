@@ -1,0 +1,25 @@
+{
+  "name": "@quoin/docs",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Quoin documentation site. Built with Vite multi-page + the Quoin Vite plugin so the site itself is a working demonstration of the language.",
+  "scripts": {
+    "prebuild": "node scripts/build-spec.js && node scripts/build-pack-catalog.js && node scripts/copy-assets.js",
+    "predev": "node scripts/build-spec.js && node scripts/build-pack-catalog.js && node scripts/copy-assets.js",
+    "prepreview": "node scripts/build-spec.js && node scripts/build-pack-catalog.js && node scripts/copy-assets.js",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "marked": "^14.1.4"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "vite": "^6.0.5"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

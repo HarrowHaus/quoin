@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Migrate from shadcn/ui — Quoin docs</title>
+    <link rel="stylesheet" href="/tokens.css" />
+    <link rel="stylesheet" href="/impl.css" />
+    <link rel="stylesheet" href="/site.css" />
+  </head>
+  <body class="min-h-screen" style="background: var(--surface); color: var(--text); font-family: var(--font-sans)">
+
+    <wayfinder>
+      <a href="/">Quoin</a>
+      <a href="/spec/">Spec</a>
+      <a href="/playground/">Playground</a>
+      <a href="/packs/">Packs</a>
+      <a href="/start/">Get started</a>
+      <a href="https://github.com/harrowhaus/quoin">GitHub</a>
+    </wayfinder>
+
+    <canvas-block>
+      <stack gap="loose">
+        <breadcrumb-trail>
+          <a href="/">Home</a>
+          <span>/</span>
+          <span>Migrate</span>
+          <span>/</span>
+          <span>From shadcn/ui</span>
+        </breadcrumb-trail>
+
+        <authority-mark>Migrate from shadcn/ui</authority-mark>
+
+        <lead-graf>
+          shadcn/ui ships React components you copy into your repo and own
+          forever. Quoin ships semantic HTML elements you write in templates.
+          Different unit of authorship; the same instinct that
+          intent-bearing names beat utility strings.
+        </lead-graf>
+
+        <alert-band intent="info">
+          Quoin is not a React component library. It's a build-time compiler. Use it in any framework — React, Svelte, Astro, plain HTML. The compiler runs at build time and emits standard HTML.
+        </alert-band>
+
+        <stack>
+          <authority-mark weight="emphasize">When to use which</authority-mark>
+          <reading-flow>
+            <p>
+              <strong>Keep shadcn/ui</strong> for interactive React
+              components that need state, focus management, or
+              accessibility behavior — dialogs, command palettes,
+              dropdown menus, comboboxes. Those are real React work.
+            </p>
+            <p>
+              <strong>Use Quoin</strong> for the surrounding page —
+              layout, editorial chrome, marketing sections, forms,
+              dashboards. Anything where the value of authoring is
+              <em>semantic clarity</em>, not behavior.
+            </p>
+            <p>
+              The two compose. A Quoin source file can include a React
+              island for an interactive shadcn component; the rest of
+              the page is Quoin tags compiled at build time.
+            </p>
+          </reading-flow>
+        </stack>
+
+        <stack>
+          <authority-mark weight="emphasize">The shape of the change</authority-mark>
+          <code-block>
+<code>// shadcn/ui (React)
+import { Button } from "@/components/ui/button"
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
+
+&lt;Card&gt;
+  &lt;CardHeader&gt;&lt;CardTitle&gt;Key takeaway&lt;/CardTitle&gt;&lt;/CardHeader&gt;
+  &lt;CardContent&gt;
+    &lt;p className="text-muted-foreground"&gt;
+      The aesthetic is the swappable vendor.
+    &lt;/p&gt;
+    &lt;Button&gt;Continue&lt;/Button&gt;
+  &lt;/CardContent&gt;
+&lt;/Card&gt;</code>
+          </code-block>
+          <code-block>
+<code>&lt;!-- Quoin --&gt;
+&lt;emphasis-card&gt;
+  &lt;stack&gt;
+    &lt;lead-graf weight="emphasize"&gt;Key takeaway&lt;/lead-graf&gt;
+    &lt;recede-block&gt;
+      The aesthetic is the swappable vendor.
+    &lt;/recede-block&gt;
+    &lt;primary-action&gt;Continue&lt;/primary-action&gt;
+  &lt;/stack&gt;
+&lt;/emphasis-card&gt;</code>
+          </code-block>
+        </stack>
+
+        <stack>
+          <authority-mark weight="emphasize">Translation table</authority-mark>
+          <data-table>
+            <table style="width: 100%; border-collapse: collapse; font-size: var(--type-size-sm)">
+              <thead>
+                <tr>
+                  <th style="text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border)">shadcn/ui</th>
+                  <th style="text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border)">Quoin</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td style="padding: 0.5rem 0.75rem"><code>&lt;Button&gt;</code></td><td style="padding: 0.5rem 0.75rem"><code>&lt;primary-action&gt;</code></td></tr>
+                <tr><td style="padding: 0.5rem 0.75rem"><code>&lt;Button variant="outline"&gt;</code></td><td style="padding: 0.5rem 0.75rem"><code>&lt;secondary-action&gt;</code></td></tr>
+                <tr><td style="padding: 0.5rem 0.75rem"><code>&lt;Button variant="destructive"&gt;</code></td><td style="padding: 0.5rem 0.75rem"><code>&lt;destructive-action&gt;</code></td></tr>
+                <tr><td style="padding: 0.5rem 0.75rem"><code>&lt;Card&gt; / &lt;CardContent&gt;</code></td><td style="padding: 0.5rem 0.75rem"><code>&lt;emphasis-card&gt;</code></td></tr>
+                <tr><td style="padding: 0.5rem 0.75rem"><code>&lt;Alert variant="default"&gt;</code></td><td style="padding: 0.5rem 0.75rem"><code>&lt;alert-band intent="info"&gt;</code></td></tr>
+                <tr><td style="padding: 0.5rem 0.75rem"><code>&lt;Alert variant="destructive"&gt;</code></td><td style="padding: 0.5rem 0.75rem"><code>&lt;alert-band intent="critical"&gt;</code></td></tr>
+                <tr><td style="padding: 0.5rem 0.75rem"><code>&lt;Tabs&gt; / &lt;TabsList&gt;</code></td><td style="padding: 0.5rem 0.75rem"><code>&lt;segment-control&gt;</code></td></tr>
+                <tr><td style="padding: 0.5rem 0.75rem"><code>&lt;Input&gt;</code></td><td style="padding: 0.5rem 0.75rem"><code>&lt;input-cell&gt;</code></td></tr>
+                <tr><td style="padding: 0.5rem 0.75rem"><code>&lt;Label&gt;</code></td><td style="padding: 0.5rem 0.75rem"><code>&lt;field-label&gt;</code></td></tr>
+                <tr><td style="padding: 0.5rem 0.75rem"><code>&lt;Skeleton&gt;</code></td><td style="padding: 0.5rem 0.75rem"><code>&lt;skeleton-placeholder&gt;</code></td></tr>
+                <tr><td style="padding: 0.5rem 0.75rem"><code>&lt;Accordion&gt; / &lt;AccordionItem&gt;</code></td><td style="padding: 0.5rem 0.75rem"><code>&lt;disclosure-group&gt; / &lt;faq-disclosure&gt;</code></td></tr>
+                <tr><td style="padding: 0.5rem 0.75rem"><code>&lt;Command&gt; (Cmd-K)</code></td><td style="padding: 0.5rem 0.75rem"><code>&lt;command-menu&gt;</code></td></tr>
+                <tr><td style="padding: 0.5rem 0.75rem"><code>&lt;Tooltip&gt;</code></td><td style="padding: 0.5rem 0.75rem"><code>&lt;tooltip-tip&gt;</code></td></tr>
+                <tr><td style="padding: 0.5rem 0.75rem"><code>&lt;Sheet&gt;</code></td><td style="padding: 0.5rem 0.75rem"><code>&lt;sheet-overlay&gt;</code></td></tr>
+              </tbody>
+            </table>
+          </data-table>
+        </stack>
+
+        <stack>
+          <authority-mark weight="emphasize">Theming</authority-mark>
+          <reading-flow>
+            <p>
+              shadcn/ui ships CSS custom properties named
+              <code>--background</code>, <code>--foreground</code>,
+              <code>--muted</code>, etc. The
+              <a href="/packs/"><code>@quoin/tokens-shadcn</code></a> pack
+              translates those onto Quoin's canonical namespace —
+              <code>--surface</code>, <code>--text</code>,
+              <code>--surface-recessed</code>. Drop in the pack and your
+              shadcn theme keeps working.
+            </p>
+          </reading-flow>
+          <code-block>
+<code>npm install @quoin/tokens-shadcn @quoin/vocab-shadcn @quoin/vocab-editorial @quoin/impl-tailwind</code>
+          </code-block>
+        </stack>
+
+        <stack>
+          <authority-mark weight="emphasize">Hybrid: Quoin + shadcn React islands</authority-mark>
+          <reading-flow>
+            <p>
+              Use Quoin for the page chrome; mount shadcn React components
+              as islands where you need interactive behavior. Astro,
+              Next.js, and Vite all support this pattern. The page's static
+              shape is semantic and reviewable; the interactive bits stay
+              React.
+            </p>
+          </reading-flow>
+        </stack>
+
+        <colophon>Migration guide authored in Quoin. Source: 04_docs/migrate/shadcn/index.html.</colophon>
+      </stack>
+    </canvas-block>
+  </body>
+</html>

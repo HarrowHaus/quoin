@@ -1,71 +1,140 @@
-# Phase 4 — Documentation
+# Phase 4 — Quoin documentation site
 
-Status: pending phase 3 completion.
+The Quoin docs site. Vite multi-page build with the Quoin Vite plugin
+on top, so the site is itself a working demonstration of the language —
+every page (except generated spec content) is authored in Quoin and
+compiled at build time.
 
-## Scope
+## Run
 
-Build the Quoin documentation site. The docs site is the primary public surface for the language and the largest in-the-wild demonstration of Quoin itself.
+```bash
+cd 04_docs
+npm install
+npm run dev        # local dev server with HMR
+npm run build      # produces dist/ for deploy
+npm run preview    # serves dist/ locally
+```
 
-## Stack
+The `prebuild` / `predev` / `prepreview` hooks run three small scripts:
 
-- **Static site generator:** Astro (or equivalent — must build to static HTML, no server-side runtime)
-- **Built with Quoin.** The docs site itself is authored in Quoin and compiled at build time. The site is its own largest demo.
-- **Deploy target:** Single static site, CDN-served, no server dependencies.
+1. `scripts/build-spec.js` — reads `00_spec/*.md` and emits HTML pages
+   under `spec/{name}/index.html`. Generated files are gitignored;
+   regenerated on every build so docs stay in sync with the spec.
+2. `scripts/build-pack-catalog.js` — scans `02_reference-packs/` and
+   `03_harvest/packs/`, writes `generated/packs.json` consumed by both
+   the pack browser and the playground.
+3. `scripts/copy-assets.js` — copies the active token pack's
+   `tokens.css` and the Tailwind shim into `public/` so they're served
+   at `/tokens.css` and `/impl.css`.
 
-## Required sections
+## Layout
 
-### Spec reference
+```
+04_docs/
+├── index.html               Home
+├── start/index.html         Getting started guide
+├── playground/index.html    Live in-browser compiler
+├── packs/index.html         Pack browser (45 packs)
+├── migrate/
+│   ├── tailwind/index.html
+│   ├── daisyui/index.html
+│   └── shadcn/index.html
+├── spec/                    (generated)
+│   ├── index.html           Spec landing
+│   ├── spec/index.html      <- 00_spec/spec.md
+│   ├── pack-format/index.html
+│   ├── primitives/index.html
+│   └── tokens/index.html
+├── src/
+│   ├── packs/main.ts        Pack browser driver
+│   └── playground/
+│       ├── main.ts          Playground driver
+│       └── packs.ts         In-memory pack registry
+├── public/                  Static assets (tokens.css, impl.css, site.css)
+├── generated/               (gitignored — built every run)
+├── scripts/                 Pre-build scripts
+└── vite.config.ts
+```
 
-Auto-generated from `00_spec/`. The docs site MUST regenerate from spec source rather than duplicating content; if the spec changes, the docs update on next build.
+## Site is built in Quoin
 
-### Live playground
+Every hand-authored page (`index.html`, `start/index.html`,
+`migrate/*/index.html`, `playground/index.html`, `packs/index.html`)
+contains Quoin semantic tags — `<authority-mark>`, `<reading-flow>`,
+`<feature-grid>`, etc. The Quoin Vite plugin (`@quoin/compiler/vite`)
+transforms them at build time to standard HTML.
 
-Browser-side compiler instance:
-- Left pane: user types semantic markup.
-- Right pane: real-time compiled HTML + CSS + visual render.
-- Top: dropdowns to pick a token pack and an implementation pack from any pack published under `@quoin/*`.
+The generated spec pages embed the converted markdown inside
+`<reading-flow>` for consistent measure + leading.
 
-The playground is the most important demonstration of the language. It makes the four-layer architecture visible and interactive.
+## Active pack stack
 
-### Pack browser
+| Slot | Pack |
+|------|------|
+| Token | `@quoin/tokens-baseline` |
+| Vocabulary | `@quoin/vocab-editorial` |
+| Vocabulary | `@quoin/vocab-dashboard` |
+| Vocabulary | `@quoin/vocab-marketing` |
+| Vocabulary | `@quoin/vocab-docs` |
+| Implementation | `@quoin/impl-tailwind` |
 
-Searchable catalog of every pack published under `@quoin/*` on npm. Pulls from the npm registry API at build time, caches results.
+To re-skin the entire site, edit `scripts/copy-assets.js` (one constant
+— `ACTIVE_TOKEN_PACK`) and update the pack stack in `vite.config.ts`.
+Run `npm run build`. The same content compiles against a different
+aesthetic without touching any page.
 
-For each pack: type, version, description, npm install command, link to source.
+## Live playground
 
-### Getting started
+The playground bundles the Quoin compiler for the browser via a
+narrower entry point (`01_compiler/dist/browser.js`) that excludes the
+disk-loading pack-loader. Pack data is pre-bundled as JSON imports.
 
-Step-by-step guide:
-1. Install the compiler (`npm install @quoin/compiler`)
-2. Install one pack of each type
-3. Write a first page
-4. Build and view
+The compiler runs entirely client-side once the page loads. The result
+of typing in the textarea is recompiled, written into the compiled-HTML
+pane, and written into the render iframe alongside the active token
+pack's CSS.
 
-Should produce a working Quoin page in under 5 minutes for a developer who has used Tailwind.
+Currently preloads:
 
-### Migration guides
+- **5 token packs:** baseline, geist, material3, radix, primer
+- **2 vocabulary packs:** editorial, dashboard
+- **2 implementation packs:** impl-tailwind, impl-raw-css
 
-Side-by-side comparisons:
-- From Tailwind v4 to Quoin
-- From DaisyUI to Quoin
-- From shadcn/ui to Quoin
+Adding more is a 4-line change in `src/playground/packs.ts`.
 
-## Stylistic requirement
+## Pack browser
 
-The docs site uses one of the harvested or reference token packs. The active pack should be documented prominently as a working demonstration of pack composition.
+Driven by `generated/packs.json`. Phase 5 will swap the data source to
+the npm registry (`registry.npmjs.org/@quoin/*`) once the packs are
+published. The consumed JSON shape stays stable so the page itself
+doesn't change.
 
-## Deliverables
+## Phase 4 exit criteria
 
-- Astro project in `04_docs/`
-- Local dev server (`npm run dev`) runs without error
-- Production build (`npm run build`) produces static output
-- All required sections present and functional
-- Screenshots of key pages for the launch deliverables
+Per [`../PHASE_GATES.md`](../PHASE_GATES.md):
 
-## Exit criteria
+- [x] Docs site builds and runs locally (`npm run dev`, `npm run build`).
+- [x] Spec reference auto-generated from `00_spec/` (not duplicated).
+- [x] Live playground exists — browser-side compile, real-time render.
+- [x] Pack browser lists all 45 packs (5 reference + 40 harvested).
+- [x] Getting-started + Tailwind / DaisyUI / shadcn migration guides
+      exist with real side-by-side content.
+- [x] Stylistic requirement: docs site is itself authored in Quoin.
+- [ ] Operator review pending.
 
-See `../PHASE_GATES.md` (Phase 4 section).
+## Build output
 
-## Prompt
+```
+$ npm run build
+12 HTML pages, 2 JS bundles
+playground bundle: 456 KB / 148 KB gzipped (includes the compiler)
+pack browser bundle: 34 KB / 8 KB gzipped
+zero Quoin tags survive in any compiled page
+```
 
-See `../PHASE_PROMPTS.md` (Phase 4 section).
+## Cross-references
+
+- Spec: [`../00_spec/`](../00_spec/) — drives the auto-generated reference.
+- Compiler: [`../01_compiler/`](../01_compiler/) — bundled for the playground via the new browser entry.
+- Reference packs: [`../02_reference-packs/`](../02_reference-packs/) — pack stack the site uses.
+- Harvested packs: [`../03_harvest/`](../03_harvest/) — 40 packs surfaced in the browser + playground.

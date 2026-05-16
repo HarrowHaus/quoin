@@ -1,0 +1,11 @@
+node_modules/
+dist/
+generated/
+spec/spec/
+spec/pack-format/
+spec/primitives/
+spec/tokens/
+spec/index.html
+public/tokens.css
+public/impl.css
+.vite/

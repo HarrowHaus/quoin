@@ -1,0 +1,129 @@
+/**
+ * Quoin docs site chrome.
+ *
+ * Lives outside the Quoin-emitted output. Handles anchor styling, code
+ * block tweaks, focus rings, and a few small typographic refinements
+ * that aren't worth a per-primitive emit override.
+ */
+
+html { scroll-behavior: smooth; }
+*, *::before, *::after { box-sizing: border-box; }
+
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  text-decoration-thickness: 1px;
+}
+a:hover {
+  text-decoration-thickness: 2px;
+}
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Wayfinder anchors aren't underlined — too noisy in the nav bar. */
+nav.flex.items-center.gap-6 a {
+  text-decoration: none;
+  font-weight: 500;
+}
+nav.flex.items-center.gap-6 a:hover {
+  text-decoration: underline;
+}
+
+/* Inline code inside reading-flow paragraphs */
+code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: var(--surface-recessed);
+  color: var(--text-emphasis);
+  padding: 0.1em 0.35em;
+  border-radius: var(--radius-sm);
+}
+
+/* Reset inline code styling when it sits inside a <pre> code-block */
+pre code, code-block code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* Reading-flow paragraphs */
+.text-base.text-stone-700, [class*="leading-prose"] p {
+  margin: 0 0 0.75em;
+}
+[class*="leading-prose"] p:last-child {
+  margin-bottom: 0;
+}
+
+/* Generated spec pages — restore standard headings inside reading-flow */
+.text-base.text-stone-700 h1,
+.text-base.text-stone-700 h2,
+.text-base.text-stone-700 h3,
+.text-base.text-stone-700 h4 {
+  color: var(--text-emphasis);
+  font-family: var(--font-display);
+  margin: 1.5em 0 0.5em;
+  line-height: var(--leading-tight);
+  font-weight: 500;
+}
+.text-base.text-stone-700 h1 { font-size: var(--type-size-3xl); }
+.text-base.text-stone-700 h2 { font-size: var(--type-size-2xl); }
+.text-base.text-stone-700 h3 { font-size: var(--type-size-xl); }
+.text-base.text-stone-700 h4 { font-size: var(--type-size-lg); }
+
+.text-base.text-stone-700 ul,
+.text-base.text-stone-700 ol {
+  padding-left: 1.5rem;
+  margin: 0 0 0.75em;
+}
+.text-base.text-stone-700 li { margin-bottom: 0.25em; }
+
+.text-base.text-stone-700 table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: var(--type-size-sm);
+}
+.text-base.text-stone-700 th,
+.text-base.text-stone-700 td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+.text-base.text-stone-700 th {
+  font-weight: 500;
+  background: var(--surface-recessed);
+}
+.text-base.text-stone-700 pre {
+  background: var(--surface-recessed);
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  font-size: var(--type-size-sm);
+  margin: 1rem 0;
+}
+.text-base.text-stone-700 blockquote {
+  border-left: 4px solid var(--border-emphasis);
+  padding-left: 1rem;
+  margin: 1rem 0;
+  color: var(--text-emphasis);
+  font-style: italic;
+}
+.text-base.text-stone-700 hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 2rem 0;
+}
+
+/* Slight rhythm refinements for the canvas-block on every page */
+main { padding-block: var(--space-12) var(--space-24); }
+
+button { font: inherit; cursor: pointer; }
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}

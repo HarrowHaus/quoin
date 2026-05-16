@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Migrate from Tailwind v4 — Quoin docs</title>
+    <link rel="stylesheet" href="/tokens.css" />
+    <link rel="stylesheet" href="/impl.css" />
+    <link rel="stylesheet" href="/site.css" />
+  </head>
+  <body class="min-h-screen" style="background: var(--surface); color: var(--text); font-family: var(--font-sans)">
+
+    <wayfinder>
+      <a href="/">Quoin</a>
+      <a href="/spec/">Spec</a>
+      <a href="/playground/">Playground</a>
+      <a href="/packs/">Packs</a>
+      <a href="/start/">Get started</a>
+      <a href="https://github.com/harrowhaus/quoin">GitHub</a>
+    </wayfinder>
+
+    <canvas-block>
+      <stack gap="loose">
+        <breadcrumb-trail>
+          <a href="/">Home</a>
+          <span>/</span>
+          <span>Migrate</span>
+          <span>/</span>
+          <span>From Tailwind v4</span>
+        </breadcrumb-trail>
+
+        <authority-mark>Migrate from Tailwind v4</authority-mark>
+
+        <lead-graf>
+          You already have Tailwind v4. Quoin sits one layer above it.
+          Keep Tailwind's class generation; replace the long utility strings
+          in your source with semantic tags. The compiled output is still
+          Tailwind classes.
+        </lead-graf>
+
+        <alert-band intent="info">
+          You don't replace Tailwind. You replace authoring against Tailwind classes directly. Quoin's <code>impl-tailwind</code> pack emits Tailwind v4 classes for you.
+        </alert-band>
+
+        <stack>
+          <authority-mark weight="emphasize">The shape of the change</authority-mark>
+          <reading-flow>
+            <p>
+              In Tailwind, the unit of authorship is the utility class string.
+              Every visual decision is encoded inline.
+            </p>
+          </reading-flow>
+          <code-block>
+<code>&lt;!-- Tailwind --&gt;
+&lt;button class="px-4 py-2 bg-stone-900 text-white rounded-md font-medium hover:bg-stone-800"&gt;
+  Save
+&lt;/button&gt;
+
+&lt;h1 class="text-7xl font-serif font-medium tracking-tight text-stone-900"&gt;
+  The Bot Smell Problem
+&lt;/h1&gt;</code>
+          </code-block>
+          <reading-flow>
+            <p>
+              In Quoin, the unit of authorship is the semantic element.
+              The same compiled output, but the source encodes intent
+              rather than implementation.
+            </p>
+          </reading-flow>
+          <code-block>
+<code>&lt;!-- Quoin --&gt;
+&lt;primary-action&gt;Save&lt;/primary-action&gt;
+
+&lt;authority-mark&gt;The Bot Smell Problem&lt;/authority-mark&gt;</code>
+          </code-block>
+        </stack>
+
+        <stack>
+          <authority-mark weight="emphasize">Translation table</authority-mark>
+          <data-table>
+            <table style="width: 100%; border-collapse: collapse; font-size: var(--type-size-sm)">
+              <thead>
+                <tr>
+                  <th style="text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border)">Tailwind pattern</th>
+                  <th style="text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border)">Quoin primitive</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="padding: 0.5rem 0.75rem"><code>&lt;h1 class="text-7xl font-serif font-medium tracking-tight"&gt;</code></td>
+                  <td style="padding: 0.5rem 0.75rem"><code>&lt;authority-mark&gt;</code></td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.5rem 0.75rem"><code>&lt;p class="text-xl leading-relaxed"&gt;</code></td>
+                  <td style="padding: 0.5rem 0.75rem"><code>&lt;lead-graf&gt;</code></td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.5rem 0.75rem"><code>&lt;div class="text-base max-w-prose leading-relaxed"&gt;</code></td>
+                  <td style="padding: 0.5rem 0.75rem"><code>&lt;reading-flow&gt;</code></td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.5rem 0.75rem"><code>&lt;button class="px-4 py-2 bg-stone-900 text-white rounded-md font-medium"&gt;</code></td>
+                  <td style="padding: 0.5rem 0.75rem"><code>&lt;primary-action&gt;</code></td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.5rem 0.75rem"><code>&lt;button class="px-4 py-2 border border-stone-300 rounded-md"&gt;</code></td>
+                  <td style="padding: 0.5rem 0.75rem"><code>&lt;secondary-action&gt;</code></td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.5rem 0.75rem"><code>&lt;div class="flex flex-col gap-4"&gt;</code></td>
+                  <td style="padding: 0.5rem 0.75rem"><code>&lt;stack&gt;</code></td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.5rem 0.75rem"><code>&lt;div class="flex flex-wrap gap-2"&gt;</code></td>
+                  <td style="padding: 0.5rem 0.75rem"><code>&lt;cluster&gt;</code></td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.5rem 0.75rem"><code>&lt;section class="bg-white border border-stone-200 rounded-lg p-6"&gt;</code></td>
+                  <td style="padding: 0.5rem 0.75rem"><code>&lt;emphasis-card&gt;</code></td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.5rem 0.75rem"><code>&lt;nav class="flex items-center gap-6 px-6 py-4 border-b"&gt;</code></td>
+                  <td style="padding: 0.5rem 0.75rem"><code>&lt;wayfinder&gt;</code></td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.5rem 0.75rem"><code>&lt;div role="alert" class="px-4 py-3 bg-amber-50 border-l-4 border-amber-700"&gt;</code></td>
+                  <td style="padding: 0.5rem 0.75rem"><code>&lt;alert-band intent="warning"&gt;</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </data-table>
+        </stack>
+
+        <stack>
+          <authority-mark weight="emphasize">What you keep</authority-mark>
+          <reading-flow>
+            <p>
+              Tailwind v4's CSS generation, your existing
+              <code>tailwind.config</code>, your colour palette, your build
+              pipeline. <code>@quoin/impl-tailwind</code> emits Tailwind v4
+              arbitrary-value classes referencing CSS custom properties —
+              <code>bg-[var(--accent)]</code>, <code>text-[var(--text-emphasis)]</code>,
+              and so on. Tailwind picks them up on its normal content scan.
+            </p>
+            <p>
+              Your tokens become the canonical semantic-token namespace.
+              <code>--accent</code>, <code>--surface</code>,
+              <code>--text-emphasis</code> — a small, intentional set that
+              every Quoin primitive references. See
+              <a href="/spec/tokens/">the token spec</a>.
+            </p>
+          </reading-flow>
+        </stack>
+
+        <stack>
+          <authority-mark weight="emphasize">What changes</authority-mark>
+          <reading-flow>
+            <p>
+              Source authoring. Code review. AI prompts. A
+              <code>&lt;primary-action&gt;</code> is reviewable for
+              <em>intent</em>; <code>class="px-4 py-2 bg-stone-900 …"</code>
+              isn't. Reviewers can read intent in seconds instead of mentally
+              parsing utility strings.
+            </p>
+            <p>
+              Token discipline. Quoin enforces a canonical semantic-token
+              namespace. Stray utility strings that reach for
+              <code>bg-stone-700</code> without going through
+              <code>--text</code> won't compile through Quoin primitives. Your
+              palette becomes a contract.
+            </p>
+          </reading-flow>
+        </stack>
+
+        <colophon>Migration guide authored in Quoin. Source: 04_docs/migrate/tailwind/index.html.</colophon>
+      </stack>
+    </canvas-block>
+  </body>
+</html>

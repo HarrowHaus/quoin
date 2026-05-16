@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Playground — Quoin docs</title>
+    <link rel="stylesheet" href="/tokens.css" />
+    <link rel="stylesheet" href="/impl.css" />
+    <link rel="stylesheet" href="/site.css" />
+    <style>
+      .playground-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 1rem;
+        min-height: 60vh;
+      }
+      @media (max-width: 900px) {
+        .playground-grid { grid-template-columns: 1fr; }
+      }
+      .playground-pane {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-card);
+        overflow: hidden;
+        background: var(--surface-elevated);
+      }
+      .playground-pane > header {
+        padding: 0.5rem 0.75rem;
+        border-bottom: 1px solid var(--border);
+        background: var(--surface-recessed);
+        font-size: var(--type-size-xs);
+        color: var(--text-recede);
+        font-family: var(--font-mono);
+        text-transform: uppercase;
+        letter-spacing: var(--tracking-wide);
+      }
+      .playground-pane textarea,
+      .playground-pane pre,
+      .playground-pane iframe {
+        margin: 0;
+        flex: 1;
+        border: 0;
+        background: var(--surface-elevated);
+        color: var(--text);
+        font-family: var(--font-mono);
+        font-size: var(--type-size-sm);
+        line-height: 1.5;
+        padding: 0.75rem;
+        width: 100%;
+        outline: none;
+        resize: none;
+        white-space: pre;
+        overflow: auto;
+      }
+      .playground-pane iframe {
+        background: var(--surface);
+        padding: 0;
+      }
+      .playground-tabs {
+        display: flex;
+        gap: 0;
+        background: var(--surface-recessed);
+        border-bottom: 1px solid var(--border);
+      }
+      .playground-tabs button {
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid transparent;
+        padding: 0.5rem 0.75rem;
+        font-size: var(--type-size-xs);
+        font-family: var(--font-mono);
+        color: var(--text-recede);
+        text-transform: uppercase;
+        letter-spacing: var(--tracking-wide);
+        cursor: pointer;
+      }
+      .playground-tabs button[aria-selected="true"] {
+        color: var(--text-emphasis);
+        border-bottom-color: var(--accent);
+      }
+      .playground-tabs button:hover {
+        color: var(--text);
+      }
+      .playground-pane > .tab-body {
+        flex: 1;
+        display: none;
+        flex-direction: column;
+      }
+      .playground-pane > .tab-body[data-active="true"] {
+        display: flex;
+      }
+      .playground-controls {
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 0.75rem;
+        background: var(--surface-recessed);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+      }
+      .playground-controls label {
+        font-size: var(--type-size-sm);
+        color: var(--text-recede);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .playground-controls select {
+        font-family: var(--font-mono);
+        font-size: var(--type-size-sm);
+        padding: 0.25rem 0.5rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        color: var(--text);
+      }
+      #playground-status {
+        font-size: var(--type-size-xs);
+        font-family: var(--font-mono);
+        color: var(--text-recede);
+        margin-left: auto;
+      }
+      #playground-status[data-state="error"] { color: var(--critical); }
+      #playground-status[data-state="ok"] { color: var(--success); }
+    </style>
+  </head>
+  <body class="min-h-screen" style="background: var(--surface); color: var(--text); font-family: var(--font-sans)">
+
+    <wayfinder>
+      <a href="/">Quoin</a>
+      <a href="/spec/">Spec</a>
+      <a href="/playground/">Playground</a>
+      <a href="/packs/">Packs</a>
+      <a href="/start/">Get started</a>
+      <a href="https://github.com/harrowhaus/quoin">GitHub</a>
+    </wayfinder>
+
+    <canvas-block>
+      <stack gap="loose">
+        <breadcrumb-trail>
+          <a href="/">Home</a>
+          <span>/</span>
+          <span>Playground</span>
+        </breadcrumb-trail>
+
+        <authority-mark>Playground</authority-mark>
+
+        <lead-graf>
+          Type Quoin semantic markup on the left. The compiler runs in your
+          browser and emits compiled HTML on the right. Switch token packs
+          and implementation packs from the dropdowns; the source stays the
+          same.
+        </lead-graf>
+
+        <div class="playground-controls">
+          <label>
+            Token pack
+            <select id="token-pack"></select>
+          </label>
+          <label>
+            Implementation
+            <select id="impl-pack"></select>
+          </label>
+          <span id="playground-status">Loading compiler…</span>
+        </div>
+
+        <div class="playground-grid">
+          <section class="playground-pane">
+            <header>Source — Quoin</header>
+            <textarea id="source" spellcheck="false" aria-label="Quoin source"></textarea>
+          </section>
+          <section class="playground-pane">
+            <div class="playground-tabs" role="tablist">
+              <button role="tab" type="button" data-tab="render" aria-selected="true">Render</button>
+              <button role="tab" type="button" data-tab="html">Compiled HTML</button>
+            </div>
+            <div class="tab-body" data-tab="render" data-active="true">
+              <iframe id="render" title="Compiled output"></iframe>
+            </div>
+            <div class="tab-body" data-tab="html" data-active="false">
+              <pre><code id="compiled"></code></pre>
+            </div>
+          </section>
+        </div>
+
+        <reading-flow>
+          <p>
+            The compiler runs entirely client-side here. In a real project,
+            the same compiler runs at build time through
+            <code>@quoin/compiler/vite</code> and emits static HTML — no
+            JavaScript needed at runtime to render Quoin output.
+          </p>
+        </reading-flow>
+
+        <colophon>Playground authored in Quoin. Compiler bundle: @quoin/compiler. Source: 04_docs/playground/index.html.</colophon>
+      </stack>
+    </canvas-block>
+
+    <script type="module" src="/src/playground/main.ts"></script>
+  </body>
+</html>
