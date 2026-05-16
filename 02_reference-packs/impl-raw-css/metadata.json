@@ -1,0 +1,6 @@
+{
+  "target": "raw-css",
+  "supportedPrimitives": ["*"],
+  "emittedFormat": "html-with-inline-style",
+  "capabilities": ["data-theme", "css-vars"]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "@quoin/impl-raw-css",
+  "version": "0.1.0",
+  "description": "Raw CSS implementation pack for Quoin.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./emit.js",
+  "files": [
+    "quoin.pack.json",
+    "emit.js",
+    "metadata.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "implementation", "css", "css-vars"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "02_reference-packs/impl-raw-css"
+  }
+}

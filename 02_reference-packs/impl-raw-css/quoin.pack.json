@@ -1,0 +1,18 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/impl-raw-css",
+  "version": "0.1.0",
+  "type": "implementation",
+  "quoinVersion": "^0.1.0",
+  "description": "Raw CSS emitter for Quoin. Zero framework dependency — emits inline style attributes referencing CSS custom properties from the active token pack.",
+  "exports": {
+    "emit": "./emit.js",
+    "metadata": "./metadata.json"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/impl-raw-css",
+    "tags": ["raw-css", "framework-free", "css-vars"]
+  }
+}

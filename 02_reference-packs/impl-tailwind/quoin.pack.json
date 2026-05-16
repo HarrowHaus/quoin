@@ -1,0 +1,18 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/impl-tailwind",
+  "version": "0.1.0",
+  "type": "implementation",
+  "quoinVersion": "^0.1.0",
+  "description": "Tailwind v4 emitter for Quoin. Token-bearing classes use arbitrary-value syntax referencing CSS custom properties, so the pack is token-pack agnostic.",
+  "exports": {
+    "emit": "./emit.js",
+    "metadata": "./metadata.json"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/impl-tailwind",
+    "tags": ["tailwind", "tailwind-v4", "css-vars"]
+  }
+}
