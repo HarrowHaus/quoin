@@ -1,0 +1,68 @@
+{
+  "name": "spectrum",
+  "description": "Adobe Spectrum (light theme) palette translated onto the Quoin canonical semantic-token namespace.",
+  "license": "Apache-2.0",
+  "tags": ["spectrum", "adobe", "blue-accent", "design-tools"],
+  "attribution": {
+    "sourceSystem": "Spectrum",
+    "sourceOrganization": "Adobe",
+    "sourceUrl": "https://spectrum.adobe.com/",
+    "sourceLicense": "Apache-2.0",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Spectrum 'light' theme. Spectrum publishes a global-token + alias-token model in @adobe/spectrum-tokens; this pack translates the alias layer (gray-50..gray-900, blue-500..blue-700, etc.) onto Quoin. Adobe Clean is proprietary; referenced by family name only."
+  },
+  "mappingNotes": "Spectrum gray-50 -> surface (very light), gray-100 -> surface-recessed, gray-900 -> text-emphasis. blue-500 (accent) -> accent. Spectrum has explicit negative/positive/notice/informative; mapped directly to critical/success/warning/info.",
+  "base": {
+    "gray": {
+      "50":  "#ffffff",
+      "75":  "oklch(99% 0.002 280)",
+      "100": "oklch(97% 0.005 280)",
+      "200": "oklch(93% 0.008 280)",
+      "300": "oklch(88% 0.010 280)",
+      "400": "oklch(72% 0.012 280)",
+      "500": "oklch(58% 0.012 280)",
+      "600": "oklch(45% 0.012 280)",
+      "700": "oklch(32% 0.014 280)",
+      "800": "oklch(22% 0.014 280)",
+      "900": "oklch(14% 0.014 280)"
+    },
+    "blue": {
+      "500": "oklch(55% 0.16 240)",
+      "100": "oklch(94% 0.04 240)"
+    },
+    "negative":    { "500": "oklch(54% 0.20 25)" },
+    "positive":    { "500": "oklch(55% 0.16 145)" },
+    "notice":      { "500": "oklch(75% 0.18 80)" },
+    "informative": { "500": "oklch(55% 0.16 240)" }
+  },
+  "fonts": {
+    "font-sans": "'Adobe Clean', 'Source Sans 3', system-ui, sans-serif",
+    "font-serif": "'Adobe Clean Serif', 'Source Serif 4', Georgia, serif",
+    "font-mono": "'Source Code Pro', ui-monospace, monospace",
+    "font-display": "'Adobe Clean', system-ui, sans-serif"
+  },
+  "semantic": {
+    "surface": "{gray.50}",
+    "surface-elevated": "{gray.50}",
+    "surface-recessed": "{gray.100}",
+    "surface-inverse": "{gray.900}",
+    "text": "{gray.800}",
+    "text-emphasis": "{gray.900}",
+    "text-recede": "{gray.500}",
+    "text-disabled": "{gray.300}",
+    "text-on-accent": "{gray.50}",
+    "text-on-critical": "{gray.50}",
+    "text-on-success": "{gray.50}",
+    "text-on-warning": "{gray.900}",
+    "text-on-info": "{gray.50}",
+    "border": "{gray.300}",
+    "border-emphasis": "{blue.500}",
+    "border-recede": "{gray.200}",
+    "accent": "{blue.500}",
+    "accent-recede": "{blue.100}",
+    "critical": "{negative.500}",
+    "success": "{positive.500}",
+    "warning": "{notice.500}",
+    "info": "{informative.500}"
+  }
+}

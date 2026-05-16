@@ -1,0 +1,63 @@
+{
+  "name": "mui",
+  "description": "Material UI (MUI) default theme translated onto the Quoin canonical semantic-token namespace.",
+  "license": "MIT",
+  "tags": ["mui", "material-ui", "react", "indigo-pink"],
+  "attribution": {
+    "sourceSystem": "Material UI",
+    "sourceOrganization": "MUI",
+    "sourceUrl": "https://mui.com/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "MUI v6 default light theme. MUI's classic primary is indigo (#1976d2), secondary is pink. Distinct from Material 3 — MUI is the React port of an older Material 2/3 hybrid; many MUI projects still ship the classic palette."
+  },
+  "mappingNotes": "MUI palette.background.default/paper -> surface/surface-elevated. palette.text.primary/secondary -> text/text-recede. palette.primary.main -> accent. palette.error/warning/info/success.main map directly.",
+  "base": {
+    "gray": {
+      "50":  "oklch(98% 0.003 260)",
+      "100": "oklch(96% 0.005 260)",
+      "200": "oklch(90% 0.008 260)",
+      "400": "oklch(75% 0.010 260)",
+      "500": "oklch(60% 0.010 260)",
+      "700": "oklch(40% 0.012 260)",
+      "800": "oklch(28% 0.012 260)",
+      "900": "oklch(16% 0.014 260)"
+    },
+    "white": { "0": "#ffffff" },
+    "indigo": { "500": "oklch(52% 0.18 260)", "50": "oklch(95% 0.04 260)" },
+    "red":    { "500": "oklch(58% 0.22 25)" },
+    "green":  { "500": "oklch(60% 0.16 145)" },
+    "amber":  { "500": "oklch(75% 0.18 70)" },
+    "blue":   { "500": "oklch(60% 0.16 230)" }
+  },
+  "fonts": {
+    "font-sans": "Roboto, 'Helvetica Neue', Arial, sans-serif",
+    "font-serif": "ui-serif, Georgia, serif",
+    "font-mono": "'Roboto Mono', ui-monospace, monospace",
+    "font-display": "Roboto, 'Helvetica Neue', sans-serif"
+  },
+  "semantic": {
+    "surface": "{gray.50}",
+    "surface-elevated": "{white.0}",
+    "surface-recessed": "{gray.100}",
+    "surface-inverse": "{gray.900}",
+    "text": "{gray.900}",
+    "text-emphasis": "{gray.900}",
+    "text-recede": "{gray.700}",
+    "text-disabled": "{gray.400}",
+    "text-on-accent": "{white.0}",
+    "text-on-critical": "{white.0}",
+    "text-on-success": "{white.0}",
+    "text-on-warning": "{gray.900}",
+    "text-on-info": "{white.0}",
+    "border": "{gray.200}",
+    "border-emphasis": "{indigo.500}",
+    "border-recede": "{gray.100}",
+    "accent": "{indigo.500}",
+    "accent-recede": "{indigo.50}",
+    "critical": "{red.500}",
+    "success": "{green.500}",
+    "warning": "{amber.500}",
+    "info": "{blue.500}"
+  }
+}

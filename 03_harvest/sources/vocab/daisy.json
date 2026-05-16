@@ -1,0 +1,120 @@
+{
+  "name": "daisy",
+  "description": "DaisyUI-flavoured primitives — alert tile, badge tag, bordered card, divider, indicator dot, modal shell.",
+  "license": "MIT",
+  "tags": ["daisyui", "alert", "badge", "tailwind"],
+  "attribution": {
+    "sourceSystem": "DaisyUI",
+    "sourceOrganization": "Pouya Saadeghi",
+    "sourceUrl": "https://daisyui.com/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Extracts DaisyUI's semantic-class style (alert, badge, card, divider, indicator, modal) into Quoin primitives. DaisyUI itself is the prior art that validated semantic compression on top of Tailwind; Quoin extends the same compression one layer higher."
+  },
+  "primitives": [
+    {
+      "name": "alert-tile",
+      "category": "state",
+      "role": "Inline alert block (info/success/warning/error). DaisyUI's <div class=\"alert\">.",
+      "attributes": {
+        "intent": { "values": ["info", "success", "warning", "critical"], "default": "info" }
+      },
+      "tokens": {
+        "background": "--info",
+        "color": "--text-on-info",
+        "borderRadius": "--radius-md",
+        "padding": "--space-4"
+      },
+      "structure": {
+        "element": "div",
+        "attributes": { "role": "alert" }
+      },
+      "children": "flow-content",
+      "scope": "block"
+    },
+    {
+      "name": "badge-tag",
+      "category": "content",
+      "role": "Small badge/tag — count, status, category.",
+      "attributes": {
+        "intent": { "values": ["primary", "info", "success", "warning", "critical"], "default": "primary" }
+      },
+      "tokens": {
+        "background": "--accent",
+        "color": "--text-on-accent",
+        "fontSize": "--type-size-xs",
+        "borderRadius": "--radius-pill"
+      },
+      "structure": { "element": "span" },
+      "children": "phrasing-content",
+      "scope": "inline"
+    },
+    {
+      "name": "card-bordered",
+      "category": "editorial",
+      "role": "DaisyUI's <div class=\"card card-bordered\"> — bordered content card.",
+      "attributes": {
+        "weight": { "values": ["normal", "emphasize"], "default": "normal" },
+        "density": { "values": ["sparse", "normal", "dense"], "default": "normal" }
+      },
+      "tokens": {
+        "background": "--surface-elevated",
+        "color": "--text",
+        "borderColor": "--border",
+        "borderRadius": "--radius-card",
+        "padding": "--space-card"
+      },
+      "structure": { "element": "article" },
+      "children": "flow-content",
+      "scope": "block"
+    },
+    {
+      "name": "divider-line",
+      "category": "layout",
+      "role": "Horizontal divider with optional centred text.",
+      "attributes": {
+        "weight": { "values": ["recede", "normal"], "default": "recede" }
+      },
+      "tokens": {
+        "borderColor": "--border",
+        "color": "--text-recede",
+        "fontSize": "--type-size-sm"
+      },
+      "structure": { "element": "div" },
+      "children": "phrasing-content",
+      "scope": "block"
+    },
+    {
+      "name": "indicator-dot",
+      "category": "state",
+      "role": "Notification dot/badge anchored to a host element.",
+      "attributes": {
+        "intent": { "values": ["info", "success", "warning", "critical"], "default": "critical" }
+      },
+      "tokens": {
+        "background": "--critical",
+        "borderRadius": "--radius-pill"
+      },
+      "structure": { "element": "span" },
+      "children": "none",
+      "scope": "inline"
+    },
+    {
+      "name": "modal-shell",
+      "category": "interactive",
+      "role": "Modal dialog wrapper using a native dialog element.",
+      "attributes": {
+        "density": { "values": ["sparse", "normal", "dense"], "default": "normal" }
+      },
+      "tokens": {
+        "background": "--surface-elevated",
+        "color": "--text",
+        "borderRadius": "--radius-lg",
+        "padding": "--space-panel"
+      },
+      "structure": { "element": "dialog" },
+      "children": "flow-content",
+      "scope": "block"
+    }
+  ]
+}

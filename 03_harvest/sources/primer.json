@@ -1,0 +1,64 @@
+{
+  "name": "primer",
+  "description": "GitHub Primer (light theme) palette translated onto the Quoin canonical semantic-token namespace.",
+  "license": "MIT",
+  "tags": ["primer", "github", "blue", "open-source"],
+  "attribution": {
+    "sourceSystem": "Primer",
+    "sourceOrganization": "GitHub",
+    "sourceUrl": "https://primer.style/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Primer Primitives (@primer/primitives) light scheme. Primer's data- vs accent- vs success- vs danger- families translate cleanly onto Quoin's accent + critical/success/warning/info."
+  },
+  "mappingNotes": "Primer's --color-canvas-default -> surface, --color-canvas-subtle -> surface-recessed, --color-fg-default -> text, --color-fg-emphasis -> text-emphasis, --color-fg-muted -> text-recede, --color-border-default -> border, --color-accent-emphasis -> accent. Danger/success/attention/done map to critical/success/warning/info.",
+  "base": {
+    "gray": {
+      "0":  "oklch(99% 0.005 250)",
+      "100": "oklch(97% 0.008 250)",
+      "200": "oklch(92% 0.010 250)",
+      "300": "oklch(86% 0.012 250)",
+      "400": "oklch(72% 0.012 250)",
+      "500": "oklch(58% 0.012 250)",
+      "600": "oklch(48% 0.014 250)",
+      "700": "oklch(38% 0.014 250)",
+      "800": "oklch(28% 0.014 250)",
+      "900": "oklch(20% 0.014 250)"
+    },
+    "white": { "0": "#ffffff" },
+    "blue":   { "500": "oklch(52% 0.20 245)", "100": "oklch(95% 0.04 245)" },
+    "red":    { "500": "oklch(55% 0.21 25)" },
+    "green":  { "500": "oklch(55% 0.16 150)" },
+    "yellow": { "500": "oklch(80% 0.16 80)" }
+  },
+  "fonts": {
+    "font-sans": "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif",
+    "font-serif": "ui-serif, Georgia, serif",
+    "font-mono": "'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace",
+    "font-display": "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+  },
+  "semantic": {
+    "surface": "{white.0}",
+    "surface-elevated": "{white.0}",
+    "surface-recessed": "{gray.100}",
+    "surface-inverse": "{gray.900}",
+    "text": "{gray.900}",
+    "text-emphasis": "{gray.900}",
+    "text-recede": "{gray.500}",
+    "text-disabled": "{gray.400}",
+    "text-on-accent": "{white.0}",
+    "text-on-critical": "{white.0}",
+    "text-on-success": "{white.0}",
+    "text-on-warning": "{gray.900}",
+    "text-on-info": "{white.0}",
+    "border": "{gray.300}",
+    "border-emphasis": "{blue.500}",
+    "border-recede": "{gray.200}",
+    "accent": "{blue.500}",
+    "accent-recede": "{blue.100}",
+    "critical": "{red.500}",
+    "success": "{green.500}",
+    "warning": "{yellow.500}",
+    "info": "{blue.500}"
+  }
+}

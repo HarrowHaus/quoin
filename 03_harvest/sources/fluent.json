@@ -1,0 +1,68 @@
+{
+  "name": "fluent",
+  "description": "Microsoft Fluent 2 (web light) palette translated onto the Quoin canonical semantic-token namespace.",
+  "license": "MIT",
+  "tags": ["fluent", "fluent-2", "microsoft", "communication-blue"],
+  "attribution": {
+    "sourceSystem": "Fluent 2",
+    "sourceOrganization": "Microsoft",
+    "sourceUrl": "https://fluent2.microsoft.design/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Fluent 2 'web' light theme. Built from Fluent's global ramp (gray-0..gray-160 over 16 steps in the Web theme) plus communication-blue accent. Segoe UI is proprietary to Microsoft; referenced by family name only."
+  },
+  "mappingNotes": "Fluent uses neutralBackground{1-6} for surfaces, neutralForeground{1-4} for text, neutralStroke{1-3} for borders. Translated: neutralBackground1 -> surface-elevated, neutralBackground2 -> surface, neutralBackground3 -> surface-recessed. brandBackground -> accent (communication blue #0078D4 area).",
+  "base": {
+    "gray": {
+      "0":   "#ffffff",
+      "10":  "oklch(98% 0.003 260)",
+      "20":  "oklch(96% 0.005 260)",
+      "30":  "oklch(94% 0.007 260)",
+      "40":  "oklch(90% 0.008 260)",
+      "60":  "oklch(80% 0.010 260)",
+      "80":  "oklch(65% 0.012 260)",
+      "100": "oklch(50% 0.012 260)",
+      "120": "oklch(38% 0.012 260)",
+      "140": "oklch(25% 0.012 260)",
+      "160": "oklch(15% 0.012 260)"
+    },
+    "communicationBlue": {
+      "primary": "oklch(50% 0.18 250)",
+      "tint": "oklch(95% 0.04 250)"
+    },
+    "danger":  { "primary": "oklch(50% 0.20 25)" },
+    "success": { "primary": "oklch(50% 0.16 145)" },
+    "warning": { "primary": "oklch(75% 0.18 80)" },
+    "info":    { "primary": "oklch(55% 0.16 240)" }
+  },
+  "fonts": {
+    "font-sans": "'Segoe UI Variable', 'Segoe UI', system-ui, sans-serif",
+    "font-serif": "ui-serif, Georgia, serif",
+    "font-mono": "'Cascadia Code', 'Cascadia Mono', ui-monospace, monospace",
+    "font-display": "'Segoe UI Variable', 'Segoe UI', system-ui, sans-serif"
+  },
+  "semantic": {
+    "surface": "{gray.20}",
+    "surface-elevated": "{gray.0}",
+    "surface-recessed": "{gray.40}",
+    "surface-inverse": "{gray.160}",
+    "text": "{gray.160}",
+    "text-emphasis": "{gray.160}",
+    "text-recede": "{gray.100}",
+    "text-disabled": "{gray.60}",
+    "text-on-accent": "{gray.0}",
+    "text-on-critical": "{gray.0}",
+    "text-on-success": "{gray.0}",
+    "text-on-warning": "{gray.160}",
+    "text-on-info": "{gray.0}",
+    "border": "{gray.60}",
+    "border-emphasis": "{communicationBlue.primary}",
+    "border-recede": "{gray.40}",
+    "accent": "{communicationBlue.primary}",
+    "accent-recede": "{communicationBlue.tint}",
+    "critical": "{danger.primary}",
+    "success": "{success.primary}",
+    "warning": "{warning.primary}",
+    "info": "{info.primary}"
+  }
+}

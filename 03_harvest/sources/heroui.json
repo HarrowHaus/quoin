@@ -1,0 +1,63 @@
+{
+  "name": "heroui",
+  "description": "HeroUI (formerly NextUI) default palette translated onto the Quoin canonical semantic-token namespace.",
+  "license": "MIT",
+  "tags": ["heroui", "nextui", "purple-accent", "react"],
+  "attribution": {
+    "sourceSystem": "HeroUI",
+    "sourceOrganization": "HeroUI community",
+    "sourceUrl": "https://www.heroui.com/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "HeroUI (renamed from NextUI v2). Built on Tailwind v4 + React Aria. Default primary is a vibrant purple/blue accent. Inter typeface is open-source."
+  },
+  "mappingNotes": "HeroUI exposes a layered theme system with background, foreground, primary, secondary, etc. Mapped directly: background -> surface, foreground -> text-emphasis, primary -> accent.",
+  "base": {
+    "gray": {
+      "50":  "oklch(98% 0.005 260)",
+      "100": "oklch(96% 0.008 260)",
+      "200": "oklch(92% 0.010 260)",
+      "300": "oklch(85% 0.012 260)",
+      "400": "oklch(70% 0.012 260)",
+      "500": "oklch(55% 0.014 260)",
+      "700": "oklch(35% 0.014 260)",
+      "900": "oklch(12% 0.014 260)"
+    },
+    "white": { "0": "#ffffff" },
+    "primary": { "500": "oklch(55% 0.20 270)", "50": "oklch(95% 0.04 270)" },
+    "red":   { "500": "oklch(60% 0.22 25)" },
+    "green": { "500": "oklch(60% 0.16 145)" },
+    "amber": { "500": "oklch(78% 0.18 70)" },
+    "blue":  { "500": "oklch(60% 0.16 230)" }
+  },
+  "fonts": {
+    "font-sans": "'Inter', system-ui, -apple-system, sans-serif",
+    "font-serif": "ui-serif, Georgia, serif",
+    "font-mono": "'JetBrains Mono', ui-monospace, monospace",
+    "font-display": "'Inter', system-ui, sans-serif"
+  },
+  "semantic": {
+    "surface": "{white.0}",
+    "surface-elevated": "{white.0}",
+    "surface-recessed": "{gray.50}",
+    "surface-inverse": "{gray.900}",
+    "text": "{gray.900}",
+    "text-emphasis": "{gray.900}",
+    "text-recede": "{gray.500}",
+    "text-disabled": "{gray.300}",
+    "text-on-accent": "{white.0}",
+    "text-on-critical": "{white.0}",
+    "text-on-success": "{white.0}",
+    "text-on-warning": "{gray.900}",
+    "text-on-info": "{white.0}",
+    "border": "{gray.200}",
+    "border-emphasis": "{primary.500}",
+    "border-recede": "{gray.100}",
+    "accent": "{primary.500}",
+    "accent-recede": "{primary.50}",
+    "critical": "{red.500}",
+    "success": "{green.500}",
+    "warning": "{amber.500}",
+    "info": "{blue.500}"
+  }
+}

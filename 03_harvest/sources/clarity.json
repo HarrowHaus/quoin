@@ -1,0 +1,65 @@
+{
+  "name": "clarity",
+  "description": "VMware Clarity palette translated onto the Quoin canonical semantic-token namespace.",
+  "license": "MIT",
+  "tags": ["clarity", "vmware", "blue", "enterprise"],
+  "attribution": {
+    "sourceSystem": "Clarity Design System",
+    "sourceOrganization": "VMware",
+    "sourceUrl": "https://clarity.design/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Clarity v6 light theme. Clarity's 'action blue' (#0072A3 area) is the brand accent. Heavy-blue, enterprise-IT aesthetic — gradients of teal/cobalt across the chrome."
+  },
+  "mappingNotes": "Clarity color-base-100..900 maps directly to Quoin surface/text ramp. action-blue-600 -> accent. Status colours: danger (red), success (green), warning (orange), info (action blue).",
+  "base": {
+    "base": {
+      "0":   "#ffffff",
+      "100": "oklch(98% 0.006 220)",
+      "200": "oklch(95% 0.008 220)",
+      "300": "oklch(90% 0.010 220)",
+      "400": "oklch(78% 0.012 220)",
+      "500": "oklch(55% 0.014 220)",
+      "600": "oklch(38% 0.014 220)",
+      "800": "oklch(22% 0.014 220)",
+      "1000": "oklch(10% 0.014 220)"
+    },
+    "action": {
+      "600": "oklch(45% 0.14 220)",
+      "100": "oklch(95% 0.04 220)"
+    },
+    "danger":  { "600": "oklch(52% 0.20 25)" },
+    "success": { "600": "oklch(50% 0.16 145)" },
+    "warning": { "600": "oklch(70% 0.18 60)" }
+  },
+  "fonts": {
+    "font-sans": "'Clarity City', 'Metropolis', system-ui, sans-serif",
+    "font-serif": "Georgia, ui-serif, serif",
+    "font-mono": "'Source Code Pro', ui-monospace, monospace",
+    "font-display": "'Clarity City', system-ui, sans-serif"
+  },
+  "semantic": {
+    "surface": "{base.0}",
+    "surface-elevated": "{base.0}",
+    "surface-recessed": "{base.100}",
+    "surface-inverse": "{base.1000}",
+    "text": "{base.800}",
+    "text-emphasis": "{base.1000}",
+    "text-recede": "{base.500}",
+    "text-disabled": "{base.300}",
+    "text-on-accent": "{base.0}",
+    "text-on-critical": "{base.0}",
+    "text-on-success": "{base.0}",
+    "text-on-warning": "{base.1000}",
+    "text-on-info": "{base.0}",
+    "border": "{base.300}",
+    "border-emphasis": "{action.600}",
+    "border-recede": "{base.200}",
+    "accent": "{action.600}",
+    "accent-recede": "{action.100}",
+    "critical": "{danger.600}",
+    "success": "{success.600}",
+    "warning": "{warning.600}",
+    "info": "{action.600}"
+  }
+}

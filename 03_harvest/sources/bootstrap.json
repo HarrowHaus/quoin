@@ -1,0 +1,64 @@
+{
+  "name": "bootstrap",
+  "description": "Bootstrap 5 default palette translated onto the Quoin canonical semantic-token namespace.",
+  "license": "MIT",
+  "tags": ["bootstrap", "blue-accent", "css-framework", "popular"],
+  "attribution": {
+    "sourceSystem": "Bootstrap",
+    "sourceOrganization": "Bootstrap community / Twitter origin",
+    "sourceUrl": "https://getbootstrap.com/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Bootstrap 5 default theme colours. Bootstrap's $primary (#0d6efd), $danger, $success, $warning, $info map directly onto Quoin's accent + status. $light/$dark for surface/inverse."
+  },
+  "mappingNotes": "Bootstrap variables $body-bg -> surface, $body-color -> text, $primary -> accent, $danger/$success/$warning/$info -> respective status tokens. $gray-100..900 powers the neutral ramp.",
+  "base": {
+    "gray": {
+      "100": "oklch(97% 0.005 250)",
+      "200": "oklch(94% 0.008 250)",
+      "300": "oklch(88% 0.010 250)",
+      "400": "oklch(78% 0.012 250)",
+      "500": "oklch(58% 0.012 250)",
+      "600": "oklch(45% 0.014 250)",
+      "700": "oklch(32% 0.014 250)",
+      "800": "oklch(20% 0.014 250)",
+      "900": "oklch(12% 0.014 250)"
+    },
+    "white": { "0": "#ffffff" },
+    "primary": { "500": "oklch(55% 0.20 250)", "100": "oklch(95% 0.04 250)" },
+    "danger":  { "500": "oklch(55% 0.22 25)" },
+    "success": { "500": "oklch(55% 0.16 145)" },
+    "warning": { "500": "oklch(80% 0.18 80)" },
+    "info":    { "500": "oklch(70% 0.13 200)" }
+  },
+  "fonts": {
+    "font-sans": "system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+    "font-serif": "Georgia, 'Times New Roman', ui-serif, serif",
+    "font-mono": "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace",
+    "font-display": "system-ui, -apple-system, sans-serif"
+  },
+  "semantic": {
+    "surface": "{white.0}",
+    "surface-elevated": "{white.0}",
+    "surface-recessed": "{gray.100}",
+    "surface-inverse": "{gray.900}",
+    "text": "{gray.900}",
+    "text-emphasis": "{gray.900}",
+    "text-recede": "{gray.600}",
+    "text-disabled": "{gray.400}",
+    "text-on-accent": "{white.0}",
+    "text-on-critical": "{white.0}",
+    "text-on-success": "{white.0}",
+    "text-on-warning": "{gray.900}",
+    "text-on-info": "{gray.900}",
+    "border": "{gray.300}",
+    "border-emphasis": "{primary.500}",
+    "border-recede": "{gray.200}",
+    "accent": "{primary.500}",
+    "accent-recede": "{primary.100}",
+    "critical": "{danger.500}",
+    "success": "{success.500}",
+    "warning": "{warning.500}",
+    "info": "{info.500}"
+  }
+}

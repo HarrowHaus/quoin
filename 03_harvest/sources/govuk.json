@@ -1,0 +1,60 @@
+{
+  "name": "govuk",
+  "description": "GOV.UK Design System palette translated onto the Quoin canonical semantic-token namespace.",
+  "license": "MIT",
+  "tags": ["govuk", "government", "uk", "accessibility", "transport-font"],
+  "attribution": {
+    "sourceSystem": "GOV.UK Design System",
+    "sourceOrganization": "UK Government Digital Service",
+    "sourceUrl": "https://design-system.service.gov.uk/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "GOV.UK ships govuk-frontend under MIT. Colour palette: govuk-blue (#1d70b8) primary, govuk-black text on govuk-light-grey surface. GDS Transport typeface is proprietary to GDS; referenced by family name only with a system fallback."
+  },
+  "mappingNotes": "GOV.UK is mostly black/white/blue — a deliberately stripped-down palette. Status colours map cleanly: govuk-red -> critical, govuk-green -> success, govuk-yellow -> warning, govuk-blue -> info (reusing the brand blue). No accent-recede in source; derived from govuk-light-blue.",
+  "base": {
+    "grey": {
+      "1": "oklch(99% 0 0)",
+      "2": "oklch(96% 0.003 250)",
+      "3": "oklch(92% 0.006 250)",
+      "4": "oklch(82% 0.010 250)"
+    },
+    "black":      { "0": "oklch(7% 0 0)" },
+    "white":      { "0": "#ffffff" },
+    "blue":       { "0": "oklch(48% 0.16 240)", "light": "oklch(90% 0.05 240)" },
+    "red":        { "0": "oklch(50% 0.21 25)" },
+    "green":      { "0": "oklch(45% 0.16 145)" },
+    "yellow":     { "0": "oklch(85% 0.18 90)" },
+    "mid-grey":   { "0": "oklch(50% 0.005 250)" }
+  },
+  "fonts": {
+    "font-sans": "'GDS Transport', arial, sans-serif",
+    "font-serif": "Georgia, serif",
+    "font-mono": "ui-monospace, monospace",
+    "font-display": "'GDS Transport', arial, sans-serif"
+  },
+  "semantic": {
+    "surface": "{white.0}",
+    "surface-elevated": "{white.0}",
+    "surface-recessed": "{grey.2}",
+    "surface-inverse": "{black.0}",
+    "text": "{black.0}",
+    "text-emphasis": "{black.0}",
+    "text-recede": "{mid-grey.0}",
+    "text-disabled": "{grey.4}",
+    "text-on-accent": "{white.0}",
+    "text-on-critical": "{white.0}",
+    "text-on-success": "{white.0}",
+    "text-on-warning": "{black.0}",
+    "text-on-info": "{white.0}",
+    "border": "{grey.3}",
+    "border-emphasis": "{black.0}",
+    "border-recede": "{grey.2}",
+    "accent": "{blue.0}",
+    "accent-recede": "{blue.light}",
+    "critical": "{red.0}",
+    "success": "{green.0}",
+    "warning": "{yellow.0}",
+    "info": "{blue.0}"
+  }
+}

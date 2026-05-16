@@ -1,0 +1,61 @@
+{
+  "name": "bulma",
+  "description": "Bulma CSS framework default palette translated onto the Quoin canonical semantic-token namespace.",
+  "license": "MIT",
+  "tags": ["bulma", "turquoise-accent", "css-only", "sass"],
+  "attribution": {
+    "sourceSystem": "Bulma",
+    "sourceOrganization": "Jeremy Thomas / Bulma community",
+    "sourceUrl": "https://bulma.io/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Bulma default theme. Signature accent is $primary = turquoise (#00D1B2 area). Bulma is one of the more aesthetically distinctive defaults — included for breadth."
+  },
+  "mappingNotes": "Bulma's $background -> surface, $text -> text, $primary -> accent (turquoise), $danger/$success/$warning/$info -> respective. Bulma's $border -> border, $border-light -> border-recede.",
+  "base": {
+    "white": { "0": "#ffffff" },
+    "gray": {
+      "lighter":  "oklch(97% 0.005 250)",
+      "light":    "oklch(94% 0.008 250)",
+      "default":  "oklch(80% 0.012 250)",
+      "dark":     "oklch(50% 0.014 250)",
+      "darker":   "oklch(28% 0.014 250)",
+      "darkest":  "oklch(14% 0.014 250)"
+    },
+    "primary": { "500": "oklch(70% 0.13 175)", "100": "oklch(95% 0.04 175)" },
+    "danger":  { "500": "oklch(58% 0.22 25)" },
+    "success": { "500": "oklch(60% 0.16 145)" },
+    "warning": { "500": "oklch(85% 0.18 80)" },
+    "info":    { "500": "oklch(60% 0.16 220)" }
+  },
+  "fonts": {
+    "font-sans": "BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif",
+    "font-serif": "Georgia, ui-serif, serif",
+    "font-mono": "monospace",
+    "font-display": "BlinkMacSystemFont, -apple-system, sans-serif"
+  },
+  "semantic": {
+    "surface": "{white.0}",
+    "surface-elevated": "{white.0}",
+    "surface-recessed": "{gray.lighter}",
+    "surface-inverse": "{gray.darkest}",
+    "text": "{gray.darker}",
+    "text-emphasis": "{gray.darkest}",
+    "text-recede": "{gray.dark}",
+    "text-disabled": "{gray.default}",
+    "text-on-accent": "{white.0}",
+    "text-on-critical": "{white.0}",
+    "text-on-success": "{white.0}",
+    "text-on-warning": "{gray.darkest}",
+    "text-on-info": "{white.0}",
+    "border": "{gray.light}",
+    "border-emphasis": "{primary.500}",
+    "border-recede": "{gray.lighter}",
+    "accent": "{primary.500}",
+    "accent-recede": "{primary.100}",
+    "critical": "{danger.500}",
+    "success": "{success.500}",
+    "warning": "{warning.500}",
+    "info": "{info.500}"
+  }
+}

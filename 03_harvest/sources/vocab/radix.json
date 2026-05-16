@@ -1,0 +1,104 @@
+{
+  "name": "radix",
+  "description": "Radix UI-flavoured accessibility primitives — toggle, switch, slider, progress bar, dialog overlay.",
+  "license": "MIT",
+  "tags": ["radix", "accessibility", "primitives", "headless"],
+  "attribution": {
+    "sourceSystem": "Radix UI",
+    "sourceOrganization": "WorkOS",
+    "sourceUrl": "https://www.radix-ui.com/primitives",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Distills Radix UI's accessibility-first primitive set into Quoin semantic elements. Naming follows the role rather than Radix's component name (e.g. <accessible-toggle> instead of <Toggle.Root>). Use alongside the v1 vocab packs."
+  },
+  "primitives": [
+    {
+      "name": "accessible-toggle",
+      "category": "interactive",
+      "role": "Two-state toggle button. ARIA-aware.",
+      "attributes": {
+        "pressed": { "values": ["true", "false"], "default": "false", "specific": true }
+      },
+      "tokens": {
+        "background": "--surface",
+        "color": "--text",
+        "borderColor": "--border",
+        "borderRadius": "--radius-md"
+      },
+      "structure": {
+        "element": "button",
+        "attributes": { "type": "button", "aria-pressed": "false" }
+      },
+      "children": "phrasing-content",
+      "scope": "inline"
+    },
+    {
+      "name": "switch-toggle",
+      "category": "interactive",
+      "role": "On/off switch — a styled checkbox with thumb track visual.",
+      "attributes": {
+        "name": { "values": [], "default": "", "specific": true }
+      },
+      "tokens": {
+        "background": "--surface-recessed",
+        "color": "--accent",
+        "borderRadius": "--radius-pill"
+      },
+      "structure": {
+        "element": "input",
+        "attributes": { "type": "checkbox", "role": "switch" }
+      },
+      "children": "none",
+      "scope": "inline"
+    },
+    {
+      "name": "slider-cell",
+      "category": "interactive",
+      "role": "Single-value range slider.",
+      "attributes": {
+        "name": { "values": [], "default": "", "specific": true }
+      },
+      "tokens": { "color": "--accent" },
+      "structure": {
+        "element": "input",
+        "attributes": { "type": "range" }
+      },
+      "children": "none",
+      "scope": "inline"
+    },
+    {
+      "name": "progress-meter",
+      "category": "state",
+      "role": "Determinate or indeterminate progress indicator.",
+      "attributes": {
+        "intent": { "values": ["primary", "success", "warning", "critical"], "default": "primary" }
+      },
+      "tokens": {
+        "background": "--surface-recessed",
+        "color": "--accent",
+        "borderRadius": "--radius-pill"
+      },
+      "structure": {
+        "element": "div",
+        "attributes": { "role": "progressbar" }
+      },
+      "children": "flow-content",
+      "scope": "block"
+    },
+    {
+      "name": "dialog-overlay",
+      "category": "interactive",
+      "role": "Modal dialog with backdrop. Native HTML dialog under the hood.",
+      "attributes": {},
+      "tokens": {
+        "background": "--surface-elevated",
+        "borderColor": "--border",
+        "borderRadius": "--radius-lg",
+        "padding": "--space-panel"
+      },
+      "structure": { "element": "dialog" },
+      "children": "flow-content",
+      "scope": "block"
+    }
+  ]
+}

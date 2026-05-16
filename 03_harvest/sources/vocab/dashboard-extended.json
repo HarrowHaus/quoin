@@ -1,0 +1,132 @@
+{
+  "name": "dashboard-extended",
+  "description": "Extended data-dense primitives — KPI cards, sparklines, status pills, change indicators, filter chips, search cells, view switchers.",
+  "license": "MIT",
+  "tags": ["dashboard", "kpi", "sparkline", "metrics"],
+  "attribution": {
+    "sourceSystem": "Quoin original — distilled from common dashboard patterns across Grafana, Datadog, Linear, Vercel, Stripe, and Mixpanel.",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Extends the v1 dashboard vocabulary with primitives that show up repeatedly in real operational consoles. Designed to compose inside <density-grid> + <canvas-block>."
+  },
+  "primitives": [
+    {
+      "name": "kpi-card",
+      "category": "content",
+      "role": "Single metric card — label, big value, optional delta.",
+      "attributes": {
+        "intent": { "values": ["primary", "success", "warning", "critical"], "default": "primary" },
+        "density": { "values": ["normal", "dense"], "default": "dense" }
+      },
+      "tokens": {
+        "background": "--surface-elevated",
+        "color": "--text",
+        "borderColor": "--border",
+        "padding": "--space-card",
+        "borderRadius": "--radius-card"
+      },
+      "structure": { "element": "article" },
+      "children": "flow-content",
+      "scope": "block"
+    },
+    {
+      "name": "spark-line",
+      "category": "content",
+      "role": "Tiny in-line trend chart container. Inner SVG/canvas supplied by author.",
+      "attributes": {
+        "intent": { "values": ["primary", "success", "warning", "critical"], "default": "primary" }
+      },
+      "tokens": { "color": "--accent" },
+      "structure": { "element": "div" },
+      "children": "flow-content",
+      "scope": "inline"
+    },
+    {
+      "name": "status-pill",
+      "category": "state",
+      "role": "Short status indicator — running, success, error, queued.",
+      "attributes": {
+        "intent": { "values": ["info", "success", "warning", "critical"], "default": "info" }
+      },
+      "tokens": {
+        "background": "--info",
+        "color": "--text-on-info",
+        "fontSize": "--type-size-xs",
+        "borderRadius": "--radius-pill",
+        "fontFamily": "--font-mono"
+      },
+      "structure": { "element": "span" },
+      "children": "phrasing-content",
+      "scope": "inline"
+    },
+    {
+      "name": "change-indicator",
+      "category": "state",
+      "role": "Delta against a previous value — arrow + percentage.",
+      "attributes": {
+        "intent": { "values": ["success", "critical"], "default": "success" }
+      },
+      "tokens": { "color": "--success", "fontSize": "--type-size-sm" },
+      "structure": { "element": "span" },
+      "children": "phrasing-content",
+      "scope": "inline"
+    },
+    {
+      "name": "filter-chip",
+      "category": "interactive",
+      "role": "Active filter chip with optional close affordance.",
+      "attributes": {
+        "intent": { "values": ["primary", "secondary"], "default": "secondary" }
+      },
+      "tokens": {
+        "background": "--surface-recessed",
+        "color": "--text",
+        "borderColor": "--border",
+        "borderRadius": "--radius-pill"
+      },
+      "structure": { "element": "button", "attributes": { "type": "button" } },
+      "children": "phrasing-content",
+      "scope": "inline"
+    },
+    {
+      "name": "search-cell",
+      "category": "interactive",
+      "role": "Search input with implicit search icon, usually in a header.",
+      "attributes": {
+        "density": { "values": ["sparse", "normal", "dense"], "default": "dense" },
+        "placeholder": { "values": [], "default": "Search", "specific": true },
+        "name": { "values": [], "default": "q", "specific": true }
+      },
+      "tokens": {
+        "background": "--surface",
+        "color": "--text",
+        "borderColor": "--border",
+        "borderRadius": "--radius-md"
+      },
+      "structure": {
+        "element": "input",
+        "attributes": { "type": "search" }
+      },
+      "children": "none",
+      "scope": "inline"
+    },
+    {
+      "name": "view-switcher",
+      "category": "navigation",
+      "role": "Tab-like view selector between list / grid / kanban etc.",
+      "attributes": {
+        "density": { "values": ["sparse", "normal", "dense"], "default": "dense" }
+      },
+      "tokens": {
+        "background": "--surface-recessed",
+        "borderRadius": "--radius-md"
+      },
+      "structure": {
+        "element": "div",
+        "attributes": { "role": "tablist" }
+      },
+      "children": "flow-content",
+      "scope": "block"
+    }
+  ]
+}

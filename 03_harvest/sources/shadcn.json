@@ -1,0 +1,62 @@
+{
+  "name": "shadcn",
+  "description": "shadcn/ui default theme (zinc, OKLCH) translated onto the Quoin canonical semantic-token namespace.",
+  "license": "MIT",
+  "tags": ["shadcn", "zinc", "neutral", "tailwind-based"],
+  "attribution": {
+    "sourceSystem": "shadcn/ui",
+    "sourceOrganization": "shadcn",
+    "sourceUrl": "https://ui.shadcn.com/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Default 'zinc' theme variables from the shadcn/ui themes registry. shadcn/ui ships CSS custom properties named --background, --foreground, --muted, etc.; these are renamed onto the Quoin canonical namespace."
+  },
+  "mappingNotes": "shadcn names map: --background -> surface, --foreground -> text-emphasis, --muted -> surface-recessed, --muted-foreground -> text-recede, --primary -> accent, --primary-foreground -> text-on-accent, --destructive -> critical, --border -> border. shadcn has no native warning/success/info; supplied from Tailwind's amber/emerald/sky 500.",
+  "base": {
+    "zinc": {
+      "50":  "oklch(0.985 0 0)",
+      "100": "oklch(0.967 0.001 286)",
+      "200": "oklch(0.92 0.004 286)",
+      "400": "oklch(0.705 0.015 286)",
+      "500": "oklch(0.552 0.016 286)",
+      "700": "oklch(0.37 0.013 286)",
+      "900": "oklch(0.21 0.006 286)",
+      "950": "oklch(0.141 0.005 286)"
+    },
+    "white":   { "0": "#ffffff" },
+    "red":     { "500": "oklch(0.577 0.245 27.325)" },
+    "emerald": { "500": "oklch(0.696 0.17 162)" },
+    "amber":   { "500": "oklch(0.769 0.188 70)" },
+    "sky":     { "500": "oklch(0.685 0.169 237)" }
+  },
+  "fonts": {
+    "font-sans": "'Geist', 'Inter', system-ui, sans-serif",
+    "font-serif": "ui-serif, Georgia, serif",
+    "font-mono": "'Geist Mono', ui-monospace, monospace",
+    "font-display": "'Geist', 'Inter', system-ui, sans-serif"
+  },
+  "semantic": {
+    "surface": "{white.0}",
+    "surface-elevated": "{white.0}",
+    "surface-recessed": "{zinc.100}",
+    "surface-inverse": "{zinc.950}",
+    "text": "{zinc.900}",
+    "text-emphasis": "{zinc.950}",
+    "text-recede": "{zinc.500}",
+    "text-disabled": "{zinc.400}",
+    "text-on-accent": "{zinc.50}",
+    "text-on-critical": "{zinc.50}",
+    "text-on-success": "{white.0}",
+    "text-on-warning": "{zinc.950}",
+    "text-on-info": "{white.0}",
+    "border": "{zinc.200}",
+    "border-emphasis": "{zinc.700}",
+    "border-recede": "{zinc.100}",
+    "accent": "{zinc.900}",
+    "accent-recede": "{zinc.100}",
+    "critical": "{red.500}",
+    "success": "{emerald.500}",
+    "warning": "{amber.500}",
+    "info": "{sky.500}"
+  }
+}

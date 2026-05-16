@@ -1,0 +1,62 @@
+{
+  "name": "elastic",
+  "description": "Elastic EUI (light theme) palette translated onto the Quoin canonical semantic-token namespace.",
+  "license": "Apache-2.0",
+  "tags": ["elastic", "eui", "blue-accent", "data-visualisation"],
+  "attribution": {
+    "sourceSystem": "Elastic UI Framework (EUI)",
+    "sourceOrganization": "Elastic",
+    "sourceUrl": "https://eui.elastic.co/",
+    "sourceLicense": "Apache-2.0",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "EUI 'Amsterdam' light theme. Elastic ships @elastic/eui with the design tokens exposed as SASS / CSS vars. Inter typeface is open-source."
+  },
+  "mappingNotes": "EUI's text/background/border tokens map directly. euiColorPrimary -> accent (Elastic blue), euiColorEmptyShade -> surface, euiColorLightestShade -> surface-recessed, euiColorDarkestShade -> surface-inverse. Status: danger/success/warning/primary -> critical/success/warning/info.",
+  "base": {
+    "ink": {
+      "0":   "#ffffff",
+      "100": "oklch(97% 0.005 245)",
+      "200": "oklch(94% 0.008 245)",
+      "300": "oklch(88% 0.010 245)",
+      "400": "oklch(78% 0.012 245)",
+      "500": "oklch(60% 0.012 245)",
+      "600": "oklch(45% 0.012 245)",
+      "800": "oklch(22% 0.014 245)",
+      "900": "oklch(12% 0.014 245)"
+    },
+    "primary": { "500": "oklch(55% 0.18 245)", "100": "oklch(95% 0.04 245)" },
+    "danger":  { "500": "oklch(58% 0.22 25)" },
+    "success": { "500": "oklch(58% 0.16 145)" },
+    "warning": { "500": "oklch(75% 0.18 75)" }
+  },
+  "fonts": {
+    "font-sans": "'Inter', BlinkMacSystemFont, Helvetica, Arial, sans-serif",
+    "font-serif": "Georgia, ui-serif, serif",
+    "font-mono": "'Roboto Mono', 'Courier New', monospace",
+    "font-display": "'Inter', system-ui, sans-serif"
+  },
+  "semantic": {
+    "surface": "{ink.0}",
+    "surface-elevated": "{ink.0}",
+    "surface-recessed": "{ink.100}",
+    "surface-inverse": "{ink.900}",
+    "text": "{ink.800}",
+    "text-emphasis": "{ink.900}",
+    "text-recede": "{ink.500}",
+    "text-disabled": "{ink.300}",
+    "text-on-accent": "{ink.0}",
+    "text-on-critical": "{ink.0}",
+    "text-on-success": "{ink.0}",
+    "text-on-warning": "{ink.900}",
+    "text-on-info": "{ink.0}",
+    "border": "{ink.200}",
+    "border-emphasis": "{primary.500}",
+    "border-recede": "{ink.100}",
+    "accent": "{primary.500}",
+    "accent-recede": "{primary.100}",
+    "critical": "{danger.500}",
+    "success": "{success.500}",
+    "warning": "{warning.500}",
+    "info": "{primary.500}"
+  }
+}

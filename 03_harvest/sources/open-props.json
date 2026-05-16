@@ -1,0 +1,67 @@
+{
+  "name": "open-props",
+  "description": "Open Props (Adam Argyle / Chrome team) translated onto the Quoin canonical semantic-token namespace.",
+  "license": "MIT",
+  "tags": ["open-props", "gray", "css-vars", "framework-free"],
+  "attribution": {
+    "sourceSystem": "Open Props",
+    "sourceOrganization": "Adam Argyle / Open Props community",
+    "sourceUrl": "https://open-props.style/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Open Props' gray-N scale powers neutrals; its named colour set powers status (red-7, green-7, etc.). Open Props ships hsl(); converted to OKLCH approximations here for consistency with the rest of the harvested set."
+  },
+  "mappingNotes": "Open Props gray-0..gray-12 maps to Quoin surface/text/border ramp. Open Props has a dedicated surface- and brand- layer in its newer releases; this pack uses the gray ramp directly to keep the mapping simple and faithful to the original 'use the raw scale' usage pattern.",
+  "base": {
+    "gray": {
+      "0":  "oklch(98% 0.002 250)",
+      "1":  "oklch(96% 0.003 250)",
+      "2":  "oklch(93% 0.005 250)",
+      "3":  "oklch(88% 0.008 250)",
+      "4":  "oklch(80% 0.010 250)",
+      "5":  "oklch(70% 0.012 250)",
+      "6":  "oklch(60% 0.012 250)",
+      "7":  "oklch(50% 0.012 250)",
+      "8":  "oklch(40% 0.012 250)",
+      "9":  "oklch(30% 0.014 250)",
+      "10": "oklch(22% 0.014 250)",
+      "11": "oklch(15% 0.014 250)",
+      "12": "oklch(10% 0.014 250)"
+    },
+    "white":  { "0": "#ffffff" },
+    "red":    { "7": "oklch(55% 0.21 25)" },
+    "green":  { "7": "oklch(55% 0.16 150)" },
+    "orange": { "7": "oklch(70% 0.18 60)" },
+    "blue":   { "7": "oklch(58% 0.16 240)" }
+  },
+  "fonts": {
+    "font-sans": "system-ui, -apple-system, sans-serif",
+    "font-serif": "Georgia, Cambria, 'Times New Roman', serif",
+    "font-mono": "ui-monospace, 'Cascadia Code', 'Source Code Pro', monospace",
+    "font-display": "system-ui, -apple-system, sans-serif"
+  },
+  "semantic": {
+    "surface": "{gray.0}",
+    "surface-elevated": "{white.0}",
+    "surface-recessed": "{gray.1}",
+    "surface-inverse": "{gray.11}",
+    "text": "{gray.9}",
+    "text-emphasis": "{gray.11}",
+    "text-recede": "{gray.7}",
+    "text-disabled": "{gray.5}",
+    "text-on-accent": "{white.0}",
+    "text-on-critical": "{white.0}",
+    "text-on-success": "{white.0}",
+    "text-on-warning": "{gray.11}",
+    "text-on-info": "{white.0}",
+    "border": "{gray.3}",
+    "border-emphasis": "{gray.9}",
+    "border-recede": "{gray.2}",
+    "accent": "{gray.11}",
+    "accent-recede": "{gray.2}",
+    "critical": "{red.7}",
+    "success": "{green.7}",
+    "warning": "{orange.7}",
+    "info": "{blue.7}"
+  }
+}

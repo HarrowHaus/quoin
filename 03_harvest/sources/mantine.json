@@ -1,0 +1,65 @@
+{
+  "name": "mantine",
+  "description": "Mantine UI default palette translated onto the Quoin canonical semantic-token namespace.",
+  "license": "MIT",
+  "tags": ["mantine", "blue-accent", "react", "popular"],
+  "attribution": {
+    "sourceSystem": "Mantine",
+    "sourceOrganization": "Mantine community",
+    "sourceUrl": "https://mantine.dev/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Mantine v7 default theme. Mantine ships a 10-shade scale per colour (0-9). Default primary is 'blue', shade 6. Gray = ash-tinted neutral."
+  },
+  "mappingNotes": "Mantine's gray shades 0-9 map to Quoin's surface/text ramp. mantine-blue-6 -> accent. Mantine has explicit red/green/yellow/cyan colour scales for status; mapped to their shade-6 step.",
+  "base": {
+    "gray": {
+      "0": "oklch(98% 0.002 250)",
+      "1": "oklch(96% 0.003 250)",
+      "2": "oklch(92% 0.005 250)",
+      "3": "oklch(88% 0.008 250)",
+      "4": "oklch(78% 0.010 250)",
+      "5": "oklch(65% 0.012 250)",
+      "6": "oklch(50% 0.012 250)",
+      "7": "oklch(38% 0.014 250)",
+      "8": "oklch(26% 0.014 250)",
+      "9": "oklch(14% 0.014 250)"
+    },
+    "white": { "0": "#ffffff" },
+    "blue":   { "6": "oklch(58% 0.18 250)", "0": "oklch(96% 0.04 250)" },
+    "red":    { "6": "oklch(58% 0.20 25)" },
+    "green":  { "6": "oklch(58% 0.16 145)" },
+    "yellow": { "6": "oklch(80% 0.18 80)" },
+    "cyan":   { "6": "oklch(65% 0.13 200)" }
+  },
+  "fonts": {
+    "font-sans": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif",
+    "font-serif": "Georgia, ui-serif, serif",
+    "font-mono": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+    "font-display": "-apple-system, BlinkMacSystemFont, sans-serif"
+  },
+  "semantic": {
+    "surface": "{white.0}",
+    "surface-elevated": "{white.0}",
+    "surface-recessed": "{gray.0}",
+    "surface-inverse": "{gray.9}",
+    "text": "{gray.9}",
+    "text-emphasis": "{gray.9}",
+    "text-recede": "{gray.6}",
+    "text-disabled": "{gray.4}",
+    "text-on-accent": "{white.0}",
+    "text-on-critical": "{white.0}",
+    "text-on-success": "{white.0}",
+    "text-on-warning": "{gray.9}",
+    "text-on-info": "{white.0}",
+    "border": "{gray.3}",
+    "border-emphasis": "{blue.6}",
+    "border-recede": "{gray.2}",
+    "accent": "{blue.6}",
+    "accent-recede": "{blue.0}",
+    "critical": "{red.6}",
+    "success": "{green.6}",
+    "warning": "{yellow.6}",
+    "info": "{cyan.6}"
+  }
+}

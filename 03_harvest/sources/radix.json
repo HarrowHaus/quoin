@@ -1,0 +1,71 @@
+{
+  "name": "radix",
+  "description": "Radix Colors translated to Quoin. Slate neutral plus Blue accent (canonical Radix UI combination).",
+  "license": "MIT",
+  "tags": ["radix", "slate", "12-step", "accessible"],
+  "attribution": {
+    "sourceSystem": "Radix Colors",
+    "sourceOrganization": "WorkOS",
+    "sourceUrl": "https://www.radix-ui.com/colors",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Radix's 12-step alpha+saturation scale flattened to OKLCH greys for the neutral, plus the canonical Blue scale for the accent. Status colours from Radix's red, green, amber, blue scales (step 10 = solid)."
+  },
+  "mappingNotes": "Radix's 12-step model maps onto Quoin's 4-surface model as: step 1 -> surface-elevated, step 2 -> surface, step 3 -> surface-recessed, step 12 -> surface-inverse. text uses step 11 (body), text-emphasis uses step 12, text-recede uses step 9. Border uses step 6 / 8 (recede / emphasis).",
+  "base": {
+    "slate": {
+      "1":  "oklch(99% 0.002 264)",
+      "2":  "oklch(98% 0.004 264)",
+      "3":  "oklch(95% 0.005 264)",
+      "4":  "oklch(92% 0.006 264)",
+      "5":  "oklch(89% 0.007 264)",
+      "6":  "oklch(85% 0.008 264)",
+      "7":  "oklch(80% 0.010 264)",
+      "8":  "oklch(70% 0.012 264)",
+      "9":  "oklch(55% 0.012 264)",
+      "10": "oklch(50% 0.012 264)",
+      "11": "oklch(42% 0.012 264)",
+      "12": "oklch(18% 0.014 264)"
+    },
+    "blue": {
+      "9":  "oklch(60% 0.18 254)",
+      "10": "oklch(56% 0.18 254)",
+      "3":  "oklch(95% 0.04 254)"
+    },
+    "red":   { "9": "oklch(58% 0.21 25)" },
+    "green": { "9": "oklch(58% 0.18 145)" },
+    "amber": { "9": "oklch(75% 0.18 80)" },
+    "info":  { "9": "oklch(60% 0.18 254)" },
+    "white": { "0": "#ffffff" }
+  },
+  "fonts": {
+    "font-sans": "'Inter', system-ui, sans-serif",
+    "font-serif": "ui-serif, Georgia, serif",
+    "font-mono": "'JetBrains Mono', ui-monospace, monospace",
+    "font-display": "'Inter', system-ui, sans-serif"
+  },
+  "semantic": {
+    "surface": "{slate.2}",
+    "surface-elevated": "{slate.1}",
+    "surface-recessed": "{slate.3}",
+    "surface-inverse": "{slate.12}",
+    "text": "{slate.11}",
+    "text-emphasis": "{slate.12}",
+    "text-recede": "{slate.10}",
+    "text-disabled": "{slate.8}",
+    "text-on-accent": "{white.0}",
+    "text-on-critical": "{white.0}",
+    "text-on-success": "{white.0}",
+    "text-on-warning": "{slate.12}",
+    "text-on-info": "{white.0}",
+    "border": "{slate.6}",
+    "border-emphasis": "{slate.8}",
+    "border-recede": "{slate.4}",
+    "accent": "{blue.9}",
+    "accent-recede": "{blue.3}",
+    "critical": "{red.9}",
+    "success": "{green.9}",
+    "warning": "{amber.9}",
+    "info": "{info.9}"
+  }
+}

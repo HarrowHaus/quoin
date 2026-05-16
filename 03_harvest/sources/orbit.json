@@ -1,0 +1,66 @@
+{
+  "name": "orbit",
+  "description": "Kiwi.com Orbit palette translated onto the Quoin canonical semantic-token namespace.",
+  "license": "MIT",
+  "tags": ["orbit", "kiwi", "travel", "green-accent"],
+  "attribution": {
+    "sourceSystem": "Orbit Design System",
+    "sourceOrganization": "Kiwi.com",
+    "sourceUrl": "https://orbit.kiwi/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Orbit 'on-light' theme. Kiwi green is the signature accent. Orbit uses Roboto + Circular as its typeface stack; Roboto is open-source, Circular is proprietary (referenced by family name only)."
+  },
+  "mappingNotes": "Orbit cloud (light grey backgrounds), ink (text greys), product (green accent). Status colours: critical (red), success (Kiwi green or success-green), warning (yellow), info (blue).",
+  "base": {
+    "cloud": {
+      "0":   "#ffffff",
+      "50":  "oklch(97% 0.005 175)",
+      "100": "oklch(94% 0.008 175)",
+      "200": "oklch(88% 0.010 175)"
+    },
+    "ink": {
+      "300": "oklch(60% 0.012 240)",
+      "500": "oklch(38% 0.014 240)",
+      "700": "oklch(18% 0.014 240)"
+    },
+    "product": {
+      "500": "oklch(60% 0.16 165)",
+      "100": "oklch(96% 0.05 165)"
+    },
+    "red":    { "500": "oklch(55% 0.22 25)" },
+    "green":  { "500": "oklch(58% 0.16 145)" },
+    "orange": { "500": "oklch(72% 0.18 60)" },
+    "blue":   { "500": "oklch(55% 0.18 240)" }
+  },
+  "fonts": {
+    "font-sans": "'Circular Std', 'Roboto', system-ui, -apple-system, sans-serif",
+    "font-serif": "Georgia, ui-serif, serif",
+    "font-mono": "'Roboto Mono', ui-monospace, monospace",
+    "font-display": "'Circular Std', 'Roboto', system-ui, sans-serif"
+  },
+  "semantic": {
+    "surface": "{cloud.0}",
+    "surface-elevated": "{cloud.0}",
+    "surface-recessed": "{cloud.50}",
+    "surface-inverse": "{ink.700}",
+    "text": "{ink.700}",
+    "text-emphasis": "{ink.700}",
+    "text-recede": "{ink.500}",
+    "text-disabled": "{ink.300}",
+    "text-on-accent": "{cloud.0}",
+    "text-on-critical": "{cloud.0}",
+    "text-on-success": "{cloud.0}",
+    "text-on-warning": "{ink.700}",
+    "text-on-info": "{cloud.0}",
+    "border": "{cloud.200}",
+    "border-emphasis": "{product.500}",
+    "border-recede": "{cloud.100}",
+    "accent": "{product.500}",
+    "accent-recede": "{product.100}",
+    "critical": "{red.500}",
+    "success": "{green.500}",
+    "warning": "{orange.500}",
+    "info": "{blue.500}"
+  }
+}

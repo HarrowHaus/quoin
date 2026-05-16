@@ -1,0 +1,66 @@
+{
+  "name": "lightning",
+  "description": "Salesforce Lightning Design System palette translated onto the Quoin canonical semantic-token namespace.",
+  "license": "BSD-3-Clause",
+  "tags": ["lightning", "salesforce", "blue-accent", "enterprise"],
+  "attribution": {
+    "sourceSystem": "Lightning Design System (SLDS)",
+    "sourceOrganization": "Salesforce",
+    "sourceUrl": "https://www.lightningdesignsystem.com/",
+    "sourceLicense": "BSD-3-Clause",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "SLDS '2' tokens (light scheme). Salesforce ships @salesforce-ux/design-system-tokens with utility, component, and theme layers; this pack uses the global + alias layers. Salesforce Sans is proprietary; referenced by family name only."
+  },
+  "mappingNotes": "SLDS color-background-base -> surface, color-background -> surface-recessed, color-text-default -> text, color-brand -> accent (Salesforce blue #0070D2 area). color-success/error/warning/info map directly.",
+  "base": {
+    "neutral": {
+      "0":   "#ffffff",
+      "5":   "oklch(98% 0.005 240)",
+      "10":  "oklch(96% 0.008 240)",
+      "25":  "oklch(92% 0.010 240)",
+      "50":  "oklch(80% 0.012 240)",
+      "65":  "oklch(60% 0.012 240)",
+      "75":  "oklch(45% 0.014 240)",
+      "90":  "oklch(28% 0.014 240)",
+      "100": "oklch(15% 0.014 240)"
+    },
+    "brand": {
+      "500": "oklch(50% 0.18 240)",
+      "100": "oklch(95% 0.04 240)"
+    },
+    "error":   { "500": "oklch(52% 0.20 25)" },
+    "success": { "500": "oklch(50% 0.16 145)" },
+    "warning": { "500": "oklch(75% 0.18 80)" },
+    "info":    { "500": "oklch(55% 0.16 220)" }
+  },
+  "fonts": {
+    "font-sans": "'Salesforce Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif",
+    "font-serif": "ui-serif, Georgia, serif",
+    "font-mono": "ui-monospace, 'SF Mono', monospace",
+    "font-display": "'Salesforce Sans', system-ui, sans-serif"
+  },
+  "semantic": {
+    "surface": "{neutral.0}",
+    "surface-elevated": "{neutral.0}",
+    "surface-recessed": "{neutral.5}",
+    "surface-inverse": "{neutral.100}",
+    "text": "{neutral.100}",
+    "text-emphasis": "{neutral.100}",
+    "text-recede": "{neutral.65}",
+    "text-disabled": "{neutral.50}",
+    "text-on-accent": "{neutral.0}",
+    "text-on-critical": "{neutral.0}",
+    "text-on-success": "{neutral.0}",
+    "text-on-warning": "{neutral.100}",
+    "text-on-info": "{neutral.0}",
+    "border": "{neutral.25}",
+    "border-emphasis": "{brand.500}",
+    "border-recede": "{neutral.10}",
+    "accent": "{brand.500}",
+    "accent-recede": "{brand.100}",
+    "critical": "{error.500}",
+    "success": "{success.500}",
+    "warning": "{warning.500}",
+    "info": "{info.500}"
+  }
+}

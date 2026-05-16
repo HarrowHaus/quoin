@@ -1,0 +1,103 @@
+{
+  "name": "headless",
+  "description": "Headless UI-flavoured primitives — listbox, combobox, menu, disclosure-group, transition frame.",
+  "license": "MIT",
+  "tags": ["headless-ui", "listbox", "combobox", "accessibility"],
+  "attribution": {
+    "sourceSystem": "Headless UI",
+    "sourceOrganization": "Tailwind Labs",
+    "sourceUrl": "https://headlessui.com/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Translates Headless UI's componentless-component patterns into Quoin semantic primitives. The implementation pack supplies the styling; Headless UI's behaviour-only abstraction is honoured by emitting plain elements with the right ARIA shape."
+  },
+  "primitives": [
+    {
+      "name": "listbox-options",
+      "category": "interactive",
+      "role": "Single-select listbox surface with options.",
+      "attributes": {},
+      "tokens": {
+        "background": "--surface-elevated",
+        "borderColor": "--border",
+        "borderRadius": "--radius-md",
+        "color": "--text"
+      },
+      "structure": {
+        "element": "ul",
+        "attributes": { "role": "listbox" }
+      },
+      "children": "flow-content",
+      "scope": "block"
+    },
+    {
+      "name": "combobox-input",
+      "category": "interactive",
+      "role": "Searchable combo input (text + listbox).",
+      "attributes": {
+        "name": { "values": [], "default": "", "specific": true },
+        "placeholder": { "values": [], "default": "", "specific": true }
+      },
+      "tokens": {
+        "background": "--surface",
+        "borderColor": "--border",
+        "color": "--text",
+        "borderRadius": "--radius-md"
+      },
+      "structure": {
+        "element": "input",
+        "attributes": { "type": "text", "role": "combobox" }
+      },
+      "children": "none",
+      "scope": "inline"
+    },
+    {
+      "name": "menu-group",
+      "category": "interactive",
+      "role": "Action menu opened from a trigger.",
+      "attributes": {
+        "density": { "values": ["sparse", "normal", "dense"], "default": "normal" }
+      },
+      "tokens": {
+        "background": "--surface-elevated",
+        "borderColor": "--border",
+        "borderRadius": "--radius-md",
+        "color": "--text"
+      },
+      "structure": {
+        "element": "div",
+        "attributes": { "role": "menu" }
+      },
+      "children": "flow-content",
+      "scope": "block"
+    },
+    {
+      "name": "disclosure-group",
+      "category": "interactive",
+      "role": "Group of vertically-stacked disclosures (FAQ accordion).",
+      "attributes": {
+        "density": { "values": ["sparse", "normal", "dense"], "default": "normal" }
+      },
+      "tokens": {
+        "color": "--text",
+        "borderColor": "--border-recede",
+        "gap": "--space-stack-compact"
+      },
+      "structure": { "element": "div" },
+      "children": "flow-content",
+      "scope": "block"
+    },
+    {
+      "name": "transition-frame",
+      "category": "layout",
+      "role": "Wrapper that hosts enter/leave transitions — semantic-only, the implementation pack supplies the actual transition.",
+      "attributes": {
+        "weight": { "values": ["normal", "emphasize"], "default": "normal" }
+      },
+      "tokens": { "background": "--surface" },
+      "structure": { "element": "div" },
+      "children": "flow-content",
+      "scope": "block"
+    }
+  ]
+}

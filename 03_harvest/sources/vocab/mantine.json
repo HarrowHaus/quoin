@@ -1,0 +1,85 @@
+{
+  "name": "mantine",
+  "description": "Mantine-flavoured primitives — skeleton placeholder, ring progress, loader spinner, notification toast.",
+  "license": "MIT",
+  "tags": ["mantine", "skeleton", "loader", "notification"],
+  "attribution": {
+    "sourceSystem": "Mantine",
+    "sourceOrganization": "Mantine community",
+    "sourceUrl": "https://mantine.dev/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Mantine ships a richer set of small UI primitives than most React libraries. This pack picks the distinctive ones — skeleton, ring-progress, loader — that don't have a clean equivalent in the v1 vocabulary."
+  },
+  "primitives": [
+    {
+      "name": "skeleton-placeholder",
+      "category": "state",
+      "role": "Animated placeholder while content loads.",
+      "attributes": {
+        "weight": { "values": ["recede", "normal"], "default": "recede" }
+      },
+      "tokens": {
+        "background": "--surface-recessed",
+        "borderRadius": "--radius-md"
+      },
+      "structure": {
+        "element": "div",
+        "attributes": { "role": "status", "aria-busy": "true" }
+      },
+      "children": "none",
+      "scope": "block"
+    },
+    {
+      "name": "ring-progress",
+      "category": "state",
+      "role": "Circular progress indicator. Inner SVG/canvas supplied by author.",
+      "attributes": {
+        "intent": { "values": ["primary", "success", "warning", "critical"], "default": "primary" }
+      },
+      "tokens": { "color": "--accent" },
+      "structure": {
+        "element": "div",
+        "attributes": { "role": "progressbar" }
+      },
+      "children": "flow-content",
+      "scope": "inline"
+    },
+    {
+      "name": "loader-spinner",
+      "category": "state",
+      "role": "Indeterminate spinner.",
+      "attributes": {
+        "intent": { "values": ["primary", "secondary"], "default": "primary" }
+      },
+      "tokens": { "color": "--accent" },
+      "structure": {
+        "element": "div",
+        "attributes": { "role": "status", "aria-label": "Loading" }
+      },
+      "children": "none",
+      "scope": "inline"
+    },
+    {
+      "name": "notification-toast",
+      "category": "state",
+      "role": "Floating notification toast.",
+      "attributes": {
+        "intent": { "values": ["info", "success", "warning", "critical"], "default": "info" }
+      },
+      "tokens": {
+        "background": "--surface-elevated",
+        "color": "--text",
+        "borderColor": "--border",
+        "borderRadius": "--radius-md",
+        "padding": "--space-4"
+      },
+      "structure": {
+        "element": "div",
+        "attributes": { "role": "status" }
+      },
+      "children": "flow-content",
+      "scope": "block"
+    }
+  ]
+}

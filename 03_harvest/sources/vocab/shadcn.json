@@ -1,0 +1,120 @@
+{
+  "name": "shadcn",
+  "description": "shadcn/ui-flavoured primitives — command palette, scroll pane, hover card, popover, sheet overlay, tooltip.",
+  "license": "MIT",
+  "tags": ["shadcn", "command-menu", "popover", "tooltip"],
+  "attribution": {
+    "sourceSystem": "shadcn/ui",
+    "sourceOrganization": "shadcn",
+    "sourceUrl": "https://ui.shadcn.com/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Maps shadcn/ui's distinctive overlay + command-menu patterns to Quoin primitives. Use alongside @quoin/vocab-editorial and @quoin/vocab-dashboard; this pack only adds primitives shadcn introduces beyond the v1 set."
+  },
+  "primitives": [
+    {
+      "name": "command-menu",
+      "category": "interactive",
+      "role": "Keyboard-first command palette (Cmd-K style).",
+      "attributes": {
+        "density": { "values": ["sparse", "normal", "dense"], "default": "dense" }
+      },
+      "tokens": {
+        "background": "--surface-elevated",
+        "color": "--text",
+        "borderColor": "--border",
+        "borderRadius": "--radius-lg"
+      },
+      "structure": {
+        "element": "div",
+        "attributes": { "role": "dialog", "aria-modal": "true" }
+      },
+      "children": "flow-content",
+      "scope": "block"
+    },
+    {
+      "name": "scroll-pane",
+      "category": "layout",
+      "role": "Custom-styled scrollable region.",
+      "attributes": {
+        "density": { "values": ["sparse", "normal", "dense"], "default": "normal" }
+      },
+      "tokens": { "background": "--surface" },
+      "structure": { "element": "div" },
+      "children": "flow-content",
+      "scope": "block"
+    },
+    {
+      "name": "hover-card",
+      "category": "interactive",
+      "role": "Card that appears on hover, typically for previews.",
+      "attributes": {
+        "density": { "values": ["normal", "dense"], "default": "normal" }
+      },
+      "tokens": {
+        "background": "--surface-elevated",
+        "color": "--text",
+        "borderColor": "--border",
+        "borderRadius": "--radius-md",
+        "padding": "--space-card"
+      },
+      "structure": { "element": "div" },
+      "children": "flow-content",
+      "scope": "block"
+    },
+    {
+      "name": "popover-panel",
+      "category": "interactive",
+      "role": "Click-triggered popover anchored to a button.",
+      "attributes": {
+        "density": { "values": ["sparse", "normal", "dense"], "default": "normal" }
+      },
+      "tokens": {
+        "background": "--surface-elevated",
+        "borderColor": "--border",
+        "borderRadius": "--radius-md",
+        "padding": "--space-4"
+      },
+      "structure": { "element": "div" },
+      "children": "flow-content",
+      "scope": "block"
+    },
+    {
+      "name": "sheet-overlay",
+      "category": "layout",
+      "role": "Drawer / slide-in sheet from an edge of the viewport.",
+      "attributes": {
+        "intent": { "values": ["primary", "secondary"], "default": "primary" }
+      },
+      "tokens": {
+        "background": "--surface-elevated",
+        "borderColor": "--border",
+        "padding": "--space-panel"
+      },
+      "structure": {
+        "element": "aside",
+        "attributes": { "role": "dialog" }
+      },
+      "children": "flow-content",
+      "scope": "block"
+    },
+    {
+      "name": "tooltip-tip",
+      "category": "interactive",
+      "role": "Small explanatory tooltip on hover/focus.",
+      "attributes": {},
+      "tokens": {
+        "background": "--surface-inverse",
+        "color": "--text-on-accent",
+        "fontSize": "--type-size-xs",
+        "borderRadius": "--radius-sm"
+      },
+      "structure": {
+        "element": "div",
+        "attributes": { "role": "tooltip" }
+      },
+      "children": "phrasing-content",
+      "scope": "inline"
+    }
+  ]
+}

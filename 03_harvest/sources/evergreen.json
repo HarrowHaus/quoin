@@ -1,0 +1,61 @@
+{
+  "name": "evergreen",
+  "description": "Segment Evergreen palette translated onto the Quoin canonical semantic-token namespace.",
+  "license": "MIT",
+  "tags": ["evergreen", "segment", "neutral", "react"],
+  "attribution": {
+    "sourceSystem": "Evergreen",
+    "sourceOrganization": "Segment (Twilio)",
+    "sourceUrl": "https://evergreen.segment.com/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Segment Evergreen 'default' theme. Neutral-heavy, restrained palette. Project status notes Evergreen v6 maintenance is light; pack is included because the design itself is widely studied."
+  },
+  "mappingNotes": "Evergreen has tints rather than a numbered scale; mapped to Quoin's surface ramp. Default brand colour is a muted blue; status colours follow conventional traffic-light pattern.",
+  "base": {
+    "neutral": {
+      "0":   "#ffffff",
+      "5":   "oklch(98% 0.005 245)",
+      "10":  "oklch(96% 0.007 245)",
+      "20":  "oklch(92% 0.010 245)",
+      "40":  "oklch(78% 0.012 245)",
+      "60":  "oklch(55% 0.014 245)",
+      "80":  "oklch(30% 0.014 245)",
+      "90":  "oklch(18% 0.014 245)"
+    },
+    "blue":   { "500": "oklch(48% 0.18 240)", "50": "oklch(95% 0.04 240)" },
+    "red":    { "500": "oklch(55% 0.22 25)" },
+    "green":  { "500": "oklch(52% 0.16 145)" },
+    "yellow": { "500": "oklch(75% 0.18 80)" }
+  },
+  "fonts": {
+    "font-sans": "SF UI Text, system-ui, sans-serif",
+    "font-serif": "Georgia, ui-serif, serif",
+    "font-mono": "SF Mono, Menlo, ui-monospace, monospace",
+    "font-display": "SF UI Display, system-ui, sans-serif"
+  },
+  "semantic": {
+    "surface": "{neutral.0}",
+    "surface-elevated": "{neutral.0}",
+    "surface-recessed": "{neutral.5}",
+    "surface-inverse": "{neutral.90}",
+    "text": "{neutral.80}",
+    "text-emphasis": "{neutral.90}",
+    "text-recede": "{neutral.60}",
+    "text-disabled": "{neutral.40}",
+    "text-on-accent": "{neutral.0}",
+    "text-on-critical": "{neutral.0}",
+    "text-on-success": "{neutral.0}",
+    "text-on-warning": "{neutral.90}",
+    "text-on-info": "{neutral.0}",
+    "border": "{neutral.20}",
+    "border-emphasis": "{blue.500}",
+    "border-recede": "{neutral.10}",
+    "accent": "{blue.500}",
+    "accent-recede": "{blue.50}",
+    "critical": "{red.500}",
+    "success": "{green.500}",
+    "warning": "{yellow.500}",
+    "info": "{blue.500}"
+  }
+}

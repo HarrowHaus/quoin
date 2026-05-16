@@ -1,0 +1,62 @@
+{
+  "name": "paste",
+  "description": "Twilio Paste design tokens translated onto the Quoin canonical semantic-token namespace.",
+  "license": "MIT",
+  "tags": ["paste", "twilio", "blue-accent", "telephony"],
+  "attribution": {
+    "sourceSystem": "Paste Design System",
+    "sourceOrganization": "Twilio",
+    "sourceUrl": "https://paste.twilio.design/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Twilio Paste 'default' theme. Paste publishes @twilio-paste/design-tokens with global/alias layers. Twilio brand red (#F22F46) is a sub-brand colour; this pack uses Paste's primary 'color-background-primary' (blue) for accent, matching the default theme. Inter is open-source."
+  },
+  "mappingNotes": "Paste color-background -> surface, color-background-body-inverse -> surface-inverse, color-text -> text, color-text-weak -> text-recede, color-text-error -> critical, color-text-success -> success, color-text-warning -> warning, color-text-information -> info.",
+  "base": {
+    "gray": {
+      "0":  "#ffffff",
+      "10": "oklch(98% 0.005 250)",
+      "20": "oklch(96% 0.008 250)",
+      "30": "oklch(92% 0.010 250)",
+      "40": "oklch(85% 0.010 250)",
+      "60": "oklch(60% 0.010 250)",
+      "80": "oklch(35% 0.012 250)",
+      "90": "oklch(20% 0.012 250)",
+      "100": "oklch(10% 0.012 250)"
+    },
+    "blue":   { "60": "oklch(50% 0.18 240)", "10": "oklch(95% 0.04 240)" },
+    "red":    { "60": "oklch(50% 0.22 25)" },
+    "green":  { "60": "oklch(50% 0.16 145)" },
+    "orange": { "60": "oklch(72% 0.18 70)" }
+  },
+  "fonts": {
+    "font-sans": "'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif",
+    "font-serif": "ui-serif, Georgia, serif",
+    "font-mono": "'JetBrains Mono', ui-monospace, monospace",
+    "font-display": "'Inter', system-ui, sans-serif"
+  },
+  "semantic": {
+    "surface": "{gray.0}",
+    "surface-elevated": "{gray.0}",
+    "surface-recessed": "{gray.10}",
+    "surface-inverse": "{gray.100}",
+    "text": "{gray.90}",
+    "text-emphasis": "{gray.100}",
+    "text-recede": "{gray.60}",
+    "text-disabled": "{gray.40}",
+    "text-on-accent": "{gray.0}",
+    "text-on-critical": "{gray.0}",
+    "text-on-success": "{gray.0}",
+    "text-on-warning": "{gray.100}",
+    "text-on-info": "{gray.0}",
+    "border": "{gray.30}",
+    "border-emphasis": "{blue.60}",
+    "border-recede": "{gray.20}",
+    "accent": "{blue.60}",
+    "accent-recede": "{blue.10}",
+    "critical": "{red.60}",
+    "success": "{green.60}",
+    "warning": "{orange.60}",
+    "info": "{blue.60}"
+  }
+}

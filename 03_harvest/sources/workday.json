@@ -1,0 +1,64 @@
+{
+  "name": "workday",
+  "description": "Workday Canvas Kit palette translated onto the Quoin canonical semantic-token namespace.",
+  "license": "Apache-2.0",
+  "tags": ["workday", "canvas-kit", "blue-accent", "hr"],
+  "attribution": {
+    "sourceSystem": "Workday Canvas Kit",
+    "sourceOrganization": "Workday",
+    "sourceUrl": "https://canvas.workday.com/",
+    "sourceLicense": "Apache-2.0",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Canvas Kit v9 'main' light theme. Workday's brand blue (a teal-leaning navy) is the accent. Roboto typeface is open-source."
+  },
+  "mappingNotes": "Canvas's licorice (text), soap (light backgrounds), berrySmoothie (brand accent in newer themes — using blueberry here for the classic accent). Status colours follow Canvas's pomegranate/greenApple/cantaloupe/blueberry naming.",
+  "base": {
+    "soap": {
+      "100": "#ffffff",
+      "200": "oklch(98% 0.005 245)",
+      "300": "oklch(96% 0.008 245)",
+      "400": "oklch(92% 0.010 245)",
+      "500": "oklch(85% 0.010 245)"
+    },
+    "licorice": {
+      "100": "oklch(60% 0.014 245)",
+      "200": "oklch(45% 0.014 245)",
+      "400": "oklch(25% 0.014 245)",
+      "600": "oklch(15% 0.014 245)"
+    },
+    "blueberry": { "400": "oklch(48% 0.16 240)", "100": "oklch(95% 0.04 240)" },
+    "pomegranate": { "500": "oklch(52% 0.22 25)" },
+    "greenApple":  { "500": "oklch(58% 0.16 145)" },
+    "cantaloupe":  { "500": "oklch(72% 0.18 60)" }
+  },
+  "fonts": {
+    "font-sans": "'Roboto', -apple-system, BlinkMacSystemFont, system-ui, sans-serif",
+    "font-serif": "Georgia, ui-serif, serif",
+    "font-mono": "'Roboto Mono', ui-monospace, monospace",
+    "font-display": "'Roboto', system-ui, sans-serif"
+  },
+  "semantic": {
+    "surface": "{soap.100}",
+    "surface-elevated": "{soap.100}",
+    "surface-recessed": "{soap.200}",
+    "surface-inverse": "{licorice.600}",
+    "text": "{licorice.400}",
+    "text-emphasis": "{licorice.600}",
+    "text-recede": "{licorice.100}",
+    "text-disabled": "{soap.500}",
+    "text-on-accent": "{soap.100}",
+    "text-on-critical": "{soap.100}",
+    "text-on-success": "{soap.100}",
+    "text-on-warning": "{licorice.600}",
+    "text-on-info": "{soap.100}",
+    "border": "{soap.500}",
+    "border-emphasis": "{blueberry.400}",
+    "border-recede": "{soap.400}",
+    "accent": "{blueberry.400}",
+    "accent-recede": "{blueberry.100}",
+    "critical": "{pomegranate.500}",
+    "success": "{greenApple.500}",
+    "warning": "{cantaloupe.500}",
+    "info": "{blueberry.400}"
+  }
+}

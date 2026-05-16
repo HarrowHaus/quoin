@@ -1,0 +1,62 @@
+{
+  "name": "base-web",
+  "description": "Uber Base Web palette translated onto the Quoin canonical semantic-token namespace.",
+  "license": "MIT",
+  "tags": ["base-web", "uber", "black-accent", "react"],
+  "attribution": {
+    "sourceSystem": "Base Web",
+    "sourceOrganization": "Uber",
+    "sourceUrl": "https://baseweb.design/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Uber Base Web light theme. Heavily monochrome — Uber's brand uses near-black accent on white. UberMove typeface is proprietary; referenced by family name only."
+  },
+  "mappingNotes": "Base Web ships mono100..1000 alongside primary{A,B}, accent, negative, positive, warning. Mapped: mono100 -> surface, mono900 -> text-emphasis, primaryA (black) -> accent, negative -> critical, positive -> success, warning -> warning, accent -> info.",
+  "base": {
+    "mono": {
+      "100": "#ffffff",
+      "200": "oklch(98% 0.002 250)",
+      "300": "oklch(96% 0.003 250)",
+      "400": "oklch(92% 0.005 250)",
+      "500": "oklch(80% 0.008 250)",
+      "600": "oklch(55% 0.010 250)",
+      "700": "oklch(35% 0.012 250)",
+      "800": "oklch(20% 0.012 250)",
+      "900": "oklch(8% 0.012 250)"
+    },
+    "negative": { "500": "oklch(50% 0.22 25)" },
+    "positive": { "500": "oklch(52% 0.16 145)" },
+    "warning":  { "500": "oklch(72% 0.18 70)" },
+    "accent":   { "500": "oklch(55% 0.16 245)", "100": "oklch(95% 0.04 245)" }
+  },
+  "fonts": {
+    "font-sans": "'UberMove Text', system-ui, -apple-system, sans-serif",
+    "font-serif": "Georgia, ui-serif, serif",
+    "font-mono": "'UberMove Mono', ui-monospace, 'SF Mono', monospace",
+    "font-display": "'UberMove', 'UberMove Text', system-ui, sans-serif"
+  },
+  "semantic": {
+    "surface": "{mono.100}",
+    "surface-elevated": "{mono.100}",
+    "surface-recessed": "{mono.200}",
+    "surface-inverse": "{mono.900}",
+    "text": "{mono.800}",
+    "text-emphasis": "{mono.900}",
+    "text-recede": "{mono.600}",
+    "text-disabled": "{mono.500}",
+    "text-on-accent": "{mono.100}",
+    "text-on-critical": "{mono.100}",
+    "text-on-success": "{mono.100}",
+    "text-on-warning": "{mono.900}",
+    "text-on-info": "{mono.100}",
+    "border": "{mono.400}",
+    "border-emphasis": "{mono.900}",
+    "border-recede": "{mono.300}",
+    "accent": "{mono.900}",
+    "accent-recede": "{mono.300}",
+    "critical": "{negative.500}",
+    "success": "{positive.500}",
+    "warning": "{warning.500}",
+    "info": "{accent.500}"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "name": "uswds",
+  "description": "United States Web Design System tokens translated onto the Quoin canonical semantic-token namespace.",
+  "license": "CC0-1.0",
+  "tags": ["uswds", "government", "federal-blue", "accessibility"],
+  "attribution": {
+    "sourceSystem": "U.S. Web Design System",
+    "sourceOrganization": "U.S. General Services Administration",
+    "sourceUrl": "https://designsystem.digital.gov/",
+    "sourceLicense": "CC0-1.0",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "USWDS is a work of the U.S. Federal Government and is in the public domain. Token values reflect the USWDS v3 'standard' palette (cool-blue primary + neutral gray). Source Sans Pro is referenced by family name only — no font files are redistributed."
+  },
+  "mappingNotes": "USWDS uses Sass tokens like $color-base, $color-primary, $color-accent-cool, $color-error. Map: $color-base -> text, $color-primary -> accent, $color-error/-warning/-success/-info -> respective. USWDS's neutral 'gray cool' scale provides surface/border ramp.",
+  "base": {
+    "gray": {
+      "5":  "oklch(98% 0.005 230)",
+      "10": "oklch(94% 0.008 230)",
+      "20": "oklch(86% 0.012 230)",
+      "30": "oklch(78% 0.012 230)",
+      "40": "oklch(65% 0.014 230)",
+      "50": "oklch(55% 0.014 230)",
+      "70": "oklch(38% 0.014 230)",
+      "80": "oklch(28% 0.014 230)",
+      "90": "oklch(20% 0.014 230)"
+    },
+    "white": { "0": "#ffffff" },
+    "blue":   { "60v": "oklch(45% 0.18 245)", "5": "oklch(96% 0.04 245)" },
+    "red":    { "60v": "oklch(50% 0.20 25)" },
+    "green":  { "60v": "oklch(50% 0.16 145)" },
+    "yellow": { "10": "oklch(85% 0.18 85)" },
+    "cyan":   { "60v": "oklch(50% 0.13 215)" }
+  },
+  "fonts": {
+    "font-sans": "'Source Sans 3', 'Source Sans Pro', system-ui, sans-serif",
+    "font-serif": "'Merriweather', Georgia, serif",
+    "font-mono": "'Roboto Mono', ui-monospace, monospace",
+    "font-display": "'Source Sans 3', system-ui, sans-serif"
+  },
+  "semantic": {
+    "surface": "{white.0}",
+    "surface-elevated": "{white.0}",
+    "surface-recessed": "{gray.5}",
+    "surface-inverse": "{gray.90}",
+    "text": "{gray.90}",
+    "text-emphasis": "{gray.90}",
+    "text-recede": "{gray.50}",
+    "text-disabled": "{gray.30}",
+    "text-on-accent": "{white.0}",
+    "text-on-critical": "{white.0}",
+    "text-on-success": "{white.0}",
+    "text-on-warning": "{gray.90}",
+    "text-on-info": "{white.0}",
+    "border": "{gray.30}",
+    "border-emphasis": "{blue.60v}",
+    "border-recede": "{gray.10}",
+    "accent": "{blue.60v}",
+    "accent-recede": "{blue.5}",
+    "critical": "{red.60v}",
+    "success": "{green.60v}",
+    "warning": "{yellow.10}",
+    "info": "{cyan.60v}"
+  }
+}
