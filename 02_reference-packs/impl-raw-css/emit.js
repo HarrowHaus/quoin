@@ -101,11 +101,40 @@ function emitElement(tag, declarations, input, extraAttrs = {}, voidElement = fa
   return {
     html: el(
       tag,
-      { ...extraAttrs, style: style(declarations) },
+      {
+        ...passthroughAttrs(input),
+        ...extraAttrs,
+        style: style(declarations)
+      },
       input.children,
       voidElement
     )
   };
+}
+
+/**
+ * Pass through user-set framework-agnostic attributes (id, data-*,
+ * aria-*, title, lang, dir, role, tabindex). Vocabulary-defined keys
+ * stay in the primitive's `specific` map for the per-primitive emitter.
+ */
+function passthroughAttrs(input) {
+  const out = {};
+  const spec = input.attributes?.specific ?? {};
+  for (const [k, v] of Object.entries(spec)) {
+    if (
+      k === "id" ||
+      k === "title" ||
+      k === "lang" ||
+      k === "dir" ||
+      k === "role" ||
+      k === "tabindex" ||
+      k.startsWith("data-") ||
+      k.startsWith("aria-")
+    ) {
+      out[k] = v;
+    }
+  }
+  return out;
 }
 
 /* ─────────────────── per-primitive emitters ─────────────────── */

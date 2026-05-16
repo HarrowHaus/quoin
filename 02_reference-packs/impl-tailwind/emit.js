@@ -117,11 +117,43 @@ function mergeAttrs(base, extra) {
   return { ...base, ...extra };
 }
 
+/**
+ * Per-primitive emitters compute a class string but lose any user-set
+ * attributes (id, data-*, aria-*, title, lang, dir). This filter rescues
+ * those before basic() builds the final attribute map. Anything not on
+ * the allowlist is treated as vocabulary-defined and stays in the
+ * primitive's `specific` map, where the per-primitive emitter decides
+ * what to do with it.
+ */
+function passthroughAttrs(input) {
+  const out = {};
+  const spec = input.attributes?.specific ?? {};
+  for (const [k, v] of Object.entries(spec)) {
+    if (
+      k === "id" ||
+      k === "title" ||
+      k === "lang" ||
+      k === "dir" ||
+      k === "role" ||
+      k === "tabindex" ||
+      k.startsWith("data-") ||
+      k.startsWith("aria-")
+    ) {
+      out[k] = v;
+    }
+  }
+  return out;
+}
+
 function basic(tag, cls, input, extraAttrs = {}, opts = {}) {
   return {
     html: el(
       tag,
-      mergeAttrs(extraAttrs, { class: cls }),
+      {
+        ...passthroughAttrs(input),
+        ...extraAttrs,
+        class: cls
+      },
       input.children,
       opts.voidElement === true
     )
