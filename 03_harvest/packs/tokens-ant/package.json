@@ -1,0 +1,28 @@
+{
+  "name": "@quoin/tokens-ant",
+  "version": "0.1.0",
+  "description": "Ant Design (light theme) palette translated onto the Quoin canonical semantic-token namespace.",
+  "license": "MIT",
+  "main": "./tokens/index.json",
+  "files": [
+    "quoin.pack.json",
+    "tokens/",
+    "tokens.css",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "quoin",
+    "design-tokens",
+    "dtcg",
+    "ant-design",
+    "blue-accent",
+    "chinese-enterprise",
+    "react"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "03_harvest/packs/tokens-ant"
+  }
+}

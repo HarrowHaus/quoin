@@ -1,0 +1,31 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/tokens-uswds",
+  "version": "0.1.0",
+  "type": "token",
+  "quoinVersion": "^0.1.0",
+  "description": "United States Web Design System tokens translated onto the Quoin canonical semantic-token namespace.",
+  "exports": {
+    "tokens": "./tokens/index.json",
+    "css": "./tokens.css"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "CC0-1.0",
+    "homepage": "https://harrow.haus/quoin/packs/tokens-uswds",
+    "tags": [
+      "uswds",
+      "government",
+      "federal-blue",
+      "accessibility"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "U.S. Web Design System",
+    "sourceOrganization": "U.S. General Services Administration",
+    "sourceUrl": "https://designsystem.digital.gov/",
+    "sourceLicense": "CC0-1.0",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "USWDS is a work of the U.S. Federal Government and is in the public domain. Token values reflect the USWDS v3 'standard' palette (cool-blue primary + neutral gray). Source Sans Pro is referenced by family name only — no font files are redistributed."
+  }
+}

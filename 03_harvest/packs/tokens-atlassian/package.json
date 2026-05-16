@@ -1,0 +1,28 @@
+{
+  "name": "@quoin/tokens-atlassian",
+  "version": "0.1.0",
+  "description": "Atlassian Design System (light theme) palette translated onto the Quoin canonical semantic-token namespace.",
+  "license": "Apache-2.0",
+  "main": "./tokens/index.json",
+  "files": [
+    "quoin.pack.json",
+    "tokens/",
+    "tokens.css",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "quoin",
+    "design-tokens",
+    "dtcg",
+    "atlassian",
+    "jira",
+    "confluence",
+    "blue-accent"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "03_harvest/packs/tokens-atlassian"
+  }
+}

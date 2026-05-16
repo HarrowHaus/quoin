@@ -1,0 +1,31 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/tokens-orbit",
+  "version": "0.1.0",
+  "type": "token",
+  "quoinVersion": "^0.1.0",
+  "description": "Kiwi.com Orbit palette translated onto the Quoin canonical semantic-token namespace.",
+  "exports": {
+    "tokens": "./tokens/index.json",
+    "css": "./tokens.css"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/tokens-orbit",
+    "tags": [
+      "orbit",
+      "kiwi",
+      "travel",
+      "green-accent"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "Orbit Design System",
+    "sourceOrganization": "Kiwi.com",
+    "sourceUrl": "https://orbit.kiwi/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Orbit 'on-light' theme. Kiwi green is the signature accent. Orbit uses Roboto + Circular as its typeface stack; Roboto is open-source, Circular is proprietary (referenced by family name only)."
+  }
+}

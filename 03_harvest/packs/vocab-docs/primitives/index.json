@@ -1,0 +1,162 @@
+[
+  {
+    "name": "code-fence",
+    "category": "content",
+    "role": "Fenced code block with optional language label and copy affordance.",
+    "attributes": {
+      "density": {
+        "values": [
+          "sparse",
+          "normal",
+          "dense"
+        ],
+        "default": "normal"
+      },
+      "language": {
+        "values": [],
+        "default": "",
+        "specific": true
+      },
+      "filename": {
+        "values": [],
+        "default": "",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "fontFamily": "--font-mono",
+      "background": "--surface-recessed",
+      "borderRadius": "--radius-md",
+      "padding": "--space-4"
+    },
+    "structure": {
+      "element": "pre"
+    },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "callout-box",
+    "category": "state",
+    "role": "Inline doc callout — note, tip, warning, danger.",
+    "attributes": {
+      "intent": {
+        "values": [
+          "info",
+          "success",
+          "warning",
+          "critical"
+        ],
+        "default": "info"
+      }
+    },
+    "tokens": {
+      "background": "--surface-recessed",
+      "borderColor": "--border-emphasis",
+      "color": "--text",
+      "padding": "--space-4",
+      "borderRadius": "--radius-md"
+    },
+    "structure": {
+      "element": "aside"
+    },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "command-shell",
+    "category": "content",
+    "role": "Terminal/shell command sample with prompt prefix.",
+    "attributes": {
+      "shell": {
+        "values": [],
+        "default": "$",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "fontFamily": "--font-mono",
+      "background": "--surface-inverse",
+      "color": "--text-on-accent",
+      "padding": "--space-4",
+      "borderRadius": "--radius-md"
+    },
+    "structure": {
+      "element": "pre"
+    },
+    "children": "phrasing-content",
+    "scope": "block"
+  },
+  {
+    "name": "kbd-key",
+    "category": "content",
+    "role": "Inline keyboard key label.",
+    "attributes": {},
+    "tokens": {
+      "fontFamily": "--font-mono",
+      "background": "--surface-elevated",
+      "borderColor": "--border",
+      "color": "--text-emphasis",
+      "borderRadius": "--radius-sm"
+    },
+    "structure": {
+      "element": "kbd"
+    },
+    "children": "phrasing-content",
+    "scope": "inline"
+  },
+  {
+    "name": "version-badge",
+    "category": "content",
+    "role": "Compact version/status badge, often beside a heading.",
+    "attributes": {
+      "intent": {
+        "values": [
+          "info",
+          "success",
+          "warning"
+        ],
+        "default": "info"
+      }
+    },
+    "tokens": {
+      "background": "--info",
+      "color": "--text-on-info",
+      "borderRadius": "--radius-pill",
+      "fontFamily": "--font-mono"
+    },
+    "structure": {
+      "element": "span"
+    },
+    "children": "phrasing-content",
+    "scope": "inline"
+  },
+  {
+    "name": "toc-list",
+    "category": "navigation",
+    "role": "Table of contents — nested anchor list scaffolding.",
+    "attributes": {
+      "density": {
+        "values": [
+          "sparse",
+          "normal",
+          "dense"
+        ],
+        "default": "dense"
+      }
+    },
+    "tokens": {
+      "color": "--text-recede",
+      "gap": "--space-stack-compact",
+      "fontSize": "--type-size-sm"
+    },
+    "structure": {
+      "element": "nav",
+      "attributes": {
+        "aria-label": "Table of contents"
+      }
+    },
+    "children": "flow-content",
+    "scope": "block"
+  }
+]

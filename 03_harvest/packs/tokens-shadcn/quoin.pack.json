@@ -1,0 +1,31 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/tokens-shadcn",
+  "version": "0.1.0",
+  "type": "token",
+  "quoinVersion": "^0.1.0",
+  "description": "shadcn/ui default theme (zinc, OKLCH) translated onto the Quoin canonical semantic-token namespace.",
+  "exports": {
+    "tokens": "./tokens/index.json",
+    "css": "./tokens.css"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/tokens-shadcn",
+    "tags": [
+      "shadcn",
+      "zinc",
+      "neutral",
+      "tailwind-based"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "shadcn/ui",
+    "sourceOrganization": "shadcn",
+    "sourceUrl": "https://ui.shadcn.com/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Default 'zinc' theme variables from the shadcn/ui themes registry. shadcn/ui ships CSS custom properties named --background, --foreground, --muted, etc.; these are renamed onto the Quoin canonical namespace."
+  }
+}

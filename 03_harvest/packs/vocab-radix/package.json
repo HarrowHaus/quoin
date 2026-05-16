@@ -1,0 +1,26 @@
+{
+  "name": "@quoin/vocab-radix",
+  "version": "0.1.0",
+  "description": "Radix UI-flavoured accessibility primitives — toggle, switch, slider, progress bar, dialog overlay.",
+  "license": "MIT",
+  "main": "./primitives/index.json",
+  "files": [
+    "quoin.pack.json",
+    "primitives/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "quoin",
+    "vocabulary",
+    "radix",
+    "accessibility",
+    "primitives",
+    "headless"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "03_harvest/packs/vocab-radix"
+  }
+}

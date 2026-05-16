@@ -1,0 +1,30 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/vocab-mantine",
+  "version": "0.1.0",
+  "type": "vocabulary",
+  "quoinVersion": "^0.1.0",
+  "description": "Mantine-flavoured primitives — skeleton placeholder, ring progress, loader spinner, notification toast.",
+  "exports": {
+    "primitives": "./primitives/index.json"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/vocab-mantine",
+    "tags": [
+      "mantine",
+      "skeleton",
+      "loader",
+      "notification"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "Mantine",
+    "sourceOrganization": "Mantine community",
+    "sourceUrl": "https://mantine.dev/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Mantine ships a richer set of small UI primitives than most React libraries. This pack picks the distinctive ones — skeleton, ring-progress, loader — that don't have a clean equivalent in the v1 vocabulary."
+  }
+}

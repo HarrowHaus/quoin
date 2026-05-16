@@ -1,0 +1,28 @@
+{
+  "name": "@quoin/tokens-gestalt",
+  "version": "0.1.0",
+  "description": "Pinterest Gestalt design tokens translated onto the Quoin canonical semantic-token namespace.",
+  "license": "Apache-2.0",
+  "main": "./tokens/index.json",
+  "files": [
+    "quoin.pack.json",
+    "tokens/",
+    "tokens.css",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "quoin",
+    "design-tokens",
+    "dtcg",
+    "gestalt",
+    "pinterest",
+    "red-accent",
+    "social"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "03_harvest/packs/tokens-gestalt"
+  }
+}

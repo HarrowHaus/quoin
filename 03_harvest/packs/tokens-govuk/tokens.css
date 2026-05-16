@@ -1,0 +1,99 @@
+/**
+ * @quoin/tokens-govuk — CSS custom property export.
+ *
+ * Generated from tokens/index.json. Harvested from GOV.UK Design System.
+ * See README.md for attribution and mapping notes.
+ */
+
+:root {
+  /* base palette */
+  --color-grey-1: oklch(99% 0 0);
+  --color-grey-2: oklch(96% 0.003 250);
+  --color-grey-3: oklch(92% 0.006 250);
+  --color-grey-4: oklch(82% 0.010 250);
+  --color-black-0: oklch(7% 0 0);
+  --color-white-0: #ffffff;
+  --color-blue-0: oklch(48% 0.16 240);
+  --color-blue-light: oklch(90% 0.05 240);
+  --color-red-0: oklch(50% 0.21 25);
+  --color-green-0: oklch(45% 0.16 145);
+  --color-yellow-0: oklch(85% 0.18 90);
+  --color-mid-grey-0: oklch(50% 0.005 250);
+
+  /* semantic */
+  --type-size-xs: 0.75rem;
+  --type-size-sm: 0.875rem;
+  --type-size-base: 1rem;
+  --type-size-lg: 1.125rem;
+  --type-size-xl: 1.25rem;
+  --type-size-2xl: 1.5rem;
+  --type-size-3xl: 1.875rem;
+  --type-size-display: 4.5rem;
+  --leading-tight: 1.15;
+  --leading-normal: 1.4;
+  --leading-prose: 1.6;
+  --leading-loose: 1.9;
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.05em;
+  --measure-prose: 65ch;
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+  --space-stack-compact: 0.5rem;
+  --space-stack-normal: 1rem;
+  --space-stack-loose: 2rem;
+  --space-inline-tight: 0.25rem;
+  --space-inline-normal: 0.5rem;
+  --space-card: 1.5rem;
+  --space-panel: 1.5rem;
+  --space-frame: 1rem;
+  --radius-none: 0;
+  --radius-sm: 0.125rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-pill: 9999px;
+  --radius-card: 0.5rem;
+  --radius-frame: 0.25rem;
+  --radius-media: 0.25rem;
+  --motion-fast: 120ms;
+  --motion-normal: 200ms;
+  --motion-slow: 320ms;
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-decelerate: cubic-bezier(0, 0, 0.2, 1);
+  --ease-accelerate: cubic-bezier(0.4, 0, 1, 1);
+  --font-sans: 'GDS Transport', arial, sans-serif;
+  --font-serif: Georgia, serif;
+  --font-mono: ui-monospace, monospace;
+  --font-display: 'GDS Transport', arial, sans-serif;
+  --surface: var(--color-white-0);
+  --surface-elevated: var(--color-white-0);
+  --surface-recessed: var(--color-grey-2);
+  --surface-inverse: var(--color-black-0);
+  --text: var(--color-black-0);
+  --text-emphasis: var(--color-black-0);
+  --text-recede: var(--color-mid-grey-0);
+  --text-disabled: var(--color-grey-4);
+  --text-on-accent: var(--color-white-0);
+  --text-on-critical: var(--color-white-0);
+  --text-on-success: var(--color-white-0);
+  --text-on-warning: var(--color-black-0);
+  --text-on-info: var(--color-white-0);
+  --border: var(--color-grey-3);
+  --border-emphasis: var(--color-black-0);
+  --border-recede: var(--color-grey-2);
+  --accent: var(--color-blue-0);
+  --accent-recede: var(--color-blue-light);
+  --critical: var(--color-red-0);
+  --success: var(--color-green-0);
+  --warning: var(--color-yellow-0);
+  --info: var(--color-blue-0);
+}

@@ -1,0 +1,26 @@
+{
+  "name": "@quoin/vocab-shadcn",
+  "version": "0.1.0",
+  "description": "shadcn/ui-flavoured primitives — command palette, scroll pane, hover card, popover, sheet overlay, tooltip.",
+  "license": "MIT",
+  "main": "./primitives/index.json",
+  "files": [
+    "quoin.pack.json",
+    "primitives/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "quoin",
+    "vocabulary",
+    "shadcn",
+    "command-menu",
+    "popover",
+    "tooltip"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "03_harvest/packs/vocab-shadcn"
+  }
+}

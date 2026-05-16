@@ -1,0 +1,31 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/tokens-carbon",
+  "version": "0.1.0",
+  "type": "token",
+  "quoinVersion": "^0.1.0",
+  "description": "IBM Carbon (white theme) palette translated onto the Quoin canonical semantic-token namespace.",
+  "exports": {
+    "tokens": "./tokens/index.json",
+    "css": "./tokens.css"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "Apache-2.0",
+    "homepage": "https://harrow.haus/quoin/packs/tokens-carbon",
+    "tags": [
+      "carbon",
+      "ibm",
+      "blue-60",
+      "enterprise"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "Carbon Design System",
+    "sourceOrganization": "IBM",
+    "sourceUrl": "https://carbondesignsystem.com/",
+    "sourceLicense": "Apache-2.0",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Carbon ships @carbon/themes (white, g10, g90, g100). This pack mirrors the 'white' theme. Carbon's interactive states (hover, active, focus) are not modelled separately; consumers layer Carbon-style focus rings via project CSS if required."
+  }
+}

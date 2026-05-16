@@ -1,0 +1,31 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/tokens-elastic",
+  "version": "0.1.0",
+  "type": "token",
+  "quoinVersion": "^0.1.0",
+  "description": "Elastic EUI (light theme) palette translated onto the Quoin canonical semantic-token namespace.",
+  "exports": {
+    "tokens": "./tokens/index.json",
+    "css": "./tokens.css"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "Apache-2.0",
+    "homepage": "https://harrow.haus/quoin/packs/tokens-elastic",
+    "tags": [
+      "elastic",
+      "eui",
+      "blue-accent",
+      "data-visualisation"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "Elastic UI Framework (EUI)",
+    "sourceOrganization": "Elastic",
+    "sourceUrl": "https://eui.elastic.co/",
+    "sourceLicense": "Apache-2.0",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "EUI 'Amsterdam' light theme. Elastic ships @elastic/eui with the design tokens exposed as SASS / CSS vars. Inter typeface is open-source."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/tokens-mui",
+  "version": "0.1.0",
+  "type": "token",
+  "quoinVersion": "^0.1.0",
+  "description": "Material UI (MUI) default theme translated onto the Quoin canonical semantic-token namespace.",
+  "exports": {
+    "tokens": "./tokens/index.json",
+    "css": "./tokens.css"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/tokens-mui",
+    "tags": [
+      "mui",
+      "material-ui",
+      "react",
+      "indigo-pink"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "Material UI",
+    "sourceOrganization": "MUI",
+    "sourceUrl": "https://mui.com/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "MUI v6 default light theme. MUI's classic primary is indigo (#1976d2), secondary is pink. Distinct from Material 3 — MUI is the React port of an older Material 2/3 hybrid; many MUI projects still ship the classic palette."
+  }
+}

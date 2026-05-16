@@ -1,0 +1,26 @@
+{
+  "name": "@quoin/vocab-docs",
+  "version": "0.1.0",
+  "description": "Documentation primitives — code fences, callouts, command shells, kbd keys, version badges, table of contents.",
+  "license": "MIT",
+  "main": "./primitives/index.json",
+  "files": [
+    "quoin.pack.json",
+    "primitives/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "quoin",
+    "vocabulary",
+    "docs",
+    "documentation",
+    "code",
+    "callout"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "03_harvest/packs/vocab-docs"
+  }
+}

@@ -1,0 +1,113 @@
+[
+  {
+    "name": "skeleton-placeholder",
+    "category": "state",
+    "role": "Animated placeholder while content loads.",
+    "attributes": {
+      "weight": {
+        "values": [
+          "recede",
+          "normal"
+        ],
+        "default": "recede"
+      }
+    },
+    "tokens": {
+      "background": "--surface-recessed",
+      "borderRadius": "--radius-md"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "role": "status",
+        "aria-busy": "true"
+      }
+    },
+    "children": "none",
+    "scope": "block"
+  },
+  {
+    "name": "ring-progress",
+    "category": "state",
+    "role": "Circular progress indicator. Inner SVG/canvas supplied by author.",
+    "attributes": {
+      "intent": {
+        "values": [
+          "primary",
+          "success",
+          "warning",
+          "critical"
+        ],
+        "default": "primary"
+      }
+    },
+    "tokens": {
+      "color": "--accent"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "role": "progressbar"
+      }
+    },
+    "children": "flow-content",
+    "scope": "inline"
+  },
+  {
+    "name": "loader-spinner",
+    "category": "state",
+    "role": "Indeterminate spinner.",
+    "attributes": {
+      "intent": {
+        "values": [
+          "primary",
+          "secondary"
+        ],
+        "default": "primary"
+      }
+    },
+    "tokens": {
+      "color": "--accent"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "role": "status",
+        "aria-label": "Loading"
+      }
+    },
+    "children": "none",
+    "scope": "inline"
+  },
+  {
+    "name": "notification-toast",
+    "category": "state",
+    "role": "Floating notification toast.",
+    "attributes": {
+      "intent": {
+        "values": [
+          "info",
+          "success",
+          "warning",
+          "critical"
+        ],
+        "default": "info"
+      }
+    },
+    "tokens": {
+      "background": "--surface-elevated",
+      "color": "--text",
+      "borderColor": "--border",
+      "borderRadius": "--radius-md",
+      "padding": "--space-4"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "role": "status"
+      }
+    },
+    "children": "flow-content",
+    "scope": "block"
+  }
+]

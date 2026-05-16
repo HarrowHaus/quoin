@@ -1,0 +1,26 @@
+{
+  "name": "@quoin/vocab-forms",
+  "version": "0.1.0",
+  "description": "Form primitives — field, label, help text, error, select, checkbox, radio, textarea, fieldset, submit row.",
+  "license": "MIT",
+  "main": "./primitives/index.json",
+  "files": [
+    "quoin.pack.json",
+    "primitives/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "quoin",
+    "vocabulary",
+    "forms",
+    "input",
+    "validation",
+    "accessibility"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "03_harvest/packs/vocab-forms"
+  }
+}

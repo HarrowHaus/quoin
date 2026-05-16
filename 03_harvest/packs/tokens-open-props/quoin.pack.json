@@ -1,0 +1,31 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/tokens-open-props",
+  "version": "0.1.0",
+  "type": "token",
+  "quoinVersion": "^0.1.0",
+  "description": "Open Props (Adam Argyle / Chrome team) translated onto the Quoin canonical semantic-token namespace.",
+  "exports": {
+    "tokens": "./tokens/index.json",
+    "css": "./tokens.css"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/tokens-open-props",
+    "tags": [
+      "open-props",
+      "gray",
+      "css-vars",
+      "framework-free"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "Open Props",
+    "sourceOrganization": "Adam Argyle / Open Props community",
+    "sourceUrl": "https://open-props.style/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Open Props' gray-N scale powers neutrals; its named colour set powers status (red-7, green-7, etc.). Open Props ships hsl(); converted to OKLCH approximations here for consistency with the rest of the harvested set."
+  }
+}

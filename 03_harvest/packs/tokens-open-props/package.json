@@ -1,0 +1,28 @@
+{
+  "name": "@quoin/tokens-open-props",
+  "version": "0.1.0",
+  "description": "Open Props (Adam Argyle / Chrome team) translated onto the Quoin canonical semantic-token namespace.",
+  "license": "MIT",
+  "main": "./tokens/index.json",
+  "files": [
+    "quoin.pack.json",
+    "tokens/",
+    "tokens.css",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "quoin",
+    "design-tokens",
+    "dtcg",
+    "open-props",
+    "gray",
+    "css-vars",
+    "framework-free"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "03_harvest/packs/tokens-open-props"
+  }
+}

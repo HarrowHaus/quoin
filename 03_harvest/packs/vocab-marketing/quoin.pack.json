@@ -1,0 +1,29 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/vocab-marketing",
+  "version": "0.1.0",
+  "type": "vocabulary",
+  "quoinVersion": "^0.1.0",
+  "description": "Marketing-page primitives — hero, feature grid, pricing tier, testimonial, CTA band, FAQ disclosure.",
+  "exports": {
+    "primitives": "./primitives/index.json"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/vocab-marketing",
+    "tags": [
+      "marketing",
+      "landing-page",
+      "pricing",
+      "hero",
+      "cta"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "Quoin original — distilled from common marketing-page patterns across shadcn/ui blocks, Tailwind UI marketing components, and editorial product pages.",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Original Quoin work. Pattern names follow editorial marketing terminology rather than any specific framework's component names."
+  }
+}

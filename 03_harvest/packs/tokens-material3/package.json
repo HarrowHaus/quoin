@@ -1,0 +1,28 @@
+{
+  "name": "@quoin/tokens-material3",
+  "version": "0.1.0",
+  "description": "Material Design 3 (M3) baseline palette translated onto the Quoin canonical semantic-token namespace.",
+  "license": "Apache-2.0",
+  "main": "./tokens/index.json",
+  "files": [
+    "quoin.pack.json",
+    "tokens/",
+    "tokens.css",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "quoin",
+    "design-tokens",
+    "dtcg",
+    "material",
+    "material-3",
+    "google",
+    "purple-accent"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "03_harvest/packs/tokens-material3"
+  }
+}

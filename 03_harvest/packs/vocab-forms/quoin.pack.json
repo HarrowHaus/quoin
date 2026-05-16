@@ -1,0 +1,28 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/vocab-forms",
+  "version": "0.1.0",
+  "type": "vocabulary",
+  "quoinVersion": "^0.1.0",
+  "description": "Form primitives — field, label, help text, error, select, checkbox, radio, textarea, fieldset, submit row.",
+  "exports": {
+    "primitives": "./primitives/index.json"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/vocab-forms",
+    "tags": [
+      "forms",
+      "input",
+      "validation",
+      "accessibility"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "Quoin original — distilled from form patterns across shadcn/ui, Headless UI, Radix UI, and WCAG-conformant form examples.",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Extends the v1 input-cell primitive with the surrounding form scaffolding most apps need."
+  }
+}

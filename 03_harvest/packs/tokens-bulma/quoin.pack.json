@@ -1,0 +1,31 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/tokens-bulma",
+  "version": "0.1.0",
+  "type": "token",
+  "quoinVersion": "^0.1.0",
+  "description": "Bulma CSS framework default palette translated onto the Quoin canonical semantic-token namespace.",
+  "exports": {
+    "tokens": "./tokens/index.json",
+    "css": "./tokens.css"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/tokens-bulma",
+    "tags": [
+      "bulma",
+      "turquoise-accent",
+      "css-only",
+      "sass"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "Bulma",
+    "sourceOrganization": "Jeremy Thomas / Bulma community",
+    "sourceUrl": "https://bulma.io/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Bulma default theme. Signature accent is $primary = turquoise (#00D1B2 area). Bulma is one of the more aesthetically distinctive defaults — included for breadth."
+  }
+}

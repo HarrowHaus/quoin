@@ -1,0 +1,31 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/tokens-fluent",
+  "version": "0.1.0",
+  "type": "token",
+  "quoinVersion": "^0.1.0",
+  "description": "Microsoft Fluent 2 (web light) palette translated onto the Quoin canonical semantic-token namespace.",
+  "exports": {
+    "tokens": "./tokens/index.json",
+    "css": "./tokens.css"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/tokens-fluent",
+    "tags": [
+      "fluent",
+      "fluent-2",
+      "microsoft",
+      "communication-blue"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "Fluent 2",
+    "sourceOrganization": "Microsoft",
+    "sourceUrl": "https://fluent2.microsoft.design/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Fluent 2 'web' light theme. Built from Fluent's global ramp (gray-0..gray-160 over 16 steps in the Web theme) plus communication-blue accent. Segoe UI is proprietary to Microsoft; referenced by family name only."
+  }
+}

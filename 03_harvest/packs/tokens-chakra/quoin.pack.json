@@ -1,0 +1,30 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/tokens-chakra",
+  "version": "0.1.0",
+  "type": "token",
+  "quoinVersion": "^0.1.0",
+  "description": "Chakra UI default palette translated onto the Quoin canonical semantic-token namespace.",
+  "exports": {
+    "tokens": "./tokens/index.json",
+    "css": "./tokens.css"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/tokens-chakra",
+    "tags": [
+      "chakra",
+      "teal-accent",
+      "react"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "Chakra UI",
+    "sourceOrganization": "Chakra UI community",
+    "sourceUrl": "https://www.chakra-ui.com/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Chakra v3 default colour scales. Default primary is 'teal' (500). Gray = standard slate-tinted neutral."
+  }
+}

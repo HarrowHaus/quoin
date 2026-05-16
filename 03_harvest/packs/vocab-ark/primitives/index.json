@@ -1,0 +1,118 @@
+[
+  {
+    "name": "number-input",
+    "category": "interactive",
+    "role": "Numeric input with optional step controls.",
+    "attributes": {
+      "name": {
+        "values": [],
+        "default": "",
+        "specific": true
+      },
+      "min": {
+        "values": [],
+        "default": "",
+        "specific": true
+      },
+      "max": {
+        "values": [],
+        "default": "",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "borderColor": "--border",
+      "color": "--text",
+      "borderRadius": "--radius-md",
+      "background": "--surface"
+    },
+    "structure": {
+      "element": "input",
+      "attributes": {
+        "type": "number",
+        "inputmode": "numeric"
+      }
+    },
+    "children": "none",
+    "scope": "inline"
+  },
+  {
+    "name": "color-picker",
+    "category": "interactive",
+    "role": "Colour swatch / picker.",
+    "attributes": {
+      "name": {
+        "values": [],
+        "default": "",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "borderColor": "--border",
+      "borderRadius": "--radius-md"
+    },
+    "structure": {
+      "element": "input",
+      "attributes": {
+        "type": "color"
+      }
+    },
+    "children": "none",
+    "scope": "inline"
+  },
+  {
+    "name": "segment-bar",
+    "category": "navigation",
+    "role": "Larger version of segment-control with icons + labels.",
+    "attributes": {
+      "density": {
+        "values": [
+          "sparse",
+          "normal",
+          "dense"
+        ],
+        "default": "normal"
+      }
+    },
+    "tokens": {
+      "background": "--surface-recessed",
+      "borderRadius": "--radius-md",
+      "color": "--text"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "role": "tablist"
+      }
+    },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "toggle-group",
+    "category": "interactive",
+    "role": "Group of toggle buttons (single or multi-select).",
+    "attributes": {
+      "intent": {
+        "values": [
+          "primary",
+          "secondary"
+        ],
+        "default": "secondary"
+      }
+    },
+    "tokens": {
+      "background": "--surface",
+      "borderColor": "--border",
+      "borderRadius": "--radius-md"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "role": "group"
+      }
+    },
+    "children": "flow-content",
+    "scope": "block"
+  }
+]

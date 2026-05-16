@@ -1,0 +1,31 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/tokens-polaris",
+  "version": "0.1.0",
+  "type": "token",
+  "quoinVersion": "^0.1.0",
+  "description": "Shopify Polaris (light theme) palette translated onto the Quoin canonical semantic-token namespace.",
+  "exports": {
+    "tokens": "./tokens/index.json",
+    "css": "./tokens.css"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/tokens-polaris",
+    "tags": [
+      "polaris",
+      "shopify",
+      "indigo-accent",
+      "commerce"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "Polaris",
+    "sourceOrganization": "Shopify",
+    "sourceUrl": "https://polaris.shopify.com/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Polaris v12 'light' colour tokens. Polaris ships extensive token families (--p-color-bg-*, --p-color-text-*, --p-color-border-*, etc.); this pack distills them onto Quoin's 4-surface model. Polaris's brand indigo (#2C6ECB area) sets accent."
+  }
+}

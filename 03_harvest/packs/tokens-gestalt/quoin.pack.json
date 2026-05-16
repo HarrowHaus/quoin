@@ -1,0 +1,31 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/tokens-gestalt",
+  "version": "0.1.0",
+  "type": "token",
+  "quoinVersion": "^0.1.0",
+  "description": "Pinterest Gestalt design tokens translated onto the Quoin canonical semantic-token namespace.",
+  "exports": {
+    "tokens": "./tokens/index.json",
+    "css": "./tokens.css"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "Apache-2.0",
+    "homepage": "https://harrow.haus/quoin/packs/tokens-gestalt",
+    "tags": [
+      "gestalt",
+      "pinterest",
+      "red-accent",
+      "social"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "Gestalt",
+    "sourceOrganization": "Pinterest",
+    "sourceUrl": "https://gestalt.pinterest.systems/",
+    "sourceLicense": "Apache-2.0",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Pinterest Gestalt 'light' tokens. Pinterest red (#E60023 family) drives accent. Gestalt has explicit semantic background-default / background-tertiary / text-default / text-subtle tokens that map cleanly. Pinterest Sans is proprietary; referenced by family name only."
+  }
+}

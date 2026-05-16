@@ -1,0 +1,105 @@
+/**
+ * @quoin/tokens-carbon — CSS custom property export.
+ *
+ * Generated from tokens/index.json. Harvested from Carbon Design System.
+ * See README.md for attribution and mapping notes.
+ */
+
+:root {
+  /* base palette */
+  --color-gray-10: oklch(95% 0.003 264);
+  --color-gray-20: oklch(89% 0.003 264);
+  --color-gray-30: oklch(80% 0.005 264);
+  --color-gray-40: oklch(70% 0.005 264);
+  --color-gray-50: oklch(58% 0.005 264);
+  --color-gray-60: oklch(48% 0.005 264);
+  --color-gray-70: oklch(38% 0.006 264);
+  --color-gray-80: oklch(28% 0.006 264);
+  --color-gray-90: oklch(20% 0.008 264);
+  --color-gray-100: oklch(10% 0.008 264);
+  --color-white-0: #ffffff;
+  --color-blue-10: oklch(95% 0.05 250);
+  --color-blue-60: oklch(50% 0.18 250);
+  --color-blue-70: oklch(40% 0.18 250);
+  --color-red-60: oklch(52% 0.20 25);
+  --color-green-60: oklch(55% 0.16 145);
+  --color-yellow-30: oklch(85% 0.18 90);
+  --color-purple-60: oklch(48% 0.20 290);
+
+  /* semantic */
+  --type-size-xs: 0.75rem;
+  --type-size-sm: 0.875rem;
+  --type-size-base: 1rem;
+  --type-size-lg: 1.125rem;
+  --type-size-xl: 1.25rem;
+  --type-size-2xl: 1.5rem;
+  --type-size-3xl: 1.875rem;
+  --type-size-display: 4.5rem;
+  --leading-tight: 1.15;
+  --leading-normal: 1.4;
+  --leading-prose: 1.6;
+  --leading-loose: 1.9;
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.05em;
+  --measure-prose: 65ch;
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+  --space-stack-compact: 0.5rem;
+  --space-stack-normal: 1rem;
+  --space-stack-loose: 2rem;
+  --space-inline-tight: 0.25rem;
+  --space-inline-normal: 0.5rem;
+  --space-card: 1.5rem;
+  --space-panel: 1.5rem;
+  --space-frame: 1rem;
+  --radius-none: 0;
+  --radius-sm: 0.125rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-pill: 9999px;
+  --radius-card: 0.5rem;
+  --radius-frame: 0.25rem;
+  --radius-media: 0.25rem;
+  --motion-fast: 120ms;
+  --motion-normal: 200ms;
+  --motion-slow: 320ms;
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-decelerate: cubic-bezier(0, 0, 0.2, 1);
+  --ease-accelerate: cubic-bezier(0.4, 0, 1, 1);
+  --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-serif: 'IBM Plex Serif', Georgia, serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --font-display: 'IBM Plex Sans', system-ui, sans-serif;
+  --surface: var(--color-white-0);
+  --surface-elevated: var(--color-white-0);
+  --surface-recessed: var(--color-gray-10);
+  --surface-inverse: var(--color-gray-100);
+  --text: var(--color-gray-100);
+  --text-emphasis: var(--color-gray-100);
+  --text-recede: var(--color-gray-60);
+  --text-disabled: var(--color-gray-30);
+  --text-on-accent: var(--color-white-0);
+  --text-on-critical: var(--color-white-0);
+  --text-on-success: var(--color-white-0);
+  --text-on-warning: var(--color-gray-100);
+  --text-on-info: var(--color-white-0);
+  --border: var(--color-gray-20);
+  --border-emphasis: var(--color-blue-60);
+  --border-recede: var(--color-gray-10);
+  --accent: var(--color-blue-60);
+  --accent-recede: var(--color-blue-10);
+  --critical: var(--color-red-60);
+  --success: var(--color-green-60);
+  --warning: var(--color-yellow-30);
+  --info: var(--color-blue-60);
+}

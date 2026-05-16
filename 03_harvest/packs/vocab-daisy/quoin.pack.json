@@ -1,0 +1,30 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/vocab-daisy",
+  "version": "0.1.0",
+  "type": "vocabulary",
+  "quoinVersion": "^0.1.0",
+  "description": "DaisyUI-flavoured primitives — alert tile, badge tag, bordered card, divider, indicator dot, modal shell.",
+  "exports": {
+    "primitives": "./primitives/index.json"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/vocab-daisy",
+    "tags": [
+      "daisyui",
+      "alert",
+      "badge",
+      "tailwind"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "DaisyUI",
+    "sourceOrganization": "Pouya Saadeghi",
+    "sourceUrl": "https://daisyui.com/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Extracts DaisyUI's semantic-class style (alert, badge, card, divider, indicator, modal) into Quoin primitives. DaisyUI itself is the prior art that validated semantic compression on top of Tailwind; Quoin extends the same compression one layer higher."
+  }
+}

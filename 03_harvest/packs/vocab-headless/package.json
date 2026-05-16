@@ -1,0 +1,26 @@
+{
+  "name": "@quoin/vocab-headless",
+  "version": "0.1.0",
+  "description": "Headless UI-flavoured primitives — listbox, combobox, menu, disclosure-group, transition frame.",
+  "license": "MIT",
+  "main": "./primitives/index.json",
+  "files": [
+    "quoin.pack.json",
+    "primitives/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "quoin",
+    "vocabulary",
+    "headless-ui",
+    "listbox",
+    "combobox",
+    "accessibility"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "03_harvest/packs/vocab-headless"
+  }
+}

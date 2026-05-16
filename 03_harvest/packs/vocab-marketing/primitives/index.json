@@ -1,0 +1,201 @@
+[
+  {
+    "name": "hero-banner",
+    "category": "editorial",
+    "role": "Top-of-page marketing banner. Headline + sub-copy + primary action.",
+    "attributes": {
+      "intent": {
+        "values": [
+          "primary",
+          "secondary"
+        ],
+        "default": "primary"
+      },
+      "weight": {
+        "values": [
+          "normal",
+          "emphasize",
+          "dominate"
+        ],
+        "default": "dominate"
+      }
+    },
+    "tokens": {
+      "background": "--surface",
+      "color": "--text-emphasis",
+      "padding": "--space-32"
+    },
+    "structure": {
+      "element": "section"
+    },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "feature-grid",
+    "category": "layout",
+    "role": "Auto-layout grid of feature cards. Wraps responsively.",
+    "attributes": {
+      "density": {
+        "values": [
+          "sparse",
+          "normal",
+          "dense"
+        ],
+        "default": "normal"
+      },
+      "min-cell-width": {
+        "values": [],
+        "default": "280px",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "gap": "--space-6"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "feature-cell",
+    "category": "content",
+    "role": "Single feature unit inside a feature grid.",
+    "attributes": {
+      "weight": {
+        "values": [
+          "normal",
+          "emphasize"
+        ],
+        "default": "normal"
+      }
+    },
+    "tokens": {
+      "color": "--text",
+      "background": "--surface-elevated",
+      "padding": "--space-card",
+      "borderColor": "--border",
+      "borderRadius": "--radius-card"
+    },
+    "structure": {
+      "element": "article"
+    },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "pricing-tier",
+    "category": "content",
+    "role": "Single pricing plan with price, description, feature list, CTA.",
+    "attributes": {
+      "intent": {
+        "values": [
+          "primary",
+          "secondary",
+          "tertiary"
+        ],
+        "default": "secondary"
+      },
+      "weight": {
+        "values": [
+          "normal",
+          "emphasize"
+        ],
+        "default": "normal"
+      }
+    },
+    "tokens": {
+      "background": "--surface-elevated",
+      "color": "--text",
+      "borderColor": "--border",
+      "padding": "--space-panel",
+      "borderRadius": "--radius-card"
+    },
+    "structure": {
+      "element": "article"
+    },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "testimonial-quote",
+    "category": "editorial",
+    "role": "Customer/user testimonial quote with attribution line.",
+    "attributes": {
+      "weight": {
+        "values": [
+          "normal",
+          "emphasize"
+        ],
+        "default": "normal"
+      }
+    },
+    "tokens": {
+      "fontSize": "--type-size-lg",
+      "fontFamily": "--font-display",
+      "color": "--text-emphasis",
+      "borderColor": "--border-emphasis"
+    },
+    "structure": {
+      "element": "blockquote"
+    },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "cta-band",
+    "category": "editorial",
+    "role": "Full-width call-to-action band, typically near page foot.",
+    "attributes": {
+      "intent": {
+        "values": [
+          "primary",
+          "critical"
+        ],
+        "default": "primary"
+      },
+      "weight": {
+        "values": [
+          "normal",
+          "emphasize",
+          "dominate"
+        ],
+        "default": "emphasize"
+      }
+    },
+    "tokens": {
+      "background": "--accent",
+      "color": "--text-on-accent",
+      "padding": "--space-16"
+    },
+    "structure": {
+      "element": "section"
+    },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "faq-disclosure",
+    "category": "interactive",
+    "role": "Question/answer pair using a native disclosure.",
+    "attributes": {
+      "summary": {
+        "values": [],
+        "default": "Question",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "borderColor": "--border",
+      "color": "--text",
+      "borderRadius": "--radius-md"
+    },
+    "structure": {
+      "element": "details"
+    },
+    "children": "flow-content",
+    "scope": "block"
+  }
+]

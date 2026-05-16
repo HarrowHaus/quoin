@@ -1,0 +1,28 @@
+{
+  "name": "@quoin/tokens-workday",
+  "version": "0.1.0",
+  "description": "Workday Canvas Kit palette translated onto the Quoin canonical semantic-token namespace.",
+  "license": "Apache-2.0",
+  "main": "./tokens/index.json",
+  "files": [
+    "quoin.pack.json",
+    "tokens/",
+    "tokens.css",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "quoin",
+    "design-tokens",
+    "dtcg",
+    "workday",
+    "canvas-kit",
+    "blue-accent",
+    "hr"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "03_harvest/packs/tokens-workday"
+  }
+}

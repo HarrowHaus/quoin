@@ -1,0 +1,28 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/vocab-docs",
+  "version": "0.1.0",
+  "type": "vocabulary",
+  "quoinVersion": "^0.1.0",
+  "description": "Documentation primitives — code fences, callouts, command shells, kbd keys, version badges, table of contents.",
+  "exports": {
+    "primitives": "./primitives/index.json"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/vocab-docs",
+    "tags": [
+      "docs",
+      "documentation",
+      "code",
+      "callout"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "Quoin original — distilled from MDX-style documentation patterns across Astro Starlight, Docusaurus, Nextra, and shadcn/ui docs.",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Original Quoin work. Builds on the v1 code-block primitive with documentation-specific extensions."
+  }
+}

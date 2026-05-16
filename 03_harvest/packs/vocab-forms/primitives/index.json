@@ -1,0 +1,266 @@
+[
+  {
+    "name": "form-field",
+    "category": "interactive",
+    "role": "Wrapper for a single form input with its label, control, help text, and error.",
+    "attributes": {
+      "density": {
+        "values": [
+          "sparse",
+          "normal",
+          "dense"
+        ],
+        "default": "normal"
+      },
+      "invalid": {
+        "values": [
+          "true",
+          "false"
+        ],
+        "default": "false",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "gap": "--space-stack-compact",
+      "color": "--text"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "field-label",
+    "category": "content",
+    "role": "Label text for a form control. Usually short.",
+    "attributes": {
+      "weight": {
+        "values": [
+          "normal",
+          "emphasize"
+        ],
+        "default": "emphasize"
+      }
+    },
+    "tokens": {
+      "fontSize": "--type-size-sm",
+      "color": "--text-emphasis"
+    },
+    "structure": {
+      "element": "label"
+    },
+    "children": "phrasing-content",
+    "scope": "block"
+  },
+  {
+    "name": "field-help",
+    "category": "content",
+    "role": "Helper text below a form control.",
+    "attributes": {
+      "weight": {
+        "values": [
+          "recede",
+          "normal"
+        ],
+        "default": "recede"
+      }
+    },
+    "tokens": {
+      "fontSize": "--type-size-xs",
+      "color": "--text-recede"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "field-error",
+    "category": "state",
+    "role": "Error message below a form control.",
+    "attributes": {
+      "intent": {
+        "values": [
+          "critical"
+        ],
+        "default": "critical"
+      }
+    },
+    "tokens": {
+      "fontSize": "--type-size-sm",
+      "color": "--critical"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "role": "alert"
+      }
+    },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "select-cell",
+    "category": "interactive",
+    "role": "Select dropdown.",
+    "attributes": {
+      "density": {
+        "values": [
+          "sparse",
+          "normal",
+          "dense"
+        ],
+        "default": "normal"
+      },
+      "name": {
+        "values": [],
+        "default": "",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "borderColor": "--border",
+      "color": "--text",
+      "borderRadius": "--radius-md",
+      "background": "--surface"
+    },
+    "structure": {
+      "element": "select"
+    },
+    "children": "flow-content",
+    "scope": "inline"
+  },
+  {
+    "name": "checkbox-cell",
+    "category": "interactive",
+    "role": "Boolean checkbox input.",
+    "attributes": {
+      "name": {
+        "values": [],
+        "default": "",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "--accent"
+    },
+    "structure": {
+      "element": "input",
+      "attributes": {
+        "type": "checkbox"
+      }
+    },
+    "children": "none",
+    "scope": "inline"
+  },
+  {
+    "name": "radio-cell",
+    "category": "interactive",
+    "role": "Radio button (mutually exclusive with siblings sharing name).",
+    "attributes": {
+      "name": {
+        "values": [],
+        "default": "",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "--accent"
+    },
+    "structure": {
+      "element": "input",
+      "attributes": {
+        "type": "radio"
+      }
+    },
+    "children": "none",
+    "scope": "inline"
+  },
+  {
+    "name": "textarea-cell",
+    "category": "interactive",
+    "role": "Multi-line text input.",
+    "attributes": {
+      "density": {
+        "values": [
+          "sparse",
+          "normal",
+          "dense"
+        ],
+        "default": "normal"
+      },
+      "name": {
+        "values": [],
+        "default": "",
+        "specific": true
+      },
+      "placeholder": {
+        "values": [],
+        "default": "",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "borderColor": "--border",
+      "color": "--text",
+      "borderRadius": "--radius-md",
+      "background": "--surface"
+    },
+    "structure": {
+      "element": "textarea"
+    },
+    "children": "phrasing-content",
+    "scope": "block"
+  },
+  {
+    "name": "fieldset-group",
+    "category": "interactive",
+    "role": "Grouped fields with a legend.",
+    "attributes": {
+      "density": {
+        "values": [
+          "sparse",
+          "normal",
+          "dense"
+        ],
+        "default": "normal"
+      }
+    },
+    "tokens": {
+      "borderColor": "--border",
+      "padding": "--space-4",
+      "borderRadius": "--radius-md"
+    },
+    "structure": {
+      "element": "fieldset"
+    },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "submit-row",
+    "category": "interactive",
+    "role": "Action row at the bottom of a form — primary submit, cancel, etc.",
+    "attributes": {
+      "density": {
+        "values": [
+          "sparse",
+          "normal",
+          "dense"
+        ],
+        "default": "normal"
+      }
+    },
+    "tokens": {
+      "gap": "--space-inline-normal"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "flow-content",
+    "scope": "block"
+  }
+]

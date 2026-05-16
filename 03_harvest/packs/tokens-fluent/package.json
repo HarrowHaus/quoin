@@ -1,0 +1,28 @@
+{
+  "name": "@quoin/tokens-fluent",
+  "version": "0.1.0",
+  "description": "Microsoft Fluent 2 (web light) palette translated onto the Quoin canonical semantic-token namespace.",
+  "license": "MIT",
+  "main": "./tokens/index.json",
+  "files": [
+    "quoin.pack.json",
+    "tokens/",
+    "tokens.css",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "quoin",
+    "design-tokens",
+    "dtcg",
+    "fluent",
+    "fluent-2",
+    "microsoft",
+    "communication-blue"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "03_harvest/packs/tokens-fluent"
+  }
+}

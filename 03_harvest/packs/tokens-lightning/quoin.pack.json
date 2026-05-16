@@ -1,0 +1,31 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/tokens-lightning",
+  "version": "0.1.0",
+  "type": "token",
+  "quoinVersion": "^0.1.0",
+  "description": "Salesforce Lightning Design System palette translated onto the Quoin canonical semantic-token namespace.",
+  "exports": {
+    "tokens": "./tokens/index.json",
+    "css": "./tokens.css"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "BSD-3-Clause",
+    "homepage": "https://harrow.haus/quoin/packs/tokens-lightning",
+    "tags": [
+      "lightning",
+      "salesforce",
+      "blue-accent",
+      "enterprise"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "Lightning Design System (SLDS)",
+    "sourceOrganization": "Salesforce",
+    "sourceUrl": "https://www.lightningdesignsystem.com/",
+    "sourceLicense": "BSD-3-Clause",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "SLDS '2' tokens (light scheme). Salesforce ships @salesforce-ux/design-system-tokens with utility, component, and theme layers; this pack uses the global + alias layers. Salesforce Sans is proprietary; referenced by family name only."
+  }
+}

@@ -1,0 +1,371 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "color": {
+    "white": {
+      "0": {
+        "$value": "#ffffff",
+        "$type": "color"
+      }
+    },
+    "gray": {
+      "lighter": {
+        "$value": "oklch(97% 0.005 250)",
+        "$type": "color"
+      },
+      "light": {
+        "$value": "oklch(94% 0.008 250)",
+        "$type": "color"
+      },
+      "default": {
+        "$value": "oklch(80% 0.012 250)",
+        "$type": "color"
+      },
+      "dark": {
+        "$value": "oklch(50% 0.014 250)",
+        "$type": "color"
+      },
+      "darker": {
+        "$value": "oklch(28% 0.014 250)",
+        "$type": "color"
+      },
+      "darkest": {
+        "$value": "oklch(14% 0.014 250)",
+        "$type": "color"
+      }
+    },
+    "primary": {
+      "100": {
+        "$value": "oklch(95% 0.04 175)",
+        "$type": "color"
+      },
+      "500": {
+        "$value": "oklch(70% 0.13 175)",
+        "$type": "color"
+      }
+    },
+    "danger": {
+      "500": {
+        "$value": "oklch(58% 0.22 25)",
+        "$type": "color"
+      }
+    },
+    "success": {
+      "500": {
+        "$value": "oklch(60% 0.16 145)",
+        "$type": "color"
+      }
+    },
+    "warning": {
+      "500": {
+        "$value": "oklch(85% 0.18 80)",
+        "$type": "color"
+      }
+    },
+    "info": {
+      "500": {
+        "$value": "oklch(60% 0.16 220)",
+        "$type": "color"
+      }
+    }
+  },
+  "type-size-xs": {
+    "$value": "0.75rem",
+    "$type": "dimension"
+  },
+  "type-size-sm": {
+    "$value": "0.875rem",
+    "$type": "dimension"
+  },
+  "type-size-base": {
+    "$value": "1rem",
+    "$type": "dimension"
+  },
+  "type-size-lg": {
+    "$value": "1.125rem",
+    "$type": "dimension"
+  },
+  "type-size-xl": {
+    "$value": "1.25rem",
+    "$type": "dimension"
+  },
+  "type-size-2xl": {
+    "$value": "1.5rem",
+    "$type": "dimension"
+  },
+  "type-size-3xl": {
+    "$value": "1.875rem",
+    "$type": "dimension"
+  },
+  "type-size-display": {
+    "$value": "4.5rem",
+    "$type": "dimension"
+  },
+  "leading-tight": {
+    "$value": "1.15",
+    "$type": "number"
+  },
+  "leading-normal": {
+    "$value": "1.4",
+    "$type": "number"
+  },
+  "leading-prose": {
+    "$value": "1.6",
+    "$type": "number"
+  },
+  "leading-loose": {
+    "$value": "1.9",
+    "$type": "number"
+  },
+  "tracking-tight": {
+    "$value": "-0.02em",
+    "$type": "dimension"
+  },
+  "tracking-normal": {
+    "$value": "0em",
+    "$type": "dimension"
+  },
+  "tracking-wide": {
+    "$value": "0.05em",
+    "$type": "dimension"
+  },
+  "measure-prose": {
+    "$value": "65ch",
+    "$type": "dimension"
+  },
+  "space-0": {
+    "$value": "0",
+    "$type": "dimension"
+  },
+  "space-1": {
+    "$value": "0.25rem",
+    "$type": "dimension"
+  },
+  "space-2": {
+    "$value": "0.5rem",
+    "$type": "dimension"
+  },
+  "space-3": {
+    "$value": "0.75rem",
+    "$type": "dimension"
+  },
+  "space-4": {
+    "$value": "1rem",
+    "$type": "dimension"
+  },
+  "space-6": {
+    "$value": "1.5rem",
+    "$type": "dimension"
+  },
+  "space-8": {
+    "$value": "2rem",
+    "$type": "dimension"
+  },
+  "space-12": {
+    "$value": "3rem",
+    "$type": "dimension"
+  },
+  "space-16": {
+    "$value": "4rem",
+    "$type": "dimension"
+  },
+  "space-24": {
+    "$value": "6rem",
+    "$type": "dimension"
+  },
+  "space-32": {
+    "$value": "8rem",
+    "$type": "dimension"
+  },
+  "space-stack-compact": {
+    "$value": "0.5rem",
+    "$type": "dimension"
+  },
+  "space-stack-normal": {
+    "$value": "1rem",
+    "$type": "dimension"
+  },
+  "space-stack-loose": {
+    "$value": "2rem",
+    "$type": "dimension"
+  },
+  "space-inline-tight": {
+    "$value": "0.25rem",
+    "$type": "dimension"
+  },
+  "space-inline-normal": {
+    "$value": "0.5rem",
+    "$type": "dimension"
+  },
+  "space-card": {
+    "$value": "1.5rem",
+    "$type": "dimension"
+  },
+  "space-panel": {
+    "$value": "1.5rem",
+    "$type": "dimension"
+  },
+  "space-frame": {
+    "$value": "1rem",
+    "$type": "dimension"
+  },
+  "radius-none": {
+    "$value": "0",
+    "$type": "dimension"
+  },
+  "radius-sm": {
+    "$value": "0.125rem",
+    "$type": "dimension"
+  },
+  "radius-md": {
+    "$value": "0.375rem",
+    "$type": "dimension"
+  },
+  "radius-lg": {
+    "$value": "0.5rem",
+    "$type": "dimension"
+  },
+  "radius-pill": {
+    "$value": "9999px",
+    "$type": "dimension"
+  },
+  "radius-card": {
+    "$value": "0.5rem",
+    "$type": "dimension"
+  },
+  "radius-frame": {
+    "$value": "0.25rem",
+    "$type": "dimension"
+  },
+  "radius-media": {
+    "$value": "0.25rem",
+    "$type": "dimension"
+  },
+  "motion-fast": {
+    "$value": "120ms",
+    "$type": "duration"
+  },
+  "motion-normal": {
+    "$value": "200ms",
+    "$type": "duration"
+  },
+  "motion-slow": {
+    "$value": "320ms",
+    "$type": "duration"
+  },
+  "ease-standard": {
+    "$value": "cubic-bezier(0.4, 0, 0.2, 1)",
+    "$type": "cubicBezier"
+  },
+  "ease-decelerate": {
+    "$value": "cubic-bezier(0, 0, 0.2, 1)",
+    "$type": "cubicBezier"
+  },
+  "ease-accelerate": {
+    "$value": "cubic-bezier(0.4, 0, 1, 1)",
+    "$type": "cubicBezier"
+  },
+  "font-sans": {
+    "$value": "BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif",
+    "$type": "fontFamily"
+  },
+  "font-serif": {
+    "$value": "Georgia, ui-serif, serif",
+    "$type": "fontFamily"
+  },
+  "font-mono": {
+    "$value": "monospace",
+    "$type": "fontFamily"
+  },
+  "font-display": {
+    "$value": "BlinkMacSystemFont, -apple-system, sans-serif",
+    "$type": "fontFamily"
+  },
+  "surface": {
+    "$value": "{color.white.0}",
+    "$type": "color"
+  },
+  "surface-elevated": {
+    "$value": "{color.white.0}",
+    "$type": "color"
+  },
+  "surface-recessed": {
+    "$value": "{color.gray.lighter}",
+    "$type": "color"
+  },
+  "surface-inverse": {
+    "$value": "{color.gray.darkest}",
+    "$type": "color"
+  },
+  "text": {
+    "$value": "{color.gray.darker}",
+    "$type": "color"
+  },
+  "text-emphasis": {
+    "$value": "{color.gray.darkest}",
+    "$type": "color"
+  },
+  "text-recede": {
+    "$value": "{color.gray.dark}",
+    "$type": "color"
+  },
+  "text-disabled": {
+    "$value": "{color.gray.default}",
+    "$type": "color"
+  },
+  "text-on-accent": {
+    "$value": "{color.white.0}",
+    "$type": "color"
+  },
+  "text-on-critical": {
+    "$value": "{color.white.0}",
+    "$type": "color"
+  },
+  "text-on-success": {
+    "$value": "{color.white.0}",
+    "$type": "color"
+  },
+  "text-on-warning": {
+    "$value": "{color.gray.darkest}",
+    "$type": "color"
+  },
+  "text-on-info": {
+    "$value": "{color.white.0}",
+    "$type": "color"
+  },
+  "border": {
+    "$value": "{color.gray.light}",
+    "$type": "color"
+  },
+  "border-emphasis": {
+    "$value": "{color.primary.500}",
+    "$type": "color"
+  },
+  "border-recede": {
+    "$value": "{color.gray.lighter}",
+    "$type": "color"
+  },
+  "accent": {
+    "$value": "{color.primary.500}",
+    "$type": "color"
+  },
+  "accent-recede": {
+    "$value": "{color.primary.100}",
+    "$type": "color"
+  },
+  "critical": {
+    "$value": "{color.danger.500}",
+    "$type": "color"
+  },
+  "success": {
+    "$value": "{color.success.500}",
+    "$type": "color"
+  },
+  "warning": {
+    "$value": "{color.warning.500}",
+    "$type": "color"
+  },
+  "info": {
+    "$value": "{color.info.500}",
+    "$type": "color"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/tokens-radix",
+  "version": "0.1.0",
+  "type": "token",
+  "quoinVersion": "^0.1.0",
+  "description": "Radix Colors translated to Quoin. Slate neutral plus Blue accent (canonical Radix UI combination).",
+  "exports": {
+    "tokens": "./tokens/index.json",
+    "css": "./tokens.css"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/tokens-radix",
+    "tags": [
+      "radix",
+      "slate",
+      "12-step",
+      "accessible"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "Radix Colors",
+    "sourceOrganization": "WorkOS",
+    "sourceUrl": "https://www.radix-ui.com/colors",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Radix's 12-step alpha+saturation scale flattened to OKLCH greys for the neutral, plus the canonical Blue scale for the accent. Status colours from Radix's red, green, amber, blue scales (step 10 = solid)."
+  }
+}

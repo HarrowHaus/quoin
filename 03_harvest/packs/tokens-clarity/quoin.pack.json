@@ -1,0 +1,31 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/tokens-clarity",
+  "version": "0.1.0",
+  "type": "token",
+  "quoinVersion": "^0.1.0",
+  "description": "VMware Clarity palette translated onto the Quoin canonical semantic-token namespace.",
+  "exports": {
+    "tokens": "./tokens/index.json",
+    "css": "./tokens.css"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/tokens-clarity",
+    "tags": [
+      "clarity",
+      "vmware",
+      "blue",
+      "enterprise"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "Clarity Design System",
+    "sourceOrganization": "VMware",
+    "sourceUrl": "https://clarity.design/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Clarity v6 light theme. Clarity's 'action blue' (#0072A3 area) is the brand accent. Heavy-blue, enterprise-IT aesthetic — gradients of teal/cobalt across the chrome."
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/vocab-dashboard-extended",
+  "version": "0.1.0",
+  "type": "vocabulary",
+  "quoinVersion": "^0.1.0",
+  "description": "Extended data-dense primitives — KPI cards, sparklines, status pills, change indicators, filter chips, search cells, view switchers.",
+  "exports": {
+    "primitives": "./primitives/index.json"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/vocab-dashboard-extended",
+    "tags": [
+      "dashboard",
+      "kpi",
+      "sparkline",
+      "metrics"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "Quoin original — distilled from common dashboard patterns across Grafana, Datadog, Linear, Vercel, Stripe, and Mixpanel.",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Extends the v1 dashboard vocabulary with primitives that show up repeatedly in real operational consoles. Designed to compose inside <density-grid> + <canvas-block>."
+  }
+}

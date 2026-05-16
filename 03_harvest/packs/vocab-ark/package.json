@@ -1,0 +1,26 @@
+{
+  "name": "@quoin/vocab-ark",
+  "version": "0.1.0",
+  "description": "Ark UI-flavoured primitives — number input, color picker, segment bar, toggle group.",
+  "license": "MIT",
+  "main": "./primitives/index.json",
+  "files": [
+    "quoin.pack.json",
+    "primitives/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "quoin",
+    "vocabulary",
+    "ark-ui",
+    "zag",
+    "state-machine",
+    "accessibility"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "03_harvest/packs/vocab-ark"
+  }
+}

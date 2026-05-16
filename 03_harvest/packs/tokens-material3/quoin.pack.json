@@ -1,0 +1,31 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/tokens-material3",
+  "version": "0.1.0",
+  "type": "token",
+  "quoinVersion": "^0.1.0",
+  "description": "Material Design 3 (M3) baseline palette translated onto the Quoin canonical semantic-token namespace.",
+  "exports": {
+    "tokens": "./tokens/index.json",
+    "css": "./tokens.css"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "Apache-2.0",
+    "homepage": "https://harrow.haus/quoin/packs/tokens-material3",
+    "tags": [
+      "material",
+      "material-3",
+      "google",
+      "purple-accent"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "Material Design 3",
+    "sourceOrganization": "Google",
+    "sourceUrl": "https://m3.material.io/",
+    "sourceLicense": "Apache-2.0",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "M3 baseline 'reference palette' (neutral + primary purple + error). M3's elevation token set is not modelled here (Quoin's optional elevation capability is intentionally omitted by this pack — see Phase 1 spec §4.4). Use M3's CSS variables in the consumer project if elevation is required."
+  }
+}

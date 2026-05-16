@@ -1,0 +1,31 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/tokens-paste",
+  "version": "0.1.0",
+  "type": "token",
+  "quoinVersion": "^0.1.0",
+  "description": "Twilio Paste design tokens translated onto the Quoin canonical semantic-token namespace.",
+  "exports": {
+    "tokens": "./tokens/index.json",
+    "css": "./tokens.css"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/tokens-paste",
+    "tags": [
+      "paste",
+      "twilio",
+      "blue-accent",
+      "telephony"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "Paste Design System",
+    "sourceOrganization": "Twilio",
+    "sourceUrl": "https://paste.twilio.design/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Twilio Paste 'default' theme. Paste publishes @twilio-paste/design-tokens with global/alias layers. Twilio brand red (#F22F46) is a sub-brand colour; this pack uses Paste's primary 'color-background-primary' (blue) for accent, matching the default theme. Inter is open-source."
+  }
+}

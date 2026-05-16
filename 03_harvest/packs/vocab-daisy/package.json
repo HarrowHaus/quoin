@@ -1,0 +1,26 @@
+{
+  "name": "@quoin/vocab-daisy",
+  "version": "0.1.0",
+  "description": "DaisyUI-flavoured primitives — alert tile, badge tag, bordered card, divider, indicator dot, modal shell.",
+  "license": "MIT",
+  "main": "./primitives/index.json",
+  "files": [
+    "quoin.pack.json",
+    "primitives/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "quoin",
+    "vocabulary",
+    "daisyui",
+    "alert",
+    "badge",
+    "tailwind"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "03_harvest/packs/vocab-daisy"
+  }
+}

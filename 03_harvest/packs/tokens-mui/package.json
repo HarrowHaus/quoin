@@ -1,0 +1,28 @@
+{
+  "name": "@quoin/tokens-mui",
+  "version": "0.1.0",
+  "description": "Material UI (MUI) default theme translated onto the Quoin canonical semantic-token namespace.",
+  "license": "MIT",
+  "main": "./tokens/index.json",
+  "files": [
+    "quoin.pack.json",
+    "tokens/",
+    "tokens.css",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "quoin",
+    "design-tokens",
+    "dtcg",
+    "mui",
+    "material-ui",
+    "react",
+    "indigo-pink"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "03_harvest/packs/tokens-mui"
+  }
+}

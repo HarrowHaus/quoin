@@ -1,0 +1,31 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/tokens-atlassian",
+  "version": "0.1.0",
+  "type": "token",
+  "quoinVersion": "^0.1.0",
+  "description": "Atlassian Design System (light theme) palette translated onto the Quoin canonical semantic-token namespace.",
+  "exports": {
+    "tokens": "./tokens/index.json",
+    "css": "./tokens.css"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "Apache-2.0",
+    "homepage": "https://harrow.haus/quoin/packs/tokens-atlassian",
+    "tags": [
+      "atlassian",
+      "jira",
+      "confluence",
+      "blue-accent"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "Atlassian Design System",
+    "sourceOrganization": "Atlassian",
+    "sourceUrl": "https://atlassian.design/",
+    "sourceLicense": "Apache-2.0",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Atlassian's design tokens 'light' theme. Atlassian publishes JSON token files under @atlaskit/tokens; this pack translates the color.background/text/border/accent families onto Quoin's canonical namespace. Charlie Sans (Atlassian's typeface) is proprietary; referenced by family name only."
+  }
+}

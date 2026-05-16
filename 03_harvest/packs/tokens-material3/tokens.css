@@ -1,0 +1,109 @@
+/**
+ * @quoin/tokens-material3 — CSS custom property export.
+ *
+ * Generated from tokens/index.json. Harvested from Material Design 3.
+ * See README.md for attribution and mapping notes.
+ */
+
+:root {
+  /* base palette */
+  --color-neutral-0: oklch(0% 0 0);
+  --color-neutral-10: oklch(12% 0.005 280);
+  --color-neutral-20: oklch(20% 0.005 280);
+  --color-neutral-30: oklch(30% 0.005 280);
+  --color-neutral-40: oklch(42% 0.005 280);
+  --color-neutral-50: oklch(55% 0.005 280);
+  --color-neutral-60: oklch(65% 0.005 280);
+  --color-neutral-70: oklch(75% 0.005 280);
+  --color-neutral-80: oklch(85% 0.005 280);
+  --color-neutral-90: oklch(92% 0.005 280);
+  --color-neutral-95: oklch(95% 0.005 280);
+  --color-neutral-98: oklch(98% 0.005 280);
+  --color-neutral-99: oklch(99% 0.003 280);
+  --color-neutral-100: oklch(100% 0 0);
+  --color-primary-40: oklch(40% 0.16 290);
+  --color-primary-80: oklch(80% 0.12 290);
+  --color-primary-90: oklch(90% 0.05 290);
+  --color-error-40: oklch(45% 0.20 25);
+  --color-success-40: oklch(50% 0.16 150);
+  --color-warning-40: oklch(60% 0.16 80);
+  --color-info-40: oklch(50% 0.16 245);
+  --color-white-0: #ffffff;
+
+  /* semantic */
+  --type-size-xs: 0.75rem;
+  --type-size-sm: 0.875rem;
+  --type-size-base: 1rem;
+  --type-size-lg: 1.125rem;
+  --type-size-xl: 1.25rem;
+  --type-size-2xl: 1.5rem;
+  --type-size-3xl: 1.875rem;
+  --type-size-display: 4.5rem;
+  --leading-tight: 1.15;
+  --leading-normal: 1.4;
+  --leading-prose: 1.6;
+  --leading-loose: 1.9;
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.05em;
+  --measure-prose: 65ch;
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+  --space-stack-compact: 0.5rem;
+  --space-stack-normal: 1rem;
+  --space-stack-loose: 2rem;
+  --space-inline-tight: 0.25rem;
+  --space-inline-normal: 0.5rem;
+  --space-card: 1.5rem;
+  --space-panel: 1.5rem;
+  --space-frame: 1rem;
+  --radius-none: 0;
+  --radius-sm: 0.125rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-pill: 9999px;
+  --radius-card: 0.5rem;
+  --radius-frame: 0.25rem;
+  --radius-media: 0.25rem;
+  --motion-fast: 120ms;
+  --motion-normal: 200ms;
+  --motion-slow: 320ms;
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-decelerate: cubic-bezier(0, 0, 0.2, 1);
+  --ease-accelerate: cubic-bezier(0.4, 0, 1, 1);
+  --font-sans: 'Roboto', 'Roboto Flex', system-ui, sans-serif;
+  --font-serif: 'Roboto Serif', Georgia, serif;
+  --font-mono: 'Roboto Mono', ui-monospace, monospace;
+  --font-display: 'Roboto', system-ui, sans-serif;
+  --surface: var(--color-neutral-98);
+  --surface-elevated: var(--color-neutral-99);
+  --surface-recessed: var(--color-neutral-95);
+  --surface-inverse: var(--color-neutral-20);
+  --text: var(--color-neutral-20);
+  --text-emphasis: var(--color-neutral-10);
+  --text-recede: var(--color-neutral-50);
+  --text-disabled: var(--color-neutral-80);
+  --text-on-accent: var(--color-white-0);
+  --text-on-critical: var(--color-white-0);
+  --text-on-success: var(--color-white-0);
+  --text-on-warning: var(--color-neutral-10);
+  --text-on-info: var(--color-white-0);
+  --border: var(--color-neutral-80);
+  --border-emphasis: var(--color-primary-40);
+  --border-recede: var(--color-neutral-90);
+  --accent: var(--color-primary-40);
+  --accent-recede: var(--color-primary-90);
+  --critical: var(--color-error-40);
+  --success: var(--color-success-40);
+  --warning: var(--color-warning-40);
+  --info: var(--color-info-40);
+}

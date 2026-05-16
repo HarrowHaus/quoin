@@ -1,0 +1,31 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/tokens-evergreen",
+  "version": "0.1.0",
+  "type": "token",
+  "quoinVersion": "^0.1.0",
+  "description": "Segment Evergreen palette translated onto the Quoin canonical semantic-token namespace.",
+  "exports": {
+    "tokens": "./tokens/index.json",
+    "css": "./tokens.css"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/tokens-evergreen",
+    "tags": [
+      "evergreen",
+      "segment",
+      "neutral",
+      "react"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "Evergreen",
+    "sourceOrganization": "Segment (Twilio)",
+    "sourceUrl": "https://evergreen.segment.com/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Segment Evergreen 'default' theme. Neutral-heavy, restrained palette. Project status notes Evergreen v6 maintenance is light; pack is included because the design itself is widely studied."
+  }
+}

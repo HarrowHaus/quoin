@@ -1,0 +1,27 @@
+{
+  "name": "@quoin/vocab-marketing",
+  "version": "0.1.0",
+  "description": "Marketing-page primitives — hero, feature grid, pricing tier, testimonial, CTA band, FAQ disclosure.",
+  "license": "MIT",
+  "main": "./primitives/index.json",
+  "files": [
+    "quoin.pack.json",
+    "primitives/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "quoin",
+    "vocabulary",
+    "marketing",
+    "landing-page",
+    "pricing",
+    "hero",
+    "cta"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "03_harvest/packs/vocab-marketing"
+  }
+}

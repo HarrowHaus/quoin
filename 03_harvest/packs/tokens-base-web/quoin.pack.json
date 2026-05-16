@@ -1,0 +1,31 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/tokens-base-web",
+  "version": "0.1.0",
+  "type": "token",
+  "quoinVersion": "^0.1.0",
+  "description": "Uber Base Web palette translated onto the Quoin canonical semantic-token namespace.",
+  "exports": {
+    "tokens": "./tokens/index.json",
+    "css": "./tokens.css"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/tokens-base-web",
+    "tags": [
+      "base-web",
+      "uber",
+      "black-accent",
+      "react"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "Base Web",
+    "sourceOrganization": "Uber",
+    "sourceUrl": "https://baseweb.design/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Uber Base Web light theme. Heavily monochrome — Uber's brand uses near-black accent on white. UberMove typeface is proprietary; referenced by family name only."
+  }
+}

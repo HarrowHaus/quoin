@@ -1,0 +1,101 @@
+/**
+ * @quoin/tokens-elastic — CSS custom property export.
+ *
+ * Generated from tokens/index.json. Harvested from Elastic UI Framework (EUI).
+ * See README.md for attribution and mapping notes.
+ */
+
+:root {
+  /* base palette */
+  --color-ink-0: #ffffff;
+  --color-ink-100: oklch(97% 0.005 245);
+  --color-ink-200: oklch(94% 0.008 245);
+  --color-ink-300: oklch(88% 0.010 245);
+  --color-ink-400: oklch(78% 0.012 245);
+  --color-ink-500: oklch(60% 0.012 245);
+  --color-ink-600: oklch(45% 0.012 245);
+  --color-ink-800: oklch(22% 0.014 245);
+  --color-ink-900: oklch(12% 0.014 245);
+  --color-primary-100: oklch(95% 0.04 245);
+  --color-primary-500: oklch(55% 0.18 245);
+  --color-danger-500: oklch(58% 0.22 25);
+  --color-success-500: oklch(58% 0.16 145);
+  --color-warning-500: oklch(75% 0.18 75);
+
+  /* semantic */
+  --type-size-xs: 0.75rem;
+  --type-size-sm: 0.875rem;
+  --type-size-base: 1rem;
+  --type-size-lg: 1.125rem;
+  --type-size-xl: 1.25rem;
+  --type-size-2xl: 1.5rem;
+  --type-size-3xl: 1.875rem;
+  --type-size-display: 4.5rem;
+  --leading-tight: 1.15;
+  --leading-normal: 1.4;
+  --leading-prose: 1.6;
+  --leading-loose: 1.9;
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.05em;
+  --measure-prose: 65ch;
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+  --space-stack-compact: 0.5rem;
+  --space-stack-normal: 1rem;
+  --space-stack-loose: 2rem;
+  --space-inline-tight: 0.25rem;
+  --space-inline-normal: 0.5rem;
+  --space-card: 1.5rem;
+  --space-panel: 1.5rem;
+  --space-frame: 1rem;
+  --radius-none: 0;
+  --radius-sm: 0.125rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-pill: 9999px;
+  --radius-card: 0.5rem;
+  --radius-frame: 0.25rem;
+  --radius-media: 0.25rem;
+  --motion-fast: 120ms;
+  --motion-normal: 200ms;
+  --motion-slow: 320ms;
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-decelerate: cubic-bezier(0, 0, 0.2, 1);
+  --ease-accelerate: cubic-bezier(0.4, 0, 1, 1);
+  --font-sans: 'Inter', BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+  --font-serif: Georgia, ui-serif, serif;
+  --font-mono: 'Roboto Mono', 'Courier New', monospace;
+  --font-display: 'Inter', system-ui, sans-serif;
+  --surface: var(--color-ink-0);
+  --surface-elevated: var(--color-ink-0);
+  --surface-recessed: var(--color-ink-100);
+  --surface-inverse: var(--color-ink-900);
+  --text: var(--color-ink-800);
+  --text-emphasis: var(--color-ink-900);
+  --text-recede: var(--color-ink-500);
+  --text-disabled: var(--color-ink-300);
+  --text-on-accent: var(--color-ink-0);
+  --text-on-critical: var(--color-ink-0);
+  --text-on-success: var(--color-ink-0);
+  --text-on-warning: var(--color-ink-900);
+  --text-on-info: var(--color-ink-0);
+  --border: var(--color-ink-200);
+  --border-emphasis: var(--color-primary-500);
+  --border-recede: var(--color-ink-100);
+  --accent: var(--color-primary-500);
+  --accent-recede: var(--color-primary-100);
+  --critical: var(--color-danger-500);
+  --success: var(--color-success-500);
+  --warning: var(--color-warning-500);
+  --info: var(--color-primary-500);
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/tokens-ant",
+  "version": "0.1.0",
+  "type": "token",
+  "quoinVersion": "^0.1.0",
+  "description": "Ant Design (light theme) palette translated onto the Quoin canonical semantic-token namespace.",
+  "exports": {
+    "tokens": "./tokens/index.json",
+    "css": "./tokens.css"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/tokens-ant",
+    "tags": [
+      "ant-design",
+      "blue-accent",
+      "chinese-enterprise",
+      "react"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "Ant Design",
+    "sourceOrganization": "Ant Group",
+    "sourceUrl": "https://ant.design/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Ant Design v5 default 'light' theme. Ant's daybreak-blue (#1677FF area) drives accent. Ant uses a 10-step palette per color (X-1..X-10) with X-6 as the standard step."
+  }
+}

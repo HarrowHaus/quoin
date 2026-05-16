@@ -1,0 +1,28 @@
+{
+  "name": "@quoin/tokens-lightning",
+  "version": "0.1.0",
+  "description": "Salesforce Lightning Design System palette translated onto the Quoin canonical semantic-token namespace.",
+  "license": "BSD-3-Clause",
+  "main": "./tokens/index.json",
+  "files": [
+    "quoin.pack.json",
+    "tokens/",
+    "tokens.css",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "quoin",
+    "design-tokens",
+    "dtcg",
+    "lightning",
+    "salesforce",
+    "blue-accent",
+    "enterprise"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "03_harvest/packs/tokens-lightning"
+  }
+}

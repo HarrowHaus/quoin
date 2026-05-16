@@ -1,0 +1,30 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/vocab-ark",
+  "version": "0.1.0",
+  "type": "vocabulary",
+  "quoinVersion": "^0.1.0",
+  "description": "Ark UI-flavoured primitives — number input, color picker, segment bar, toggle group.",
+  "exports": {
+    "primitives": "./primitives/index.json"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/vocab-ark",
+    "tags": [
+      "ark-ui",
+      "zag",
+      "state-machine",
+      "accessibility"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "Ark UI",
+    "sourceOrganization": "Chakra Systems",
+    "sourceUrl": "https://ark-ui.com/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Ark UI publishes state-machine-driven primitives via @zag-js. This pack extracts the semantic shape (the element + ARIA story) of distinctive Ark widgets and renders them as Quoin primitives. Behaviour is delegated to host JS at runtime."
+  }
+}

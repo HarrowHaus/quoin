@@ -1,0 +1,32 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/tokens-govuk",
+  "version": "0.1.0",
+  "type": "token",
+  "quoinVersion": "^0.1.0",
+  "description": "GOV.UK Design System palette translated onto the Quoin canonical semantic-token namespace.",
+  "exports": {
+    "tokens": "./tokens/index.json",
+    "css": "./tokens.css"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/tokens-govuk",
+    "tags": [
+      "govuk",
+      "government",
+      "uk",
+      "accessibility",
+      "transport-font"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "GOV.UK Design System",
+    "sourceOrganization": "UK Government Digital Service",
+    "sourceUrl": "https://design-system.service.gov.uk/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "GOV.UK ships govuk-frontend under MIT. Colour palette: govuk-blue (#1d70b8) primary, govuk-black text on govuk-light-grey surface. GDS Transport typeface is proprietary to GDS; referenced by family name only with a system fallback."
+  }
+}

@@ -1,0 +1,369 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "color": {
+    "grey": {
+      "1": {
+        "$value": "oklch(99% 0 0)",
+        "$type": "color"
+      },
+      "2": {
+        "$value": "oklch(96% 0.003 250)",
+        "$type": "color"
+      },
+      "3": {
+        "$value": "oklch(92% 0.006 250)",
+        "$type": "color"
+      },
+      "4": {
+        "$value": "oklch(82% 0.010 250)",
+        "$type": "color"
+      }
+    },
+    "black": {
+      "0": {
+        "$value": "oklch(7% 0 0)",
+        "$type": "color"
+      }
+    },
+    "white": {
+      "0": {
+        "$value": "#ffffff",
+        "$type": "color"
+      }
+    },
+    "blue": {
+      "0": {
+        "$value": "oklch(48% 0.16 240)",
+        "$type": "color"
+      },
+      "light": {
+        "$value": "oklch(90% 0.05 240)",
+        "$type": "color"
+      }
+    },
+    "red": {
+      "0": {
+        "$value": "oklch(50% 0.21 25)",
+        "$type": "color"
+      }
+    },
+    "green": {
+      "0": {
+        "$value": "oklch(45% 0.16 145)",
+        "$type": "color"
+      }
+    },
+    "yellow": {
+      "0": {
+        "$value": "oklch(85% 0.18 90)",
+        "$type": "color"
+      }
+    },
+    "mid-grey": {
+      "0": {
+        "$value": "oklch(50% 0.005 250)",
+        "$type": "color"
+      }
+    }
+  },
+  "type-size-xs": {
+    "$value": "0.75rem",
+    "$type": "dimension"
+  },
+  "type-size-sm": {
+    "$value": "0.875rem",
+    "$type": "dimension"
+  },
+  "type-size-base": {
+    "$value": "1rem",
+    "$type": "dimension"
+  },
+  "type-size-lg": {
+    "$value": "1.125rem",
+    "$type": "dimension"
+  },
+  "type-size-xl": {
+    "$value": "1.25rem",
+    "$type": "dimension"
+  },
+  "type-size-2xl": {
+    "$value": "1.5rem",
+    "$type": "dimension"
+  },
+  "type-size-3xl": {
+    "$value": "1.875rem",
+    "$type": "dimension"
+  },
+  "type-size-display": {
+    "$value": "4.5rem",
+    "$type": "dimension"
+  },
+  "leading-tight": {
+    "$value": "1.15",
+    "$type": "number"
+  },
+  "leading-normal": {
+    "$value": "1.4",
+    "$type": "number"
+  },
+  "leading-prose": {
+    "$value": "1.6",
+    "$type": "number"
+  },
+  "leading-loose": {
+    "$value": "1.9",
+    "$type": "number"
+  },
+  "tracking-tight": {
+    "$value": "-0.02em",
+    "$type": "dimension"
+  },
+  "tracking-normal": {
+    "$value": "0em",
+    "$type": "dimension"
+  },
+  "tracking-wide": {
+    "$value": "0.05em",
+    "$type": "dimension"
+  },
+  "measure-prose": {
+    "$value": "65ch",
+    "$type": "dimension"
+  },
+  "space-0": {
+    "$value": "0",
+    "$type": "dimension"
+  },
+  "space-1": {
+    "$value": "0.25rem",
+    "$type": "dimension"
+  },
+  "space-2": {
+    "$value": "0.5rem",
+    "$type": "dimension"
+  },
+  "space-3": {
+    "$value": "0.75rem",
+    "$type": "dimension"
+  },
+  "space-4": {
+    "$value": "1rem",
+    "$type": "dimension"
+  },
+  "space-6": {
+    "$value": "1.5rem",
+    "$type": "dimension"
+  },
+  "space-8": {
+    "$value": "2rem",
+    "$type": "dimension"
+  },
+  "space-12": {
+    "$value": "3rem",
+    "$type": "dimension"
+  },
+  "space-16": {
+    "$value": "4rem",
+    "$type": "dimension"
+  },
+  "space-24": {
+    "$value": "6rem",
+    "$type": "dimension"
+  },
+  "space-32": {
+    "$value": "8rem",
+    "$type": "dimension"
+  },
+  "space-stack-compact": {
+    "$value": "0.5rem",
+    "$type": "dimension"
+  },
+  "space-stack-normal": {
+    "$value": "1rem",
+    "$type": "dimension"
+  },
+  "space-stack-loose": {
+    "$value": "2rem",
+    "$type": "dimension"
+  },
+  "space-inline-tight": {
+    "$value": "0.25rem",
+    "$type": "dimension"
+  },
+  "space-inline-normal": {
+    "$value": "0.5rem",
+    "$type": "dimension"
+  },
+  "space-card": {
+    "$value": "1.5rem",
+    "$type": "dimension"
+  },
+  "space-panel": {
+    "$value": "1.5rem",
+    "$type": "dimension"
+  },
+  "space-frame": {
+    "$value": "1rem",
+    "$type": "dimension"
+  },
+  "radius-none": {
+    "$value": "0",
+    "$type": "dimension"
+  },
+  "radius-sm": {
+    "$value": "0.125rem",
+    "$type": "dimension"
+  },
+  "radius-md": {
+    "$value": "0.375rem",
+    "$type": "dimension"
+  },
+  "radius-lg": {
+    "$value": "0.5rem",
+    "$type": "dimension"
+  },
+  "radius-pill": {
+    "$value": "9999px",
+    "$type": "dimension"
+  },
+  "radius-card": {
+    "$value": "0.5rem",
+    "$type": "dimension"
+  },
+  "radius-frame": {
+    "$value": "0.25rem",
+    "$type": "dimension"
+  },
+  "radius-media": {
+    "$value": "0.25rem",
+    "$type": "dimension"
+  },
+  "motion-fast": {
+    "$value": "120ms",
+    "$type": "duration"
+  },
+  "motion-normal": {
+    "$value": "200ms",
+    "$type": "duration"
+  },
+  "motion-slow": {
+    "$value": "320ms",
+    "$type": "duration"
+  },
+  "ease-standard": {
+    "$value": "cubic-bezier(0.4, 0, 0.2, 1)",
+    "$type": "cubicBezier"
+  },
+  "ease-decelerate": {
+    "$value": "cubic-bezier(0, 0, 0.2, 1)",
+    "$type": "cubicBezier"
+  },
+  "ease-accelerate": {
+    "$value": "cubic-bezier(0.4, 0, 1, 1)",
+    "$type": "cubicBezier"
+  },
+  "font-sans": {
+    "$value": "'GDS Transport', arial, sans-serif",
+    "$type": "fontFamily"
+  },
+  "font-serif": {
+    "$value": "Georgia, serif",
+    "$type": "fontFamily"
+  },
+  "font-mono": {
+    "$value": "ui-monospace, monospace",
+    "$type": "fontFamily"
+  },
+  "font-display": {
+    "$value": "'GDS Transport', arial, sans-serif",
+    "$type": "fontFamily"
+  },
+  "surface": {
+    "$value": "{color.white.0}",
+    "$type": "color"
+  },
+  "surface-elevated": {
+    "$value": "{color.white.0}",
+    "$type": "color"
+  },
+  "surface-recessed": {
+    "$value": "{color.grey.2}",
+    "$type": "color"
+  },
+  "surface-inverse": {
+    "$value": "{color.black.0}",
+    "$type": "color"
+  },
+  "text": {
+    "$value": "{color.black.0}",
+    "$type": "color"
+  },
+  "text-emphasis": {
+    "$value": "{color.black.0}",
+    "$type": "color"
+  },
+  "text-recede": {
+    "$value": "{color.mid-grey.0}",
+    "$type": "color"
+  },
+  "text-disabled": {
+    "$value": "{color.grey.4}",
+    "$type": "color"
+  },
+  "text-on-accent": {
+    "$value": "{color.white.0}",
+    "$type": "color"
+  },
+  "text-on-critical": {
+    "$value": "{color.white.0}",
+    "$type": "color"
+  },
+  "text-on-success": {
+    "$value": "{color.white.0}",
+    "$type": "color"
+  },
+  "text-on-warning": {
+    "$value": "{color.black.0}",
+    "$type": "color"
+  },
+  "text-on-info": {
+    "$value": "{color.white.0}",
+    "$type": "color"
+  },
+  "border": {
+    "$value": "{color.grey.3}",
+    "$type": "color"
+  },
+  "border-emphasis": {
+    "$value": "{color.black.0}",
+    "$type": "color"
+  },
+  "border-recede": {
+    "$value": "{color.grey.2}",
+    "$type": "color"
+  },
+  "accent": {
+    "$value": "{color.blue.0}",
+    "$type": "color"
+  },
+  "accent-recede": {
+    "$value": "{color.blue.light}",
+    "$type": "color"
+  },
+  "critical": {
+    "$value": "{color.red.0}",
+    "$type": "color"
+  },
+  "success": {
+    "$value": "{color.green.0}",
+    "$type": "color"
+  },
+  "warning": {
+    "$value": "{color.yellow.0}",
+    "$type": "color"
+  },
+  "info": {
+    "$value": "{color.blue.0}",
+    "$type": "color"
+  }
+}

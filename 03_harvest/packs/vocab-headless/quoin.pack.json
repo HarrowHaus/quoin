@@ -1,0 +1,30 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/vocab-headless",
+  "version": "0.1.0",
+  "type": "vocabulary",
+  "quoinVersion": "^0.1.0",
+  "description": "Headless UI-flavoured primitives — listbox, combobox, menu, disclosure-group, transition frame.",
+  "exports": {
+    "primitives": "./primitives/index.json"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/vocab-headless",
+    "tags": [
+      "headless-ui",
+      "listbox",
+      "combobox",
+      "accessibility"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "Headless UI",
+    "sourceOrganization": "Tailwind Labs",
+    "sourceUrl": "https://headlessui.com/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Translates Headless UI's componentless-component patterns into Quoin semantic primitives. The implementation pack supplies the styling; Headless UI's behaviour-only abstraction is honoured by emitting plain elements with the right ARIA shape."
+  }
+}

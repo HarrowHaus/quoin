@@ -1,0 +1,31 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/tokens-bootstrap",
+  "version": "0.1.0",
+  "type": "token",
+  "quoinVersion": "^0.1.0",
+  "description": "Bootstrap 5 default palette translated onto the Quoin canonical semantic-token namespace.",
+  "exports": {
+    "tokens": "./tokens/index.json",
+    "css": "./tokens.css"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/tokens-bootstrap",
+    "tags": [
+      "bootstrap",
+      "blue-accent",
+      "css-framework",
+      "popular"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "Bootstrap",
+    "sourceOrganization": "Bootstrap community / Twitter origin",
+    "sourceUrl": "https://getbootstrap.com/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Bootstrap 5 default theme colours. Bootstrap's $primary (#0d6efd), $danger, $success, $warning, $info map directly onto Quoin's accent + status. $light/$dark for surface/inverse."
+  }
+}

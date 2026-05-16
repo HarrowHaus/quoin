@@ -1,0 +1,30 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/vocab-shadcn",
+  "version": "0.1.0",
+  "type": "vocabulary",
+  "quoinVersion": "^0.1.0",
+  "description": "shadcn/ui-flavoured primitives — command palette, scroll pane, hover card, popover, sheet overlay, tooltip.",
+  "exports": {
+    "primitives": "./primitives/index.json"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/vocab-shadcn",
+    "tags": [
+      "shadcn",
+      "command-menu",
+      "popover",
+      "tooltip"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "shadcn/ui",
+    "sourceOrganization": "shadcn",
+    "sourceUrl": "https://ui.shadcn.com/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Maps shadcn/ui's distinctive overlay + command-menu patterns to Quoin primitives. Use alongside @quoin/vocab-editorial and @quoin/vocab-dashboard; this pack only adds primitives shadcn introduces beyond the v1 set."
+  }
+}

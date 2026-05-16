@@ -1,0 +1,26 @@
+{
+  "name": "@quoin/vocab-dashboard-extended",
+  "version": "0.1.0",
+  "description": "Extended data-dense primitives — KPI cards, sparklines, status pills, change indicators, filter chips, search cells, view switchers.",
+  "license": "MIT",
+  "main": "./primitives/index.json",
+  "files": [
+    "quoin.pack.json",
+    "primitives/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "quoin",
+    "vocabulary",
+    "dashboard",
+    "kpi",
+    "sparkline",
+    "metrics"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "03_harvest/packs/vocab-dashboard-extended"
+  }
+}

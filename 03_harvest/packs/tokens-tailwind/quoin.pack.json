@@ -1,0 +1,31 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/tokens-tailwind",
+  "version": "0.1.0",
+  "type": "token",
+  "quoinVersion": "^0.1.0",
+  "description": "Tailwind v4 default palette and scales (zinc neutral), translated onto the Quoin canonical semantic-token namespace.",
+  "exports": {
+    "tokens": "./tokens/index.json",
+    "css": "./tokens.css"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/tokens-tailwind",
+    "tags": [
+      "tailwind",
+      "zinc",
+      "oklch",
+      "utility-first"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "Tailwind CSS",
+    "sourceOrganization": "Tailwind Labs",
+    "sourceUrl": "https://tailwindcss.com/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Default v4 palette (zinc-based neutral). Values approximate the published v4 OKLCH defaults; verify against the canonical tailwindcss source before publication."
+  }
+}

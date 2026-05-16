@@ -1,0 +1,31 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/tokens-spectrum",
+  "version": "0.1.0",
+  "type": "token",
+  "quoinVersion": "^0.1.0",
+  "description": "Adobe Spectrum (light theme) palette translated onto the Quoin canonical semantic-token namespace.",
+  "exports": {
+    "tokens": "./tokens/index.json",
+    "css": "./tokens.css"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "Apache-2.0",
+    "homepage": "https://harrow.haus/quoin/packs/tokens-spectrum",
+    "tags": [
+      "spectrum",
+      "adobe",
+      "blue-accent",
+      "design-tools"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "Spectrum",
+    "sourceOrganization": "Adobe",
+    "sourceUrl": "https://spectrum.adobe.com/",
+    "sourceLicense": "Apache-2.0",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Spectrum 'light' theme. Spectrum publishes a global-token + alias-token model in @adobe/spectrum-tokens; this pack translates the alias layer (gray-50..gray-900, blue-500..blue-700, etc.) onto Quoin. Adobe Clean is proprietary; referenced by family name only."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/tokens-mantine",
+  "version": "0.1.0",
+  "type": "token",
+  "quoinVersion": "^0.1.0",
+  "description": "Mantine UI default palette translated onto the Quoin canonical semantic-token namespace.",
+  "exports": {
+    "tokens": "./tokens/index.json",
+    "css": "./tokens.css"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/tokens-mantine",
+    "tags": [
+      "mantine",
+      "blue-accent",
+      "react",
+      "popular"
+    ]
+  },
+  "attribution": {
+    "sourceSystem": "Mantine",
+    "sourceOrganization": "Mantine community",
+    "sourceUrl": "https://mantine.dev/",
+    "sourceLicense": "MIT",
+    "harvestedAt": "2026-05-16",
+    "harvestNotes": "Mantine v7 default theme. Mantine ships a 10-shade scale per colour (0-9). Default primary is 'blue', shade 6. Gray = ash-tinted neutral."
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "@quoin/vocab-mantine",
+  "version": "0.1.0",
+  "description": "Mantine-flavoured primitives — skeleton placeholder, ring progress, loader spinner, notification toast.",
+  "license": "MIT",
+  "main": "./primitives/index.json",
+  "files": [
+    "quoin.pack.json",
+    "primitives/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "quoin",
+    "vocabulary",
+    "mantine",
+    "skeleton",
+    "loader",
+    "notification"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "03_harvest/packs/vocab-mantine"
+  }
+}
