@@ -37,7 +37,10 @@ runtime, no shadow DOM, no proprietary tag — only standard HTML and CSS.
 │   ├── vocab-editorial/
 │   ├── vocab-dashboard/
 │   └── impl-tailwind/
-└── sample/                 Sample reference page (14 primitives, 6 categories)
+└── sample/                 Sample reference page (real Vite project)
+    ├── index.html          Quoin source — 14 primitives, 6 categories
+    ├── vite.config.ts      Imports `quoin()` from ../dist/vite.js
+    └── public/styles.css   Copied to dist/ by Vite
 ```
 
 The packs under `test-fixtures/` are **Phase-1 fixtures**, not the
@@ -53,8 +56,13 @@ npm run typecheck          # strict TypeScript
 npm test                   # run the full suite
 npm run test:coverage      # run with coverage (90% line floor)
 npm run build              # emit dist/
-npm run sample             # build sample/ -> sample/dist/
+npm run sample             # build compiler, then vite build sample/ -> sample/dist/
 ```
+
+`npm run sample` is a chained script: it runs `npm run build` first (the
+sample's `vite.config.ts` imports the plugin from `../dist/vite.js`)
+and then `cd sample && vite build` to exercise the Vite plugin
+end-to-end against the Quoin source in `sample/index.html`.
 
 ## Public API
 
