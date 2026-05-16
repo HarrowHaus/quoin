@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://harrow.haus/quoin/schema/pack.json",
+  "title": "Quoin Pack Manifest",
+  "type": "object",
+  "required": ["name", "version", "type", "quoinVersion", "description", "exports"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "name": {
+      "type": "string",
+      "pattern": "^@[a-z0-9][a-z0-9-]*/[a-z][a-z0-9-]{1,31}$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$"
+    },
+    "type": { "enum": ["token", "vocabulary", "implementation"] },
+    "quoinVersion": { "type": "string" },
+    "description": { "type": "string", "minLength": 1, "maxLength": 200 },
+    "exports": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "type": "string" }
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "author": { "type": "string" },
+        "license": { "type": "string" },
+        "homepage": { "type": "string" },
+        "tags": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "attribution": {
+      "type": "object",
+      "required": ["sourceSystem", "sourceLicense", "harvestedAt"],
+      "properties": {
+        "sourceSystem": { "type": "string" },
+        "sourceOrganization": { "type": "string" },
+        "sourceUrl": { "type": "string" },
+        "sourceLicense": { "type": "string" },
+        "harvestedAt": { "type": "string" },
+        "harvestNotes": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "peerPacks": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "capabilities": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "type": { "const": "token" } } },
+      "then": {
+        "properties": {
+          "exports": {
+            "required": ["tokens"],
+            "properties": { "tokens": { "type": "string" } }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "type": { "const": "vocabulary" } } },
+      "then": {
+        "properties": {
+          "exports": {
+            "required": ["primitives"],
+            "properties": {
+              "primitives": { "type": "string" },
+              "componentTokens": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "type": { "const": "implementation" } } },
+      "then": {
+        "properties": {
+          "exports": {
+            "required": ["emit", "metadata"],
+            "properties": {
+              "emit": { "type": "string" },
+              "metadata": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "additionalProperties": false
+}
