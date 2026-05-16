@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quoin sample — semantic-first page</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body class="min-h-screen bg-stone-50 text-stone-900 antialiased">
+    <wayfinder>
+      <a href="/">Home</a>
+      <a href="/journal">Journal</a>
+      <a href="/work">Work</a>
+    </wayfinder>
+
+    <canvas-block>
+      <stack gap="loose">
+        <breadcrumb-trail>
+          <a href="/">Home</a>
+          <span>/</span>
+          <a href="/journal">Journal</a>
+          <span>/</span>
+          <span>The Bot Smell Problem</span>
+        </breadcrumb-trail>
+
+        <authority-mark>The Bot Smell Problem</authority-mark>
+
+        <lead-graf>
+          For the last fifteen years, the dominant aesthetic of the web has been
+          one of progressive simplification — flat surfaces, generous whitespace,
+          and a vocabulary of utility classes wide enough to encode every visual
+          decision twice over.
+        </lead-graf>
+
+        <reading-flow>
+          <p>
+            Quoin proposes a different layering. The author writes intent;
+            the compiler resolves it; the browser receives standard HTML and
+            CSS. Nothing about that flow is novel — it is the same pipeline as
+            Tailwind, DaisyUI, and a generation of CSS frameworks. What is novel
+            is the level of abstraction at which the author works.
+          </p>
+          <p>
+            A <code>&lt;primary-action&gt;</code> is not a button class string;
+            it is a semantic role. Below the role, anything is possible: the
+            same source compiles against a Swiss token pack or a brutalist one,
+            and the rendered output is meaningfully different without the
+            author touching the markup.
+          </p>
+        </reading-flow>
+
+        <pull-quote>The grid is a refusal of chance.</pull-quote>
+
+        <emphasis-card>
+          <stack>
+            <authority-mark weight="emphasize">Key takeaway</authority-mark>
+            <recede-block>
+              Intent is the durable contract. Aesthetic is the swappable
+              vendor. The compiler is the thing that keeps them apart.
+            </recede-block>
+          </stack>
+        </emphasis-card>
+
+        <cluster>
+          <primary-action>Read the spec</primary-action>
+          <secondary-action>View on GitHub</secondary-action>
+        </cluster>
+
+        <aside-note>
+          Cf. Müller-Brockmann, <em>Grid Systems</em> (1981), p. 41.
+        </aside-note>
+
+        <colophon>
+          Set in iA Writer Quattro. Composed in Quoin v0.1. May 2026.
+        </colophon>
+      </stack>
+    </canvas-block>
+  </body>
+</html>
