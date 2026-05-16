@@ -163,7 +163,7 @@ const EMITTERS = {
     basic(
       "section",
       classes(
-        "border",
+        "border shadow-sm",
         v("bg", "--surface-elevated"),
         v("border", "--border"),
         v("p", "--space-card"),
@@ -280,7 +280,7 @@ const EMITTERS = {
   panel: (input) =>
     basic(
       "section",
-      classes(v("bg", "--surface-elevated"), v("p", "--space-panel")),
+      classes("shadow-xs", v("bg", "--surface-elevated"), v("p", "--space-panel")),
       input
     ),
 

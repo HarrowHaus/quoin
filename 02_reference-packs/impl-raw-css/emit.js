@@ -144,7 +144,8 @@ const EMITTERS = {
         background: v("--surface-elevated"),
         border: `1px solid ${v("--border")}`,
         padding: v("--space-card"),
-        borderRadius: v("--radius-card")
+        borderRadius: v("--radius-card"),
+        boxShadow: "0 1px 2px 0 rgb(0 0 0 / 0.05)"
       },
       input,
       structureAttrs(input.primitive)
@@ -278,7 +279,11 @@ const EMITTERS = {
   panel: (input) =>
     emitElement(
       "section",
-      { background: v("--surface-elevated"), padding: v("--space-panel") },
+      {
+        background: v("--surface-elevated"),
+        padding: v("--space-panel"),
+        boxShadow: "0 1px 1px 0 rgb(0 0 0 / 0.04)"
+      },
       input
     ),
 
