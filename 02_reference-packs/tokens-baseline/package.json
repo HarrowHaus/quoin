@@ -1,0 +1,20 @@
+{
+  "name": "@quoin/tokens-baseline",
+  "version": "0.1.0",
+  "description": "Neutral baseline token pack for Quoin — system fonts, OKLCH greyscale, conservative spacing and type.",
+  "license": "MIT",
+  "main": "./tokens/index.json",
+  "files": [
+    "quoin.pack.json",
+    "tokens/",
+    "tokens.css",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "design-tokens", "dtcg", "tailwind"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "02_reference-packs/tokens-baseline"
+  }
+}

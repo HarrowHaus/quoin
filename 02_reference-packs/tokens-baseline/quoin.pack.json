@@ -1,0 +1,18 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/tokens-baseline",
+  "version": "0.1.0",
+  "type": "token",
+  "quoinVersion": "^0.1.0",
+  "description": "Neutral baseline token pack — the Helvetica of Quoin token packs.",
+  "exports": {
+    "tokens": "./tokens/index.json",
+    "css": "./tokens.css"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/tokens-baseline",
+    "tags": ["neutral", "default", "reference", "system-fonts", "oklch"]
+  }
+}
