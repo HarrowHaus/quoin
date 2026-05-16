@@ -1,0 +1,14 @@
+{
+  "name": "@quoin/vocab-essentials",
+  "version": "0.1.0",
+  "description": "Universal layout + content primitives (tab panels, stat display, columns, split shell, comparison table, browser/terminal frames, step flow, logo strip, pin entry).",
+  "license": "MIT",
+  "main": "./primitives/index.json",
+  "files": ["quoin.pack.json", "primitives/", "README.md", "LICENSE"],
+  "keywords": ["quoin", "vocabulary", "essentials", "layout"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "02_reference-packs/vocab-essentials"
+  }
+}

@@ -1,0 +1,163 @@
+[
+  {
+    "name": "tab-panels",
+    "category": "interactive",
+    "role": "Full tab system — a row of tab buttons plus the corresponding panel content.",
+    "attributes": {
+      "density": { "values": ["sparse", "normal", "dense"], "default": "normal" }
+    },
+    "tokens": {
+      "borderColor": "--border",
+      "color": "--text",
+      "background": "--surface-elevated"
+    },
+    "structure": { "element": "div" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "pin-entry",
+    "category": "interactive",
+    "role": "Multi-cell numeric/OTP input. Renders as a row of small connected input boxes.",
+    "attributes": {
+      "density": { "values": ["normal", "dense"], "default": "normal" },
+      "length": { "values": [], "default": "6", "specific": true },
+      "name": { "values": [], "default": "code", "specific": true }
+    },
+    "tokens": {
+      "borderColor": "--border",
+      "color": "--text-emphasis",
+      "background": "--surface",
+      "borderRadius": "--radius-md"
+    },
+    "structure": { "element": "div" },
+    "children": "none",
+    "scope": "inline"
+  },
+  {
+    "name": "stat-display",
+    "category": "content",
+    "role": "Big number + label, optional delta indicator. The dominant metric of a section.",
+    "attributes": {
+      "intent": { "values": ["primary", "success", "warning", "critical"], "default": "primary" },
+      "weight": { "values": ["normal", "emphasize"], "default": "emphasize" }
+    },
+    "tokens": {
+      "color": "--text-emphasis",
+      "fontFamily": "--font-display"
+    },
+    "structure": { "element": "div" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "split-shell",
+    "category": "layout",
+    "role": "Fixed-width sidebar + flexible main content area. The canonical app shell.",
+    "attributes": {
+      "weight": { "values": ["normal", "emphasize"], "default": "normal" },
+      "sidebar": { "values": ["compact", "comfortable", "wide"], "default": "comfortable", "specific": true }
+    },
+    "tokens": {
+      "borderColor": "--border",
+      "background": "--surface"
+    },
+    "structure": { "element": "div" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "columns",
+    "category": "layout",
+    "role": "Explicit responsive columns. 1:1, 1:2, 2:1, or 1:1:1. Collapses to single column on small screens.",
+    "attributes": {
+      "density": { "values": ["sparse", "normal", "dense"], "default": "normal" },
+      "ratio": { "values": ["1:1", "1:2", "2:1", "1:1:1", "1:3", "3:1"], "default": "1:1", "specific": true }
+    },
+    "tokens": { "gap": "--space-6" },
+    "structure": { "element": "div" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "comparison-table",
+    "category": "content",
+    "role": "Feature × tier comparison grid with check/cross cells. Pricing pages, feature matrices.",
+    "attributes": {
+      "density": { "values": ["sparse", "normal", "dense"], "default": "normal" }
+    },
+    "tokens": {
+      "color": "--text",
+      "borderColor": "--border",
+      "background": "--surface-elevated"
+    },
+    "structure": { "element": "table" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "browser-frame",
+    "category": "content",
+    "role": "Chrome wrapper around content that reads as a browser window — title bar, dots, URL pill.",
+    "attributes": {
+      "weight": { "values": ["normal", "emphasize"], "default": "normal" },
+      "url": { "values": [], "default": "harrow.haus/quoin", "specific": true }
+    },
+    "tokens": {
+      "background": "--surface-elevated",
+      "borderColor": "--border",
+      "borderRadius": "--radius-md"
+    },
+    "structure": { "element": "figure" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "terminal-frame",
+    "category": "content",
+    "role": "Chrome wrapper around code that reads as a terminal window — dark surface, monospace, prompt.",
+    "attributes": {
+      "weight": { "values": ["normal", "emphasize"], "default": "normal" },
+      "title": { "values": [], "default": "Terminal", "specific": true }
+    },
+    "tokens": {
+      "background": "--surface-inverse",
+      "color": "--text-on-accent",
+      "fontFamily": "--font-mono",
+      "borderRadius": "--radius-md"
+    },
+    "structure": { "element": "figure" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "step-flow",
+    "category": "content",
+    "role": "Numbered horizontal steps with a connecting line. Install flows, onboarding, process diagrams.",
+    "attributes": {
+      "density": { "values": ["sparse", "normal", "dense"], "default": "normal" }
+    },
+    "tokens": {
+      "color": "--text",
+      "borderColor": "--border",
+      "background": "--surface"
+    },
+    "structure": { "element": "ol" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "logo-strip",
+    "category": "content",
+    "role": "Trusted-by row of greyscale logo placeholders. Marketing social proof.",
+    "attributes": {
+      "weight": { "values": ["recede", "normal"], "default": "recede" }
+    },
+    "tokens": {
+      "color": "--text-recede"
+    },
+    "structure": { "element": "div" },
+    "children": "flow-content",
+    "scope": "block"
+  }
+]

@@ -558,5 +558,231 @@ const EMITTERS = {
         ]
       )
     };
-  }
+  },
+
+  /* ─────────────── vocab-essentials ─────────────── */
+
+  "tab-panels": (input) =>
+    basic(
+      "div",
+      classes(
+        "border rounded-lg overflow-hidden",
+        v("border", "--border"),
+        v("bg", "--surface-elevated"),
+        v("text", "--text")
+      ),
+      input
+    ),
+
+  "pin-entry": (input) => {
+    const length = parseInt(input.attributes.specific.length ?? "6", 10);
+    const name = input.attributes.specific.name ?? "code";
+    const cells = [];
+    for (let i = 0; i < length; i++) {
+      cells.push(
+        el(
+          "input",
+          {
+            type: "text",
+            inputmode: "numeric",
+            maxlength: "1",
+            name: `${name}-${i + 1}`,
+            "aria-label": `Digit ${i + 1}`,
+            class: classes(
+              "w-12 h-14 text-center text-2xl font-mono border",
+              v("border", "--border"),
+              v("text", "--text-emphasis"),
+              v("bg", "--surface"),
+              v("rounded", "--radius-md")
+            )
+          },
+          [],
+          true
+        )
+      );
+    }
+    return {
+      html: el(
+        "div",
+        { class: "flex items-center gap-2", role: "group", "aria-label": "Verification code" },
+        cells
+      )
+    };
+  },
+
+  "stat-display": (input) => {
+    const intent = input.attributes.canonical.intent ?? "primary";
+    const tone = intent === "success" || intent === "warning" || intent === "critical"
+      ? v("text", `--${intent}`)
+      : v("text", "--text-emphasis");
+    return basic(
+      "div",
+      classes(
+        "flex flex-col gap-1",
+        tone,
+        v("font", "--font-display")
+      ),
+      input
+    );
+  },
+
+  "split-shell": (input) => {
+    const sidebar = input.attributes.specific.sidebar ?? "comfortable";
+    const widths = { compact: "240px", comfortable: "320px", wide: "400px" };
+    const w = widths[sidebar] ?? widths.comfortable;
+    return basic(
+      "div",
+      classes(
+        `grid grid-cols-[${w}_1fr] min-h-screen`,
+        v("border", "--border"),
+        v("bg", "--surface")
+      ),
+      input
+    );
+  },
+
+  columns: (input) => {
+    const ratio = input.attributes.specific.ratio ?? "1:1";
+    const cols = {
+      "1:1": "grid-cols-1 md:grid-cols-2",
+      "1:2": "grid-cols-1 md:grid-cols-[1fr_2fr]",
+      "2:1": "grid-cols-1 md:grid-cols-[2fr_1fr]",
+      "1:1:1": "grid-cols-1 md:grid-cols-3",
+      "1:3": "grid-cols-1 md:grid-cols-[1fr_3fr]",
+      "3:1": "grid-cols-1 md:grid-cols-[3fr_1fr]"
+    }[ratio] ?? "grid-cols-1 md:grid-cols-2";
+    return basic(
+      "div",
+      classes("grid gap-6", cols),
+      input
+    );
+  },
+
+  "comparison-table": (input) =>
+    basic(
+      "table",
+      classes(
+        "w-full border-collapse",
+        v("text", "--text"),
+        v("bg", "--surface-elevated")
+      ),
+      input
+    ),
+
+  "browser-frame": (input) => {
+    const url = input.attributes.specific.url ?? "harrow.haus/quoin";
+    const dots = el(
+      "div",
+      { class: "flex items-center gap-1.5", "aria-hidden": "true" },
+      [
+        el("span", { class: "w-3 h-3 rounded-full bg-[var(--surface-recessed)]" }, []),
+        el("span", { class: "w-3 h-3 rounded-full bg-[var(--surface-recessed)]" }, []),
+        el("span", { class: "w-3 h-3 rounded-full bg-[var(--surface-recessed)]" }, [])
+      ]
+    );
+    const urlPill = el(
+      "div",
+      {
+        class: classes(
+          "flex-1 px-3 py-1 text-xs font-mono",
+          v("bg", "--surface"),
+          v("text", "--text-recede"),
+          v("rounded", "--radius-pill")
+        )
+      },
+      [{ type: "text", value: url }]
+    );
+    const header = el(
+      "header",
+      {
+        class: classes(
+          "flex items-center gap-3 px-3 py-2 border-b",
+          v("bg", "--surface-recessed"),
+          v("border", "--border")
+        )
+      },
+      [dots, urlPill]
+    );
+    return {
+      html: el(
+        "figure",
+        {
+          class: classes(
+            "overflow-hidden border",
+            v("border", "--border"),
+            v("bg", "--surface-elevated"),
+            v("rounded", "--radius-md"),
+            "shadow-md"
+          )
+        },
+        [header, el("div", { class: "p-0" }, input.children)]
+      )
+    };
+  },
+
+  "terminal-frame": (input) => {
+    const title = input.attributes.specific.title ?? "Terminal";
+    const dots = el(
+      "div",
+      { class: "flex items-center gap-1.5", "aria-hidden": "true" },
+      [
+        el("span", { class: "w-3 h-3 rounded-full bg-red-500/80" }, []),
+        el("span", { class: "w-3 h-3 rounded-full bg-amber-500/80" }, []),
+        el("span", { class: "w-3 h-3 rounded-full bg-emerald-500/80" }, [])
+      ]
+    );
+    const titleEl = el(
+      "span",
+      {
+        class: classes("flex-1 text-center text-xs font-mono", v("text", "--text-recede"))
+      },
+      [{ type: "text", value: title }]
+    );
+    const header = el(
+      "header",
+      {
+        class: classes(
+          "flex items-center gap-3 px-3 py-2 border-b border-white/10",
+          v("bg", "--surface-inverse")
+        )
+      },
+      [dots, titleEl]
+    );
+    return {
+      html: el(
+        "figure",
+        {
+          class: classes(
+            "overflow-hidden",
+            v("bg", "--surface-inverse"),
+            v("text", "--text-on-accent"),
+            v("rounded", "--radius-md"),
+            v("font", "--font-mono"),
+            "shadow-md"
+          )
+        },
+        [header, el("div", { class: "p-4 text-sm" }, input.children)]
+      )
+    };
+  },
+
+  "step-flow": (input) =>
+    basic(
+      "ol",
+      classes(
+        "flex flex-col md:flex-row gap-4 list-none p-0",
+        v("text", "--text")
+      ),
+      input
+    ),
+
+  "logo-strip": (input) =>
+    basic(
+      "div",
+      classes(
+        "flex flex-wrap items-center justify-center gap-8 py-6 opacity-60 grayscale",
+        v("text", "--text-recede")
+      ),
+      input
+    )
 };
