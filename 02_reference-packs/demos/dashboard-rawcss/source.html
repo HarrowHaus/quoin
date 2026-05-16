@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Operations console — Quoin demo</title>
+    <link rel="stylesheet" href="./tokens.css" />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; }
+      body { margin: 0; font-family: var(--font-sans); background: var(--surface); color: var(--text); }
+      a { color: inherit; }
+    </style>
+  </head>
+  <body>
+    <wayfinder>
+      <a href="/">Console</a>
+      <a href="/jobs">Jobs</a>
+      <a href="/deploys">Deploys</a>
+      <a href="/audit">Audit</a>
+    </wayfinder>
+
+    <alert-band intent="warning">Build cache reduced. Next build may be slow.</alert-band>
+
+    <main style="display: grid; grid-template-columns: 16rem 1fr; gap: var(--space-6); padding: var(--space-6)">
+
+      <jump-list>
+        <a href="#today">Today</a>
+        <a href="#deploys">Active deploys</a>
+        <a href="#alerts">Open alerts</a>
+        <a href="#settings">Settings</a>
+      </jump-list>
+
+      <div style="display: flex; flex-direction: column; gap: var(--space-6)">
+
+        <segment-control>
+          <button role="tab" aria-selected="true" style="padding: 0.25rem 0.75rem; background: var(--surface-elevated); border: none; border-radius: var(--radius-sm)">Day</button>
+          <button role="tab" style="padding: 0.25rem 0.75rem; background: transparent; border: none">Week</button>
+          <button role="tab" style="padding: 0.25rem 0.75rem; background: transparent; border: none">Month</button>
+        </segment-control>
+
+        <key-value-list>
+          <dt>Active jobs</dt><dd>12</dd>
+          <dt>Queue depth</dt><dd>3</dd>
+          <dt>Last deploy</dt><dd>13 minutes ago</dd>
+          <dt>Open alerts</dt><dd>1</dd>
+        </key-value-list>
+
+        <data-table>
+          <table style="width: 100%; border-collapse: collapse">
+            <thead>
+              <tr>
+                <th style="text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border)">Job</th>
+                <th style="text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border)">Status</th>
+                <th style="text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border)">Duration</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td style="padding: 0.5rem 0.75rem">build-prod</td><td><resolved-mark>complete</resolved-mark></td><td>2m 41s</td></tr>
+              <tr><td style="padding: 0.5rem 0.75rem">sync-tokens</td><td><pending-block>running</pending-block></td><td>—</td></tr>
+              <tr><td style="padding: 0.5rem 0.75rem">audit-report</td><td><resolved-mark>complete</resolved-mark></td><td>11s</td></tr>
+            </tbody>
+          </table>
+        </data-table>
+
+        <div style="display: flex; gap: 0.5rem">
+          <primary-action>Run build</primary-action>
+          <secondary-action>View logs</secondary-action>
+          <destructive-action>Stop all jobs</destructive-action>
+        </div>
+
+        <disclosure summary="Open job details">
+          <div style="padding: var(--space-4)">
+            <key-value-list>
+              <dt>Reference</dt><dd>build-prod #4128</dd>
+              <dt>Branch</dt><dd>main</dd>
+              <dt>Commit</dt><dd>a44ae19</dd>
+              <dt>Triggered by</dt><dd>scheduler</dd>
+            </key-value-list>
+          </div>
+        </disclosure>
+
+      </div>
+    </main>
+  </body>
+</html>

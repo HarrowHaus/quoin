@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Showcase — Quoin demo</title>
+    <link rel="stylesheet" href="./tokens.css" />
+    <link rel="stylesheet" href="./impl.css" />
+  </head>
+  <body class="min-h-screen" style="background: var(--surface); color: var(--text);">
+
+    <wayfinder>
+      <a href="/">Quoin</a>
+      <a href="/spec">Spec</a>
+      <a href="/packs">Packs</a>
+      <a href="https://github.com/harrowhaus/quoin">GitHub</a>
+    </wayfinder>
+
+    <canvas-block>
+      <stack gap="loose">
+
+        <breadcrumb-trail>
+          <a href="/">Home</a>
+          <span>/</span>
+          <a href="/docs">Docs</a>
+          <span>/</span>
+          <span>Pack composition</span>
+        </breadcrumb-trail>
+
+        <authority-mark>Pack composition</authority-mark>
+
+        <lead-graf>
+          This page is built from <strong>both</strong> vocabulary packs
+          merged together — editorial primitives sitting in the same source
+          as navigation, state, and interactive primitives. The same compiler,
+          the same token pack, no boundary between the two.
+        </lead-graf>
+
+        <reading-flow>
+          <p>
+            A Quoin build loads one or more vocabulary packs. The compiler
+            unions their primitive sets and resolves source tags against the
+            combined registry. Name collisions emit warnings and resolve last
+            loaded wins — which means a project can layer a custom vocabulary
+            pack on top of a stock one to override specific primitives without
+            forking.
+          </p>
+        </reading-flow>
+
+        <alert-band intent="info">
+          This demo loads vocab-editorial and vocab-dashboard together — 36 primitives in one source.
+        </alert-band>
+
+        <emphasis-card>
+          <stack>
+            <authority-mark weight="emphasize">Read the spec, ship a pack</authority-mark>
+            <recede-block>
+              Two short documents — the spec and the pack format — are enough
+              to author a token pack, a vocabulary pack, or an implementation
+              pack from scratch. Each pack ships as a small npm module under
+              the @quoin/* scope.
+            </recede-block>
+            <cluster>
+              <primary-action>Read the spec</primary-action>
+              <secondary-action>Browse packs</secondary-action>
+            </cluster>
+          </stack>
+        </emphasis-card>
+
+        <pull-quote>The grid is a refusal of chance.</pull-quote>
+
+        <stack>
+          <authority-mark weight="normal">Recent activity</authority-mark>
+          <timeline-stack>
+            <li>2026-05-12 — tokens-baseline v0.1 published</li>
+            <li>2026-05-14 — vocab-editorial + vocab-dashboard v0.1 published</li>
+            <li>2026-05-16 — impl-tailwind + impl-raw-css v0.1 published</li>
+          </timeline-stack>
+        </stack>
+
+        <aside-note>
+          Cf. Alexander, <em>A Pattern Language</em> (1977), §X.
+          The pattern grammar Quoin borrows is the original one.
+        </aside-note>
+
+        <colophon>
+          Composed in Quoin v0.1. Pack composition:
+          vocab-editorial + vocab-dashboard + tokens-baseline + impl-tailwind.
+        </colophon>
+
+      </stack>
+    </canvas-block>
+  </body>
+</html>

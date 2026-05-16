@@ -1,45 +1,83 @@
-# Phase 2 — Reference Packs
+# Phase 2 — Reference packs
 
-Status: pending phase 1 completion.
+The canonical `@quoin/*` distributables. Five packs covering the three
+pack types defined in [`00_spec/pack-format.md`](../00_spec/pack-format.md),
+plus a validation script and three composition demos.
 
-## Scope
+## Packs
 
-Build the five canonical reference packs that demonstrate Quoin end to end and serve as the v1 floor of usable packs.
+| Pack | Type | Coverage |
+|------|------|----------|
+| [`tokens-baseline/`](tokens-baseline) | Token | Full canonical semantic namespace. OKLCH greyscale, system fonts, conservative scales. Ships DTCG JSON + CSS custom-property stylesheet. |
+| [`vocab-editorial/`](vocab-editorial) | Vocabulary | 21 primitives: editorial 8 + layout 7 + content 6. |
+| [`vocab-dashboard/`](vocab-dashboard) | Vocabulary | 15 primitives: navigation 5 + state 5 + interactive 5. |
+| [`impl-tailwind/`](impl-tailwind) | Implementation | Tailwind v4 emitter. Token-bearing classes use arbitrary-value syntax (`bg-[var(--accent)]`) so the pack is token-pack agnostic. |
+| [`impl-raw-css/`](impl-raw-css) | Implementation | Raw CSS emitter. Inline `style` attributes referencing CSS custom properties. Zero framework dependency. |
 
-## Packs to produce
+Together the two vocabulary packs supply the complete 36-primitive v1
+vocabulary from [`00_spec/primitives.md`](../00_spec/primitives.md). Both
+implementation packs handle every primitive in both vocabularies.
 
-| Pack | Type | Purpose |
-|------|------|---------|
-| `@quoin/tokens-baseline` | Token | Neutral default. The "Helvetica" of Quoin token packs. |
-| `@quoin/vocab-editorial` | Vocabulary | Long-form reading and documentation. Implements editorial primitives + supporting layout and content primitives. |
-| `@quoin/vocab-dashboard` | Vocabulary | Data-dense interfaces. Tighter spacing, denser type, all state and content primitives. |
-| `@quoin/impl-tailwind` | Implementation | Tailwind v4 emitter. Already partially built in phase 1; harden here. |
-| `@quoin/impl-raw-css` | Implementation | Raw CSS emitter. Demonstrates that Quoin is not Tailwind-bound. |
+## Relationship to Phase 1 fixtures
 
-## Deliverables per pack
+Phase 1 (`01_compiler/test-fixtures/`) shipped minimum-viable fixture
+packs sufficient to exercise the compiler end-to-end. Phase 2's packs
+**supersede those fixtures** for any real use:
 
-Each pack contains:
-- `quoin.pack.json` conforming to `00_spec/pack-format.md`
-- `package.json` for npm publication
-- `README.md` describing scope, target use cases, design decisions
-- `LICENSE` (MIT)
-- Type-specific contents per pack format spec
+- Manifests are publication-ready (full metadata, repository fields,
+  homepage URLs).
+- `tokens-baseline` ships an additional `tokens.css` runtime export and
+  a richer palette (status colours have soft variants).
+- `impl-tailwind` uses arbitrary-value classes referencing CSS variables
+  rather than hardcoded `bg-stone-900` style strings — meaning it works
+  with any compliant token pack.
+- `impl-raw-css` is new in Phase 2. It proves the architecture is not
+  Tailwind-bound: the same Quoin source compiles to vanilla HTML +
+  inline styles with no framework dependency at all.
+
+The Phase 1 fixtures stay in place to keep the compiler test suite
+self-contained.
 
 ## Validation
 
-Every pack must pass `@quoin/validate-pack` and build successfully through the phase 1 compiler.
+```bash
+# from 02_reference-packs/
+node validate.js
+```
+
+Loads every pack via the compiler, asserts the 21 + 15 = 36 primitive
+counts, then compiles every primitive against both implementation packs
+and confirms no Quoin tags leak. **80 checks** in the current run.
 
 ## Composition demos
 
-At least three end-to-end builds demonstrating pack composition:
-- Editorial vocab + baseline tokens + Tailwind impl
-- Dashboard vocab + baseline tokens + raw CSS impl
-- Editorial + dashboard vocab merged + baseline tokens + Tailwind impl
+Three runnable demos under [`demos/`](demos), each composing a different
+pack stack against the same Phase 1 compiler:
 
-## Exit criteria
+| Demo | Vocabulary | Tokens | Implementation |
+|------|------------|--------|----------------|
+| [`article-tailwind/`](demos/article-tailwind) | editorial | baseline | tailwind |
+| [`dashboard-rawcss/`](demos/dashboard-rawcss) | dashboard | baseline | raw-css |
+| [`showcase-tailwind/`](demos/showcase-tailwind) | editorial + dashboard | baseline | tailwind |
 
-See `../PHASE_GATES.md` (Phase 2 section).
+Build all three at once:
 
-## Prompt
+```bash
+# from 02_reference-packs/
+node demos/build.js
+```
 
-See `../PHASE_PROMPTS.md` (Phase 2 section).
+This emits `demos/{name}/dist/index.html` for each demo, plus the token
+pack's `tokens.css` copied in alongside, plus (for the Tailwind demos)
+a lab-only `impl.css` shim that resolves the arbitrary-value classes
+without a Tailwind toolchain installed. Open any `dist/index.html`
+directly in a browser.
+
+Prerequisite: the Phase 1 compiler must have been built once
+(`cd ../01_compiler && npm run build`).
+
+## Cross-references
+
+- [`00_spec/`](../00_spec) — language reference, pack format, primitives, tokens.
+- [`01_compiler/`](../01_compiler) — reference compiler that consumes these packs.
+- [`PHASE_GATES.md`](../PHASE_GATES.md) — Phase 2 exit criteria.
