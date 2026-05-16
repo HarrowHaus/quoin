@@ -27,7 +27,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "sample": "npm run build && cd sample && vite build"
+    "sample": "npm run build && cd sample && vite build",
+    "sample:preview": "cd sample && vite preview"
   },
   "dependencies": {
     "ajv": "^8.17.1",
