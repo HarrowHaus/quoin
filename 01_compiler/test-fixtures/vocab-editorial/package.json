@@ -1,0 +1,7 @@
+{
+  "name": "@quoin/vocab-editorial",
+  "version": "0.1.0",
+  "description": "Editorial vocabulary pack (Phase 1 fixture).",
+  "license": "MIT",
+  "private": true
+}

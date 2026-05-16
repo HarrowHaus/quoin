@@ -1,0 +1,8 @@
+{
+  "name": "@quoin/impl-tailwind",
+  "version": "0.1.0",
+  "description": "Tailwind v4 emitter (Phase 1 fixture).",
+  "license": "MIT",
+  "type": "module",
+  "private": true
+}

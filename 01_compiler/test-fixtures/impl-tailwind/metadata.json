@@ -1,0 +1,7 @@
+{
+  "target": "tailwind-v4",
+  "tailwindVersion": "^4.0.0",
+  "supportedPrimitives": ["*"],
+  "emittedFormat": "html-with-classes",
+  "capabilities": ["data-theme"]
+}

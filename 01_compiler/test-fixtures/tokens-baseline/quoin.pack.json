@@ -1,0 +1,16 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/tokens-baseline",
+  "version": "0.1.0",
+  "type": "token",
+  "quoinVersion": "^0.1.0",
+  "description": "Baseline neutral token pack (Phase 1 fixture).",
+  "exports": {
+    "tokens": "./tokens/index.json"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "tags": ["neutral", "default", "reference"]
+  }
+}

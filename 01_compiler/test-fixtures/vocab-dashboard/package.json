@@ -1,0 +1,7 @@
+{
+  "name": "@quoin/vocab-dashboard",
+  "version": "0.1.0",
+  "description": "Dashboard vocabulary pack (Phase 1 fixture).",
+  "license": "MIT",
+  "private": true
+}
