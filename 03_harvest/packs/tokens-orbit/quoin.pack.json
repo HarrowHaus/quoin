@@ -29,6 +29,5 @@
     "harvestNotes": "Orbit foundation palette extracted per-file from kiwicom/orbit packages/orbit-design-tokens/src/dictionary/definitions/foundation/palette/. Each colour ships as a style-dictionary JSON with hex values. Extraction method: C. Mapping: Orbit uses semantic step names (normal, dark, darker, hover, light, lighter, lightest, lightHover, lightActive, etc.) rather than numeric. Mapping: surface = cloud.light, surface-recessed = cloud.normal, text = ink.dark, accent = blue.normal (#0172cb), critical = red.normal, success = green.normal, warning = orange.normal.",
     "fidelityTier": "B",
     "sourceCommit": "master"
-  },
-  "status": "pending-3.5c-fill"
+  }
 }

@@ -29,6 +29,5 @@
     "harvestNotes": "Atlassian Design System light theme extracted from @atlaskit/tokens figma/atlassian-light.json. Hundreds of `Light/color.*` named tokens with hex values; mapping selects the canonical `color.text`, `color.background.accent.blue.bolder`, `color.border`, etc. for Quoin's namespace. Extraction method: B. Algorithm: @atlaskit/tokens@13.0.4, inputs {\"theme\":\"atlassian-light\"}. Mapping: Atlassian tokens flattened onto base.atlassian.{name}. Mapping: surface = color.background.neutral, text = color.text, accent = color.background.accent.blue.bolder (Atlassian brand blue), critical = color.background.danger, success = color.background.success, warning = color.background.warning.",
     "fidelityTier": "B",
     "sourceCommit": "13.0.4"
-  },
-  "status": "pending-3.5c-fill"
+  }
 }

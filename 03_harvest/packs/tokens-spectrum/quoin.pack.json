@@ -29,6 +29,5 @@
     "harvestNotes": "Adobe Spectrum tokens extracted from @adobe/spectrum-tokens dist/json/variables.json. Light theme values resolved from `sets.light.value`. Extraction method: B. Algorithm: @adobe/spectrum-tokens@14.7.0, inputs {\"mode\":\"light\"}. Mapping: Spectrum's `accent-color-N`, `gray-N`, `red-color-N`, etc. flattened. Mapping: surface = gray-50, text = gray-900, accent = accent-color-900 (Adobe blue), critical = negative-background-color-default, success = positive-background-color-default, warning = notice-background-color-default.",
     "fidelityTier": "B",
     "sourceCommit": "14.7.0"
-  },
-  "status": "pending-3.5c-fill"
+  }
 }

@@ -29,6 +29,5 @@
     "harvestNotes": "HeroUI semantic colour tokens from packages/core/theme/src/colors/semantic.ts. Extraction method: A. Mapping: HeroUI's semantic palette flattened onto base.heroui.{name}. Default light theme: background = white, foreground = neutral-900 (zinc-style), primary = purple-ish #7828c8 per HeroUI's brand.",
     "fidelityTier": "B",
     "sourceCommit": "main"
-  },
-  "status": "pending-3.5c-fill"
+  }
 }

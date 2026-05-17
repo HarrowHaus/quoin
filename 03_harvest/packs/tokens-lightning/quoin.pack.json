@@ -29,6 +29,5 @@
     "harvestNotes": "Salesforce SLDS palette extracted from salesforce-ux/design-system design-tokens/aliases/color-palettes.yml. Extraction method: A. Mapping: SLDS cool-gray + warm-gray + blue/green/red/orange/yellow ramps (steps 1-13). Default accent = BLUE_4 (Salesforce brand).",
     "fidelityTier": "B",
     "sourceCommit": "main"
-  },
-  "status": "pending-3.5c-fill"
+  }
 }

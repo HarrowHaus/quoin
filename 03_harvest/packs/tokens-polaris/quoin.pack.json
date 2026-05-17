@@ -29,6 +29,5 @@
     "harvestNotes": "Polaris default theme colours read from @shopify/polaris-tokens themeDefault.color. The library is Shopify's canonical static export of its programmatic palette. Extraction method: B. Algorithm: @shopify/polaris-tokens@9.4.2, inputs {\"theme\":\"default\"}. Mapping: Polaris ships ~226 named colour tokens (color-bg, color-text, color-icon, color-border, etc.). Mapping uses Polaris names directly: surface = color-bg-surface, text = color-text, accent = color-bg-fill-brand, critical = color-bg-fill-critical, success = color-bg-fill-success, warning = color-bg-fill-warning, info = color-bg-fill-info.",
     "fidelityTier": "B",
     "sourceCommit": "9.4.2"
-  },
-  "status": "pending-3.5c-fill"
+  }
 }

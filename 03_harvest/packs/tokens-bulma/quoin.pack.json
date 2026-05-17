@@ -29,6 +29,5 @@
     "harvestNotes": "Bulma initial-variables.scss extracted byte-faithfully. Turquoise primary + greyscale ramp. Hex source converted to OKLCH via culori. Extraction method: A. Mapping: Bulma's neutral ramp uses semantic stops (lighter/light/grey/dark/darker) rather than numeric. Status colours map: critical = red, success = green, warning = yellow, info = cyan; accent = turquoise.",
     "fidelityTier": "B",
     "sourceCommit": "main"
-  },
-  "status": "pending-3.5c-fill"
+  }
 }

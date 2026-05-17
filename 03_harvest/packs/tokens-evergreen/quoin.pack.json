@@ -29,6 +29,5 @@
     "harvestNotes": "Segment Evergreen default theme colours. The library is in maintenance mode; values are stable. Extraction method: A. Mapping: Evergreen ships scale + intent objects (gray, blue, red, orange, green, etc.) with explicit step keys.",
     "fidelityTier": "B",
     "sourceCommit": "master"
-  },
-  "status": "pending-3.5c-fill"
+  }
 }

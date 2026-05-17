@@ -29,6 +29,5 @@
     "harvestNotes": "Canvas Kit v9 'main' light theme. Workday's brand blue (a teal-leaning navy) is the accent. Roboto typeface is open-source.\n\nPhase 3.5b fidelity status: Tier C. License incompatibility — Workday Canvas Tokens ships under CC-BY-ND-4.0 (NoDerivatives), which prohibits redistribution of derivative works. Quoin packs are derivatives; we cannot relicense values under MIT/Apache-2.0. Tier C designed-approximation values stand; consumers needing exact Canvas tokens should install @workday/canvas-tokens-web directly under its own license.",
     "fidelityTier": "C",
     "sourceCommit": "main"
-  },
-  "status": "pending-3.5c-fill"
+  }
 }
