@@ -8,7 +8,8 @@
   "exports": {
     "emit": "./emit.js",
     "metadata": "./metadata.json",
-    "css": "./companion.css"
+    "css": "./companion.css",
+    "js": "./companion.js"
   },
   "metadata": {
     "author": "Quoin",

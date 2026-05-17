@@ -77,6 +77,18 @@ await fs.writeFile(
   path.join(publicDir, "impl.css"),
   `${shimCss}\n/* ---- @quoin/impl-tailwind companion (Phase 5a polish) ---- */\n${companionCss}`
 );
+// 4. Copy companion.js as a side-effect ESM module loaded by every
+//    docs page. Hosts the Phase 5c interactive behaviors — tab-panels
+//    keyboard nav, disclosure animations, modal triggers, command-menu
+//    Cmd-K. Pure DOM, no dependencies.
+const companionJsSrc = path.join(
+  labRoot,
+  "02_reference-packs",
+  "impl-tailwind",
+  "companion.js"
+);
+await fs.copyFile(companionJsSrc, path.join(publicDir, "impl.js"));
+
 console.log(
-  `copied tokens.css (${ACTIVE_TOKEN_PACK} + project overrides) + impl.css (Tailwind shim + companion) -> 04_docs/public/`
+  `copied tokens.css (${ACTIVE_TOKEN_PACK} + project overrides) + impl.css (shim + companion css) + impl.js (companion js) -> 04_docs/public/`
 );

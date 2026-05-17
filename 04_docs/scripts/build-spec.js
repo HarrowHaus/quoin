@@ -34,6 +34,7 @@ function layout({ title, slug, body }) {
     <link rel="stylesheet" href="/tokens.css" />
     <link rel="stylesheet" href="/impl.css" />
     <link rel="stylesheet" href="/site.css" />
+    <script type="module" src="/impl.js"></script>
   </head>
   <body class="min-h-screen" style="background: var(--surface); color: var(--text); font-family: var(--font-sans)">
     <wayfinder>
@@ -85,6 +86,7 @@ async function main() {
     <link rel="stylesheet" href="/tokens.css" />
     <link rel="stylesheet" href="/impl.css" />
     <link rel="stylesheet" href="/site.css" />
+    <script type="module" src="/impl.js"></script>
   </head>
   <body class="min-h-screen" style="background: var(--surface); color: var(--text); font-family: var(--font-sans)">
     <wayfinder>

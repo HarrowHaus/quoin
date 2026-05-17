@@ -7,10 +7,15 @@
     "data-theme",
     "css-vars",
     "companion-css",
+    "companion-js",
     "hover-states",
     "focus-visible",
     "motion",
-    "prefers-reduced-motion"
+    "prefers-reduced-motion",
+    "keyboard-nav",
+    "modal-pattern",
+    "command-menu"
   ],
-  "companionStylesheet": "./companion.css"
+  "companionStylesheet": "./companion.css",
+  "companionScript": "./companion.js"
 }

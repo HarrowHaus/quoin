@@ -64,6 +64,41 @@ The companion uses the canonical `--motion-*` and `--ease-*` token
 namespace, so durations and easings respect whatever your active token
 pack defines. No JavaScript required — every effect is pure CSS.
 
+## Companion JS module (Phase 5c interactive behavior)
+
+`companion.js` ships alongside `companion.css`. It's a single ES module
+(pure DOM API, no dependencies) that auto-attaches four behaviors on
+DOMContentLoaded:
+
+```html
+<script type="module" src="/node_modules/@quoin/impl-tailwind/companion.js"></script>
+```
+
+Behaviors:
+
+1. **Tab panels** — keyboard navigation (`←` / `→` / `Home` / `End`)
+   between `[role="tab"]` buttons inside a `[role="tablist"]`. Each
+   tab's `aria-controls` should point to a `[role="tabpanel"]` id; the
+   module shows/hides panels as tabs are selected.
+
+2. **Disclosure smooth animation** — `<details>` elements get a
+   `height` transition on toggle. Respects
+   `prefers-reduced-motion: reduce` (skips animation entirely).
+
+3. **Modal pattern** — any element with
+   `[data-quoin-dialog-trigger="targetId"]` opens the `<dialog
+   id="targetId">` on click via the native `showModal()` API. Clicking
+   the dialog backdrop closes it. Native `ESC` close stays.
+
+4. **Command menu** — `Cmd-K` / `Ctrl-K` toggles the first
+   `[data-quoin-command-menu]` element (typically a `<dialog>`). An
+   `<input>` with `[data-quoin-command-filter]` filters child `<li
+   role="option">` items in real time. `Enter` activates the
+   highlighted item; `Escape` closes.
+
+Re-scan after dynamic content insertion via
+`window.QuoinCompanion.init()`.
+
 ## Coverage
 
 All 36 v1 primitives across editorial, layout, navigation, state,
