@@ -82,9 +82,13 @@
       }
       .showcase-cell iframe {
         width: 100%;
-        min-height: 420px;
+        height: 880px;
         border: 0;
         background: var(--surface);
+        display: block;
+      }
+      @media (max-width: 900px) {
+        .showcase-cell iframe { height: 720px; }
       }
       .showcase-loading {
         padding: 2rem;

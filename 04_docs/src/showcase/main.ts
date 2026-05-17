@@ -124,7 +124,7 @@ function renderIntoFrame(frame: HTMLIFrameElement, html: string, css: string): v
   <base target="_parent">
   <style>
     *, *::before, *::after { box-sizing: border-box; }
-    body { margin: 0; padding: 1rem; font-family: var(--font-sans, system-ui); background: var(--surface, #fff); color: var(--text, #111); line-height: 1.4; }
+    body { margin: 0; padding: 1.25rem; font-family: var(--font-sans, system-ui); background: var(--surface, #fff); color: var(--text, #111); line-height: 1.4; }
     a { color: inherit; }
     button { font: inherit; cursor: pointer; }
     pre, code { font-family: var(--font-mono, ui-monospace, monospace); }
@@ -132,6 +132,27 @@ function renderIntoFrame(frame: HTMLIFrameElement, html: string, css: string): v
   <style>${css}</style>
   <style>${SHIM_CSS}</style>
   <style>${COMPANION_CSS}</style>
+  <script>
+    // After paint, post the body's scrollHeight up so the parent can
+    // resize the iframe to fit content. Runs once on load and again
+    // after web fonts settle.
+    function reportHeight() {
+      const h = Math.max(
+        document.body.scrollHeight,
+        document.documentElement.scrollHeight
+      );
+      parent.postMessage({ type: 'quoin-showcase-height', height: h }, '*');
+    }
+    if (document.readyState === 'complete') {
+      reportHeight();
+      setTimeout(reportHeight, 200);
+    } else {
+      window.addEventListener('load', () => {
+        reportHeight();
+        setTimeout(reportHeight, 200);
+      });
+    }
+  </script>
 </head><body>${html}</body></html>`;
   const doc = frame.contentDocument;
   if (!doc) return;
@@ -139,6 +160,19 @@ function renderIntoFrame(frame: HTMLIFrameElement, html: string, css: string): v
   doc.write(page);
   doc.close();
 }
+
+// Listen for height messages from each iframe and resize accordingly.
+window.addEventListener("message", (event) => {
+  if (event.data?.type !== "quoin-showcase-height") return;
+  const h = event.data.height;
+  if (typeof h !== "number" || h < 100) return;
+  // Find which iframe sent it
+  document.querySelectorAll<HTMLIFrameElement>("iframe").forEach((f) => {
+    if (f.contentWindow === event.source) {
+      f.style.height = `${Math.min(h + 8, 1600)}px`;
+    }
+  });
+});
 
 function compilePack(pack: ShowcasePack): string {
   const tokenEntry = TOKEN_PACKS[pack.id];

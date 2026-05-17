@@ -98,8 +98,21 @@ function buildToggle() {
   })() ?? "default";
   applySkin(saved in SKINS ? saved : "default");
 
-  // Find the wayfinder, append the toggle as the last item.
-  const wayfinder = document.querySelector("wayfinder");
+  // Find the wayfinder. At runtime the `<wayfinder>` Quoin tag has
+  // been compiled to `<nav class="…">`; the first non-breadcrumb nav
+  // on the page is ours.
+  const wayfinder = (() => {
+    // Prefer the literal pre-compile tag (dev server / SSR cases).
+    const native = document.querySelector("wayfinder");
+    if (native) return native;
+    // Compiled form: first <nav> that doesn't carry aria-label="breadcrumb".
+    const navs = document.querySelectorAll("nav");
+    for (const n of navs) {
+      if (n.getAttribute("aria-label") === "breadcrumb") continue;
+      return n;
+    }
+    return null;
+  })();
   if (!wayfinder) return;
   const wrap = document.createElement("span");
   wrap.className = "theme-toggle";
