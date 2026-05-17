@@ -54,6 +54,11 @@
     "capabilities": {
       "type": "array",
       "items": { "type": "string" }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["pending-3.5c-fill"],
+      "description": "Phase 0.5 transitional status. Packs marked 'pending-3.5c-fill' emit validation warnings instead of errors for missing canonical tokens. Removed after Phase 3.5c populates the expanded namespace."
     }
   },
   "allOf": [

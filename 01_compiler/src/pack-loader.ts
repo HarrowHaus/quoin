@@ -65,14 +65,25 @@ export async function loadTokenPack(source: TokenPackSource): Promise<TokenPack>
 
 function finalizeTokenPack(pack: TokenPack): TokenPack {
   const missing = findMissingSemanticTokens(pack.tokens);
-  if (missing.length > 0) {
-    throw new PackValidationError(
-      `Token pack ${pack.manifest.name} missing canonical semantic tokens: ` +
-        missing.join(", "),
-      pack.manifest.name
-    );
+  if (missing.length === 0) return pack;
+  // Phase 0.5 transitional window: packs that declare
+  // `"status": "pending-3.5c-fill"` in their manifest are allowed to
+  // be missing canonical tokens — they emit a warning rather than
+  // throwing. Strict validation resumes after Phase 3.5c lands.
+  const status = (pack.manifest as { status?: string }).status;
+  if (status === "pending-3.5c-fill") {
+    if (typeof console !== "undefined" && typeof console.warn === "function") {
+      console.warn(
+        `Token pack ${pack.manifest.name} is pending-3.5c-fill: ${missing.length} canonical tokens not yet populated.`
+      );
+    }
+    return pack;
   }
-  return pack;
+  throw new PackValidationError(
+    `Token pack ${pack.manifest.name} missing canonical semantic tokens: ` +
+      missing.join(", "),
+    pack.manifest.name
+  );
 }
 
 /* ────────────────────── Vocabulary pack ────────────────────── */

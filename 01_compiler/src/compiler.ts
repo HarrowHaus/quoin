@@ -55,13 +55,24 @@ function runCompile(options: CompileOptions): CompileResult {
 
   // Validate the canonical semantic namespace once per compile (the loader
   // does this on disk-loaded packs; this catches in-memory packs too).
+  // Phase 0.5: packs declaring `"status": "pending-3.5c-fill"` emit a
+  // warning instead of throwing during the transitional window.
   const missingCanonical = findMissingSemanticTokens(options.tokenPack.tokens);
   if (missingCanonical.length > 0) {
-    throw new PackValidationError(
-      `Token pack ${options.tokenPack.manifest.name} missing canonical semantic tokens: ` +
-        missingCanonical.join(", "),
-      options.tokenPack.manifest.name
-    );
+    const status = (options.tokenPack.manifest as { status?: string }).status;
+    if (status === "pending-3.5c-fill") {
+      warnings.push({
+        kind: "warning",
+        message: `Token pack ${options.tokenPack.manifest.name} is pending-3.5c-fill: ${missingCanonical.length} canonical tokens not yet populated.`,
+        pack: options.tokenPack.manifest.name
+      });
+    } else {
+      throw new PackValidationError(
+        `Token pack ${options.tokenPack.manifest.name} missing canonical semantic tokens: ` +
+          missingCanonical.join(", "),
+        options.tokenPack.manifest.name
+      );
+    }
   }
 
   const registry = buildPrimitiveRegistry(options.vocabularyPacks, warnings);
@@ -141,9 +152,21 @@ function emitPrimitive(
   const resolved = resolveAttributes(primitive, el, inherited, diagnose);
 
   const tokens: ResolvedTokens = {};
+  const packStatus = (ctx.options.tokenPack.manifest as { status?: string }).status;
   for (const [property, ref] of Object.entries(primitive.tokens)) {
     const value = lookupToken(ctx.tokens, ref);
     if (value === undefined) {
+      if (packStatus === "pending-3.5c-fill") {
+        // Phase 0.5 transitional: a primitive referencing a token the
+        // pack hasn't filled yet emits the literal CSS-var fallback
+        // (`var(--foo)`) instead of throwing. The compiler test suite
+        // and reference demos keep functioning while harvested packs
+        // are populated in Phase 3.5c.
+        const cssVar = ref.startsWith("--") ? ref : `--${ref}`;
+        tokens[property] = `var(${cssVar})`;
+        ctx.usedTokens.add(normaliseTokenName(ref));
+        continue;
+      }
       throw new CompilerError(
         "MISSING_TOKEN",
         `Token "${ref}" is not provided by the active token pack ` +
