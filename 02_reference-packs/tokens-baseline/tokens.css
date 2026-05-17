@@ -1,19 +1,19 @@
 /**
  * @quoin/tokens-baseline — CSS custom property export.
  *
- * Generated from tokens/index.json. Link this stylesheet in any page that
- * uses @quoin/impl-raw-css, or include it alongside Tailwind v4 when
- * pairing with @quoin/impl-tailwind so the impl pack's arbitrary-value
- * classes (e.g. bg-[var(--accent)]) resolve.
+ * Generated from tokens/index.json. The canonical v1.0 namespace (164
+ * tokens across 11 DTCG types). Link this stylesheet alongside any
+ * impl pack — its arbitrary-value classes (e.g. bg-[var(--accent)])
+ * resolve against these custom properties.
  *
- * Both layers are exposed: base palette (--color-stone-*) for direct
- * use by Tailwind-style classes, and the canonical semantic namespace
- * (--surface, --text, --accent, ...) that any Quoin vocabulary pack
- * references.
+ * Composite tokens (shadow, border, typography, transition) are
+ * exposed as single CSS-shorthand values where the cascade allows.
+ * Typography composites are also exposed per-aspect (e.g.
+ * --text-body-md-font-size) so impl packs can decompose if needed.
  */
 
 :root {
-  /* base palette */
+  /* ──────────── base palette ──────────── */
   --color-stone-50:  oklch(98% 0 0);
   --color-stone-100: oklch(96% 0 0);
   --color-stone-200: oklch(90% 0 0);
@@ -25,6 +25,7 @@
   --color-stone-800: oklch(20% 0 0);
   --color-stone-900: oklch(15% 0 0);
   --color-white:        #ffffff;
+  --color-black:        #000000;
   --color-red:          oklch(55% 0.22 25);
   --color-red-soft:     oklch(95% 0.04 25);
   --color-amber:        oklch(75% 0.18 80);
@@ -34,13 +35,14 @@
   --color-sky:          oklch(70% 0.15 235);
   --color-sky-soft:     oklch(95% 0.04 235);
 
-  /* surface */
+  /* ──────────── §3.1 surfaces ──────────── */
   --surface:          var(--color-stone-50);
   --surface-elevated: var(--color-white);
   --surface-recessed: var(--color-stone-100);
   --surface-inverse:  var(--color-stone-900);
+  --scrim:            oklch(0% 0 0 / 0.5);
 
-  /* text */
+  /* ──────────── §3.2 text ──────────── */
   --text:             var(--color-stone-700);
   --text-emphasis:    var(--color-stone-900);
   --text-recede:      var(--color-stone-500);
@@ -50,13 +52,14 @@
   --text-on-success:  var(--color-white);
   --text-on-warning:  var(--color-stone-900);
   --text-on-info:     var(--color-white);
+  --highlight:        oklch(88% 0.16 90);
 
-  /* border */
+  /* ──────────── §3.3 borders ──────────── */
   --border:          var(--color-stone-200);
   --border-emphasis: var(--color-stone-900);
   --border-recede:   var(--color-stone-100);
 
-  /* accent + status */
+  /* ──────────── §3.4 accent + status ──────────── */
   --accent:        var(--color-stone-900);
   --accent-recede: var(--color-stone-100);
   --critical:      var(--color-red);
@@ -64,69 +67,196 @@
   --warning:       var(--color-amber);
   --info:          var(--color-sky);
 
-  /* typography */
-  --font-sans:    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-serif:   ui-serif, Georgia, "Times New Roman", serif;
-  --font-mono:    ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  --font-display: ui-serif, Georgia, "Times New Roman", serif;
+  /* ──────────── §3.5 focus, links, shadow tint ──────────── */
+  --focus-ring:   var(--color-stone-900);
+  --link:         var(--color-stone-700);
+  --link-visited: var(--color-stone-500);
+  --link-hover:   var(--color-stone-900);
+  --shadow-tint:  oklch(0% 0 0 / 0.1);
 
-  --type-size-xs:      0.75rem;
-  --type-size-sm:      0.875rem;
-  --type-size-base:    1rem;
-  --type-size-lg:      1.125rem;
-  --type-size-xl:      1.25rem;
-  --type-size-2xl:     1.5rem;
-  --type-size-3xl:     1.875rem;
-  --type-size-display: 4.5rem;
-
-  --leading-tight:  1.15;
-  --leading-normal: 1.4;
-  --leading-prose:  1.6;
-  --leading-loose:  1.9;
-
-  --tracking-tight:  -0.02em;
-  --tracking-normal: 0em;
-  --tracking-wide:   0.05em;
-
-  --measure-prose: 65ch;
-
-  /* spacing */
+  /* ──────────── §3.6 spacing scale ──────────── */
   --space-0:  0;
   --space-1:  0.25rem;
   --space-2:  0.5rem;
   --space-3:  0.75rem;
   --space-4:  1rem;
+  --space-5:  1.25rem;
   --space-6:  1.5rem;
   --space-8:  2rem;
+  --space-10: 2.5rem;
   --space-12: 3rem;
   --space-16: 4rem;
+  --space-20: 5rem;
   --space-24: 6rem;
   --space-32: 8rem;
 
+  /* ──────────── §3.7 semantic spacing ──────────── */
   --space-stack-compact: 0.5rem;
   --space-stack-normal:  1rem;
   --space-stack-loose:   2rem;
   --space-inline-tight:  0.25rem;
   --space-inline-normal: 0.5rem;
+  --space-inline-loose:  1rem;
   --space-card:          1.5rem;
   --space-panel:         1.5rem;
   --space-frame:         1rem;
 
-  /* radius */
+  /* ──────────── §3.8 type sizes ──────────── */
+  --type-size-xs:      0.75rem;
+  --type-size-sm:      0.875rem;
+  --type-size-md:      1rem;
+  --type-size-lg:      1.125rem;
+  --type-size-xl:      1.25rem;
+  --type-size-2xl:     1.5rem;
+  --type-size-3xl:     1.875rem;
+  --type-size-4xl:     2.25rem;
+  --type-size-5xl:     3rem;
+  --type-size-display: 4.5rem;
+
+  /* ──────────── §3.9 tracking ──────────── */
+  --tracking-tight:  -0.02em;
+  --tracking-normal: 0em;
+  --tracking-wide:   0.05em;
+
+  /* ──────────── §3.10 radius ──────────── */
   --radius-none:  0;
   --radius-sm:    0.125rem;
   --radius-md:    0.375rem;
   --radius-lg:    0.5rem;
+  --radius-xl:    1rem;
   --radius-pill:  9999px;
   --radius-card:  0.5rem;
   --radius-frame: 0.25rem;
   --radius-media: 0.25rem;
 
-  /* motion */
-  --motion-fast:     120ms;
-  --motion-normal:   200ms;
-  --motion-slow:     320ms;
+  /* ──────────── §3.11 border widths ──────────── */
+  --border-width-hairline: 0.5px;
+  --border-width-sm:       1px;
+  --border-width-md:       2px;
+  --border-width-lg:       4px;
+
+  /* ──────────── §3.12 focus ring metrics ──────────── */
+  --focus-ring-width:  2px;
+  --focus-ring-offset: 2px;
+
+  /* ──────────── §3.13 icon sizes ──────────── */
+  --icon-size-xs: 0.75rem;
+  --icon-size-sm: 1rem;
+  --icon-size-md: 1.25rem;
+  --icon-size-lg: 1.5rem;
+  --icon-size-xl: 2rem;
+
+  /* ──────────── §3.14 containers ──────────── */
+  --container-narrow:  40rem;
+  --container-default: 64rem;
+  --container-wide:    80rem;
+  --container-full:    100%;
+
+  /* ──────────── §3.15 measure + blur ──────────── */
+  --measure-prose: 65ch;
+  --blur-sm:       4px;
+  --blur-md:       12px;
+  --blur-lg:       24px;
+
+  /* ──────────── §3.16 opacity ──────────── */
+  --opacity-disabled:     0.38;
+  --opacity-recede:       0.6;
+  --opacity-hover-layer:  0.08;
+  --opacity-active-layer: 0.12;
+  --opacity-scrim:        0.5;
+
+  /* ──────────── §3.17 z-index ──────────── */
+  --z-base:     0;
+  --z-raised:   1;
+  --z-sticky:   100;
+  --z-dropdown: 1000;
+  --z-modal:    2000;
+  --z-popover:  3000;
+  --z-tooltip:  4000;
+  --z-toast:    5000;
+
+  /* ──────────── §3.18 aspect ratios ──────────── */
+  --aspect-square:   1.0;
+  --aspect-video:    1.7778;
+  --aspect-portrait: 0.75;
+  --aspect-banner:   3.0;
+
+  /* ──────────── §3.19 leading multipliers ──────────── */
+  --leading-tight:  1.15;
+  --leading-normal: 1.4;
+  --leading-prose:  1.6;
+  --leading-loose:  1.9;
+
+  /* ──────────── §3.20 fontFamily ──────────── */
+  --font-sans:    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif:   ui-serif, Georgia, 'Times New Roman', serif;
+  --font-mono:    ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-display: ui-serif, Georgia, 'Times New Roman', serif;
+
+  /* ──────────── §3.21 fontWeight ──────────── */
+  --font-weight-light:    300;
+  --font-weight-regular:  400;
+  --font-weight-medium:   500;
+  --font-weight-semibold: 600;
+  --font-weight-bold:     700;
+  --font-weight-black:    900;
+
+  /* ──────────── §3.22 motion durations ──────────── */
+  --motion-instant: 50ms;
+  --motion-fast:    100ms;
+  --motion-normal:  200ms;
+  --motion-slow:    400ms;
+  --motion-slower:  800ms;
+
+  /* ──────────── §3.23 easing ──────────── */
+  --ease-linear:     cubic-bezier(0, 0, 1, 1);
   --ease-standard:   cubic-bezier(0.4, 0, 0.2, 1);
   --ease-decelerate: cubic-bezier(0, 0, 0.2, 1);
   --ease-accelerate: cubic-bezier(0.4, 0, 1, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --ease-spring:     cubic-bezier(0.5, 1.5, 0.5, 1);
+
+  /* ──────────── §3.24 shadow (composite) ──────────── */
+  /* Each shadow exposed as a CSS-ready single value usable in box-shadow. */
+  --shadow-xs:    0 1px 2px var(--shadow-tint);
+  --shadow-sm:    0 1px 3px var(--shadow-tint);
+  --shadow-md:    0 4px 6px -1px var(--shadow-tint), 0 2px 4px -1px var(--shadow-tint);
+  --shadow-lg:    0 10px 15px -3px var(--shadow-tint), 0 4px 6px -2px var(--shadow-tint);
+  --shadow-xl:    0 20px 25px -5px var(--shadow-tint), 0 8px 10px -6px var(--shadow-tint);
+  --shadow-2xl:   0 25px 50px -12px var(--shadow-tint);
+  --shadow-inner: inset 0 2px 4px var(--shadow-tint);
+
+  /* ──────────── §3.25 border (composite) ──────────── */
+  --border-default:          var(--border-width-sm) solid var(--border);
+  --border-emphasis-stroke:  var(--border-width-md) solid var(--border-emphasis);
+  --border-divider:          var(--border-width-sm) solid var(--border-recede);
+
+  /* ──────────── §3.26 typography (composite) ──────────── */
+  /* Each typography token is also exposed as a single CSS `font` shorthand
+   * usable directly (font: weight size/leading family). For aspects that
+   * are not part of the `font:` shorthand (letter-spacing), impl packs read
+   * the per-aspect tokens below. */
+  --text-display:      var(--font-weight-bold) var(--type-size-display)/var(--leading-tight) var(--font-display);
+  --text-headline-lg:  var(--font-weight-bold) var(--type-size-5xl)/var(--leading-tight) var(--font-display);
+  --text-headline-md:  var(--font-weight-bold) var(--type-size-4xl)/var(--leading-tight) var(--font-display);
+  --text-headline-sm:  var(--font-weight-semibold) var(--type-size-3xl)/var(--leading-tight) var(--font-display);
+  --text-title-lg:     var(--font-weight-semibold) var(--type-size-2xl)/var(--leading-normal) var(--font-sans);
+  --text-title-md:     var(--font-weight-semibold) var(--type-size-xl)/var(--leading-normal) var(--font-sans);
+  --text-title-sm:     var(--font-weight-medium) var(--type-size-lg)/var(--leading-normal) var(--font-sans);
+  --text-body-lg:      var(--font-weight-regular) var(--type-size-lg)/var(--leading-prose) var(--font-sans);
+  --text-body-md:      var(--font-weight-regular) var(--type-size-md)/var(--leading-prose) var(--font-sans);
+  --text-body-sm:      var(--font-weight-regular) var(--type-size-sm)/var(--leading-prose) var(--font-sans);
+  --text-label-lg:     var(--font-weight-medium) var(--type-size-md)/var(--leading-normal) var(--font-sans);
+  --text-label-md:     var(--font-weight-medium) var(--type-size-sm)/var(--leading-normal) var(--font-sans);
+  --text-label-sm:     var(--font-weight-medium) var(--type-size-xs)/var(--leading-normal) var(--font-sans);
+
+  /* ──────────── §3.27 transition (composite) ──────────── */
+  --transition-default:  all var(--motion-normal) var(--ease-standard);
+  --transition-emphasis: all var(--motion-slow)   var(--ease-emphasized);
+  --transition-fast:     all var(--motion-fast)   var(--ease-standard);
+
+  /* ──────────── §3.28 strokeStyle ──────────── */
+  --stroke-solid:  solid;
+  --stroke-dashed: dashed;
+  --stroke-dotted: dotted;
 }

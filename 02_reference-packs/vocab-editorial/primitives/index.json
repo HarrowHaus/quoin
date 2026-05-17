@@ -27,7 +27,7 @@
       "weight": { "values": ["recede", "normal"], "default": "recede" }
     },
     "tokens": {
-      "fontSize": "--type-size-base",
+      "fontSize": "--type-size-md",
       "color": "--text-recede"
     },
     "structure": { "element": "div" },
@@ -63,7 +63,7 @@
       "density":  { "values": ["sparse", "normal", "dense"], "default": "normal" }
     },
     "tokens": {
-      "fontSize": "--type-size-base",
+      "fontSize": "--type-size-md",
       "color": "--text",
       "lineHeight": "--leading-prose",
       "maxWidth": "--measure-prose"

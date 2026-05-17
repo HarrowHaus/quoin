@@ -145,7 +145,7 @@ button { font: inherit; cursor: pointer; }
 .text-\[var\(--text-on-warning\)\]   { color: var(--text-on-warning); }
 .text-\[var\(--success\)\]           { color: var(--success); }
 
-.text-\[var\(--type-size-base\)\]    { font-size: var(--type-size-base); }
+.text-\[var\(--type-size-md\)\]    { font-size: var(--type-size-md); }
 .text-\[var\(--type-size-sm\)\]      { font-size: var(--type-size-sm); }
 .text-\[var\(--type-size-xl\)\]      { font-size: var(--type-size-xl); }
 .text-\[var\(--type-size-3xl\)\]     { font-size: var(--type-size-3xl); }

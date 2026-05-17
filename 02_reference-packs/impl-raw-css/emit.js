@@ -161,7 +161,7 @@ const EMITTERS = {
   "recede-block": (input) =>
     emitElement(
       "div",
-      { fontSize: v("--type-size-base"), color: v("--text-recede") },
+      { fontSize: v("--type-size-md"), color: v("--text-recede") },
       input,
       structureAttrs(input.primitive)
     ),
@@ -184,7 +184,7 @@ const EMITTERS = {
     emitElement(
       "div",
       {
-        fontSize: v("--type-size-base"),
+        fontSize: v("--type-size-md"),
         color: v("--text"),
         lineHeight: v("--leading-prose"),
         maxWidth: v("--measure-prose")

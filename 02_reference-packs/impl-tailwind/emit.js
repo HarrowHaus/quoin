@@ -186,7 +186,7 @@ const EMITTERS = {
   "recede-block": (input) =>
     basic(
       "div",
-      classes(v("text", "--type-size-base"), v("text", "--text-recede")),
+      classes(v("text", "--type-size-md"), v("text", "--text-recede")),
       input,
       structureAttrs(input.primitive)
     ),
@@ -241,7 +241,7 @@ const EMITTERS = {
     basic(
       "div",
       classes(
-        v("text", "--type-size-base"),
+        v("text", "--type-size-md"),
         v("text", "--text"),
         v("leading", "--leading-prose"),
         v("max-w", "--measure-prose")
