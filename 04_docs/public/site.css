@@ -6,6 +6,12 @@
  * that aren't worth a per-primitive emit override.
  */
 
+/* ─────────── Public Sans — Quoin's body sans ─────────── *
+ * USWDS humanist sans, OFL 1.1. Pairs with Junicode by sharing
+ * humanist roots without competing for distinctiveness.
+ */
+@import url("https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap");
+
 /* ─────────── Junicode — Quoin's signature serif ─────────── *
  * Served from jsdelivr's GitHub mirror of psb1558/Junicode-font.
  * SIL OFL 1.1, designed by Peter Baker. The variable font carries

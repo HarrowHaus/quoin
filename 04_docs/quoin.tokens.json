@@ -18,7 +18,7 @@
   "accent":           { "$value": "oklch(14% 0.012 30)",   "$type": "color" },
   "accent-recede":    { "$value": "oklch(94% 0.014 30)",   "$type": "color" },
 
-  "font-sans":    { "$value": "'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif",  "$type": "fontFamily" },
+  "font-sans":    { "$value": "'Public Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",  "$type": "fontFamily" },
   "font-serif":   { "$value": "'Junicode', 'Newsreader', Georgia, ui-serif, serif",                  "$type": "fontFamily" },
   "font-display": { "$value": "'Junicode', 'Newsreader', Georgia, ui-serif, serif",                  "$type": "fontFamily" },
   "font-mono":    { "$value": "'JetBrains Mono', 'Geist Mono', ui-monospace, monospace",             "$type": "fontFamily" },
