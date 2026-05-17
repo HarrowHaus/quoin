@@ -87,11 +87,40 @@ Exit criteria for each phase. A phase is complete when **every** criterion in it
 - [x] Demo build (`02_reference-packs/demos/build.js`) still passes for all three demos.
 - [x] `03_harvest/REPORT.md` updated with new Tier A/B/C classification and a per-pack table.
 - [x] Per-pack harvest notes document the extraction source, commit/version, and any mapping decisions.
-- [ ] **≤5 Tier C packs** (current state: 24 Tier C — stop condition triggered; awaiting operator decision per the ask in `03_harvest/REPORT.md`).
+- [x] **≤5 Tier C packs** (final: 3 Tier C — within Phase 3.5b's tighter ≤3 target).
 - [ ] Visual smoke tests rendered for each pack against the showcase-tailwind demo.
 - [ ] Operator review completed.
 
-**Status:** **partial** — framework shipped, 6 packs upgraded (1 A + 5 B), 24 packs awaiting per-source URL discovery and format-specific extraction in a Phase 3.5b follow-up. Stop condition triggered; operator decision required before continuation.
+**Status:** **complete** via Phase 3.5b. Framework shipped (Methods A + B + C), 27 packs upgraded (1 A + 26 B), 3 Tier C with documented unresolvable reasons.
+
+---
+
+## Phase 3.5b — Comprehensive Fidelity Pass
+
+**Output location:** `03_harvest/fidelity/specs/` (per-pack specs) + `03_harvest/fidelity/runner.js` (Method A/B/C dispatcher).
+
+**Goal:** bring every harvested token pack to byte-faithful fidelity using three extraction methods. Target: 0-3 Tier C packs.
+
+**Extraction methods:**
+
+- **Method A** — static fetch + format parser. The original 3.5 path. Extended with new parsers: `primer-json5` (Primer's nested `$value.hex` shape), `value-wrapped-ts` (Chakra v3 / Style Dictionary `name: { value: '#hex' }`).
+- **Method B** — algorithm execution at extract time. Authorized to `npm install` source-system generation libraries as dev dependencies of the harvest pipeline. Used for Material 3 (`@material/material-color-utilities`), Ant Design (`@ant-design/colors`), Carbon (`@carbon/colors`), Polaris (`@shopify/polaris-tokens`), Atlassian (`@atlaskit/tokens`), Spectrum (`@adobe/spectrum-tokens`), shadcn (custom fetch + HSL→OKLCH conversion), GOV.UK (Sass-map regex pass), USWDS (per-family SCSS).
+- **Method C** — per-file structured extraction. For systems whose values are static but split across multiple files in patterns that defeat concatenated parsing. Used for MUI (per-colour modules) and Orbit (per-family palette JSON).
+
+**Exit criteria:**
+
+- [x] All 30 token packs declare `attribution.fidelityTier` ∈ {A, B, C} in their manifest.
+- [x] **≤3 Tier C packs** (final: clarity, geist, workday — all with documented unresolvable reasons).
+- [x] All 30 packs still pass `03_harvest/validate.js`.
+- [x] All 30 packs still build cleanly through the Phase 1 compiler.
+- [x] Compiler test suite still passes (77/77).
+- [x] Demo build (`02_reference-packs/demos/build.js`) still passes for all three demos.
+- [x] New parsers documented in `03_harvest/fidelity/README.md`.
+- [x] `03_harvest/REPORT.md` updated with new tier table + method per pack.
+- [ ] Visual smoke tests rendered for each pack against the showcase-tailwind demo (operator-side; cannot run in this env).
+- [ ] Operator review completed.
+
+**Final counts:** Tier A 1 (tailwind), Tier B 26, Tier C 3 (clarity, geist, workday).
 
 ---
 

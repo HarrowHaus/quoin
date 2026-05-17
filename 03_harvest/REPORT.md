@@ -1,15 +1,25 @@
-# Phase 3 + 3.5 — Harvest Report
+# Phase 3 + 3.5 + 3.5b — Harvest Report
 
 **Status:** 40 packs ship. 1 in holding. Floor met.
 
-**Phase 3.5 status:** partial. Fidelity extraction framework built and
-applied. 6 token packs upgraded to byte-faithful or near-byte-faithful
-extraction (1 Tier A, 5 Tier B). 24 token packs remain Tier C — values
-preserved as designed approximations pending a Phase 3.5b follow-up
-that hand-tunes per-source URL discovery and format-specific parsers.
-**Stop-condition triggered**: >5 Tier C packs warrants operator
-discussion of methodology before further extraction work. See
-[Fidelity tiers](#fidelity-tiers-phase-35) below.
+**Phase 3.5b status:** complete. Fidelity extraction across 27 of 30
+token packs. Three extraction methods deployed:
+
+- **Method A** (static fetch + parse) — Tailwind, Open Props, Bootstrap,
+  Radix, Mantine, Chakra, Fluent, Primer (json5), Paste, Lightning,
+  Elastic, USWDS, Polaris (via npm pkg), Bulma, Evergreen, HeroUI,
+  Gestalt, Base Web, Spectrum (npm), Atlassian (npm), GOV.UK.
+- **Method B** (algorithm execution at extract time) — Material 3
+  (`@material/material-color-utilities`), Ant Design (`@ant-design/
+  colors`), Carbon (`@carbon/colors`), shadcn (themes.css HSL→OKLCH),
+  Polaris (`@shopify/polaris-tokens`), Atlassian (`@atlaskit/tokens`),
+  Spectrum (`@adobe/spectrum-tokens`).
+- **Method C** (per-file structured extraction) — MUI (per-colour
+  module files), Orbit (per-family palette JSON).
+
+**Final tier counts:** 1 Tier A, 26 Tier B, 3 Tier C. Tier C target
+(≤3) met. All 40 packs pass `validate.js`. Phase 1 compiler test suite
+77/77 green. All 3 demos build cleanly.
 
 ## Summary
 
@@ -43,7 +53,7 @@ Each pack ships the same files: `quoin.pack.json`, `package.json`,
 under [`03_harvest/packs/tokens-*/`](packs/). Generated from per-system
 configs under [`sources/*.json`](sources/) by [`build.js`](build.js).
 
-### Fidelity tiers (Phase 3.5)
+### Fidelity tiers (Phase 3.5 + 3.5b)
 
 Replaces the original "confidence tiers" with an extraction-based
 classification. Each pack now declares `attribution.fidelityTier` in
@@ -69,40 +79,40 @@ its manifest.
   specs ready to run once URL hunting and format-specific parsing
   are completed in a Phase 3.5b follow-up.
 
-| Pack | License | Tier | Notes |
-|------|---------|------|-------|
-| `tokens-tailwind` | MIT | **A** | v4 zinc neutral + red/emerald/amber/sky 500. Extracted byte-faithful from `packages/tailwindcss/theme.css` (native OKLCH preserved). |
-| `tokens-open-props` | MIT | **B** | gray + red + orange + green + blue scales extracted from `src/props.colors.css`. Status hues selected at perceptually balanced steps (red-7, green-7, orange-7, blue-7). |
-| `tokens-bootstrap` | MIT | **B** | $gray-100..900 + $blue/$red/$green/$yellow/$cyan extracted from `scss/_variables.scss`. SCSS tint-color()/shade-color() functions not evaluated; soft accent variants substituted as OKLCH approximations. |
-| `tokens-radix` | MIT | **B** | gray + slate + blue + red + green + amber + sky 12-step scales extracted from `src/light.ts`. 12 steps flattened onto Quoin's 4-surface model. |
-| `tokens-mantine` | MIT | **B** | 10-step ramps for gray + blue + red + green + yellow + orange + cyan extracted from `default-colors.ts`. primaryShade = 6 per Mantine's own default. |
-| `tokens-mui` | MIT | **B** | Per-colour MUI files share step keys; concatenated parsing collapses values. Approximations of Material Design v2 indigo/grey/red/green/orange/blue retained, anchored to documented hex values pending per-file extraction. |
-| `tokens-material3` | Apache-2.0 | C | M3 algorithmic palette generation; designed-approximation values stand. Source URL declared. |
-| `tokens-carbon` | Apache-2.0 | C | Carbon white.js imports color values from a separate colors module; per-token resolution deferred. |
-| `tokens-primer` | MIT | C | Primer json5 base palette nests hex under `$value.hex` keys; bespoke parser needed. |
-| `tokens-uswds` | CC0-1.0 | C | USWDS palette; extraction deferred. |
-| `tokens-govuk` | MIT | C | Deliberately stripped palette; designed approximations stand. |
-| `tokens-polaris` | MIT | C | Polaris DTCG-like JSON; bespoke parser needed. |
-| `tokens-fluent` | MIT | C | Fluent 2 TS exports; extraction deferred. |
-| `tokens-atlassian` | Apache-2.0 | C | Atlassian palette TS; extraction deferred. |
-| `tokens-spectrum` | Apache-2.0 | C | Adobe Spectrum DTCG with custom schema. |
-| `tokens-lightning` | BSD-3-Clause | C | SLDS YAML token files. |
-| `tokens-geist` | MIT | C | Vercel Geist; extraction deferred (operator pack — well-anchored values). |
-| `tokens-paste` | MIT | C | Twilio Paste YAML. |
-| `tokens-gestalt` | Apache-2.0 | C | Pinterest Gestalt JSON. |
-| `tokens-chakra` | MIT | C | Chakra UI v3 — TS module path moved; URL hunt incomplete. |
-| `tokens-ant` | MIT | C | Ant Design palette is generated algorithmically via `generate.ts`. |
-| `tokens-elastic` | Apache-2.0 | C | EUI SCSS. |
-| `tokens-evergreen` | MIT | C | Segment Evergreen; module path moved in maintenance branch. |
-| `tokens-orbit` | MIT | C | Kiwi.com Orbit TS. |
-| `tokens-clarity` | MIT | C | VMware Clarity SCSS. |
-| `tokens-base-web` | MIT | C | Uber Base Web JS. |
-| `tokens-workday` | Apache-2.0 | C | Workday Canvas Kit TS. |
-| `tokens-shadcn` | MIT | C | shadcn/ui apps/v4 directory restructured; current URL unresolved. |
-| `tokens-bulma` | MIT | C | Bulma initial-variables; SCSS file path migrated to `main` branch on the latest extraction round but extraction yielded incomplete family coverage. |
-| `tokens-heroui` | MIT | C | HeroUI semantic.ts; extraction deferred. |
+| Pack | License | Tier | Method | Notes |
+|------|---------|------|--------|-------|
+| `tokens-tailwind` | MIT | **A** | A | v4 zinc + red/emerald/amber/sky 500. Native OKLCH preserved verbatim. |
+| `tokens-open-props` | MIT | **B** | A | gray + red + orange + green + blue scales from `src/props.colors.css`. Status hues at perceptually balanced steps. |
+| `tokens-bootstrap` | MIT | **B** | A | $gray-100..900 + $blue/$red/$green/$yellow/$cyan from `_variables.scss`. SCSS tint-color()/shade-color() approximated. |
+| `tokens-radix` | MIT | **B** | A | gray/slate/blue/red/green/amber/sky 12-step scales from `src/light.ts`. Flattened onto Quoin's 4-surface model. |
+| `tokens-mantine` | MIT | **B** | A | 10-step ramps from `default-colors.ts`. primaryShade=6 per Mantine default. |
+| `tokens-mui` | MIT | **B** | C | Per-colour MUI module files fetched individually and namespaced by family. Material Design v1/v2 ramps. |
+| `tokens-material3` | Apache-2.0 | **B** | B | Algorithm execution: `@material/material-color-utilities` with M3 baseline seed #6750A4 + status seeds. 13 tones × 9 palettes. |
+| `tokens-carbon` | Apache-2.0 | **B** | B | Library read: `@carbon/colors` per-family exports. Blue 60 accent (Carbon canonical). |
+| `tokens-primer` | MIT | **B** | A | Primer json5 base palette via custom `primer-json5` parser. 10-step ramps. |
+| `tokens-uswds` | CC0-1.0 | **B** | B | Per-family SCSS files (blue, gray-cool, gray-warm, red, green, yellow, gold, orange). Federal blue accent. |
+| `tokens-govuk` | MIT | **B** | B | GOV.UK Sass map (settings/_colours-palette--internal.scss). Deliberately stripped palette — blue/green/red/yellow with primary + tint/shade variants. |
+| `tokens-polaris` | MIT | **B** | B | Library read: `@shopify/polaris-tokens` themeDefault.color. 226 named colour tokens. |
+| `tokens-fluent` | MIT | **B** | A | Microsoft Fluent 2 colour TS exports. Grey 2-99 + blue/red/green/yellow/orange + communicationBlue. |
+| `tokens-atlassian` | Apache-2.0 | **B** | B | Library read: `@atlaskit/tokens` figma/atlassian-light.json. 403 functional tokens. |
+| `tokens-spectrum` | Apache-2.0 | **B** | B | Library read: `@adobe/spectrum-tokens` variables.json. Light theme. 666 tokens. |
+| `tokens-lightning` | BSD-3-Clause | **B** | A | SLDS color-palettes.yml. Cool-gray + warm-gray + blue/green/red/orange/yellow at 13 steps. |
+| `tokens-paste` | MIT | **B** | A | Twilio Paste color-palette.yml. 12-step ramps for gray/blue/red/green/orange/yellow/purple/cyan/pink. |
+| `tokens-gestalt` | Apache-2.0 | **B** | A | Pinterest Gestalt classic base-color.json. Pinterest-named ramps (pushpin red, flaminglow pink, etc.). |
+| `tokens-chakra` | MIT | **B** | A | Chakra v3 tokens via custom `value-wrapped-ts` parser. 50-950 ramps for 10 colour families. |
+| `tokens-ant` | MIT | **B** | B | Library read: `@ant-design/colors` named exports. 10-step ramps for blue/red/green/gold/etc. |
+| `tokens-elastic` | Apache-2.0 | **B** | A | EUI semantic_colors.scss. Borealis light theme. 158 colour vars. |
+| `tokens-evergreen` | MIT | **B** | A | Segment Evergreen default theme colors.js. 50 colour vars. |
+| `tokens-orbit` | MIT | **B** | C | Per-family JSON files (blue/red/green/orange/ink/cloud/white). Semantic variant naming (normal/dark/light/etc.). |
+| `tokens-base-web` | MIT | **B** | A | Uber Base Web foundation color tokens. Heavy monochrome with accent blue. |
+| `tokens-shadcn` | MIT | **B** | B | Custom fetch: themes.css under `.theme-zinc`; raw HSL components wrapped in hsl() then converted to OKLCH. |
+| `tokens-bulma` | MIT | **B** | A | Bulma initial-variables.scss. Semantic step names (lighter/light/base/dark/darker). |
+| `tokens-heroui` | MIT | **B** | A | HeroUI semantic.ts. Minimal extraction; falls back to base.DEFAULT for accents. |
+| `tokens-clarity` | MIT | **C** | — | Clarity tokens are auto-generated at build time by an internal pipeline; published source tree does not include the static output. @clr/core npm package does not expose tokens as JS exports. |
+| `tokens-geist` | MIT | **C** | — | No public canonical token file. Vercel ships Geist as fonts (SIL OFL) but no static colour-tokens module. |
+| `tokens-workday` | Apache-2.0 | **C** | — | License incompatibility — @workday/canvas-tokens-web is CC-BY-ND-4.0 (NoDerivatives), prohibiting redistribution of derivative works. Consumers should install the package directly under its own license. |
 
-**Counts:** Tier A 1, Tier B 5, Tier C 24. Total 30.
+**Counts:** Tier A 1, Tier B 26, Tier C 3. Total 30. Tier C target (≤3) met.
 
 ## Vocabulary packs (10)
 
@@ -217,25 +227,11 @@ Documented gaps that future packs or extensions could close:
 
 ## Ask the operator
 
-1. **Phase 3.5 — fidelity extraction stop condition triggered.** 24
-   of 30 token packs are currently Tier C (extraction deferred). The
-   Phase 3.5 prompt set a stop threshold of 5 Tier C packs; this
-   exceeds it. The methodology problem isn't the framework — it's
-   that 30 design systems use 30 different file layouts and URL
-   conventions, and per-source URL discovery + format adaptation is
-   labour-intensive enough that batched automation hits diminishing
-   returns. Options:
-   - **A. Ship now** with 1 A + 5 B + 24 C packs. The Tier C packs
-     remain shippable — their values are designed approximations
-     informed by published source palettes. The `fidelityTier: "C"`
-     marker on each manifest makes consumers aware. A Phase 3.5b can
-     follow up post-launch.
-   - **B. Spend a dedicated session** doing per-pack URL hunting and
-     format-parser writing for the remaining 24. Realistically a
-     half-day of focused work per ~5 packs.
-   - **C. Drop the harvested packs we can't extract** and ship a
-     leaner pack catalogue (Tier A + Tier B only). Less impressive
-     "40 packs" number, more honest provenance.
+1. **Phase 3.5b complete.** 27 of 30 token packs now extract from
+   canonical upstream sources (1 Tier A + 26 Tier B). 3 Tier C packs
+   are documented unresolvable: workday (license incompatibility),
+   geist (no published token file), clarity (auto-generated tokens
+   not published). Tier C target (≤3) met.
 2. **Dogfooding test.** The Phase 3 gate includes: *"the operator can
    instruct Claude Code to build a real production page using only
    harvested packs and a custom token pack."* This needs an

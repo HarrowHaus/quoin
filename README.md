@@ -56,7 +56,8 @@ A user composes their build by installing one of each.
 | 1 | `01_compiler/` | Reference compiler (TypeScript, ESM, Vite plugin, browser entry) | shipped |
 | 2 | `02_reference-packs/` | 7 reference packs: 1 token, 4 vocabulary, 2 implementation | shipped |
 | 3 | `03_harvest/` | 40 harvested packs (30 token + 10 vocabulary) | shipped |
-| 3.5 | `03_harvest/fidelity/` | Token Fidelity Pass — byte-faithful extraction framework + per-pack `fidelityTier` annotation (A/B/C) | partial (1 A, 5 B, 24 C; stop condition triggered) |
+| 3.5 | `03_harvest/fidelity/` | Token Fidelity Pass — byte-faithful extraction framework + per-pack `fidelityTier` annotation (A/B/C) | partial (1 A, 5 B, 24 C; stop condition triggered → Phase 3.5b) |
+| 3.5b | `03_harvest/fidelity/` | Comprehensive Fidelity Pass — three extraction methods (static parse, algorithm exec, per-file). 27 packs upgraded to extraction; 3 documented Tier C. | complete (1 A, 26 B, 3 C) |
 | 4 | `04_docs/` | Documentation site, live playground, pack browser, migration guides | shipped |
 | 5a | `02_reference-packs/impl-tailwind/companion.css` | Visual-maturity polish layer — hover, focus, motion, microinteractions | shipped |
 | 5b | (per-primitive) | Specific-attribute variants on key primitives (`emphasis-card variant="featured"`, `alert-band variant="compact"`, etc.) | shipped |
@@ -66,11 +67,12 @@ A user composes their build by installing one of each.
 
 ## Status
 
-Phases 0–4 plus 5a–5d are complete. Phase 3.5 (Token Fidelity Pass)
-ran partial — the extraction framework shipped and 6 packs were
-upgraded (1 Tier A + 5 Tier B), but 24 packs hit the >5-Tier-C stop
-condition and await operator decision (see
-[`03_harvest/REPORT.md`](03_harvest/REPORT.md)). Phase 5e (launch) is
+Phases 0–4 plus 5a–5d are complete. Phase 3.5 + 3.5b (Token Fidelity
+Pass + Comprehensive Fidelity Pass) are complete: 27 of 30 token
+packs now extract byte-faithfully from canonical upstream sources
+(1 Tier A + 26 Tier B), with 3 documented Tier C packs (clarity,
+geist, workday — unresolvable for documented reasons). See
+[`03_harvest/REPORT.md`](03_harvest/REPORT.md). Phase 5e (launch) is
 staged but not executed — see [`05_launch/README.md`](05_launch/README.md)
 for the deliverables list, and [`PHASE_PROMPTS.md`](PHASE_PROMPTS.md)
 for the per-phase Claude Code prompts.

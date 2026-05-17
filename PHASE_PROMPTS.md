@@ -223,7 +223,43 @@ The framework that supports this phase lives at `03_harvest/fidelity/`:
 - `fidelity/specs/*.js` — per-source extraction specs (one file per pack)
 - `fidelity/annotate-tier-c.js` — stamps `fidelityTier: "C"` on every source that hasn't been extracted
 
-After the initial Phase 3.5 run, the per-pack `attribution.fidelityTier` records the status. Phase 3.5b (a follow-up batch) promotes Tier C packs to A/B by adding/fixing per-source specs.
+After the initial Phase 3.5 run, the per-pack `attribution.fidelityTier` records the status. Phase 3.5b (a follow-up batch) promoted Tier C packs to A/B by expanding methodology to three methods.
+
+---
+
+## Phase 3.5b — Comprehensive Fidelity Pass
+
+```
+You are working on the Quoin design language project. Phase 3.5 ran and completed with 1 Tier A, 5 Tier B, and 24 Tier C packs — far above the >5 Tier C stop condition. Run Phase 3.5b to bring the catalog to byte-faithful fidelity using an expanded methodology.
+
+Required reading: README.md, HANDOFF.md, 00_spec/spec.md + 00_spec/tokens.md, 03_harvest/README.md, 03_harvest/REPORT.md, 03_harvest/fidelity/extract.js, 03_harvest/fidelity/parsers.js, 03_harvest/fidelity/oklch.js, 03_harvest/fidelity/specs/*.js, 03_harvest/fidelity/extract-report.json.
+
+GOAL: bring every harvested token pack to byte-faithful fidelity. Target: 0-3 Tier C packs.
+
+THREE EXTRACTION METHODS:
+- Method A: static fetch + parse (existing 3.5 path; new parsers added for primer-json5 and value-wrapped-ts).
+- Method B: algorithm execution at extract time. AUTHORIZED to `npm install` source-system libraries as dev deps. Examples: @material/material-color-utilities, @ant-design/colors, @carbon/colors, @shopify/polaris-tokens, @atlaskit/tokens, @adobe/spectrum-tokens.
+- Method C: per-file structured extraction. For sources whose values are static but split across files that defeat concatenated parsing (MUI per-colour modules, Orbit per-family palette JSON).
+
+TIER C CRITERIA — reserved only for packs where ALL of these hold:
+- No public static token file exists.
+- No published generation library exists (or it's license-incompatible).
+- Reasonable URL search has not yielded a canonical source.
+- The system has not migrated to a successor that ships public tokens.
+
+VALIDATION: validate.js passes, compiler tests still pass, demos still build, REPORT.md updated with per-pack tier + method.
+
+STOP CONDITIONS: >3 Tier C packs trending. License change. npm install failure. Compiler test regression.
+
+Commit per pack: `fidelity-b: extract <name> via method <A|B|C>`. Final docs commit: `phase 3.5b: complete comprehensive fidelity pass`. Push to origin/main.
+```
+
+The framework grows by one file in 3.5b: `fidelity/runner.js` dispatches across Methods A/B/C based on spec shape. The runner is imported by `extract.js`. New parsers were added to `parsers.js`:
+
+- `primer-json5` — handles Primer's `name: { $value: { hex: '#xxx' } }` shape.
+- `value-wrapped-ts` — handles Chakra v3 / Style Dictionary `name: { value: '#hex' }` (multi-line and single-line).
+
+After Phase 3.5b: 1 A, 26 B, 3 C (clarity, geist, workday — all with documented unresolvable reasons in REPORT.md).
 
 ---
 
