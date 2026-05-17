@@ -784,5 +784,114 @@ const EMITTERS = {
         v("text", "--text-recede")
       ),
       input
+    ),
+
+  /* ─────────────── vocab-app-shell ─────────────── *
+   *
+   * Layout positioning goes inline via `style` so the docs lab shim
+   * doesn't need per-config CSS rules. A production Tailwind v4 build
+   * would generate equivalent CSS from arbitrary-value classes; either
+   * approach renders identically in the browser.
+   */
+
+  "app-shell": (input) => {
+    const navPosition = input.attributes.specific["nav-position"] ?? "left";
+    const hasCommandBar = input.attributes.specific["command-bar"] !== "false";
+    const areas =
+      navPosition === "none"
+        ? hasCommandBar
+          ? `"cmd" "main"`
+          : `"main"`
+        : navPosition === "right"
+        ? hasCommandBar
+          ? `"cmd cmd" "main side"`
+          : `"main side"`
+        : hasCommandBar
+        ? `"cmd cmd" "side main"`
+        : `"side main"`;
+    const columns =
+      navPosition === "none"
+        ? "1fr"
+        : navPosition === "right"
+        ? "1fr auto"
+        : "auto 1fr";
+    const rows = hasCommandBar ? "auto 1fr" : "1fr";
+    return basic(
+      "div",
+      classes(
+        "grid min-h-screen",
+        v("bg", "--surface"),
+        v("text", "--text")
+      ),
+      input,
+      {
+        style: `grid-template-areas: ${areas}; grid-template-columns: ${columns}; grid-template-rows: ${rows}`
+      }
+    );
+  },
+
+  "command-bar": (input) =>
+    basic(
+      "header",
+      classes(
+        "flex items-center gap-4 px-6 py-3 border-b",
+        v("bg", "--surface-elevated"),
+        v("border", "--border"),
+        v("text", "--text")
+      ),
+      input,
+      { style: "grid-area: cmd" }
+    ),
+
+  "sidebar-nav": (input) => {
+    const width = input.attributes.specific.width ?? "comfortable";
+    const w = { compact: "14rem", comfortable: "16rem", wide: "18rem" }[width] ?? "16rem";
+    return basic(
+      "nav",
+      classes(
+        "shrink-0 border-r overflow-y-auto py-4 px-3 flex flex-col gap-6",
+        v("bg", "--surface"),
+        v("border", "--border"),
+        v("text", "--text-recede")
+      ),
+      input,
+      { style: `grid-area: side; width: ${w}` }
+    );
+  },
+
+  "content-region": (input) => {
+    const aside = input.attributes.specific.aside ?? "none";
+    const gridCols =
+      aside === "right"
+        ? "1fr auto"
+        : aside === "left"
+        ? "auto 1fr"
+        : null;
+    const inlineStyle =
+      "grid-area: main" +
+      (gridCols ? `; display: grid; grid-template-columns: ${gridCols}; gap: 1.5rem` : "");
+    return basic(
+      "main",
+      classes(
+        aside === "none" ? "flex flex-col gap-6" : "",
+        "overflow-y-auto",
+        v("p", "--space-panel"),
+        v("bg", "--surface"),
+        v("text", "--text")
+      ),
+      input,
+      { style: inlineStyle }
+    );
+  },
+
+  "page-header": (input) =>
+    basic(
+      "header",
+      classes(
+        "flex flex-col gap-2 pb-6 border-b mb-6",
+        v("border", "--border"),
+        v("text", "--text")
+      ),
+      input
     )
 };

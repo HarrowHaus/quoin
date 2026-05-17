@@ -57,6 +57,7 @@ export default defineConfig({
         path.join(refPacks, "vocab-editorial"),
         path.join(refPacks, "vocab-dashboard"),
         path.join(refPacks, "vocab-essentials"),
+        path.join(refPacks, "vocab-app-shell"),
         path.join(labRoot, "03_harvest", "packs", "vocab-marketing"),
         path.join(labRoot, "03_harvest", "packs", "vocab-docs")
       ],

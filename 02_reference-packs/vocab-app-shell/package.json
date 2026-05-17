@@ -1,0 +1,14 @@
+{
+  "name": "@quoin/vocab-app-shell",
+  "version": "0.1.0",
+  "description": "Application-shell primitives for Quoin — app-shell, page-header, sidebar-nav, content-region, command-bar.",
+  "license": "MIT",
+  "main": "./primitives/index.json",
+  "files": ["quoin.pack.json", "primitives/", "README.md", "LICENSE"],
+  "keywords": ["quoin", "vocabulary", "app-shell", "layout", "dashboard"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "02_reference-packs/vocab-app-shell"
+  }
+}

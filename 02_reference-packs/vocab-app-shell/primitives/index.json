@@ -1,0 +1,86 @@
+[
+  {
+    "name": "app-shell",
+    "category": "layout",
+    "role": "Outer page wrapper for application surfaces. CSS Grid with named areas — command-bar across the top, sidebar-nav on one side, content-region filling the rest. min-height: 100vh.",
+    "attributes": {
+      "density": { "values": ["sparse", "normal", "dense"], "default": "normal" },
+      "nav-position": { "values": ["left", "right", "none"], "default": "left", "specific": true },
+      "command-bar": { "values": ["true", "false"], "default": "true", "specific": true }
+    },
+    "tokens": {
+      "background": "--surface",
+      "color": "--text",
+      "borderColor": "--border"
+    },
+    "structure": { "element": "div" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "command-bar",
+    "category": "navigation",
+    "role": "Top bar across the application viewport. Logo, breadcrumb or search, global actions. Spans the full width above sidebar + content.",
+    "attributes": {
+      "density": { "values": ["sparse", "normal", "dense"], "default": "dense" }
+    },
+    "tokens": {
+      "background": "--surface-elevated",
+      "color": "--text",
+      "borderColor": "--border"
+    },
+    "structure": { "element": "header" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "sidebar-nav",
+    "category": "navigation",
+    "role": "Vertical navigation rail. Grouped sections with section headings. Goes in the side area of an app-shell.",
+    "attributes": {
+      "density": { "values": ["sparse", "normal", "dense"], "default": "dense" },
+      "width": { "values": ["compact", "comfortable", "wide"], "default": "comfortable", "specific": true }
+    },
+    "tokens": {
+      "background": "--surface",
+      "color": "--text-recede",
+      "borderColor": "--border"
+    },
+    "structure": { "element": "nav" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "content-region",
+    "category": "layout",
+    "role": "Main content area inside an app-shell. Holds the actual page UI. Optionally splits off an aside on one side.",
+    "attributes": {
+      "density": { "values": ["sparse", "normal", "dense"], "default": "normal" },
+      "aside": { "values": ["right", "left", "none"], "default": "none", "specific": true }
+    },
+    "tokens": {
+      "background": "--surface",
+      "padding": "--space-panel"
+    },
+    "structure": { "element": "main" },
+    "children": "flow-content",
+    "scope": "block"
+  },
+  {
+    "name": "page-header",
+    "category": "editorial",
+    "role": "Title + breadcrumb + lead + action row at the top of a content-region. The standard 'this page is about X' anchor.",
+    "attributes": {
+      "weight": { "values": ["normal", "emphasize"], "default": "normal" },
+      "density": { "values": ["sparse", "normal", "dense"], "default": "normal" }
+    },
+    "tokens": {
+      "borderColor": "--border",
+      "color": "--text",
+      "background": "--surface"
+    },
+    "structure": { "element": "header" },
+    "children": "flow-content",
+    "scope": "block"
+  }
+]
