@@ -4,6 +4,27 @@ Exit criteria for each phase. A phase is complete when **every** criterion in it
 
 ---
 
+## Phase 3.5d — Per-pack source-faithful composite refinement
+
+**Output location:** `03_harvest/fidelity/extract.js` (framework extension), `03_harvest/fidelity/specs/{tailwind,material3,bootstrap}.js` (extended specs), `03_harvest/sources/{tailwind,material3,bootstrap}.json` (composite + semantic override fields).
+
+**Goal:** refine programmatic 3.5c defaults to source-faithful values per pack. Targets the canonical composite tokens (shadow, border, typography, transition) and atomic geometric/motion tokens.
+
+**Exit criteria:**
+
+- [x] Fidelity framework accepts `semantic`, `composites`, `fonts` overrides from `spec.map()` return — not just `base`.
+- [x] At least 3 packs refined with source-faithful composite values.
+- [x] All 40 packs still pass strict validation.
+- [x] Compiler test suite 77/77 still passes.
+- [x] Demo build 3/3 still passes.
+- [x] Docs site builds clean.
+- [ ] Optional continuation (3.5d-cont) — extend specs for the medium-feasibility candidates (open-props, mantine, uswds, polaris, spectrum, mui, carbon, fluent, atlassian).
+- [ ] Operator review.
+
+**Status:** complete — framework + 3 packs refined (tailwind, material3, bootstrap). The remaining 27 packs satisfy the canonical contract via 3.5c programmatic defaults; per-pack source refinement is incremental polish that can land any time without blocking launch.
+
+---
+
 ## Phase 3.5c — Geometric & typographic fidelity
 
 **Output location:** `03_harvest/build.js` (expanded DEFAULT_* tables + composite emission), all 30 packs in `03_harvest/packs/tokens-*/` regenerated with full v1.0 namespace.

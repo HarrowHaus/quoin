@@ -56,7 +56,7 @@ At each phase gate, run the same prompt through two different models (Claude + C
 
 ## What to do right now
 
-Current state: Phases 0–4, 4.5, 5a–5d, 0.5, and 3.5c are complete.
+Current state: Phases 0–4, 4.5, 5a–5d, 0.5, 3.5c, and 3.5d are complete.
 The canonical token namespace is frozen at its v1.0 surface area —
 164 tokens across 11 DTCG 2025.10 types — and every token pack
 (reference + 30 harvested) supplies a `$value` for every canonical

@@ -6,6 +6,52 @@ versioning follows pre-1.0 conventions until v1.0.0 publication.
 
 ## [Unreleased]
 
+### Phase 3.5d — Per-pack source-faithful composite refinement (2026-05-17)
+
+Extends the Phase 3.5b fidelity framework to refine composite tokens
+(shadow, border, typography, transition) and atomic geometric tokens
+(border widths, motion durations) from each design system's published
+specs. Three packs received source-faithful composite refinement in
+this round; the framework is in place for the remaining 27 packs to
+be promoted whenever the upstream publishes extractable data.
+
+#### Changed
+
+- **`03_harvest/fidelity/extract.js`** — `processSpec()` now merges
+  optional `semantic`, `composites`, and `fonts` fields from
+  `spec.map()` into the saved `sources/<name>.json`, alongside the
+  existing `base` color palette. Today's specs continue to work
+  unchanged; specs that opt into composite refinement add the new
+  return-shape fields.
+- **`03_harvest/fidelity/specs/tailwind.js`** — extended with
+  composite shadow recipes (sm/md/lg/xl/2xl/inner) matching Tailwind
+  v4's published box-shadow scale, motion durations matching the
+  utility-class set (75/150/200/300/500 ms), and border widths.
+- **`03_harvest/fidelity/specs/material3.js`** — extended with the
+  M3 elevation level 1-5 key-light/ambient-light shadow recipe per
+  `m3.material.io/styles/elevation/tokens`, motion durations matching
+  `md.sys.motion.duration.*` (50/150/300/500/1000 ms), and emphasized
+  easing for the `transition-emphasis` composite.
+- **`03_harvest/fidelity/specs/bootstrap.js`** — extended with the
+  `$box-shadow*` variants from `scss/_variables.scss` verbatim, plus
+  motion durations.
+
+#### Status
+
+- 3 packs refined: tokens-tailwind, tokens-material3, tokens-bootstrap.
+- 27 packs remain on programmatic defaults from `build.js`. Each
+  satisfies the canonical contract but doesn't yet ship source-
+  specific composite values.
+- A follow-up 3.5d-cont can extend the remaining specs as data is
+  available — the framework no longer needs changes.
+
+#### Validation
+
+- All 40 packs pass strict validation.
+- Compiler test suite 77/77 still passes.
+- All three reference demos build cleanly.
+- Docs site builds clean.
+
 ### Phase 3.5c — Geometric & typographic fidelity (2026-05-17)
 
 Fills every harvested token pack with `$value` entries for the ~100

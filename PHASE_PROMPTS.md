@@ -27,6 +27,30 @@ Report the repo URL and the initial commit SHA when complete.
 
 ---
 
+## Phase 3.5d — Per-pack source-faithful composite refinement
+
+```
+You are working on the Quoin design language project. Phase 3.5c populated every harvested token pack with programmatic defaults for the v1.0 namespace. Material 3's shadows look identical to Bootstrap's; Tailwind's border widths match Carbon's. 3.5d refines per-pack composite + atomic values to match each source system's actual published specs.
+
+REQUIRED READING: 00_spec/tokens.md (canonical contract), 03_harvest/build.js (composite defaults), 03_harvest/fidelity/extract.js (framework), 03_harvest/REPORT.md.
+
+GOAL: per-pack source-faithful values for the new composite tokens (shadow, border, typography, transition) and atomic geometric/motion tokens.
+
+FRAMEWORK EXTENSION: extract.js merges optional `semantic`, `composites`, and `fonts` fields from each spec's map() return — not just `base`. The override fields flow into sources/<name>.json and build.js applies them on top of its defaults.
+
+PRIORITY: refine each pack where the upstream publishes the data. High-feasibility candidates with extractable composite specs: tailwind (box-shadow scale), material3 (elevation level 1-5), bootstrap ($box-shadow* variants), open-props (props.shadows.css), mantine (theme.shadows), uswds (tokens/shadow/), polaris (@shopify/polaris-tokens theme), spectrum (@adobe/spectrum-tokens), mui (theme.shadows), atlassian (@atlaskit/tokens shadow). Skip clarity/geist/workday (Tier C from 3.5b).
+
+VALIDATION: validate.js still passes (no warnings), compiler tests 77/77, demos 3/3 build.
+
+PER-PACK FIDELITY: each refined pack documents in harvestNotes which composite values come from the upstream vs from build.js defaults.
+
+Commit per pack. Push to origin/main.
+```
+
+After Phase 3.5d: framework + at least 3 packs refined. Remaining packs satisfy the canonical contract via 3.5c programmatic defaults; they can be refined any time without blocking launch.
+
+---
+
 ## Phase 3.5c — Geometric & typographic fidelity
 
 ```

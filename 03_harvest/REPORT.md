@@ -1,6 +1,34 @@
-# Phase 3 + 3.5 + 3.5b + 3.5c — Harvest Report
+# Phase 3 + 3.5 + 3.5b + 3.5c + 3.5d — Harvest Report
 
 **Status:** 40 packs ship. 1 in holding. Floor met.
+
+**Phase 3.5d status:** partial — framework + 3 source-faithful packs.
+The fidelity framework was extended in 3.5d to accept `semantic`,
+`composites`, and `fonts` overrides from each spec's `map()` return,
+not just `base` color palette. Three packs received source-faithful
+composite refinement during this round:
+
+- **`tokens-tailwind`** — shadow-{xs,sm,md,lg,xl,2xl,inner} match
+  Tailwind v4's published box-shadow scale verbatim; motion durations
+  match Tailwind's transition-duration utilities (75/150/200/300/500ms);
+  border widths match the utility-class set.
+- **`tokens-material3`** — shadow-{xs,sm,md,lg,xl,2xl} ship M3's
+  elevation level 1-5 key-light/ambient-light recipe per
+  m3.material.io/styles/elevation/tokens. Motion durations match
+  md.sys.motion.duration.* spec (50/150/300/500/1000 ms). Transition
+  composites reference M3's emphasized easing for the emphasis variant.
+- **`tokens-bootstrap`** — shadow-{sm,md,lg,inner} match Bootstrap
+  5.3's `$box-shadow*` variants from `scss/_variables.scss` verbatim;
+  motion durations match `$transition-base` (150ms hover) and the
+  `.fade` transition (300ms).
+
+The other 27 packs continue to use `03_harvest/build.js` programmatic
+defaults for composite values. Refining each remaining pack is
+incremental polish — the namespace contract is already satisfied
+catalogue-wide from Phase 3.5c, and the per-pack source-faithful
+work scales linearly. A follow-up 3.5d-cont can extend specs for the
+medium-feasibility candidates (open-props, mantine, uswds, polaris,
+spectrum, mui, carbon, fluent, atlassian) whenever there's appetite.
 
 **Phase 3.5c status:** complete. All 30 harvested token packs now
 declare a `$value` for every name in the v1.0 canonical namespace
