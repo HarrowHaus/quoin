@@ -4,6 +4,27 @@ Exit criteria for each phase. A phase is complete when **every** criterion in it
 
 ---
 
+## Phase 3.5c — Geometric & typographic fidelity
+
+**Output location:** `03_harvest/build.js` (expanded DEFAULT_* tables + composite emission), all 30 packs in `03_harvest/packs/tokens-*/` regenerated with full v1.0 namespace.
+
+**Goal:** populate every harvested token pack with `$value` entries for the ~100 new canonical tokens that Phase 0.5 added. Remove the `pending-3.5c-fill` flag.
+
+**Exit criteria:**
+
+- [x] All 30 harvested token packs declare a `$value` for every name in `00_spec/tokens.md` §3.
+- [x] `pending-3.5c-fill` status removed from every pack manifest.
+- [x] Strict validation passes for all 40 packs (no warnings).
+- [x] Compiler test suite 77/77 still passes.
+- [x] Demo build (`02_reference-packs/demos/build.js`) still passes.
+- [x] Docs site builds clean; transitional compat layer disabled.
+- [ ] Optional follow-up (3.5d) — refine per-pack shadow recipes / border widths / typography composites to match each source system's actual specs.
+- [ ] Operator review.
+
+**Status:** complete. v1.0 namespace fully populated across the catalog.
+
+---
+
 ## Phase 0.5 — Canonical Namespace Expansion
 
 **Output location:** `00_spec/tokens.md` (rewritten), `01_compiler/src/token-resolver.ts` (expanded canonical list), `02_reference-packs/tokens-baseline/` (full reference implementation), all 30 harvested token packs flagged `"status": "pending-3.5c-fill"`.

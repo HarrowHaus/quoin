@@ -27,6 +27,28 @@ Report the repo URL and the initial commit SHA when complete.
 
 ---
 
+## Phase 3.5c — Geometric & typographic fidelity
+
+```
+You are working on the Quoin design language project. Phase 0.5 froze the canonical namespace at v1.0 (164 tokens). Every harvested token pack is flagged "pending-3.5c-fill" with ~100 new canonical tokens missing. Phase 3.5c populates them.
+
+REQUIRED READING: 00_spec/tokens.md (canonical contract), 03_harvest/build.js (pack generator), 03_harvest/REPORT.md.
+
+GOAL: every harvested pack supplies a $value for all 164 canonical names. Remove the pending-3.5c-fill flag. Strict validation passes across the catalog.
+
+METHODOLOGY: extend 03_harvest/build.js with DEFAULT_* tables for the new atomic types (border widths, focus-ring metrics, icon sizes, containers, blur, opacity, z-index, aspect ratios, font weights, new motion durations + easings, stroke solid/dotted) and DEFAULT_COMPOSITES for the new composite types (7 shadow + 3 border + 13 typography + 3 transition + 1 strokeStyle-dashed). buildSemanticTokens applies the new defaults; sources can override via source.semantic / source.composites if they want pack-specific values.
+
+VALIDATION: validate.js 40/40 pass; compiler tests 77/77 still pass; demos 3/3 build; docs site builds clean.
+
+PER-PACK FIDELITY POLISH (optional 3.5d): refine each pack's shadow recipes, border widths, and typography composites to match each source system's actual geometric specs. Programmatic defaults satisfy the canonical contract; per-pack source-faithful values are incremental polish.
+
+Commit per area. Push to origin/main.
+```
+
+After Phase 3.5c: all 30 harvested packs satisfy the canonical contract. v1.0 namespace fully populated across the catalogue.
+
+---
+
 ## Phase 0.5 — Canonical Namespace Expansion
 
 Pre-1.0 spec change. Expands the canonical token namespace from its v0 sketch to v1.0 surface area. After this phase the namespace is frozen.

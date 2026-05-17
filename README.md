@@ -54,6 +54,7 @@ A user composes their build by installing one of each.
 |-------|--------|--------|--------|
 | 0 | `00_spec/` | Specification document (spec, pack-format, primitives, tokens) | shipped |
 | 0.5 | `00_spec/tokens.md` | Canonical Namespace Expansion — token namespace expanded from ~30 to 164 tokens across 11 DTCG 2025.10 types. Frozen at v1.0. | complete |
+| 3.5c | `03_harvest/build.js` | Geometric & typographic fidelity — all 30 harvested packs filled with `$value` for every v1.0 canonical token; strict validation passes catalog-wide. | complete |
 | 1 | `01_compiler/` | Reference compiler (TypeScript, ESM, Vite plugin, browser entry) | shipped |
 | 2 | `02_reference-packs/` | 7 reference packs: 1 token, 4 vocabulary, 2 implementation | shipped |
 | 3 | `03_harvest/` | 40 harvested packs (30 token + 10 vocabulary) | shipped |
@@ -69,12 +70,13 @@ A user composes their build by installing one of each.
 
 ## Status
 
-Phases 0–4, 4.5, 5a–5d, and 0.5 (canonical namespace expansion) are
-complete. The canonical namespace is at its v1.0 surface area — 164
-tokens across 11 DTCG 2025.10 types — and frozen. Reference pack
-`@quoin/tokens-baseline` is fully populated; the 30 harvested token
-packs are flagged `"status": "pending-3.5c-fill"` and will be filled
-with values for the new tokens during Phase 3.5c.
+Phases 0–4, 4.5, 5a–5d, 0.5, and 3.5c are complete. The canonical
+namespace is at its v1.0 surface area — 164 tokens across 11 DTCG
+2025.10 types — and frozen. Every token pack (reference + 30
+harvested) supplies a `$value` for every canonical name; strict
+validation passes catalogue-wide. A future optional 3.5d sweep
+would refine per-pack shadow recipes / border widths / typography
+composites to source-faithful values — incremental polish.
 
 Phase 3.5 + 3.5b (Token Fidelity Pass + Comprehensive Fidelity Pass)
 are complete: 27 of 30 token packs extract byte-faithfully from

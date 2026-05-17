@@ -57,13 +57,12 @@ for (const [k, v] of Object.entries(overridesRaw)) {
 overrideLines.push("}", "");
 const overrideCss = overrideLines.join("\n");
 
-// 2.5 Phase 0.5 transitional compatibility layer. The active pack is
-//     a pending-3.5c-fill harvested pack (tokens-geist) that still
-//     uses the v0 namespace (--type-size-base, no shadow composites,
-//     no border-width, etc.). Until Phase 3.5c fills it, alias the
-//     missing v1.0 canonical names back to the closest v0 equivalent
-//     so the docs site CSS resolves correctly.
-const compatLayer = `
+// 2.5 Phase 0.5 transitional compatibility layer.
+//     (Disabled after Phase 3.5c — tokens-geist now ships the full
+//     v1.0 namespace. Keeping the block here as documentation of how
+//     a project-local pack can re-declare canonical names if needed.)
+const compatLayer = "";
+void `
 /* ---- Phase 0.5 transitional compat (until 3.5c fills tokens-geist) ---- */
 :root {
   --type-size-md: var(--type-size-base, 1rem);
@@ -146,6 +145,7 @@ const compatLayer = `
   --stroke-dotted: dotted;
 }
 `;
+// end of disabled compat-layer documentation block
 
 await fs.writeFile(
   path.join(publicDir, "tokens.css"),

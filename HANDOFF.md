@@ -56,17 +56,18 @@ At each phase gate, run the same prompt through two different models (Claude + C
 
 ## What to do right now
 
-Current state: Phases 0–4, 4.5, 5a–5d, and 0.5 (canonical namespace
-expansion) are complete. The canonical token namespace is frozen at
-its v1.0 surface area — 164 tokens across 11 DTCG 2025.10 types.
-`tokens-baseline` is the fully-populated reference; the 30 harvested
-packs are flagged `"status": "pending-3.5c-fill"` until Phase 3.5c
-populates them with values for the new tokens (border-widths, focus
-metrics, opacity, z-index, aspect ratios, font weights, shadow /
-border / typography / transition composites, strokeStyle). Phase 3.5
-+ 3.5b (Token Fidelity Pass + Comprehensive Fidelity Pass) shipped
-the existing color/dimension extractions. Phase 4.5 refreshed the
-docs site. Phase 5e (launch) is staged but not executed.
+Current state: Phases 0–4, 4.5, 5a–5d, 0.5, and 3.5c are complete.
+The canonical token namespace is frozen at its v1.0 surface area —
+164 tokens across 11 DTCG 2025.10 types — and every token pack
+(reference + 30 harvested) supplies a `$value` for every canonical
+name. Strict validation passes catalogue-wide. Phase 3.5 + 3.5b
+shipped the existing color/dimension extractions; Phase 3.5c filled
+the geometric/typographic gap with programmatic defaults so the
+namespace contract is satisfied. An optional Phase 3.5d would refine
+per-pack shadow / border / typography composite values to match each
+source system's actual geometric specs — incremental polish, not
+blocking. Phase 4.5 refreshed the docs site. Phase 5e (launch) is
+staged but not executed.
 
 If this is your first time opening this lab:
 

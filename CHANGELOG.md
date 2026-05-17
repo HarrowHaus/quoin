@@ -6,6 +6,54 @@ versioning follows pre-1.0 conventions until v1.0.0 publication.
 
 ## [Unreleased]
 
+### Phase 3.5c — Geometric & typographic fidelity (2026-05-17)
+
+Fills every harvested token pack with `$value` entries for the ~100
+new canonical tokens that Phase 0.5 introduced. All 30 harvested
+packs now declare a value for every name in the v1.0 namespace and
+pass strict validation; the `"status": "pending-3.5c-fill"` flag is
+removed.
+
+#### Changed
+
+- **`03_harvest/build.js`** — added DEFAULT_* tables for the new
+  atomic tokens (border widths, focus-ring metrics, icon sizes,
+  containers, blur, opacity, z-index, aspect ratios, font weights,
+  motion-instant/slower, ease-linear/emphasized/spring, stroke
+  solid/dotted) and DEFAULT_COMPOSITES for the seven shadow tokens,
+  three border composites, thirteen typography composites, three
+  transition composites, and the dashed strokeStyle composite.
+- **`buildSemanticTokens`** applies the new defaults; sources can
+  override any of them via `source.semantic[<name>]` (atomics) or
+  `source.composites[<name>]` (composites).
+- **`normaliseRef`** heuristic refined: dot-less refs (`{accent}`,
+  `{text-recede}`, `{border}`, `{shadow-tint}`) resolve at top level;
+  refs with dots (`{stone.50}`) get the `color.` prefix. Composite
+  tokens can therefore reference other top-level semantic tokens
+  without the awkward `{color.shadow-tint}` form.
+- **`renderCssValue`** new function — converts composite DTCG values
+  into single CSS-ready shorthand strings (box-shadow, border, font,
+  transition) so each pack's tokens.css stays directly usable.
+- **`buildManifest`** stops emitting `status: pending-3.5c-fill`.
+- **04_docs/scripts/copy-assets.js** — Phase 0.5 transitional compat
+  layer disabled (kept as documentation comment); tokens-geist now
+  ships the full v1.0 namespace.
+
+#### Pack obligations
+
+After Phase 3.5c: every token pack (reference + harvested) supplies
+a `$value` for all 164 canonical names. Strict validation passes
+across the catalog; no warnings.
+
+#### Caveat
+
+The new-token values are programmatic defaults, not byte-faithful
+extractions from each source system. A subsequent fidelity sweep
+(3.5d) could refine each pack's shadow recipes, border widths, and
+typography composites to match each source system's actual specs.
+This is incremental polish, not a blocker — the namespace contract
+is satisfied.
+
 ### Phase 0.5 — Canonical Namespace Expansion (2026-05-17)
 
 **Major pre-1.0 spec change.** The canonical semantic-token namespace

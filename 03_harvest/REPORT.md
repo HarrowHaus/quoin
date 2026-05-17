@@ -1,6 +1,24 @@
-# Phase 3 + 3.5 + 3.5b — Harvest Report
+# Phase 3 + 3.5 + 3.5b + 3.5c — Harvest Report
 
 **Status:** 40 packs ship. 1 in holding. Floor met.
+
+**Phase 3.5c status:** complete. All 30 harvested token packs now
+declare a `$value` for every name in the v1.0 canonical namespace
+(164 tokens across 11 DTCG 2025.10 types). The Phase 0.5 transitional
+`"status": "pending-3.5c-fill"` flag has been removed from every
+pack. Strict validation passes for all 40 packs (no warnings).
+
+Fill methodology: `build.js` ships defensible defaults for every
+canonical token added during Phase 0.5 (border widths, focus-ring
+metrics, opacity, z-index, aspect ratios, font weights, motion
+durations + easings, shadow / border / typography / transition /
+strokeStyle composites). Each source's existing `semantic` block
+continues to supply pack-specific values for the v0-era atomic
+tokens; the new tokens inherit the build.js defaults plus per-pack
+font / shadow-tint variance. A future per-pack source-specific
+fidelity sweep (3.5d?) can refine border widths and shadow recipes
+to match each design system's actual specs — that's incremental,
+not blocking.
 
 **Phase 3.5b status:** complete. Fidelity extraction across 27 of 30
 token packs. Three extraction methods deployed:
