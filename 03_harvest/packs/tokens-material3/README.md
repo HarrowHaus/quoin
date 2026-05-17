@@ -8,10 +8,8 @@ Material Design 3 (M3) baseline palette translated onto the Quoin canonical sema
 - **Source organisation:** Google
 - **Source URL:** https://m3.material.io/
 - **Source license:** Apache-2.0
-- **Harvested:** 2026-05-16
-- **Notes:** M3 baseline 'reference palette' (neutral + primary purple + error). M3's elevation token set is not modelled here (Quoin's optional elevation capability is intentionally omitted by this pack — see Phase 1 spec §4.4). Use M3's CSS variables in the consumer project if elevation is required.
-
-Phase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.
+- **Harvested:** 2026-05-17
+- **Notes:** Values computed by running @material/material-color-utilities with M3's documented baseline seed (#6750A4). 13 tones × 6 role palettes (primary, secondary, tertiary, neutral, neutral variant, error). To regenerate with a different seed: install the library, change SEED in fidelity/specs/material3.js, and re-run. Extraction method: B. Algorithm: @material/material-color-utilities@0.2.7, inputs {"seed":"#6750A4","status":{"success":"#43A047","warning":"#FFA000","info":"#1976D2"},"tones":[0,10,20,30,40,50,60,70,80,90,95,99,100]}. Mapping: M3 13-tone scale per role palette. Light-theme mapping: surface = neutral.98, surface-elevated = neutral.99, surface-recessed = neutral.95, surface-inverse = neutral.20, text = neutral.20, text-emphasis = neutral.10, accent = primary.40, accent-recede = primary.90, critical = error.40.
 
 ## Mapping
 

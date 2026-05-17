@@ -1,69 +1,231 @@
 {
   "$schema": "https://design-tokens.github.io/community-group/format/",
   "color": {
-    "mono": {
-      "100": {
-        "$value": "#ffffff",
-        "$type": "color"
-      },
-      "200": {
-        "$value": "oklch(98% 0.002 250)",
-        "$type": "color"
-      },
-      "300": {
-        "$value": "oklch(96% 0.003 250)",
-        "$type": "color"
-      },
-      "400": {
-        "$value": "oklch(92% 0.005 250)",
-        "$type": "color"
-      },
-      "500": {
-        "$value": "oklch(80% 0.008 250)",
-        "$type": "color"
-      },
-      "600": {
-        "$value": "oklch(55% 0.010 250)",
-        "$type": "color"
-      },
-      "700": {
-        "$value": "oklch(35% 0.012 250)",
-        "$type": "color"
-      },
-      "800": {
-        "$value": "oklch(20% 0.012 250)",
-        "$type": "color"
-      },
-      "900": {
-        "$value": "oklch(8% 0.012 250)",
+    "baseWeb": {
+      "foundationColors": {
+        "primary": {
+          "$value": "oklch(0% 0 0)",
+          "$type": "color"
+        },
+        "primary50": {
+          "$value": "oklch(97.3% 0 0)",
+          "$type": "color"
+        },
+        "primary100": {
+          "$value": "oklch(94.9% 0 0)",
+          "$type": "color"
+        },
+        "primary200": {
+          "$value": "oklch(91.3% 0 0)",
+          "$type": "color"
+        },
+        "primary300": {
+          "$value": "oklch(84.2% 0 0)",
+          "$type": "color"
+        },
+        "primary400": {
+          "$value": "oklch(75.4% 0 0)",
+          "$type": "color"
+        },
+        "primary500": {
+          "$value": "oklch(52.8% 0 0)",
+          "$type": "color"
+        },
+        "primary600": {
+          "$value": "oklch(44.6% 0 0)",
+          "$type": "color"
+        },
+        "primary700": {
+          "$value": "oklch(32.1% 0 0)",
+          "$type": "color"
+        },
+        "accent50": {
+          "$value": "oklch(96.4% 0.0153 270)",
+          "$type": "color"
+        },
+        "accent100": {
+          "$value": "oklch(91% 0.0387 262.9)",
+          "$type": "color"
+        },
+        "accent200": {
+          "$value": "oklch(80.2% 0.0881 262.4)",
+          "$type": "color"
+        },
+        "accent300": {
+          "$value": "oklch(66.6% 0.1597 261.7)",
+          "$type": "color"
+        },
+        "accent400": {
+          "$value": "oklch(57.3% 0.2095 261.4)",
+          "$type": "color"
+        },
+        "accent500": {
+          "$value": "oklch(47.2% 0.1671 261.3)",
+          "$type": "color"
+        },
+        "accent600": {
+          "$value": "oklch(40% 0.1392 261.3)",
+          "$type": "color"
+        },
+        "accent700": {
+          "$value": "oklch(30.6% 0.0987 261.4)",
+          "$type": "color"
+        },
+        "negative50": {
+          "$value": "oklch(96.4% 0.0176 26.1)",
+          "$type": "color"
+        },
+        "negative100": {
+          "$value": "oklch(91.1% 0.0444 26.6)",
+          "$type": "color"
+        },
+        "negative200": {
+          "$value": "oklch(76.9% 0.1078 27.6)",
+          "$type": "color"
+        },
+        "negative300": {
+          "$value": "oklch(65.3% 0.1773 29.9)",
+          "$type": "color"
+        },
+        "negative400": {
+          "$value": "oklch(57.8% 0.2282 30.5)",
+          "$type": "color"
+        },
+        "negative500": {
+          "$value": "oklch(47.2% 0.1847 30.9)",
+          "$type": "color"
+        },
+        "negative600": {
+          "$value": "oklch(39.8% 0.1542 31.2)",
+          "$type": "color"
+        },
+        "negative700": {
+          "$value": "oklch(30.1% 0.1134 32.3)",
+          "$type": "color"
+        },
+        "warning50": {
+          "$value": "oklch(98.6% 0.0142 84.6)",
+          "$type": "color"
+        },
+        "warning100": {
+          "$value": "oklch(96.5% 0.0356 83.8)",
+          "$type": "color"
+        },
+        "warning200": {
+          "$value": "oklch(92.6% 0.0768 84)",
+          "$type": "color"
+        },
+        "warning300": {
+          "$value": "oklch(87.8% 0.1255 82.9)",
+          "$type": "color"
+        },
+        "warning400": {
+          "$value": "oklch(84.5% 0.1525 80.6)",
+          "$type": "color"
+        },
+        "warning500": {
+          "$value": "oklch(66.8% 0.1225 79.7)",
+          "$type": "color"
+        },
+        "warning600": {
+          "$value": "oklch(56.9% 0.1172 82.2)",
+          "$type": "color"
+        },
+        "warning700": {
+          "$value": "oklch(43.8% 0.0747 80.7)",
+          "$type": "color"
+        },
+        "positive50": {
+          "$value": "oklch(95.1% 0.0143 169.2)",
+          "$type": "color"
+        },
+        "positive100": {
+          "$value": "oklch(86% 0.0586 166.9)",
+          "$type": "color"
+        },
+        "positive200": {
+          "$value": "oklch(78.3% 0.1246 160.8)",
+          "$type": "color"
+        },
+        "positive300": {
+          "$value": "oklch(71.1% 0.1828 152.8)",
+          "$type": "color"
+        },
+        "positive400": {
+          "$value": "oklch(55% 0.14 153.2)",
+          "$type": "color"
+        },
+        "positive500": {
+          "$value": "oklch(47.9% 0.12 153.9)",
+          "$type": "color"
+        },
+        "positive600": {
+          "$value": "oklch(40.5% 0.0999 154.3)",
+          "$type": "color"
+        },
+        "positive700": {
+          "$value": "oklch(35.2% 0.071 158.8)",
+          "$type": "color"
+        },
+        "white": {
+          "$value": "oklch(100% 0 0)",
+          "$type": "color"
+        },
+        "black": {
+          "$value": "oklch(0% 0 0)",
+          "$type": "color"
+        },
+        "mono100": {
+          "$value": "oklch(100% 0 0)",
+          "$type": "color"
+        },
+        "mono200": {
+          "$value": "oklch(97.3% 0 0)",
+          "$type": "color"
+        },
+        "mono300": {
+          "$value": "oklch(94.9% 0 0)",
+          "$type": "color"
+        },
+        "mono400": {
+          "$value": "oklch(91.3% 0 0)",
+          "$type": "color"
+        },
+        "mono500": {
+          "$value": "oklch(84.2% 0 0)",
+          "$type": "color"
+        },
+        "mono600": {
+          "$value": "oklch(75.4% 0 0)",
+          "$type": "color"
+        },
+        "mono700": {
+          "$value": "oklch(52.8% 0 0)",
+          "$type": "color"
+        },
+        "mono800": {
+          "$value": "oklch(44.6% 0 0)",
+          "$type": "color"
+        },
+        "mono900": {
+          "$value": "oklch(32.1% 0 0)",
+          "$type": "color"
+        },
+        "mono1000": {
+          "$value": "oklch(0% 0 0)",
+          "$type": "color"
+        }
+      }
+    },
+    "white": {
+      "0": {
+        "$value": "oklch(100% 0 0)",
         "$type": "color"
       }
     },
-    "negative": {
-      "500": {
-        "$value": "oklch(50% 0.22 25)",
-        "$type": "color"
-      }
-    },
-    "positive": {
-      "500": {
-        "$value": "oklch(52% 0.16 145)",
-        "$type": "color"
-      }
-    },
-    "warning": {
-      "500": {
-        "$value": "oklch(72% 0.18 70)",
-        "$type": "color"
-      }
-    },
-    "accent": {
-      "100": {
-        "$value": "oklch(95% 0.04 245)",
-        "$type": "color"
-      },
-      "500": {
-        "$value": "oklch(55% 0.16 245)",
+    "black": {
+      "0": {
+        "$value": "oklch(0% 0 0)",
         "$type": "color"
       }
     }
@@ -281,91 +443,91 @@
     "$type": "fontFamily"
   },
   "surface": {
-    "$value": "{color.mono.100}",
+    "$value": "{color.baseWeb.foundationColors.primary}",
     "$type": "color"
   },
   "surface-elevated": {
-    "$value": "{color.mono.100}",
+    "$value": "{color.baseWeb.foundationColors.primary}",
     "$type": "color"
   },
   "surface-recessed": {
-    "$value": "{color.mono.200}",
+    "$value": "{color.baseWeb.foundationColors.primary50}",
     "$type": "color"
   },
   "surface-inverse": {
-    "$value": "{color.mono.900}",
+    "$value": "{color.baseWeb.foundationColors.primary50}",
     "$type": "color"
   },
   "text": {
-    "$value": "{color.mono.800}",
+    "$value": "{color.baseWeb.foundationColors.primary50}",
     "$type": "color"
   },
   "text-emphasis": {
-    "$value": "{color.mono.900}",
+    "$value": "{color.baseWeb.foundationColors.primary50}",
     "$type": "color"
   },
   "text-recede": {
-    "$value": "{color.mono.600}",
+    "$value": "{color.baseWeb.foundationColors.primary50}",
     "$type": "color"
   },
   "text-disabled": {
-    "$value": "{color.mono.500}",
+    "$value": "{color.baseWeb.foundationColors.primary50}",
     "$type": "color"
   },
   "text-on-accent": {
-    "$value": "{color.mono.100}",
+    "$value": "{color.baseWeb.foundationColors.primary}",
     "$type": "color"
   },
   "text-on-critical": {
-    "$value": "{color.mono.100}",
+    "$value": "{color.baseWeb.foundationColors.primary}",
     "$type": "color"
   },
   "text-on-success": {
-    "$value": "{color.mono.100}",
+    "$value": "{color.baseWeb.foundationColors.primary}",
     "$type": "color"
   },
   "text-on-warning": {
-    "$value": "{color.mono.900}",
+    "$value": "{color.baseWeb.foundationColors.primary50}",
     "$type": "color"
   },
   "text-on-info": {
-    "$value": "{color.mono.100}",
+    "$value": "{color.baseWeb.foundationColors.primary}",
     "$type": "color"
   },
   "border": {
-    "$value": "{color.mono.400}",
+    "$value": "{color.baseWeb.foundationColors.primary50}",
     "$type": "color"
   },
   "border-emphasis": {
-    "$value": "{color.mono.900}",
+    "$value": "{color.baseWeb.foundationColors.primary50}",
     "$type": "color"
   },
   "border-recede": {
-    "$value": "{color.mono.300}",
+    "$value": "{color.baseWeb.foundationColors.primary50}",
     "$type": "color"
   },
   "accent": {
-    "$value": "{color.mono.900}",
+    "$value": "{color.baseWeb.foundationColors.primary50}",
     "$type": "color"
   },
   "accent-recede": {
-    "$value": "{color.mono.300}",
+    "$value": "{color.baseWeb.foundationColors.primary50}",
     "$type": "color"
   },
   "critical": {
-    "$value": "{color.negative.500}",
+    "$value": "{color.baseWeb.foundationColors.primary}",
     "$type": "color"
   },
   "success": {
-    "$value": "{color.positive.500}",
+    "$value": "{color.baseWeb.foundationColors.primary}",
     "$type": "color"
   },
   "warning": {
-    "$value": "{color.warning.500}",
+    "$value": "{color.baseWeb.foundationColors.primary}",
     "$type": "color"
   },
   "info": {
-    "$value": "{color.accent.500}",
+    "$value": "{color.baseWeb.foundationColors.primary}",
     "$type": "color"
   }
 }

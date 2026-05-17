@@ -25,8 +25,9 @@
     "sourceOrganization": "Ant Group",
     "sourceUrl": "https://ant.design/",
     "sourceLicense": "MIT",
-    "harvestedAt": "2026-05-16",
-    "harvestNotes": "Ant Design v5 default 'light' theme. Ant's daybreak-blue (#1677FF area) drives accent. Ant uses a 10-step palette per color (X-1..X-10) with X-6 as the standard step.\n\nPhase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.",
-    "fidelityTier": "C"
+    "harvestedAt": "2026-05-17",
+    "harvestNotes": "Values read byte-faithfully from @ant-design/colors. Each ramp is a 10-entry hex array indexed 1-10 in Ant's own docs (step 6 = the 'solid' tone). To regenerate against a different seed, call generate('#hex') from the same library. Extraction method: B. Algorithm: @ant-design/colors@8.0.1, inputs \"package default seeds\". Mapping: Ant Design canonical 10-step ramps for blue/red/green/gold/orange/purple/cyan/magenta/grey. Accent = blue.6 (daybreak), critical = red.5, success = green.6, warning = gold.6, info = blue.6 per Ant's own status-colour convention.",
+    "fidelityTier": "B",
+    "sourceCommit": "8.0.1"
   }
 }

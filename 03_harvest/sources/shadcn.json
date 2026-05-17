@@ -13,36 +13,39 @@
     "sourceOrganization": "shadcn",
     "sourceUrl": "https://ui.shadcn.com/",
     "sourceLicense": "MIT",
-    "harvestedAt": "2026-05-16",
-    "harvestNotes": "Default 'zinc' theme variables from the shadcn/ui themes registry. shadcn/ui ships CSS custom properties named --background, --foreground, --muted, etc.; these are renamed onto the Quoin canonical namespace.\n\nPhase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.",
-    "fidelityTier": "C"
+    "harvestedAt": "2026-05-17",
+    "harvestNotes": "shadcn/ui default zinc theme extracted from apps/v4/public/r/themes.css. Values are raw HSL components in the source; this spec wraps them in hsl() for OKLCH conversion. The semantic role names (background, foreground, primary, etc.) map directly onto Quoin's canonical namespace via the existing sources/shadcn.json semantic block. Extraction method: B. Algorithm: shadcn-ui/ui apps/v4/public/r/themes.css@main, inputs {\"theme\":\".theme-zinc\"}. Mapping: shadcn ships flat semantic CSS vars (--background, --foreground, --primary, --destructive, --muted, etc.) under .theme-zinc. Mapping selects: surface = background, surface-elevated = card, surface-recessed = muted, text = foreground, accent = primary, critical = destructive, border = border. shadcn has no native success/warning/info so we supply matching-style green/amber/blue.",
+    "fidelityTier": "B",
+    "sourceCommit": "main"
   },
   "mappingNotes": "shadcn names map: --background -> surface, --foreground -> text-emphasis, --muted -> surface-recessed, --muted-foreground -> text-recede, --primary -> accent, --primary-foreground -> text-on-accent, --destructive -> critical, --border -> border. shadcn has no native warning/success/info; supplied from Tailwind's amber/emerald/sky 500.",
   "base": {
-    "zinc": {
-      "50": "oklch(0.985 0 0)",
-      "100": "oklch(0.967 0.001 286)",
-      "200": "oklch(0.92 0.004 286)",
-      "400": "oklch(0.705 0.015 286)",
-      "500": "oklch(0.552 0.016 286)",
-      "700": "oklch(0.37 0.013 286)",
-      "900": "oklch(0.21 0.006 286)",
-      "950": "oklch(0.141 0.005 286)"
+    "shadcn": {
+      "background": "oklch(100% 0 0)",
+      "foreground": "oklch(14.1% 0.0044 285.8)",
+      "muted": "oklch(96.8% 0.0013 286.4)",
+      "muted-foreground": "oklch(55.2% 0.0137 285.9)",
+      "popover": "oklch(100% 0 0)",
+      "popover-foreground": "oklch(14.1% 0.0044 285.8)",
+      "card": "oklch(100% 0 0)",
+      "card-foreground": "oklch(14.1% 0.0044 285.8)",
+      "border": "oklch(92% 0.004 286.3)",
+      "input": "oklch(92% 0.004 286.3)",
+      "primary": "oklch(21% 0.0059 285.9)",
+      "primary-foreground": "oklch(98.5% 0 0)",
+      "secondary": "oklch(96.8% 0.0013 286.4)",
+      "secondary-foreground": "oklch(21% 0.0059 285.9)",
+      "accent": "oklch(96.8% 0.0013 286.4)",
+      "accent-foreground": "oklch(21% 0.0059 285.9)",
+      "destructive": "oklch(63.7% 0.2078 25.3)",
+      "destructive-foreground": "oklch(98.5% 0 0)",
+      "ring": "oklch(21% 0.0059 285.9)",
+      "success": "oklch(58.4% 0.18 145)",
+      "warning": "oklch(78% 0.17 80)",
+      "info": "oklch(60% 0.18 240)"
     },
     "white": {
-      "0": "#ffffff"
-    },
-    "red": {
-      "500": "oklch(0.577 0.245 27.325)"
-    },
-    "emerald": {
-      "500": "oklch(0.696 0.17 162)"
-    },
-    "amber": {
-      "500": "oklch(0.769 0.188 70)"
-    },
-    "sky": {
-      "500": "oklch(0.685 0.169 237)"
+      "0": "oklch(100% 0 0)"
     }
   },
   "fonts": {
@@ -52,27 +55,27 @@
     "font-display": "'Geist', 'Inter', system-ui, sans-serif"
   },
   "semantic": {
-    "surface": "{white.0}",
-    "surface-elevated": "{white.0}",
-    "surface-recessed": "{zinc.100}",
-    "surface-inverse": "{zinc.950}",
-    "text": "{zinc.900}",
-    "text-emphasis": "{zinc.950}",
-    "text-recede": "{zinc.500}",
-    "text-disabled": "{zinc.400}",
-    "text-on-accent": "{zinc.50}",
-    "text-on-critical": "{zinc.50}",
+    "surface": "{shadcn.background}",
+    "surface-elevated": "{shadcn.card}",
+    "surface-recessed": "{shadcn.muted}",
+    "surface-inverse": "{shadcn.primary}",
+    "text": "{shadcn.foreground}",
+    "text-emphasis": "{shadcn.foreground}",
+    "text-recede": "{shadcn.muted-foreground}",
+    "text-disabled": "{shadcn.muted-foreground}",
+    "text-on-accent": "{shadcn.primary-foreground}",
+    "text-on-critical": "{shadcn.destructive-foreground}",
     "text-on-success": "{white.0}",
-    "text-on-warning": "{zinc.950}",
+    "text-on-warning": "{shadcn.foreground}",
     "text-on-info": "{white.0}",
-    "border": "{zinc.200}",
-    "border-emphasis": "{zinc.700}",
-    "border-recede": "{zinc.100}",
-    "accent": "{zinc.900}",
-    "accent-recede": "{zinc.100}",
-    "critical": "{red.500}",
-    "success": "{emerald.500}",
-    "warning": "{amber.500}",
-    "info": "{sky.500}"
+    "border": "{shadcn.border}",
+    "border-emphasis": "{shadcn.ring}",
+    "border-recede": "{shadcn.muted}",
+    "accent": "{shadcn.primary}",
+    "accent-recede": "{shadcn.accent}",
+    "critical": "{shadcn.destructive}",
+    "success": "{shadcn.success}",
+    "warning": "{shadcn.warning}",
+    "info": "{shadcn.info}"
   }
 }

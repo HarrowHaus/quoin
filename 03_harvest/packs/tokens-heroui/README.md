@@ -6,12 +6,10 @@ HeroUI (formerly NextUI) default palette translated onto the Quoin canonical sem
 
 - **Source system:** HeroUI
 - **Source organisation:** HeroUI community
-- **Source URL:** https://www.heroui.com/
+- **Source URL:** https://raw.githubusercontent.com/heroui-inc/heroui/main/packages/core/theme/src/colors/semantic.ts
 - **Source license:** MIT
-- **Harvested:** 2026-05-16
-- **Notes:** HeroUI (renamed from NextUI v2). Built on Tailwind v4 + React Aria. Default primary is a vibrant purple/blue accent. Inter typeface is open-source.
-
-Phase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.
+- **Harvested:** 2026-05-17
+- **Notes:** HeroUI semantic colour tokens from packages/core/theme/src/colors/semantic.ts. Extraction method: A. Mapping: HeroUI's semantic palette flattened onto base.heroui.{name}. Default light theme: background = white, foreground = neutral-900 (zinc-style), primary = purple-ish #7828c8 per HeroUI's brand.
 
 ## Mapping
 

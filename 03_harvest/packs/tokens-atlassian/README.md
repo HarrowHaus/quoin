@@ -8,10 +8,8 @@ Atlassian Design System (light theme) palette translated onto the Quoin canonica
 - **Source organisation:** Atlassian
 - **Source URL:** https://atlassian.design/
 - **Source license:** Apache-2.0
-- **Harvested:** 2026-05-16
-- **Notes:** Atlassian's design tokens 'light' theme. Atlassian publishes JSON token files under @atlaskit/tokens; this pack translates the color.background/text/border/accent families onto Quoin's canonical namespace. Charlie Sans (Atlassian's typeface) is proprietary; referenced by family name only.
-
-Phase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.
+- **Harvested:** 2026-05-17
+- **Notes:** Atlassian Design System light theme extracted from @atlaskit/tokens figma/atlassian-light.json. Hundreds of `Light/color.*` named tokens with hex values; mapping selects the canonical `color.text`, `color.background.accent.blue.bolder`, `color.border`, etc. for Quoin's namespace. Extraction method: B. Algorithm: @atlaskit/tokens@13.0.4, inputs {"theme":"atlassian-light"}. Mapping: Atlassian tokens flattened onto base.atlassian.{name}. Mapping: surface = color.background.neutral, text = color.text, accent = color.background.accent.blue.bolder (Atlassian brand blue), critical = color.background.danger, success = color.background.success, warning = color.background.warning.
 
 ## Mapping
 

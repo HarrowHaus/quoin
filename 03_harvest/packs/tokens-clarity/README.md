@@ -6,12 +6,12 @@ VMware Clarity palette translated onto the Quoin canonical semantic-token namesp
 
 - **Source system:** Clarity Design System
 - **Source organisation:** VMware
-- **Source URL:** https://clarity.design/
+- **Source URL:** https://github.com/vmware-clarity/core
 - **Source license:** MIT
-- **Harvested:** 2026-05-16
+- **Harvested:** 2026-05-17
 - **Notes:** Clarity v6 light theme. Clarity's 'action blue' (#0072A3 area) is the brand accent. Heavy-blue, enterprise-IT aesthetic — gradients of teal/cobalt across the chrome.
 
-Phase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.
+Phase 3.5b fidelity status: Tier C. Clarity tokens are auto-generated at build time by an internal pipeline; the published source tree does not include the static token file the build emits. The npm package @clr/core MIT does not expose tokens as JS exports either. Designed-approximation values stand pending VMware publishing the canonical token output.
 
 ## Mapping
 

@@ -6,12 +6,10 @@ Microsoft Fluent 2 (web light) palette translated onto the Quoin canonical seman
 
 - **Source system:** Fluent 2
 - **Source organisation:** Microsoft
-- **Source URL:** https://fluent2.microsoft.design/
+- **Source URL:** https://raw.githubusercontent.com/microsoft/fluentui/master/packages/tokens/src/global/colors.ts
 - **Source license:** MIT
-- **Harvested:** 2026-05-16
-- **Notes:** Fluent 2 'web' light theme. Built from Fluent's global ramp (gray-0..gray-160 over 16 steps in the Web theme) plus communication-blue accent. Segoe UI is proprietary to Microsoft; referenced by family name only.
-
-Phase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.
+- **Harvested:** 2026-05-17
+- **Notes:** Fluent 2 colour tokens extracted from microsoft/fluentui packages/tokens/src/global/colors.ts. Each colour family ships as a `Record<step, '#hex'>` TS export. Extraction method: A. Mapping: Fluent ships grey at 2/4/6...100 (52 steps), plus colour ramps and a communicationBlue accent (Fluent's brand). Default text = grey.14, surface = white, accent = communicationBlue.primary.
 
 ## Mapping
 

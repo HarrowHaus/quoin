@@ -1,69 +1,643 @@
 {
   "$schema": "https://design-tokens.github.io/community-group/format/",
   "color": {
-    "ink": {
+    "eui": {
+      "euiColorWhite": {
+        "$value": "oklch(100% 0 0)",
+        "$type": "color"
+      },
+      "euiColorBlack": {
+        "$value": "oklch(0% 0 0)",
+        "$type": "color"
+      },
+      "euiColorMutedBlack": {
+        "$value": "oklch(16.9% 0.0065 271)",
+        "$type": "color"
+      },
+      "euiColorBlueBlack": {
+        "$value": "oklch(17% 0.0411 259.7)",
+        "$type": "color"
+      },
+      "euiColorPrimary10": {
+        "$value": "oklch(97.2% 0.0132 262.4)",
+        "$type": "color"
+      },
+      "euiColorPrimary20": {
+        "$value": "oklch(92.7% 0.0352 258.9)",
+        "$type": "color"
+      },
+      "euiColorPrimary30": {
+        "$value": "oklch(88.3% 0.0582 254.8)",
+        "$type": "color"
+      },
+      "euiColorPrimary40": {
+        "$value": "oklch(83.2% 0.085 255.2)",
+        "$type": "color"
+      },
+      "euiColorPrimary50": {
+        "$value": "oklch(77.3% 0.1167 257.5)",
+        "$type": "color"
+      },
+      "euiColorPrimary60": {
+        "$value": "oklch(71% 0.1523 257.5)",
+        "$type": "color"
+      },
+      "euiColorPrimary70": {
+        "$value": "oklch(64% 0.1938 258.5)",
+        "$type": "color"
+      },
+      "euiColorPrimary80": {
+        "$value": "oklch(58.8% 0.1995 259.1)",
+        "$type": "color"
+      },
+      "euiColorPrimary90": {
+        "$value": "oklch(53.2% 0.2002 259.1)",
+        "$type": "color"
+      },
+      "euiColorPrimary100": {
+        "$value": "oklch(46.4% 0.1774 261.5)",
+        "$type": "color"
+      },
+      "euiColorPrimary110": {
+        "$value": "oklch(40.8% 0.1496 261.5)",
+        "$type": "color"
+      },
+      "euiColorPrimary120": {
+        "$value": "oklch(35.3% 0.1191 260.8)",
+        "$type": "color"
+      },
+      "euiColorPrimary130": {
+        "$value": "oklch(31% 0.0925 257.6)",
+        "$type": "color"
+      },
+      "euiColorPrimary140": {
+        "$value": "oklch(25.6% 0.0661 255.5)",
+        "$type": "color"
+      },
+      "euiColorAccent10": {
+        "$value": "oklch(96.9% 0.0192 343.9)",
+        "$type": "color"
+      },
+      "euiColorAccent20": {
+        "$value": "oklch(92.7% 0.0385 353.2)",
+        "$type": "color"
+      },
+      "euiColorAccent30": {
+        "$value": "oklch(88.5% 0.0683 355.3)",
+        "$type": "color"
+      },
+      "euiColorAccent40": {
+        "$value": "oklch(83% 0.0978 355.5)",
+        "$type": "color"
+      },
+      "euiColorAccent50": {
+        "$value": "oklch(76.7% 0.1327 355.3)",
+        "$type": "color"
+      },
+      "euiColorAccent60": {
+        "$value": "oklch(71.2% 0.1619 355.6)",
+        "$type": "color"
+      },
+      "euiColorAccent70": {
+        "$value": "oklch(64.4% 0.2004 356.1)",
+        "$type": "color"
+      },
+      "euiColorAccent80": {
+        "$value": "oklch(58.8% 0.2001 356.3)",
+        "$type": "color"
+      },
+      "euiColorAccent90": {
+        "$value": "oklch(53% 0.1997 355.8)",
+        "$type": "color"
+      },
+      "euiColorAccent100": {
+        "$value": "oklch(47.1% 0.1835 354)",
+        "$type": "color"
+      },
+      "euiColorAccent110": {
+        "$value": "oklch(41.2% 0.152 352.9)",
+        "$type": "color"
+      },
+      "euiColorAccent120": {
+        "$value": "oklch(35% 0.0963 351.6)",
+        "$type": "color"
+      },
+      "euiColorAccent130": {
+        "$value": "oklch(30.3% 0.0694 352.2)",
+        "$type": "color"
+      },
+      "euiColorAccent140": {
+        "$value": "oklch(25.4% 0.052 352.1)",
+        "$type": "color"
+      },
+      "euiColorAccentSecondary10": {
+        "$value": "oklch(97.5% 0.0179 192.6)",
+        "$type": "color"
+      },
+      "euiColorAccentSecondary20": {
+        "$value": "oklch(93.4% 0.0434 191.1)",
+        "$type": "color"
+      },
+      "euiColorAccentSecondary30": {
+        "$value": "oklch(89.9% 0.0706 192.6)",
+        "$type": "color"
+      },
+      "euiColorAccentSecondary40": {
+        "$value": "oklch(85.6% 0.1018 191.5)",
+        "$type": "color"
+      },
+      "euiColorAccentSecondary50": {
+        "$value": "oklch(80.3% 0.1147 192.3)",
+        "$type": "color"
+      },
+      "euiColorAccentSecondary60": {
+        "$value": "oklch(74.5% 0.1254 191.5)",
+        "$type": "color"
+      },
+      "euiColorAccentSecondary70": {
+        "$value": "oklch(68.3% 0.1178 190.5)",
+        "$type": "color"
+      },
+      "euiColorAccentSecondary80": {
+        "$value": "oklch(63.1% 0.1087 190.8)",
+        "$type": "color"
+      },
+      "euiColorAccentSecondary90": {
+        "$value": "oklch(57.5% 0.0989 191.2)",
+        "$type": "color"
+      },
+      "euiColorAccentSecondary100": {
+        "$value": "oklch(50.5% 0.086 191.6)",
+        "$type": "color"
+      },
+      "euiColorAccentSecondary110": {
+        "$value": "oklch(42.6% 0.0716 190.8)",
+        "$type": "color"
+      },
+      "euiColorAccentSecondary120": {
+        "$value": "oklch(36.8% 0.0611 194.8)",
+        "$type": "color"
+      },
+      "euiColorAccentSecondary130": {
+        "$value": "oklch(29.6% 0.049 199.1)",
+        "$type": "color"
+      },
+      "euiColorAccentSecondary140": {
+        "$value": "oklch(25.3% 0.0406 203)",
+        "$type": "color"
+      },
+      "euiColorNeutral10": {
+        "$value": "oklch(97.8% 0.0167 215.5)",
+        "$type": "color"
+      },
+      "euiColorNeutral20": {
+        "$value": "oklch(92.9% 0.0346 217.1)",
+        "$type": "color"
+      },
+      "euiColorNeutral30": {
+        "$value": "oklch(89.3% 0.0525 216.1)",
+        "$type": "color"
+      },
+      "euiColorNeutral40": {
+        "$value": "oklch(84.3% 0.0731 217.2)",
+        "$type": "color"
+      },
+      "euiColorNeutral50": {
+        "$value": "oklch(78.2% 0.1013 217.7)",
+        "$type": "color"
+      },
+      "euiColorNeutral60": {
+        "$value": "oklch(72.9% 0.1194 221)",
+        "$type": "color"
+      },
+      "euiColorNeutral70": {
+        "$value": "oklch(65.9% 0.122 224.1)",
+        "$type": "color"
+      },
+      "euiColorNeutral80": {
+        "$value": "oklch(60% 0.1113 229.1)",
+        "$type": "color"
+      },
+      "euiColorNeutral90": {
+        "$value": "oklch(54.2% 0.1015 230.8)",
+        "$type": "color"
+      },
+      "euiColorNeutral100": {
+        "$value": "oklch(47.8% 0.0949 233.8)",
+        "$type": "color"
+      },
+      "euiColorNeutral110": {
+        "$value": "oklch(42.1% 0.0874 235.1)",
+        "$type": "color"
+      },
+      "euiColorNeutral120": {
+        "$value": "oklch(35.6% 0.0734 232.7)",
+        "$type": "color"
+      },
+      "euiColorNeutral130": {
+        "$value": "oklch(30.4% 0.0603 229.5)",
+        "$type": "color"
+      },
+      "euiColorNeutral140": {
+        "$value": "oklch(26.2% 0.0512 228.1)",
+        "$type": "color"
+      },
+      "euiColorSuccess10": {
+        "$value": "oklch(98.2% 0.0252 172)",
+        "$type": "color"
+      },
+      "euiColorSuccess20": {
+        "$value": "oklch(93% 0.0484 170.1)",
+        "$type": "color"
+      },
+      "euiColorSuccess30": {
+        "$value": "oklch(88.5% 0.0665 169.4)",
+        "$type": "color"
+      },
+      "euiColorSuccess40": {
+        "$value": "oklch(85% 0.0992 169.4)",
+        "$type": "color"
+      },
+      "euiColorSuccess50": {
+        "$value": "oklch(77.7% 0.1201 169.6)",
+        "$type": "color"
+      },
+      "euiColorSuccess60": {
+        "$value": "oklch(72.5% 0.1427 166.3)",
+        "$type": "color"
+      },
+      "euiColorSuccess70": {
+        "$value": "oklch(66.5% 0.1395 164.9)",
+        "$type": "color"
+      },
+      "euiColorSuccess80": {
+        "$value": "oklch(60.4% 0.1301 163.3)",
+        "$type": "color"
+      },
+      "euiColorSuccess90": {
+        "$value": "oklch(56% 0.1225 162.2)",
+        "$type": "color"
+      },
+      "euiColorSuccess100": {
+        "$value": "oklch(48.9% 0.1051 161.7)",
+        "$type": "color"
+      },
+      "euiColorSuccess110": {
+        "$value": "oklch(41.6% 0.0844 163.6)",
+        "$type": "color"
+      },
+      "euiColorSuccess120": {
+        "$value": "oklch(35.9% 0.0672 169.4)",
+        "$type": "color"
+      },
+      "euiColorSuccess130": {
+        "$value": "oklch(30.1% 0.0495 171.7)",
+        "$type": "color"
+      },
+      "euiColorSuccess140": {
+        "$value": "oklch(26% 0.0385 183.9)",
+        "$type": "color"
+      },
+      "euiColorWarning10": {
+        "$value": "oklch(97.7% 0.0288 89.6)",
+        "$type": "color"
+      },
+      "euiColorWarning20": {
+        "$value": "oklch(93.8% 0.0702 89.5)",
+        "$type": "color"
+      },
+      "euiColorWarning30": {
+        "$value": "oklch(89.5% 0.1116 87.2)",
+        "$type": "color"
+      },
+      "euiColorWarning40": {
+        "$value": "oklch(86% 0.1582 89.5)",
+        "$type": "color"
+      },
+      "euiColorWarning50": {
+        "$value": "oklch(82.4% 0.1686 86.5)",
+        "$type": "color"
+      },
+      "euiColorWarning60": {
+        "$value": "oklch(78.5% 0.1612 83.5)",
+        "$type": "color"
+      },
+      "euiColorWarning70": {
+        "$value": "oklch(70.4% 0.1444 83.7)",
+        "$type": "color"
+      },
+      "euiColorWarning80": {
+        "$value": "oklch(62.3% 0.1283 82.3)",
+        "$type": "color"
+      },
+      "euiColorWarning90": {
+        "$value": "oklch(55.7% 0.1144 80.5)",
+        "$type": "color"
+      },
+      "euiColorWarning100": {
+        "$value": "oklch(49.4% 0.1024 76.3)",
+        "$type": "color"
+      },
+      "euiColorWarning110": {
+        "$value": "oklch(43.1% 0.087 77.9)",
+        "$type": "color"
+      },
+      "euiColorWarning120": {
+        "$value": "oklch(36.3% 0.0649 77.1)",
+        "$type": "color"
+      },
+      "euiColorWarning130": {
+        "$value": "oklch(31.7% 0.0466 84.6)",
+        "$type": "color"
+      },
+      "euiColorWarning140": {
+        "$value": "oklch(27.6% 0.0131 72.3)",
+        "$type": "color"
+      },
+      "euiColorDanger10": {
+        "$value": "oklch(97.3% 0.0132 28.9)",
+        "$type": "color"
+      },
+      "euiColorDanger20": {
+        "$value": "oklch(92.3% 0.0363 28.3)",
+        "$type": "color"
+      },
+      "euiColorDanger30": {
+        "$value": "oklch(88.2% 0.0626 26.9)",
+        "$type": "color"
+      },
+      "euiColorDanger40": {
+        "$value": "oklch(84.1% 0.0876 26)",
+        "$type": "color"
+      },
+      "euiColorDanger50": {
+        "$value": "oklch(76.8% 0.1307 25.6)",
+        "$type": "color"
+      },
+      "euiColorDanger60": {
+        "$value": "oklch(70.8% 0.1637 25.6)",
+        "$type": "color"
+      },
+      "euiColorDanger70": {
+        "$value": "oklch(64.4% 0.1993 25.9)",
+        "$type": "color"
+      },
+      "euiColorDanger80": {
+        "$value": "oklch(58.8% 0.1998 25.9)",
+        "$type": "color"
+      },
+      "euiColorDanger90": {
+        "$value": "oklch(53.2% 0.2002 26)",
+        "$type": "color"
+      },
+      "euiColorDanger100": {
+        "$value": "oklch(46.9% 0.1764 22.7)",
+        "$type": "color"
+      },
+      "euiColorDanger110": {
+        "$value": "oklch(39.9% 0.1301 21)",
+        "$type": "color"
+      },
+      "euiColorDanger120": {
+        "$value": "oklch(34.2% 0.0892 15.3)",
+        "$type": "color"
+      },
+      "euiColorDanger130": {
+        "$value": "oklch(29.9% 0.0679 7.9)",
+        "$type": "color"
+      },
+      "euiColorDanger140": {
+        "$value": "oklch(25.2% 0.0498 0.1)",
+        "$type": "color"
+      },
+      "euiColorRisk10": {
+        "$value": "oklch(96.9% 0.0248 75.3)",
+        "$type": "color"
+      },
+      "euiColorRisk20": {
+        "$value": "oklch(92% 0.0549 65.3)",
+        "$type": "color"
+      },
+      "euiColorRisk30": {
+        "$value": "oklch(88.2% 0.0807 62.8)",
+        "$type": "color"
+      },
+      "euiColorRisk40": {
+        "$value": "oklch(83.6% 0.1048 54.5)",
+        "$type": "color"
+      },
+      "euiColorRisk50": {
+        "$value": "oklch(77.8% 0.1432 49.5)",
+        "$type": "color"
+      },
+      "euiColorRisk60": {
+        "$value": "oklch(73.9% 0.1646 47)",
+        "$type": "color"
+      },
+      "euiColorRisk70": {
+        "$value": "oklch(67.1% 0.1819 43.3)",
+        "$type": "color"
+      },
+      "euiColorRisk80": {
+        "$value": "oklch(61.8% 0.181 40)",
+        "$type": "color"
+      },
+      "euiColorRisk90": {
+        "$value": "oklch(55.7% 0.1708 38.8)",
+        "$type": "color"
+      },
+      "euiColorRisk100": {
+        "$value": "oklch(48.5% 0.1412 38.5)",
+        "$type": "color"
+      },
+      "euiColorRisk110": {
+        "$value": "oklch(40.4% 0.1093 37)",
+        "$type": "color"
+      },
+      "euiColorRisk120": {
+        "$value": "oklch(35% 0.0829 35.6)",
+        "$type": "color"
+      },
+      "euiColorRisk130": {
+        "$value": "oklch(30.6% 0.0622 29.9)",
+        "$type": "color"
+      },
+      "euiColorRisk140": {
+        "$value": "oklch(26.3% 0.0408 32.1)",
+        "$type": "color"
+      },
+      "euiColorAssistance10": {
+        "$value": "oklch(96.9% 0.018 303.4)",
+        "$type": "color"
+      },
+      "euiColorAssistance20": {
+        "$value": "oklch(92.9% 0.039 301.9)",
+        "$type": "color"
+      },
+      "euiColorAssistance30": {
+        "$value": "oklch(89.3% 0.0604 301.1)",
+        "$type": "color"
+      },
+      "euiColorAssistance40": {
+        "$value": "oklch(83.1% 0.094 300.3)",
+        "$type": "color"
+      },
+      "euiColorAssistance50": {
+        "$value": "oklch(78.1% 0.1227 300.9)",
+        "$type": "color"
+      },
+      "euiColorAssistance60": {
+        "$value": "oklch(71.1% 0.167 300.3)",
+        "$type": "color"
+      },
+      "euiColorAssistance70": {
+        "$value": "oklch(64.9% 0.1897 300.4)",
+        "$type": "color"
+      },
+      "euiColorAssistance80": {
+        "$value": "oklch(59.3% 0.1866 300.6)",
+        "$type": "color"
+      },
+      "euiColorAssistance90": {
+        "$value": "oklch(53.2% 0.2005 300.2)",
+        "$type": "color"
+      },
+      "euiColorAssistance100": {
+        "$value": "oklch(46.3% 0.1555 302.6)",
+        "$type": "color"
+      },
+      "euiColorAssistance110": {
+        "$value": "oklch(40.1% 0.1196 299.3)",
+        "$type": "color"
+      },
+      "euiColorAssistance120": {
+        "$value": "oklch(34.3% 0.0938 296.2)",
+        "$type": "color"
+      },
+      "euiColorAssistance130": {
+        "$value": "oklch(30.2% 0.0809 295.2)",
+        "$type": "color"
+      },
+      "euiColorAssistance140": {
+        "$value": "oklch(26.6% 0.0595 299.7)",
+        "$type": "color"
+      },
+      "euiColorShade10": {
+        "$value": "oklch(98.1% 0.0051 247.9)",
+        "$type": "color"
+      },
+      "euiColorShade15": {
+        "$value": "oklch(95.7% 0.012 259.8)",
+        "$type": "color"
+      },
+      "euiColorShade20": {
+        "$value": "oklch(93% 0.0146 264.5)",
+        "$type": "color"
+      },
+      "euiColorShade25": {
+        "$value": "oklch(89.6% 0.0193 263)",
+        "$type": "color"
+      },
+      "euiColorShade30": {
+        "$value": "oklch(86.5% 0.023 260.7)",
+        "$type": "color"
+      },
+      "euiColorShade35": {
+        "$value": "oklch(84.1% 0.0271 257)",
+        "$type": "color"
+      },
+      "euiColorShade40": {
+        "$value": "oklch(80.7% 0.0317 258.9)",
+        "$type": "color"
+      },
+      "euiColorShade45": {
+        "$value": "oklch(78.2% 0.0363 260.4)",
+        "$type": "color"
+      },
+      "euiColorShade50": {
+        "$value": "oklch(75.7% 0.0384 259.8)",
+        "$type": "color"
+      },
+      "euiColorShade55": {
+        "$value": "oklch(72.8% 0.0432 260.9)",
+        "$type": "color"
+      },
+      "euiColorShade60": {
+        "$value": "oklch(69.9% 0.0469 261.1)",
+        "$type": "color"
+      },
+      "euiColorShade65": {
+        "$value": "oklch(67.3% 0.0524 260.8)",
+        "$type": "color"
+      },
+      "euiColorShade70": {
+        "$value": "oklch(64.2% 0.0553 259.3)",
+        "$type": "color"
+      },
+      "euiColorShade75": {
+        "$value": "oklch(61.6% 0.0573 259.9)",
+        "$type": "color"
+      },
+      "euiColorShade80": {
+        "$value": "oklch(59.2% 0.0565 259.3)",
+        "$type": "color"
+      },
+      "euiColorShade85": {
+        "$value": "oklch(55.9% 0.052 259.4)",
+        "$type": "color"
+      },
+      "euiColorShade90": {
+        "$value": "oklch(53.2% 0.0541 260.1)",
+        "$type": "color"
+      },
+      "euiColorShade95": {
+        "$value": "oklch(49.7% 0.0531 260.5)",
+        "$type": "color"
+      },
+      "euiColorShade100": {
+        "$value": "oklch(46.1% 0.0506 260.2)",
+        "$type": "color"
+      },
+      "euiColorShade105": {
+        "$value": "oklch(42.5% 0.048 260)",
+        "$type": "color"
+      },
+      "euiColorShade110": {
+        "$value": "oklch(39.9% 0.0472 259.2)",
+        "$type": "color"
+      },
+      "euiColorShade115": {
+        "$value": "oklch(37% 0.0455 261)",
+        "$type": "color"
+      },
+      "euiColorShade120": {
+        "$value": "oklch(34.2% 0.0431 259.3)",
+        "$type": "color"
+      },
+      "euiColorShade125": {
+        "$value": "oklch(31.2% 0.0436 260.6)",
+        "$type": "color"
+      },
+      "euiColorShade130": {
+        "$value": "oklch(28.3% 0.0412 258.8)",
+        "$type": "color"
+      },
+      "euiColorShade135": {
+        "$value": "oklch(25.5% 0.0399 259.3)",
+        "$type": "color"
+      },
+      "euiColorShade140": {
+        "$value": "oklch(22.5% 0.0352 257.7)",
+        "$type": "color"
+      },
+      "euiColorShade145": {
+        "$value": "oklch(20% 0.0397 259.8)",
+        "$type": "color"
+      }
+    },
+    "white": {
       "0": {
-        "$value": "#ffffff",
-        "$type": "color"
-      },
-      "100": {
-        "$value": "oklch(97% 0.005 245)",
-        "$type": "color"
-      },
-      "200": {
-        "$value": "oklch(94% 0.008 245)",
-        "$type": "color"
-      },
-      "300": {
-        "$value": "oklch(88% 0.010 245)",
-        "$type": "color"
-      },
-      "400": {
-        "$value": "oklch(78% 0.012 245)",
-        "$type": "color"
-      },
-      "500": {
-        "$value": "oklch(60% 0.012 245)",
-        "$type": "color"
-      },
-      "600": {
-        "$value": "oklch(45% 0.012 245)",
-        "$type": "color"
-      },
-      "800": {
-        "$value": "oklch(22% 0.014 245)",
-        "$type": "color"
-      },
-      "900": {
-        "$value": "oklch(12% 0.014 245)",
-        "$type": "color"
-      }
-    },
-    "primary": {
-      "100": {
-        "$value": "oklch(95% 0.04 245)",
-        "$type": "color"
-      },
-      "500": {
-        "$value": "oklch(55% 0.18 245)",
-        "$type": "color"
-      }
-    },
-    "danger": {
-      "500": {
-        "$value": "oklch(58% 0.22 25)",
-        "$type": "color"
-      }
-    },
-    "success": {
-      "500": {
-        "$value": "oklch(58% 0.16 145)",
-        "$type": "color"
-      }
-    },
-    "warning": {
-      "500": {
-        "$value": "oklch(75% 0.18 75)",
+        "$value": "oklch(100% 0 0)",
         "$type": "color"
       }
     }
@@ -281,91 +855,91 @@
     "$type": "fontFamily"
   },
   "surface": {
-    "$value": "{color.ink.0}",
+    "$value": "{color.eui.euiColorWhite}",
     "$type": "color"
   },
   "surface-elevated": {
-    "$value": "{color.ink.0}",
+    "$value": "{color.eui.euiColorWhite}",
     "$type": "color"
   },
   "surface-recessed": {
-    "$value": "{color.ink.100}",
+    "$value": "{color.eui.euiColorShade30}",
     "$type": "color"
   },
   "surface-inverse": {
-    "$value": "{color.ink.900}",
+    "$value": "{color.eui.euiColorBlueBlack}",
     "$type": "color"
   },
   "text": {
-    "$value": "{color.ink.800}",
+    "$value": "{color.eui.euiColorShade30}",
     "$type": "color"
   },
   "text-emphasis": {
-    "$value": "{color.ink.900}",
+    "$value": "{color.eui.euiColorBlueBlack}",
     "$type": "color"
   },
   "text-recede": {
-    "$value": "{color.ink.500}",
+    "$value": "{color.eui.euiColorShade70}",
     "$type": "color"
   },
   "text-disabled": {
-    "$value": "{color.ink.300}",
+    "$value": "{color.eui.euiColorShade30}",
     "$type": "color"
   },
   "text-on-accent": {
-    "$value": "{color.ink.0}",
+    "$value": "{color.eui.euiColorWhite}",
     "$type": "color"
   },
   "text-on-critical": {
-    "$value": "{color.ink.0}",
+    "$value": "{color.eui.euiColorWhite}",
     "$type": "color"
   },
   "text-on-success": {
-    "$value": "{color.ink.0}",
+    "$value": "{color.eui.euiColorWhite}",
     "$type": "color"
   },
   "text-on-warning": {
-    "$value": "{color.ink.900}",
+    "$value": "{color.eui.euiColorBlueBlack}",
     "$type": "color"
   },
   "text-on-info": {
-    "$value": "{color.ink.0}",
+    "$value": "{color.eui.euiColorWhite}",
     "$type": "color"
   },
   "border": {
-    "$value": "{color.ink.200}",
+    "$value": "{color.eui.euiColorShade30}",
     "$type": "color"
   },
   "border-emphasis": {
-    "$value": "{color.primary.500}",
+    "$value": "{color.eui.euiColorPrimary90}",
     "$type": "color"
   },
   "border-recede": {
-    "$value": "{color.ink.100}",
+    "$value": "{color.eui.euiColorShade30}",
     "$type": "color"
   },
   "accent": {
-    "$value": "{color.primary.500}",
+    "$value": "{color.eui.euiColorPrimary90}",
     "$type": "color"
   },
   "accent-recede": {
-    "$value": "{color.primary.100}",
+    "$value": "{color.eui.euiColorPrimary30}",
     "$type": "color"
   },
   "critical": {
-    "$value": "{color.danger.500}",
+    "$value": "{color.eui.euiColorDanger90}",
     "$type": "color"
   },
   "success": {
-    "$value": "{color.success.500}",
+    "$value": "{color.eui.euiColorSuccess90}",
     "$type": "color"
   },
   "warning": {
-    "$value": "{color.warning.500}",
+    "$value": "{color.eui.euiColorWarning40}",
     "$type": "color"
   },
   "info": {
-    "$value": "{color.primary.500}",
+    "$value": "{color.eui.euiColorPrimary90}",
     "$type": "color"
   }
 }

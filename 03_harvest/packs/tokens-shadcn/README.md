@@ -8,10 +8,8 @@ shadcn/ui default theme (zinc, OKLCH) translated onto the Quoin canonical semant
 - **Source organisation:** shadcn
 - **Source URL:** https://ui.shadcn.com/
 - **Source license:** MIT
-- **Harvested:** 2026-05-16
-- **Notes:** Default 'zinc' theme variables from the shadcn/ui themes registry. shadcn/ui ships CSS custom properties named --background, --foreground, --muted, etc.; these are renamed onto the Quoin canonical namespace.
-
-Phase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.
+- **Harvested:** 2026-05-17
+- **Notes:** shadcn/ui default zinc theme extracted from apps/v4/public/r/themes.css. Values are raw HSL components in the source; this spec wraps them in hsl() for OKLCH conversion. The semantic role names (background, foreground, primary, etc.) map directly onto Quoin's canonical namespace via the existing sources/shadcn.json semantic block. Extraction method: B. Algorithm: shadcn-ui/ui apps/v4/public/r/themes.css@main, inputs {"theme":".theme-zinc"}. Mapping: shadcn ships flat semantic CSS vars (--background, --foreground, --primary, --destructive, --muted, etc.) under .theme-zinc. Mapping selects: surface = background, surface-elevated = card, surface-recessed = muted, text = foreground, accent = primary, critical = destructive, border = border. shadcn has no native success/warning/info so we supply matching-style green/amber/blue.
 
 ## Mapping
 

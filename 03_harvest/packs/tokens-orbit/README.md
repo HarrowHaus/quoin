@@ -6,12 +6,10 @@ Kiwi.com Orbit palette translated onto the Quoin canonical semantic-token namesp
 
 - **Source system:** Orbit Design System
 - **Source organisation:** Kiwi.com
-- **Source URL:** https://orbit.kiwi/
+- **Source URL:** https://raw.githubusercontent.com/kiwicom/orbit/master/packages/orbit-design-tokens/src/dictionary/definitions/foundation/palette/blue.json
 - **Source license:** MIT
-- **Harvested:** 2026-05-16
-- **Notes:** Orbit 'on-light' theme. Kiwi green is the signature accent. Orbit uses Roboto + Circular as its typeface stack; Roboto is open-source, Circular is proprietary (referenced by family name only).
-
-Phase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.
+- **Harvested:** 2026-05-17
+- **Notes:** Orbit foundation palette extracted per-file from kiwicom/orbit packages/orbit-design-tokens/src/dictionary/definitions/foundation/palette/. Each colour ships as a style-dictionary JSON with hex values. Extraction method: C. Mapping: Orbit uses semantic step names (normal, dark, darker, hover, light, lighter, lightest, lightHover, lightActive, etc.) rather than numeric. Mapping: surface = cloud.light, surface-recessed = cloud.normal, text = ink.dark, accent = blue.normal (#0172cb), critical = red.normal, success = green.normal, warning = orange.normal.
 
 ## Mapping
 

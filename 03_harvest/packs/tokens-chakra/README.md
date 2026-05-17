@@ -6,12 +6,10 @@ Chakra UI default palette translated onto the Quoin canonical semantic-token nam
 
 - **Source system:** Chakra UI
 - **Source organisation:** Chakra UI community
-- **Source URL:** https://www.chakra-ui.com/
+- **Source URL:** https://raw.githubusercontent.com/chakra-ui/chakra-ui/main/packages/react/src/theme/tokens/colors.ts
 - **Source license:** MIT
-- **Harvested:** 2026-05-16
-- **Notes:** Chakra v3 default colour scales. Default primary is 'teal' (500). Gray = standard slate-tinted neutral.
-
-Phase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.
+- **Harvested:** 2026-05-17
+- **Notes:** Chakra UI v3 colour tokens extracted from packages/react/src/theme/tokens/colors.ts. Chakra wraps every value in `{ value: '#hex' }` per the Panda-CSS / @chakra-ui/styled-system convention. The value-wrapped-ts parser handles this shape. Extraction method: A. Mapping: Chakra v3 50-950 ramps for gray/red/orange/yellow/green/teal/blue/cyan/purple/pink. Default accent = teal.500 per Chakra convention. whiteAlpha/blackAlpha (semi-transparent overlays) are not modelled in the base palette — Quoin's primitives handle overlay tints via the impl pack.
 
 ## Mapping
 

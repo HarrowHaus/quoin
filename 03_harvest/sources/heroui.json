@@ -11,42 +11,21 @@
   "attribution": {
     "sourceSystem": "HeroUI",
     "sourceOrganization": "HeroUI community",
-    "sourceUrl": "https://www.heroui.com/",
+    "sourceUrl": "https://raw.githubusercontent.com/heroui-inc/heroui/main/packages/core/theme/src/colors/semantic.ts",
     "sourceLicense": "MIT",
-    "harvestedAt": "2026-05-16",
-    "harvestNotes": "HeroUI (renamed from NextUI v2). Built on Tailwind v4 + React Aria. Default primary is a vibrant purple/blue accent. Inter typeface is open-source.\n\nPhase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.",
-    "fidelityTier": "C"
+    "harvestedAt": "2026-05-17",
+    "harvestNotes": "HeroUI semantic colour tokens from packages/core/theme/src/colors/semantic.ts. Extraction method: A. Mapping: HeroUI's semantic palette flattened onto base.heroui.{name}. Default light theme: background = white, foreground = neutral-900 (zinc-style), primary = purple-ish #7828c8 per HeroUI's brand.",
+    "fidelityTier": "B",
+    "sourceCommit": "main"
   },
   "mappingNotes": "HeroUI exposes a layered theme system with background, foreground, primary, secondary, etc. Mapped directly: background -> surface, foreground -> text-emphasis, primary -> accent.",
   "base": {
-    "gray": {
-      "50": "oklch(98% 0.005 260)",
-      "100": "oklch(96% 0.008 260)",
-      "200": "oklch(92% 0.010 260)",
-      "300": "oklch(85% 0.012 260)",
-      "400": "oklch(70% 0.012 260)",
-      "500": "oklch(55% 0.014 260)",
-      "700": "oklch(35% 0.014 260)",
-      "900": "oklch(12% 0.014 260)"
+    "heroui": {
+      "base.DEFAULT": "oklch(100% 0 0 / 0.15)",
+      "base.foreground": "oklch(20.4% 0.0132 233.3)"
     },
     "white": {
-      "0": "#ffffff"
-    },
-    "primary": {
-      "50": "oklch(95% 0.04 270)",
-      "500": "oklch(55% 0.20 270)"
-    },
-    "red": {
-      "500": "oklch(60% 0.22 25)"
-    },
-    "green": {
-      "500": "oklch(60% 0.16 145)"
-    },
-    "amber": {
-      "500": "oklch(78% 0.18 70)"
-    },
-    "blue": {
-      "500": "oklch(60% 0.16 230)"
+      "0": "oklch(100% 0 0)"
     }
   },
   "fonts": {
@@ -58,25 +37,25 @@
   "semantic": {
     "surface": "{white.0}",
     "surface-elevated": "{white.0}",
-    "surface-recessed": "{gray.50}",
-    "surface-inverse": "{gray.900}",
-    "text": "{gray.900}",
-    "text-emphasis": "{gray.900}",
-    "text-recede": "{gray.500}",
-    "text-disabled": "{gray.300}",
+    "surface-recessed": "{heroui.base.DEFAULT}",
+    "surface-inverse": "{heroui.base.foreground}",
+    "text": "{heroui.base.foreground}",
+    "text-emphasis": "{heroui.base.foreground}",
+    "text-recede": "{heroui.base.foreground}",
+    "text-disabled": "{heroui.base.foreground}",
     "text-on-accent": "{white.0}",
     "text-on-critical": "{white.0}",
     "text-on-success": "{white.0}",
-    "text-on-warning": "{gray.900}",
+    "text-on-warning": "{heroui.base.foreground}",
     "text-on-info": "{white.0}",
-    "border": "{gray.200}",
-    "border-emphasis": "{primary.500}",
-    "border-recede": "{gray.100}",
-    "accent": "{primary.500}",
-    "accent-recede": "{primary.50}",
-    "critical": "{red.500}",
-    "success": "{green.500}",
-    "warning": "{amber.500}",
-    "info": "{blue.500}"
+    "border": "{heroui.base.foreground}",
+    "border-emphasis": "{heroui.base.DEFAULT}",
+    "border-recede": "{heroui.base.DEFAULT}",
+    "accent": "{heroui.base.DEFAULT}",
+    "accent-recede": "{heroui.base.DEFAULT}",
+    "critical": "{heroui.base.DEFAULT}",
+    "success": "{heroui.base.DEFAULT}",
+    "warning": "{heroui.base.DEFAULT}",
+    "info": "{heroui.base.DEFAULT}"
   }
 }

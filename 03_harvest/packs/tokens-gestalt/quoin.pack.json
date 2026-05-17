@@ -23,10 +23,11 @@
   "attribution": {
     "sourceSystem": "Gestalt",
     "sourceOrganization": "Pinterest",
-    "sourceUrl": "https://gestalt.pinterest.systems/",
+    "sourceUrl": "https://raw.githubusercontent.com/pinterest/gestalt/master/packages/gestalt-design-tokens/tokens/classic/base-color.json",
     "sourceLicense": "Apache-2.0",
-    "harvestedAt": "2026-05-16",
-    "harvestNotes": "Pinterest Gestalt 'light' tokens. Pinterest red (#E60023 family) drives accent. Gestalt has explicit semantic background-default / background-tertiary / text-default / text-subtle tokens that map cleanly. Pinterest Sans is proprietary; referenced by family name only.\n\nPhase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.",
-    "fidelityTier": "C"
+    "harvestedAt": "2026-05-17",
+    "harvestNotes": "Pinterest Gestalt classic base-color tokens extracted from packages/gestalt-design-tokens/tokens/classic/base-color.json. Style Dictionary–shaped JSON with named colour scales (red pushpin, pink flaminglow, etc.). Extraction method: A. Mapping: Gestalt names Pinterest-specific (pushpin red, flaminglow pink, ai blue, masala beige, etc.). Mapping: surface = white, text = darkGray, accent = pushpin.450 (Pinterest red), critical = pushpin.500.",
+    "fidelityTier": "B",
+    "sourceCommit": "master"
   }
 }

@@ -6,12 +6,10 @@ Elastic EUI (light theme) palette translated onto the Quoin canonical semantic-t
 
 - **Source system:** Elastic UI Framework (EUI)
 - **Source organisation:** Elastic
-- **Source URL:** https://eui.elastic.co/
+- **Source URL:** https://raw.githubusercontent.com/elastic/eui/main/packages/eui-theme-borealis/src/variables/colors/_semantic_colors.scss
 - **Source license:** Apache-2.0
-- **Harvested:** 2026-05-16
-- **Notes:** EUI 'Amsterdam' light theme. Elastic ships @elastic/eui with the design tokens exposed as SASS / CSS vars. Inter typeface is open-source.
-
-Phase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.
+- **Harvested:** 2026-05-17
+- **Notes:** Elastic EUI Borealis light theme extracted from packages/eui-theme-borealis/src/variables/colors/_colors_light.scss. Extraction method: A. Mapping: EUI's $euiColor* family flattened onto base.eui.{name}. Semantic mapping reads euiColorEmptyShade → surface, euiColorFullShade → surface-inverse, euiColorPrimary → accent, euiColorDanger → critical, euiColorSuccess → success, euiColorWarning → warning, euiColorAccent → info.
 
 ## Mapping
 

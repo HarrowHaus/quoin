@@ -8,10 +8,8 @@ IBM Carbon (white theme) palette translated onto the Quoin canonical semantic-to
 - **Source organisation:** IBM
 - **Source URL:** https://carbondesignsystem.com/
 - **Source license:** Apache-2.0
-- **Harvested:** 2026-05-16
-- **Notes:** Carbon ships @carbon/themes (white, g10, g90, g100). This pack mirrors the 'white' theme. Carbon's interactive states (hover, active, focus) are not modelled separately; consumers layer Carbon-style focus rings via project CSS if required.
-
-Phase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.
+- **Harvested:** 2026-05-17
+- **Notes:** Values read byte-faithfully from @carbon/colors. Each Carbon colour family ships as a `{10..100}` step object. The white-theme accent is Carbon's Blue 60 per IBM's documentation. Extraction method: B. Algorithm: @carbon/colors@11.51.0, inputs "package default exports (Carbon canonical palette)". Mapping: Carbon white theme mapping: surface = white, surface-recessed = gray.10, surface-inverse = gray.100, text = gray.100, accent = blue.60, critical = red.60, success = green.50, warning = yellow.30, info = blue.60. Carbon's interactive state tokens (hover/active/visited) are not modelled — Quoin's impl pack handles interaction states.
 
 ## Mapping
 

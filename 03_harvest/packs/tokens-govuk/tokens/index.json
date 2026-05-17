@@ -1,67 +1,171 @@
 {
   "$schema": "https://design-tokens.github.io/community-group/format/",
   "color": {
-    "grey": {
-      "1": {
-        "$value": "oklch(99% 0 0)",
+    "blue": {
+      "primary": {
+        "$value": "oklch(53.5% 0.136 249.9)",
         "$type": "color"
       },
-      "2": {
-        "$value": "oklch(96% 0.003 250)",
+      "tint-25": {
+        "$value": "oklch(64.7% 0.1037 246.5)",
         "$type": "color"
       },
-      "3": {
-        "$value": "oklch(92% 0.006 250)",
+      "tint-50": {
+        "$value": "oklch(76.5% 0.0687 244.7)",
         "$type": "color"
       },
-      "4": {
-        "$value": "oklch(82% 0.010 250)",
+      "tint-80": {
+        "$value": "oklch(90.5% 0.0268 246.4)",
+        "$type": "color"
+      },
+      "tint-95": {
+        "$value": "oklch(97.7% 0.0059 239.8)",
+        "$type": "color"
+      },
+      "shade-25": {
+        "$value": "oklch(43.7% 0.1079 249.6)",
+        "$type": "color"
+      },
+      "shade-50": {
+        "$value": "oklch(33.3% 0.0777 249.1)",
+        "$type": "color"
+      },
+      "shade-10": {
+        "$value": "oklch(49.7% 0.1254 249.8)",
+        "$type": "color"
+      }
+    },
+    "green": {
+      "primary": {
+        "$value": "oklch(51.4% 0.1101 161)",
+        "$type": "color"
+      },
+      "tint-25": {
+        "$value": "oklch(63% 0.0919 166.6)",
+        "$type": "color"
+      },
+      "tint-50": {
+        "$value": "oklch(75.2% 0.0627 169.2)",
+        "$type": "color"
+      },
+      "tint-80": {
+        "$value": "oklch(90.1% 0.0248 170.9)",
+        "$type": "color"
+      },
+      "tint-95": {
+        "$value": "oklch(97.5% 0.0059 170.4)",
+        "$type": "color"
+      },
+      "shade-25": {
+        "$value": "oklch(42.2% 0.0884 161.7)",
+        "$type": "color"
+      },
+      "shade-50": {
+        "$value": "oklch(32.1% 0.0645 162.5)",
+        "$type": "color"
+      }
+    },
+    "red": {
+      "primary": {
+        "$value": "oklch(55.8% 0.1861 25.6)",
+        "$type": "color"
+      },
+      "tint-25": {
+        "$value": "oklch(65% 0.1401 21.7)",
+        "$type": "color"
+      },
+      "tint-50": {
+        "$value": "oklch(76% 0.0904 19.4)",
+        "$type": "color"
+      },
+      "tint-80": {
+        "$value": "oklch(90.3% 0.0323 17.8)",
+        "$type": "color"
+      },
+      "tint-95": {
+        "$value": "oklch(97.6% 0.0075 17.3)",
+        "$type": "color"
+      },
+      "shade-25": {
+        "$value": "oklch(45.5% 0.1482 25.3)",
+        "$type": "color"
+      },
+      "shade-50": {
+        "$value": "oklch(34.4% 0.1062 24.7)",
+        "$type": "color"
+      }
+    },
+    "yellow": {
+      "primary": {
+        "$value": "oklch(89.9% 0.1857 97.9)",
+        "$type": "color"
+      },
+      "tint-25": {
+        "$value": "oklch(91.9% 0.174 100.3)",
+        "$type": "color"
+      },
+      "tint-50": {
+        "$value": "oklch(94.1% 0.1323 100.7)",
+        "$type": "color"
+      },
+      "tint-80": {
+        "$value": "oklch(97.4% 0.0572 99.9)",
+        "$type": "color"
+      },
+      "tint-95": {
+        "$value": "oklch(99.3% 0.0146 98.3)",
+        "$type": "color"
+      },
+      "shade-25": {
+        "$value": "oklch(72.5% 0.15 98.3)",
+        "$type": "color"
+      },
+      "shade-50": {
+        "$value": "oklch(54.1% 0.112 98.6)",
+        "$type": "color"
+      }
+    },
+    "orange": {
+      "primary": {
+        "$value": "oklch(70.6% 0.1709 44.8)",
+        "$type": "color"
+      },
+      "tint-25": {
+        "$value": "oklch(77% 0.129 46.8)",
+        "$type": "color"
+      },
+      "tint-50": {
+        "$value": "oklch(84.2% 0.0844 47.3)",
+        "$type": "color"
+      },
+      "tint-80": {
+        "$value": "oklch(93.6% 0.0327 49.3)",
+        "$type": "color"
+      },
+      "tint-95": {
+        "$value": "oklch(98.3% 0.0076 48.7)",
+        "$type": "color"
+      },
+      "shade-25": {
+        "$value": "oklch(57.1% 0.1357 44.9)",
+        "$type": "color"
+      },
+      "shade-50": {
+        "$value": "oklch(43% 0.0971 45.9)",
+        "$type": "color"
+      }
+    },
+    "pink": {},
+    "grey": {},
+    "white": {
+      "0": {
+        "$value": "oklch(100% 0 0)",
         "$type": "color"
       }
     },
     "black": {
       "0": {
-        "$value": "oklch(7% 0 0)",
-        "$type": "color"
-      }
-    },
-    "white": {
-      "0": {
-        "$value": "#ffffff",
-        "$type": "color"
-      }
-    },
-    "blue": {
-      "0": {
-        "$value": "oklch(48% 0.16 240)",
-        "$type": "color"
-      },
-      "light": {
-        "$value": "oklch(90% 0.05 240)",
-        "$type": "color"
-      }
-    },
-    "red": {
-      "0": {
-        "$value": "oklch(50% 0.21 25)",
-        "$type": "color"
-      }
-    },
-    "green": {
-      "0": {
-        "$value": "oklch(45% 0.16 145)",
-        "$type": "color"
-      }
-    },
-    "yellow": {
-      "0": {
-        "$value": "oklch(85% 0.18 90)",
-        "$type": "color"
-      }
-    },
-    "mid-grey": {
-      "0": {
-        "$value": "oklch(50% 0.005 250)",
+        "$value": "oklch(0% 0 0)",
         "$type": "color"
       }
     }
@@ -287,7 +391,7 @@
     "$type": "color"
   },
   "surface-recessed": {
-    "$value": "{color.grey.2}",
+    "$value": "{color.blue.tint-95}",
     "$type": "color"
   },
   "surface-inverse": {
@@ -303,11 +407,11 @@
     "$type": "color"
   },
   "text-recede": {
-    "$value": "{color.mid-grey.0}",
+    "$value": "{color.blue.tint-95}",
     "$type": "color"
   },
   "text-disabled": {
-    "$value": "{color.grey.4}",
+    "$value": "{color.blue.tint-95}",
     "$type": "color"
   },
   "text-on-accent": {
@@ -331,7 +435,7 @@
     "$type": "color"
   },
   "border": {
-    "$value": "{color.grey.3}",
+    "$value": "{color.blue.tint-25}",
     "$type": "color"
   },
   "border-emphasis": {
@@ -339,31 +443,31 @@
     "$type": "color"
   },
   "border-recede": {
-    "$value": "{color.grey.2}",
+    "$value": "{color.blue.tint-95}",
     "$type": "color"
   },
   "accent": {
-    "$value": "{color.blue.0}",
+    "$value": "{color.blue.primary}",
     "$type": "color"
   },
   "accent-recede": {
-    "$value": "{color.blue.light}",
+    "$value": "{color.blue.tint-50}",
     "$type": "color"
   },
   "critical": {
-    "$value": "{color.red.0}",
+    "$value": "{color.red.primary}",
     "$type": "color"
   },
   "success": {
-    "$value": "{color.green.0}",
+    "$value": "{color.green.primary}",
     "$type": "color"
   },
   "warning": {
-    "$value": "{color.yellow.0}",
+    "$value": "{color.yellow.primary}",
     "$type": "color"
   },
   "info": {
-    "$value": "{color.blue.0}",
+    "$value": "{color.blue.primary}",
     "$type": "color"
   }
 }

@@ -7,19 +7,20 @@
 
 :root {
   /* base palette */
-  --color-white-0: #ffffff;
-  --color-gray-lighter: oklch(97% 0.005 250);
-  --color-gray-light: oklch(94% 0.008 250);
-  --color-gray-default: oklch(80% 0.012 250);
-  --color-gray-dark: oklch(50% 0.014 250);
-  --color-gray-darker: oklch(28% 0.014 250);
-  --color-gray-darkest: oklch(14% 0.014 250);
-  --color-primary-100: oklch(95% 0.04 175);
-  --color-primary-500: oklch(70% 0.13 175);
-  --color-danger-500: oklch(58% 0.22 25);
-  --color-success-500: oklch(60% 0.16 145);
-  --color-warning-500: oklch(85% 0.18 80);
-  --color-info-500: oklch(60% 0.16 220);
+  --color-white-0: oklch(100% 0 0);
+  --color-black-0: oklch(14.3% 0.0045 264.9);
+  --color-grey-lighter: oklch(88.6% 0.01 266);
+  --color-grey-light: oklch(76% 0.0215 265.9);
+  --color-grey-base: oklch(55.9% 0.0387 265.6);
+  --color-grey-dark: oklch(39.4% 0.0255 265.6);
+  --color-grey-darker: oklch(32% 0.0194 265.6);
+  --color-turquoise-base: oklch(77% 0.1431 176.7);
+  --color-cyan-base: oklch(81.5% 0.1177 228.8);
+  --color-green-base: oklch(74.4% 0.1401 160.3);
+  --color-yellow-base: oklch(82.6% 0.1691 79.7);
+  --color-orange-base: oklch(66.3% 0.2269 35);
+  --color-red-base: oklch(71.1% 0.187 11);
+  --color-blue-base: oklch(55.5% 0.2452 270.1);
 
   /* semantic */
   --type-size-xs: 0.75rem;
@@ -77,24 +78,24 @@
   --font-display: BlinkMacSystemFont, -apple-system, sans-serif;
   --surface: var(--color-white-0);
   --surface-elevated: var(--color-white-0);
-  --surface-recessed: var(--color-gray-lighter);
-  --surface-inverse: var(--color-gray-darkest);
-  --text: var(--color-gray-darker);
-  --text-emphasis: var(--color-gray-darkest);
-  --text-recede: var(--color-gray-dark);
-  --text-disabled: var(--color-gray-default);
+  --surface-recessed: var(--color-grey-lighter);
+  --surface-inverse: var(--color-grey-darker);
+  --text: var(--color-grey-darker);
+  --text-emphasis: var(--color-grey-darker);
+  --text-recede: var(--color-grey-dark);
+  --text-disabled: var(--color-grey-base);
   --text-on-accent: var(--color-white-0);
   --text-on-critical: var(--color-white-0);
   --text-on-success: var(--color-white-0);
-  --text-on-warning: var(--color-gray-darkest);
+  --text-on-warning: var(--color-grey-darker);
   --text-on-info: var(--color-white-0);
-  --border: var(--color-gray-light);
-  --border-emphasis: var(--color-primary-500);
-  --border-recede: var(--color-gray-lighter);
-  --accent: var(--color-primary-500);
-  --accent-recede: var(--color-primary-100);
-  --critical: var(--color-danger-500);
-  --success: var(--color-success-500);
-  --warning: var(--color-warning-500);
-  --info: var(--color-info-500);
+  --border: var(--color-grey-light);
+  --border-emphasis: var(--color-turquoise-base);
+  --border-recede: var(--color-grey-lighter);
+  --accent: var(--color-turquoise-base);
+  --accent-recede: var(--color-turquoise-base);
+  --critical: var(--color-red-base);
+  --success: var(--color-green-base);
+  --warning: var(--color-yellow-base);
+  --info: var(--color-cyan-base);
 }

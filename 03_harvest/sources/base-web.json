@@ -11,37 +11,75 @@
   "attribution": {
     "sourceSystem": "Base Web",
     "sourceOrganization": "Uber",
-    "sourceUrl": "https://baseweb.design/",
+    "sourceUrl": "https://raw.githubusercontent.com/uber/baseweb/main/src/themes/light-theme/color-foundation-tokens.ts",
     "sourceLicense": "MIT",
-    "harvestedAt": "2026-05-16",
-    "harvestNotes": "Uber Base Web light theme. Heavily monochrome — Uber's brand uses near-black accent on white. UberMove typeface is proprietary; referenced by family name only.\n\nPhase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.",
-    "fidelityTier": "C"
+    "harvestedAt": "2026-05-17",
+    "harvestNotes": "Uber Base Web light theme foundation colour tokens extracted from src/themes/light-theme/color-foundation-tokens.ts. Extraction method: A. Mapping: Base Web ships primary (50-700) + accent + ramps for negative/warning/positive. Heavy monochrome aesthetic — accent is a deep blue. Mapping: primary = primaryA (black), surface = primaryB (white), surface-recessed = primary50, accent = accent (blue), critical = negative, success = positive, warning = warning.",
+    "fidelityTier": "B",
+    "sourceCommit": "main"
   },
   "mappingNotes": "Base Web ships mono100..1000 alongside primary{A,B}, accent, negative, positive, warning. Mapped: mono100 -> surface, mono900 -> text-emphasis, primaryA (black) -> accent, negative -> critical, positive -> success, warning -> warning, accent -> info.",
   "base": {
-    "mono": {
-      "100": "#ffffff",
-      "200": "oklch(98% 0.002 250)",
-      "300": "oklch(96% 0.003 250)",
-      "400": "oklch(92% 0.005 250)",
-      "500": "oklch(80% 0.008 250)",
-      "600": "oklch(55% 0.010 250)",
-      "700": "oklch(35% 0.012 250)",
-      "800": "oklch(20% 0.012 250)",
-      "900": "oklch(8% 0.012 250)"
+    "baseWeb": {
+      "foundationColors.primary": "oklch(0% 0 0)",
+      "foundationColors.primary50": "oklch(97.3% 0 0)",
+      "foundationColors.primary100": "oklch(94.9% 0 0)",
+      "foundationColors.primary200": "oklch(91.3% 0 0)",
+      "foundationColors.primary300": "oklch(84.2% 0 0)",
+      "foundationColors.primary400": "oklch(75.4% 0 0)",
+      "foundationColors.primary500": "oklch(52.8% 0 0)",
+      "foundationColors.primary600": "oklch(44.6% 0 0)",
+      "foundationColors.primary700": "oklch(32.1% 0 0)",
+      "foundationColors.accent50": "oklch(96.4% 0.0153 270)",
+      "foundationColors.accent100": "oklch(91% 0.0387 262.9)",
+      "foundationColors.accent200": "oklch(80.2% 0.0881 262.4)",
+      "foundationColors.accent300": "oklch(66.6% 0.1597 261.7)",
+      "foundationColors.accent400": "oklch(57.3% 0.2095 261.4)",
+      "foundationColors.accent500": "oklch(47.2% 0.1671 261.3)",
+      "foundationColors.accent600": "oklch(40% 0.1392 261.3)",
+      "foundationColors.accent700": "oklch(30.6% 0.0987 261.4)",
+      "foundationColors.negative50": "oklch(96.4% 0.0176 26.1)",
+      "foundationColors.negative100": "oklch(91.1% 0.0444 26.6)",
+      "foundationColors.negative200": "oklch(76.9% 0.1078 27.6)",
+      "foundationColors.negative300": "oklch(65.3% 0.1773 29.9)",
+      "foundationColors.negative400": "oklch(57.8% 0.2282 30.5)",
+      "foundationColors.negative500": "oklch(47.2% 0.1847 30.9)",
+      "foundationColors.negative600": "oklch(39.8% 0.1542 31.2)",
+      "foundationColors.negative700": "oklch(30.1% 0.1134 32.3)",
+      "foundationColors.warning50": "oklch(98.6% 0.0142 84.6)",
+      "foundationColors.warning100": "oklch(96.5% 0.0356 83.8)",
+      "foundationColors.warning200": "oklch(92.6% 0.0768 84)",
+      "foundationColors.warning300": "oklch(87.8% 0.1255 82.9)",
+      "foundationColors.warning400": "oklch(84.5% 0.1525 80.6)",
+      "foundationColors.warning500": "oklch(66.8% 0.1225 79.7)",
+      "foundationColors.warning600": "oklch(56.9% 0.1172 82.2)",
+      "foundationColors.warning700": "oklch(43.8% 0.0747 80.7)",
+      "foundationColors.positive50": "oklch(95.1% 0.0143 169.2)",
+      "foundationColors.positive100": "oklch(86% 0.0586 166.9)",
+      "foundationColors.positive200": "oklch(78.3% 0.1246 160.8)",
+      "foundationColors.positive300": "oklch(71.1% 0.1828 152.8)",
+      "foundationColors.positive400": "oklch(55% 0.14 153.2)",
+      "foundationColors.positive500": "oklch(47.9% 0.12 153.9)",
+      "foundationColors.positive600": "oklch(40.5% 0.0999 154.3)",
+      "foundationColors.positive700": "oklch(35.2% 0.071 158.8)",
+      "foundationColors.white": "oklch(100% 0 0)",
+      "foundationColors.black": "oklch(0% 0 0)",
+      "foundationColors.mono100": "oklch(100% 0 0)",
+      "foundationColors.mono200": "oklch(97.3% 0 0)",
+      "foundationColors.mono300": "oklch(94.9% 0 0)",
+      "foundationColors.mono400": "oklch(91.3% 0 0)",
+      "foundationColors.mono500": "oklch(84.2% 0 0)",
+      "foundationColors.mono600": "oklch(75.4% 0 0)",
+      "foundationColors.mono700": "oklch(52.8% 0 0)",
+      "foundationColors.mono800": "oklch(44.6% 0 0)",
+      "foundationColors.mono900": "oklch(32.1% 0 0)",
+      "foundationColors.mono1000": "oklch(0% 0 0)"
     },
-    "negative": {
-      "500": "oklch(50% 0.22 25)"
+    "white": {
+      "0": "oklch(100% 0 0)"
     },
-    "positive": {
-      "500": "oklch(52% 0.16 145)"
-    },
-    "warning": {
-      "500": "oklch(72% 0.18 70)"
-    },
-    "accent": {
-      "100": "oklch(95% 0.04 245)",
-      "500": "oklch(55% 0.16 245)"
+    "black": {
+      "0": "oklch(0% 0 0)"
     }
   },
   "fonts": {
@@ -51,27 +89,27 @@
     "font-display": "'UberMove', 'UberMove Text', system-ui, sans-serif"
   },
   "semantic": {
-    "surface": "{mono.100}",
-    "surface-elevated": "{mono.100}",
-    "surface-recessed": "{mono.200}",
-    "surface-inverse": "{mono.900}",
-    "text": "{mono.800}",
-    "text-emphasis": "{mono.900}",
-    "text-recede": "{mono.600}",
-    "text-disabled": "{mono.500}",
-    "text-on-accent": "{mono.100}",
-    "text-on-critical": "{mono.100}",
-    "text-on-success": "{mono.100}",
-    "text-on-warning": "{mono.900}",
-    "text-on-info": "{mono.100}",
-    "border": "{mono.400}",
-    "border-emphasis": "{mono.900}",
-    "border-recede": "{mono.300}",
-    "accent": "{mono.900}",
-    "accent-recede": "{mono.300}",
-    "critical": "{negative.500}",
-    "success": "{positive.500}",
-    "warning": "{warning.500}",
-    "info": "{accent.500}"
+    "surface": "{baseWeb.foundationColors.primary}",
+    "surface-elevated": "{baseWeb.foundationColors.primary}",
+    "surface-recessed": "{baseWeb.foundationColors.primary50}",
+    "surface-inverse": "{baseWeb.foundationColors.primary50}",
+    "text": "{baseWeb.foundationColors.primary50}",
+    "text-emphasis": "{baseWeb.foundationColors.primary50}",
+    "text-recede": "{baseWeb.foundationColors.primary50}",
+    "text-disabled": "{baseWeb.foundationColors.primary50}",
+    "text-on-accent": "{baseWeb.foundationColors.primary}",
+    "text-on-critical": "{baseWeb.foundationColors.primary}",
+    "text-on-success": "{baseWeb.foundationColors.primary}",
+    "text-on-warning": "{baseWeb.foundationColors.primary50}",
+    "text-on-info": "{baseWeb.foundationColors.primary}",
+    "border": "{baseWeb.foundationColors.primary50}",
+    "border-emphasis": "{baseWeb.foundationColors.primary50}",
+    "border-recede": "{baseWeb.foundationColors.primary50}",
+    "accent": "{baseWeb.foundationColors.primary50}",
+    "accent-recede": "{baseWeb.foundationColors.primary50}",
+    "critical": "{baseWeb.foundationColors.primary}",
+    "success": "{baseWeb.foundationColors.primary}",
+    "warning": "{baseWeb.foundationColors.primary}",
+    "info": "{baseWeb.foundationColors.primary}"
   }
 }

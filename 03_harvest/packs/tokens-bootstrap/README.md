@@ -9,9 +9,7 @@ Bootstrap 5 default palette translated onto the Quoin canonical semantic-token n
 - **Source URL:** https://raw.githubusercontent.com/twbs/bootstrap/main/scss/_variables.scss
 - **Source license:** MIT
 - **Harvested:** 2026-05-17
-- **Notes:** Bootstrap 5 default palette extracted from scss/_variables.scss. Greyscale ($gray-100 … $gray-900) + theme colours ($primary, $danger, $success, $warning, $info). Hex source converted to OKLCH at extraction.
-
-Extraction notes: Bootstrap's $primary/$danger/$success/$warning/$info aliases resolve at compile time to $blue/$red/$green/$yellow/$cyan; we read those directly. The tint-color($blue, 80%) pre-computation Bootstrap uses for soft accent variants is not evaluated by this pipeline — we substitute an OKLCH approximation of that lightness/chroma.
+- **Notes:** Bootstrap 5 default palette extracted from scss/_variables.scss. Greyscale ($gray-100 … $gray-900) + theme colours ($primary, $danger, $success, $warning, $info). Hex source converted to OKLCH at extraction. Extraction method: A. Mapping: Bootstrap's $primary/$danger/$success/$warning/$info aliases resolve at compile time to $blue/$red/$green/$yellow/$cyan; we read those directly. The tint-color($blue, 80%) pre-computation Bootstrap uses for soft accent variants is not evaluated by this pipeline — we substitute an OKLCH approximation of that lightness/chroma.
 
 ## Mapping
 

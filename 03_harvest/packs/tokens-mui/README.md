@@ -6,12 +6,10 @@ Material UI (MUI) default theme translated onto the Quoin canonical semantic-tok
 
 - **Source system:** Material UI
 - **Source organisation:** MUI
-- **Source URL:** https://raw.githubusercontent.com/mui/material-ui/master/packages/mui-material/src/colors/indigo.js
+- **Source URL:** https://raw.githubusercontent.com/mui/material-ui/master/packages/mui-material/src/colors/grey.js
 - **Source license:** MIT
 - **Harvested:** 2026-05-17
-- **Notes:** Material UI default (Material Design v1/v2) palettes: indigo + grey + red + green + orange + blue. Each file ships a flat hex object; we capture step 500 + a few neighbours.
-
-Extraction notes: MUI's per-colour files (indigo.js, gray.js, red.js, etc.) share step keys; concatenating them in this pipeline collapses values into the last file's keys. Per-file fidelity extraction is deferred; OKLCH approximations of MUI's Material Design v2 palette stand, anchored to documented hex values from mui/material-ui.
+- **Notes:** Per-file extraction from mui/material-ui packages/mui-material/src/colors/. Each colour family (grey, indigo, red, green, amber, blue) parsed independently and namespaced by family. Extraction method: C. Mapping: MUI ships Material Design v1/v2-style 50-900 + A100-A700 ramps per colour. Default light theme: surface = grey.50, text = grey.900, accent = indigo.500, critical = red.500, success = green.500, warning = amber.500, info = blue.500.
 
 ## Mapping
 

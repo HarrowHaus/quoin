@@ -14,39 +14,66 @@
     "sourceOrganization": "UK Government Digital Service",
     "sourceUrl": "https://design-system.service.gov.uk/",
     "sourceLicense": "MIT",
-    "harvestedAt": "2026-05-16",
-    "harvestNotes": "GOV.UK ships govuk-frontend under MIT. Colour palette: govuk-blue (#1d70b8) primary, govuk-black text on govuk-light-grey surface. GDS Transport typeface is proprietary to GDS; referenced by family name only with a system fallback.\n\nPhase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.",
-    "fidelityTier": "C"
+    "harvestedAt": "2026-05-17",
+    "harvestNotes": "GOV.UK $govuk-palette extracted from settings/_colours-palette--internal.scss. Deliberately stripped palette — blue/green/red/yellow with primary + tint/shade variants. Extraction method: B. Algorithm: alphagov/govuk-frontend@main, inputs {\"path\":\"settings/_colours-palette--internal.scss\"}. Mapping: GOV.UK palette uses semantic variant names (primary, tint-25, tint-50, tint-80, shade-25, shade-50). Accent = blue.primary (#1d70b8), critical = red.primary, success = green.primary.",
+    "fidelityTier": "B",
+    "sourceCommit": "main"
   },
   "mappingNotes": "GOV.UK is mostly black/white/blue — a deliberately stripped-down palette. Status colours map cleanly: govuk-red -> critical, govuk-green -> success, govuk-yellow -> warning, govuk-blue -> info (reusing the brand blue). No accent-recede in source; derived from govuk-light-blue.",
   "base": {
-    "grey": {
-      "1": "oklch(99% 0 0)",
-      "2": "oklch(96% 0.003 250)",
-      "3": "oklch(92% 0.006 250)",
-      "4": "oklch(82% 0.010 250)"
-    },
-    "black": {
-      "0": "oklch(7% 0 0)"
-    },
-    "white": {
-      "0": "#ffffff"
-    },
     "blue": {
-      "0": "oklch(48% 0.16 240)",
-      "light": "oklch(90% 0.05 240)"
-    },
-    "red": {
-      "0": "oklch(50% 0.21 25)"
+      "primary": "oklch(53.5% 0.136 249.9)",
+      "tint-25": "oklch(64.7% 0.1037 246.5)",
+      "tint-50": "oklch(76.5% 0.0687 244.7)",
+      "tint-80": "oklch(90.5% 0.0268 246.4)",
+      "tint-95": "oklch(97.7% 0.0059 239.8)",
+      "shade-25": "oklch(43.7% 0.1079 249.6)",
+      "shade-50": "oklch(33.3% 0.0777 249.1)",
+      "shade-10": "oklch(49.7% 0.1254 249.8)"
     },
     "green": {
-      "0": "oklch(45% 0.16 145)"
+      "primary": "oklch(51.4% 0.1101 161)",
+      "tint-25": "oklch(63% 0.0919 166.6)",
+      "tint-50": "oklch(75.2% 0.0627 169.2)",
+      "tint-80": "oklch(90.1% 0.0248 170.9)",
+      "tint-95": "oklch(97.5% 0.0059 170.4)",
+      "shade-25": "oklch(42.2% 0.0884 161.7)",
+      "shade-50": "oklch(32.1% 0.0645 162.5)"
+    },
+    "red": {
+      "primary": "oklch(55.8% 0.1861 25.6)",
+      "tint-25": "oklch(65% 0.1401 21.7)",
+      "tint-50": "oklch(76% 0.0904 19.4)",
+      "tint-80": "oklch(90.3% 0.0323 17.8)",
+      "tint-95": "oklch(97.6% 0.0075 17.3)",
+      "shade-25": "oklch(45.5% 0.1482 25.3)",
+      "shade-50": "oklch(34.4% 0.1062 24.7)"
     },
     "yellow": {
-      "0": "oklch(85% 0.18 90)"
+      "primary": "oklch(89.9% 0.1857 97.9)",
+      "tint-25": "oklch(91.9% 0.174 100.3)",
+      "tint-50": "oklch(94.1% 0.1323 100.7)",
+      "tint-80": "oklch(97.4% 0.0572 99.9)",
+      "tint-95": "oklch(99.3% 0.0146 98.3)",
+      "shade-25": "oklch(72.5% 0.15 98.3)",
+      "shade-50": "oklch(54.1% 0.112 98.6)"
     },
-    "mid-grey": {
-      "0": "oklch(50% 0.005 250)"
+    "orange": {
+      "primary": "oklch(70.6% 0.1709 44.8)",
+      "tint-25": "oklch(77% 0.129 46.8)",
+      "tint-50": "oklch(84.2% 0.0844 47.3)",
+      "tint-80": "oklch(93.6% 0.0327 49.3)",
+      "tint-95": "oklch(98.3% 0.0076 48.7)",
+      "shade-25": "oklch(57.1% 0.1357 44.9)",
+      "shade-50": "oklch(43% 0.0971 45.9)"
+    },
+    "pink": {},
+    "grey": {},
+    "white": {
+      "0": "oklch(100% 0 0)"
+    },
+    "black": {
+      "0": "oklch(0% 0 0)"
     }
   },
   "fonts": {
@@ -58,25 +85,25 @@
   "semantic": {
     "surface": "{white.0}",
     "surface-elevated": "{white.0}",
-    "surface-recessed": "{grey.2}",
+    "surface-recessed": "{blue.tint-95}",
     "surface-inverse": "{black.0}",
     "text": "{black.0}",
     "text-emphasis": "{black.0}",
-    "text-recede": "{mid-grey.0}",
-    "text-disabled": "{grey.4}",
+    "text-recede": "{blue.tint-95}",
+    "text-disabled": "{blue.tint-95}",
     "text-on-accent": "{white.0}",
     "text-on-critical": "{white.0}",
     "text-on-success": "{white.0}",
     "text-on-warning": "{black.0}",
     "text-on-info": "{white.0}",
-    "border": "{grey.3}",
+    "border": "{blue.tint-25}",
     "border-emphasis": "{black.0}",
-    "border-recede": "{grey.2}",
-    "accent": "{blue.0}",
-    "accent-recede": "{blue.light}",
-    "critical": "{red.0}",
-    "success": "{green.0}",
-    "warning": "{yellow.0}",
-    "info": "{blue.0}"
+    "border-recede": "{blue.tint-95}",
+    "accent": "{blue.primary}",
+    "accent-recede": "{blue.tint-50}",
+    "critical": "{red.primary}",
+    "success": "{green.primary}",
+    "warning": "{yellow.primary}",
+    "info": "{blue.primary}"
   }
 }

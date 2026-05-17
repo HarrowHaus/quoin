@@ -7,51 +7,47 @@
         "$type": "color"
       },
       "10": {
-        "$value": "oklch(12% 0.005 280)",
+        "$value": "oklch(22.5% 0.0059 301.1)",
         "$type": "color"
       },
       "20": {
-        "$value": "oklch(20% 0.005 280)",
+        "$value": "oklch(31.1% 0.0055 301.2)",
         "$type": "color"
       },
       "30": {
-        "$value": "oklch(30% 0.005 280)",
+        "$value": "oklch(39.8% 0.0071 308.3)",
         "$type": "color"
       },
       "40": {
-        "$value": "oklch(42% 0.005 280)",
+        "$value": "oklch(48.3% 0.0087 312.2)",
         "$type": "color"
       },
       "50": {
-        "$value": "oklch(55% 0.005 280)",
+        "$value": "oklch(57% 0.007 317.7)",
         "$type": "color"
       },
       "60": {
-        "$value": "oklch(65% 0.005 280)",
+        "$value": "oklch(65.5% 0.0086 319.4)",
         "$type": "color"
       },
       "70": {
-        "$value": "oklch(75% 0.005 280)",
+        "$value": "oklch(74.3% 0.0072 325.6)",
         "$type": "color"
       },
       "80": {
-        "$value": "oklch(85% 0.005 280)",
+        "$value": "oklch(82.9% 0.0088 325.7)",
         "$type": "color"
       },
       "90": {
-        "$value": "oklch(92% 0.005 280)",
+        "$value": "oklch(91.5% 0.0086 325.6)",
         "$type": "color"
       },
       "95": {
-        "$value": "oklch(95% 0.005 280)",
-        "$type": "color"
-      },
-      "98": {
-        "$value": "oklch(98% 0.005 280)",
+        "$value": "oklch(95.7% 0.0085 325.6)",
         "$type": "color"
       },
       "99": {
-        "$value": "oklch(99% 0.003 280)",
+        "$value": "oklch(99.2% 0.0067 325.6)",
         "$type": "color"
       },
       "100": {
@@ -60,46 +56,386 @@
       }
     },
     "primary": {
+      "0": {
+        "$value": "oklch(0% 0 0)",
+        "$type": "color"
+      },
+      "10": {
+        "$value": "oklch(24.3% 0.1403 286.9)",
+        "$type": "color"
+      },
+      "20": {
+        "$value": "oklch(32.5% 0.1353 291.2)",
+        "$type": "color"
+      },
+      "30": {
+        "$value": "oklch(41% 0.1323 293)",
+        "$type": "color"
+      },
       "40": {
-        "$value": "oklch(40% 0.16 290)",
+        "$value": "oklch(49.6% 0.1305 293.7)",
+        "$type": "color"
+      },
+      "50": {
+        "$value": "oklch(58.1% 0.1298 294.3)",
+        "$type": "color"
+      },
+      "60": {
+        "$value": "oklch(66.7% 0.1292 294.7)",
+        "$type": "color"
+      },
+      "70": {
+        "$value": "oklch(75.3% 0.1303 295.7)",
         "$type": "color"
       },
       "80": {
-        "$value": "oklch(80% 0.12 290)",
+        "$value": "oklch(83.4% 0.0944 297.3)",
         "$type": "color"
       },
       "90": {
-        "$value": "oklch(90% 0.05 290)",
+        "$value": "oklch(91.7% 0.0474 301.5)",
+        "$type": "color"
+      },
+      "95": {
+        "$value": "oklch(96% 0.0241 307)",
+        "$type": "color"
+      },
+      "99": {
+        "$value": "oklch(99.2% 0.0067 325.6)",
+        "$type": "color"
+      },
+      "100": {
+        "$value": "oklch(100% 0 0)",
+        "$type": "color"
+      }
+    },
+    "secondary": {
+      "0": {
+        "$value": "oklch(0% 0 0)",
+        "$type": "color"
+      },
+      "10": {
+        "$value": "oklch(22.8% 0.0349 296.3)",
+        "$type": "color"
+      },
+      "20": {
+        "$value": "oklch(31.2% 0.0361 298)",
+        "$type": "color"
+      },
+      "30": {
+        "$value": "oklch(40.1% 0.034 298.6)",
+        "$type": "color"
+      },
+      "40": {
+        "$value": "oklch(48.6% 0.0358 299.6)",
+        "$type": "color"
+      },
+      "50": {
+        "$value": "oklch(57.3% 0.0343 299.8)",
+        "$type": "color"
+      },
+      "60": {
+        "$value": "oklch(65.8% 0.0348 301.3)",
+        "$type": "color"
+      },
+      "70": {
+        "$value": "oklch(74.4% 0.0368 301.9)",
+        "$type": "color"
+      },
+      "80": {
+        "$value": "oklch(82.9% 0.0358 302)",
+        "$type": "color"
+      },
+      "90": {
+        "$value": "oklch(91.6% 0.0365 303.1)",
+        "$type": "color"
+      },
+      "95": {
+        "$value": "oklch(96% 0.0241 307)",
+        "$type": "color"
+      },
+      "99": {
+        "$value": "oklch(99.2% 0.0067 325.6)",
+        "$type": "color"
+      },
+      "100": {
+        "$value": "oklch(100% 0 0)",
+        "$type": "color"
+      }
+    },
+    "tertiary": {
+      "0": {
+        "$value": "oklch(0% 0 0)",
+        "$type": "color"
+      },
+      "10": {
+        "$value": "oklch(23.1% 0.0563 357.7)",
+        "$type": "color"
+      },
+      "20": {
+        "$value": "oklch(31.9% 0.0584 358.5)",
+        "$type": "color"
+      },
+      "30": {
+        "$value": "oklch(40.4% 0.0591 359.1)",
+        "$type": "color"
+      },
+      "40": {
+        "$value": "oklch(49.2% 0.0618 359)",
+        "$type": "color"
+      },
+      "50": {
+        "$value": "oklch(57.8% 0.0633 358.5)",
+        "$type": "color"
+      },
+      "60": {
+        "$value": "oklch(66.4% 0.0645 359.3)",
+        "$type": "color"
+      },
+      "70": {
+        "$value": "oklch(75% 0.0663 359)",
+        "$type": "color"
+      },
+      "80": {
+        "$value": "oklch(83.7% 0.0666 359.4)",
+        "$type": "color"
+      },
+      "90": {
+        "$value": "oklch(92% 0.0441 0.3)",
+        "$type": "color"
+      },
+      "95": {
+        "$value": "oklch(95.9% 0.0212 3.1)",
+        "$type": "color"
+      },
+      "99": {
+        "$value": "oklch(99.2% 0.0067 325.6)",
+        "$type": "color"
+      },
+      "100": {
+        "$value": "oklch(100% 0 0)",
         "$type": "color"
       }
     },
     "error": {
+      "0": {
+        "$value": "oklch(0% 0 0)",
+        "$type": "color"
+      },
+      "10": {
+        "$value": "oklch(23.6% 0.0962 27.2)",
+        "$type": "color"
+      },
+      "20": {
+        "$value": "oklch(32.8% 0.1336 27.3)",
+        "$type": "color"
+      },
+      "30": {
+        "$value": "oklch(41.7% 0.1702 27.4)",
+        "$type": "color"
+      },
       "40": {
-        "$value": "oklch(45% 0.20 25)",
+        "$value": "oklch(50.6% 0.1927 27.7)",
+        "$type": "color"
+      },
+      "50": {
+        "$value": "oklch(59.4% 0.2045 27.8)",
+        "$type": "color"
+      },
+      "60": {
+        "$value": "oklch(67.9% 0.2089 27.7)",
+        "$type": "color"
+      },
+      "70": {
+        "$value": "oklch(75.7% 0.1452 27.1)",
+        "$type": "color"
+      },
+      "80": {
+        "$value": "oklch(83.8% 0.0891 26.8)",
+        "$type": "color"
+      },
+      "90": {
+        "$value": "oklch(91.8% 0.0418 25.2)",
+        "$type": "color"
+      },
+      "95": {
+        "$value": "oklch(96% 0.02 28.9)",
+        "$type": "color"
+      },
+      "99": {
+        "$value": "oklch(99.2% 0.0067 325.6)",
+        "$type": "color"
+      },
+      "100": {
+        "$value": "oklch(100% 0 0)",
         "$type": "color"
       }
     },
     "success": {
+      "0": {
+        "$value": "oklch(0% 0 0)",
+        "$type": "color"
+      },
+      "10": {
+        "$value": "oklch(21.9% 0.0682 145.4)",
+        "$type": "color"
+      },
+      "20": {
+        "$value": "oklch(30% 0.0934 145.3)",
+        "$type": "color"
+      },
+      "30": {
+        "$value": "oklch(38.5% 0.1198 145.3)",
+        "$type": "color"
+      },
       "40": {
-        "$value": "oklch(50% 0.16 150)",
+        "$value": "oklch(46.8% 0.1459 145.3)",
+        "$type": "color"
+      },
+      "50": {
+        "$value": "oklch(55.3% 0.1505 144.8)",
+        "$type": "color"
+      },
+      "60": {
+        "$value": "oklch(63.9% 0.1543 144.3)",
+        "$type": "color"
+      },
+      "70": {
+        "$value": "oklch(72.5% 0.1573 143.7)",
+        "$type": "color"
+      },
+      "80": {
+        "$value": "oklch(81.3% 0.1614 143.3)",
+        "$type": "color"
+      },
+      "90": {
+        "$value": "oklch(89.8% 0.1634 143.2)",
+        "$type": "color"
+      },
+      "95": {
+        "$value": "oklch(94.7% 0.1005 141.5)",
+        "$type": "color"
+      },
+      "99": {
+        "$value": "oklch(98.9% 0.0218 132.5)",
+        "$type": "color"
+      },
+      "100": {
+        "$value": "oklch(100% 0 0)",
         "$type": "color"
       }
     },
     "warning": {
+      "0": {
+        "$value": "oklch(0% 0 0)",
+        "$type": "color"
+      },
+      "10": {
+        "$value": "oklch(22.7% 0.0497 68.4)",
+        "$type": "color"
+      },
+      "20": {
+        "$value": "oklch(31.6% 0.069 68.7)",
+        "$type": "color"
+      },
+      "30": {
+        "$value": "oklch(40% 0.0877 68.1)",
+        "$type": "color"
+      },
       "40": {
-        "$value": "oklch(60% 0.16 80)",
+        "$value": "oklch(48.8% 0.1073 67.7)",
+        "$type": "color"
+      },
+      "50": {
+        "$value": "oklch(57.5% 0.1264 67.8)",
+        "$type": "color"
+      },
+      "60": {
+        "$value": "oklch(66.3% 0.1453 68.1)",
+        "$type": "color"
+      },
+      "70": {
+        "$value": "oklch(75.1% 0.1647 68.1)",
+        "$type": "color"
+      },
+      "80": {
+        "$value": "oklch(83.3% 0.1292 68.7)",
+        "$type": "color"
+      },
+      "90": {
+        "$value": "oklch(91.7% 0.0595 67.8)",
+        "$type": "color"
+      },
+      "95": {
+        "$value": "oklch(95.9% 0.0272 64)",
+        "$type": "color"
+      },
+      "99": {
+        "$value": "oklch(99.2% 0.0067 325.6)",
+        "$type": "color"
+      },
+      "100": {
+        "$value": "oklch(100% 0 0)",
         "$type": "color"
       }
     },
     "info": {
+      "0": {
+        "$value": "oklch(0% 0 0)",
+        "$type": "color"
+      },
+      "10": {
+        "$value": "oklch(22.5% 0.0677 252.1)",
+        "$type": "color"
+      },
+      "20": {
+        "$value": "oklch(31.3% 0.095 252.5)",
+        "$type": "color"
+      },
+      "30": {
+        "$value": "oklch(39.8% 0.122 252.8)",
+        "$type": "color"
+      },
       "40": {
-        "$value": "oklch(50% 0.16 245)",
+        "$value": "oklch(48.5% 0.1479 252.6)",
+        "$type": "color"
+      },
+      "50": {
+        "$value": "oklch(57.1% 0.1629 253.3)",
+        "$type": "color"
+      },
+      "60": {
+        "$value": "oklch(65.6% 0.1601 254.8)",
+        "$type": "color"
+      },
+      "70": {
+        "$value": "oklch(74.2% 0.1345 256.8)",
+        "$type": "color"
+      },
+      "80": {
+        "$value": "oklch(82.7% 0.0865 259.3)",
+        "$type": "color"
+      },
+      "90": {
+        "$value": "oklch(91.3% 0.0416 263)",
+        "$type": "color"
+      },
+      "95": {
+        "$value": "oklch(95.8% 0.0199 267.3)",
+        "$type": "color"
+      },
+      "99": {
+        "$value": "oklch(99.3% 0.0041 301.4)",
+        "$type": "color"
+      },
+      "100": {
+        "$value": "oklch(100% 0 0)",
         "$type": "color"
       }
     },
     "white": {
       "0": {
-        "$value": "#ffffff",
+        "$value": "oklch(100% 0 0)",
         "$type": "color"
       }
     }
@@ -317,7 +653,7 @@
     "$type": "fontFamily"
   },
   "surface": {
-    "$value": "{color.neutral.98}",
+    "$value": "{color.neutral.99}",
     "$type": "color"
   },
   "surface-elevated": {
@@ -325,7 +661,7 @@
     "$type": "color"
   },
   "surface-recessed": {
-    "$value": "{color.neutral.95}",
+    "$value": "{color.neutral.90}",
     "$type": "color"
   },
   "surface-inverse": {

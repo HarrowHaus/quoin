@@ -8,10 +8,8 @@ GOV.UK Design System palette translated onto the Quoin canonical semantic-token 
 - **Source organisation:** UK Government Digital Service
 - **Source URL:** https://design-system.service.gov.uk/
 - **Source license:** MIT
-- **Harvested:** 2026-05-16
-- **Notes:** GOV.UK ships govuk-frontend under MIT. Colour palette: govuk-blue (#1d70b8) primary, govuk-black text on govuk-light-grey surface. GDS Transport typeface is proprietary to GDS; referenced by family name only with a system fallback.
-
-Phase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.
+- **Harvested:** 2026-05-17
+- **Notes:** GOV.UK $govuk-palette extracted from settings/_colours-palette--internal.scss. Deliberately stripped palette — blue/green/red/yellow with primary + tint/shade variants. Extraction method: B. Algorithm: alphagov/govuk-frontend@main, inputs {"path":"settings/_colours-palette--internal.scss"}. Mapping: GOV.UK palette uses semantic variant names (primary, tint-25, tint-50, tint-80, shade-25, shade-50). Accent = blue.primary (#1d70b8), critical = red.primary, success = green.primary.
 
 ## Mapping
 

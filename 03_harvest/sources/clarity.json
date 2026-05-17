@@ -11,11 +11,12 @@
   "attribution": {
     "sourceSystem": "Clarity Design System",
     "sourceOrganization": "VMware",
-    "sourceUrl": "https://clarity.design/",
+    "sourceUrl": "https://github.com/vmware-clarity/core",
     "sourceLicense": "MIT",
-    "harvestedAt": "2026-05-16",
-    "harvestNotes": "Clarity v6 light theme. Clarity's 'action blue' (#0072A3 area) is the brand accent. Heavy-blue, enterprise-IT aesthetic — gradients of teal/cobalt across the chrome.\n\nPhase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.",
-    "fidelityTier": "C"
+    "harvestedAt": "2026-05-17",
+    "harvestNotes": "Clarity v6 light theme. Clarity's 'action blue' (#0072A3 area) is the brand accent. Heavy-blue, enterprise-IT aesthetic — gradients of teal/cobalt across the chrome.\n\nPhase 3.5b fidelity status: Tier C. Clarity tokens are auto-generated at build time by an internal pipeline; the published source tree does not include the static token file the build emits. The npm package @clr/core MIT does not expose tokens as JS exports either. Designed-approximation values stand pending VMware publishing the canonical token output.",
+    "fidelityTier": "C",
+    "sourceCommit": "main"
   },
   "mappingNotes": "Clarity color-base-100..900 maps directly to Quoin surface/text ramp. action-blue-600 -> accent. Status colours: danger (red), success (green), warning (orange), info (action blue).",
   "base": {

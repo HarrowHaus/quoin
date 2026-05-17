@@ -3,67 +3,77 @@
   "color": {
     "white": {
       "0": {
-        "$value": "#ffffff",
+        "$value": "oklch(100% 0 0)",
         "$type": "color"
       }
     },
-    "gray": {
+    "black": {
+      "0": {
+        "$value": "oklch(14.3% 0.0045 264.9)",
+        "$type": "color"
+      }
+    },
+    "grey": {
       "lighter": {
-        "$value": "oklch(97% 0.005 250)",
+        "$value": "oklch(88.6% 0.01 266)",
         "$type": "color"
       },
       "light": {
-        "$value": "oklch(94% 0.008 250)",
+        "$value": "oklch(76% 0.0215 265.9)",
         "$type": "color"
       },
-      "default": {
-        "$value": "oklch(80% 0.012 250)",
+      "base": {
+        "$value": "oklch(55.9% 0.0387 265.6)",
         "$type": "color"
       },
       "dark": {
-        "$value": "oklch(50% 0.014 250)",
+        "$value": "oklch(39.4% 0.0255 265.6)",
         "$type": "color"
       },
       "darker": {
-        "$value": "oklch(28% 0.014 250)",
-        "$type": "color"
-      },
-      "darkest": {
-        "$value": "oklch(14% 0.014 250)",
+        "$value": "oklch(32% 0.0194 265.6)",
         "$type": "color"
       }
     },
-    "primary": {
-      "100": {
-        "$value": "oklch(95% 0.04 175)",
-        "$type": "color"
-      },
-      "500": {
-        "$value": "oklch(70% 0.13 175)",
+    "turquoise": {
+      "base": {
+        "$value": "oklch(77% 0.1431 176.7)",
         "$type": "color"
       }
     },
-    "danger": {
-      "500": {
-        "$value": "oklch(58% 0.22 25)",
+    "cyan": {
+      "base": {
+        "$value": "oklch(81.5% 0.1177 228.8)",
         "$type": "color"
       }
     },
-    "success": {
-      "500": {
-        "$value": "oklch(60% 0.16 145)",
+    "green": {
+      "base": {
+        "$value": "oklch(74.4% 0.1401 160.3)",
         "$type": "color"
       }
     },
-    "warning": {
-      "500": {
-        "$value": "oklch(85% 0.18 80)",
+    "yellow": {
+      "base": {
+        "$value": "oklch(82.6% 0.1691 79.7)",
         "$type": "color"
       }
     },
-    "info": {
-      "500": {
-        "$value": "oklch(60% 0.16 220)",
+    "orange": {
+      "base": {
+        "$value": "oklch(66.3% 0.2269 35)",
+        "$type": "color"
+      }
+    },
+    "red": {
+      "base": {
+        "$value": "oklch(71.1% 0.187 11)",
+        "$type": "color"
+      }
+    },
+    "blue": {
+      "base": {
+        "$value": "oklch(55.5% 0.2452 270.1)",
         "$type": "color"
       }
     }
@@ -289,27 +299,27 @@
     "$type": "color"
   },
   "surface-recessed": {
-    "$value": "{color.gray.lighter}",
+    "$value": "{color.grey.lighter}",
     "$type": "color"
   },
   "surface-inverse": {
-    "$value": "{color.gray.darkest}",
+    "$value": "{color.grey.darker}",
     "$type": "color"
   },
   "text": {
-    "$value": "{color.gray.darker}",
+    "$value": "{color.grey.darker}",
     "$type": "color"
   },
   "text-emphasis": {
-    "$value": "{color.gray.darkest}",
+    "$value": "{color.grey.darker}",
     "$type": "color"
   },
   "text-recede": {
-    "$value": "{color.gray.dark}",
+    "$value": "{color.grey.dark}",
     "$type": "color"
   },
   "text-disabled": {
-    "$value": "{color.gray.default}",
+    "$value": "{color.grey.base}",
     "$type": "color"
   },
   "text-on-accent": {
@@ -325,7 +335,7 @@
     "$type": "color"
   },
   "text-on-warning": {
-    "$value": "{color.gray.darkest}",
+    "$value": "{color.grey.darker}",
     "$type": "color"
   },
   "text-on-info": {
@@ -333,39 +343,39 @@
     "$type": "color"
   },
   "border": {
-    "$value": "{color.gray.light}",
+    "$value": "{color.grey.light}",
     "$type": "color"
   },
   "border-emphasis": {
-    "$value": "{color.primary.500}",
+    "$value": "{color.turquoise.base}",
     "$type": "color"
   },
   "border-recede": {
-    "$value": "{color.gray.lighter}",
+    "$value": "{color.grey.lighter}",
     "$type": "color"
   },
   "accent": {
-    "$value": "{color.primary.500}",
+    "$value": "{color.turquoise.base}",
     "$type": "color"
   },
   "accent-recede": {
-    "$value": "{color.primary.100}",
+    "$value": "{color.turquoise.base}",
     "$type": "color"
   },
   "critical": {
-    "$value": "{color.danger.500}",
+    "$value": "{color.red.base}",
     "$type": "color"
   },
   "success": {
-    "$value": "{color.success.500}",
+    "$value": "{color.green.base}",
     "$type": "color"
   },
   "warning": {
-    "$value": "{color.warning.500}",
+    "$value": "{color.yellow.base}",
     "$type": "color"
   },
   "info": {
-    "$value": "{color.info.500}",
+    "$value": "{color.cyan.base}",
     "$type": "color"
   }
 }

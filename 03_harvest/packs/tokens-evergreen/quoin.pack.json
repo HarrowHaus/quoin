@@ -23,10 +23,11 @@
   "attribution": {
     "sourceSystem": "Evergreen",
     "sourceOrganization": "Segment (Twilio)",
-    "sourceUrl": "https://evergreen.segment.com/",
+    "sourceUrl": "https://raw.githubusercontent.com/segmentio/evergreen/master/src/themes/default/tokens/colors.js",
     "sourceLicense": "MIT",
-    "harvestedAt": "2026-05-16",
-    "harvestNotes": "Segment Evergreen 'default' theme. Neutral-heavy, restrained palette. Project status notes Evergreen v6 maintenance is light; pack is included because the design itself is widely studied.\n\nPhase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.",
-    "fidelityTier": "C"
+    "harvestedAt": "2026-05-17",
+    "harvestNotes": "Segment Evergreen default theme colours. The library is in maintenance mode; values are stable. Extraction method: A. Mapping: Evergreen ships scale + intent objects (gray, blue, red, orange, green, etc.) with explicit step keys.",
+    "fidelityTier": "B",
+    "sourceCommit": "master"
   }
 }

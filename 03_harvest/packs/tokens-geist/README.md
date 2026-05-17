@@ -8,10 +8,10 @@ Vercel Geist design language tokens translated onto the Quoin canonical semantic
 - **Source organisation:** Vercel
 - **Source URL:** https://vercel.com/geist
 - **Source license:** MIT
-- **Harvested:** 2026-05-16
+- **Harvested:** 2026-05-17
 - **Notes:** Geist is published as @vercel/geist-ui in earlier form and as the Vercel design system more recently. Highly monochrome — almost pure white surfaces and near-black text. Geist Sans / Geist Mono are open-source via Vercel under SIL OFL; referenced by family name.
 
-Phase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.
+Phase 3.5b fidelity status: Tier C. No public canonical token file. Vercel publishes Geist as fonts (Geist Sans / Geist Mono, SIL OFL) but does not ship a static colour-tokens module the way Tailwind / Radix / shadcn do. The Vercel Style Guide MPL-2.0 includes some colour usage but is documentation, not extractable tokens. Designed-approximation values stand.
 
 ## Mapping
 

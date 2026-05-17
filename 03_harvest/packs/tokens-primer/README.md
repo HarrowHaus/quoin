@@ -6,12 +6,10 @@ GitHub Primer (light theme) palette translated onto the Quoin canonical semantic
 
 - **Source system:** Primer
 - **Source organisation:** GitHub
-- **Source URL:** https://primer.style/
+- **Source URL:** https://raw.githubusercontent.com/primer/primitives/main/src/tokens/base/color/light/light.json5
 - **Source license:** MIT
-- **Harvested:** 2026-05-16
-- **Notes:** Primer Primitives (@primer/primitives) light scheme. Primer's data- vs accent- vs success- vs danger- families translate cleanly onto Quoin's accent + critical/success/warning/info.
-
-Phase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.
+- **Harvested:** 2026-05-17
+- **Notes:** Primer base/color/light/light.json5 extracted byte-faithfully. The json5 source nests hex inside `$value.hex`; the primer-json5 parser walks the indented tree and emits `base.color.{family}.{step}: '#hex'`. Extraction method: A. Mapping: Primer 10-step scales for gray/blue/green/red/orange/yellow/purple/pink/coral. Functional mapping: surface = white, text = gray.9, accent = blue.5 (Primer's --color-accent-emphasis), critical = red.5, success = green.5, warning = yellow.5, info = blue.5.
 
 ## Mapping
 

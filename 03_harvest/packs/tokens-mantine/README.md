@@ -9,9 +9,7 @@ Mantine UI default palette translated onto the Quoin canonical semantic-token na
 - **Source URL:** https://raw.githubusercontent.com/mantinedev/mantine/master/packages/%40mantine/core/src/core/MantineProvider/default-colors.ts
 - **Source license:** MIT
 - **Harvested:** 2026-05-17
-- **Notes:** Mantine v7 default palette (blue accent at step 6). Each colour ramp is a 10-entry hex array.
-
-Extraction notes: Mantine 10-step ramps (indices 0-9) extracted verbatim from default-colors.ts. The 'primaryShade' default is 6 (light theme); accent = blue.6 per Mantine's own convention.
+- **Notes:** Mantine v7 default palette (blue accent at step 6). Each colour ramp is a 10-entry hex array. Extraction method: A. Mapping: Mantine 10-step ramps (indices 0-9) extracted verbatim from default-colors.ts. The 'primaryShade' default is 6 (light theme); accent = blue.6 per Mantine's own convention.
 
 ## Mapping
 

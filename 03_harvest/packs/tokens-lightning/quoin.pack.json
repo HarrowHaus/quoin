@@ -23,10 +23,11 @@
   "attribution": {
     "sourceSystem": "Lightning Design System (SLDS)",
     "sourceOrganization": "Salesforce",
-    "sourceUrl": "https://www.lightningdesignsystem.com/",
+    "sourceUrl": "https://raw.githubusercontent.com/salesforce-ux/design-system/main/design-tokens/aliases/color-palettes.yml",
     "sourceLicense": "BSD-3-Clause",
-    "harvestedAt": "2026-05-16",
-    "harvestNotes": "SLDS '2' tokens (light scheme). Salesforce ships @salesforce-ux/design-system-tokens with utility, component, and theme layers; this pack uses the global + alias layers. Salesforce Sans is proprietary; referenced by family name only.\n\nPhase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.",
-    "fidelityTier": "C"
+    "harvestedAt": "2026-05-17",
+    "harvestNotes": "Salesforce SLDS palette extracted from salesforce-ux/design-system design-tokens/aliases/color-palettes.yml. Extraction method: A. Mapping: SLDS cool-gray + warm-gray + blue/green/red/orange/yellow ramps (steps 1-13). Default accent = BLUE_4 (Salesforce brand).",
+    "fidelityTier": "B",
+    "sourceCommit": "main"
   }
 }

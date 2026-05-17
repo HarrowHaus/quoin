@@ -11,40 +11,117 @@
   "attribution": {
     "sourceSystem": "Lightning Design System (SLDS)",
     "sourceOrganization": "Salesforce",
-    "sourceUrl": "https://www.lightningdesignsystem.com/",
+    "sourceUrl": "https://raw.githubusercontent.com/salesforce-ux/design-system/main/design-tokens/aliases/color-palettes.yml",
     "sourceLicense": "BSD-3-Clause",
-    "harvestedAt": "2026-05-16",
-    "harvestNotes": "SLDS '2' tokens (light scheme). Salesforce ships @salesforce-ux/design-system-tokens with utility, component, and theme layers; this pack uses the global + alias layers. Salesforce Sans is proprietary; referenced by family name only.\n\nPhase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.",
-    "fidelityTier": "C"
+    "harvestedAt": "2026-05-17",
+    "harvestNotes": "Salesforce SLDS palette extracted from salesforce-ux/design-system design-tokens/aliases/color-palettes.yml. Extraction method: A. Mapping: SLDS cool-gray + warm-gray + blue/green/red/orange/yellow ramps (steps 1-13). Default accent = BLUE_4 (Salesforce brand).",
+    "fidelityTier": "B",
+    "sourceCommit": "main"
   },
   "mappingNotes": "SLDS color-background-base -> surface, color-background -> surface-recessed, color-text-default -> text, color-brand -> accent (Salesforce blue #0070D2 area). color-success/error/warning/info map directly.",
   "base": {
-    "neutral": {
-      "0": "#ffffff",
-      "5": "oklch(98% 0.005 240)",
-      "10": "oklch(96% 0.008 240)",
-      "25": "oklch(92% 0.010 240)",
-      "50": "oklch(80% 0.012 240)",
-      "65": "oklch(60% 0.012 240)",
-      "75": "oklch(45% 0.014 240)",
-      "90": "oklch(28% 0.014 240)",
-      "100": "oklch(15% 0.014 240)"
+    "coolGray": {
+      "1": "oklch(100% 0 0)",
+      "2": "oklch(98.2% 0.0013 286.4)",
+      "3": "oklch(96.1% 0.0013 286.4)",
+      "4": "oklch(93.7% 0.0029 264.5)",
+      "5": "oklch(89% 0.0035 247.9)",
+      "6": "oklch(82.6% 0.006 264.5)",
+      "7": "oklch(74.7% 0.0048 258.3)",
+      "8": "oklch(66.1% 0.0074 277.1)",
+      "9": "oklch(53.4% 0.0053 258.3)",
+      "10": "oklch(43.9% 0.0081 233.8)",
+      "11": "oklch(37% 0.0032 228.9)",
+      "12": "oklch(29.1% 0.0056 236.7)",
+      "13": "oklch(13.3% 0.0021 196.9)"
     },
-    "brand": {
-      "100": "oklch(95% 0.04 240)",
-      "500": "oklch(50% 0.18 240)"
+    "warmGray": {
+      "1": "oklch(100% 0 0)",
+      "2": "oklch(98.5% 0.0013 106.4)",
+      "3": "oklch(96.2% 0.0011 17.2)",
+      "4": "oklch(94.1% 0.0017 67.8)",
+      "5": "oklch(89.3% 0.0026 48.7)",
+      "6": "oklch(83.1% 0.0036 67.8)",
+      "7": "oklch(74.9% 0.0045 56.4)",
+      "8": "oklch(66.8% 0.0038 67.8)",
+      "9": "oklch(53.9% 0.0052 78.3)",
+      "10": "oklch(42.9% 0.0042 67.7)",
+      "11": "oklch(36.3% 0.0034 106.6)",
+      "12": "oklch(27.9% 0.0057 56.2)",
+      "13": "oklch(13% 0.0021 17.4)"
     },
-    "error": {
-      "500": "oklch(52% 0.20 25)"
+    "blue": {
+      "10": "oklch(20.8% 0.0748 257.3)",
+      "15": "oklch(26.2% 0.0861 256.9)",
+      "20": "oklch(30.4% 0.101 256.5)",
+      "30": "oklch(39.1% 0.1256 254.5)",
+      "40": "oklch(47.6% 0.1448 253.9)",
+      "50": "oklch(56.3% 0.1674 251.9)",
+      "60": "oklch(66.5% 0.1842 251)",
+      "65": "oklch(70.7% 0.1526 254.1)",
+      "70": "oklch(75% 0.1265 256.6)",
+      "80": "oklch(83.6% 0.0816 259.4)",
+      "90": "oklch(92.2% 0.036 261.3)",
+      "95": "oklch(96.6% 0.0161 262.8)"
     },
-    "success": {
-      "500": "oklch(50% 0.16 145)"
+    "green": {
+      "10": "oklch(20.2% 0.0322 162.3)",
+      "15": "oklch(25.2% 0.0551 148)",
+      "20": "oklch(29.7% 0.0377 158.3)",
+      "30": "oklch(38% 0.0751 156)",
+      "40": "oklch(46.6% 0.0694 153.2)",
+      "50": "oklch(54.7% 0.1215 150.9)",
+      "60": "oklch(64.7% 0.1544 148.2)",
+      "65": "oklch(68.9% 0.1693 147.1)",
+      "70": "oklch(73.2% 0.1867 146.2)",
+      "80": "oklch(82.3% 0.132 142.6)",
+      "90": "oklch(91.6% 0.0676 139.2)",
+      "95": "oklch(96.3% 0.0258 136.3)"
     },
-    "warning": {
-      "500": "oklch(75% 0.18 80)"
+    "red": {
+      "10": "oklch(21.4% 0.0632 40.8)",
+      "15": "oklch(26.9% 0.0937 31.7)",
+      "20": "oklch(31.7% 0.1286 28.2)",
+      "30": "oklch(40.8% 0.1643 26.5)",
+      "40": "oklch(49.8% 0.2005 26.5)",
+      "50": "oklch(59% 0.2399 26.5)",
+      "60": "oklch(68.7% 0.2 28.9)",
+      "65": "oklch(72.5% 0.1683 29.5)",
+      "70": "oklch(76.5% 0.1377 30.3)",
+      "80": "oklch(84.4% 0.084 30.7)",
+      "90": "oklch(92.5% 0.0366 30.4)",
+      "95": "oklch(96.8% 0.0147 33.1)"
     },
-    "info": {
-      "500": "oklch(55% 0.16 220)"
+    "orange": {
+      "10": "oklch(20.7% 0.0424 86.8)",
+      "15": "oklch(26.3% 0.0553 63.9)",
+      "20": "oklch(30.4% 0.0607 81.5)",
+      "30": "oklch(39.2% 0.0817 74.6)",
+      "40": "oklch(47.9% 0.1036 69.7)",
+      "50": "oklch(56.8% 0.1268 64.5)",
+      "60": "oklch(67.6% 0.1599 59)",
+      "65": "oklch(72% 0.1735 57.1)",
+      "70": "oklch(76.3% 0.1624 56.3)",
+      "80": "oklch(84.3% 0.0976 52.3)",
+      "90": "oklch(92.5% 0.04 47.5)",
+      "95": "oklch(96.7% 0.0178 48.5)"
+    },
+    "yellow": {
+      "10": "oklch(21.1% 0.0464 56.9)",
+      "15": "oklch(26% 0.048 86.6)",
+      "20": "oklch(30.9% 0.0811 50.5)",
+      "30": "oklch(39.7% 0.1006 53)",
+      "40": "oklch(48.2% 0.1137 58.6)",
+      "50": "oklch(56.7% 0.1262 65)",
+      "60": "oklch(67.1% 0.1429 72.7)",
+      "65": "oklch(71.3% 0.1492 75.8)",
+      "70": "oklch(75.6% 0.1568 79.3)",
+      "80": "oklch(83.9% 0.1714 85.7)",
+      "90": "oklch(92.3% 0.0631 84.9)",
+      "95": "oklch(96.5% 0.0264 87.9)"
+    },
+    "white": {
+      "0": "oklch(100% 0 0)"
     }
   },
   "fonts": {
@@ -54,27 +131,27 @@
     "font-display": "'Salesforce Sans', system-ui, sans-serif"
   },
   "semantic": {
-    "surface": "{neutral.0}",
-    "surface-elevated": "{neutral.0}",
-    "surface-recessed": "{neutral.5}",
-    "surface-inverse": "{neutral.100}",
-    "text": "{neutral.100}",
-    "text-emphasis": "{neutral.100}",
-    "text-recede": "{neutral.65}",
-    "text-disabled": "{neutral.50}",
-    "text-on-accent": "{neutral.0}",
-    "text-on-critical": "{neutral.0}",
-    "text-on-success": "{neutral.0}",
-    "text-on-warning": "{neutral.100}",
-    "text-on-info": "{neutral.0}",
-    "border": "{neutral.25}",
-    "border-emphasis": "{brand.500}",
-    "border-recede": "{neutral.10}",
-    "accent": "{brand.500}",
-    "accent-recede": "{brand.100}",
-    "critical": "{error.500}",
-    "success": "{success.500}",
-    "warning": "{warning.500}",
-    "info": "{info.500}"
+    "surface": "{coolGray.1}",
+    "surface-elevated": "{coolGray.1}",
+    "surface-recessed": "{coolGray.1}",
+    "surface-inverse": "{coolGray.3}",
+    "text": "{coolGray.3}",
+    "text-emphasis": "{coolGray.3}",
+    "text-recede": "{coolGray.1}",
+    "text-disabled": "{coolGray.2}",
+    "text-on-accent": "{coolGray.1}",
+    "text-on-critical": "{coolGray.1}",
+    "text-on-success": "{coolGray.1}",
+    "text-on-warning": "{coolGray.3}",
+    "text-on-info": "{coolGray.1}",
+    "border": "{coolGray.1}",
+    "border-emphasis": "{blue.40}",
+    "border-recede": "{coolGray.1}",
+    "accent": "{blue.40}",
+    "accent-recede": "{blue.10}",
+    "critical": "{red.40}",
+    "success": "{green.40}",
+    "warning": "{yellow.40}",
+    "info": "{blue.40}"
   }
 }

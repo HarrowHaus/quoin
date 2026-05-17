@@ -10,44 +10,150 @@
   "attribution": {
     "sourceSystem": "Chakra UI",
     "sourceOrganization": "Chakra UI community",
-    "sourceUrl": "https://www.chakra-ui.com/",
+    "sourceUrl": "https://raw.githubusercontent.com/chakra-ui/chakra-ui/main/packages/react/src/theme/tokens/colors.ts",
     "sourceLicense": "MIT",
-    "harvestedAt": "2026-05-16",
-    "harvestNotes": "Chakra v3 default colour scales. Default primary is 'teal' (500). Gray = standard slate-tinted neutral.\n\nPhase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.",
-    "fidelityTier": "C"
+    "harvestedAt": "2026-05-17",
+    "harvestNotes": "Chakra UI v3 colour tokens extracted from packages/react/src/theme/tokens/colors.ts. Chakra wraps every value in `{ value: '#hex' }` per the Panda-CSS / @chakra-ui/styled-system convention. The value-wrapped-ts parser handles this shape. Extraction method: A. Mapping: Chakra v3 50-950 ramps for gray/red/orange/yellow/green/teal/blue/cyan/purple/pink. Default accent = teal.500 per Chakra convention. whiteAlpha/blackAlpha (semi-transparent overlays) are not modelled in the base palette — Quoin's primitives handle overlay tints via the impl pack.",
+    "fidelityTier": "B",
+    "sourceCommit": "main"
   },
   "mappingNotes": "Chakra gray-50..900 maps to Quoin surface/text. chakra-teal-500 -> accent. Status colours: red-500 (critical), green-500 (success), orange-500 (warning), blue-500 (info).",
   "base": {
     "gray": {
-      "50": "oklch(98% 0.005 250)",
-      "100": "oklch(95% 0.008 250)",
-      "200": "oklch(90% 0.012 250)",
-      "300": "oklch(82% 0.012 250)",
-      "400": "oklch(70% 0.012 250)",
-      "500": "oklch(55% 0.012 250)",
-      "600": "oklch(42% 0.014 250)",
-      "700": "oklch(30% 0.014 250)",
-      "800": "oklch(20% 0.014 250)",
-      "900": "oklch(12% 0.014 250)"
-    },
-    "white": {
-      "0": "#ffffff"
-    },
-    "teal": {
-      "50": "oklch(95% 0.04 195)",
-      "500": "oklch(55% 0.13 195)"
+      "50": "oklch(98.5% 0 0)",
+      "100": "oklch(96.7% 0.0013 286.4)",
+      "200": "oklch(92% 0.004 286.3)",
+      "300": "oklch(87.1% 0.0055 286.3)",
+      "400": "oklch(71.2% 0.0129 286.1)",
+      "500": "oklch(55.2% 0.0138 285.9)",
+      "600": "oklch(44.2% 0.0146 285.8)",
+      "700": "oklch(37% 0.0119 285.8)",
+      "800": "oklch(27.4% 0.0055 286)",
+      "900": "oklch(21% 0.0059 285.9)",
+      "950": "oklch(17.8% 0 0)"
     },
     "red": {
-      "500": "oklch(58% 0.21 25)"
-    },
-    "green": {
-      "500": "oklch(58% 0.16 145)"
+      "50": "oklch(97.1% 0.0129 17.4)",
+      "100": "oklch(93.6% 0.0309 17.7)",
+      "200": "oklch(88.5% 0.0593 18.3)",
+      "300": "oklch(80.8% 0.1035 19.6)",
+      "400": "oklch(71.1% 0.1661 22.2)",
+      "500": "oklch(63.7% 0.2078 25.3)",
+      "600": "oklch(57.7% 0.2152 27.3)",
+      "700": "oklch(44.2% 0.1629 27.1)",
+      "800": "oklch(29.1% 0.0947 25.3)",
+      "900": "oklch(21.6% 0.059 23.4)",
+      "950": "oklch(17.4% 0.0405 22.2)"
     },
     "orange": {
-      "500": "oklch(70% 0.18 60)"
+      "50": "oklch(98% 0.0158 73.7)",
+      "100": "oklch(95.4% 0.0372 75.2)",
+      "200": "oklch(90.1% 0.0729 70.7)",
+      "300": "oklch(83.7% 0.1165 66.3)",
+      "400": "oklch(75.8% 0.159 55.9)",
+      "500": "oklch(70.5% 0.1867 47.6)",
+      "600": "oklch(64.6% 0.1943 41.1)",
+      "700": "oklch(45.2% 0.1385 38.8)",
+      "800": "oklch(37.1% 0.1043 38)",
+      "900": "oklch(24.5% 0.0695 36.1)",
+      "950": "oklch(18.3% 0.0439 38.1)"
+    },
+    "yellow": {
+      "50": "oklch(98.7% 0.0262 102.2)",
+      "100": "oklch(97.3% 0.0693 103.2)",
+      "200": "oklch(94.5% 0.1243 101.5)",
+      "300": "oklch(90.5% 0.1657 98.1)",
+      "400": "oklch(86.1% 0.1731 91.9)",
+      "500": "oklch(79.5% 0.1617 86)",
+      "600": "oklch(68.1% 0.1423 75.8)",
+      "700": "oklch(48.4% 0.1025 68.2)",
+      "800": "oklch(42.1% 0.0897 57.7)",
+      "900": "oklch(28.6% 0.0639 53.8)",
+      "950": "oklch(21.3% 0.0435 55.6)"
+    },
+    "green": {
+      "50": "oklch(98.2% 0.0181 155.8)",
+      "100": "oklch(96.2% 0.0434 156.7)",
+      "200": "oklch(92.5% 0.0806 156)",
+      "300": "oklch(87.1% 0.1363 154.4)",
+      "400": "oklch(80% 0.1821 151.7)",
+      "500": "oklch(72.3% 0.192 149.6)",
+      "600": "oklch(62.7% 0.1699 149.2)",
+      "700": "oklch(45.8% 0.1175 150.3)",
+      "800": "oklch(36.4% 0.0819 152.6)",
+      "900": "oklch(24.2% 0.0553 154.1)",
+      "950": "oklch(19% 0.0399 155.8)"
+    },
+    "teal": {
+      "50": "oklch(98.4% 0.0142 180.7)",
+      "100": "oklch(95.3% 0.0498 180.8)",
+      "200": "oklch(91% 0.0927 180.4)",
+      "300": "oklch(85.5% 0.1251 181.1)",
+      "400": "oklch(78.5% 0.1325 181.9)",
+      "500": "oklch(70.4% 0.123 182.5)",
+      "600": "oklch(60% 0.1038 184.7)",
+      "700": "oklch(43.2% 0.0722 185.7)",
+      "800": "oklch(34.7% 0.0511 191.2)",
+      "900": "oklch(24.8% 0.0398 192.2)",
+      "950": "oklch(18.6% 0.0289 190.9)"
     },
     "blue": {
-      "500": "oklch(58% 0.16 240)"
+      "50": "oklch(97% 0.0142 254.6)",
+      "100": "oklch(93.2% 0.0316 255.6)",
+      "200": "oklch(88.2% 0.0571 254.1)",
+      "300": "oklch(84% 0.0821 251)",
+      "400": "oklch(71.4% 0.1434 254.6)",
+      "500": "oklch(62.3% 0.188 259.8)",
+      "600": "oklch(54.6% 0.2152 262.9)",
+      "700": "oklch(40.8% 0.1742 264.4)",
+      "800": "oklch(34.9% 0.1208 264.9)",
+      "900": "oklch(26% 0.0796 268.4)",
+      "950": "oklch(20% 0.0532 268.4)"
+    },
+    "cyan": {
+      "50": "oklch(98.4% 0.0189 200.9)",
+      "100": "oklch(95.6% 0.0443 203.4)",
+      "200": "oklch(91.7% 0.0772 205)",
+      "300": "oklch(86.5% 0.1153 207.1)",
+      "400": "oklch(79.7% 0.1339 211.5)",
+      "500": "oklch(71.5% 0.1257 215.2)",
+      "600": "oklch(60.9% 0.1109 221.7)",
+      "700": "oklch(44.2% 0.0781 222.6)",
+      "800": "oklch(35.3% 0.0568 226.6)",
+      "900": "oklch(26.8% 0.0465 229.2)",
+      "950": "oklch(20.9% 0.0333 227.7)"
+    },
+    "purple": {
+      "50": "oklch(97.7% 0.0142 308.3)",
+      "100": "oklch(94.6% 0.0327 307.2)",
+      "200": "oklch(90.2% 0.0604 306.7)",
+      "300": "oklch(82.7% 0.1082 306.4)",
+      "400": "oklch(72.2% 0.1767 305.5)",
+      "500": "oklch(62.7% 0.2325 303.9)",
+      "600": "oklch(55.8% 0.2525 302.3)",
+      "700": "oklch(42% 0.1974 302.4)",
+      "800": "oklch(33.9% 0.1461 305.1)",
+      "900": "oklch(25.4% 0.1254 301.7)",
+      "950": "oklch(18% 0.0828 304.1)"
+    },
+    "pink": {
+      "50": "oklch(97.1% 0.0141 343.2)",
+      "100": "oklch(94.8% 0.0276 342.3)",
+      "200": "oklch(89.9% 0.0589 343.2)",
+      "300": "oklch(82.3% 0.1095 346)",
+      "400": "oklch(72.5% 0.1752 349.8)",
+      "500": "oklch(65.6% 0.2118 354.3)",
+      "600": "oklch(59.2% 0.218 0.6)",
+      "700": "oklch(47.3% 0.1766 3)",
+      "800": "oklch(35.4% 0.1294 3.6)",
+      "900": "oklch(25.9% 0.0942 3.3)",
+      "950": "oklch(19.9% 0.0664 1.1)"
+    },
+    "black": {
+      "0": "oklch(14.1% 0.0044 285.8)"
+    },
+    "white": {
+      "0": "oklch(100% 0 0)"
     }
   },
   "fonts": {

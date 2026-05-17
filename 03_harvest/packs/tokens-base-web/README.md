@@ -6,12 +6,10 @@ Uber Base Web palette translated onto the Quoin canonical semantic-token namespa
 
 - **Source system:** Base Web
 - **Source organisation:** Uber
-- **Source URL:** https://baseweb.design/
+- **Source URL:** https://raw.githubusercontent.com/uber/baseweb/main/src/themes/light-theme/color-foundation-tokens.ts
 - **Source license:** MIT
-- **Harvested:** 2026-05-16
-- **Notes:** Uber Base Web light theme. Heavily monochrome — Uber's brand uses near-black accent on white. UberMove typeface is proprietary; referenced by family name only.
-
-Phase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.
+- **Harvested:** 2026-05-17
+- **Notes:** Uber Base Web light theme foundation colour tokens extracted from src/themes/light-theme/color-foundation-tokens.ts. Extraction method: A. Mapping: Base Web ships primary (50-700) + accent + ramps for negative/warning/positive. Heavy monochrome aesthetic — accent is a deep blue. Mapping: primary = primaryA (black), surface = primaryB (white), surface-recessed = primary50, accent = accent (blue), critical = negative, success = positive, warning = warning.
 
 ## Mapping
 

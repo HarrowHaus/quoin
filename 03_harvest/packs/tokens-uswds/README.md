@@ -8,10 +8,8 @@ United States Web Design System tokens translated onto the Quoin canonical seman
 - **Source organisation:** U.S. General Services Administration
 - **Source URL:** https://designsystem.digital.gov/
 - **Source license:** CC0-1.0
-- **Harvested:** 2026-05-16
-- **Notes:** USWDS is a work of the U.S. Federal Government and is in the public domain. Token values reflect the USWDS v3 'standard' palette (cool-blue primary + neutral gray). Source Sans Pro is referenced by family name only — no font files are redistributed.
-
-Phase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.
+- **Harvested:** 2026-05-17
+- **Notes:** USWDS palette extracted per-family from uswds/uswds packages/uswds-core/src/styles/tokens/color/_<family>.scss. Each family is a Sass map; we extract `step: #hex` via regex. Extraction method: B. Algorithm: uswds/uswds@develop, inputs {"families":["blue","gray-cool","gray-warm","red","green","yellow","gold","orange"]}. Mapping: USWDS uses semantic step values (5/10/20/30/40/50/60/70/80/90) and includes 'vivid' variants. Federal blue family is the canonical accent (blue.50). Cool gray is the default neutral ramp.
 
 ## Mapping
 

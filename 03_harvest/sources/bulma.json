@@ -11,40 +11,48 @@
   "attribution": {
     "sourceSystem": "Bulma",
     "sourceOrganization": "Jeremy Thomas / Bulma community",
-    "sourceUrl": "https://bulma.io/",
+    "sourceUrl": "https://raw.githubusercontent.com/jgthms/bulma/main/sass/utilities/initial-variables.scss",
     "sourceLicense": "MIT",
-    "harvestedAt": "2026-05-16",
-    "harvestNotes": "Bulma default theme. Signature accent is $primary = turquoise (#00D1B2 area). Bulma is one of the more aesthetically distinctive defaults — included for breadth.\n\nPhase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.",
-    "fidelityTier": "C"
+    "harvestedAt": "2026-05-17",
+    "harvestNotes": "Bulma initial-variables.scss extracted byte-faithfully. Turquoise primary + greyscale ramp. Hex source converted to OKLCH via culori. Extraction method: A. Mapping: Bulma's neutral ramp uses semantic stops (lighter/light/grey/dark/darker) rather than numeric. Status colours map: critical = red, success = green, warning = yellow, info = cyan; accent = turquoise.",
+    "fidelityTier": "B",
+    "sourceCommit": "main"
   },
   "mappingNotes": "Bulma's $background -> surface, $text -> text, $primary -> accent (turquoise), $danger/$success/$warning/$info -> respective. Bulma's $border -> border, $border-light -> border-recede.",
   "base": {
     "white": {
-      "0": "#ffffff"
+      "0": "oklch(100% 0 0)"
     },
-    "gray": {
-      "lighter": "oklch(97% 0.005 250)",
-      "light": "oklch(94% 0.008 250)",
-      "default": "oklch(80% 0.012 250)",
-      "dark": "oklch(50% 0.014 250)",
-      "darker": "oklch(28% 0.014 250)",
-      "darkest": "oklch(14% 0.014 250)"
+    "black": {
+      "0": "oklch(14.3% 0.0045 264.9)"
     },
-    "primary": {
-      "100": "oklch(95% 0.04 175)",
-      "500": "oklch(70% 0.13 175)"
+    "grey": {
+      "lighter": "oklch(88.6% 0.01 266)",
+      "light": "oklch(76% 0.0215 265.9)",
+      "base": "oklch(55.9% 0.0387 265.6)",
+      "dark": "oklch(39.4% 0.0255 265.6)",
+      "darker": "oklch(32% 0.0194 265.6)"
     },
-    "danger": {
-      "500": "oklch(58% 0.22 25)"
+    "turquoise": {
+      "base": "oklch(77% 0.1431 176.7)"
     },
-    "success": {
-      "500": "oklch(60% 0.16 145)"
+    "cyan": {
+      "base": "oklch(81.5% 0.1177 228.8)"
     },
-    "warning": {
-      "500": "oklch(85% 0.18 80)"
+    "green": {
+      "base": "oklch(74.4% 0.1401 160.3)"
     },
-    "info": {
-      "500": "oklch(60% 0.16 220)"
+    "yellow": {
+      "base": "oklch(82.6% 0.1691 79.7)"
+    },
+    "orange": {
+      "base": "oklch(66.3% 0.2269 35)"
+    },
+    "red": {
+      "base": "oklch(71.1% 0.187 11)"
+    },
+    "blue": {
+      "base": "oklch(55.5% 0.2452 270.1)"
     }
   },
   "fonts": {
@@ -56,25 +64,25 @@
   "semantic": {
     "surface": "{white.0}",
     "surface-elevated": "{white.0}",
-    "surface-recessed": "{gray.lighter}",
-    "surface-inverse": "{gray.darkest}",
-    "text": "{gray.darker}",
-    "text-emphasis": "{gray.darkest}",
-    "text-recede": "{gray.dark}",
-    "text-disabled": "{gray.default}",
+    "surface-recessed": "{grey.lighter}",
+    "surface-inverse": "{grey.darker}",
+    "text": "{grey.darker}",
+    "text-emphasis": "{grey.darker}",
+    "text-recede": "{grey.dark}",
+    "text-disabled": "{grey.base}",
     "text-on-accent": "{white.0}",
     "text-on-critical": "{white.0}",
     "text-on-success": "{white.0}",
-    "text-on-warning": "{gray.darkest}",
+    "text-on-warning": "{grey.darker}",
     "text-on-info": "{white.0}",
-    "border": "{gray.light}",
-    "border-emphasis": "{primary.500}",
-    "border-recede": "{gray.lighter}",
-    "accent": "{primary.500}",
-    "accent-recede": "{primary.100}",
-    "critical": "{danger.500}",
-    "success": "{success.500}",
-    "warning": "{warning.500}",
-    "info": "{info.500}"
+    "border": "{grey.light}",
+    "border-emphasis": "{turquoise.base}",
+    "border-recede": "{grey.lighter}",
+    "accent": "{turquoise.base}",
+    "accent-recede": "{turquoise.base}",
+    "critical": "{red.base}",
+    "success": "{green.base}",
+    "warning": "{yellow.base}",
+    "info": "{cyan.base}"
   }
 }

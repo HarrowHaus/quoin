@@ -1,67 +1,99 @@
 {
   "$schema": "https://design-tokens.github.io/community-group/format/",
   "color": {
-    "zinc": {
-      "50": {
-        "$value": "oklch(0.985 0 0)",
+    "shadcn": {
+      "background": {
+        "$value": "oklch(100% 0 0)",
         "$type": "color"
       },
-      "100": {
-        "$value": "oklch(0.967 0.001 286)",
+      "foreground": {
+        "$value": "oklch(14.1% 0.0044 285.8)",
         "$type": "color"
       },
-      "200": {
-        "$value": "oklch(0.92 0.004 286)",
+      "muted": {
+        "$value": "oklch(96.8% 0.0013 286.4)",
         "$type": "color"
       },
-      "400": {
-        "$value": "oklch(0.705 0.015 286)",
+      "muted-foreground": {
+        "$value": "oklch(55.2% 0.0137 285.9)",
         "$type": "color"
       },
-      "500": {
-        "$value": "oklch(0.552 0.016 286)",
+      "popover": {
+        "$value": "oklch(100% 0 0)",
         "$type": "color"
       },
-      "700": {
-        "$value": "oklch(0.37 0.013 286)",
+      "popover-foreground": {
+        "$value": "oklch(14.1% 0.0044 285.8)",
         "$type": "color"
       },
-      "900": {
-        "$value": "oklch(0.21 0.006 286)",
+      "card": {
+        "$value": "oklch(100% 0 0)",
         "$type": "color"
       },
-      "950": {
-        "$value": "oklch(0.141 0.005 286)",
+      "card-foreground": {
+        "$value": "oklch(14.1% 0.0044 285.8)",
+        "$type": "color"
+      },
+      "border": {
+        "$value": "oklch(92% 0.004 286.3)",
+        "$type": "color"
+      },
+      "input": {
+        "$value": "oklch(92% 0.004 286.3)",
+        "$type": "color"
+      },
+      "primary": {
+        "$value": "oklch(21% 0.0059 285.9)",
+        "$type": "color"
+      },
+      "primary-foreground": {
+        "$value": "oklch(98.5% 0 0)",
+        "$type": "color"
+      },
+      "secondary": {
+        "$value": "oklch(96.8% 0.0013 286.4)",
+        "$type": "color"
+      },
+      "secondary-foreground": {
+        "$value": "oklch(21% 0.0059 285.9)",
+        "$type": "color"
+      },
+      "accent": {
+        "$value": "oklch(96.8% 0.0013 286.4)",
+        "$type": "color"
+      },
+      "accent-foreground": {
+        "$value": "oklch(21% 0.0059 285.9)",
+        "$type": "color"
+      },
+      "destructive": {
+        "$value": "oklch(63.7% 0.2078 25.3)",
+        "$type": "color"
+      },
+      "destructive-foreground": {
+        "$value": "oklch(98.5% 0 0)",
+        "$type": "color"
+      },
+      "ring": {
+        "$value": "oklch(21% 0.0059 285.9)",
+        "$type": "color"
+      },
+      "success": {
+        "$value": "oklch(58.4% 0.18 145)",
+        "$type": "color"
+      },
+      "warning": {
+        "$value": "oklch(78% 0.17 80)",
+        "$type": "color"
+      },
+      "info": {
+        "$value": "oklch(60% 0.18 240)",
         "$type": "color"
       }
     },
     "white": {
       "0": {
-        "$value": "#ffffff",
-        "$type": "color"
-      }
-    },
-    "red": {
-      "500": {
-        "$value": "oklch(0.577 0.245 27.325)",
-        "$type": "color"
-      }
-    },
-    "emerald": {
-      "500": {
-        "$value": "oklch(0.696 0.17 162)",
-        "$type": "color"
-      }
-    },
-    "amber": {
-      "500": {
-        "$value": "oklch(0.769 0.188 70)",
-        "$type": "color"
-      }
-    },
-    "sky": {
-      "500": {
-        "$value": "oklch(0.685 0.169 237)",
+        "$value": "oklch(100% 0 0)",
         "$type": "color"
       }
     }
@@ -279,43 +311,43 @@
     "$type": "fontFamily"
   },
   "surface": {
-    "$value": "{color.white.0}",
+    "$value": "{color.shadcn.background}",
     "$type": "color"
   },
   "surface-elevated": {
-    "$value": "{color.white.0}",
+    "$value": "{color.shadcn.card}",
     "$type": "color"
   },
   "surface-recessed": {
-    "$value": "{color.zinc.100}",
+    "$value": "{color.shadcn.muted}",
     "$type": "color"
   },
   "surface-inverse": {
-    "$value": "{color.zinc.950}",
+    "$value": "{color.shadcn.primary}",
     "$type": "color"
   },
   "text": {
-    "$value": "{color.zinc.900}",
+    "$value": "{color.shadcn.foreground}",
     "$type": "color"
   },
   "text-emphasis": {
-    "$value": "{color.zinc.950}",
+    "$value": "{color.shadcn.foreground}",
     "$type": "color"
   },
   "text-recede": {
-    "$value": "{color.zinc.500}",
+    "$value": "{color.shadcn.muted-foreground}",
     "$type": "color"
   },
   "text-disabled": {
-    "$value": "{color.zinc.400}",
+    "$value": "{color.shadcn.muted-foreground}",
     "$type": "color"
   },
   "text-on-accent": {
-    "$value": "{color.zinc.50}",
+    "$value": "{color.shadcn.primary-foreground}",
     "$type": "color"
   },
   "text-on-critical": {
-    "$value": "{color.zinc.50}",
+    "$value": "{color.shadcn.destructive-foreground}",
     "$type": "color"
   },
   "text-on-success": {
@@ -323,7 +355,7 @@
     "$type": "color"
   },
   "text-on-warning": {
-    "$value": "{color.zinc.950}",
+    "$value": "{color.shadcn.foreground}",
     "$type": "color"
   },
   "text-on-info": {
@@ -331,39 +363,39 @@
     "$type": "color"
   },
   "border": {
-    "$value": "{color.zinc.200}",
+    "$value": "{color.shadcn.border}",
     "$type": "color"
   },
   "border-emphasis": {
-    "$value": "{color.zinc.700}",
+    "$value": "{color.shadcn.ring}",
     "$type": "color"
   },
   "border-recede": {
-    "$value": "{color.zinc.100}",
+    "$value": "{color.shadcn.muted}",
     "$type": "color"
   },
   "accent": {
-    "$value": "{color.zinc.900}",
+    "$value": "{color.shadcn.primary}",
     "$type": "color"
   },
   "accent-recede": {
-    "$value": "{color.zinc.100}",
+    "$value": "{color.shadcn.accent}",
     "$type": "color"
   },
   "critical": {
-    "$value": "{color.red.500}",
+    "$value": "{color.shadcn.destructive}",
     "$type": "color"
   },
   "success": {
-    "$value": "{color.emerald.500}",
+    "$value": "{color.shadcn.success}",
     "$type": "color"
   },
   "warning": {
-    "$value": "{color.amber.500}",
+    "$value": "{color.shadcn.warning}",
     "$type": "color"
   },
   "info": {
-    "$value": "{color.sky.500}",
+    "$value": "{color.shadcn.info}",
     "$type": "color"
   }
 }

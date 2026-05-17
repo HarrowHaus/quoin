@@ -1,71 +1,907 @@
 {
   "$schema": "https://design-tokens.github.io/community-group/format/",
   "color": {
-    "neutral": {
+    "polaris": {
+      "color-bg": {
+        "$value": "oklch(95.8% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-inverse": {
+        "$value": "oklch(21.8% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-surface": {
+        "$value": "oklch(100% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-surface-hover": {
+        "$value": "oklch(97.6% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-surface-active": {
+        "$value": "oklch(96.4% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-surface-selected": {
+        "$value": "oklch(95.8% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-surface-disabled": {
+        "$value": "oklch(0% 0 0 / 0.05)",
+        "$type": "color"
+      },
+      "color-bg-surface-secondary": {
+        "$value": "oklch(97.6% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-surface-secondary-hover": {
+        "$value": "oklch(95.8% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-surface-secondary-active": {
+        "$value": "oklch(94% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-surface-secondary-selected": {
+        "$value": "oklch(94% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-surface-tertiary": {
+        "$value": "oklch(96.4% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-surface-tertiary-hover": {
+        "$value": "oklch(94% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-surface-tertiary-active": {
+        "$value": "oklch(91.6% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-surface-brand": {
+        "$value": "oklch(91.6% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-surface-brand-hover": {
+        "$value": "oklch(94% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-surface-brand-active": {
+        "$value": "oklch(95.8% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-surface-brand-selected": {
+        "$value": "oklch(95.8% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-surface-info": {
+        "$value": "oklch(96.3% 0.0182 250.6)",
+        "$type": "color"
+      },
+      "color-bg-surface-info-hover": {
+        "$value": "oklch(94.8% 0.0265 246.3)",
+        "$type": "color"
+      },
+      "color-bg-surface-info-active": {
+        "$value": "oklch(91.2% 0.0453 245.3)",
+        "$type": "color"
+      },
+      "color-bg-surface-success": {
+        "$value": "oklch(95.2% 0.0752 148.9)",
+        "$type": "color"
+      },
+      "color-bg-surface-success-hover": {
+        "$value": "oklch(93% 0.1154 150)",
+        "$type": "color"
+      },
+      "color-bg-surface-success-active": {
+        "$value": "oklch(90.7% 0.1481 150.5)",
+        "$type": "color"
+      },
+      "color-bg-surface-caution": {
+        "$value": "oklch(97.7% 0.0385 95.8)",
+        "$type": "color"
+      },
+      "color-bg-surface-caution-hover": {
+        "$value": "oklch(96.3% 0.0689 97.7)",
+        "$type": "color"
+      },
+      "color-bg-surface-caution-active": {
+        "$value": "oklch(94.7% 0.1033 98.5)",
+        "$type": "color"
+      },
+      "color-bg-surface-warning": {
+        "$value": "oklch(96.5% 0.024 67.5)",
+        "$type": "color"
+      },
+      "color-bg-surface-warning-hover": {
+        "$value": "oklch(95% 0.0363 70)",
+        "$type": "color"
+      },
+      "color-bg-surface-warning-active": {
+        "$value": "oklch(93.3% 0.0494 70.1)",
+        "$type": "color"
+      },
+      "color-bg-surface-critical": {
+        "$value": "oklch(94.9% 0.0243 8.2)",
+        "$type": "color"
+      },
+      "color-bg-surface-critical-hover": {
+        "$value": "oklch(93.5% 0.0326 6)",
+        "$type": "color"
+      },
+      "color-bg-surface-critical-active": {
+        "$value": "oklch(91.8% 0.0419 6.9)",
+        "$type": "color"
+      },
+      "color-bg-surface-emphasis": {
+        "$value": "oklch(96.3% 0.0175 279.1)",
+        "$type": "color"
+      },
+      "color-bg-surface-emphasis-hover": {
+        "$value": "oklch(94.9% 0.0244 278.4)",
+        "$type": "color"
+      },
+      "color-bg-surface-emphasis-active": {
+        "$value": "oklch(93.1% 0.0329 276.4)",
+        "$type": "color"
+      },
+      "color-bg-surface-magic": {
+        "$value": "oklch(97.9% 0.0106 292)",
+        "$type": "color"
+      },
+      "color-bg-surface-magic-hover": {
+        "$value": "oklch(96.4% 0.0187 292.6)",
+        "$type": "color"
+      },
+      "color-bg-surface-magic-active": {
+        "$value": "oklch(93.3% 0.0352 292.8)",
+        "$type": "color"
+      },
+      "color-bg-surface-inverse": {
+        "$value": "oklch(30.9% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-surface-transparent": {
+        "$value": "oklch(0% 0 0 / 0)",
+        "$type": "color"
+      },
+      "color-bg-fill": {
+        "$value": "oklch(100% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-fill-hover": {
+        "$value": "oklch(98.5% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-fill-active": {
+        "$value": "oklch(97.6% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-fill-selected": {
+        "$value": "oklch(84.5% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-fill-disabled": {
+        "$value": "oklch(0% 0 0 / 0.05)",
+        "$type": "color"
+      },
+      "color-bg-fill-secondary": {
+        "$value": "oklch(95.8% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-fill-secondary-hover": {
+        "$value": "oklch(94% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-fill-secondary-active": {
+        "$value": "oklch(91.6% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-fill-secondary-selected": {
+        "$value": "oklch(91.6% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-fill-tertiary": {
+        "$value": "oklch(91.6% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-fill-tertiary-hover": {
+        "$value": "oklch(87% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-fill-tertiary-active": {
+        "$value": "oklch(84.5% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-fill-brand": {
+        "$value": "oklch(30.9% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-fill-brand-hover": {
+        "$value": "oklch(21.8% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-fill-brand-active": {
+        "$value": "oklch(21.8% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-fill-brand-selected": {
+        "$value": "oklch(30.9% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-fill-brand-disabled": {
+        "$value": "oklch(0% 0 0 / 0.17)",
+        "$type": "color"
+      },
+      "color-bg-fill-info": {
+        "$value": "oklch(83.2% 0.0923 241.5)",
+        "$type": "color"
+      },
+      "color-bg-fill-info-hover": {
+        "$value": "oklch(77% 0.1347 237.2)",
+        "$type": "color"
+      },
+      "color-bg-fill-info-active": {
+        "$value": "oklch(63.3% 0.1412 238.3)",
+        "$type": "color"
+      },
+      "color-bg-fill-info-secondary": {
+        "$value": "oklch(93% 0.0359 245.6)",
+        "$type": "color"
+      },
+      "color-bg-fill-success": {
+        "$value": "oklch(51.8% 0.1038 168.2)",
+        "$type": "color"
+      },
+      "color-bg-fill-success-hover": {
+        "$value": "oklch(43% 0.0812 173.5)",
+        "$type": "color"
+      },
+      "color-bg-fill-success-active": {
+        "$value": "oklch(37% 0.0673 178.6)",
+        "$type": "color"
+      },
+      "color-bg-fill-success-secondary": {
+        "$value": "oklch(93% 0.1154 150)",
+        "$type": "color"
+      },
+      "color-bg-fill-warning": {
+        "$value": "oklch(82.7% 0.1711 80.5)",
+        "$type": "color"
+      },
+      "color-bg-fill-warning-hover": {
+        "$value": "oklch(76.3% 0.1577 80.6)",
+        "$type": "color"
+      },
+      "color-bg-fill-warning-active": {
+        "$value": "oklch(64.1% 0.1316 83.9)",
+        "$type": "color"
+      },
+      "color-bg-fill-warning-secondary": {
+        "$value": "oklch(89.9% 0.0792 72.1)",
+        "$type": "color"
+      },
+      "color-bg-fill-caution": {
+        "$value": "oklch(91.7% 0.1915 101.4)",
+        "$type": "color"
+      },
+      "color-bg-fill-caution-hover": {
+        "$value": "oklch(85.9% 0.1795 101.4)",
+        "$type": "color"
+      },
+      "color-bg-fill-caution-active": {
+        "$value": "oklch(83.4% 0.1744 101.5)",
+        "$type": "color"
+      },
+      "color-bg-fill-caution-secondary": {
+        "$value": "oklch(93.4% 0.1372 99.6)",
+        "$type": "color"
+      },
+      "color-bg-fill-critical": {
+        "$value": "oklch(52.6% 0.209 24.5)",
+        "$type": "color"
+      },
+      "color-bg-fill-critical-hover": {
+        "$value": "oklch(45.5% 0.1784 22.1)",
+        "$type": "color"
+      },
+      "color-bg-fill-critical-active": {
+        "$value": "oklch(41.4% 0.1596 21.3)",
+        "$type": "color"
+      },
+      "color-bg-fill-critical-selected": {
+        "$value": "oklch(41.4% 0.1596 21.3)",
+        "$type": "color"
+      },
+      "color-bg-fill-critical-secondary": {
+        "$value": "oklch(90.1% 0.0512 9.1)",
+        "$type": "color"
+      },
+      "color-bg-fill-emphasis": {
+        "$value": "oklch(50.4% 0.1992 259.4)",
+        "$type": "color"
+      },
+      "color-bg-fill-emphasis-hover": {
+        "$value": "oklch(40.2% 0.1543 258.8)",
+        "$type": "color"
+      },
+      "color-bg-fill-emphasis-active": {
+        "$value": "oklch(31.4% 0.115 257.7)",
+        "$type": "color"
+      },
+      "color-bg-fill-magic": {
+        "$value": "oklch(58.7% 0.2424 289.1)",
+        "$type": "color"
+      },
+      "color-bg-fill-magic-secondary": {
+        "$value": "oklch(93.3% 0.0352 292.8)",
+        "$type": "color"
+      },
+      "color-bg-fill-magic-secondary-hover": {
+        "$value": "oklch(91.5% 0.045 293.8)",
+        "$type": "color"
+      },
+      "color-bg-fill-magic-secondary-active": {
+        "$value": "oklch(90.2% 0.052 292.6)",
+        "$type": "color"
+      },
+      "color-bg-fill-inverse": {
+        "$value": "oklch(30.9% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-fill-inverse-hover": {
+        "$value": "oklch(40.9% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-fill-inverse-active": {
+        "$value": "oklch(49.3% 0 0)",
+        "$type": "color"
+      },
+      "color-bg-fill-transparent": {
+        "$value": "oklch(0% 0 0 / 0.02)",
+        "$type": "color"
+      },
+      "color-bg-fill-transparent-hover": {
+        "$value": "oklch(0% 0 0 / 0.05)",
+        "$type": "color"
+      },
+      "color-bg-fill-transparent-active": {
+        "$value": "oklch(0% 0 0 / 0.08)",
+        "$type": "color"
+      },
+      "color-bg-fill-transparent-selected": {
+        "$value": "oklch(0% 0 0 / 0.08)",
+        "$type": "color"
+      },
+      "color-bg-fill-transparent-secondary": {
+        "$value": "oklch(0% 0 0 / 0.06)",
+        "$type": "color"
+      },
+      "color-bg-fill-transparent-secondary-hover": {
+        "$value": "oklch(0% 0 0 / 0.08)",
+        "$type": "color"
+      },
+      "color-bg-fill-transparent-secondary-active": {
+        "$value": "oklch(0% 0 0 / 0.11)",
+        "$type": "color"
+      },
+      "color-text": {
+        "$value": "oklch(30.9% 0 0)",
+        "$type": "color"
+      },
+      "color-text-secondary": {
+        "$value": "oklch(49.3% 0 0)",
+        "$type": "color"
+      },
+      "color-text-disabled": {
+        "$value": "oklch(77.3% 0 0)",
+        "$type": "color"
+      },
+      "color-text-link": {
+        "$value": "oklch(50.4% 0.1992 259.4)",
+        "$type": "color"
+      },
+      "color-text-link-hover": {
+        "$value": "oklch(40.2% 0.1543 258.8)",
+        "$type": "color"
+      },
+      "color-text-link-active": {
+        "$value": "oklch(31.4% 0.115 257.7)",
+        "$type": "color"
+      },
+      "color-text-brand": {
+        "$value": "oklch(40.9% 0 0)",
+        "$type": "color"
+      },
+      "color-text-brand-hover": {
+        "$value": "oklch(30.9% 0 0)",
+        "$type": "color"
+      },
+      "color-text-brand-on-bg-fill": {
+        "$value": "oklch(100% 0 0)",
+        "$type": "color"
+      },
+      "color-text-brand-on-bg-fill-hover": {
+        "$value": "oklch(91.6% 0 0)",
+        "$type": "color"
+      },
+      "color-text-brand-on-bg-fill-active": {
+        "$value": "oklch(84.5% 0 0)",
+        "$type": "color"
+      },
+      "color-text-brand-on-bg-fill-disabled": {
+        "$value": "oklch(100% 0 0)",
+        "$type": "color"
+      },
+      "color-text-info": {
+        "$value": "oklch(33.3% 0.0777 241)",
+        "$type": "color"
+      },
+      "color-text-info-hover": {
+        "$value": "oklch(33.3% 0.0777 241)",
+        "$type": "color"
+      },
+      "color-text-info-active": {
+        "$value": "oklch(23.5% 0.0513 237.1)",
+        "$type": "color"
+      },
+      "color-text-info-secondary": {
+        "$value": "oklch(55.7% 0.1249 238.6)",
+        "$type": "color"
+      },
+      "color-text-info-on-bg-fill": {
+        "$value": "oklch(23.5% 0.0513 237.1)",
+        "$type": "color"
+      },
+      "color-text-success": {
+        "$value": "oklch(37% 0.0673 178.6)",
+        "$type": "color"
+      },
+      "color-text-success-hover": {
+        "$value": "oklch(30.1% 0.0494 182.3)",
+        "$type": "color"
+      },
+      "color-text-success-active": {
+        "$value": "oklch(24.2% 0.041 184.1)",
+        "$type": "color"
+      },
+      "color-text-success-secondary": {
+        "$value": "oklch(51.8% 0.1038 168.2)",
+        "$type": "color"
+      },
+      "color-text-success-on-bg-fill": {
+        "$value": "oklch(99.5% 0.0074 151.9)",
+        "$type": "color"
+      },
+      "color-text-caution": {
+        "$value": "oklch(39.4% 0.0825 102.1)",
+        "$type": "color"
+      },
+      "color-text-caution-hover": {
+        "$value": "oklch(29.7% 0.0625 103)",
+        "$type": "color"
+      },
+      "color-text-caution-active": {
+        "$value": "oklch(22.3% 0.047 104)",
+        "$type": "color"
+      },
+      "color-text-caution-secondary": {
+        "$value": "oklch(55.7% 0.1165 101.7)",
+        "$type": "color"
+      },
+      "color-text-caution-on-bg-fill": {
+        "$value": "oklch(29.7% 0.0625 103)",
+        "$type": "color"
+      },
+      "color-text-warning": {
+        "$value": "oklch(40% 0.0825 81.2)",
+        "$type": "color"
+      },
+      "color-text-warning-hover": {
+        "$value": "oklch(31.2% 0.0644 82)",
+        "$type": "color"
+      },
+      "color-text-warning-active": {
+        "$value": "oklch(22.5% 0.0461 87)",
+        "$type": "color"
+      },
+      "color-text-warning-secondary": {
+        "$value": "oklch(56.4% 0.1157 84.7)",
+        "$type": "color"
+      },
+      "color-text-warning-on-bg-fill": {
+        "$value": "oklch(22.5% 0.0461 87)",
+        "$type": "color"
+      },
+      "color-text-critical": {
+        "$value": "oklch(41.4% 0.1596 21.3)",
+        "$type": "color"
+      },
+      "color-text-critical-hover": {
+        "$value": "oklch(31.3% 0.1179 20)",
+        "$type": "color"
+      },
+      "color-text-critical-active": {
+        "$value": "oklch(20.2% 0.07 16)",
+        "$type": "color"
+      },
+      "color-text-critical-secondary": {
+        "$value": "oklch(52.6% 0.209 24.5)",
+        "$type": "color"
+      },
+      "color-text-critical-on-bg-fill": {
+        "$value": "oklch(98.9% 0.0055 3.3)",
+        "$type": "color"
+      },
+      "color-text-emphasis": {
+        "$value": "oklch(50.4% 0.1992 259.4)",
+        "$type": "color"
+      },
+      "color-text-emphasis-hover": {
+        "$value": "oklch(40.2% 0.1543 258.8)",
+        "$type": "color"
+      },
+      "color-text-emphasis-active": {
+        "$value": "oklch(31.4% 0.115 257.7)",
+        "$type": "color"
+      },
+      "color-text-emphasis-on-bg-fill": {
+        "$value": "oklch(99.4% 0.0029 264.5)",
+        "$type": "color"
+      },
+      "color-text-emphasis-on-bg-fill-hover": {
+        "$value": "oklch(93.1% 0.0329 276.4)",
+        "$type": "color"
+      },
+      "color-text-emphasis-on-bg-fill-active": {
+        "$value": "oklch(90% 0.0486 276.5)",
+        "$type": "color"
+      },
+      "color-text-magic": {
+        "$value": "oklch(43.8% 0.2524 287.3)",
+        "$type": "color"
+      },
+      "color-text-magic-secondary": {
+        "$value": "oklch(53% 0.2799 287.9)",
+        "$type": "color"
+      },
+      "color-text-magic-on-bg-fill": {
+        "$value": "oklch(99.5% 0.0026 286.4)",
+        "$type": "color"
+      },
+      "color-text-inverse": {
+        "$value": "oklch(91.6% 0 0)",
+        "$type": "color"
+      },
+      "color-text-inverse-secondary": {
+        "$value": "oklch(77.3% 0 0)",
+        "$type": "color"
+      },
+      "color-text-link-inverse": {
+        "$value": "oklch(86.5% 0.0664 274.6)",
+        "$type": "color"
+      },
+      "color-border": {
+        "$value": "oklch(91.6% 0 0)",
+        "$type": "color"
+      },
+      "color-border-hover": {
+        "$value": "oklch(84.5% 0 0)",
+        "$type": "color"
+      },
+      "color-border-disabled": {
+        "$value": "oklch(94% 0 0)",
+        "$type": "color"
+      },
+      "color-border-secondary": {
+        "$value": "oklch(94% 0 0)",
+        "$type": "color"
+      },
+      "color-border-tertiary": {
+        "$value": "oklch(84.5% 0 0)",
+        "$type": "color"
+      },
+      "color-border-focus": {
+        "$value": "oklch(50.4% 0.1992 259.4)",
+        "$type": "color"
+      },
+      "color-border-brand": {
+        "$value": "oklch(91.6% 0 0)",
+        "$type": "color"
+      },
+      "color-border-info": {
+        "$value": "oklch(86.2% 0.074 243.2)",
+        "$type": "color"
+      },
+      "color-border-success": {
+        "$value": "oklch(90.7% 0.1481 150.5)",
+        "$type": "color"
+      },
+      "color-border-caution": {
+        "$value": "oklch(93.4% 0.1372 99.6)",
+        "$type": "color"
+      },
+      "color-border-warning": {
+        "$value": "oklch(86.5% 0.1153 75.3)",
+        "$type": "color"
+      },
+      "color-border-critical": {
+        "$value": "oklch(86.7% 0.0704 12.1)",
+        "$type": "color"
+      },
+      "color-border-critical-secondary": {
+        "$value": "oklch(41.4% 0.1596 21.3)",
+        "$type": "color"
+      },
+      "color-border-emphasis": {
+        "$value": "oklch(50.4% 0.1992 259.4)",
+        "$type": "color"
+      },
+      "color-border-emphasis-hover": {
+        "$value": "oklch(40.2% 0.1543 258.8)",
+        "$type": "color"
+      },
+      "color-border-emphasis-active": {
+        "$value": "oklch(31.4% 0.115 257.7)",
+        "$type": "color"
+      },
+      "color-border-magic": {
+        "$value": "oklch(91.5% 0.045 293.8)",
+        "$type": "color"
+      },
+      "color-border-magic-secondary": {
+        "$value": "oklch(65.7% 0.1982 290.5)",
+        "$type": "color"
+      },
+      "color-border-magic-secondary-hover": {
+        "$value": "oklch(58.7% 0.2424 289.1)",
+        "$type": "color"
+      },
+      "color-border-inverse": {
+        "$value": "oklch(49.3% 0 0)",
+        "$type": "color"
+      },
+      "color-border-inverse-hover": {
+        "$value": "oklch(84.5% 0 0)",
+        "$type": "color"
+      },
+      "color-border-inverse-active": {
+        "$value": "oklch(91.6% 0 0)",
+        "$type": "color"
+      },
+      "color-tooltip-tail-down-border": {
+        "$value": "oklch(87% 0 0)",
+        "$type": "color"
+      },
+      "color-tooltip-tail-up-border": {
+        "$value": "oklch(91.6% 0 0)",
+        "$type": "color"
+      },
+      "color-icon": {
+        "$value": "oklch(40.9% 0 0)",
+        "$type": "color"
+      },
+      "color-icon-hover": {
+        "$value": "oklch(30.9% 0 0)",
+        "$type": "color"
+      },
+      "color-icon-active": {
+        "$value": "oklch(21.8% 0 0)",
+        "$type": "color"
+      },
+      "color-icon-disabled": {
+        "$value": "oklch(84.5% 0 0)",
+        "$type": "color"
+      },
+      "color-icon-secondary": {
+        "$value": "oklch(63.3% 0 0)",
+        "$type": "color"
+      },
+      "color-icon-secondary-hover": {
+        "$value": "oklch(49.3% 0 0)",
+        "$type": "color"
+      },
+      "color-icon-secondary-active": {
+        "$value": "oklch(40.9% 0 0)",
+        "$type": "color"
+      },
+      "color-icon-brand": {
+        "$value": "oklch(21.8% 0 0)",
+        "$type": "color"
+      },
+      "color-icon-info": {
+        "$value": "oklch(63.3% 0.1412 238.3)",
+        "$type": "color"
+      },
+      "color-icon-success": {
+        "$value": "oklch(51.8% 0.1038 168.2)",
+        "$type": "color"
+      },
+      "color-icon-caution": {
+        "$value": "oklch(62.7% 0.1312 101.7)",
+        "$type": "color"
+      },
+      "color-icon-warning": {
+        "$value": "oklch(64.1% 0.1316 83.9)",
+        "$type": "color"
+      },
+      "color-icon-critical": {
+        "$value": "oklch(59.4% 0.2151 24)",
+        "$type": "color"
+      },
+      "color-icon-emphasis": {
+        "$value": "oklch(50.4% 0.1992 259.4)",
+        "$type": "color"
+      },
+      "color-icon-emphasis-hover": {
+        "$value": "oklch(40.2% 0.1543 258.8)",
+        "$type": "color"
+      },
+      "color-icon-emphasis-active": {
+        "$value": "oklch(31.4% 0.115 257.7)",
+        "$type": "color"
+      },
+      "color-icon-magic": {
+        "$value": "oklch(58.7% 0.2424 289.1)",
+        "$type": "color"
+      },
+      "color-icon-inverse": {
+        "$value": "oklch(91.6% 0 0)",
+        "$type": "color"
+      },
+      "color-avatar-bg-fill": {
+        "$value": "oklch(77.3% 0 0)",
+        "$type": "color"
+      },
+      "color-avatar-five-bg-fill": {
+        "$value": "oklch(68.3% 0.2197 0.6)",
+        "$type": "color"
+      },
+      "color-avatar-five-text-on-bg-fill": {
+        "$value": "oklch(98.1% 0.01 2)",
+        "$type": "color"
+      },
+      "color-avatar-four-bg-fill": {
+        "$value": "oklch(77% 0.1347 237.2)",
+        "$type": "color"
+      },
+      "color-avatar-four-text-on-bg-fill": {
+        "$value": "oklch(23.5% 0.0513 237.1)",
+        "$type": "color"
+      },
+      "color-avatar-one-bg-fill": {
+        "$value": "oklch(59.7% 0.2403 328.1)",
+        "$type": "color"
+      },
+      "color-avatar-one-text-on-bg-fill": {
+        "$value": "oklch(96.7% 0.0237 325.8)",
+        "$type": "color"
+      },
+      "color-avatar-seven-bg-fill": {
+        "$value": "oklch(65.7% 0.1982 290.5)",
+        "$type": "color"
+      },
+      "color-avatar-seven-text-on-bg-fill": {
+        "$value": "oklch(97.9% 0.0106 292)",
+        "$type": "color"
+      },
+      "color-avatar-six-bg-fill": {
+        "$value": "oklch(81% 0.2618 142.9)",
+        "$type": "color"
+      },
+      "color-avatar-six-text-on-bg-fill": {
+        "$value": "oklch(31.3% 0.1011 143.1)",
+        "$type": "color"
+      },
+      "color-avatar-text-on-bg-fill": {
+        "$value": "oklch(100% 0 0)",
+        "$type": "color"
+      },
+      "color-avatar-three-bg-fill": {
+        "$value": "oklch(82% 0.1359 187.7)",
+        "$type": "color"
+      },
+      "color-avatar-three-text-on-bg-fill": {
+        "$value": "oklch(32.2% 0.0541 189.2)",
+        "$type": "color"
+      },
+      "color-avatar-two-bg-fill": {
+        "$value": "oklch(86% 0.1931 152.3)",
+        "$type": "color"
+      },
+      "color-avatar-two-text-on-bg-fill": {
+        "$value": "oklch(37% 0.0673 178.6)",
+        "$type": "color"
+      },
+      "color-backdrop-bg": {
+        "$value": "oklch(0% 0 0 / 0.71)",
+        "$type": "color"
+      },
+      "color-checkbox-bg-surface-disabled": {
+        "$value": "oklch(0% 0 0 / 0.08)",
+        "$type": "color"
+      },
+      "color-checkbox-icon-disabled": {
+        "$value": "oklch(100% 0 0)",
+        "$type": "color"
+      },
+      "color-input-bg-surface": {
+        "$value": "oklch(99.4% 0 0)",
+        "$type": "color"
+      },
+      "color-input-bg-surface-hover": {
+        "$value": "oklch(98.5% 0 0)",
+        "$type": "color"
+      },
+      "color-input-bg-surface-active": {
+        "$value": "oklch(97.6% 0 0)",
+        "$type": "color"
+      },
+      "color-input-border": {
+        "$value": "oklch(63.3% 0 0)",
+        "$type": "color"
+      },
+      "color-input-border-hover": {
+        "$value": "oklch(49.3% 0 0)",
+        "$type": "color"
+      },
+      "color-input-border-active": {
+        "$value": "oklch(21.8% 0 0)",
+        "$type": "color"
+      },
+      "color-nav-bg": {
+        "$value": "oklch(94% 0 0)",
+        "$type": "color"
+      },
+      "color-nav-bg-surface": {
+        "$value": "oklch(0% 0 0 / 0.02)",
+        "$type": "color"
+      },
+      "color-nav-bg-surface-hover": {
+        "$value": "oklch(95.8% 0 0)",
+        "$type": "color"
+      },
+      "color-nav-bg-surface-active": {
+        "$value": "oklch(98.5% 0 0)",
+        "$type": "color"
+      },
+      "color-nav-bg-surface-selected": {
+        "$value": "oklch(98.5% 0 0)",
+        "$type": "color"
+      },
+      "color-radio-button-bg-surface-disabled": {
+        "$value": "oklch(0% 0 0 / 0.08)",
+        "$type": "color"
+      },
+      "color-radio-button-icon-disabled": {
+        "$value": "oklch(100% 0 0)",
+        "$type": "color"
+      },
+      "color-video-thumbnail-play-button-bg-fill-hover": {
+        "$value": "oklch(0% 0 0 / 0.81)",
+        "$type": "color"
+      },
+      "color-video-thumbnail-play-button-bg-fill": {
+        "$value": "oklch(0% 0 0 / 0.71)",
+        "$type": "color"
+      },
+      "color-video-thumbnail-play-button-text-on-bg-fill": {
+        "$value": "oklch(100% 0 0)",
+        "$type": "color"
+      },
+      "color-scrollbar-thumb-bg-hover": {
+        "$value": "oklch(63.3% 0 0)",
+        "$type": "color"
+      },
+      "color-scrollbar-thumb-bg": {
+        "$value": "oklch(77.3% 0 0)",
+        "$type": "color"
+      }
+    },
+    "white": {
       "0": {
-        "$value": "#ffffff",
-        "$type": "color"
-      },
-      "50": {
-        "$value": "oklch(98% 0.005 250)",
-        "$type": "color"
-      },
-      "100": {
-        "$value": "oklch(95% 0.008 250)",
-        "$type": "color"
-      },
-      "200": {
-        "$value": "oklch(88% 0.010 250)",
-        "$type": "color"
-      },
-      "300": {
-        "$value": "oklch(75% 0.010 250)",
-        "$type": "color"
-      },
-      "500": {
-        "$value": "oklch(50% 0.012 250)",
-        "$type": "color"
-      },
-      "700": {
-        "$value": "oklch(32% 0.012 250)",
-        "$type": "color"
-      },
-      "900": {
-        "$value": "oklch(15% 0.012 250)",
-        "$type": "color"
-      }
-    },
-    "indigo": {
-      "50": {
-        "$value": "oklch(96% 0.04 260)",
-        "$type": "color"
-      },
-      "500": {
-        "$value": "oklch(45% 0.20 260)",
-        "$type": "color"
-      }
-    },
-    "critical": {
-      "500": {
-        "$value": "oklch(50% 0.20 25)",
-        "$type": "color"
-      }
-    },
-    "success": {
-      "500": {
-        "$value": "oklch(50% 0.16 150)",
-        "$type": "color"
-      }
-    },
-    "warning": {
-      "500": {
-        "$value": "oklch(75% 0.18 80)",
-        "$type": "color"
-      }
-    },
-    "info": {
-      "500": {
-        "$value": "oklch(55% 0.16 240)",
+        "$value": "oklch(100% 0 0)",
         "$type": "color"
       }
     }
@@ -283,91 +1119,91 @@
     "$type": "fontFamily"
   },
   "surface": {
-    "$value": "{color.neutral.0}",
+    "$value": "{color.polaris.color-bg}",
     "$type": "color"
   },
   "surface-elevated": {
-    "$value": "{color.neutral.0}",
+    "$value": "{color.polaris.color-bg-surface}",
     "$type": "color"
   },
   "surface-recessed": {
-    "$value": "{color.neutral.50}",
+    "$value": "{color.polaris.color-bg-surface-secondary}",
     "$type": "color"
   },
   "surface-inverse": {
-    "$value": "{color.neutral.900}",
+    "$value": "{color.polaris.color-bg-inverse}",
     "$type": "color"
   },
   "text": {
-    "$value": "{color.neutral.900}",
+    "$value": "{color.polaris.color-text}",
     "$type": "color"
   },
   "text-emphasis": {
-    "$value": "{color.neutral.900}",
+    "$value": "{color.polaris.color-text-emphasis}",
     "$type": "color"
   },
   "text-recede": {
-    "$value": "{color.neutral.500}",
+    "$value": "{color.polaris.color-text-secondary}",
     "$type": "color"
   },
   "text-disabled": {
-    "$value": "{color.neutral.300}",
+    "$value": "{color.polaris.color-text-disabled}",
     "$type": "color"
   },
   "text-on-accent": {
-    "$value": "{color.neutral.0}",
+    "$value": "{color.polaris.color-text-brand-on-bg-fill}",
     "$type": "color"
   },
   "text-on-critical": {
-    "$value": "{color.neutral.0}",
+    "$value": "{color.polaris.color-text-critical-on-bg-fill}",
     "$type": "color"
   },
   "text-on-success": {
-    "$value": "{color.neutral.0}",
+    "$value": "{color.polaris.color-text-success-on-bg-fill}",
     "$type": "color"
   },
   "text-on-warning": {
-    "$value": "{color.neutral.900}",
+    "$value": "{color.polaris.color-text-warning-on-bg-fill}",
     "$type": "color"
   },
   "text-on-info": {
-    "$value": "{color.neutral.0}",
+    "$value": "{color.polaris.color-text-info-on-bg-fill}",
     "$type": "color"
   },
   "border": {
-    "$value": "{color.neutral.200}",
+    "$value": "{color.polaris.color-border}",
     "$type": "color"
   },
   "border-emphasis": {
-    "$value": "{color.indigo.500}",
+    "$value": "{color.polaris.color-border-brand}",
     "$type": "color"
   },
   "border-recede": {
-    "$value": "{color.neutral.100}",
+    "$value": "{color.polaris.color-border-secondary}",
     "$type": "color"
   },
   "accent": {
-    "$value": "{color.indigo.500}",
+    "$value": "{color.polaris.color-bg-fill-brand}",
     "$type": "color"
   },
   "accent-recede": {
-    "$value": "{color.indigo.50}",
+    "$value": "{color.polaris.color-bg-fill-brand-hover}",
     "$type": "color"
   },
   "critical": {
-    "$value": "{color.critical.500}",
+    "$value": "{color.polaris.color-bg-fill-critical}",
     "$type": "color"
   },
   "success": {
-    "$value": "{color.success.500}",
+    "$value": "{color.polaris.color-bg-fill-success}",
     "$type": "color"
   },
   "warning": {
-    "$value": "{color.warning.500}",
+    "$value": "{color.polaris.color-bg-fill-warning}",
     "$type": "color"
   },
   "info": {
-    "$value": "{color.info.500}",
+    "$value": "{color.polaris.color-bg-fill-info}",
     "$type": "color"
   }
 }

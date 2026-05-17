@@ -26,7 +26,7 @@
     "sourceUrl": "https://raw.githubusercontent.com/mantinedev/mantine/master/packages/%40mantine/core/src/core/MantineProvider/default-colors.ts",
     "sourceLicense": "MIT",
     "harvestedAt": "2026-05-17",
-    "harvestNotes": "Mantine v7 default palette (blue accent at step 6). Each colour ramp is a 10-entry hex array.\n\nExtraction notes: Mantine 10-step ramps (indices 0-9) extracted verbatim from default-colors.ts. The 'primaryShade' default is 6 (light theme); accent = blue.6 per Mantine's own convention.",
+    "harvestNotes": "Mantine v7 default palette (blue accent at step 6). Each colour ramp is a 10-entry hex array. Extraction method: A. Mapping: Mantine 10-step ramps (indices 0-9) extracted verbatim from default-colors.ts. The 'primaryShade' default is 6 (light theme); accent = blue.6 per Mantine's own convention.",
     "sourceCommit": "master",
     "fidelityTier": "B"
   }

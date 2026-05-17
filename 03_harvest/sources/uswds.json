@@ -13,41 +13,119 @@
     "sourceOrganization": "U.S. General Services Administration",
     "sourceUrl": "https://designsystem.digital.gov/",
     "sourceLicense": "CC0-1.0",
-    "harvestedAt": "2026-05-16",
-    "harvestNotes": "USWDS is a work of the U.S. Federal Government and is in the public domain. Token values reflect the USWDS v3 'standard' palette (cool-blue primary + neutral gray). Source Sans Pro is referenced by family name only — no font files are redistributed.\n\nPhase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.",
-    "fidelityTier": "C"
+    "harvestedAt": "2026-05-17",
+    "harvestNotes": "USWDS palette extracted per-family from uswds/uswds packages/uswds-core/src/styles/tokens/color/_<family>.scss. Each family is a Sass map; we extract `step: #hex` via regex. Extraction method: B. Algorithm: uswds/uswds@develop, inputs {\"families\":[\"blue\",\"gray-cool\",\"gray-warm\",\"red\",\"green\",\"yellow\",\"gold\",\"orange\"]}. Mapping: USWDS uses semantic step values (5/10/20/30/40/50/60/70/80/90) and includes 'vivid' variants. Federal blue family is the canonical accent (blue.50). Cool gray is the default neutral ramp.",
+    "fidelityTier": "B",
+    "sourceCommit": "develop"
   },
   "mappingNotes": "USWDS uses Sass tokens like $color-base, $color-primary, $color-accent-cool, $color-error. Map: $color-base -> text, $color-primary -> accent, $color-error/-warning/-success/-info -> respective. USWDS's neutral 'gray cool' scale provides surface/border ramp.",
   "base": {
-    "gray": {
-      "5": "oklch(98% 0.005 230)",
-      "10": "oklch(94% 0.008 230)",
-      "20": "oklch(86% 0.012 230)",
-      "30": "oklch(78% 0.012 230)",
-      "40": "oklch(65% 0.014 230)",
-      "50": "oklch(55% 0.014 230)",
-      "70": "oklch(38% 0.014 230)",
-      "80": "oklch(28% 0.014 230)",
-      "90": "oklch(20% 0.014 230)"
-    },
-    "white": {
-      "0": "#ffffff"
-    },
     "blue": {
-      "5": "oklch(96% 0.04 245)",
-      "60v": "oklch(45% 0.18 245)"
+      "5": "oklch(96.3% 0.0193 240.7)",
+      "10": "oklch(92% 0.0412 246)",
+      "20": "oklch(84.7% 0.0809 245.5)",
+      "30": "oklch(74.6% 0.1397 245.8)",
+      "40": "oklch(65.5% 0.188 253.4)",
+      "50": "oklch(56.5% 0.1713 252.5)",
+      "60": "oklch(47.3% 0.1322 249.5)",
+      "70": "oklch(39% 0.1008 249.3)",
+      "80": "oklch(30% 0.0668 251.7)",
+      "90": "oklch(20.4% 0.0145 239.5)"
+    },
+    "gray-cool": {
+      "1": "oklch(99.1% 0.0017 247.8)",
+      "2": "oklch(98.1% 0.0025 228.8)",
+      "3": "oklch(97.3% 0.0017 247.8)",
+      "4": "oklch(96.3% 0.0045 258.3)",
+      "5": "oklch(95.1% 0.0025 228.8)",
+      "10": "oklch(90.8% 0.0026 228.8)",
+      "20": "oklch(83.7% 0.0071 247.9)",
+      "30": "oklch(74.8% 0.0071 233.7)",
+      "40": "oklch(65.7% 0.0094 248)",
+      "50": "oklch(56.3% 0.0087 241.8)",
+      "60": "oklch(47.3% 0.0164 258.4)",
+      "70": "oklch(38.8% 0.023 258.4)",
+      "80": "oklch(30.1% 0.0023 247.9)",
+      "90": "oklch(23.1% 0.0041 264.5)"
+    },
+    "gray-warm": {
+      "1": "oklch(99.1% 0.0013 106.4)",
+      "2": "oklch(98.2% 0.0026 106.4)",
+      "3": "oklch(97.2% 0.0053 106.5)",
+      "4": "oklch(96.9% 0.0066 106.5)",
+      "5": "oklch(95.4% 0.0053 106.5)",
+      "10": "oklch(92.4% 0.0054 106.5)",
+      "20": "oklch(83.4% 0.0124 101.5)",
+      "30": "oklch(74.8% 0.0169 102.9)",
+      "40": "oklch(65.6% 0.0188 106.9)",
+      "50": "oklch(56.2% 0.018 107)",
+      "60": "oklch(47.5% 0.0172 107)",
+      "70": "oklch(38.9% 0.0083 106.8)",
+      "80": "oklch(30% 0.0071 106.8)",
+      "90": "oklch(20.4% 0.0019 106.6)"
     },
     "red": {
-      "60v": "oklch(50% 0.20 25)"
+      "5": "oklch(97.3% 0.013 23.2)",
+      "10": "oklch(92.9% 0.0329 29.4)",
+      "20": "oklch(84.4% 0.082 28.2)",
+      "30": "oklch(76.3% 0.1414 30.1)",
+      "40": "oklch(67.9% 0.1997 29.8)",
+      "50": "oklch(59% 0.2274 30.8)",
+      "60": "oklch(48.8% 0.1962 28.8)",
+      "70": "oklch(40.4% 0.1598 29.8)",
+      "80": "oklch(31.4% 0.1073 26)",
+      "90": "oklch(20.6% 0.0081 17.8)"
     },
     "green": {
-      "60v": "oklch(50% 0.16 145)"
+      "5": "oklch(94.9% 0.0719 131.5)",
+      "10": "oklch(89.9% 0.1249 128.4)",
+      "20": "oklch(79.1% 0.1867 127.9)",
+      "30": "oklch(70.1% 0.1607 129)",
+      "40": "oklch(64.7% 0.1519 128.9)",
+      "50": "oklch(55.1% 0.1491 130.3)",
+      "60": "oklch(48.4% 0.1281 129.8)",
+      "70": "oklch(37.4% 0.0929 130.6)",
+      "80": "oklch(30.2% 0.0579 130.6)",
+      "90": "oklch(20.5% 0.0083 128.9)"
     },
     "yellow": {
-      "10": "oklch(85% 0.18 85)"
+      "5": "oklch(96.6% 0.0663 98.2)",
+      "10": "oklch(92.4% 0.1203 95.8)",
+      "20": "oklch(86.4% 0.177 93.2)",
+      "30": "oklch(76.4% 0.1561 86.8)",
+      "40": "oklch(65.8% 0.1346 88.8)",
+      "50": "oklch(56.8% 0.1161 87)",
+      "60": "oklch(49.9% 0.0923 90.3)",
+      "70": "oklch(41.2% 0.0795 89.2)",
+      "80": "oklch(31.7% 0.0445 63.7)",
+      "90": "oklch(20.4% 0.0076 48.3)"
     },
-    "cyan": {
-      "60v": "oklch(50% 0.13 215)"
+    "gold": {
+      "5": "oklch(95.6% 0.054 91)",
+      "10": "oklch(92.2% 0.1006 90.3)",
+      "20": "oklch(84% 0.162 81.6)",
+      "30": "oklch(75.3% 0.1572 77.8)",
+      "40": "oklch(66.2% 0.1366 75.8)",
+      "50": "oklch(56.6% 0.0855 76.1)",
+      "60": "oklch(48.7% 0.0887 79.5)",
+      "70": "oklch(39.6% 0.0764 79.6)",
+      "80": "oklch(30.2% 0.0421 73.8)",
+      "90": "oklch(20.6% 0.0066 78.2)"
+    },
+    "orange": {
+      "5": "oklch(96.7% 0.0226 71.8)",
+      "10": "oklch(92.7% 0.0478 70.2)",
+      "20": "oklch(84.3% 0.1149 65.6)",
+      "30": "oklch(76% 0.1551 56.2)",
+      "40": "oklch(67.1% 0.1728 50.4)",
+      "50": "oklch(57.8% 0.1562 48.5)",
+      "60": "oklch(47.6% 0.1086 49.2)",
+      "70": "oklch(37.7% 0.0734 55.2)",
+      "80": "oklch(27.4% 0.0383 61.8)",
+      "90": "oklch(20.5% 0.009 43.1)"
+    },
+    "white": {
+      "0": "oklch(100% 0 0)"
     }
   },
   "fonts": {
@@ -59,25 +137,25 @@
   "semantic": {
     "surface": "{white.0}",
     "surface-elevated": "{white.0}",
-    "surface-recessed": "{gray.5}",
-    "surface-inverse": "{gray.90}",
-    "text": "{gray.90}",
-    "text-emphasis": "{gray.90}",
-    "text-recede": "{gray.50}",
-    "text-disabled": "{gray.30}",
+    "surface-recessed": "{gray-cool.5}",
+    "surface-inverse": "{gray-cool.90}",
+    "text": "{gray-cool.90}",
+    "text-emphasis": "{gray-cool.90}",
+    "text-recede": "{gray-cool.50}",
+    "text-disabled": "{gray-cool.30}",
     "text-on-accent": "{white.0}",
     "text-on-critical": "{white.0}",
     "text-on-success": "{white.0}",
-    "text-on-warning": "{gray.90}",
+    "text-on-warning": "{gray-cool.90}",
     "text-on-info": "{white.0}",
-    "border": "{gray.30}",
-    "border-emphasis": "{blue.60v}",
-    "border-recede": "{gray.10}",
-    "accent": "{blue.60v}",
+    "border": "{gray-cool.30}",
+    "border-emphasis": "{blue.60}",
+    "border-recede": "{gray-cool.10}",
+    "accent": "{blue.60}",
     "accent-recede": "{blue.5}",
-    "critical": "{red.60v}",
-    "success": "{green.60v}",
+    "critical": "{red.60}",
+    "success": "{green.60}",
     "warning": "{yellow.10}",
-    "info": "{cyan.60v}"
+    "info": "{blue.60}"
   }
 }
