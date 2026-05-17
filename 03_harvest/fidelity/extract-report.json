@@ -2,47 +2,16 @@
   "ranAt": "2026-05-17",
   "results": [
     {
-      "name": "paste",
+      "name": "bootstrap",
       "tier": "B",
-      "url": "https://raw.githubusercontent.com/twilio-labs/paste/main/packages/paste-design-tokens/tokens/aliases/color-palette.yml",
+      "url": "https://raw.githubusercontent.com/twbs/bootstrap/main/scss/_variables.scss",
       "methods": [
         "A"
       ],
-      "valuesExtracted": 131,
-      "valuesConverted": 131,
+      "valuesExtracted": 43,
+      "valuesConverted": 21,
       "missingFamilies": [],
-      "notes": "Paste 12-step ramps for gray/blue/red/green/orange/yellow/purple/cyan/pink. Default accent = blue.60 (Twilio brand)."
-    },
-    {
-      "name": "lightning",
-      "tier": "B",
-      "url": "https://raw.githubusercontent.com/salesforce-ux/design-system/main/design-tokens/aliases/color-palettes.yml",
-      "methods": [
-        "A"
-      ],
-      "valuesExtracted": 234,
-      "valuesConverted": 234,
-      "missingFamilies": [
-        "neutral",
-        "brand",
-        "error",
-        "success",
-        "warning",
-        "info"
-      ],
-      "notes": "SLDS cool-gray + warm-gray + blue/green/red/orange/yellow ramps (steps 1-13). Default accent = BLUE_4 (Salesforce brand)."
-    },
-    {
-      "name": "primer",
-      "tier": "B",
-      "url": "https://raw.githubusercontent.com/primer/primitives/main/src/tokens/base/color/light/light.json5",
-      "methods": [
-        "A"
-      ],
-      "valuesExtracted": 95,
-      "valuesConverted": 95,
-      "missingFamilies": [],
-      "notes": "Primer 10-step scales for gray/blue/green/red/orange/yellow/purple/pink/coral. Functional mapping: surface = white, text = gray.9, accent = blue.5 (Primer's --color-accent-emphasis), critical = red.5, success = green.5, warning = yellow.5, info = blue.5."
+      "notes": "Bootstrap's $primary/$danger/$success/$warning/$info aliases resolve at compile time to $blue/$red/$green/$yellow/$cyan; we read those directly. The tint-color($blue, 80%) pre-computation Bootstrap uses for soft accent variants is not evaluated by this pipeline — we substitute an OKLCH approximation of that lightness/chroma. Phase 3.5d composite refinement: shadow recipes match Bootstrap 5.3's $box-shadow variants verbatim."
     }
   ]
 }

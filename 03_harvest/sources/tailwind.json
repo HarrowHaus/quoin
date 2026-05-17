@@ -14,9 +14,9 @@
     "sourceUrl": "https://raw.githubusercontent.com/tailwindlabs/tailwindcss/main/packages/tailwindcss/theme.css",
     "sourceLicense": "MIT",
     "harvestedAt": "2026-05-17",
-    "harvestNotes": "Default v4 palette extracted byte-faithfully from packages/tailwindcss/theme.css. Tailwind v4 ships native OKLCH; values preserved verbatim. Neutral ramp = zinc. Extraction method: A.",
+    "harvestNotes": "Default v4 palette extracted byte-faithfully from packages/tailwindcss/theme.css. Tailwind v4 ships native OKLCH; values preserved verbatim. Neutral ramp = zinc. Extraction method: A. Mapping: Phase 3.5d composite refinement: shadow recipes match Tailwind v4's canonical box-shadow scale (sm/md/lg/xl/2xl) verbatim. Motion durations match Tailwind's transition-duration utilities (75/150/200/300/500ms).",
     "sourceCommit": "main",
-    "fidelityTier": "A"
+    "fidelityTier": "B"
   },
   "mappingNotes": "Tailwind's neutral scale (zinc 50-950) maps directly onto Quoin's surface/text/border ramp. Tailwind has no native semantic-token layer; status colours selected from Tailwind's default red/amber/emerald/sky scales at their 500 step (or 700 for text-emphasis contrast).",
   "base": {
@@ -77,6 +77,113 @@
     "critical": "{red.500}",
     "success": "{emerald.500}",
     "warning": "{amber.500}",
-    "info": "{sky.500}"
+    "info": "{sky.500}",
+    "border-width-hairline": "1px",
+    "border-width-sm": "1px",
+    "border-width-md": "2px",
+    "border-width-lg": "4px",
+    "motion-instant": "75ms",
+    "motion-fast": "150ms",
+    "motion-normal": "200ms",
+    "motion-slow": "300ms",
+    "motion-slower": "500ms"
+  },
+  "composites": {
+    "shadow-xs": {
+      "color": "rgb(0 0 0 / 0.05)",
+      "offsetX": "0",
+      "offsetY": "1px",
+      "blur": "2px",
+      "spread": "0",
+      "inset": false
+    },
+    "shadow-sm": [
+      {
+        "color": "rgb(0 0 0 / 0.1)",
+        "offsetX": "0",
+        "offsetY": "1px",
+        "blur": "3px",
+        "spread": "0",
+        "inset": false
+      },
+      {
+        "color": "rgb(0 0 0 / 0.1)",
+        "offsetX": "0",
+        "offsetY": "1px",
+        "blur": "2px",
+        "spread": "-1px",
+        "inset": false
+      }
+    ],
+    "shadow-md": [
+      {
+        "color": "rgb(0 0 0 / 0.1)",
+        "offsetX": "0",
+        "offsetY": "4px",
+        "blur": "6px",
+        "spread": "-1px",
+        "inset": false
+      },
+      {
+        "color": "rgb(0 0 0 / 0.1)",
+        "offsetX": "0",
+        "offsetY": "2px",
+        "blur": "4px",
+        "spread": "-2px",
+        "inset": false
+      }
+    ],
+    "shadow-lg": [
+      {
+        "color": "rgb(0 0 0 / 0.1)",
+        "offsetX": "0",
+        "offsetY": "10px",
+        "blur": "15px",
+        "spread": "-3px",
+        "inset": false
+      },
+      {
+        "color": "rgb(0 0 0 / 0.1)",
+        "offsetX": "0",
+        "offsetY": "4px",
+        "blur": "6px",
+        "spread": "-4px",
+        "inset": false
+      }
+    ],
+    "shadow-xl": [
+      {
+        "color": "rgb(0 0 0 / 0.1)",
+        "offsetX": "0",
+        "offsetY": "20px",
+        "blur": "25px",
+        "spread": "-5px",
+        "inset": false
+      },
+      {
+        "color": "rgb(0 0 0 / 0.1)",
+        "offsetX": "0",
+        "offsetY": "8px",
+        "blur": "10px",
+        "spread": "-6px",
+        "inset": false
+      }
+    ],
+    "shadow-2xl": {
+      "color": "rgb(0 0 0 / 0.25)",
+      "offsetX": "0",
+      "offsetY": "25px",
+      "blur": "50px",
+      "spread": "-12px",
+      "inset": false
+    },
+    "shadow-inner": {
+      "color": "rgb(0 0 0 / 0.05)",
+      "offsetX": "0",
+      "offsetY": "2px",
+      "blur": "4px",
+      "spread": "0",
+      "inset": true
+    }
   }
 }

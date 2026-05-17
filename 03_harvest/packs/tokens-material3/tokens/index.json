@@ -645,19 +645,19 @@
     "$type": "duration"
   },
   "motion-fast": {
-    "$value": "100ms",
+    "$value": "150ms",
     "$type": "duration"
   },
   "motion-normal": {
-    "$value": "200ms",
+    "$value": "300ms",
     "$type": "duration"
   },
   "motion-slow": {
-    "$value": "400ms",
+    "$value": "500ms",
     "$type": "duration"
   },
   "motion-slower": {
-    "$value": "800ms",
+    "$value": "1000ms",
     "$type": "duration"
   },
   "ease-linear": {
@@ -685,7 +685,7 @@
     "$type": "cubicBezier"
   },
   "border-width-hairline": {
-    "$value": "0.5px",
+    "$value": "1px",
     "$type": "dimension"
   },
   "border-width-sm": {
@@ -697,7 +697,7 @@
     "$type": "dimension"
   },
   "border-width-lg": {
-    "$value": "4px",
+    "$value": "3px",
     "$type": "dimension"
   },
   "focus-ring-width": {
@@ -989,43 +989,63 @@
     "$type": "color"
   },
   "shadow-xs": {
-    "$value": {
-      "color": "{shadow-tint}",
-      "offsetX": "0",
-      "offsetY": "1px",
-      "blur": "2px",
-      "spread": "0",
-      "inset": false
-    },
+    "$value": [
+      {
+        "color": "rgb(0 0 0 / 0.30)",
+        "offsetX": "0",
+        "offsetY": "1px",
+        "blur": "2px",
+        "spread": "0",
+        "inset": false
+      },
+      {
+        "color": "rgb(0 0 0 / 0.15)",
+        "offsetX": "0",
+        "offsetY": "1px",
+        "blur": "3px",
+        "spread": "1px",
+        "inset": false
+      }
+    ],
     "$type": "shadow"
   },
   "shadow-sm": {
-    "$value": {
-      "color": "{shadow-tint}",
-      "offsetX": "0",
-      "offsetY": "1px",
-      "blur": "3px",
-      "spread": "0",
-      "inset": false
-    },
+    "$value": [
+      {
+        "color": "rgb(0 0 0 / 0.30)",
+        "offsetX": "0",
+        "offsetY": "1px",
+        "blur": "2px",
+        "spread": "0",
+        "inset": false
+      },
+      {
+        "color": "rgb(0 0 0 / 0.15)",
+        "offsetX": "0",
+        "offsetY": "2px",
+        "blur": "6px",
+        "spread": "2px",
+        "inset": false
+      }
+    ],
     "$type": "shadow"
   },
   "shadow-md": {
     "$value": [
       {
-        "color": "{shadow-tint}",
+        "color": "rgb(0 0 0 / 0.30)",
         "offsetX": "0",
-        "offsetY": "4px",
-        "blur": "6px",
-        "spread": "-1px",
+        "offsetY": "1px",
+        "blur": "3px",
+        "spread": "0",
         "inset": false
       },
       {
-        "color": "{shadow-tint}",
+        "color": "rgb(0 0 0 / 0.15)",
         "offsetX": "0",
-        "offsetY": "2px",
-        "blur": "4px",
-        "spread": "-1px",
+        "offsetY": "4px",
+        "blur": "8px",
+        "spread": "3px",
         "inset": false
       }
     ],
@@ -1034,19 +1054,19 @@
   "shadow-lg": {
     "$value": [
       {
-        "color": "{shadow-tint}",
+        "color": "rgb(0 0 0 / 0.30)",
         "offsetX": "0",
-        "offsetY": "10px",
-        "blur": "15px",
-        "spread": "-3px",
+        "offsetY": "2px",
+        "blur": "3px",
+        "spread": "0",
         "inset": false
       },
       {
-        "color": "{shadow-tint}",
+        "color": "rgb(0 0 0 / 0.15)",
         "offsetX": "0",
-        "offsetY": "4px",
-        "blur": "6px",
-        "spread": "-2px",
+        "offsetY": "6px",
+        "blur": "10px",
+        "spread": "4px",
         "inset": false
       }
     ],
@@ -1055,33 +1075,43 @@
   "shadow-xl": {
     "$value": [
       {
-        "color": "{shadow-tint}",
+        "color": "rgb(0 0 0 / 0.30)",
         "offsetX": "0",
-        "offsetY": "20px",
-        "blur": "25px",
-        "spread": "-5px",
+        "offsetY": "4px",
+        "blur": "4px",
+        "spread": "0",
         "inset": false
       },
       {
-        "color": "{shadow-tint}",
+        "color": "rgb(0 0 0 / 0.15)",
         "offsetX": "0",
         "offsetY": "8px",
-        "blur": "10px",
-        "spread": "-6px",
+        "blur": "12px",
+        "spread": "6px",
         "inset": false
       }
     ],
     "$type": "shadow"
   },
   "shadow-2xl": {
-    "$value": {
-      "color": "{shadow-tint}",
-      "offsetX": "0",
-      "offsetY": "25px",
-      "blur": "50px",
-      "spread": "-12px",
-      "inset": false
-    },
+    "$value": [
+      {
+        "color": "rgb(0 0 0 / 0.30)",
+        "offsetX": "0",
+        "offsetY": "6px",
+        "blur": "6px",
+        "spread": "0",
+        "inset": false
+      },
+      {
+        "color": "rgb(0 0 0 / 0.15)",
+        "offsetX": "0",
+        "offsetY": "12px",
+        "blur": "20px",
+        "spread": "8px",
+        "inset": false
+      }
+    ],
     "$type": "shadow"
   },
   "shadow-inner": {

@@ -97,8 +97,64 @@ export default {
         info: pick("info"),
         white: { 0: "oklch(100% 0 0)" }
       },
+      // Phase 3.5d: M3 elevation + motion specs. Source:
+      //   m3.material.io/styles/elevation/tokens
+      //   m3.material.io/styles/motion/easing-and-duration/tokens-specs
+      semantic: {
+        // M3 motion duration tokens (md.sys.motion.duration.*)
+        "motion-instant": "50ms",
+        "motion-fast": "150ms",
+        "motion-normal": "300ms",
+        "motion-slow": "500ms",
+        "motion-slower": "1000ms",
+        // M3 border-width tokens — derived from outlined-card and
+        // text-field outline specs (1px / 2px / 3px).
+        "border-width-hairline": "1px",
+        "border-width-sm": "1px",
+        "border-width-md": "2px",
+        "border-width-lg": "3px"
+      },
+      composites: {
+        // M3 elevation tokens (md.sys.elevation.level{1..5}). Each
+        // level is two layered drop-shadows with M3's key-light /
+        // ambient-light recipe.
+        // shadow-xs ≈ level 1
+        "shadow-xs": [
+          { color: "rgb(0 0 0 / 0.30)", offsetX: "0", offsetY: "1px", blur: "2px",  spread: "0",   inset: false },
+          { color: "rgb(0 0 0 / 0.15)", offsetX: "0", offsetY: "1px", blur: "3px",  spread: "1px", inset: false }
+        ],
+        // shadow-sm ≈ level 2
+        "shadow-sm": [
+          { color: "rgb(0 0 0 / 0.30)", offsetX: "0", offsetY: "1px", blur: "2px",  spread: "0",   inset: false },
+          { color: "rgb(0 0 0 / 0.15)", offsetX: "0", offsetY: "2px", blur: "6px",  spread: "2px", inset: false }
+        ],
+        // shadow-md ≈ level 3
+        "shadow-md": [
+          { color: "rgb(0 0 0 / 0.30)", offsetX: "0", offsetY: "1px", blur: "3px",  spread: "0",   inset: false },
+          { color: "rgb(0 0 0 / 0.15)", offsetX: "0", offsetY: "4px", blur: "8px",  spread: "3px", inset: false }
+        ],
+        // shadow-lg ≈ level 4
+        "shadow-lg": [
+          { color: "rgb(0 0 0 / 0.30)", offsetX: "0", offsetY: "2px", blur: "3px",  spread: "0",   inset: false },
+          { color: "rgb(0 0 0 / 0.15)", offsetX: "0", offsetY: "6px", blur: "10px", spread: "4px", inset: false }
+        ],
+        // shadow-xl ≈ level 5
+        "shadow-xl": [
+          { color: "rgb(0 0 0 / 0.30)", offsetX: "0", offsetY: "4px", blur: "4px",  spread: "0",   inset: false },
+          { color: "rgb(0 0 0 / 0.15)", offsetX: "0", offsetY: "8px", blur: "12px", spread: "6px", inset: false }
+        ],
+        "shadow-2xl": [
+          { color: "rgb(0 0 0 / 0.30)", offsetX: "0", offsetY: "6px",  blur: "6px",  spread: "0",   inset: false },
+          { color: "rgb(0 0 0 / 0.15)", offsetX: "0", offsetY: "12px", blur: "20px", spread: "8px", inset: false }
+        ],
+        // transition curves use M3's standard / emphasized / decelerate
+        // easing per md.sys.motion.easing.
+        "transition-default":  { duration: "{motion-normal}", delay: "0ms", timingFunction: "{ease-standard}" },
+        "transition-emphasis": { duration: "{motion-slow}",   delay: "0ms", timingFunction: "{ease-emphasized}" },
+        "transition-fast":     { duration: "{motion-fast}",   delay: "0ms", timingFunction: "{ease-standard}" }
+      },
       notes:
-        "M3 13-tone scale per role palette. Light-theme mapping: surface = neutral.98, surface-elevated = neutral.99, surface-recessed = neutral.95, surface-inverse = neutral.20, text = neutral.20, text-emphasis = neutral.10, accent = primary.40, accent-recede = primary.90, critical = error.40."
+        "M3 13-tone scale per role palette. Light-theme mapping: surface = neutral.98, surface-elevated = neutral.99, surface-recessed = neutral.95, surface-inverse = neutral.20, text = neutral.20, text-emphasis = neutral.10, accent = primary.40, accent-recede = primary.90, critical = error.40. Phase 3.5d composite refinement: shadow recipes match M3 elevation levels 1-5 (m3.material.io/styles/elevation/tokens). Motion durations match md.sys.motion.duration.* spec (50/150/300/500/1000 ms)."
     };
   }
 };

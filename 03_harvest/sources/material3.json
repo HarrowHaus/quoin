@@ -14,7 +14,7 @@
     "sourceUrl": "https://m3.material.io/",
     "sourceLicense": "Apache-2.0",
     "harvestedAt": "2026-05-17",
-    "harvestNotes": "Values computed by running @material/material-color-utilities with M3's documented baseline seed (#6750A4). 13 tones × 6 role palettes (primary, secondary, tertiary, neutral, neutral variant, error). To regenerate with a different seed: install the library, change SEED in fidelity/specs/material3.js, and re-run. Extraction method: B. Algorithm: @material/material-color-utilities@0.2.7, inputs {\"seed\":\"#6750A4\",\"status\":{\"success\":\"#43A047\",\"warning\":\"#FFA000\",\"info\":\"#1976D2\"},\"tones\":[0,10,20,30,40,50,60,70,80,90,95,99,100]}. Mapping: M3 13-tone scale per role palette. Light-theme mapping: surface = neutral.98, surface-elevated = neutral.99, surface-recessed = neutral.95, surface-inverse = neutral.20, text = neutral.20, text-emphasis = neutral.10, accent = primary.40, accent-recede = primary.90, critical = error.40.",
+    "harvestNotes": "Values computed by running @material/material-color-utilities with M3's documented baseline seed (#6750A4). 13 tones × 6 role palettes (primary, secondary, tertiary, neutral, neutral variant, error). To regenerate with a different seed: install the library, change SEED in fidelity/specs/material3.js, and re-run. Extraction method: B. Algorithm: @material/material-color-utilities@0.2.7, inputs {\"seed\":\"#6750A4\",\"status\":{\"success\":\"#43A047\",\"warning\":\"#FFA000\",\"info\":\"#1976D2\"},\"tones\":[0,10,20,30,40,50,60,70,80,90,95,99,100]}. Mapping: M3 13-tone scale per role palette. Light-theme mapping: surface = neutral.98, surface-elevated = neutral.99, surface-recessed = neutral.95, surface-inverse = neutral.20, text = neutral.20, text-emphasis = neutral.10, accent = primary.40, accent-recede = primary.90, critical = error.40. Phase 3.5d composite refinement: shadow recipes match M3 elevation levels 1-5 (m3.material.io/styles/elevation/tokens). Motion durations match md.sys.motion.duration.* spec (50/150/300/500/1000 ms).",
     "fidelityTier": "B",
     "sourceCommit": "0.2.7"
   },
@@ -172,6 +172,140 @@
     "critical": "{error.40}",
     "success": "{success.40}",
     "warning": "{warning.40}",
-    "info": "{info.40}"
+    "info": "{info.40}",
+    "motion-instant": "50ms",
+    "motion-fast": "150ms",
+    "motion-normal": "300ms",
+    "motion-slow": "500ms",
+    "motion-slower": "1000ms",
+    "border-width-hairline": "1px",
+    "border-width-sm": "1px",
+    "border-width-md": "2px",
+    "border-width-lg": "3px"
+  },
+  "composites": {
+    "shadow-xs": [
+      {
+        "color": "rgb(0 0 0 / 0.30)",
+        "offsetX": "0",
+        "offsetY": "1px",
+        "blur": "2px",
+        "spread": "0",
+        "inset": false
+      },
+      {
+        "color": "rgb(0 0 0 / 0.15)",
+        "offsetX": "0",
+        "offsetY": "1px",
+        "blur": "3px",
+        "spread": "1px",
+        "inset": false
+      }
+    ],
+    "shadow-sm": [
+      {
+        "color": "rgb(0 0 0 / 0.30)",
+        "offsetX": "0",
+        "offsetY": "1px",
+        "blur": "2px",
+        "spread": "0",
+        "inset": false
+      },
+      {
+        "color": "rgb(0 0 0 / 0.15)",
+        "offsetX": "0",
+        "offsetY": "2px",
+        "blur": "6px",
+        "spread": "2px",
+        "inset": false
+      }
+    ],
+    "shadow-md": [
+      {
+        "color": "rgb(0 0 0 / 0.30)",
+        "offsetX": "0",
+        "offsetY": "1px",
+        "blur": "3px",
+        "spread": "0",
+        "inset": false
+      },
+      {
+        "color": "rgb(0 0 0 / 0.15)",
+        "offsetX": "0",
+        "offsetY": "4px",
+        "blur": "8px",
+        "spread": "3px",
+        "inset": false
+      }
+    ],
+    "shadow-lg": [
+      {
+        "color": "rgb(0 0 0 / 0.30)",
+        "offsetX": "0",
+        "offsetY": "2px",
+        "blur": "3px",
+        "spread": "0",
+        "inset": false
+      },
+      {
+        "color": "rgb(0 0 0 / 0.15)",
+        "offsetX": "0",
+        "offsetY": "6px",
+        "blur": "10px",
+        "spread": "4px",
+        "inset": false
+      }
+    ],
+    "shadow-xl": [
+      {
+        "color": "rgb(0 0 0 / 0.30)",
+        "offsetX": "0",
+        "offsetY": "4px",
+        "blur": "4px",
+        "spread": "0",
+        "inset": false
+      },
+      {
+        "color": "rgb(0 0 0 / 0.15)",
+        "offsetX": "0",
+        "offsetY": "8px",
+        "blur": "12px",
+        "spread": "6px",
+        "inset": false
+      }
+    ],
+    "shadow-2xl": [
+      {
+        "color": "rgb(0 0 0 / 0.30)",
+        "offsetX": "0",
+        "offsetY": "6px",
+        "blur": "6px",
+        "spread": "0",
+        "inset": false
+      },
+      {
+        "color": "rgb(0 0 0 / 0.15)",
+        "offsetX": "0",
+        "offsetY": "12px",
+        "blur": "20px",
+        "spread": "8px",
+        "inset": false
+      }
+    ],
+    "transition-default": {
+      "duration": "{motion-normal}",
+      "delay": "0ms",
+      "timingFunction": "{ease-standard}"
+    },
+    "transition-emphasis": {
+      "duration": "{motion-slow}",
+      "delay": "0ms",
+      "timingFunction": "{ease-emphasized}"
+    },
+    "transition-fast": {
+      "duration": "{motion-fast}",
+      "delay": "0ms",
+      "timingFunction": "{ease-standard}"
+    }
   }
 }

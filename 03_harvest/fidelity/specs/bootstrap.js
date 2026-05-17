@@ -31,8 +31,38 @@ export default {
         warning: { 500: values["yellow"] },
         info: { 500: values["cyan"] }
       },
+      semantic: {
+        // Bootstrap 5.3 published values from scss/_variables.scss.
+        "border-width-hairline": "1px",
+        "border-width-sm": "1px",
+        "border-width-md": "2px",
+        "border-width-lg": "3px",
+        "motion-fast":   "150ms",
+        "motion-normal": "200ms",
+        "motion-slow":   "300ms"
+      },
+      composites: {
+        // Bootstrap 5.3 $box-shadow / $box-shadow-sm / $box-shadow-lg
+        // from _variables.scss. Each is a single drop-shadow.
+        "shadow-sm": {
+          color: "rgba(0, 0, 0, 0.075)",
+          offsetX: "0", offsetY: "0.125rem", blur: "0.25rem", spread: "0", inset: false
+        },
+        "shadow-md": {
+          color: "rgba(0, 0, 0, 0.15)",
+          offsetX: "0", offsetY: "0.5rem", blur: "1rem", spread: "0", inset: false
+        },
+        "shadow-lg": {
+          color: "rgba(0, 0, 0, 0.175)",
+          offsetX: "0", offsetY: "1rem", blur: "3rem", spread: "0", inset: false
+        },
+        "shadow-inner": {
+          color: "rgba(0, 0, 0, 0.075)",
+          offsetX: "0", offsetY: "1px", blur: "2px", spread: "0", inset: true
+        }
+      },
       notes:
-        "Bootstrap's $primary/$danger/$success/$warning/$info aliases resolve at compile time to $blue/$red/$green/$yellow/$cyan; we read those directly. The tint-color($blue, 80%) pre-computation Bootstrap uses for soft accent variants is not evaluated by this pipeline — we substitute an OKLCH approximation of that lightness/chroma."
+        "Bootstrap's $primary/$danger/$success/$warning/$info aliases resolve at compile time to $blue/$red/$green/$yellow/$cyan; we read those directly. The tint-color($blue, 80%) pre-computation Bootstrap uses for soft accent variants is not evaluated by this pipeline — we substitute an OKLCH approximation of that lightness/chroma. Phase 3.5d composite refinement: shadow recipes match Bootstrap 5.3's $box-shadow variants verbatim."
     };
   }
 };
