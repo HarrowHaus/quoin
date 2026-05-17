@@ -6,10 +6,12 @@ Open Props (Adam Argyle / Chrome team) translated onto the Quoin canonical seman
 
 - **Source system:** Open Props
 - **Source organisation:** Adam Argyle / Open Props community
-- **Source URL:** https://open-props.style/
+- **Source URL:** https://raw.githubusercontent.com/argyleink/open-props/main/src/props.colors.css
 - **Source license:** MIT
-- **Harvested:** 2026-05-16
-- **Notes:** Open Props' gray-N scale powers neutrals; its named colour set powers status (red-7, green-7, etc.). Open Props ships hsl(); converted to OKLCH approximations here for consistency with the rest of the harvested set.
+- **Harvested:** 2026-05-17
+- **Notes:** Open Props props.colors.css extracted byte-faithfully. The gray-N ramp + named colour scales (red, orange, green, blue) preserved verbatim. Hex inputs converted to OKLCH via culori at extraction time.
+
+Extraction notes: Status hues mapped: critical = red-7, success = green-7, warning = orange-7 (matches Open Props' own usage in props.shadows.css), info = blue-7. Hex source → OKLCH at extraction.
 
 ## Mapping
 

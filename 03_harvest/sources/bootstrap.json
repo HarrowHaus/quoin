@@ -2,34 +2,54 @@
   "name": "bootstrap",
   "description": "Bootstrap 5 default palette translated onto the Quoin canonical semantic-token namespace.",
   "license": "MIT",
-  "tags": ["bootstrap", "blue-accent", "css-framework", "popular"],
+  "tags": [
+    "bootstrap",
+    "blue-accent",
+    "css-framework",
+    "popular"
+  ],
   "attribution": {
     "sourceSystem": "Bootstrap",
     "sourceOrganization": "Bootstrap community / Twitter origin",
-    "sourceUrl": "https://getbootstrap.com/",
+    "sourceUrl": "https://raw.githubusercontent.com/twbs/bootstrap/main/scss/_variables.scss",
     "sourceLicense": "MIT",
-    "harvestedAt": "2026-05-16",
-    "harvestNotes": "Bootstrap 5 default theme colours. Bootstrap's $primary (#0d6efd), $danger, $success, $warning, $info map directly onto Quoin's accent + status. $light/$dark for surface/inverse."
+    "harvestedAt": "2026-05-17",
+    "harvestNotes": "Bootstrap 5 default palette extracted from scss/_variables.scss. Greyscale ($gray-100 … $gray-900) + theme colours ($primary, $danger, $success, $warning, $info). Hex source converted to OKLCH at extraction.\n\nExtraction notes: Bootstrap's $primary/$danger/$success/$warning/$info aliases resolve at compile time to $blue/$red/$green/$yellow/$cyan; we read those directly. The tint-color($blue, 80%) pre-computation Bootstrap uses for soft accent variants is not evaluated by this pipeline — we substitute an OKLCH approximation of that lightness/chroma.",
+    "sourceCommit": "main",
+    "fidelityTier": "B"
   },
   "mappingNotes": "Bootstrap variables $body-bg -> surface, $body-color -> text, $primary -> accent, $danger/$success/$warning/$info -> respective status tokens. $gray-100..900 powers the neutral ramp.",
   "base": {
     "gray": {
-      "100": "oklch(97% 0.005 250)",
-      "200": "oklch(94% 0.008 250)",
-      "300": "oklch(88% 0.010 250)",
-      "400": "oklch(78% 0.012 250)",
-      "500": "oklch(58% 0.012 250)",
-      "600": "oklch(45% 0.014 250)",
-      "700": "oklch(32% 0.014 250)",
-      "800": "oklch(20% 0.014 250)",
-      "900": "oklch(12% 0.014 250)"
+      "100": "oklch(98.2% 0.0017 247.8)",
+      "200": "oklch(94.2% 0.0052 247.9)",
+      "300": "oklch(91.1% 0.007 247.9)",
+      "400": "oklch(86.7% 0.0106 247.9)",
+      "500": "oklch(76.9% 0.0145 248)",
+      "600": "oklch(55.8% 0.0165 244.9)",
+      "700": "oklch(42.8% 0.0147 248.2)",
+      "800": "oklch(34.5% 0.0133 248.2)",
+      "900": "oklch(26.2% 0.0095 248.2)"
     },
-    "white": { "0": "#ffffff" },
-    "primary": { "500": "oklch(55% 0.20 250)", "100": "oklch(95% 0.04 250)" },
-    "danger":  { "500": "oklch(55% 0.22 25)" },
-    "success": { "500": "oklch(55% 0.16 145)" },
-    "warning": { "500": "oklch(80% 0.18 80)" },
-    "info":    { "500": "oklch(70% 0.13 200)" }
+    "white": {
+      "0": "oklch(100% 0 0)"
+    },
+    "primary": {
+      "100": "oklch(96% 0.03 250)",
+      "500": "oklch(57.8% 0.2282 260)"
+    },
+    "danger": {
+      "500": "oklch(59.2% 0.202 21.2)"
+    },
+    "success": {
+      "500": "oklch(55.2% 0.1234 157)"
+    },
+    "warning": {
+      "500": "oklch(84.4% 0.1722 84.9)"
+    },
+    "info": {
+      "500": "oklch(77.5% 0.138 218.1)"
+    }
   },
   "fonts": {
     "font-sans": "system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",

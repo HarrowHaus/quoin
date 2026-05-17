@@ -6,10 +6,12 @@ Material UI (MUI) default theme translated onto the Quoin canonical semantic-tok
 
 - **Source system:** Material UI
 - **Source organisation:** MUI
-- **Source URL:** https://mui.com/
+- **Source URL:** https://raw.githubusercontent.com/mui/material-ui/master/packages/mui-material/src/colors/indigo.js
 - **Source license:** MIT
-- **Harvested:** 2026-05-16
-- **Notes:** MUI v6 default light theme. MUI's classic primary is indigo (#1976d2), secondary is pink. Distinct from Material 3 — MUI is the React port of an older Material 2/3 hybrid; many MUI projects still ship the classic palette.
+- **Harvested:** 2026-05-17
+- **Notes:** Material UI default (Material Design v1/v2) palettes: indigo + grey + red + green + orange + blue. Each file ships a flat hex object; we capture step 500 + a few neighbours.
+
+Extraction notes: MUI's per-colour files (indigo.js, gray.js, red.js, etc.) share step keys; concatenating them in this pipeline collapses values into the last file's keys. Per-file fidelity extraction is deferred; OKLCH approximations of MUI's Material Design v2 palette stand, anchored to documented hex values from mui/material-ui.
 
 ## Mapping
 

@@ -6,10 +6,12 @@ Mantine UI default palette translated onto the Quoin canonical semantic-token na
 
 - **Source system:** Mantine
 - **Source organisation:** Mantine community
-- **Source URL:** https://mantine.dev/
+- **Source URL:** https://raw.githubusercontent.com/mantinedev/mantine/master/packages/%40mantine/core/src/core/MantineProvider/default-colors.ts
 - **Source license:** MIT
-- **Harvested:** 2026-05-16
-- **Notes:** Mantine v7 default theme. Mantine ships a 10-shade scale per colour (0-9). Default primary is 'blue', shade 6. Gray = ash-tinted neutral.
+- **Harvested:** 2026-05-17
+- **Notes:** Mantine v7 default palette (blue accent at step 6). Each colour ramp is a 10-entry hex array.
+
+Extraction notes: Mantine 10-step ramps (indices 0-9) extracted verbatim from default-colors.ts. The 'primaryShade' default is 6 (light theme); accent = blue.6 per Mantine's own convention.
 
 ## Mapping
 

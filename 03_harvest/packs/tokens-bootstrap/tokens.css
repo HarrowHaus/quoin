@@ -7,22 +7,22 @@
 
 :root {
   /* base palette */
-  --color-gray-100: oklch(97% 0.005 250);
-  --color-gray-200: oklch(94% 0.008 250);
-  --color-gray-300: oklch(88% 0.010 250);
-  --color-gray-400: oklch(78% 0.012 250);
-  --color-gray-500: oklch(58% 0.012 250);
-  --color-gray-600: oklch(45% 0.014 250);
-  --color-gray-700: oklch(32% 0.014 250);
-  --color-gray-800: oklch(20% 0.014 250);
-  --color-gray-900: oklch(12% 0.014 250);
-  --color-white-0: #ffffff;
-  --color-primary-100: oklch(95% 0.04 250);
-  --color-primary-500: oklch(55% 0.20 250);
-  --color-danger-500: oklch(55% 0.22 25);
-  --color-success-500: oklch(55% 0.16 145);
-  --color-warning-500: oklch(80% 0.18 80);
-  --color-info-500: oklch(70% 0.13 200);
+  --color-gray-100: oklch(98.2% 0.0017 247.8);
+  --color-gray-200: oklch(94.2% 0.0052 247.9);
+  --color-gray-300: oklch(91.1% 0.007 247.9);
+  --color-gray-400: oklch(86.7% 0.0106 247.9);
+  --color-gray-500: oklch(76.9% 0.0145 248);
+  --color-gray-600: oklch(55.8% 0.0165 244.9);
+  --color-gray-700: oklch(42.8% 0.0147 248.2);
+  --color-gray-800: oklch(34.5% 0.0133 248.2);
+  --color-gray-900: oklch(26.2% 0.0095 248.2);
+  --color-white-0: oklch(100% 0 0);
+  --color-primary-100: oklch(96% 0.03 250);
+  --color-primary-500: oklch(57.8% 0.2282 260);
+  --color-danger-500: oklch(59.2% 0.202 21.2);
+  --color-success-500: oklch(55.2% 0.1234 157);
+  --color-warning-500: oklch(84.4% 0.1722 84.9);
+  --color-info-500: oklch(77.5% 0.138 218.1);
 
   /* semantic */
   --type-size-xs: 0.75rem;

@@ -3,75 +3,71 @@
   "color": {
     "gray": {
       "50": {
-        "$value": "oklch(98% 0.003 260)",
+        "$value": "oklch(98.5% 0.001 0)",
         "$type": "color"
       },
       "100": {
-        "$value": "oklch(96% 0.005 260)",
+        "$value": "oklch(96% 0.002 0)",
         "$type": "color"
       },
       "200": {
-        "$value": "oklch(90% 0.008 260)",
+        "$value": "oklch(93% 0.003 0)",
         "$type": "color"
       },
       "400": {
-        "$value": "oklch(75% 0.010 260)",
-        "$type": "color"
-      },
-      "500": {
-        "$value": "oklch(60% 0.010 260)",
+        "$value": "oklch(74% 0.005 0)",
         "$type": "color"
       },
       "700": {
-        "$value": "oklch(40% 0.012 260)",
-        "$type": "color"
-      },
-      "800": {
-        "$value": "oklch(28% 0.012 260)",
+        "$value": "oklch(38% 0.008 0)",
         "$type": "color"
       },
       "900": {
-        "$value": "oklch(16% 0.014 260)",
-        "$type": "color"
-      }
-    },
-    "white": {
-      "0": {
-        "$value": "#ffffff",
+        "$value": "oklch(13% 0.01 0)",
         "$type": "color"
       }
     },
     "indigo": {
       "50": {
-        "$value": "oklch(95% 0.04 260)",
+        "$value": "oklch(95% 0.04 280)",
         "$type": "color"
       },
       "500": {
-        "$value": "oklch(52% 0.18 260)",
+        "$value": "oklch(48% 0.18 280)",
+        "$type": "color"
+      },
+      "700": {
+        "$value": "oklch(38% 0.18 280)",
         "$type": "color"
       }
     },
     "red": {
       "500": {
-        "$value": "oklch(58% 0.22 25)",
+        "$value": "oklch(60% 0.22 25)",
         "$type": "color"
       }
     },
     "green": {
       "500": {
-        "$value": "oklch(60% 0.16 145)",
+        "$value": "oklch(58% 0.16 145)",
         "$type": "color"
       }
     },
     "amber": {
       "500": {
-        "$value": "oklch(75% 0.18 70)",
+        "$value": "oklch(78% 0.17 80)",
         "$type": "color"
       }
     },
     "blue": {
       "500": {
-        "$value": "oklch(60% 0.16 230)",
+        "$value": "oklch(58% 0.17 240)",
+        "$type": "color"
+      }
+    },
+    "white": {
+      "0": {
+        "$value": "oklch(100% 0 0)",
         "$type": "color"
       }
     }

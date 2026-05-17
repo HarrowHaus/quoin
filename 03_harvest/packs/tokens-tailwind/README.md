@@ -6,10 +6,10 @@ Tailwind v4 default palette and scales (zinc neutral), translated onto the Quoin
 
 - **Source system:** Tailwind CSS
 - **Source organisation:** Tailwind Labs
-- **Source URL:** https://tailwindcss.com/
+- **Source URL:** https://raw.githubusercontent.com/tailwindlabs/tailwindcss/main/packages/tailwindcss/theme.css
 - **Source license:** MIT
-- **Harvested:** 2026-05-16
-- **Notes:** Default v4 palette (zinc-based neutral). Values approximate the published v4 OKLCH defaults; verify against the canonical tailwindcss source before publication.
+- **Harvested:** 2026-05-17
+- **Notes:** Default v4 palette extracted byte-faithfully from packages/tailwindcss/theme.css. Tailwind v4 ships native OKLCH; values preserved verbatim. Neutral ramp = zinc.
 
 ## Mapping
 

@@ -23,9 +23,11 @@
   "attribution": {
     "sourceSystem": "Bootstrap",
     "sourceOrganization": "Bootstrap community / Twitter origin",
-    "sourceUrl": "https://getbootstrap.com/",
+    "sourceUrl": "https://raw.githubusercontent.com/twbs/bootstrap/main/scss/_variables.scss",
     "sourceLicense": "MIT",
-    "harvestedAt": "2026-05-16",
-    "harvestNotes": "Bootstrap 5 default theme colours. Bootstrap's $primary (#0d6efd), $danger, $success, $warning, $info map directly onto Quoin's accent + status. $light/$dark for surface/inverse."
+    "harvestedAt": "2026-05-17",
+    "harvestNotes": "Bootstrap 5 default palette extracted from scss/_variables.scss. Greyscale ($gray-100 … $gray-900) + theme colours ($primary, $danger, $success, $warning, $info). Hex source converted to OKLCH at extraction.\n\nExtraction notes: Bootstrap's $primary/$danger/$success/$warning/$info aliases resolve at compile time to $blue/$red/$green/$yellow/$cyan; we read those directly. The tint-color($blue, 80%) pre-computation Bootstrap uses for soft accent variants is not evaluated by this pipeline — we substitute an OKLCH approximation of that lightness/chroma.",
+    "sourceCommit": "main",
+    "fidelityTier": "B"
   }
 }

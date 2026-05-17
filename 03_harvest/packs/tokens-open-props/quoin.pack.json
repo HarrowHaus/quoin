@@ -23,9 +23,11 @@
   "attribution": {
     "sourceSystem": "Open Props",
     "sourceOrganization": "Adam Argyle / Open Props community",
-    "sourceUrl": "https://open-props.style/",
+    "sourceUrl": "https://raw.githubusercontent.com/argyleink/open-props/main/src/props.colors.css",
     "sourceLicense": "MIT",
-    "harvestedAt": "2026-05-16",
-    "harvestNotes": "Open Props' gray-N scale powers neutrals; its named colour set powers status (red-7, green-7, etc.). Open Props ships hsl(); converted to OKLCH approximations here for consistency with the rest of the harvested set."
+    "harvestedAt": "2026-05-17",
+    "harvestNotes": "Open Props props.colors.css extracted byte-faithfully. The gray-N ramp + named colour scales (red, orange, green, blue) preserved verbatim. Hex inputs converted to OKLCH via culori at extraction time.\n\nExtraction notes: Status hues mapped: critical = red-7, success = green-7, warning = orange-7 (matches Open Props' own usage in props.shadows.css), info = blue-7. Hex source → OKLCH at extraction.",
+    "sourceCommit": "main",
+    "fidelityTier": "B"
   }
 }

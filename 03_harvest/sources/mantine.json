@@ -2,35 +2,111 @@
   "name": "mantine",
   "description": "Mantine UI default palette translated onto the Quoin canonical semantic-token namespace.",
   "license": "MIT",
-  "tags": ["mantine", "blue-accent", "react", "popular"],
+  "tags": [
+    "mantine",
+    "blue-accent",
+    "react",
+    "popular"
+  ],
   "attribution": {
     "sourceSystem": "Mantine",
     "sourceOrganization": "Mantine community",
-    "sourceUrl": "https://mantine.dev/",
+    "sourceUrl": "https://raw.githubusercontent.com/mantinedev/mantine/master/packages/%40mantine/core/src/core/MantineProvider/default-colors.ts",
     "sourceLicense": "MIT",
-    "harvestedAt": "2026-05-16",
-    "harvestNotes": "Mantine v7 default theme. Mantine ships a 10-shade scale per colour (0-9). Default primary is 'blue', shade 6. Gray = ash-tinted neutral."
+    "harvestedAt": "2026-05-17",
+    "harvestNotes": "Mantine v7 default palette (blue accent at step 6). Each colour ramp is a 10-entry hex array.\n\nExtraction notes: Mantine 10-step ramps (indices 0-9) extracted verbatim from default-colors.ts. The 'primaryShade' default is 6 (light theme); accent = blue.6 per Mantine's own convention.",
+    "sourceCommit": "master",
+    "fidelityTier": "B"
   },
   "mappingNotes": "Mantine's gray shades 0-9 map to Quoin's surface/text ramp. mantine-blue-6 -> accent. Mantine has explicit red/green/yellow/cyan colour scales for status; mapped to their shade-6 step.",
   "base": {
     "gray": {
-      "0": "oklch(98% 0.002 250)",
-      "1": "oklch(96% 0.003 250)",
-      "2": "oklch(92% 0.005 250)",
-      "3": "oklch(88% 0.008 250)",
-      "4": "oklch(78% 0.010 250)",
-      "5": "oklch(65% 0.012 250)",
-      "6": "oklch(50% 0.012 250)",
-      "7": "oklch(38% 0.014 250)",
-      "8": "oklch(26% 0.014 250)",
-      "9": "oklch(14% 0.014 250)"
+      "0": "oklch(98.2% 0.0017 247.8)",
+      "1": "oklch(96.3% 0.0034 247.9)",
+      "2": "oklch(94.2% 0.0052 247.9)",
+      "3": "oklch(91.1% 0.007 247.9)",
+      "4": "oklch(86.7% 0.0106 247.9)",
+      "5": "oklch(76.9% 0.0145 248)",
+      "6": "oklch(64.3% 0.0152 248.1)",
+      "7": "oklch(42.8% 0.0147 248.2)",
+      "8": "oklch(34.5% 0.0133 248.2)",
+      "9": "oklch(26.2% 0.0095 248.2)"
     },
-    "white": { "0": "#ffffff" },
-    "blue":   { "6": "oklch(58% 0.18 250)", "0": "oklch(96% 0.04 250)" },
-    "red":    { "6": "oklch(58% 0.20 25)" },
-    "green":  { "6": "oklch(58% 0.16 145)" },
-    "yellow": { "6": "oklch(80% 0.18 80)" },
-    "cyan":   { "6": "oklch(65% 0.13 200)" }
+    "blue": {
+      "0": "oklch(96.3% 0.02 238.7)",
+      "1": "oklch(92.7% 0.0395 240)",
+      "2": "oklch(86% 0.0759 241.7)",
+      "3": "oklch(78.2% 0.1147 243.8)",
+      "4": "oklch(71.8% 0.1422 246.1)",
+      "5": "oklch(66.9% 0.1575 248.3)",
+      "6": "oklch(62.6% 0.1641 250.3)",
+      "7": "oklch(58.6% 0.1591 251.3)",
+      "8": "oklch(54.3% 0.1485 251.7)",
+      "9": "oklch(49.7% 0.1334 251.6)"
+    },
+    "red": {
+      "0": "oklch(97.8% 0.0107 17.3)",
+      "1": "oklch(93.9% 0.0309 17.7)",
+      "2": "oklch(88.3% 0.0616 18.4)",
+      "3": "oklch(81.7% 0.1032 19.5)",
+      "4": "oklch(75.6% 0.146 21.1)",
+      "5": "oklch(71.2% 0.1812 22.8)",
+      "6": "oklch(67.1% 0.2045 24.5)",
+      "7": "oklch(63.2% 0.2144 25.8)",
+      "8": "oklch(59.3% 0.2106 26.5)",
+      "9": "oklch(54.6% 0.1949 26.6)"
+    },
+    "green": {
+      "0": "oklch(97.3% 0.024 151.2)",
+      "1": "oklch(94.6% 0.0591 148.8)",
+      "2": "oklch(90.4% 0.0987 148.4)",
+      "3": "oklch(85.6% 0.141 147.8)",
+      "4": "oklch(80.2% 0.1684 147.3)",
+      "5": "oklch(76% 0.1832 146.6)",
+      "6": "oklch(71.5% 0.1835 146.4)",
+      "7": "oklch(67.4% 0.1775 146.2)",
+      "8": "oklch(61.7% 0.1624 146.4)",
+      "9": "oklch(56% 0.1427 146.9)"
+    },
+    "yellow": {
+      "0": "oklch(97.9% 0.0396 97.8)",
+      "1": "oklch(96.1% 0.0679 96.6)",
+      "2": "oklch(94% 0.1049 96.8)",
+      "3": "oklch(91% 0.144 95.1)",
+      "4": "oklch(88.3% 0.1648 92.2)",
+      "5": "oklch(84.7% 0.1693 87.1)",
+      "6": "oklch(80.7% 0.1674 78.1)",
+      "7": "oklch(77% 0.1658 71)",
+      "8": "oklch(73.1% 0.1673 62.6)",
+      "9": "oklch(68.3% 0.1693 55)"
+    },
+    "orange": {
+      "0": "oklch(97.2% 0.022 74.1)",
+      "1": "oklch(94.2% 0.0446 72.7)",
+      "2": "oklch(90.4% 0.0758 72.4)",
+      "3": "oklch(85% 0.1149 69)",
+      "4": "oklch(80.3% 0.1461 64.6)",
+      "5": "oklch(76.2% 0.1686 57.8)",
+      "6": "oklch(72.7% 0.1832 51.5)",
+      "7": "oklch(68.5% 0.1954 44.6)",
+      "8": "oklch(64.4% 0.1916 41.7)",
+      "9": "oklch(60% 0.1905 37.9)"
+    },
+    "cyan": {
+      "0": "oklch(96.9% 0.0242 203.1)",
+      "1": "oklch(94.1% 0.0502 202.5)",
+      "2": "oklch(88.6% 0.0791 204.8)",
+      "3": "oklch(82.4% 0.1058 206.8)",
+      "4": "oklch(77% 0.1186 207.6)",
+      "5": "oklch(72% 0.1193 211.2)",
+      "6": "oklch(67.8% 0.1144 210.6)",
+      "7": "oklch(62.5% 0.1065 212.2)",
+      "8": "oklch(56.8% 0.0973 213.4)",
+      "9": "oklch(50.9% 0.0875 215.1)"
+    },
+    "white": {
+      "0": "oklch(100% 0 0)"
+    }
   },
   "fonts": {
     "font-sans": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif",

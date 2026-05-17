@@ -2,40 +2,57 @@
   "name": "tailwind",
   "description": "Tailwind v4 default palette and scales (zinc neutral), translated onto the Quoin canonical semantic-token namespace.",
   "license": "MIT",
-  "tags": ["tailwind", "zinc", "oklch", "utility-first"],
+  "tags": [
+    "tailwind",
+    "zinc",
+    "oklch",
+    "utility-first"
+  ],
   "attribution": {
     "sourceSystem": "Tailwind CSS",
     "sourceOrganization": "Tailwind Labs",
-    "sourceUrl": "https://tailwindcss.com/",
+    "sourceUrl": "https://raw.githubusercontent.com/tailwindlabs/tailwindcss/main/packages/tailwindcss/theme.css",
     "sourceLicense": "MIT",
-    "harvestedAt": "2026-05-16",
-    "harvestNotes": "Default v4 palette (zinc-based neutral). Values approximate the published v4 OKLCH defaults; verify against the canonical tailwindcss source before publication."
+    "harvestedAt": "2026-05-17",
+    "harvestNotes": "Default v4 palette extracted byte-faithfully from packages/tailwindcss/theme.css. Tailwind v4 ships native OKLCH; values preserved verbatim. Neutral ramp = zinc.",
+    "sourceCommit": "main",
+    "fidelityTier": "A"
   },
   "mappingNotes": "Tailwind's neutral scale (zinc 50-950) maps directly onto Quoin's surface/text/border ramp. Tailwind has no native semantic-token layer; status colours selected from Tailwind's default red/amber/emerald/sky scales at their 500 step (or 700 for text-emphasis contrast).",
   "base": {
     "zinc": {
-      "50":  "oklch(0.985 0 0)",
-      "100": "oklch(0.967 0.001 286.375)",
-      "200": "oklch(0.92 0.004 286.32)",
-      "300": "oklch(0.871 0.006 286.286)",
-      "400": "oklch(0.705 0.015 286.067)",
-      "500": "oklch(0.552 0.016 285.938)",
-      "600": "oklch(0.442 0.017 285.786)",
-      "700": "oklch(0.37 0.013 285.805)",
-      "800": "oklch(0.274 0.006 286.033)",
-      "900": "oklch(0.21 0.006 285.885)",
-      "950": "oklch(0.141 0.005 285.823)"
+      "50": "oklch(98.5% 0 0)",
+      "100": "oklch(96.7% 0.001 286.4)",
+      "200": "oklch(92% 0.004 286.3)",
+      "300": "oklch(87.1% 0.006 286.3)",
+      "400": "oklch(70.5% 0.015 286.1)",
+      "500": "oklch(55.2% 0.016 285.9)",
+      "600": "oklch(44.2% 0.017 285.8)",
+      "700": "oklch(37% 0.013 285.8)",
+      "800": "oklch(27.4% 0.006 286)",
+      "900": "oklch(21% 0.006 285.9)",
+      "950": "oklch(14.1% 0.005 285.8)"
     },
-    "white": { "0": "#ffffff" },
-    "red":     { "500": "oklch(0.637 0.237 25.331)" },
-    "emerald": { "500": "oklch(0.696 0.17 162.48)" },
-    "amber":   { "500": "oklch(0.769 0.188 70.08)" },
-    "sky":     { "500": "oklch(0.685 0.169 237.323)" }
+    "red": {
+      "500": "oklch(63.7% 0.237 25.3)"
+    },
+    "emerald": {
+      "500": "oklch(69.6% 0.17 162.5)"
+    },
+    "amber": {
+      "500": "oklch(76.9% 0.188 70.1)"
+    },
+    "sky": {
+      "500": "oklch(68.5% 0.169 237.3)"
+    },
+    "white": {
+      "0": "oklch(100% 0 0)"
+    }
   },
   "fonts": {
-    "font-sans":    "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-    "font-serif":   "ui-serif, Georgia, 'Times New Roman', serif",
-    "font-mono":    "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",
+    "font-sans": "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+    "font-serif": "ui-serif, Georgia, 'Times New Roman', serif",
+    "font-mono": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",
     "font-display": "ui-sans-serif, system-ui, sans-serif"
   },
   "semantic": {

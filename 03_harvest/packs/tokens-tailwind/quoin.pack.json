@@ -23,9 +23,11 @@
   "attribution": {
     "sourceSystem": "Tailwind CSS",
     "sourceOrganization": "Tailwind Labs",
-    "sourceUrl": "https://tailwindcss.com/",
+    "sourceUrl": "https://raw.githubusercontent.com/tailwindlabs/tailwindcss/main/packages/tailwindcss/theme.css",
     "sourceLicense": "MIT",
-    "harvestedAt": "2026-05-16",
-    "harvestNotes": "Default v4 palette (zinc-based neutral). Values approximate the published v4 OKLCH defaults; verify against the canonical tailwindcss source before publication."
+    "harvestedAt": "2026-05-17",
+    "harvestNotes": "Default v4 palette extracted byte-faithfully from packages/tailwindcss/theme.css. Tailwind v4 ships native OKLCH; values preserved verbatim. Neutral ramp = zinc.",
+    "sourceCommit": "main",
+    "fidelityTier": "A"
   }
 }

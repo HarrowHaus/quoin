@@ -2,41 +2,125 @@
   "name": "radix",
   "description": "Radix Colors translated to Quoin. Slate neutral plus Blue accent (canonical Radix UI combination).",
   "license": "MIT",
-  "tags": ["radix", "slate", "12-step", "accessible"],
+  "tags": [
+    "radix",
+    "slate",
+    "12-step",
+    "accessible"
+  ],
   "attribution": {
     "sourceSystem": "Radix Colors",
     "sourceOrganization": "WorkOS",
-    "sourceUrl": "https://www.radix-ui.com/colors",
+    "sourceUrl": "https://raw.githubusercontent.com/radix-ui/colors/main/src/light.ts",
     "sourceLicense": "MIT",
-    "harvestedAt": "2026-05-16",
-    "harvestNotes": "Radix's 12-step alpha+saturation scale flattened to OKLCH greys for the neutral, plus the canonical Blue scale for the accent. Status colours from Radix's red, green, amber, blue scales (step 10 = solid)."
+    "harvestedAt": "2026-05-17",
+    "harvestNotes": "Radix Colors light theme: slate + blue + red + green + amber, extracted from the canonical sRGB hex declarations in radix-ui/colors. Each ramp has 12 perceptual steps; we keep steps 1-12 verbatim.\n\nExtraction notes: Radix's 12-step scale (gray, slate, blue, red, green, amber, sky) extracted byte-faithful from src/light.ts. Flattened onto Quoin's 4-surface model: step-1 → surface-elevated, step-2 → surface, step-3 → surface-recessed, step-12 → surface-inverse. Accent = slate.12.",
+    "sourceCommit": "main",
+    "fidelityTier": "B"
   },
   "mappingNotes": "Radix's 12-step model maps onto Quoin's 4-surface model as: step 1 -> surface-elevated, step 2 -> surface, step 3 -> surface-recessed, step 12 -> surface-inverse. text uses step 11 (body), text-emphasis uses step 12, text-recede uses step 9. Border uses step 6 / 8 (recede / emphasis).",
   "base": {
     "slate": {
-      "1":  "oklch(99% 0.002 264)",
-      "2":  "oklch(98% 0.004 264)",
-      "3":  "oklch(95% 0.005 264)",
-      "4":  "oklch(92% 0.006 264)",
-      "5":  "oklch(89% 0.007 264)",
-      "6":  "oklch(85% 0.008 264)",
-      "7":  "oklch(80% 0.010 264)",
-      "8":  "oklch(70% 0.012 264)",
-      "9":  "oklch(55% 0.012 264)",
-      "10": "oklch(50% 0.012 264)",
-      "11": "oklch(42% 0.012 264)",
-      "12": "oklch(18% 0.014 264)"
+      "1": "oklch(99.1% 0.0013 286.4)",
+      "2": "oklch(98.3% 0.0026 286.4)",
+      "3": "oklch(95.6% 0.004 286.3)",
+      "4": "oklch(93.2% 0.0054 286.3)",
+      "5": "oklch(91% 0.0068 277.2)",
+      "6": "oklch(88.7% 0.0095 286.2)",
+      "7": "oklch(85.3% 0.0111 280.4)",
+      "8": "oklch(79.4% 0.0156 277.8)",
+      "9": "oklch(64.5% 0.0165 277.7)",
+      "10": "oklch(61.1% 0.0155 272.6)",
+      "11": "oklch(50.2% 0.0136 264.4)",
+      "12": "oklch(24.1% 0.0097 248.2)"
+    },
+    "gray": {
+      "1": "oklch(99.1% 0 0)",
+      "2": "oklch(98.2% 0 0)",
+      "3": "oklch(95.5% 0 0)",
+      "4": "oklch(93.1% 0 0)",
+      "5": "oklch(90.7% 0 0)",
+      "6": "oklch(88.5% 0 0)",
+      "7": "oklch(85.1% 0 0)",
+      "8": "oklch(79.2% 0 0)",
+      "9": "oklch(64.3% 0 0)",
+      "10": "oklch(61% 0 0)",
+      "11": "oklch(50.3% 0 0)",
+      "12": "oklch(24.4% 0 0)"
     },
     "blue": {
-      "9":  "oklch(60% 0.18 254)",
-      "10": "oklch(56% 0.18 254)",
-      "3":  "oklch(95% 0.04 254)"
+      "1": "oklch(99.3% 0.0034 247.9)",
+      "2": "oklch(98.2% 0.0092 242.8)",
+      "3": "oklch(96% 0.0201 238.7)",
+      "4": "oklch(93.8% 0.035 234.8)",
+      "5": "oklch(90.5% 0.0513 240.3)",
+      "6": "oklch(86.3% 0.0682 243.3)",
+      "7": "oklch(81% 0.0887 243.1)",
+      "8": "oklch(73.4% 0.1214 243.1)",
+      "9": "oklch(64.9% 0.193 251.8)",
+      "10": "oklch(62.2% 0.1831 251.7)",
+      "11": "oklch(55.6% 0.1622 252.2)",
+      "12": "oklch(32.4% 0.0964 258.8)"
     },
-    "red":   { "9": "oklch(58% 0.21 25)" },
-    "green": { "9": "oklch(58% 0.18 145)" },
-    "amber": { "9": "oklch(75% 0.18 80)" },
-    "info":  { "9": "oklch(60% 0.18 254)" },
-    "white": { "0": "#ffffff" }
+    "red": {
+      "1": "oklch(99.3% 0.0032 17.2)",
+      "2": "oklch(98.2% 0.0086 17.3)",
+      "3": "oklch(95.5% 0.0207 13.9)",
+      "4": "oklch(92.2% 0.0401 16)",
+      "5": "oklch(89.2% 0.0567 16.9)",
+      "6": "oklch(85.7% 0.0741 17.7)",
+      "7": "oklch(80.7% 0.0888 18.3)",
+      "8": "oklch(74.4% 0.1133 18.8)",
+      "9": "oklch(62.6% 0.1933 23)",
+      "10": "oklch(59.9% 0.1947 24)",
+      "11": "oklch(55.7% 0.1974 25.2)",
+      "12": "oklch(33.9% 0.1089 16.6)"
+    },
+    "green": {
+      "1": "oklch(99.4% 0.0041 157.2)",
+      "2": "oklch(98.1% 0.0099 155.1)",
+      "3": "oklch(95.8% 0.0223 155.9)",
+      "4": "oklch(93.4% 0.0372 156.4)",
+      "5": "oklch(89.9% 0.0489 157.2)",
+      "6": "oklch(85.6% 0.0641 158.2)",
+      "7": "oklch(79.8% 0.0832 159.1)",
+      "8": "oklch(71.6% 0.1133 160.3)",
+      "9": "oklch(64.1% 0.1329 157.7)",
+      "10": "oklch(61.1% 0.1266 158.2)",
+      "11": "oklch(54.3% 0.1116 159.5)",
+      "12": "oklch(32.2% 0.0475 164.5)"
+    },
+    "amber": {
+      "1": "oklch(99.4% 0.0028 84.6)",
+      "2": "oklch(98.6% 0.0238 99.1)",
+      "3": "oklch(97% 0.0684 100.4)",
+      "4": "oklch(94.5% 0.1034 97.9)",
+      "5": "oklch(91.8% 0.1326 98.2)",
+      "6": "oklch(88% 0.1233 93.4)",
+      "7": "oklch(82.7% 0.1224 86.7)",
+      "8": "oklch(75.8% 0.1403 76.7)",
+      "9": "oklch(85.4% 0.1572 84.1)",
+      "10": "oklch(83.1% 0.1679 80.8)",
+      "11": "oklch(57.1% 0.1291 63.9)",
+      "12": "oklch(35.2% 0.0486 54.2)"
+    },
+    "sky": {
+      "1": "oklch(99.4% 0.0055 211)",
+      "2": "oklch(97.9% 0.0103 219.6)",
+      "3": "oklch(96% 0.024 219.7)",
+      "4": "oklch(93.6% 0.0351 219.2)",
+      "5": "oklch(90.3% 0.0467 220.6)",
+      "6": "oklch(86% 0.0571 223.6)",
+      "7": "oklch(80.6% 0.0716 225.5)",
+      "8": "oklch(72.8% 0.0961 228.4)",
+      "9": "oklch(86.1% 0.1027 217.8)",
+      "10": "oklch(83.8% 0.1038 219.4)",
+      "11": "oklch(52.5% 0.1079 232.5)",
+      "12": "oklch(35.1% 0.0572 242.4)"
+    },
+    "white": {
+      "0": "oklch(100% 0 0)"
+    }
   },
   "fonts": {
     "font-sans": "'Inter', system-ui, sans-serif",
@@ -66,6 +150,6 @@
     "critical": "{red.9}",
     "success": "{green.9}",
     "warning": "{amber.9}",
-    "info": "{info.9}"
+    "info": "{sky.9}"
   }
 }

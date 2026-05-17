@@ -2,37 +2,83 @@
   "name": "open-props",
   "description": "Open Props (Adam Argyle / Chrome team) translated onto the Quoin canonical semantic-token namespace.",
   "license": "MIT",
-  "tags": ["open-props", "gray", "css-vars", "framework-free"],
+  "tags": [
+    "open-props",
+    "gray",
+    "css-vars",
+    "framework-free"
+  ],
   "attribution": {
     "sourceSystem": "Open Props",
     "sourceOrganization": "Adam Argyle / Open Props community",
-    "sourceUrl": "https://open-props.style/",
+    "sourceUrl": "https://raw.githubusercontent.com/argyleink/open-props/main/src/props.colors.css",
     "sourceLicense": "MIT",
-    "harvestedAt": "2026-05-16",
-    "harvestNotes": "Open Props' gray-N scale powers neutrals; its named colour set powers status (red-7, green-7, etc.). Open Props ships hsl(); converted to OKLCH approximations here for consistency with the rest of the harvested set."
+    "harvestedAt": "2026-05-17",
+    "harvestNotes": "Open Props props.colors.css extracted byte-faithfully. The gray-N ramp + named colour scales (red, orange, green, blue) preserved verbatim. Hex inputs converted to OKLCH via culori at extraction time.\n\nExtraction notes: Status hues mapped: critical = red-7, success = green-7, warning = orange-7 (matches Open Props' own usage in props.shadows.css), info = blue-7. Hex source → OKLCH at extraction.",
+    "sourceCommit": "main",
+    "fidelityTier": "B"
   },
   "mappingNotes": "Open Props gray-0..gray-12 maps to Quoin surface/text/border ramp. Open Props has a dedicated surface- and brand- layer in its newer releases; this pack uses the gray ramp directly to keep the mapping simple and faithful to the original 'use the raw scale' usage pattern.",
   "base": {
     "gray": {
-      "0":  "oklch(98% 0.002 250)",
-      "1":  "oklch(96% 0.003 250)",
-      "2":  "oklch(93% 0.005 250)",
-      "3":  "oklch(88% 0.008 250)",
-      "4":  "oklch(80% 0.010 250)",
-      "5":  "oklch(70% 0.012 250)",
-      "6":  "oklch(60% 0.012 250)",
-      "7":  "oklch(50% 0.012 250)",
-      "8":  "oklch(40% 0.012 250)",
-      "9":  "oklch(30% 0.014 250)",
-      "10": "oklch(22% 0.014 250)",
-      "11": "oklch(15% 0.014 250)",
-      "12": "oklch(10% 0.014 250)"
+      "0": "oklch(98.2% 0.0017 247.8)",
+      "1": "oklch(96.3% 0.0034 247.9)",
+      "2": "oklch(94.2% 0.0052 247.9)",
+      "3": "oklch(91.1% 0.007 247.9)",
+      "4": "oklch(86.7% 0.0106 247.9)",
+      "5": "oklch(76.9% 0.0145 248)",
+      "6": "oklch(64.3% 0.0152 248.1)",
+      "7": "oklch(42.8% 0.0147 248.2)",
+      "8": "oklch(34.5% 0.0133 248.2)",
+      "9": "oklch(26.2% 0.0095 248.2)",
+      "10": "oklch(21.2% 0.0092 255.6)",
+      "11": "oklch(16.8% 0.0071 258.4)",
+      "12": "oklch(11.2% 0.0087 242.2)"
     },
-    "white":  { "0": "#ffffff" },
-    "red":    { "7": "oklch(55% 0.21 25)" },
-    "green":  { "7": "oklch(55% 0.16 150)" },
-    "orange": { "7": "oklch(70% 0.18 60)" },
-    "blue":   { "7": "oklch(58% 0.16 240)" }
+    "red": {
+      "0": "oklch(97.8% 0.0107 17.3)",
+      "1": "oklch(93.9% 0.0309 17.7)",
+      "2": "oklch(88.3% 0.0616 18.4)",
+      "6": "oklch(67.1% 0.2045 24.5)",
+      "7": "oklch(63.2% 0.2144 25.8)",
+      "8": "oklch(59.3% 0.2106 26.5)",
+      "9": "oklch(54.6% 0.1949 26.6)"
+    },
+    "orange": {
+      "0": "oklch(97.2% 0.022 74.1)",
+      "1": "oklch(94.2% 0.0446 72.7)",
+      "2": "oklch(90.4% 0.0758 72.4)",
+      "6": "oklch(72.7% 0.1832 51.5)",
+      "7": "oklch(68.5% 0.1954 44.6)",
+      "8": "oklch(64.4% 0.1916 41.7)",
+      "9": "oklch(60% 0.1905 37.9)"
+    },
+    "green": {
+      "0": "oklch(97.3% 0.024 151.2)",
+      "1": "oklch(94.6% 0.0591 148.8)",
+      "2": "oklch(90.4% 0.0987 148.4)",
+      "6": "oklch(71.5% 0.1835 146.4)",
+      "7": "oklch(67.4% 0.1775 146.2)",
+      "8": "oklch(61.7% 0.1624 146.4)",
+      "9": "oklch(56% 0.1427 146.9)"
+    },
+    "blue": {
+      "0": "oklch(96.3% 0.02 238.7)",
+      "1": "oklch(92.7% 0.0395 240)",
+      "2": "oklch(86% 0.0759 241.7)",
+      "6": "oklch(62.6% 0.1641 250.3)",
+      "7": "oklch(58.6% 0.1591 251.3)",
+      "8": "oklch(54.3% 0.1485 251.7)",
+      "9": "oklch(49.7% 0.1334 251.6)"
+    },
+    "yellow": {
+      "5": "oklch(84.7% 0.1693 87.1)",
+      "6": "oklch(80.7% 0.1674 78.1)",
+      "7": "oklch(77% 0.1658 71)"
+    },
+    "white": {
+      "0": "oklch(100% 0 0)"
+    }
   },
   "fonts": {
     "font-sans": "system-ui, -apple-system, sans-serif",

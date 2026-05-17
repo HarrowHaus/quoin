@@ -2,33 +2,52 @@
   "name": "mui",
   "description": "Material UI (MUI) default theme translated onto the Quoin canonical semantic-token namespace.",
   "license": "MIT",
-  "tags": ["mui", "material-ui", "react", "indigo-pink"],
+  "tags": [
+    "mui",
+    "material-ui",
+    "react",
+    "indigo-pink"
+  ],
   "attribution": {
     "sourceSystem": "Material UI",
     "sourceOrganization": "MUI",
-    "sourceUrl": "https://mui.com/",
+    "sourceUrl": "https://raw.githubusercontent.com/mui/material-ui/master/packages/mui-material/src/colors/indigo.js",
     "sourceLicense": "MIT",
-    "harvestedAt": "2026-05-16",
-    "harvestNotes": "MUI v6 default light theme. MUI's classic primary is indigo (#1976d2), secondary is pink. Distinct from Material 3 — MUI is the React port of an older Material 2/3 hybrid; many MUI projects still ship the classic palette."
+    "harvestedAt": "2026-05-17",
+    "harvestNotes": "Material UI default (Material Design v1/v2) palettes: indigo + grey + red + green + orange + blue. Each file ships a flat hex object; we capture step 500 + a few neighbours.\n\nExtraction notes: MUI's per-colour files (indigo.js, gray.js, red.js, etc.) share step keys; concatenating them in this pipeline collapses values into the last file's keys. Per-file fidelity extraction is deferred; OKLCH approximations of MUI's Material Design v2 palette stand, anchored to documented hex values from mui/material-ui.",
+    "sourceCommit": "master",
+    "fidelityTier": "B"
   },
   "mappingNotes": "MUI palette.background.default/paper -> surface/surface-elevated. palette.text.primary/secondary -> text/text-recede. palette.primary.main -> accent. palette.error/warning/info/success.main map directly.",
   "base": {
     "gray": {
-      "50":  "oklch(98% 0.003 260)",
-      "100": "oklch(96% 0.005 260)",
-      "200": "oklch(90% 0.008 260)",
-      "400": "oklch(75% 0.010 260)",
-      "500": "oklch(60% 0.010 260)",
-      "700": "oklch(40% 0.012 260)",
-      "800": "oklch(28% 0.012 260)",
-      "900": "oklch(16% 0.014 260)"
+      "50": "oklch(98.5% 0.001 0)",
+      "100": "oklch(96% 0.002 0)",
+      "200": "oklch(93% 0.003 0)",
+      "400": "oklch(74% 0.005 0)",
+      "700": "oklch(38% 0.008 0)",
+      "900": "oklch(13% 0.01 0)"
     },
-    "white": { "0": "#ffffff" },
-    "indigo": { "500": "oklch(52% 0.18 260)", "50": "oklch(95% 0.04 260)" },
-    "red":    { "500": "oklch(58% 0.22 25)" },
-    "green":  { "500": "oklch(60% 0.16 145)" },
-    "amber":  { "500": "oklch(75% 0.18 70)" },
-    "blue":   { "500": "oklch(60% 0.16 230)" }
+    "indigo": {
+      "50": "oklch(95% 0.04 280)",
+      "500": "oklch(48% 0.18 280)",
+      "700": "oklch(38% 0.18 280)"
+    },
+    "red": {
+      "500": "oklch(60% 0.22 25)"
+    },
+    "green": {
+      "500": "oklch(58% 0.16 145)"
+    },
+    "amber": {
+      "500": "oklch(78% 0.17 80)"
+    },
+    "blue": {
+      "500": "oklch(58% 0.17 240)"
+    },
+    "white": {
+      "0": "oklch(100% 0 0)"
+    }
   },
   "fonts": {
     "font-sans": "Roboto, 'Helvetica Neue', Arial, sans-serif",
