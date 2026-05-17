@@ -103,6 +103,9 @@ button { font: inherit; cursor: pointer; }
   .md\:grid-cols-\[3fr_1fr\] { grid-template-columns: 3fr 1fr; }
   .md\:flex-row { flex-direction: row; }
 }
+@media (min-width: 1024px) {
+  .lg\:grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+}
 
 .border-collapse { border-collapse: collapse; }
 .min-h-screen { min-height: 100vh; }

@@ -697,6 +697,7 @@ const EMITTERS = {
       "1:2": "grid-cols-1 md:grid-cols-[1fr_2fr]",
       "2:1": "grid-cols-1 md:grid-cols-[2fr_1fr]",
       "1:1:1": "grid-cols-1 md:grid-cols-3",
+      "1:1:1:1": "grid-cols-1 md:grid-cols-2 lg:grid-cols-4",
       "1:3": "grid-cols-1 md:grid-cols-[1fr_3fr]",
       "3:1": "grid-cols-1 md:grid-cols-[3fr_1fr]"
     }[ratio] ?? "grid-cols-1 md:grid-cols-2";

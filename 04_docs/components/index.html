@@ -42,9 +42,16 @@
           authored Quoin source and the rendered result.
         </lead-graf>
 
-        <alert-band intent="info">
-          Press <kbd style="font-family: var(--font-mono); font-size: 0.875em; padding: 0.1em 0.35em; background: var(--surface-recessed); border-radius: var(--radius-sm)">Cmd-K</kbd> (or <kbd style="font-family: var(--font-mono); font-size: 0.875em; padding: 0.1em 0.35em; background: var(--surface-recessed); border-radius: var(--radius-sm)">Ctrl-K</kbd>) anywhere on the docs to jump between pages — that's <code>companion.js</code> handling the command-menu primitive live.
-        </alert-band>
+        <cluster>
+          <alert-band intent="info" variant="compact">
+            <kbd style="font-family: var(--font-mono); font-size: 0.875em; padding: 0.1em 0.4em; background: rgba(255,255,255,0.22); color: inherit; border: 1px solid rgba(255,255,255,0.35); border-radius: var(--radius-sm); font-weight: 600">Cmd-K</kbd>
+            <span style="opacity: 0.7">/</span>
+            <kbd style="font-family: var(--font-mono); font-size: 0.875em; padding: 0.1em 0.4em; background: rgba(255,255,255,0.22); color: inherit; border: 1px solid rgba(255,255,255,0.35); border-radius: var(--radius-sm); font-weight: 600">Ctrl-K</kbd>
+          </alert-band>
+          <recede-block style="font-size: var(--type-size-sm)">
+            jumps between pages — <code>companion.js</code> handling the command-menu primitive live.
+          </recede-block>
+        </cluster>
 
         <!-- ─── Stat display ─── -->
         <stack>

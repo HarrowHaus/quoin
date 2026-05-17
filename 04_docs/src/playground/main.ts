@@ -140,6 +140,7 @@ function recompile(): void {
   if (vocabs.length === 0) {
     setStatus("error: pick at least one vocab pack", "error");
     compiledEl.textContent = "// pick at least one vocab pack from the Vocab packs fieldset";
+    markFrameError();
     return;
   }
   try {
@@ -153,11 +154,25 @@ function recompile(): void {
     compiledEl.textContent = result.html;
     renderIntoFrame(result.html, tokenEntry.css, activeImplPackId);
     setStatus(`compiled — ${result.html.length} bytes`, "ok");
+    clearFrameError();
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     compiledEl.textContent = `// ${message}`;
     setStatus(`error: ${message.slice(0, 120)}`, "error");
+    markFrameError();
   }
+}
+
+function markFrameError(): void {
+  renderFrame.style.opacity = "0.35";
+  renderFrame.style.outline = "2px solid var(--critical, #c33)";
+  renderFrame.style.outlineOffset = "-2px";
+}
+
+function clearFrameError(): void {
+  renderFrame.style.opacity = "";
+  renderFrame.style.outline = "";
+  renderFrame.style.outlineOffset = "";
 }
 
 /* ─────────────── wire events ─────────────── */
