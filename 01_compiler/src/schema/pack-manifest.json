@@ -39,9 +39,11 @@
         "sourceSystem": { "type": "string" },
         "sourceOrganization": { "type": "string" },
         "sourceUrl": { "type": "string" },
+        "sourceCommit": { "type": "string", "description": "Git SHA, tag, or branch of the upstream source at extraction time. Added in Phase 3.5." },
         "sourceLicense": { "type": "string" },
         "harvestedAt": { "type": "string" },
-        "harvestNotes": { "type": "string" }
+        "harvestNotes": { "type": "string" },
+        "fidelityTier": { "type": "string", "enum": ["A", "B", "C"], "description": "Phase 3.5 fidelity classification: A = byte-faithful extraction; B = extracted with mapping notes; C = extraction failed, designed-interpretation values stand." }
       },
       "additionalProperties": false
     },

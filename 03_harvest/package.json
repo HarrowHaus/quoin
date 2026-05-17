@@ -1,0 +1,16 @@
+{
+  "name": "@quoin/harvest",
+  "version": "0.1.0",
+  "description": "Phase 3 + 3.5 harvest tooling — pack generator, validator, fidelity extractor.",
+  "private": true,
+  "type": "module",
+  "main": "build.js",
+  "scripts": {
+    "build": "node build.js",
+    "validate": "node validate.js",
+    "extract": "node fidelity/extract.js"
+  },
+  "dependencies": {
+    "culori": "^4.0.2"
+  }
+}

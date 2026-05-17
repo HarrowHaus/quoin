@@ -1,0 +1,4 @@
+<!-- fetched 2026-05-17 from https://raw.githubusercontent.com/ant-design/ant-design-colors/main/src/index.ts -->
+export { default as generate } from './generate';
+export * from './presets'
+export type * from './types'
