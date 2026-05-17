@@ -33,9 +33,9 @@ Four layers, three of which already exist as standards or shipped products:
 
 Three composable pack categories distributed via npm under the `@quoin/*` scope:
 
-- **Token packs** — aesthetic-bearing (colors, type, spacing, motion, radius). Example: `@quoin/tokens-baseline`, `@quoin/tokens-material`.
-- **Vocabulary packs** — semantic element definitions for a domain. Example: `@quoin/vocab-editorial`, `@quoin/vocab-dashboard`.
-- **Implementation packs** — compilation targets. Example: `@quoin/impl-tailwind`, `@quoin/impl-raw-css`.
+- **Token packs** — aesthetic-bearing (colors, type, spacing, motion, radius). Reference: `@quoin/tokens-baseline`. Harvested: 30 production packs from Material 3, Carbon, Polaris, Fluent, Primer, Geist, Tailwind defaults, and more (see `03_harvest/`).
+- **Vocabulary packs** — semantic element definitions for a domain. Reference: `@quoin/vocab-editorial` (21 primitives), `@quoin/vocab-dashboard` (15), `@quoin/vocab-essentials` (10), `@quoin/vocab-app-shell` (5). Harvested: 10 more covering shadcn, Radix, Headless, forms, docs, marketing.
+- **Implementation packs** — compilation targets. Reference: `@quoin/impl-tailwind` (Tailwind v4 arbitrary-value classes, ships `companion.css` for hover/focus/motion polish + `companion.js` for tab / disclosure / modal / Cmd-K behaviors), `@quoin/impl-raw-css` (zero-dependency inline-style emitter).
 
 A user composes their build by installing one of each.
 
@@ -50,18 +50,22 @@ A user composes their build by installing one of each.
 
 ## Phase map
 
-| Phase | Folder | Output |
-|-------|--------|--------|
-| 0 | `00_spec/` | Specification document (current) |
-| 1 | `01_compiler/` | Reference compiler |
-| 2 | `02_reference-packs/` | 3-5 hand-curated reference packs |
-| 3 | `03_harvest/` | AI-translated packs from existing design systems |
-| 4 | `04_docs/` | Documentation site + playground |
-| 5 | `05_launch/` | npm publication, landing page, launch essay |
+| Phase | Folder | Output | Status |
+|-------|--------|--------|--------|
+| 0 | `00_spec/` | Specification document (spec, pack-format, primitives, tokens) | shipped |
+| 1 | `01_compiler/` | Reference compiler (TypeScript, ESM, Vite plugin, browser entry) | shipped |
+| 2 | `02_reference-packs/` | 7 reference packs: 1 token, 4 vocabulary, 2 implementation | shipped |
+| 3 | `03_harvest/` | 40 harvested packs (30 token + 10 vocabulary) | shipped |
+| 4 | `04_docs/` | Documentation site, live playground, pack browser, migration guides | shipped |
+| 5a | `02_reference-packs/impl-tailwind/companion.css` | Visual-maturity polish layer — hover, focus, motion, microinteractions | shipped |
+| 5b | (per-primitive) | Specific-attribute variants on key primitives (`emphasis-card variant="featured"`, `alert-band variant="compact"`, etc.) | shipped |
+| 5c | `02_reference-packs/impl-tailwind/companion.js` | Interactive behaviors — tab-panels keyboard nav, disclosure animation, modal trigger, Cmd-K command menu | shipped |
+| 5d | `02_reference-packs/vocab-essentials/`, `vocab-app-shell/` | Two additional vocabulary packs covering the v1 gaps (10 essentials + 5 app-shell primitives) | shipped |
+| 5e | `05_launch/` | npm publication, landing page, launch essay, demo video, HN/X drafts, release tag | pending |
 
 ## Status
 
-Phase 0 in progress. See `HANDOFF.md` for operator instructions and `PHASE_PROMPTS.md` for the per-phase Claude Code prompts.
+Phases 0–4 plus 5a–5d are complete. Phase 5e (launch) is staged but not executed — see `05_launch/README.md` for the deliverables list, and `PHASE_PROMPTS.md` for the per-phase Claude Code prompts.
 
 ## Canonical locations
 

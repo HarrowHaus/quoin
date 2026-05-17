@@ -5,6 +5,14 @@ on top, so the site is itself a working demonstration of the language —
 every page (except generated spec content) is authored in Quoin and
 compiled at build time.
 
+Phase 4 originally shipped the site, playground, pack browser, and
+migration guides. Phase 5 added the **Components** page (catalog of
+every primitive with side-by-side authored / rendered output), a global
+**Cmd-K command menu** via `companion.js`, four playground **preset
+seeds** (article / marketing / dashboard / app-shell) with a multi-select
+vocab-pack picker, and a visible **error state** on the playground
+iframe when compilation fails.
+
 ## Run
 
 ```bash
@@ -33,8 +41,9 @@ The `prebuild` / `predev` / `prepreview` hooks run three small scripts:
 04_docs/
 ├── index.html               Home
 ├── start/index.html         Getting started guide
-├── playground/index.html    Live in-browser compiler
-├── packs/index.html         Pack browser (45 packs)
+├── components/index.html    Phase 5 — every primitive, authored + rendered
+├── playground/index.html    Live in-browser compiler (4 presets, vocab multi-select)
+├── packs/index.html         Pack browser (47 packs)
 ├── migrate/
 │   ├── tailwind/index.html
 │   ├── daisyui/index.html
@@ -48,11 +57,13 @@ The `prebuild` / `predev` / `prepreview` hooks run three small scripts:
 ├── src/
 │   ├── packs/main.ts        Pack browser driver
 │   └── playground/
-│       ├── main.ts          Playground driver
-│       └── packs.ts         In-memory pack registry
-├── public/                  Static assets (tokens.css, impl.css, site.css)
+│       ├── main.ts          Playground driver (preset + vocab toggles + error frame)
+│       ├── packs.ts         In-memory pack registry
+│       └── presets.ts       Four preset seed sources
+├── public/                  Static assets (tokens.css, impl.css, impl.js, cmd-k.js, site.css)
 ├── generated/               (gitignored — built every run)
 ├── scripts/                 Pre-build scripts
+├── quoin.tokens.json        Project-local token overrides (Junicode + Public Sans + brand accent)
 └── vite.config.ts
 ```
 
@@ -71,12 +82,15 @@ The generated spec pages embed the converted markdown inside
 
 | Slot | Pack |
 |------|------|
-| Token | `@quoin/tokens-baseline` |
+| Token | `@quoin/tokens-geist` + project overrides in `quoin.tokens.json` (Junicode display, Public Sans body, brand accent) |
 | Vocabulary | `@quoin/vocab-editorial` |
 | Vocabulary | `@quoin/vocab-dashboard` |
+| Vocabulary | `@quoin/vocab-essentials` *(Phase 5d)* |
+| Vocabulary | `@quoin/vocab-app-shell` *(Phase 5d)* |
 | Vocabulary | `@quoin/vocab-marketing` |
 | Vocabulary | `@quoin/vocab-docs` |
-| Implementation | `@quoin/impl-tailwind` |
+| Vocabulary | `@quoin/vocab-dashboard-extended` |
+| Implementation | `@quoin/impl-tailwind` + `companion.css` (Phase 5a polish) + `companion.js` (Phase 5c interactive behaviors) |
 
 To re-skin the entire site, edit `scripts/copy-assets.js` (one constant
 — `ACTIVE_TOKEN_PACK`) and update the pack stack in `vite.config.ts`.
@@ -97,14 +111,22 @@ pack's CSS.
 Currently preloads:
 
 - **5 token packs:** baseline, geist, material3, radix, primer
-- **2 vocabulary packs:** editorial, dashboard
-- **2 implementation packs:** impl-tailwind, impl-raw-css
+- **8 vocabulary packs:** editorial, dashboard, essentials, app-shell, dashboard-extended, marketing, docs, forms
+- **2 implementation packs:** impl-tailwind (with companion css/js), impl-raw-css
 
-Adding more is a 4-line change in `src/playground/packs.ts`.
+The vocabulary picker is multi-select via checkboxes — load any
+combination at once. A **Preset** dropdown seeds the source textarea
+with one of four canonical examples (article, marketing, dashboard,
+app-shell) and auto-toggles the vocab packs each example needs. When a
+compile fails — typically because a toggle removed a vocab the source
+still uses — the iframe dims and gets a red outline so the failure is
+visible at a glance, with the specific error in the status bar.
+
+Adding more packs is a 4-line change in `src/playground/packs.ts`.
 
 ## Pack browser
 
-Driven by `generated/packs.json`. Phase 5 will swap the data source to
+Driven by `generated/packs.json`. Phase 5e will swap the data source to
 the npm registry (`registry.npmjs.org/@quoin/*`) once the packs are
 published. The consumed JSON shape stays stable so the page itself
 doesn't change.
@@ -116,19 +138,31 @@ Per [`../PHASE_GATES.md`](../PHASE_GATES.md):
 - [x] Docs site builds and runs locally (`npm run dev`, `npm run build`).
 - [x] Spec reference auto-generated from `00_spec/` (not duplicated).
 - [x] Live playground exists — browser-side compile, real-time render.
-- [x] Pack browser lists all 45 packs (5 reference + 40 harvested).
+- [x] Pack browser lists all 47 packs (7 reference + 40 harvested).
 - [x] Getting-started + Tailwind / DaisyUI / shadcn migration guides
       exist with real side-by-side content.
 - [x] Stylistic requirement: docs site is itself authored in Quoin.
-- [ ] Operator review pending.
+
+## Phase 5 additions (5a–5d) shipped to this site
+
+- **Components page** with every primitive shown source + rendered.
+- **Cmd-K command menu** wired site-wide via `cmd-k.js` + `companion.js`.
+- **Playground presets** — article / marketing / dashboard / app-shell.
+- **Vocab multi-select** in the playground with 8 preloaded packs.
+- **Visible compile-error state** — dimmed iframe + red outline.
+- **Project token overrides** via `quoin.tokens.json` (Junicode +
+  Public Sans + brand accent) compiled into both the build pipeline and
+  the served `tokens.css`.
+- **Companion CSS + JS** loaded on every page for hover/focus polish
+  and interactive behaviors.
 
 ## Build output
 
 ```
 $ npm run build
-12 HTML pages, 2 JS bundles
-playground bundle: 456 KB / 148 KB gzipped (includes the compiler)
-pack browser bundle: 34 KB / 8 KB gzipped
+13 HTML pages, 2 JS bundles
+playground bundle: ~511 KB / 159 KB gzipped (includes the compiler)
+pack browser bundle: ~34 KB / 8 KB gzipped
 zero Quoin tags survive in any compiled page
 ```
 

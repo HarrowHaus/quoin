@@ -1,8 +1,8 @@
 # @quoin/vocab-app-shell
 
-Five primitives that compose into a complete application surface — the
-sidebar + top-bar + content layouts that every SaaS product, admin
-console, and authenticated app uses.
+Added in **Phase 5d**. Five primitives that compose into a complete
+application surface — the sidebar + top-bar + content layouts that every
+SaaS product, admin console, and authenticated app uses.
 
 ## Primitives
 

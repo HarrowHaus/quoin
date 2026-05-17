@@ -1,6 +1,21 @@
-# Phase 5 — Launch
+# Phase 5e — Launch
 
-Status: pending phase 4 completion.
+Status: **staged, not executed.** Phases 0–4 plus 5a–5d are complete; this
+folder covers the remaining launch deliverables.
+
+## Phase 5 sub-phases
+
+Phase 5 was split during execution. Sub-phases 5a–5d shipped to the
+existing source folders (no separate phase folder); 5e is the actual
+public launch and lives here.
+
+| Sub-phase | Where it lives | What it added |
+|-----------|----------------|---------------|
+| 5a polish | `02_reference-packs/impl-tailwind/companion.css` | Hover, focus, active, motion microinteractions for every primitive. Pure CSS, honors `prefers-reduced-motion`. |
+| 5b variants | Per-primitive (e.g. `emphasis-card variant="featured"`, `alert-band variant="compact"`, `pricing-tier variant="featured"`) | Specific-attribute variants on key primitives. |
+| 5c interactive JS | `02_reference-packs/impl-tailwind/companion.js` | Tab-panels keyboard nav, disclosure animation, modal trigger, Cmd-K command menu. Single ES module, no dependencies. |
+| 5d vocabulary expansion | `02_reference-packs/vocab-essentials/`, `02_reference-packs/vocab-app-shell/` | 15 new primitives (10 essentials + 5 app-shell) closing v1 gaps. |
+| **5e launch** | `05_launch/` | npm publication, landing page, launch essay, demo video, HN/X drafts, release tag. |
 
 ## Scope
 
@@ -19,6 +34,12 @@ All packs prepared for npm publication under `@quoin/*` scope. Publication is st
 - npm scope reserved by the operator
 - Publication command sequence documented (operator executes)
 - Two-factor auth and credentials handled by the operator
+
+Inventory to publish: 7 reference packs (`tokens-baseline`,
+`vocab-editorial`, `vocab-dashboard`, `vocab-essentials`,
+`vocab-app-shell`, `impl-tailwind`, `impl-raw-css`), plus the 40
+harvested packs from `03_harvest/packs/`. The `@quoin/compiler` and
+`@quoin/compiler/vite` plugin from Phase 1 also publish.
 
 ### 2. Landing page
 

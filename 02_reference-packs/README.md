@@ -1,8 +1,10 @@
 # Phase 2 — Reference packs
 
-The canonical `@quoin/*` distributables. Five packs covering the three
+The canonical `@quoin/*` distributables. Seven packs covering the three
 pack types defined in [`00_spec/pack-format.md`](../00_spec/pack-format.md),
-plus a validation script and three composition demos.
+plus a validation script and three composition demos. (Phase 2 originally
+shipped five packs; `vocab-essentials` and `vocab-app-shell` were added
+during Phase 5d to close gaps the v1 spec left.)
 
 ## Packs
 
@@ -11,12 +13,17 @@ plus a validation script and three composition demos.
 | [`tokens-baseline/`](tokens-baseline) | Token | Full canonical semantic namespace. OKLCH greyscale, system fonts, conservative scales. Ships DTCG JSON + CSS custom-property stylesheet. |
 | [`vocab-editorial/`](vocab-editorial) | Vocabulary | 21 primitives: editorial 8 + layout 7 + content 6. |
 | [`vocab-dashboard/`](vocab-dashboard) | Vocabulary | 15 primitives: navigation 5 + state 5 + interactive 5. |
-| [`impl-tailwind/`](impl-tailwind) | Implementation | Tailwind v4 emitter. Token-bearing classes use arbitrary-value syntax (`bg-[var(--accent)]`) so the pack is token-pack agnostic. |
+| [`vocab-essentials/`](vocab-essentials) | Vocabulary | 10 universal primitives the v1 spec missed: tab-panels, pin-entry, stat-display, split-shell, columns (with 1:1, 1:2, 2:1, 1:1:1, 1:1:1:1, 1:3, 3:1 ratios), comparison-table, browser-frame, terminal-frame, step-flow, logo-strip. *(Phase 5d)* |
+| [`vocab-app-shell/`](vocab-app-shell) | Vocabulary | 5 app-surface primitives: app-shell, command-bar, sidebar-nav, content-region, page-header. *(Phase 5d)* |
+| [`impl-tailwind/`](impl-tailwind) | Implementation | Tailwind v4 emitter. Token-bearing classes use arbitrary-value syntax (`bg-[var(--accent)]`) so the pack is token-pack agnostic. Ships `companion.css` (Phase 5a polish — hover/focus/motion) + `companion.js` (Phase 5c — tab keyboard nav, disclosure animation, modal trigger, Cmd-K). |
 | [`impl-raw-css/`](impl-raw-css) | Implementation | Raw CSS emitter. Inline `style` attributes referencing CSS custom properties. Zero framework dependency. |
 
-Together the two vocabulary packs supply the complete 36-primitive v1
-vocabulary from [`00_spec/primitives.md`](../00_spec/primitives.md). Both
-implementation packs handle every primitive in both vocabularies.
+Together the four vocabulary packs supply 51 primitives — the 36-primitive
+v1 vocabulary from [`00_spec/primitives.md`](../00_spec/primitives.md)
+plus the 15 added in Phase 5d. Both implementation packs handle every
+primitive in every vocabulary; `impl-tailwind` additionally ships
+companion CSS + JS for the visual-maturity and interactive-behavior
+layers added in Phases 5a / 5c.
 
 ## Relationship to Phase 1 fixtures
 
@@ -45,9 +52,9 @@ self-contained.
 node validate.js
 ```
 
-Loads every pack via the compiler, asserts the 21 + 15 = 36 primitive
-counts, then compiles every primitive against both implementation packs
-and confirms no Quoin tags leak. **80 checks** in the current run.
+Loads every pack via the compiler, asserts the 21 + 15 + 10 + 5 = 51
+primitive counts, then compiles every primitive against both
+implementation packs and confirms no Quoin tags leak.
 
 ## Composition demos
 

@@ -24,6 +24,7 @@ runtime, no shadow DOM, no proprietary tag — only standard HTML and CSS.
 │   ├── types.ts            Shared TypeScript contracts
 │   ├── errors.ts           CompilerError + diagnostic codes
 │   ├── vite.ts             Vite plugin entry
+│   ├── browser.ts          Browser-safe entry (excludes disk pack-loader)
 │   └── index.ts            Public API
 ├── test/                   Vitest test suite
 │   ├── primitives.test.ts  All 36 v1 primitives compile correctly
@@ -167,6 +168,15 @@ where the parser would have collapsed it natively.
 - Not yet the canonical distributable packs. The packs under
   `test-fixtures/` are minimum-viable Phase-1 fixtures; Phase 2 produces
   the proper `@quoin/*` distributables.
+
+## Browser entry
+
+`src/browser.ts` is a browser-safe re-export that drops the disk-loading
+`pack-loader`. The Phase 4 docs site uses this entry to run the compiler
+client-side inside the live playground — packs are passed in as plain
+JS objects rather than loaded from `node_modules`. Imported as
+`@quoin/compiler` from any browser bundle (the docs Vite config aliases
+the package to `dist/browser.js`).
 
 ## Cross-references
 
