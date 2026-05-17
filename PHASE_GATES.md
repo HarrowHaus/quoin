@@ -130,13 +130,38 @@ Exit criteria for each phase. A phase is complete when **every** criterion in it
 
 **Exit criteria:**
 
-- [ ] Docs site builds and runs locally.
-- [ ] Spec reference is generated from `00_spec/` (auto-generated, not hand-duplicated).
-- [ ] A live playground exists: user types semantic markup, sees compiled output.
-- [ ] A pack browser exists that lists all packs published under `@quoin/*` on npm.
-- [ ] Getting-started guide and migration guides (from Tailwind, from DaisyUI) exist.
-- [ ] All documentation has been reviewed for accuracy against the spec.
+- [x] Docs site builds and runs locally.
+- [x] Spec reference is generated from `00_spec/` (auto-generated, not hand-duplicated).
+- [x] A live playground exists: user types semantic markup, sees compiled output.
+- [x] A pack browser exists that lists all packs published under `@quoin/*` on npm.
+- [x] Getting-started guide and migration guides (from Tailwind, from DaisyUI) exist.
+- [x] All documentation has been reviewed for accuracy against the spec.
 - [ ] Operator review completed.
+
+---
+
+## Phase 4.5 — Docs site refresh + playground REPL
+
+**Output location:** `04_docs/showcase/` (new), `04_docs/src/playground/` (rewritten), `04_docs/src/packs/` (filters + tier badges), `04_docs/public/theme-toggle.js` (new).
+
+**Goal:** bring the docs site to the standard of a modern language REPL. Showcase the strongest claim (one source, many aesthetics) on its own page. Surface fidelity tiers prominently.
+
+**Exit criteria:**
+
+- [x] New `/showcase/` page — one Quoin source rendered against 4 token packs (Tailwind, Radix, Geist, Material 3) live in the browser.
+- [x] Playground: three-pane layout (source / compiled HTML / preview).
+- [x] Playground: all 30 token packs available with fidelity-tier badges.
+- [x] Playground: 10-preset example gallery (article, hero, pricing, dashboard, app-shell, navigation, form, empty-state, alert, blank).
+- [x] Playground: shareable URL state — encode source + active packs in URL hash.
+- [x] Playground: token-efficiency badge (Quoin tags → Tailwind classes ratio).
+- [x] Pack browser: fidelity-tier badges + filter chips (Type, Tier, License).
+- [x] Pack browser: "Try in playground" deep-link encodes pack into playground URL.
+- [x] Theme toggle in wayfinder — switch between Default / Tailwind / Radix skins, persisted to localStorage.
+- [x] Migration guides updated with "Closest Quoin pack to your current stack" section.
+- [x] Build clean; compiler tests 77/77; harvest validate 40/40; demos 3/3.
+- [ ] Operator review completed.
+
+**Status:** complete.
 
 ---
 

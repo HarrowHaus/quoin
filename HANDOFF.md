@@ -56,12 +56,15 @@ At each phase gate, run the same prompt through two different models (Claude + C
 
 ## What to do right now
 
-Current state: Phases 0–4 plus 5a–5d are complete. Phase 3.5 + 3.5b
-(Token Fidelity Pass + Comprehensive Fidelity Pass) are complete:
-27 token packs extracted (1 Tier A, 26 Tier B); 3 Tier C with
-documented unresolvable reasons (workday license, geist no published
-tokens, clarity auto-generated). Phase 5e (launch) is staged but not
-executed.
+Current state: Phases 0–4, 4.5, and 5a–5d are complete. Phase 3.5 +
+3.5b (Token Fidelity Pass + Comprehensive Fidelity Pass) are
+complete: 27 token packs extracted (1 Tier A, 26 Tier B); 3 Tier C
+with documented unresolvable reasons (workday license, geist no
+published tokens, clarity auto-generated). Phase 4.5 refreshed the
+docs site — new showcase page, three-pane playground REPL with all
+30 token packs and shareable URL state, fidelity filters on the pack
+browser, theme toggle in the wayfinder. Phase 5e (launch) is staged
+but not executed.
 
 If this is your first time opening this lab:
 

@@ -263,6 +263,66 @@ After Phase 3.5b: 1 A, 26 B, 3 C (clarity, geist, workday — all with documente
 
 ---
 
+## Phase 4.5 — Docs site refresh + playground REPL
+
+```
+You are working on the Quoin design language project. Phase 3.5b is complete. The docs site at 04_docs/ is the largest in-the-wild demonstration of Quoin and currently reflects pre-fidelity state. Phase 4.5 refreshes the docs site and upgrades the playground to the standard of a modern language REPL.
+
+Required reading: README.md, 04_docs/README.md, 04_docs/src/playground/main.ts, 04_docs/src/playground/packs.ts + presets.ts, 04_docs/index.html + components/index.html + packs/index.html, 03_harvest/REPORT.md, migration guides at 04_docs/migrate/.
+
+GOALS:
+1. Docs site uses a harvested Tier A or B token pack as active theme.
+2. Pack browser surfaces fidelity tiers with filtering.
+3. Playground levels up to feel like TypeScript Playground / Vue REPL.
+4. New showcase page demonstrates the strongest claim.
+5. Migration guides reflect post-3.5b state.
+
+HARD CONSTRAINTS:
+1. Docs site continues to build with Quoin (dogfood at scale).
+2. No new runtime deps beyond existing Vite + Quoin plugin.
+3. Browser support: current Chrome, Firefox, Safari.
+
+PRIORITY (cut from bottom if scope-pressed):
+1. Showcase page
+2. Three-pane playground
+3. Pack composition pickers in playground
+4. Docs dogfoods harvested pack
+5. Pack browser fidelity badges + filtering
+6. Shareable URL state
+7. Example gallery (8-10 patterns)
+8. Theme toggle in docs header
+9. Token efficiency metric
+10. Syntax highlighting (lowest)
+11. Migration guide refresh
+
+PLAYGROUND UPGRADES:
+- Three panes: source / compiled HTML / preview.
+- All 30 token packs with tier badges.
+- Example gallery: article, hero, pricing, dashboard, app-shell, navigation, form, empty-state, alert, blank.
+- Shareable URL state: source + active packs encoded in hash.
+- Token efficiency badge: "12 tags → 340 classes · 28× compression".
+
+PACK BROWSER UPGRADES:
+- Filter chips: Type / Tier (A/B/C) / License.
+- Tier badges on every token pack card.
+- "Try in playground" deep-link button.
+
+SHOWCASE PAGE (highest priority):
+- One semantic source block at top.
+- 4-6 rendered variants below, side-by-side or stacked.
+- Each variant labeled with pack name, license, fidelity tier.
+
+VALIDATION: build clean, all pages load, playground compiles across packs, shareable URL round-trips, Lighthouse ≥95 on perf/a11y/best-practices/SEO.
+
+STOP CONDITIONS: Lighthouse drops below 90. Playground slower than 1s per pack switch. Bundle size grows by more than 100kb.
+
+Commit per major area. Push to origin/main.
+```
+
+After Phase 4.5: new `/showcase/` page, three-pane playground with all 30 token packs + URL state + efficiency badge + 10 example presets, pack browser with tier badges + filters, theme toggle in wayfinder, migration guides refreshed.
+
+---
+
 ## Phase 4 — Documentation
 
 ```

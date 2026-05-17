@@ -9,9 +9,29 @@ Phase 4 originally shipped the site, playground, pack browser, and
 migration guides. Phase 5 added the **Components** page (catalog of
 every primitive with side-by-side authored / rendered output), a global
 **Cmd-K command menu** via `companion.js`, four playground **preset
-seeds** (article / marketing / dashboard / app-shell) with a multi-select
-vocab-pack picker, and a visible **error state** on the playground
-iframe when compilation fails.
+seeds** with a multi-select vocab-pack picker, and a visible **error
+state** on the playground iframe when compilation fails.
+
+Phase 4.5 brought the site to a modern-REPL standard:
+
+- **New [/showcase/](showcase/) page** — one Quoin source rendered
+  live against four token packs (Tailwind v4, Radix, Geist,
+  Material 3) side-by-side, with license + fidelity-tier badges.
+- **Three-pane playground** — source / compiled HTML / preview, with
+  all 30 token packs available via dropdown (fidelity-tier badge
+  next to each).
+- **10 example presets** — article, hero, pricing, dashboard,
+  app-shell, navigation, form, empty-state, alert, blank.
+- **Shareable URL state** — source + active packs encoded in the
+  URL hash; refresh or share reconstructs.
+- **Token-efficiency badge** — counts Quoin tags in the source vs
+  Tailwind classes in compiled output, prints the compression ratio.
+- **Pack browser filters** — fidelity-tier chips (A/B/C), license
+  chips (MIT/Apache/BSD/CC0), per-card tier badges, and a "Try in
+  playground" deep-link button.
+- **Theme toggle** — Default / Tailwind / Radix skins in the
+  wayfinder, persisted to localStorage. Demonstrates pack-swap claim
+  on the docs site itself.
 
 ## Run
 

@@ -58,6 +58,7 @@ A user composes their build by installing one of each.
 | 3 | `03_harvest/` | 40 harvested packs (30 token + 10 vocabulary) | shipped |
 | 3.5 | `03_harvest/fidelity/` | Token Fidelity Pass — byte-faithful extraction framework + per-pack `fidelityTier` annotation (A/B/C) | partial (1 A, 5 B, 24 C; stop condition triggered → Phase 3.5b) |
 | 3.5b | `03_harvest/fidelity/` | Comprehensive Fidelity Pass — three extraction methods (static parse, algorithm exec, per-file). 27 packs upgraded to extraction; 3 documented Tier C. | complete (1 A, 26 B, 3 C) |
+| 4.5 | `04_docs/showcase/`, `04_docs/src/playground/` | Docs site refresh — new showcase page, three-pane playground REPL with all 30 token packs, shareable URLs, token-efficiency badge, fidelity-tier filters on pack browser, theme toggle. | complete |
 | 4 | `04_docs/` | Documentation site, live playground, pack browser, migration guides | shipped |
 | 5a | `02_reference-packs/impl-tailwind/companion.css` | Visual-maturity polish layer — hover, focus, motion, microinteractions | shipped |
 | 5b | (per-primitive) | Specific-attribute variants on key primitives (`emphasis-card variant="featured"`, `alert-band variant="compact"`, etc.) | shipped |
@@ -67,13 +68,17 @@ A user composes their build by installing one of each.
 
 ## Status
 
-Phases 0–4 plus 5a–5d are complete. Phase 3.5 + 3.5b (Token Fidelity
-Pass + Comprehensive Fidelity Pass) are complete: 27 of 30 token
-packs now extract byte-faithfully from canonical upstream sources
-(1 Tier A + 26 Tier B), with 3 documented Tier C packs (clarity,
-geist, workday — unresolvable for documented reasons). See
-[`03_harvest/REPORT.md`](03_harvest/REPORT.md). Phase 5e (launch) is
-staged but not executed — see [`05_launch/README.md`](05_launch/README.md)
+Phases 0–4, 4.5, and 5a–5d are complete. Phase 3.5 + 3.5b (Token
+Fidelity Pass + Comprehensive Fidelity Pass) are complete: 27 of 30
+token packs now extract byte-faithfully from canonical upstream
+sources (1 Tier A + 26 Tier B), with 3 documented Tier C packs
+(clarity, geist, workday — unresolvable for documented reasons). See
+[`03_harvest/REPORT.md`](03_harvest/REPORT.md). Phase 4.5 brought the
+docs site to a modern-REPL standard — new
+[`/showcase/`](04_docs/showcase/) page, three-pane playground with all
+30 token packs and shareable URL state, pack browser with fidelity
+filters, theme toggle in the wayfinder. Phase 5e (launch) is staged
+but not executed — see [`05_launch/README.md`](05_launch/README.md)
 for the deliverables list, and [`PHASE_PROMPTS.md`](PHASE_PROMPTS.md)
 for the per-phase Claude Code prompts.
 
