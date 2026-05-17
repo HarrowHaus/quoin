@@ -98,10 +98,18 @@ async function processSpec(name) {
 
   let base;
   let mappingNotes;
+  // Phase 3.5d: specs may return additional optional fields for
+  // composite + atomic refinement beyond the color palette.
+  let extraSemantic = null;
+  let extraComposites = null;
+  let extraFonts = null;
   try {
     const mapped = spec.map(oklch, rawValues);
     base = mapped.base;
     mappingNotes = mapped.notes ?? null;
+    extraSemantic = mapped.semantic ?? null;
+    extraComposites = mapped.composites ?? null;
+    extraFonts = mapped.fonts ?? null;
   } catch (err) {
     return { name, tier: "C", reason: `mapping-error: ${err.message}` };
   }
@@ -149,6 +157,20 @@ async function processSpec(name) {
       harvestNotes: notes
     }
   };
+
+  // Phase 3.5d: merge composite + atomic refinements when the spec
+  // returned them. `semantic` overrides atomic-token defaults from
+  // build.js. `composites` overrides composite-token shapes.
+  // `fonts` overrides the font-family family.
+  if (extraSemantic && Object.keys(extraSemantic).length > 0) {
+    updated.semantic = { ...(source.semantic ?? {}), ...extraSemantic };
+  }
+  if (extraComposites && Object.keys(extraComposites).length > 0) {
+    updated.composites = { ...(source.composites ?? {}), ...extraComposites };
+  }
+  if (extraFonts && Object.keys(extraFonts).length > 0) {
+    updated.fonts = { ...(source.fonts ?? {}), ...extraFonts };
+  }
 
   await saveSource(name, updated);
 
