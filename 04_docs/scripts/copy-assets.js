@@ -57,9 +57,99 @@ for (const [k, v] of Object.entries(overridesRaw)) {
 overrideLines.push("}", "");
 const overrideCss = overrideLines.join("\n");
 
+// 2.5 Phase 0.5 transitional compatibility layer. The active pack is
+//     a pending-3.5c-fill harvested pack (tokens-geist) that still
+//     uses the v0 namespace (--type-size-base, no shadow composites,
+//     no border-width, etc.). Until Phase 3.5c fills it, alias the
+//     missing v1.0 canonical names back to the closest v0 equivalent
+//     so the docs site CSS resolves correctly.
+const compatLayer = `
+/* ---- Phase 0.5 transitional compat (until 3.5c fills tokens-geist) ---- */
+:root {
+  --type-size-md: var(--type-size-base, 1rem);
+  --type-size-4xl: var(--type-size-3xl, 2.25rem);
+  --type-size-5xl: 3rem;
+  --space-5:  1.25rem;
+  --space-10: 2.5rem;
+  --space-20: 5rem;
+  --space-inline-loose: 1rem;
+  --radius-xl: 1rem;
+  --border-width-hairline: 0.5px;
+  --border-width-sm: 1px;
+  --border-width-md: 2px;
+  --border-width-lg: 4px;
+  --focus-ring-width:  2px;
+  --focus-ring-offset: 2px;
+  --focus-ring: var(--accent);
+  --link:         var(--accent);
+  --link-visited: var(--text-recede);
+  --link-hover:   var(--text-emphasis);
+  --shadow-tint:  oklch(0% 0 0 / 0.1);
+  --scrim:        oklch(0% 0 0 / 0.5);
+  --highlight:    oklch(88% 0.16 90);
+  --icon-size-xs: 0.75rem;
+  --icon-size-sm: 1rem;
+  --icon-size-md: 1.25rem;
+  --icon-size-lg: 1.5rem;
+  --icon-size-xl: 2rem;
+  --container-narrow:  40rem;
+  --container-default: 64rem;
+  --container-wide:    80rem;
+  --container-full:    100%;
+  --blur-sm: 4px;
+  --blur-md: 12px;
+  --blur-lg: 24px;
+  --opacity-disabled:     0.38;
+  --opacity-recede:       0.6;
+  --opacity-hover-layer:  0.08;
+  --opacity-active-layer: 0.12;
+  --opacity-scrim:        0.5;
+  --z-base: 0; --z-raised: 1; --z-sticky: 100; --z-dropdown: 1000;
+  --z-modal: 2000; --z-popover: 3000; --z-tooltip: 4000; --z-toast: 5000;
+  --aspect-square: 1.0; --aspect-video: 1.7778;
+  --aspect-portrait: 0.75; --aspect-banner: 3.0;
+  --font-weight-light: 300; --font-weight-regular: 400;
+  --font-weight-medium: 500; --font-weight-semibold: 600;
+  --font-weight-bold: 700; --font-weight-black: 900;
+  --motion-instant: 50ms; --motion-slower: 800ms;
+  --ease-linear: cubic-bezier(0,0,1,1);
+  --ease-emphasized: cubic-bezier(0.2,0,0,1);
+  --ease-spring: cubic-bezier(0.5,1.5,0.5,1);
+  --shadow-xs: 0 1px 2px var(--shadow-tint);
+  --shadow-sm: 0 1px 3px var(--shadow-tint);
+  --shadow-md: 0 4px 6px -1px var(--shadow-tint), 0 2px 4px -1px var(--shadow-tint);
+  --shadow-lg: 0 10px 15px -3px var(--shadow-tint), 0 4px 6px -2px var(--shadow-tint);
+  --shadow-xl: 0 20px 25px -5px var(--shadow-tint), 0 8px 10px -6px var(--shadow-tint);
+  --shadow-2xl: 0 25px 50px -12px var(--shadow-tint);
+  --shadow-inner: inset 0 2px 4px var(--shadow-tint);
+  --border-default:          var(--border-width-sm) solid var(--border);
+  --border-emphasis-stroke:  var(--border-width-md) solid var(--border-emphasis);
+  --border-divider:          var(--border-width-sm) solid var(--border-recede);
+  --text-display:      var(--font-weight-bold) var(--type-size-display)/var(--leading-tight) var(--font-display);
+  --text-headline-lg:  var(--font-weight-bold) var(--type-size-5xl)/var(--leading-tight) var(--font-display);
+  --text-headline-md:  var(--font-weight-bold) var(--type-size-4xl)/var(--leading-tight) var(--font-display);
+  --text-headline-sm:  var(--font-weight-semibold) var(--type-size-3xl)/var(--leading-tight) var(--font-display);
+  --text-title-lg:     var(--font-weight-semibold) var(--type-size-2xl)/var(--leading-normal) var(--font-sans);
+  --text-title-md:     var(--font-weight-semibold) var(--type-size-xl)/var(--leading-normal) var(--font-sans);
+  --text-title-sm:     var(--font-weight-medium)   var(--type-size-lg)/var(--leading-normal) var(--font-sans);
+  --text-body-lg:      var(--font-weight-regular)  var(--type-size-lg)/var(--leading-prose) var(--font-sans);
+  --text-body-md:      var(--font-weight-regular)  var(--type-size-md)/var(--leading-prose) var(--font-sans);
+  --text-body-sm:      var(--font-weight-regular)  var(--type-size-sm)/var(--leading-prose) var(--font-sans);
+  --text-label-lg:     var(--font-weight-medium)   var(--type-size-md)/var(--leading-normal) var(--font-sans);
+  --text-label-md:     var(--font-weight-medium)   var(--type-size-sm)/var(--leading-normal) var(--font-sans);
+  --text-label-sm:     var(--font-weight-medium)   var(--type-size-xs)/var(--leading-normal) var(--font-sans);
+  --transition-default:  all var(--motion-normal) var(--ease-standard);
+  --transition-emphasis: all var(--motion-slow)   var(--ease-emphasized);
+  --transition-fast:     all var(--motion-fast)   var(--ease-standard);
+  --stroke-solid:  solid;
+  --stroke-dashed: dashed;
+  --stroke-dotted: dotted;
+}
+`;
+
 await fs.writeFile(
   path.join(publicDir, "tokens.css"),
-  `${baseCss}\n/* ---- 04_docs project-local override (quoin.tokens.json) ---- */\n${overrideCss}`
+  `${baseCss}\n/* ---- 04_docs project-local override (quoin.tokens.json) ---- */\n${overrideCss}${compatLayer}`
 );
 // 3. Concatenate the lab Tailwind shim + the impl-tailwind companion
 //    (Phase 5a polish: hover/focus/motion/microinteractions). In a real
