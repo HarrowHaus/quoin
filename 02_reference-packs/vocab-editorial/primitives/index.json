@@ -41,7 +41,8 @@
     "attributes": {
       "intent": { "values": ["primary", "secondary", "tertiary"], "default": "primary" },
       "weight": { "values": ["normal", "emphasize"], "default": "emphasize" },
-      "density": { "values": ["sparse", "normal", "dense"], "default": "normal" }
+      "density": { "values": ["sparse", "normal", "dense"], "default": "normal" },
+      "variant": { "values": ["default", "featured", "quiet"], "default": "default", "specific": true }
     },
     "tokens": {
       "background": "--surface-elevated",

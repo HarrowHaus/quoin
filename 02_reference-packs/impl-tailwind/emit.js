@@ -191,8 +191,39 @@ const EMITTERS = {
       structureAttrs(input.primitive)
     ),
 
-  "emphasis-card": (input) =>
-    basic(
+  "emphasis-card": (input) => {
+    const variant = input.attributes.specific.variant ?? "default";
+    if (variant === "featured") {
+      // Featured: accent strip at top + larger panel-class padding +
+      // softer surface. Reads as 'this is the one to look at.'
+      return basic(
+        "section",
+        classes(
+          "relative border-t-4 shadow-sm",
+          v("bg", "--surface-elevated"),
+          v("border-t", "--accent"),
+          v("p", "--space-panel"),
+          v("rounded", "--radius-card")
+        ),
+        input,
+        structureAttrs(input.primitive)
+      );
+    }
+    if (variant === "quiet") {
+      // Quiet: no border, just a recessed surface fill. Reads as
+      // 'related supporting content' rather than 'attention please.'
+      return basic(
+        "section",
+        classes(
+          v("bg", "--surface-recessed"),
+          v("p", "--space-card"),
+          v("rounded", "--radius-card")
+        ),
+        input,
+        structureAttrs(input.primitive)
+      );
+    }
+    return basic(
       "section",
       classes(
         "border shadow-sm",
@@ -203,7 +234,8 @@ const EMITTERS = {
       ),
       input,
       structureAttrs(input.primitive)
-    ),
+    );
+  },
 
   "reading-flow": (input) =>
     basic(
@@ -404,6 +436,7 @@ const EMITTERS = {
 
   "alert-band": (input) => {
     const intent = input.attributes.canonical.intent ?? "info";
+    const variant = input.attributes.specific.variant ?? "default";
     const bgVar = {
       info: "--info",
       success: "--success",
@@ -411,6 +444,22 @@ const EMITTERS = {
       critical: "--critical"
     }[intent];
     const textVar = `--text-on-${intent}`;
+    if (variant === "compact") {
+      // Compact: pill-shaped, inline, single-line. Reads as a status
+      // tag rather than a full-band callout. Good for inline app
+      // status indicators above content rather than below a header.
+      return basic(
+        "div",
+        classes(
+          "inline-flex items-center gap-2 px-3 py-1 text-sm",
+          v("bg", bgVar),
+          v("text", textVar),
+          v("rounded", "--radius-pill")
+        ),
+        input,
+        { role: "status" }
+      );
+    }
     return basic(
       "div",
       classes("px-4 py-3 border-l-4", v("bg", bgVar), v("text", textVar), v("border", "--border-emphasis")),
@@ -785,6 +834,134 @@ const EMITTERS = {
       ),
       input
     ),
+
+  /* ─────────────── vocab-marketing variant-aware ─────────────── *
+   *
+   * These four primitives live in vocab-marketing (harvest pack) but
+   * get bespoke impl-tailwind emitters here so their variants render
+   * as designed layouts instead of generic-fallback boxes.
+   */
+
+  "hero-banner": (input) => {
+    const variant = input.attributes.specific.variant ?? "default";
+    if (variant === "split") {
+      // Two-column hero: content left, illustration/screenshot slot
+      // right. Collapses to single column on mobile.
+      return basic(
+        "section",
+        classes(
+          "grid gap-8 items-center",
+          "[grid-template-columns:1fr]",
+          "md:[grid-template-columns:1fr_1fr]",
+          v("bg", "--surface"),
+          v("text", "--text-emphasis"),
+          v("p", "--space-32")
+        ),
+        input
+      );
+    }
+    if (variant === "centered") {
+      // Centered hero with narrower max-width. Content is centered
+      // horizontally for a more editorial feel.
+      return basic(
+        "section",
+        classes(
+          "flex flex-col items-center text-center mx-auto max-w-3xl",
+          v("bg", "--surface"),
+          v("text", "--text-emphasis"),
+          v("p", "--space-32")
+        ),
+        input
+      );
+    }
+    return basic(
+      "section",
+      classes(v("bg", "--surface"), v("text", "--text-emphasis"), v("p", "--space-32")),
+      input
+    );
+  },
+
+  "feature-grid": (input) => {
+    const variant = input.attributes.specific.variant ?? "default";
+    const min = input.attributes.specific["min-cell-width"] || "280px";
+    if (variant === "bento") {
+      // Bento: first cell spans 2x2, rest fill normally. Inline grid
+      // declaration since template-areas can't be expressed purely
+      // through fluid auto-fill.
+      return basic(
+        "div",
+        classes("grid gap-6"),
+        input,
+        {
+          style: `grid-template-columns: repeat(auto-fit, minmax(${min}, 1fr)); grid-auto-flow: dense`
+        }
+      );
+    }
+    return basic(
+      "div",
+      classes(`grid grid-cols-[repeat(auto-fill,minmax(${min},1fr))] gap-6`),
+      input
+    );
+  },
+
+  "pricing-tier": (input) => {
+    const variant = input.attributes.specific.variant ?? "default";
+    if (variant === "featured") {
+      // Featured tier: accent ring + slight scale + "popular" feel.
+      // Anchors the eye to the recommended option in a 3-tier row.
+      return basic(
+        "article",
+        classes(
+          "relative ring-2 ring-offset-2 scale-[1.02]",
+          v("bg", "--surface-elevated"),
+          v("ring", "--accent"),
+          v("text", "--text"),
+          v("p", "--space-panel"),
+          v("rounded", "--radius-card"),
+          "shadow-md"
+        ),
+        input
+      );
+    }
+    return basic(
+      "article",
+      classes(
+        "border",
+        v("bg", "--surface-elevated"),
+        v("text", "--text"),
+        v("border", "--border"),
+        v("p", "--space-panel"),
+        v("rounded", "--radius-card")
+      ),
+      input
+    );
+  },
+
+  "cta-band": (input) => {
+    const intent = input.attributes.canonical.intent ?? "primary";
+    const variant = input.attributes.specific.variant ?? "default";
+    const bg = intent === "critical" ? "--critical" : "--accent";
+    const fg = intent === "critical" ? "--text-on-critical" : "--text-on-accent";
+    if (variant === "split") {
+      // Split CTA: headline on the left, actions on the right.
+      // Collapses to stack on mobile.
+      return basic(
+        "section",
+        classes(
+          "flex flex-col md:flex-row md:items-center md:justify-between gap-6",
+          v("bg", bg),
+          v("text", fg),
+          v("p", "--space-16")
+        ),
+        input
+      );
+    }
+    return basic(
+      "section",
+      classes(v("bg", bg), v("text", fg), v("p", "--space-16")),
+      input
+    );
+  },
 
   /* ─────────────── vocab-app-shell ─────────────── *
    *

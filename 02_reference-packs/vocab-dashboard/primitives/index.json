@@ -133,7 +133,8 @@
     "category": "state",
     "role": "System messaging strip.",
     "attributes": {
-      "intent": { "values": ["info", "success", "warning", "critical"], "default": "info" }
+      "intent":  { "values": ["info", "success", "warning", "critical"], "default": "info" },
+      "variant": { "values": ["default", "compact"], "default": "default", "specific": true }
     },
     "tokens": {
       "background": "--info",

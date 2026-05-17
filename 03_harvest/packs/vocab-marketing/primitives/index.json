@@ -18,6 +18,15 @@
           "dominate"
         ],
         "default": "dominate"
+      },
+      "variant": {
+        "values": [
+          "default",
+          "split",
+          "centered"
+        ],
+        "default": "default",
+        "specific": true
       }
     },
     "tokens": {
@@ -47,6 +56,14 @@
       "min-cell-width": {
         "values": [],
         "default": "280px",
+        "specific": true
+      },
+      "variant": {
+        "values": [
+          "default",
+          "bento"
+        ],
+        "default": "default",
         "specific": true
       }
     },
@@ -104,6 +121,14 @@
           "emphasize"
         ],
         "default": "normal"
+      },
+      "variant": {
+        "values": [
+          "default",
+          "featured"
+        ],
+        "default": "default",
+        "specific": true
       }
     },
     "tokens": {
@@ -163,6 +188,14 @@
           "dominate"
         ],
         "default": "emphasize"
+      },
+      "variant": {
+        "values": [
+          "default",
+          "split"
+        ],
+        "default": "default",
+        "specific": true
       }
     },
     "tokens": {

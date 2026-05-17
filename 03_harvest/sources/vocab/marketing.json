@@ -15,8 +15,9 @@
       "category": "editorial",
       "role": "Top-of-page marketing banner. Headline + sub-copy + primary action.",
       "attributes": {
-        "intent": { "values": ["primary", "secondary"], "default": "primary" },
-        "weight": { "values": ["normal", "emphasize", "dominate"], "default": "dominate" }
+        "intent":  { "values": ["primary", "secondary"], "default": "primary" },
+        "weight":  { "values": ["normal", "emphasize", "dominate"], "default": "dominate" },
+        "variant": { "values": ["default", "split", "centered"], "default": "default", "specific": true }
       },
       "tokens": { "background": "--surface", "color": "--text-emphasis", "padding": "--space-32" },
       "structure": { "element": "section" },
@@ -28,8 +29,9 @@
       "category": "layout",
       "role": "Auto-layout grid of feature cards. Wraps responsively.",
       "attributes": {
-        "density": { "values": ["sparse", "normal", "dense"], "default": "normal" },
-        "min-cell-width": { "values": [], "default": "280px", "specific": true }
+        "density":        { "values": ["sparse", "normal", "dense"], "default": "normal" },
+        "min-cell-width": { "values": [], "default": "280px", "specific": true },
+        "variant":        { "values": ["default", "bento"], "default": "default", "specific": true }
       },
       "tokens": { "gap": "--space-6" },
       "structure": { "element": "div" },
@@ -57,8 +59,9 @@
       "category": "content",
       "role": "Single pricing plan with price, description, feature list, CTA.",
       "attributes": {
-        "intent": { "values": ["primary", "secondary", "tertiary"], "default": "secondary" },
-        "weight": { "values": ["normal", "emphasize"], "default": "normal" }
+        "intent":  { "values": ["primary", "secondary", "tertiary"], "default": "secondary" },
+        "weight":  { "values": ["normal", "emphasize"], "default": "normal" },
+        "variant": { "values": ["default", "featured"], "default": "default", "specific": true }
       },
       "tokens": {
         "background": "--surface-elevated",
@@ -91,8 +94,9 @@
       "category": "editorial",
       "role": "Full-width call-to-action band, typically near page foot.",
       "attributes": {
-        "intent": { "values": ["primary", "critical"], "default": "primary" },
-        "weight": { "values": ["normal", "emphasize", "dominate"], "default": "emphasize" }
+        "intent":  { "values": ["primary", "critical"], "default": "primary" },
+        "weight":  { "values": ["normal", "emphasize", "dominate"], "default": "emphasize" },
+        "variant": { "values": ["default", "split"], "default": "default", "specific": true }
       },
       "tokens": { "background": "--accent", "color": "--text-on-accent", "padding": "--space-16" },
       "structure": { "element": "section" },
