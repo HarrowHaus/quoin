@@ -53,6 +53,7 @@ A user composes their build by installing one of each.
 | Phase | Folder | Output | Status |
 |-------|--------|--------|--------|
 | 0 | `00_spec/` | Specification document (spec, pack-format, primitives, tokens) | shipped |
+| 0.5 | `00_spec/tokens.md` | Canonical Namespace Expansion — token namespace expanded from ~30 to 164 tokens across 11 DTCG 2025.10 types. Frozen at v1.0. | complete |
 | 1 | `01_compiler/` | Reference compiler (TypeScript, ESM, Vite plugin, browser entry) | shipped |
 | 2 | `02_reference-packs/` | 7 reference packs: 1 token, 4 vocabulary, 2 implementation | shipped |
 | 3 | `03_harvest/` | 40 harvested packs (30 token + 10 vocabulary) | shipped |
@@ -68,19 +69,23 @@ A user composes their build by installing one of each.
 
 ## Status
 
-Phases 0–4, 4.5, and 5a–5d are complete. Phase 3.5 + 3.5b (Token
-Fidelity Pass + Comprehensive Fidelity Pass) are complete: 27 of 30
-token packs now extract byte-faithfully from canonical upstream
-sources (1 Tier A + 26 Tier B), with 3 documented Tier C packs
-(clarity, geist, workday — unresolvable for documented reasons). See
+Phases 0–4, 4.5, 5a–5d, and 0.5 (canonical namespace expansion) are
+complete. The canonical namespace is at its v1.0 surface area — 164
+tokens across 11 DTCG 2025.10 types — and frozen. Reference pack
+`@quoin/tokens-baseline` is fully populated; the 30 harvested token
+packs are flagged `"status": "pending-3.5c-fill"` and will be filled
+with values for the new tokens during Phase 3.5c.
+
+Phase 3.5 + 3.5b (Token Fidelity Pass + Comprehensive Fidelity Pass)
+are complete: 27 of 30 token packs extract byte-faithfully from
+canonical upstream sources (1 Tier A + 26 Tier B), with 3 documented
+Tier C packs (clarity, geist, workday). See
 [`03_harvest/REPORT.md`](03_harvest/REPORT.md). Phase 4.5 brought the
-docs site to a modern-REPL standard — new
-[`/showcase/`](04_docs/showcase/) page, three-pane playground with all
-30 token packs and shareable URL state, pack browser with fidelity
-filters, theme toggle in the wayfinder. Phase 5e (launch) is staged
-but not executed — see [`05_launch/README.md`](05_launch/README.md)
-for the deliverables list, and [`PHASE_PROMPTS.md`](PHASE_PROMPTS.md)
-for the per-phase Claude Code prompts.
+docs site to a modern-REPL standard. Phase 5e (launch) is staged but
+not executed — see [`05_launch/README.md`](05_launch/README.md) for
+the deliverables list, [`CHANGELOG.md`](CHANGELOG.md) for the running
+change log, and [`PHASE_PROMPTS.md`](PHASE_PROMPTS.md) for the
+per-phase Claude Code prompts.
 
 ## Canonical locations
 

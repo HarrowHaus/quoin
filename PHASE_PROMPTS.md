@@ -27,6 +27,30 @@ Report the repo URL and the initial commit SHA when complete.
 
 ---
 
+## Phase 0.5 — Canonical Namespace Expansion
+
+Pre-1.0 spec change. Expands the canonical token namespace from its v0 sketch to v1.0 surface area. After this phase the namespace is frozen.
+
+```
+You are working on the Quoin design language project. Phases 0–4 plus 5a–5d plus 3.5b are complete; phase 3.5c (geometric & typographic fidelity) has not yet run. Before 3.5c, the canonical semantic-token namespace in 00_spec/tokens.md must be expanded from its current v0 sketch (~30 tokens across 4 DTCG types) to its full v1.0 surface area (~160 tokens across 11 DTCG types). This is Phase 0.5.
+
+REQUIRED READING: README.md, 00_spec/spec.md, 00_spec/tokens.md, 00_spec/pack-format.md, 00_spec/primitives.md, the four reference vocabulary packs, 03_harvest/REPORT.md, 03_harvest/validate.js, DTCG 2025.10 at https://www.designtokens.org/tr/drafts/format/.
+
+GOAL: rewrite 00_spec/tokens.md to define the canonical namespace as 164 tokens across 11 DTCG types — color, dimension, number, fontFamily, fontWeight, duration, cubicBezier, shadow, border, typography, transition, strokeStyle. Update vocabulary packs to reference new composite tokens where appropriate. Update the validator to enforce the expanded namespace. Mark all 30 harvested packs as "pending-3.5c-fill" so they emit warnings rather than errors during the transitional window.
+
+HARD CONSTRAINTS: DTCG 2025.10 type names exactly. No ad-hoc types. Three-layer architecture preserved. Composite tokens follow DTCG composite object syntax verbatim. Canonical namespace FIXED at v1.0 after this phase.
+
+THE FULL CANONICAL NAMESPACE: see 00_spec/tokens.md §3 (29 color + 64 dimension + 21 number + 4 fontFamily + 6 fontWeight + 5 duration + 6 cubicBezier + 7 shadow + 3 border + 13 typography + 3 transition + 3 strokeStyle).
+
+VALIDATION: every pack passes validate.js (harvested packs with pending-3.5c-fill warning), compiler tests 77/77, demos build cleanly.
+
+Commit per area. Push to origin/main.
+```
+
+After Phase 0.5: namespace is at v1.0 surface area; harvested packs need values for the new tokens (Phase 3.5c).
+
+---
+
 ## Phase 0 — Specification
 
 ```

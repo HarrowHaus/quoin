@@ -4,6 +4,30 @@ Exit criteria for each phase. A phase is complete when **every** criterion in it
 
 ---
 
+## Phase 0.5 — Canonical Namespace Expansion
+
+**Output location:** `00_spec/tokens.md` (rewritten), `01_compiler/src/token-resolver.ts` (expanded canonical list), `02_reference-packs/tokens-baseline/` (full reference implementation), all 30 harvested token packs flagged `"status": "pending-3.5c-fill"`.
+
+**Goal:** expand the canonical semantic-token namespace from the v0 sketch (~30 tokens across 4 DTCG types) to its v1.0 surface area (164 tokens across 11 DTCG 2025.10 types). Freeze the namespace at v1.0 after this phase.
+
+**Exit criteria:**
+
+- [x] `00_spec/tokens.md` rewritten with full 164-token namespace organized by DTCG type, with composite-structure documentation in §4.
+- [x] Compiler `CANONICAL_SEMANTIC_TOKENS` list expanded; `flattenDtcg` handles composite `$value` objects; `resolveReferences` reference regex tightened.
+- [x] Pack-manifest schema accepts `"status": "pending-3.5c-fill"`.
+- [x] Compiler + pack-loader soft-fail for `pending-3.5c-fill` packs (warning instead of throwing for missing canonical tokens; `var(--name)` fallback for primitive-level token refs).
+- [x] `tokens-baseline` reference pack fully populated for all 164 names.
+- [x] All 30 harvested token packs flagged `pending-3.5c-fill`.
+- [x] Compiler test suite 77/77 still passes.
+- [x] Demo build (`02_reference-packs/demos/build.js`) still passes.
+- [x] Validator (`03_harvest/validate.js`) recognises `pending-3.5c-fill` status — outputs warnings rather than failures.
+- [x] CHANGELOG.md created with this phase as the first entry.
+- [ ] Operator review completed.
+
+**Status:** complete. Namespace frozen at v1.0 surface area; Phase 3.5c (geometric & typographic fidelity) is the next phase to populate harvested packs with values for the new tokens.
+
+---
+
 ## Phase 0 — Specification
 
 **Output location:** `00_spec/`
