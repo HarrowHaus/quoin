@@ -6,17 +6,42 @@
  * that aren't worth a per-primitive emit override.
  */
 
+/* ─────────── Junicode — Quoin's signature serif ─────────── *
+ * Served from jsdelivr's GitHub mirror of psb1558/Junicode-font.
+ * SIL OFL 1.1, designed by Peter Baker. The variable font carries
+ * weight 100-900 in a single file. Falls back gracefully to Newsreader
+ * / Crimson Pro / Georgia if the CDN is slow or unreachable.
+ */
+@font-face {
+  font-family: "Junicode";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/psb1558/Junicode-font@main/fonts/woff2/JunicodeVF.woff2") format("woff2-variations"),
+       url("https://cdn.jsdelivr.net/gh/psb1558/Junicode-font@main/fonts/woff2/Junicode-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Junicode";
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/psb1558/Junicode-font@main/fonts/woff2/JunicodeVF-Italic.woff2") format("woff2-variations"),
+       url("https://cdn.jsdelivr.net/gh/psb1558/Junicode-font@main/fonts/woff2/Junicode-Italic.woff2") format("woff2");
+}
+
 html { scroll-behavior: smooth; }
 *, *::before, *::after { box-sizing: border-box; }
 
 a {
   color: var(--accent);
   text-decoration: underline;
-  text-underline-offset: 0.15em;
+  text-underline-offset: 0.2em;
   text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in oklch, var(--accent) 35%, transparent);
+  transition: text-decoration-color var(--motion-fast, 120ms) var(--ease-standard, ease);
 }
 a:hover {
-  text-decoration-thickness: 2px;
+  text-decoration-color: var(--accent);
 }
 a:focus-visible {
   outline: 2px solid var(--accent);
@@ -24,13 +49,130 @@ a:focus-visible {
   border-radius: var(--radius-sm);
 }
 
-/* Wayfinder anchors aren't underlined — too noisy in the nav bar. */
+/* ─────────── Wayfinder + breadcrumb refinement ─────────── */
+
 nav.flex.items-center.gap-6 a {
   text-decoration: none;
   font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--text-emphasis);
+  position: relative;
+  padding-block: 0.25rem;
+  transition: color var(--motion-fast, 120ms) var(--ease-standard, ease);
 }
-nav.flex.items-center.gap-6 a:hover {
-  text-decoration: underline;
+nav.flex.items-center.gap-6 a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--motion-fast, 120ms) var(--ease-standard, ease);
+}
+nav.flex.items-center.gap-6 a:hover::after {
+  transform: scaleX(1);
+}
+
+[aria-label="breadcrumb"] {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--text-recede);
+}
+[aria-label="breadcrumb"] a {
+  color: var(--text-recede);
+  text-decoration: none;
+}
+[aria-label="breadcrumb"] a:hover {
+  color: var(--text-emphasis);
+}
+
+/* ─────────── Button polish ─────────── */
+
+button,
+button[type="button"] {
+  transition: background-color var(--motion-fast, 120ms) var(--ease-standard, ease),
+              color var(--motion-fast, 120ms) var(--ease-standard, ease),
+              transform var(--motion-fast, 120ms) var(--ease-standard, ease),
+              box-shadow var(--motion-fast, 120ms) var(--ease-standard, ease);
+}
+/* Primary action: subtle hover lift + brightness shift */
+button[class*="bg-[var(--accent)]"]:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+button[class*="bg-[var(--accent)]"]:active {
+  transform: translateY(0);
+}
+/* Secondary action: hover fills with accent-recede */
+button[class*="border-[var(--border)]"]:hover {
+  background: var(--accent-recede);
+  border-color: var(--border-emphasis);
+}
+/* Destructive: deeper brightness shift */
+button[class*="bg-[var(--critical)]"]:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+/* ─────────── Emphasis-card hover lift ─────────── */
+
+section[class*="bg-[var(--surface-elevated)]"][class*="border"]:hover,
+article[class*="bg-[var(--surface-elevated)]"][class*="border"]:hover {
+  transition: box-shadow var(--motion-normal, 200ms) var(--ease-standard, ease),
+              border-color var(--motion-normal, 200ms) var(--ease-standard, ease);
+  border-color: var(--border-emphasis);
+  box-shadow: 0 4px 12px -2px rgb(0 0 0 / 0.06), 0 2px 4px -1px rgb(0 0 0 / 0.04);
+}
+
+section[class*="bg-[var(--surface-elevated)]"][class*="border"],
+article[class*="bg-[var(--surface-elevated)]"][class*="border"] {
+  transition: box-shadow var(--motion-normal, 200ms) var(--ease-standard, ease),
+              border-color var(--motion-normal, 200ms) var(--ease-standard, ease);
+}
+
+/* ─────────── Step-flow refinement ─────────── */
+
+ol.flex.list-none {
+  counter-reset: step;
+  position: relative;
+}
+ol.flex.list-none > li {
+  flex: 1;
+  position: relative;
+  padding-right: 1.5rem;
+}
+@media (min-width: 768px) {
+  ol.flex.list-none > li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 1rem;
+    right: 0;
+    width: 1rem;
+    height: 1px;
+    background: var(--border);
+  }
+}
+
+/* ─────────── Stat-display refinement ─────────── */
+
+/* Tighten the stat-display block so the big number reads as a single unit */
+div[class*="flex flex-col gap-1"][class*="--font-display"] > div:first-child {
+  font-feature-settings: "tnum" 1;
+}
+
+/* ─────────── Comparison table polish ─────────── */
+
+table.w-full {
+  border-spacing: 0;
+}
+table.w-full tr:hover td {
+  background: var(--surface-recessed);
+  transition: background var(--motion-fast, 120ms) var(--ease-standard, ease);
 }
 
 /* Inline code inside reading-flow paragraphs */

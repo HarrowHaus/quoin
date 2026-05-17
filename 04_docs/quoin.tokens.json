@@ -18,10 +18,10 @@
   "accent":           { "$value": "oklch(14% 0.012 30)",   "$type": "color" },
   "accent-recede":    { "$value": "oklch(94% 0.014 30)",   "$type": "color" },
 
-  "font-sans":    { "$value": "'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif", "$type": "fontFamily" },
-  "font-serif":   { "$value": "'Newsreader', 'Crimson Pro', Georgia, ui-serif, serif",             "$type": "fontFamily" },
-  "font-display": { "$value": "'Newsreader', 'Crimson Pro', Georgia, ui-serif, serif",             "$type": "fontFamily" },
-  "font-mono":    { "$value": "'JetBrains Mono', 'Geist Mono', ui-monospace, monospace",           "$type": "fontFamily" },
+  "font-sans":    { "$value": "'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif",  "$type": "fontFamily" },
+  "font-serif":   { "$value": "'Junicode', 'Newsreader', Georgia, ui-serif, serif",                  "$type": "fontFamily" },
+  "font-display": { "$value": "'Junicode', 'Newsreader', Georgia, ui-serif, serif",                  "$type": "fontFamily" },
+  "font-mono":    { "$value": "'JetBrains Mono', 'Geist Mono', ui-monospace, monospace",             "$type": "fontFamily" },
 
   "type-size-display": { "$value": "5.5rem",   "$type": "dimension" },
   "type-size-3xl":     { "$value": "2.25rem",  "$type": "dimension" },
