@@ -2,19 +2,24 @@
   "name": "chakra",
   "description": "Chakra UI default palette translated onto the Quoin canonical semantic-token namespace.",
   "license": "MIT",
-  "tags": ["chakra", "teal-accent", "react"],
+  "tags": [
+    "chakra",
+    "teal-accent",
+    "react"
+  ],
   "attribution": {
     "sourceSystem": "Chakra UI",
     "sourceOrganization": "Chakra UI community",
     "sourceUrl": "https://www.chakra-ui.com/",
     "sourceLicense": "MIT",
     "harvestedAt": "2026-05-16",
-    "harvestNotes": "Chakra v3 default colour scales. Default primary is 'teal' (500). Gray = standard slate-tinted neutral."
+    "harvestNotes": "Chakra v3 default colour scales. Default primary is 'teal' (500). Gray = standard slate-tinted neutral.\n\nPhase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.",
+    "fidelityTier": "C"
   },
   "mappingNotes": "Chakra gray-50..900 maps to Quoin surface/text. chakra-teal-500 -> accent. Status colours: red-500 (critical), green-500 (success), orange-500 (warning), blue-500 (info).",
   "base": {
     "gray": {
-      "50":  "oklch(98% 0.005 250)",
+      "50": "oklch(98% 0.005 250)",
       "100": "oklch(95% 0.008 250)",
       "200": "oklch(90% 0.012 250)",
       "300": "oklch(82% 0.012 250)",
@@ -25,12 +30,25 @@
       "800": "oklch(20% 0.014 250)",
       "900": "oklch(12% 0.014 250)"
     },
-    "white":  { "0": "#ffffff" },
-    "teal":   { "500": "oklch(55% 0.13 195)", "50": "oklch(95% 0.04 195)" },
-    "red":    { "500": "oklch(58% 0.21 25)" },
-    "green":  { "500": "oklch(58% 0.16 145)" },
-    "orange": { "500": "oklch(70% 0.18 60)" },
-    "blue":   { "500": "oklch(58% 0.16 240)" }
+    "white": {
+      "0": "#ffffff"
+    },
+    "teal": {
+      "50": "oklch(95% 0.04 195)",
+      "500": "oklch(55% 0.13 195)"
+    },
+    "red": {
+      "500": "oklch(58% 0.21 25)"
+    },
+    "green": {
+      "500": "oklch(58% 0.16 145)"
+    },
+    "orange": {
+      "500": "oklch(70% 0.18 60)"
+    },
+    "blue": {
+      "500": "oklch(58% 0.16 240)"
+    }
   },
   "fonts": {
     "font-sans": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif",

@@ -11,6 +11,8 @@ Elastic EUI (light theme) palette translated onto the Quoin canonical semantic-t
 - **Harvested:** 2026-05-16
 - **Notes:** EUI 'Amsterdam' light theme. Elastic ships @elastic/eui with the design tokens exposed as SASS / CSS vars. Inter typeface is open-source.
 
+Phase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.
+
 ## Mapping
 
 EUI's text/background/border tokens map directly. euiColorPrimary -> accent (Elastic blue), euiColorEmptyShade -> surface, euiColorLightestShade -> surface-recessed, euiColorDarkestShade -> surface-inverse. Status: danger/success/warning/primary -> critical/success/warning/info.

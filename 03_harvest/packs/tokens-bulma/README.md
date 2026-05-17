@@ -11,6 +11,8 @@ Bulma CSS framework default palette translated onto the Quoin canonical semantic
 - **Harvested:** 2026-05-16
 - **Notes:** Bulma default theme. Signature accent is $primary = turquoise (#00D1B2 area). Bulma is one of the more aesthetically distinctive defaults — included for breadth.
 
+Phase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.
+
 ## Mapping
 
 Bulma's $background -> surface, $text -> text, $primary -> accent (turquoise), $danger/$success/$warning/$info -> respective. Bulma's $border -> border, $border-light -> border-recede.

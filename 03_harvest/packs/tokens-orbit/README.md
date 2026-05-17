@@ -11,6 +11,8 @@ Kiwi.com Orbit palette translated onto the Quoin canonical semantic-token namesp
 - **Harvested:** 2026-05-16
 - **Notes:** Orbit 'on-light' theme. Kiwi green is the signature accent. Orbit uses Roboto + Circular as its typeface stack; Roboto is open-source, Circular is proprietary (referenced by family name only).
 
+Phase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.
+
 ## Mapping
 
 Orbit cloud (light grey backgrounds), ink (text greys), product (green accent). Status colours: critical (red), success (Kiwi green or success-green), warning (yellow), info (blue).

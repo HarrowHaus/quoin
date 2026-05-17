@@ -2,19 +2,25 @@
   "name": "polaris",
   "description": "Shopify Polaris (light theme) palette translated onto the Quoin canonical semantic-token namespace.",
   "license": "MIT",
-  "tags": ["polaris", "shopify", "indigo-accent", "commerce"],
+  "tags": [
+    "polaris",
+    "shopify",
+    "indigo-accent",
+    "commerce"
+  ],
   "attribution": {
     "sourceSystem": "Polaris",
     "sourceOrganization": "Shopify",
     "sourceUrl": "https://polaris.shopify.com/",
     "sourceLicense": "MIT",
     "harvestedAt": "2026-05-16",
-    "harvestNotes": "Polaris v12 'light' colour tokens. Polaris ships extensive token families (--p-color-bg-*, --p-color-text-*, --p-color-border-*, etc.); this pack distills them onto Quoin's 4-surface model. Polaris's brand indigo (#2C6ECB area) sets accent."
+    "harvestNotes": "Polaris v12 'light' colour tokens. Polaris ships extensive token families (--p-color-bg-*, --p-color-text-*, --p-color-border-*, etc.); this pack distills them onto Quoin's 4-surface model. Polaris's brand indigo (#2C6ECB area) sets accent.\n\nPhase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.",
+    "fidelityTier": "C"
   },
   "mappingNotes": "Polaris --p-color-bg / bg-surface -> surface, bg-surface-secondary -> surface-recessed, bg-emphasis -> accent. text -> text, text-secondary -> text-recede, text-emphasis -> text-emphasis. critical/success/warning/info map directly from Polaris's status families.",
   "base": {
     "neutral": {
-      "0":  "#ffffff",
+      "0": "#ffffff",
       "50": "oklch(98% 0.005 250)",
       "100": "oklch(95% 0.008 250)",
       "200": "oklch(88% 0.010 250)",
@@ -24,13 +30,21 @@
       "900": "oklch(15% 0.012 250)"
     },
     "indigo": {
-      "500": "oklch(45% 0.20 260)",
-      "50": "oklch(96% 0.04 260)"
+      "50": "oklch(96% 0.04 260)",
+      "500": "oklch(45% 0.20 260)"
     },
-    "critical": { "500": "oklch(50% 0.20 25)" },
-    "success":  { "500": "oklch(50% 0.16 150)" },
-    "warning":  { "500": "oklch(75% 0.18 80)" },
-    "info":     { "500": "oklch(55% 0.16 240)" }
+    "critical": {
+      "500": "oklch(50% 0.20 25)"
+    },
+    "success": {
+      "500": "oklch(50% 0.16 150)"
+    },
+    "warning": {
+      "500": "oklch(75% 0.18 80)"
+    },
+    "info": {
+      "500": "oklch(55% 0.16 240)"
+    }
   },
   "fonts": {
     "font-sans": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif",

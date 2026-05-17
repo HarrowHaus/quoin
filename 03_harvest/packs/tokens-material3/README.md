@@ -11,6 +11,8 @@ Material Design 3 (M3) baseline palette translated onto the Quoin canonical sema
 - **Harvested:** 2026-05-16
 - **Notes:** M3 baseline 'reference palette' (neutral + primary purple + error). M3's elevation token set is not modelled here (Quoin's optional elevation capability is intentionally omitted by this pack — see Phase 1 spec §4.4). Use M3's CSS variables in the consumer project if elevation is required.
 
+Phase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.
+
 ## Mapping
 
 M3 semantic names (surface, on-surface, primary, on-primary, error, on-error) map almost directly. M3's 'tonal palette' steps (0, 10, 20, ... 100) translated to OKLCH approximations. text -> on-surface, text-emphasis -> on-surface (M3 uses opacity rather than a separate token; mapped to a darker neutral here).

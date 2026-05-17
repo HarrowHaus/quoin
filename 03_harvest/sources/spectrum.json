@@ -2,20 +2,26 @@
   "name": "spectrum",
   "description": "Adobe Spectrum (light theme) palette translated onto the Quoin canonical semantic-token namespace.",
   "license": "Apache-2.0",
-  "tags": ["spectrum", "adobe", "blue-accent", "design-tools"],
+  "tags": [
+    "spectrum",
+    "adobe",
+    "blue-accent",
+    "design-tools"
+  ],
   "attribution": {
     "sourceSystem": "Spectrum",
     "sourceOrganization": "Adobe",
     "sourceUrl": "https://spectrum.adobe.com/",
     "sourceLicense": "Apache-2.0",
     "harvestedAt": "2026-05-16",
-    "harvestNotes": "Spectrum 'light' theme. Spectrum publishes a global-token + alias-token model in @adobe/spectrum-tokens; this pack translates the alias layer (gray-50..gray-900, blue-500..blue-700, etc.) onto Quoin. Adobe Clean is proprietary; referenced by family name only."
+    "harvestNotes": "Spectrum 'light' theme. Spectrum publishes a global-token + alias-token model in @adobe/spectrum-tokens; this pack translates the alias layer (gray-50..gray-900, blue-500..blue-700, etc.) onto Quoin. Adobe Clean is proprietary; referenced by family name only.\n\nPhase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.",
+    "fidelityTier": "C"
   },
   "mappingNotes": "Spectrum gray-50 -> surface (very light), gray-100 -> surface-recessed, gray-900 -> text-emphasis. blue-500 (accent) -> accent. Spectrum has explicit negative/positive/notice/informative; mapped directly to critical/success/warning/info.",
   "base": {
     "gray": {
-      "50":  "#ffffff",
-      "75":  "oklch(99% 0.002 280)",
+      "50": "#ffffff",
+      "75": "oklch(99% 0.002 280)",
       "100": "oklch(97% 0.005 280)",
       "200": "oklch(93% 0.008 280)",
       "300": "oklch(88% 0.010 280)",
@@ -27,13 +33,21 @@
       "900": "oklch(14% 0.014 280)"
     },
     "blue": {
-      "500": "oklch(55% 0.16 240)",
-      "100": "oklch(94% 0.04 240)"
+      "100": "oklch(94% 0.04 240)",
+      "500": "oklch(55% 0.16 240)"
     },
-    "negative":    { "500": "oklch(54% 0.20 25)" },
-    "positive":    { "500": "oklch(55% 0.16 145)" },
-    "notice":      { "500": "oklch(75% 0.18 80)" },
-    "informative": { "500": "oklch(55% 0.16 240)" }
+    "negative": {
+      "500": "oklch(54% 0.20 25)"
+    },
+    "positive": {
+      "500": "oklch(55% 0.16 145)"
+    },
+    "notice": {
+      "500": "oklch(75% 0.18 80)"
+    },
+    "informative": {
+      "500": "oklch(55% 0.16 240)"
+    }
   },
   "fonts": {
     "font-sans": "'Adobe Clean', 'Source Sans 3', system-ui, sans-serif",

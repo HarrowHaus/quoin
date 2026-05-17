@@ -2,19 +2,25 @@
   "name": "clarity",
   "description": "VMware Clarity palette translated onto the Quoin canonical semantic-token namespace.",
   "license": "MIT",
-  "tags": ["clarity", "vmware", "blue", "enterprise"],
+  "tags": [
+    "clarity",
+    "vmware",
+    "blue",
+    "enterprise"
+  ],
   "attribution": {
     "sourceSystem": "Clarity Design System",
     "sourceOrganization": "VMware",
     "sourceUrl": "https://clarity.design/",
     "sourceLicense": "MIT",
     "harvestedAt": "2026-05-16",
-    "harvestNotes": "Clarity v6 light theme. Clarity's 'action blue' (#0072A3 area) is the brand accent. Heavy-blue, enterprise-IT aesthetic — gradients of teal/cobalt across the chrome."
+    "harvestNotes": "Clarity v6 light theme. Clarity's 'action blue' (#0072A3 area) is the brand accent. Heavy-blue, enterprise-IT aesthetic — gradients of teal/cobalt across the chrome.\n\nPhase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.",
+    "fidelityTier": "C"
   },
   "mappingNotes": "Clarity color-base-100..900 maps directly to Quoin surface/text ramp. action-blue-600 -> accent. Status colours: danger (red), success (green), warning (orange), info (action blue).",
   "base": {
     "base": {
-      "0":   "#ffffff",
+      "0": "#ffffff",
       "100": "oklch(98% 0.006 220)",
       "200": "oklch(95% 0.008 220)",
       "300": "oklch(90% 0.010 220)",
@@ -25,12 +31,18 @@
       "1000": "oklch(10% 0.014 220)"
     },
     "action": {
-      "600": "oklch(45% 0.14 220)",
-      "100": "oklch(95% 0.04 220)"
+      "100": "oklch(95% 0.04 220)",
+      "600": "oklch(45% 0.14 220)"
     },
-    "danger":  { "600": "oklch(52% 0.20 25)" },
-    "success": { "600": "oklch(50% 0.16 145)" },
-    "warning": { "600": "oklch(70% 0.18 60)" }
+    "danger": {
+      "600": "oklch(52% 0.20 25)"
+    },
+    "success": {
+      "600": "oklch(50% 0.16 145)"
+    },
+    "warning": {
+      "600": "oklch(70% 0.18 60)"
+    }
   },
   "fonts": {
     "font-sans": "'Clarity City', 'Metropolis', system-ui, sans-serif",

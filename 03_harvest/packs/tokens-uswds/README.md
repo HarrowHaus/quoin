@@ -11,6 +11,8 @@ United States Web Design System tokens translated onto the Quoin canonical seman
 - **Harvested:** 2026-05-16
 - **Notes:** USWDS is a work of the U.S. Federal Government and is in the public domain. Token values reflect the USWDS v3 'standard' palette (cool-blue primary + neutral gray). Source Sans Pro is referenced by family name only — no font files are redistributed.
 
+Phase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.
+
 ## Mapping
 
 USWDS uses Sass tokens like $color-base, $color-primary, $color-accent-cool, $color-error. Map: $color-base -> text, $color-primary -> accent, $color-error/-warning/-success/-info -> respective. USWDS's neutral 'gray cool' scale provides surface/border ramp.

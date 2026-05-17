@@ -11,6 +11,8 @@ Workday Canvas Kit palette translated onto the Quoin canonical semantic-token na
 - **Harvested:** 2026-05-16
 - **Notes:** Canvas Kit v9 'main' light theme. Workday's brand blue (a teal-leaning navy) is the accent. Roboto typeface is open-source.
 
+Phase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.
+
 ## Mapping
 
 Canvas's licorice (text), soap (light backgrounds), berrySmoothie (brand accent in newer themes — using blueberry here for the classic accent). Status colours follow Canvas's pomegranate/greenApple/cantaloupe/blueberry naming.

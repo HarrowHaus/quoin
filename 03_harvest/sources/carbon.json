@@ -2,35 +2,55 @@
   "name": "carbon",
   "description": "IBM Carbon (white theme) palette translated onto the Quoin canonical semantic-token namespace.",
   "license": "Apache-2.0",
-  "tags": ["carbon", "ibm", "blue-60", "enterprise"],
+  "tags": [
+    "carbon",
+    "ibm",
+    "blue-60",
+    "enterprise"
+  ],
   "attribution": {
     "sourceSystem": "Carbon Design System",
     "sourceOrganization": "IBM",
     "sourceUrl": "https://carbondesignsystem.com/",
     "sourceLicense": "Apache-2.0",
     "harvestedAt": "2026-05-16",
-    "harvestNotes": "Carbon ships @carbon/themes (white, g10, g90, g100). This pack mirrors the 'white' theme. Carbon's interactive states (hover, active, focus) are not modelled separately; consumers layer Carbon-style focus rings via project CSS if required."
+    "harvestNotes": "Carbon ships @carbon/themes (white, g10, g90, g100). This pack mirrors the 'white' theme. Carbon's interactive states (hover, active, focus) are not modelled separately; consumers layer Carbon-style focus rings via project CSS if required.\n\nPhase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.",
+    "fidelityTier": "C"
   },
   "mappingNotes": "Carbon background/layer/text tokens map onto Quoin's surface/text ramp. Carbon $interactive (Blue 60) -> accent. Carbon's support- tokens map to status: support-error -> critical, support-success -> success, support-warning -> warning, support-info -> info.",
   "base": {
     "gray": {
-      "10":  "oklch(95% 0.003 264)",
-      "20":  "oklch(89% 0.003 264)",
-      "30":  "oklch(80% 0.005 264)",
-      "40":  "oklch(70% 0.005 264)",
-      "50":  "oklch(58% 0.005 264)",
-      "60":  "oklch(48% 0.005 264)",
-      "70":  "oklch(38% 0.006 264)",
-      "80":  "oklch(28% 0.006 264)",
-      "90":  "oklch(20% 0.008 264)",
+      "10": "oklch(95% 0.003 264)",
+      "20": "oklch(89% 0.003 264)",
+      "30": "oklch(80% 0.005 264)",
+      "40": "oklch(70% 0.005 264)",
+      "50": "oklch(58% 0.005 264)",
+      "60": "oklch(48% 0.005 264)",
+      "70": "oklch(38% 0.006 264)",
+      "80": "oklch(28% 0.006 264)",
+      "90": "oklch(20% 0.008 264)",
       "100": "oklch(10% 0.008 264)"
     },
-    "white": { "0": "#ffffff" },
-    "blue":   { "60": "oklch(50% 0.18 250)", "70": "oklch(40% 0.18 250)", "10": "oklch(95% 0.05 250)" },
-    "red":    { "60": "oklch(52% 0.20 25)" },
-    "green":  { "60": "oklch(55% 0.16 145)" },
-    "yellow": { "30": "oklch(85% 0.18 90)" },
-    "purple": { "60": "oklch(48% 0.20 290)" }
+    "white": {
+      "0": "#ffffff"
+    },
+    "blue": {
+      "10": "oklch(95% 0.05 250)",
+      "60": "oklch(50% 0.18 250)",
+      "70": "oklch(40% 0.18 250)"
+    },
+    "red": {
+      "60": "oklch(52% 0.20 25)"
+    },
+    "green": {
+      "60": "oklch(55% 0.16 145)"
+    },
+    "yellow": {
+      "30": "oklch(85% 0.18 90)"
+    },
+    "purple": {
+      "60": "oklch(48% 0.20 290)"
+    }
   },
   "fonts": {
     "font-sans": "'IBM Plex Sans', system-ui, sans-serif",

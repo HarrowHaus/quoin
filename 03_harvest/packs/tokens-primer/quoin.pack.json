@@ -26,6 +26,7 @@
     "sourceUrl": "https://primer.style/",
     "sourceLicense": "MIT",
     "harvestedAt": "2026-05-16",
-    "harvestNotes": "Primer Primitives (@primer/primitives) light scheme. Primer's data- vs accent- vs success- vs danger- families translate cleanly onto Quoin's accent + critical/success/warning/info."
+    "harvestNotes": "Primer Primitives (@primer/primitives) light scheme. Primer's data- vs accent- vs success- vs danger- families translate cleanly onto Quoin's accent + critical/success/warning/info.\n\nPhase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.",
+    "fidelityTier": "C"
   }
 }

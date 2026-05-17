@@ -2,19 +2,25 @@
   "name": "primer",
   "description": "GitHub Primer (light theme) palette translated onto the Quoin canonical semantic-token namespace.",
   "license": "MIT",
-  "tags": ["primer", "github", "blue", "open-source"],
+  "tags": [
+    "primer",
+    "github",
+    "blue",
+    "open-source"
+  ],
   "attribution": {
     "sourceSystem": "Primer",
     "sourceOrganization": "GitHub",
     "sourceUrl": "https://primer.style/",
     "sourceLicense": "MIT",
     "harvestedAt": "2026-05-16",
-    "harvestNotes": "Primer Primitives (@primer/primitives) light scheme. Primer's data- vs accent- vs success- vs danger- families translate cleanly onto Quoin's accent + critical/success/warning/info."
+    "harvestNotes": "Primer Primitives (@primer/primitives) light scheme. Primer's data- vs accent- vs success- vs danger- families translate cleanly onto Quoin's accent + critical/success/warning/info.\n\nPhase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.",
+    "fidelityTier": "C"
   },
   "mappingNotes": "Primer's --color-canvas-default -> surface, --color-canvas-subtle -> surface-recessed, --color-fg-default -> text, --color-fg-emphasis -> text-emphasis, --color-fg-muted -> text-recede, --color-border-default -> border, --color-accent-emphasis -> accent. Danger/success/attention/done map to critical/success/warning/info.",
   "base": {
     "gray": {
-      "0":  "oklch(99% 0.005 250)",
+      "0": "oklch(99% 0.005 250)",
       "100": "oklch(97% 0.008 250)",
       "200": "oklch(92% 0.010 250)",
       "300": "oklch(86% 0.012 250)",
@@ -25,11 +31,22 @@
       "800": "oklch(28% 0.014 250)",
       "900": "oklch(20% 0.014 250)"
     },
-    "white": { "0": "#ffffff" },
-    "blue":   { "500": "oklch(52% 0.20 245)", "100": "oklch(95% 0.04 245)" },
-    "red":    { "500": "oklch(55% 0.21 25)" },
-    "green":  { "500": "oklch(55% 0.16 150)" },
-    "yellow": { "500": "oklch(80% 0.16 80)" }
+    "white": {
+      "0": "#ffffff"
+    },
+    "blue": {
+      "100": "oklch(95% 0.04 245)",
+      "500": "oklch(52% 0.20 245)"
+    },
+    "red": {
+      "500": "oklch(55% 0.21 25)"
+    },
+    "green": {
+      "500": "oklch(55% 0.16 150)"
+    },
+    "yellow": {
+      "500": "oklch(80% 0.16 80)"
+    }
   },
   "fonts": {
     "font-sans": "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif",

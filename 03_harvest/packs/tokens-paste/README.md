@@ -11,6 +11,8 @@ Twilio Paste design tokens translated onto the Quoin canonical semantic-token na
 - **Harvested:** 2026-05-16
 - **Notes:** Twilio Paste 'default' theme. Paste publishes @twilio-paste/design-tokens with global/alias layers. Twilio brand red (#F22F46) is a sub-brand colour; this pack uses Paste's primary 'color-background-primary' (blue) for accent, matching the default theme. Inter is open-source.
 
+Phase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.
+
 ## Mapping
 
 Paste color-background -> surface, color-background-body-inverse -> surface-inverse, color-text -> text, color-text-weak -> text-recede, color-text-error -> critical, color-text-success -> success, color-text-warning -> warning, color-text-information -> info.

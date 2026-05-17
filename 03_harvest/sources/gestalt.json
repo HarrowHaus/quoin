@@ -2,20 +2,26 @@
   "name": "gestalt",
   "description": "Pinterest Gestalt design tokens translated onto the Quoin canonical semantic-token namespace.",
   "license": "Apache-2.0",
-  "tags": ["gestalt", "pinterest", "red-accent", "social"],
+  "tags": [
+    "gestalt",
+    "pinterest",
+    "red-accent",
+    "social"
+  ],
   "attribution": {
     "sourceSystem": "Gestalt",
     "sourceOrganization": "Pinterest",
     "sourceUrl": "https://gestalt.pinterest.systems/",
     "sourceLicense": "Apache-2.0",
     "harvestedAt": "2026-05-16",
-    "harvestNotes": "Pinterest Gestalt 'light' tokens. Pinterest red (#E60023 family) drives accent. Gestalt has explicit semantic background-default / background-tertiary / text-default / text-subtle tokens that map cleanly. Pinterest Sans is proprietary; referenced by family name only."
+    "harvestNotes": "Pinterest Gestalt 'light' tokens. Pinterest red (#E60023 family) drives accent. Gestalt has explicit semantic background-default / background-tertiary / text-default / text-subtle tokens that map cleanly. Pinterest Sans is proprietary; referenced by family name only.\n\nPhase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.",
+    "fidelityTier": "C"
   },
   "mappingNotes": "Gestalt background-default -> surface, background-elevation-floating -> surface-elevated, background-secondary -> surface-recessed. text-default -> text, text-subtle -> text-recede. border-default -> border. Pinterest red 450 (their docs) -> accent.",
   "base": {
     "gray": {
-      "0":   "#ffffff",
-      "50":  "oklch(98% 0.003 30)",
+      "0": "#ffffff",
+      "50": "oklch(98% 0.003 30)",
       "100": "oklch(96% 0.005 30)",
       "200": "oklch(92% 0.007 30)",
       "300": "oklch(85% 0.010 30)",
@@ -25,10 +31,19 @@
       "800": "oklch(22% 0.012 30)",
       "900": "oklch(12% 0.012 30)"
     },
-    "red":     { "450": "oklch(55% 0.22 25)", "50": "oklch(96% 0.05 25)" },
-    "green":   { "500": "oklch(55% 0.16 145)" },
-    "amber":   { "500": "oklch(75% 0.18 80)" },
-    "blue":    { "500": "oklch(55% 0.16 240)" }
+    "red": {
+      "50": "oklch(96% 0.05 25)",
+      "450": "oklch(55% 0.22 25)"
+    },
+    "green": {
+      "500": "oklch(55% 0.16 145)"
+    },
+    "amber": {
+      "500": "oklch(75% 0.18 80)"
+    },
+    "blue": {
+      "500": "oklch(55% 0.16 240)"
+    }
   },
   "fonts": {
     "font-sans": "'Pinterest Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif",

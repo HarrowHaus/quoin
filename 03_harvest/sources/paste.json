@@ -2,19 +2,25 @@
   "name": "paste",
   "description": "Twilio Paste design tokens translated onto the Quoin canonical semantic-token namespace.",
   "license": "MIT",
-  "tags": ["paste", "twilio", "blue-accent", "telephony"],
+  "tags": [
+    "paste",
+    "twilio",
+    "blue-accent",
+    "telephony"
+  ],
   "attribution": {
     "sourceSystem": "Paste Design System",
     "sourceOrganization": "Twilio",
     "sourceUrl": "https://paste.twilio.design/",
     "sourceLicense": "MIT",
     "harvestedAt": "2026-05-16",
-    "harvestNotes": "Twilio Paste 'default' theme. Paste publishes @twilio-paste/design-tokens with global/alias layers. Twilio brand red (#F22F46) is a sub-brand colour; this pack uses Paste's primary 'color-background-primary' (blue) for accent, matching the default theme. Inter is open-source."
+    "harvestNotes": "Twilio Paste 'default' theme. Paste publishes @twilio-paste/design-tokens with global/alias layers. Twilio brand red (#F22F46) is a sub-brand colour; this pack uses Paste's primary 'color-background-primary' (blue) for accent, matching the default theme. Inter is open-source.\n\nPhase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.",
+    "fidelityTier": "C"
   },
   "mappingNotes": "Paste color-background -> surface, color-background-body-inverse -> surface-inverse, color-text -> text, color-text-weak -> text-recede, color-text-error -> critical, color-text-success -> success, color-text-warning -> warning, color-text-information -> info.",
   "base": {
     "gray": {
-      "0":  "#ffffff",
+      "0": "#ffffff",
       "10": "oklch(98% 0.005 250)",
       "20": "oklch(96% 0.008 250)",
       "30": "oklch(92% 0.010 250)",
@@ -24,10 +30,19 @@
       "90": "oklch(20% 0.012 250)",
       "100": "oklch(10% 0.012 250)"
     },
-    "blue":   { "60": "oklch(50% 0.18 240)", "10": "oklch(95% 0.04 240)" },
-    "red":    { "60": "oklch(50% 0.22 25)" },
-    "green":  { "60": "oklch(50% 0.16 145)" },
-    "orange": { "60": "oklch(72% 0.18 70)" }
+    "blue": {
+      "10": "oklch(95% 0.04 240)",
+      "60": "oklch(50% 0.18 240)"
+    },
+    "red": {
+      "60": "oklch(50% 0.22 25)"
+    },
+    "green": {
+      "60": "oklch(50% 0.16 145)"
+    },
+    "orange": {
+      "60": "oklch(72% 0.18 70)"
+    }
   },
   "fonts": {
     "font-sans": "'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif",

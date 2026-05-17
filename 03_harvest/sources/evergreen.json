@@ -2,31 +2,46 @@
   "name": "evergreen",
   "description": "Segment Evergreen palette translated onto the Quoin canonical semantic-token namespace.",
   "license": "MIT",
-  "tags": ["evergreen", "segment", "neutral", "react"],
+  "tags": [
+    "evergreen",
+    "segment",
+    "neutral",
+    "react"
+  ],
   "attribution": {
     "sourceSystem": "Evergreen",
     "sourceOrganization": "Segment (Twilio)",
     "sourceUrl": "https://evergreen.segment.com/",
     "sourceLicense": "MIT",
     "harvestedAt": "2026-05-16",
-    "harvestNotes": "Segment Evergreen 'default' theme. Neutral-heavy, restrained palette. Project status notes Evergreen v6 maintenance is light; pack is included because the design itself is widely studied."
+    "harvestNotes": "Segment Evergreen 'default' theme. Neutral-heavy, restrained palette. Project status notes Evergreen v6 maintenance is light; pack is included because the design itself is widely studied.\n\nPhase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.",
+    "fidelityTier": "C"
   },
   "mappingNotes": "Evergreen has tints rather than a numbered scale; mapped to Quoin's surface ramp. Default brand colour is a muted blue; status colours follow conventional traffic-light pattern.",
   "base": {
     "neutral": {
-      "0":   "#ffffff",
-      "5":   "oklch(98% 0.005 245)",
-      "10":  "oklch(96% 0.007 245)",
-      "20":  "oklch(92% 0.010 245)",
-      "40":  "oklch(78% 0.012 245)",
-      "60":  "oklch(55% 0.014 245)",
-      "80":  "oklch(30% 0.014 245)",
-      "90":  "oklch(18% 0.014 245)"
+      "0": "#ffffff",
+      "5": "oklch(98% 0.005 245)",
+      "10": "oklch(96% 0.007 245)",
+      "20": "oklch(92% 0.010 245)",
+      "40": "oklch(78% 0.012 245)",
+      "60": "oklch(55% 0.014 245)",
+      "80": "oklch(30% 0.014 245)",
+      "90": "oklch(18% 0.014 245)"
     },
-    "blue":   { "500": "oklch(48% 0.18 240)", "50": "oklch(95% 0.04 240)" },
-    "red":    { "500": "oklch(55% 0.22 25)" },
-    "green":  { "500": "oklch(52% 0.16 145)" },
-    "yellow": { "500": "oklch(75% 0.18 80)" }
+    "blue": {
+      "50": "oklch(95% 0.04 240)",
+      "500": "oklch(48% 0.18 240)"
+    },
+    "red": {
+      "500": "oklch(55% 0.22 25)"
+    },
+    "green": {
+      "500": "oklch(52% 0.16 145)"
+    },
+    "yellow": {
+      "500": "oklch(75% 0.18 80)"
+    }
   },
   "fonts": {
     "font-sans": "SF UI Text, system-ui, sans-serif",

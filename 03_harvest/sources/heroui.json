@@ -2,19 +2,25 @@
   "name": "heroui",
   "description": "HeroUI (formerly NextUI) default palette translated onto the Quoin canonical semantic-token namespace.",
   "license": "MIT",
-  "tags": ["heroui", "nextui", "purple-accent", "react"],
+  "tags": [
+    "heroui",
+    "nextui",
+    "purple-accent",
+    "react"
+  ],
   "attribution": {
     "sourceSystem": "HeroUI",
     "sourceOrganization": "HeroUI community",
     "sourceUrl": "https://www.heroui.com/",
     "sourceLicense": "MIT",
     "harvestedAt": "2026-05-16",
-    "harvestNotes": "HeroUI (renamed from NextUI v2). Built on Tailwind v4 + React Aria. Default primary is a vibrant purple/blue accent. Inter typeface is open-source."
+    "harvestNotes": "HeroUI (renamed from NextUI v2). Built on Tailwind v4 + React Aria. Default primary is a vibrant purple/blue accent. Inter typeface is open-source.\n\nPhase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.",
+    "fidelityTier": "C"
   },
   "mappingNotes": "HeroUI exposes a layered theme system with background, foreground, primary, secondary, etc. Mapped directly: background -> surface, foreground -> text-emphasis, primary -> accent.",
   "base": {
     "gray": {
-      "50":  "oklch(98% 0.005 260)",
+      "50": "oklch(98% 0.005 260)",
       "100": "oklch(96% 0.008 260)",
       "200": "oklch(92% 0.010 260)",
       "300": "oklch(85% 0.012 260)",
@@ -23,12 +29,25 @@
       "700": "oklch(35% 0.014 260)",
       "900": "oklch(12% 0.014 260)"
     },
-    "white": { "0": "#ffffff" },
-    "primary": { "500": "oklch(55% 0.20 270)", "50": "oklch(95% 0.04 270)" },
-    "red":   { "500": "oklch(60% 0.22 25)" },
-    "green": { "500": "oklch(60% 0.16 145)" },
-    "amber": { "500": "oklch(78% 0.18 70)" },
-    "blue":  { "500": "oklch(60% 0.16 230)" }
+    "white": {
+      "0": "#ffffff"
+    },
+    "primary": {
+      "50": "oklch(95% 0.04 270)",
+      "500": "oklch(55% 0.20 270)"
+    },
+    "red": {
+      "500": "oklch(60% 0.22 25)"
+    },
+    "green": {
+      "500": "oklch(60% 0.16 145)"
+    },
+    "amber": {
+      "500": "oklch(78% 0.18 70)"
+    },
+    "blue": {
+      "500": "oklch(60% 0.16 230)"
+    }
   },
   "fonts": {
     "font-sans": "'Inter', system-ui, -apple-system, sans-serif",

@@ -2,36 +2,50 @@
   "name": "lightning",
   "description": "Salesforce Lightning Design System palette translated onto the Quoin canonical semantic-token namespace.",
   "license": "BSD-3-Clause",
-  "tags": ["lightning", "salesforce", "blue-accent", "enterprise"],
+  "tags": [
+    "lightning",
+    "salesforce",
+    "blue-accent",
+    "enterprise"
+  ],
   "attribution": {
     "sourceSystem": "Lightning Design System (SLDS)",
     "sourceOrganization": "Salesforce",
     "sourceUrl": "https://www.lightningdesignsystem.com/",
     "sourceLicense": "BSD-3-Clause",
     "harvestedAt": "2026-05-16",
-    "harvestNotes": "SLDS '2' tokens (light scheme). Salesforce ships @salesforce-ux/design-system-tokens with utility, component, and theme layers; this pack uses the global + alias layers. Salesforce Sans is proprietary; referenced by family name only."
+    "harvestNotes": "SLDS '2' tokens (light scheme). Salesforce ships @salesforce-ux/design-system-tokens with utility, component, and theme layers; this pack uses the global + alias layers. Salesforce Sans is proprietary; referenced by family name only.\n\nPhase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.",
+    "fidelityTier": "C"
   },
   "mappingNotes": "SLDS color-background-base -> surface, color-background -> surface-recessed, color-text-default -> text, color-brand -> accent (Salesforce blue #0070D2 area). color-success/error/warning/info map directly.",
   "base": {
     "neutral": {
-      "0":   "#ffffff",
-      "5":   "oklch(98% 0.005 240)",
-      "10":  "oklch(96% 0.008 240)",
-      "25":  "oklch(92% 0.010 240)",
-      "50":  "oklch(80% 0.012 240)",
-      "65":  "oklch(60% 0.012 240)",
-      "75":  "oklch(45% 0.014 240)",
-      "90":  "oklch(28% 0.014 240)",
+      "0": "#ffffff",
+      "5": "oklch(98% 0.005 240)",
+      "10": "oklch(96% 0.008 240)",
+      "25": "oklch(92% 0.010 240)",
+      "50": "oklch(80% 0.012 240)",
+      "65": "oklch(60% 0.012 240)",
+      "75": "oklch(45% 0.014 240)",
+      "90": "oklch(28% 0.014 240)",
       "100": "oklch(15% 0.014 240)"
     },
     "brand": {
-      "500": "oklch(50% 0.18 240)",
-      "100": "oklch(95% 0.04 240)"
+      "100": "oklch(95% 0.04 240)",
+      "500": "oklch(50% 0.18 240)"
     },
-    "error":   { "500": "oklch(52% 0.20 25)" },
-    "success": { "500": "oklch(50% 0.16 145)" },
-    "warning": { "500": "oklch(75% 0.18 80)" },
-    "info":    { "500": "oklch(55% 0.16 220)" }
+    "error": {
+      "500": "oklch(52% 0.20 25)"
+    },
+    "success": {
+      "500": "oklch(50% 0.16 145)"
+    },
+    "warning": {
+      "500": "oklch(75% 0.18 80)"
+    },
+    "info": {
+      "500": "oklch(55% 0.16 220)"
+    }
   },
   "fonts": {
     "font-sans": "'Salesforce Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif",

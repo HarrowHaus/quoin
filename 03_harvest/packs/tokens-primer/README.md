@@ -11,6 +11,8 @@ GitHub Primer (light theme) palette translated onto the Quoin canonical semantic
 - **Harvested:** 2026-05-16
 - **Notes:** Primer Primitives (@primer/primitives) light scheme. Primer's data- vs accent- vs success- vs danger- families translate cleanly onto Quoin's accent + critical/success/warning/info.
 
+Phase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.
+
 ## Mapping
 
 Primer's --color-canvas-default -> surface, --color-canvas-subtle -> surface-recessed, --color-fg-default -> text, --color-fg-emphasis -> text-emphasis, --color-fg-muted -> text-recede, --color-border-default -> border, --color-accent-emphasis -> accent. Danger/success/attention/done map to critical/success/warning/info.

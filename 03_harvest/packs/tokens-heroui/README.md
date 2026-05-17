@@ -11,6 +11,8 @@ HeroUI (formerly NextUI) default palette translated onto the Quoin canonical sem
 - **Harvested:** 2026-05-16
 - **Notes:** HeroUI (renamed from NextUI v2). Built on Tailwind v4 + React Aria. Default primary is a vibrant purple/blue accent. Inter typeface is open-source.
 
+Phase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.
+
 ## Mapping
 
 HeroUI exposes a layered theme system with background, foreground, primary, secondary, etc. Mapped directly: background -> surface, foreground -> text-emphasis, primary -> accent.

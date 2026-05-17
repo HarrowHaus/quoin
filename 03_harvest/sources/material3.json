@@ -2,31 +2,37 @@
   "name": "material3",
   "description": "Material Design 3 (M3) baseline palette translated onto the Quoin canonical semantic-token namespace.",
   "license": "Apache-2.0",
-  "tags": ["material", "material-3", "google", "purple-accent"],
+  "tags": [
+    "material",
+    "material-3",
+    "google",
+    "purple-accent"
+  ],
   "attribution": {
     "sourceSystem": "Material Design 3",
     "sourceOrganization": "Google",
     "sourceUrl": "https://m3.material.io/",
     "sourceLicense": "Apache-2.0",
     "harvestedAt": "2026-05-16",
-    "harvestNotes": "M3 baseline 'reference palette' (neutral + primary purple + error). M3's elevation token set is not modelled here (Quoin's optional elevation capability is intentionally omitted by this pack — see Phase 1 spec §4.4). Use M3's CSS variables in the consumer project if elevation is required."
+    "harvestNotes": "M3 baseline 'reference palette' (neutral + primary purple + error). M3's elevation token set is not modelled here (Quoin's optional elevation capability is intentionally omitted by this pack — see Phase 1 spec §4.4). Use M3's CSS variables in the consumer project if elevation is required.\n\nPhase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.",
+    "fidelityTier": "C"
   },
   "mappingNotes": "M3 semantic names (surface, on-surface, primary, on-primary, error, on-error) map almost directly. M3's 'tonal palette' steps (0, 10, 20, ... 100) translated to OKLCH approximations. text -> on-surface, text-emphasis -> on-surface (M3 uses opacity rather than a separate token; mapped to a darker neutral here).",
   "base": {
     "neutral": {
-      "0":   "oklch(0% 0 0)",
-      "10":  "oklch(12% 0.005 280)",
-      "20":  "oklch(20% 0.005 280)",
-      "30":  "oklch(30% 0.005 280)",
-      "40":  "oklch(42% 0.005 280)",
-      "50":  "oklch(55% 0.005 280)",
-      "60":  "oklch(65% 0.005 280)",
-      "70":  "oklch(75% 0.005 280)",
-      "80":  "oklch(85% 0.005 280)",
-      "90":  "oklch(92% 0.005 280)",
-      "95":  "oklch(95% 0.005 280)",
-      "98":  "oklch(98% 0.005 280)",
-      "99":  "oklch(99% 0.003 280)",
+      "0": "oklch(0% 0 0)",
+      "10": "oklch(12% 0.005 280)",
+      "20": "oklch(20% 0.005 280)",
+      "30": "oklch(30% 0.005 280)",
+      "40": "oklch(42% 0.005 280)",
+      "50": "oklch(55% 0.005 280)",
+      "60": "oklch(65% 0.005 280)",
+      "70": "oklch(75% 0.005 280)",
+      "80": "oklch(85% 0.005 280)",
+      "90": "oklch(92% 0.005 280)",
+      "95": "oklch(95% 0.005 280)",
+      "98": "oklch(98% 0.005 280)",
+      "99": "oklch(99% 0.003 280)",
       "100": "oklch(100% 0 0)"
     },
     "primary": {
@@ -34,11 +40,21 @@
       "80": "oklch(80% 0.12 290)",
       "90": "oklch(90% 0.05 290)"
     },
-    "error":   { "40": "oklch(45% 0.20 25)" },
-    "success": { "40": "oklch(50% 0.16 150)" },
-    "warning": { "40": "oklch(60% 0.16 80)" },
-    "info":    { "40": "oklch(50% 0.16 245)" },
-    "white":   { "0": "#ffffff" }
+    "error": {
+      "40": "oklch(45% 0.20 25)"
+    },
+    "success": {
+      "40": "oklch(50% 0.16 150)"
+    },
+    "warning": {
+      "40": "oklch(60% 0.16 80)"
+    },
+    "info": {
+      "40": "oklch(50% 0.16 245)"
+    },
+    "white": {
+      "0": "#ffffff"
+    }
   },
   "fonts": {
     "font-sans": "'Roboto', 'Roboto Flex', system-ui, sans-serif",

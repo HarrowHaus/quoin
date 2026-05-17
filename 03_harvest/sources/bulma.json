@@ -2,31 +2,50 @@
   "name": "bulma",
   "description": "Bulma CSS framework default palette translated onto the Quoin canonical semantic-token namespace.",
   "license": "MIT",
-  "tags": ["bulma", "turquoise-accent", "css-only", "sass"],
+  "tags": [
+    "bulma",
+    "turquoise-accent",
+    "css-only",
+    "sass"
+  ],
   "attribution": {
     "sourceSystem": "Bulma",
     "sourceOrganization": "Jeremy Thomas / Bulma community",
     "sourceUrl": "https://bulma.io/",
     "sourceLicense": "MIT",
     "harvestedAt": "2026-05-16",
-    "harvestNotes": "Bulma default theme. Signature accent is $primary = turquoise (#00D1B2 area). Bulma is one of the more aesthetically distinctive defaults — included for breadth."
+    "harvestNotes": "Bulma default theme. Signature accent is $primary = turquoise (#00D1B2 area). Bulma is one of the more aesthetically distinctive defaults — included for breadth.\n\nPhase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.",
+    "fidelityTier": "C"
   },
   "mappingNotes": "Bulma's $background -> surface, $text -> text, $primary -> accent (turquoise), $danger/$success/$warning/$info -> respective. Bulma's $border -> border, $border-light -> border-recede.",
   "base": {
-    "white": { "0": "#ffffff" },
-    "gray": {
-      "lighter":  "oklch(97% 0.005 250)",
-      "light":    "oklch(94% 0.008 250)",
-      "default":  "oklch(80% 0.012 250)",
-      "dark":     "oklch(50% 0.014 250)",
-      "darker":   "oklch(28% 0.014 250)",
-      "darkest":  "oklch(14% 0.014 250)"
+    "white": {
+      "0": "#ffffff"
     },
-    "primary": { "500": "oklch(70% 0.13 175)", "100": "oklch(95% 0.04 175)" },
-    "danger":  { "500": "oklch(58% 0.22 25)" },
-    "success": { "500": "oklch(60% 0.16 145)" },
-    "warning": { "500": "oklch(85% 0.18 80)" },
-    "info":    { "500": "oklch(60% 0.16 220)" }
+    "gray": {
+      "lighter": "oklch(97% 0.005 250)",
+      "light": "oklch(94% 0.008 250)",
+      "default": "oklch(80% 0.012 250)",
+      "dark": "oklch(50% 0.014 250)",
+      "darker": "oklch(28% 0.014 250)",
+      "darkest": "oklch(14% 0.014 250)"
+    },
+    "primary": {
+      "100": "oklch(95% 0.04 175)",
+      "500": "oklch(70% 0.13 175)"
+    },
+    "danger": {
+      "500": "oklch(58% 0.22 25)"
+    },
+    "success": {
+      "500": "oklch(60% 0.16 145)"
+    },
+    "warning": {
+      "500": "oklch(85% 0.18 80)"
+    },
+    "info": {
+      "500": "oklch(60% 0.16 220)"
+    }
   },
   "fonts": {
     "font-sans": "BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif",

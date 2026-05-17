@@ -2,20 +2,26 @@
   "name": "orbit",
   "description": "Kiwi.com Orbit palette translated onto the Quoin canonical semantic-token namespace.",
   "license": "MIT",
-  "tags": ["orbit", "kiwi", "travel", "green-accent"],
+  "tags": [
+    "orbit",
+    "kiwi",
+    "travel",
+    "green-accent"
+  ],
   "attribution": {
     "sourceSystem": "Orbit Design System",
     "sourceOrganization": "Kiwi.com",
     "sourceUrl": "https://orbit.kiwi/",
     "sourceLicense": "MIT",
     "harvestedAt": "2026-05-16",
-    "harvestNotes": "Orbit 'on-light' theme. Kiwi green is the signature accent. Orbit uses Roboto + Circular as its typeface stack; Roboto is open-source, Circular is proprietary (referenced by family name only)."
+    "harvestNotes": "Orbit 'on-light' theme. Kiwi green is the signature accent. Orbit uses Roboto + Circular as its typeface stack; Roboto is open-source, Circular is proprietary (referenced by family name only).\n\nPhase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.",
+    "fidelityTier": "C"
   },
   "mappingNotes": "Orbit cloud (light grey backgrounds), ink (text greys), product (green accent). Status colours: critical (red), success (Kiwi green or success-green), warning (yellow), info (blue).",
   "base": {
     "cloud": {
-      "0":   "#ffffff",
-      "50":  "oklch(97% 0.005 175)",
+      "0": "#ffffff",
+      "50": "oklch(97% 0.005 175)",
       "100": "oklch(94% 0.008 175)",
       "200": "oklch(88% 0.010 175)"
     },
@@ -25,13 +31,21 @@
       "700": "oklch(18% 0.014 240)"
     },
     "product": {
-      "500": "oklch(60% 0.16 165)",
-      "100": "oklch(96% 0.05 165)"
+      "100": "oklch(96% 0.05 165)",
+      "500": "oklch(60% 0.16 165)"
     },
-    "red":    { "500": "oklch(55% 0.22 25)" },
-    "green":  { "500": "oklch(58% 0.16 145)" },
-    "orange": { "500": "oklch(72% 0.18 60)" },
-    "blue":   { "500": "oklch(55% 0.18 240)" }
+    "red": {
+      "500": "oklch(55% 0.22 25)"
+    },
+    "green": {
+      "500": "oklch(58% 0.16 145)"
+    },
+    "orange": {
+      "500": "oklch(72% 0.18 60)"
+    },
+    "blue": {
+      "500": "oklch(55% 0.18 240)"
+    }
   },
   "fonts": {
     "font-sans": "'Circular Std', 'Roboto', system-ui, -apple-system, sans-serif",

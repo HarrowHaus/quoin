@@ -26,6 +26,7 @@
     "sourceUrl": "https://ant.design/",
     "sourceLicense": "MIT",
     "harvestedAt": "2026-05-16",
-    "harvestNotes": "Ant Design v5 default 'light' theme. Ant's daybreak-blue (#1677FF area) drives accent. Ant uses a 10-step palette per color (X-1..X-10) with X-6 as the standard step."
+    "harvestNotes": "Ant Design v5 default 'light' theme. Ant's daybreak-blue (#1677FF area) drives accent. Ant uses a 10-step palette per color (X-1..X-10) with X-6 as the standard step.\n\nPhase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.",
+    "fidelityTier": "C"
   }
 }

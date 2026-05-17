@@ -2,34 +2,49 @@
   "name": "geist",
   "description": "Vercel Geist design language tokens translated onto the Quoin canonical semantic-token namespace.",
   "license": "MIT",
-  "tags": ["geist", "vercel", "monochrome", "developer-tools"],
+  "tags": [
+    "geist",
+    "vercel",
+    "monochrome",
+    "developer-tools"
+  ],
   "attribution": {
     "sourceSystem": "Geist Design Language",
     "sourceOrganization": "Vercel",
     "sourceUrl": "https://vercel.com/geist",
     "sourceLicense": "MIT",
     "harvestedAt": "2026-05-16",
-    "harvestNotes": "Geist is published as @vercel/geist-ui in earlier form and as the Vercel design system more recently. Highly monochrome — almost pure white surfaces and near-black text. Geist Sans / Geist Mono are open-source via Vercel under SIL OFL; referenced by family name."
+    "harvestNotes": "Geist is published as @vercel/geist-ui in earlier form and as the Vercel design system more recently. Highly monochrome — almost pure white surfaces and near-black text. Geist Sans / Geist Mono are open-source via Vercel under SIL OFL; referenced by family name.\n\nPhase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.",
+    "fidelityTier": "C"
   },
   "mappingNotes": "Geist's gray scale (gray-100 = near-white, gray-1000 = near-black) maps directly to Quoin's surface/text ramp. Accent is the brand near-black; status colours from Vercel's red-700 / green-700 / yellow-700 / blue-700 palette.",
   "base": {
     "gray": {
-      "0":    "#ffffff",
-      "100":  "oklch(98% 0.001 0)",
-      "200":  "oklch(96% 0.001 0)",
-      "300":  "oklch(92% 0.002 0)",
-      "400":  "oklch(85% 0.002 0)",
-      "500":  "oklch(70% 0.002 0)",
-      "600":  "oklch(55% 0.002 0)",
-      "700":  "oklch(40% 0.002 0)",
-      "800":  "oklch(28% 0.002 0)",
-      "900":  "oklch(18% 0.002 0)",
+      "0": "#ffffff",
+      "100": "oklch(98% 0.001 0)",
+      "200": "oklch(96% 0.001 0)",
+      "300": "oklch(92% 0.002 0)",
+      "400": "oklch(85% 0.002 0)",
+      "500": "oklch(70% 0.002 0)",
+      "600": "oklch(55% 0.002 0)",
+      "700": "oklch(40% 0.002 0)",
+      "800": "oklch(28% 0.002 0)",
+      "900": "oklch(18% 0.002 0)",
       "1000": "oklch(10% 0.002 0)"
     },
-    "red":    { "700": "oklch(52% 0.21 25)" },
-    "green":  { "700": "oklch(50% 0.16 145)" },
-    "yellow": { "700": "oklch(72% 0.18 80)" },
-    "blue":   { "700": "oklch(50% 0.18 240)", "100": "oklch(96% 0.04 240)" }
+    "red": {
+      "700": "oklch(52% 0.21 25)"
+    },
+    "green": {
+      "700": "oklch(50% 0.16 145)"
+    },
+    "yellow": {
+      "700": "oklch(72% 0.18 80)"
+    },
+    "blue": {
+      "100": "oklch(96% 0.04 240)",
+      "700": "oklch(50% 0.18 240)"
+    }
   },
   "fonts": {
     "font-sans": "'Geist Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif",

@@ -11,6 +11,8 @@ Segment Evergreen palette translated onto the Quoin canonical semantic-token nam
 - **Harvested:** 2026-05-16
 - **Notes:** Segment Evergreen 'default' theme. Neutral-heavy, restrained palette. Project status notes Evergreen v6 maintenance is light; pack is included because the design itself is widely studied.
 
+Phase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.
+
 ## Mapping
 
 Evergreen has tints rather than a numbered scale; mapped to Quoin's surface ramp. Default brand colour is a muted blue; status colours follow conventional traffic-light pattern.

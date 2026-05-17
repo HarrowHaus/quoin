@@ -2,14 +2,20 @@
   "name": "base-web",
   "description": "Uber Base Web palette translated onto the Quoin canonical semantic-token namespace.",
   "license": "MIT",
-  "tags": ["base-web", "uber", "black-accent", "react"],
+  "tags": [
+    "base-web",
+    "uber",
+    "black-accent",
+    "react"
+  ],
   "attribution": {
     "sourceSystem": "Base Web",
     "sourceOrganization": "Uber",
     "sourceUrl": "https://baseweb.design/",
     "sourceLicense": "MIT",
     "harvestedAt": "2026-05-16",
-    "harvestNotes": "Uber Base Web light theme. Heavily monochrome — Uber's brand uses near-black accent on white. UberMove typeface is proprietary; referenced by family name only."
+    "harvestNotes": "Uber Base Web light theme. Heavily monochrome — Uber's brand uses near-black accent on white. UberMove typeface is proprietary; referenced by family name only.\n\nPhase 3.5 fidelity status: Tier C. The shipped OKLCH values are designed approximations informed by the source system's published palette structure and contrast pattern, not byte-faithful extraction. Canonical source extraction is deferred to a Phase 3.5b follow-up. See 03_harvest/fidelity/specs/ for the extraction framework; the upstream URL declared above is the verification target.",
+    "fidelityTier": "C"
   },
   "mappingNotes": "Base Web ships mono100..1000 alongside primary{A,B}, accent, negative, positive, warning. Mapped: mono100 -> surface, mono900 -> text-emphasis, primaryA (black) -> accent, negative -> critical, positive -> success, warning -> warning, accent -> info.",
   "base": {
@@ -24,10 +30,19 @@
       "800": "oklch(20% 0.012 250)",
       "900": "oklch(8% 0.012 250)"
     },
-    "negative": { "500": "oklch(50% 0.22 25)" },
-    "positive": { "500": "oklch(52% 0.16 145)" },
-    "warning":  { "500": "oklch(72% 0.18 70)" },
-    "accent":   { "500": "oklch(55% 0.16 245)", "100": "oklch(95% 0.04 245)" }
+    "negative": {
+      "500": "oklch(50% 0.22 25)"
+    },
+    "positive": {
+      "500": "oklch(52% 0.16 145)"
+    },
+    "warning": {
+      "500": "oklch(72% 0.18 70)"
+    },
+    "accent": {
+      "100": "oklch(95% 0.04 245)",
+      "500": "oklch(55% 0.16 245)"
+    }
   },
   "fonts": {
     "font-sans": "'UberMove Text', system-ui, -apple-system, sans-serif",
