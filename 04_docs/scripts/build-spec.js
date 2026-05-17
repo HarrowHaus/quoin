@@ -44,6 +44,7 @@ function layout({ title, slug, body }) {
       <a href="/playground/">Playground</a>
       <a href="/packs/">Packs</a>
       <a href="/components/">Components</a>
+      <a href="/showcase/">Showcase</a>
       <a href="/start/">Get started</a>
       <a href="https://github.com/harrowhaus/quoin">GitHub</a>
     </wayfinder>
@@ -98,6 +99,7 @@ async function main() {
       <a href="/playground/">Playground</a>
       <a href="/packs/">Packs</a>
       <a href="/components/">Components</a>
+      <a href="/showcase/">Showcase</a>
       <a href="/start/">Get started</a>
       <a href="https://github.com/harrowhaus/quoin">GitHub</a>
     </wayfinder>

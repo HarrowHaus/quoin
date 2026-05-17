@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/site.css" />
     <script type="module" src="/impl.js"></script>
     <script type="module" src="/cmd-k.js"></script>
+    <script type="module" src="/theme-toggle.js"></script>
   </head>
   <body class="min-h-screen" style="background: var(--surface); color: var(--text); font-family: var(--font-sans)">
 
@@ -17,6 +18,7 @@
       <a href="/spec/">Spec</a>
       <a href="/playground/">Playground</a>
       <a href="/packs/">Packs</a>
+      <a href="/showcase/">Showcase</a>
       <a href="/start/">Get started</a>
       <a href="https://github.com/harrowhaus/quoin">GitHub</a>
     </wayfinder>
@@ -39,6 +41,21 @@
           Different unit of authorship; the same instinct that
           intent-bearing names beat utility strings.
         </lead-graf>
+        <stack>
+          <authority-mark weight="emphasize">Closest Quoin pack to your current stack</authority-mark>
+          <reading-flow>
+            <p>
+              If you ship shadcn/ui today, install <code>@quoin/tokens-shadcn</code>
+              — it extracts the canonical zinc-theme values from
+              <code>apps/v4/public/r/themes.css</code> in the shadcn repo (Tier B).
+              Or pick <code>@quoin/tokens-radix</code> for the Radix-style palette.
+              The migration is structural: your shadcn React components map onto
+              Quoin primitives, and the visual layer comes from whatever token
+              pack you mount. Swapping aesthetics later is a token-pack change,
+              not a rewrite.
+            </p>
+          </reading-flow>
+        </stack>
 
         <alert-band intent="info">
           Quoin is not a React component library. It's a build-time compiler. Use it in any framework — React, Svelte, Astro, plain HTML. The compiler runs at build time and emits standard HTML.
