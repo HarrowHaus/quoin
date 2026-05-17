@@ -54,6 +54,7 @@ async function scanDir(rootDir, kind) {
       tags: manifest.metadata?.tags ?? [],
       source: kind,
       attribution: manifest.attribution ?? null,
+      fidelityTier: manifest.attribution?.fidelityTier ?? null,
       dir: path.relative(labRoot, dir).split(path.sep).join("/")
     });
   }

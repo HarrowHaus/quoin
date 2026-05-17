@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Showcase — one semantic source, four aesthetics — Quoin docs</title>
+    <meta name="description" content="The same Quoin source rendered against four different token packs — Geist, Tailwind v4, Radix Slate, and Material 3. The markup never changes." />
+    <link rel="stylesheet" href="/tokens.css" />
+    <link rel="stylesheet" href="/impl.css" />
+    <link rel="stylesheet" href="/site.css" />
+    <script type="module" src="/impl.js"></script>
+    <script type="module" src="/cmd-k.js"></script>
+    <script type="module" src="/theme-toggle.js"></script>
+    <style>
+      .showcase-source {
+        background: var(--surface-recessed);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-card);
+        padding: 1rem 1.25rem;
+        overflow-x: auto;
+        font-family: var(--font-mono);
+        font-size: var(--type-size-sm);
+        line-height: 1.55;
+      }
+      .showcase-source code {
+        white-space: pre;
+        color: var(--text-emphasis);
+      }
+      .showcase-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      @media (min-width: 900px) {
+        .showcase-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      .showcase-cell {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-card);
+        overflow: hidden;
+        background: var(--surface-elevated);
+      }
+      .showcase-cell-header {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        align-items: baseline;
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid var(--border);
+        background: var(--surface-recessed);
+      }
+      .showcase-cell-name {
+        font-family: var(--font-mono);
+        font-size: var(--type-size-sm);
+        font-weight: 500;
+        color: var(--text-emphasis);
+      }
+      .showcase-cell-meta {
+        font-family: var(--font-mono);
+        font-size: var(--type-size-xs);
+        color: var(--text-recede);
+      }
+      .showcase-tier {
+        display: inline-block;
+        font-family: var(--font-mono);
+        font-size: var(--type-size-xs);
+        padding: 0.1em 0.5em;
+        border-radius: var(--radius-pill);
+        font-weight: 500;
+      }
+      .showcase-tier-a {
+        background: var(--success);
+        color: var(--text-on-success);
+      }
+      .showcase-tier-b {
+        background: var(--info);
+        color: var(--text-on-info);
+      }
+      .showcase-cell iframe {
+        width: 100%;
+        min-height: 420px;
+        border: 0;
+        background: var(--surface);
+      }
+      .showcase-loading {
+        padding: 2rem;
+        text-align: center;
+        color: var(--text-recede);
+        font-family: var(--font-mono);
+        font-size: var(--type-size-sm);
+      }
+    </style>
+  </head>
+  <body class="min-h-screen" style="background: var(--surface); color: var(--text); font-family: var(--font-sans)">
+
+    <wayfinder>
+      <a href="/">Quoin</a>
+      <a href="/spec/">Spec</a>
+      <a href="/playground/">Playground</a>
+      <a href="/packs/">Packs</a>
+      <a href="/components/">Components</a>
+      <a href="/showcase/">Showcase</a>
+      <a href="/start/">Get started</a>
+      <a href="https://github.com/harrowhaus/quoin">GitHub</a>
+    </wayfinder>
+
+    <canvas-block>
+      <stack gap="loose">
+        <breadcrumb-trail>
+          <a href="/">Home</a>
+          <span>/</span>
+          <span>Showcase</span>
+        </breadcrumb-trail>
+
+        <authority-mark>One semantic source, four aesthetics.</authority-mark>
+
+        <lead-graf>
+          Below is a complete landing-page composition authored once in
+          Quoin. It's then compiled four times — against four different
+          token packs harvested from major design systems — and rendered
+          live in your browser. The source never changes; the visual
+          treatment does. That gap is the language.
+        </lead-graf>
+
+        <stack>
+          <recede-block style="font-family: var(--font-mono); font-size: var(--type-size-xs); text-transform: uppercase; letter-spacing: var(--tracking-wide)">
+            Source — Quoin (rendered four ways below)
+          </recede-block>
+          <pre class="showcase-source"><code id="showcase-source-display"></code></pre>
+        </stack>
+
+        <stack>
+          <authority-mark weight="emphasize">Rendered</authority-mark>
+          <recede-block>
+            Each cell runs the Quoin compiler client-side against the
+            named token pack and renders into a sandboxed iframe. Pack
+            metadata — license, fidelity tier, source organisation —
+            appears in each cell header.
+          </recede-block>
+        </stack>
+
+        <div class="showcase-grid" id="showcase-grid">
+          <div class="showcase-loading">Loading compiler and four token packs…</div>
+        </div>
+
+        <stack>
+          <authority-mark weight="emphasize">What just happened</authority-mark>
+          <reading-flow>
+            <p>
+              The browser ran <code>@quoin/compiler</code> four times on
+              the same source — once per active token pack. Each
+              compilation produced its own HTML + CSS pair, dropped into
+              a separate iframe alongside the matching token pack's
+              custom-property stylesheet. The markup the author wrote is
+              identical across all four; only the visual layer changed.
+            </p>
+            <p>
+              The same compiler runs at build time in a real Quoin
+              project. There's no JavaScript runtime in the
+              <em>output</em> — the page above just uses the browser
+              entry to make the swap interactive for demonstration.
+            </p>
+            <p>
+              <a href="/playground/">Open the playground</a> to edit
+              this source and watch any of the 30 published token packs
+              re-render it live.
+            </p>
+          </reading-flow>
+        </stack>
+
+        <colophon>
+          Showcase page authored in Quoin. Source:
+          <code>04_docs/showcase/index.html</code>. Compiler:
+          <code>@quoin/compiler</code> browser entry. The source shown
+          above is shared verbatim across all four renderings.
+        </colophon>
+      </stack>
+    </canvas-block>
+
+    <script type="module" src="/src/showcase/main.ts"></script>
+  </body>
+</html>
