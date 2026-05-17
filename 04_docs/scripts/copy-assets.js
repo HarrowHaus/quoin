@@ -38,6 +38,28 @@ async function resolveActivePack(name) {
 }
 
 await fs.mkdir(publicDir, { recursive: true });
-await fs.copyFile(tokensCssSrc, path.join(publicDir, "tokens.css"));
+
+// 1. Base token pack -> tokens.css (the pack's :root variables).
+const baseCss = await fs.readFile(tokensCssSrc, "utf8");
+
+// 2. Append the project override layer from quoin.tokens.json so the
+//    CSS layer matches what the Quoin compiler resolved at build time.
+const overridesRaw = JSON.parse(
+  await fs.readFile(path.resolve(here, "..", "quoin.tokens.json"), "utf8")
+);
+const overrideLines = [":root {"];
+for (const [k, v] of Object.entries(overridesRaw)) {
+  if (k.startsWith("$")) continue;
+  if (v && typeof v === "object" && typeof v.$value === "string") {
+    overrideLines.push(`  --${k}: ${v.$value};`);
+  }
+}
+overrideLines.push("}", "");
+const overrideCss = overrideLines.join("\n");
+
+await fs.writeFile(
+  path.join(publicDir, "tokens.css"),
+  `${baseCss}\n/* ---- 04_docs project-local override (quoin.tokens.json) ---- */\n${overrideCss}`
+);
 await fs.copyFile(shimCssSrc, path.join(publicDir, "impl.css"));
-console.log(`copied tokens.css + impl.css from ${ACTIVE_TOKEN_PACK} -> 04_docs/public/`);
+console.log(`copied tokens.css (${ACTIVE_TOKEN_PACK} + project overrides) + impl.css -> 04_docs/public/`);

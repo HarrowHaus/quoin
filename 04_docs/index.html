@@ -4,7 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Quoin — a semantic design language that compiles to standard CSS</title>
-    <meta name="description" content="Quoin sits one layer above utility-first CSS. You write intent-bearing semantic elements like <primary-action> and <reading-flow>. The compiler renders them to standard HTML and CSS at build time, using pluggable token packs to determine the aesthetic." />
+    <meta name="description" content="You write intent-bearing semantic elements. The compiler renders them to standard HTML and CSS at build time, using pluggable token packs to determine the aesthetic." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/tokens.css" />
     <link rel="stylesheet" href="/impl.css" />
     <link rel="stylesheet" href="/site.css" />
@@ -22,14 +25,22 @@
 
     <hero-banner>
       <stack gap="loose">
+        <breadcrumb-trail>
+          <span>v0.1</span>
+          <span>·</span>
+          <span>Build-time compiler</span>
+          <span>·</span>
+          <span>MIT</span>
+        </breadcrumb-trail>
+
         <authority-mark>A semantic design language that compiles to standard CSS.</authority-mark>
 
         <lead-graf>
           You write intent-bearing elements like
           <code>&lt;primary-action&gt;</code> and <code>&lt;reading-flow&gt;</code>.
-          The compiler renders them to standard HTML and CSS at build time, using
-          a pluggable token pack to determine the aesthetic. The browser sees no
-          Quoin-specific runtime.
+          The compiler renders them to standard HTML and CSS at build time,
+          using a pluggable token pack to determine the aesthetic. The
+          browser sees no Quoin-specific runtime.
         </lead-graf>
 
         <cluster>
@@ -43,104 +54,149 @@
     <canvas-block>
       <stack gap="loose">
 
+        <columns ratio="1:1:1">
+          <stat-display>
+            <div style="font-size: 4.5rem; line-height: 0.95; letter-spacing: -0.04em; font-family: var(--font-display)">45</div>
+            <recede-block>packs ship in v0.1 — 30 token + 10 vocabulary + 5 reference</recede-block>
+          </stat-display>
+          <stat-display>
+            <div style="font-size: 4.5rem; line-height: 0.95; letter-spacing: -0.04em; font-family: var(--font-display)">96</div>
+            <recede-block>semantic primitives across editorial, layout, navigation, state, content, and interactive categories</recede-block>
+          </stat-display>
+          <stat-display>
+            <div style="font-size: 4.5rem; line-height: 0.95; letter-spacing: -0.04em; font-family: var(--font-display)">0</div>
+            <recede-block>runtime dependencies in the compiled output — the browser sees only standard HTML + CSS</recede-block>
+          </stat-display>
+        </columns>
+
         <stack>
-          <authority-mark weight="emphasize">The four layers</authority-mark>
-          <reading-flow>
-            <p>
-              The page you're reading was written with Quoin semantic
-              elements. Below the semantic layer, three other layers do
-              the work the author never has to repeat.
-            </p>
-          </reading-flow>
+          <authority-mark weight="emphasize">A button, three ways</authority-mark>
+          <lead-graf>
+            The same Quoin source compiles against different pack stacks
+            without the author touching the markup.
+          </lead-graf>
         </stack>
 
-        <feature-grid min-cell-width="240px">
-          <feature-cell>
-            <stack>
-              <lead-graf weight="emphasize">Authoring</lead-graf>
-              <recede-block>
-                Semantic web-component-style tags. <code>&lt;authority-mark&gt;</code>,
-                <code>&lt;reading-flow&gt;</code>, <code>&lt;primary-action&gt;</code>.
-                The vocabulary lives in a vocabulary pack.
-              </recede-block>
-            </stack>
-          </feature-cell>
-          <feature-cell>
-            <stack>
-              <lead-graf weight="emphasize">Tokens</lead-graf>
-              <recede-block>
-                Three-layer DTCG tokens — base palette, semantic
-                namespace, component overrides. The aesthetic lives in
-                a token pack.
-              </recede-block>
-            </stack>
-          </feature-cell>
-          <feature-cell>
-            <stack>
-              <lead-graf weight="emphasize">Compilation</lead-graf>
-              <recede-block>
-                Build-time. Resolves semantic tags against the active
-                packs and emits standard HTML + CSS. Zero runtime
-                dependency in the output.
-              </recede-block>
-            </stack>
-          </feature-cell>
-          <feature-cell>
-            <stack>
-              <lead-graf weight="emphasize">Rendering</lead-graf>
-              <recede-block>
-                The browser. Receives plain HTML and CSS. No proprietary
-                engine, no shadow DOM, no Quoin-specific runtime.
-              </recede-block>
-            </stack>
-          </feature-cell>
-        </feature-grid>
-
-        <emphasis-card>
+        <columns ratio="1:1">
           <stack>
-            <lead-graf weight="emphasize">A button, three ways</lead-graf>
-            <reading-flow>
-              <p>
-                The same Quoin source compiles against different pack stacks
-                without the author touching the markup.
-              </p>
-            </reading-flow>
-            <code-block>
-<code>&lt;primary-action&gt;Save&lt;/primary-action&gt;</code>
-            </code-block>
-
-            <code-block>
-<code>↓ impl-tailwind + tokens-geist
-&lt;button type="button" class="px-4 py-2 font-medium bg-[var(--accent)] text-[var(--text-on-accent)] rounded-[var(--radius-md)]"&gt;
-  Save
-&lt;/button&gt;</code>
-            </code-block>
-
-            <code-block>
-<code>↓ impl-raw-css + tokens-material3
-&lt;button type="button" style="padding-left: var(--space-4); padding-right: var(--space-4); padding-top: var(--space-2); padding-bottom: var(--space-2); font-weight: 500; background: var(--accent); color: var(--text-on-accent); border-radius: var(--radius-md); border: none; cursor: pointer"&gt;
-  Save
-&lt;/button&gt;</code>
-            </code-block>
+            <recede-block>Source — Quoin (always the same)</recede-block>
+            <terminal-frame title="src/index.html">
+              <code>&lt;primary-action&gt;Save&lt;/primary-action&gt;</code>
+            </terminal-frame>
           </stack>
-        </emphasis-card>
+
+          <stack>
+            <recede-block>Compiled — impl-tailwind + tokens-geist</recede-block>
+            <terminal-frame title="dist/index.html">
+              <code>&lt;button type="button" class="px-4 py-2
+  bg-[var(--accent)]
+  text-[var(--text-on-accent)]
+  rounded-[var(--radius-md)]"&gt;
+  Save
+&lt;/button&gt;</code>
+            </terminal-frame>
+          </stack>
+        </columns>
+
+        <stack>
+          <authority-mark weight="emphasize">The four layers</authority-mark>
+          <lead-graf>
+            The page you're reading was written with Quoin semantic
+            elements. Below the semantic layer, three other layers do
+            the work the author never has to repeat.
+          </lead-graf>
+        </stack>
+
+        <step-flow>
+          <li><stack>
+            <div style="font-family: var(--font-display); font-size: 2.5rem; line-height: 1; color: var(--text-emphasis)">01</div>
+            <lead-graf weight="emphasize">Authoring</lead-graf>
+            <recede-block>Semantic tags. <code>&lt;authority-mark&gt;</code>, <code>&lt;reading-flow&gt;</code>, <code>&lt;primary-action&gt;</code>. The vocabulary lives in a vocabulary pack.</recede-block>
+          </stack></li>
+          <li><stack>
+            <div style="font-family: var(--font-display); font-size: 2.5rem; line-height: 1; color: var(--text-emphasis)">02</div>
+            <lead-graf weight="emphasize">Tokens</lead-graf>
+            <recede-block>Three-layer DTCG tokens — base palette, semantic namespace, component overrides. The aesthetic lives in a token pack.</recede-block>
+          </stack></li>
+          <li><stack>
+            <div style="font-family: var(--font-display); font-size: 2.5rem; line-height: 1; color: var(--text-emphasis)">03</div>
+            <lead-graf weight="emphasize">Compilation</lead-graf>
+            <recede-block>Build-time. Resolves semantic tags against the active packs, emits standard HTML + CSS. Zero runtime dependency.</recede-block>
+          </stack></li>
+          <li><stack>
+            <div style="font-family: var(--font-display); font-size: 2.5rem; line-height: 1; color: var(--text-emphasis)">04</div>
+            <lead-graf weight="emphasize">Rendering</lead-graf>
+            <recede-block>The browser. Plain HTML and CSS. No proprietary engine, no shadow DOM, no Quoin runtime.</recede-block>
+          </stack></li>
+        </step-flow>
+
+        <stack>
+          <authority-mark weight="emphasize">Pack composition</authority-mark>
+          <lead-graf>
+            Three pack types. Mix any token pack with any vocabulary pack
+            with any implementation pack — the source stays the same.
+          </lead-graf>
+        </stack>
+
+        <comparison-table>
+          <thead>
+            <tr>
+              <th style="text-align: left; padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); font-family: var(--font-display); font-weight: 500">Layer</th>
+              <th style="text-align: left; padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); font-family: var(--font-display); font-weight: 500">What it owns</th>
+              <th style="text-align: left; padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); font-family: var(--font-display); font-weight: 500">v0.1 examples</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.875rem">@quoin/tokens-*</td>
+              <td style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); color: var(--text)">Aesthetic. Colour palette, type scale, spacing, radius, motion.</td>
+              <td style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); color: var(--text-recede); font-size: 0.875rem">30 packs — Material 3, Carbon, Polaris, Fluent, Geist, Radix, Tailwind…</td>
+            </tr>
+            <tr>
+              <td style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.875rem">@quoin/vocab-*</td>
+              <td style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); color: var(--text)">Semantic primitives. The named elements you author with.</td>
+              <td style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); color: var(--text-recede); font-size: 0.875rem">11 packs — editorial, dashboard, essentials, marketing, docs, forms, shadcn, radix, headless, ark, daisy, mantine</td>
+            </tr>
+            <tr>
+              <td style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.875rem">@quoin/impl-*</td>
+              <td style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); color: var(--text)">Compilation target. How each primitive renders to HTML and CSS.</td>
+              <td style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); color: var(--text-recede); font-size: 0.875rem">2 packs — impl-tailwind (Tailwind v4 classes), impl-raw-css (inline styles)</td>
+            </tr>
+          </tbody>
+        </comparison-table>
 
         <pull-quote>The aesthetic is the swappable vendor. Intent is the durable contract.</pull-quote>
 
         <stack>
           <authority-mark weight="emphasize">Intellectual lineage</authority-mark>
-          <reading-flow>
-            <p>
-              Christopher Alexander's <em>A Pattern Language</em> for the
-              generative-grammar model. The Swiss / International
-              Typographic Style and the brutalist editorial tradition
-              for the naming and structural philosophy. DaisyUI for the
-              prior-art proof that semantic compression works on top of
-              Tailwind. Tailwind v4 for the token architecture. The W3C
-              Design Tokens Community Group for the file format.
-              Web Components for the optional runtime fallback path.
-            </p>
-          </reading-flow>
+          <columns ratio="1:1">
+            <reading-flow>
+              <p>
+                Christopher Alexander's <em>A Pattern Language</em> for
+                the generative-grammar model. The Swiss / International
+                Typographic Style and the brutalist editorial tradition
+                for the naming and structural philosophy.
+              </p>
+              <p>
+                DaisyUI for the prior-art proof that semantic
+                compression works on top of Tailwind. Quoin extends the
+                compression one layer higher — from class names to
+                elements.
+              </p>
+            </reading-flow>
+            <reading-flow>
+              <p>
+                Tailwind v4 for the three-tier token architecture
+                exposed as native CSS custom properties. The W3C Design
+                Tokens Community Group for the DTCG file format.
+              </p>
+              <p>
+                Web Components for the tag-name conventions and the
+                optional runtime fallback path. Build-time wins; the
+                runtime exists for environments without a build step.
+              </p>
+            </reading-flow>
+          </columns>
         </stack>
 
         <stack>
@@ -149,47 +205,34 @@
             <feature-cell>
               <stack>
                 <lead-graf weight="emphasize"><a href="/start/">Getting started</a></lead-graf>
-                <recede-block>
-                  Install the compiler, install one pack of each type, write
-                  your first page. Five minutes for anyone who's used Tailwind.
-                </recede-block>
+                <recede-block>Install the compiler, install one pack of each type, write your first page. Five minutes for anyone who's used Tailwind.</recede-block>
               </stack>
             </feature-cell>
             <feature-cell>
               <stack>
                 <lead-graf weight="emphasize"><a href="/playground/">Live playground</a></lead-graf>
-                <recede-block>
-                  Type semantic markup; see compiled output and the rendered
-                  result in real time. Swap token packs from a dropdown.
-                </recede-block>
+                <recede-block>Type semantic markup; see compiled output and the rendered result in real time. Swap token packs from a dropdown.</recede-block>
               </stack>
             </feature-cell>
             <feature-cell>
               <stack>
                 <lead-graf weight="emphasize"><a href="/packs/">Pack browser</a></lead-graf>
-                <recede-block>
-                  Forty harvested token + vocabulary packs covering most major
-                  open-source design systems, plus the five reference packs.
-                </recede-block>
+                <recede-block>All 45 packs with attribution, license, npm install commands, source links.</recede-block>
               </stack>
             </feature-cell>
             <feature-cell>
               <stack>
                 <lead-graf weight="emphasize"><a href="/spec/">Specification</a></lead-graf>
-                <recede-block>
-                  The four canonical documents — language reference, pack
-                  format, primitives, tokens. Everything else is built from
-                  them.
-                </recede-block>
+                <recede-block>The four canonical documents — language reference, pack format, primitives, tokens.</recede-block>
               </stack>
             </feature-cell>
           </feature-grid>
         </stack>
 
         <colophon>
-          This page is itself a Quoin page. Stack: <code>tokens-baseline</code>
-          + <code>vocab-editorial</code> + <code>vocab-dashboard</code> + <code>vocab-marketing</code>
-          + <code>impl-tailwind</code>. Source: <code>04_docs/index.html</code>.
+          This page is itself a Quoin page. Stack: <code>tokens-geist</code> + project-local <code>quoin.tokens.json</code> override
+          + <code>vocab-editorial</code> + <code>vocab-dashboard</code> + <code>vocab-essentials</code> + <code>vocab-marketing</code>
+          + <code>vocab-docs</code> + <code>impl-tailwind</code>. Source: <code>04_docs/index.html</code>.
         </colophon>
 
       </stack>
