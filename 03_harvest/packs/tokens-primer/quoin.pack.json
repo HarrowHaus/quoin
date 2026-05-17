@@ -29,5 +29,6 @@
     "harvestNotes": "Primer base/color/light/light.json5 extracted byte-faithfully. The json5 source nests hex inside `$value.hex`; the primer-json5 parser walks the indented tree and emits `base.color.{family}.{step}: '#hex'`. Extraction method: A. Mapping: Primer 10-step scales for gray/blue/green/red/orange/yellow/purple/pink/coral. Functional mapping: surface = white, text = gray.9, accent = blue.5 (Primer's --color-accent-emphasis), critical = red.5, success = green.5, warning = yellow.5, info = blue.5.",
     "fidelityTier": "B",
     "sourceCommit": "main"
-  }
+  },
+  "status": "pending-3.5c-fill"
 }

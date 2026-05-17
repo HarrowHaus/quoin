@@ -29,5 +29,6 @@
     "harvestNotes": "Per-file extraction from mui/material-ui packages/mui-material/src/colors/. Each colour family (grey, indigo, red, green, amber, blue) parsed independently and namespaced by family. Extraction method: C. Mapping: MUI ships Material Design v1/v2-style 50-900 + A100-A700 ramps per colour. Default light theme: surface = grey.50, text = grey.900, accent = indigo.500, critical = red.500, success = green.500, warning = amber.500, info = blue.500.",
     "sourceCommit": "master",
     "fidelityTier": "B"
-  }
+  },
+  "status": "pending-3.5c-fill"
 }

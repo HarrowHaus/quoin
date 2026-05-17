@@ -29,5 +29,6 @@
     "harvestNotes": "Values read byte-faithfully from @ant-design/colors. Each ramp is a 10-entry hex array indexed 1-10 in Ant's own docs (step 6 = the 'solid' tone). To regenerate against a different seed, call generate('#hex') from the same library. Extraction method: B. Algorithm: @ant-design/colors@8.0.1, inputs \"package default seeds\". Mapping: Ant Design canonical 10-step ramps for blue/red/green/gold/orange/purple/cyan/magenta/grey. Accent = blue.6 (daybreak), critical = red.5, success = green.6, warning = gold.6, info = blue.6 per Ant's own status-colour convention.",
     "fidelityTier": "B",
     "sourceCommit": "8.0.1"
-  }
+  },
+  "status": "pending-3.5c-fill"
 }

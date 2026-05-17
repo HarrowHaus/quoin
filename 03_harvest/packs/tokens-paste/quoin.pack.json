@@ -29,5 +29,6 @@
     "harvestNotes": "Twilio Paste palette extracted from packages/paste-design-tokens/tokens/aliases/color-palette.yml. Named `palette-{family}-{step}` aliases. Extraction method: A. Mapping: Paste 12-step ramps for gray/blue/red/green/orange/yellow/purple/cyan/pink. Default accent = blue.60 (Twilio brand).",
     "fidelityTier": "B",
     "sourceCommit": "main"
-  }
+  },
+  "status": "pending-3.5c-fill"
 }

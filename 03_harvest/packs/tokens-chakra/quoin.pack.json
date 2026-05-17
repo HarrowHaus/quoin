@@ -28,5 +28,6 @@
     "harvestNotes": "Chakra UI v3 colour tokens extracted from packages/react/src/theme/tokens/colors.ts. Chakra wraps every value in `{ value: '#hex' }` per the Panda-CSS / @chakra-ui/styled-system convention. The value-wrapped-ts parser handles this shape. Extraction method: A. Mapping: Chakra v3 50-950 ramps for gray/red/orange/yellow/green/teal/blue/cyan/purple/pink. Default accent = teal.500 per Chakra convention. whiteAlpha/blackAlpha (semi-transparent overlays) are not modelled in the base palette — Quoin's primitives handle overlay tints via the impl pack.",
     "fidelityTier": "B",
     "sourceCommit": "main"
-  }
+  },
+  "status": "pending-3.5c-fill"
 }

@@ -29,5 +29,6 @@
     "harvestNotes": "Open Props props.colors.css extracted byte-faithfully. The gray-N ramp + named colour scales (red, orange, green, blue) preserved verbatim. Hex inputs converted to OKLCH via culori at extraction time. Extraction method: A. Mapping: Status hues mapped: critical = red-7, success = green-7, warning = orange-7 (matches Open Props' own usage in props.shadows.css), info = blue-7. Hex source → OKLCH at extraction.",
     "sourceCommit": "main",
     "fidelityTier": "B"
-  }
+  },
+  "status": "pending-3.5c-fill"
 }

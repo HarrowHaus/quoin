@@ -29,5 +29,6 @@
     "harvestNotes": "Default v4 palette extracted byte-faithfully from packages/tailwindcss/theme.css. Tailwind v4 ships native OKLCH; values preserved verbatim. Neutral ramp = zinc. Extraction method: A.",
     "sourceCommit": "main",
     "fidelityTier": "A"
-  }
+  },
+  "status": "pending-3.5c-fill"
 }

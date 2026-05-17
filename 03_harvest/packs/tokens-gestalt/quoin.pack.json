@@ -29,5 +29,6 @@
     "harvestNotes": "Pinterest Gestalt classic base-color tokens extracted from packages/gestalt-design-tokens/tokens/classic/base-color.json. Style Dictionary–shaped JSON with named colour scales (red pushpin, pink flaminglow, etc.). Extraction method: A. Mapping: Gestalt names Pinterest-specific (pushpin red, flaminglow pink, ai blue, masala beige, etc.). Mapping: surface = white, text = darkGray, accent = pushpin.450 (Pinterest red), critical = pushpin.500.",
     "fidelityTier": "B",
     "sourceCommit": "master"
-  }
+  },
+  "status": "pending-3.5c-fill"
 }

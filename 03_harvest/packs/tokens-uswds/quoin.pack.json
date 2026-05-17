@@ -29,5 +29,6 @@
     "harvestNotes": "USWDS palette extracted per-family from uswds/uswds packages/uswds-core/src/styles/tokens/color/_<family>.scss. Each family is a Sass map; we extract `step: #hex` via regex. Extraction method: B. Algorithm: uswds/uswds@develop, inputs {\"families\":[\"blue\",\"gray-cool\",\"gray-warm\",\"red\",\"green\",\"yellow\",\"gold\",\"orange\"]}. Mapping: USWDS uses semantic step values (5/10/20/30/40/50/60/70/80/90) and includes 'vivid' variants. Federal blue family is the canonical accent (blue.50). Cool gray is the default neutral ramp.",
     "fidelityTier": "B",
     "sourceCommit": "develop"
-  }
+  },
+  "status": "pending-3.5c-fill"
 }

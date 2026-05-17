@@ -294,7 +294,10 @@ function buildManifest(source) {
       homepage: `https://harrow.haus/quoin/packs/tokens-${source.name}`,
       tags: source.tags ?? []
     },
-    attribution: source.attribution
+    attribution: source.attribution,
+    // Phase 0.5 transitional flag. Removed after Phase 3.5c populates
+    // the expanded canonical namespace.
+    status: "pending-3.5c-fill"
   };
   return JSON.stringify(manifest, null, 2) + "\n";
 }

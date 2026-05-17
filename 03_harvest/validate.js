@@ -105,7 +105,11 @@ async function main() {
           vocabularyPacks: [vocabEd, vocabDb],
           implementationPack: implRaw
         });
-        ok(`${packName}: validated + compile-tested`);
+        if (manifest.status === "pending-3.5c-fill") {
+          console.log(`warn  ${packName}: pending-3.5c-fill (expected; namespace expanded in Phase 0.5)`);
+        } else {
+          ok(`${packName}: validated + compile-tested`);
+        }
       } catch (err) {
         fail(`${packName}: ${err.message}`);
       }
