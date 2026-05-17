@@ -56,6 +56,16 @@ At each phase gate, run the same prompt through two different models (Claude + C
 
 ## What to do right now
 
+Current state: Phases 0–4 plus sub-phases 5a–5d are complete. Phase
+3.5 (Token Fidelity Pass) is **partial** — framework built, 6 packs
+extracted (1 A + 5 B), 24 packs remain Tier C with the stop condition
+triggered. Phase 5e (launch) is staged but not executed.
+
+The next operator decision is the Phase 3.5 ask in
+[`03_harvest/REPORT.md`](03_harvest/REPORT.md): ship now with mixed
+tiers, run a dedicated 3.5b session for per-pack URL discovery, or
+trim the catalogue to Tier A + B only.
+
 If this is your first time opening this lab:
 
 1. Read `README.md` (top-level project overview).

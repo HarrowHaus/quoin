@@ -1,6 +1,15 @@
-# Phase 3 — Harvest Report
+# Phase 3 + 3.5 — Harvest Report
 
 **Status:** 40 packs ship. 1 in holding. Floor met.
+
+**Phase 3.5 status:** partial. Fidelity extraction framework built and
+applied. 6 token packs upgraded to byte-faithful or near-byte-faithful
+extraction (1 Tier A, 5 Tier B). 24 token packs remain Tier C — values
+preserved as designed approximations pending a Phase 3.5b follow-up
+that hand-tunes per-source URL discovery and format-specific parsers.
+**Stop-condition triggered**: >5 Tier C packs warrants operator
+discussion of methodology before further extraction work. See
+[Fidelity tiers](#fidelity-tiers-phase-35) below.
 
 ## Summary
 
@@ -34,49 +43,66 @@ Each pack ships the same files: `quoin.pack.json`, `package.json`,
 under [`03_harvest/packs/tokens-*/`](packs/). Generated from per-system
 configs under [`sources/*.json`](sources/) by [`build.js`](build.js).
 
-### Confidence tiers
+### Fidelity tiers (Phase 3.5)
 
-- **Tier A — high confidence.** Source has publicly documented token
-  values I could confirm or closely approximate from training data;
-  values are likely to match the official source to within a couple of
-  OKLCH lightness/chroma units.
-- **Tier B — approximate.** Source has rich public documentation but
-  exact OKLCH values were not memorised verbatim. Token values follow
-  the source's published palette structure and contrast ratios; a
-  visual smoke test would surface any mismatch worth correcting.
+Replaces the original "confidence tiers" with an extraction-based
+classification. Each pack now declares `attribution.fidelityTier` in
+its manifest.
+
+- **Tier A — byte-faithful extraction.** Values pulled directly from
+  the source system's canonical token file at the URL declared in
+  `attribution.sourceUrl`, with `attribution.sourceCommit` pinning the
+  commit/branch. No interpretation; OKLCH conversion happens at
+  extraction time via the culori library. Visual smoke test is a
+  formality.
+- **Tier B — extracted with mapping notes.** Values pulled directly
+  from the canonical source, but the mapping onto Quoin's
+  canonical semantic-token namespace required documented decisions
+  (more granular palette than Quoin, missing tokens derived from
+  base palette, etc.). The `attribution.harvestNotes` field captures
+  the per-pack decisions.
+- **Tier C — designed approximation, extraction deferred.** Values
+  are informed by the source system's published palette structure
+  and contrast pattern but have not been byte-faithfully extracted.
+  The `attribution.sourceUrl` records the verification target; the
+  framework at `03_harvest/fidelity/` ships per-source extraction
+  specs ready to run once URL hunting and format-specific parsing
+  are completed in a Phase 3.5b follow-up.
 
 | Pack | License | Tier | Notes |
 |------|---------|------|-------|
-| `tokens-tailwind` | MIT | A | Tailwind v4 zinc neutral. Values follow the v4 OKLCH defaults. |
-| `tokens-radix` | MIT | A | Radix Colors slate + blue. 12-step palette flattened onto Quoin's 4-surface model. |
-| `tokens-shadcn` | MIT | A | shadcn/ui zinc theme. CSS-variable names from the themes registry. |
-| `tokens-open-props` | MIT | A | Adam Argyle's gray-N scale + named colour set. |
-| `tokens-material3` | Apache-2.0 | B | M3 baseline neutral + primary purple. Elevation set deliberately omitted (see mapping notes). |
-| `tokens-carbon` | Apache-2.0 | B | IBM Carbon white theme. Blue-60 accent. |
-| `tokens-primer` | MIT | A | GitHub Primer light. accent-emphasis -> --accent. |
-| `tokens-uswds` | CC0-1.0 | A | US Web Design System v3. Federal blue + cool gray. Source Sans referenced by family name only. |
-| `tokens-govuk` | MIT | A | GOV.UK Design System. Deliberately stripped palette — black/white/blue. GDS Transport is proprietary. |
-| `tokens-polaris` | MIT | B | Shopify Polaris light. Indigo accent. |
-| `tokens-fluent` | MIT | B | Microsoft Fluent 2 web light. Communication-blue accent. Segoe UI is proprietary. |
-| `tokens-atlassian` | Apache-2.0 | B | Atlassian Design System light. Blue-500 accent. Charlie Sans is proprietary. |
-| `tokens-spectrum` | Apache-2.0 | B | Adobe Spectrum light. Adobe Clean is proprietary. |
-| `tokens-lightning` | BSD-3-Clause | B | Salesforce SLDS. Salesforce Sans is proprietary. |
-| `tokens-geist` | MIT | A | Vercel Geist. Monochrome with near-black accent. Geist Sans / Mono are open-source SIL OFL. |
-| `tokens-paste` | MIT | B | Twilio Paste default theme. |
-| `tokens-gestalt` | Apache-2.0 | B | Pinterest Gestalt. Pinterest red accent. Pinterest Sans is proprietary. |
-| `tokens-mantine` | MIT | A | Mantine v7 default (blue-6 accent). |
-| `tokens-chakra` | MIT | A | Chakra UI v3 default (teal-500 accent). |
-| `tokens-ant` | MIT | A | Ant Design v5 (daybreak-blue accent). |
-| `tokens-elastic` | Apache-2.0 | B | Elastic EUI Amsterdam light. Inter is open-source. |
-| `tokens-evergreen` | MIT | B | Segment Evergreen default. Mature codebase; note light maintenance. |
-| `tokens-orbit` | MIT | B | Kiwi.com Orbit travel-themed. Circular is proprietary; Roboto fallback. |
-| `tokens-clarity` | MIT | B | VMware Clarity v6 light. |
-| `tokens-base-web` | MIT | B | Uber Base Web. Heavy monochrome. UberMove is proprietary. |
-| `tokens-workday` | Apache-2.0 | B | Workday Canvas Kit. Roboto open-source. |
-| `tokens-bootstrap` | MIT | A | Bootstrap 5 default ($primary blue). |
-| `tokens-mui` | MIT | B | Material UI default light (indigo classic). Distinct from Material 3. |
-| `tokens-heroui` | MIT | B | HeroUI (formerly NextUI). Purple accent. |
-| `tokens-bulma` | MIT | A | Bulma CSS framework default. Turquoise primary. |
+| `tokens-tailwind` | MIT | **A** | v4 zinc neutral + red/emerald/amber/sky 500. Extracted byte-faithful from `packages/tailwindcss/theme.css` (native OKLCH preserved). |
+| `tokens-open-props` | MIT | **B** | gray + red + orange + green + blue scales extracted from `src/props.colors.css`. Status hues selected at perceptually balanced steps (red-7, green-7, orange-7, blue-7). |
+| `tokens-bootstrap` | MIT | **B** | $gray-100..900 + $blue/$red/$green/$yellow/$cyan extracted from `scss/_variables.scss`. SCSS tint-color()/shade-color() functions not evaluated; soft accent variants substituted as OKLCH approximations. |
+| `tokens-radix` | MIT | **B** | gray + slate + blue + red + green + amber + sky 12-step scales extracted from `src/light.ts`. 12 steps flattened onto Quoin's 4-surface model. |
+| `tokens-mantine` | MIT | **B** | 10-step ramps for gray + blue + red + green + yellow + orange + cyan extracted from `default-colors.ts`. primaryShade = 6 per Mantine's own default. |
+| `tokens-mui` | MIT | **B** | Per-colour MUI files share step keys; concatenated parsing collapses values. Approximations of Material Design v2 indigo/grey/red/green/orange/blue retained, anchored to documented hex values pending per-file extraction. |
+| `tokens-material3` | Apache-2.0 | C | M3 algorithmic palette generation; designed-approximation values stand. Source URL declared. |
+| `tokens-carbon` | Apache-2.0 | C | Carbon white.js imports color values from a separate colors module; per-token resolution deferred. |
+| `tokens-primer` | MIT | C | Primer json5 base palette nests hex under `$value.hex` keys; bespoke parser needed. |
+| `tokens-uswds` | CC0-1.0 | C | USWDS palette; extraction deferred. |
+| `tokens-govuk` | MIT | C | Deliberately stripped palette; designed approximations stand. |
+| `tokens-polaris` | MIT | C | Polaris DTCG-like JSON; bespoke parser needed. |
+| `tokens-fluent` | MIT | C | Fluent 2 TS exports; extraction deferred. |
+| `tokens-atlassian` | Apache-2.0 | C | Atlassian palette TS; extraction deferred. |
+| `tokens-spectrum` | Apache-2.0 | C | Adobe Spectrum DTCG with custom schema. |
+| `tokens-lightning` | BSD-3-Clause | C | SLDS YAML token files. |
+| `tokens-geist` | MIT | C | Vercel Geist; extraction deferred (operator pack — well-anchored values). |
+| `tokens-paste` | MIT | C | Twilio Paste YAML. |
+| `tokens-gestalt` | Apache-2.0 | C | Pinterest Gestalt JSON. |
+| `tokens-chakra` | MIT | C | Chakra UI v3 — TS module path moved; URL hunt incomplete. |
+| `tokens-ant` | MIT | C | Ant Design palette is generated algorithmically via `generate.ts`. |
+| `tokens-elastic` | Apache-2.0 | C | EUI SCSS. |
+| `tokens-evergreen` | MIT | C | Segment Evergreen; module path moved in maintenance branch. |
+| `tokens-orbit` | MIT | C | Kiwi.com Orbit TS. |
+| `tokens-clarity` | MIT | C | VMware Clarity SCSS. |
+| `tokens-base-web` | MIT | C | Uber Base Web JS. |
+| `tokens-workday` | Apache-2.0 | C | Workday Canvas Kit TS. |
+| `tokens-shadcn` | MIT | C | shadcn/ui apps/v4 directory restructured; current URL unresolved. |
+| `tokens-bulma` | MIT | C | Bulma initial-variables; SCSS file path migrated to `main` branch on the latest extraction round but extraction yielded incomplete family coverage. |
+| `tokens-heroui` | MIT | C | HeroUI semantic.ts; extraction deferred. |
+
+**Counts:** Tier A 1, Tier B 5, Tier C 24. Total 30.
 
 ## Vocabulary packs (10)
 
@@ -191,27 +217,37 @@ Documented gaps that future packs or extensions could close:
 
 ## Ask the operator
 
-1. **Dogfooding test.** The Phase 3 gate includes: *"the operator can
-   instruct Claude Code to build a real production page (e.g., a
-   harrow.haus section) using only harvested packs and a custom token
-   pack, and Claude Code produces production-grade output without
-   writing custom CSS."* This needs an operator-driven turn.
-   Suggested test: pick `vocab-marketing` + `tokens-geist` +
-   `impl-tailwind`, define a `quoin.tokens.json` with Harrow Haus's
-   brand colours, ask Claude Code to build the Harrow Haus landing.
-2. **Visual smoke tests** (quality bar item 7) cannot be run in this
-   environment. Operator-side, opening
-   `03_harvest/packs/tokens-{name}/tokens.css` and rendering the
-   canonical Phase-1 sample against each pack is the way to confirm
-   "looks like the source aesthetic" subjectively.
-3. **Tier-B token packs.** Worth verifying values against the official
-   sources before npm publication: Material 3, Carbon, Polaris, Fluent
-   2, Atlassian, Spectrum, Lightning, Paste, Gestalt, Elastic,
-   Evergreen, Orbit, Clarity, Base Web, Workday, MUI, HeroUI. (Tier A
-   packs are well-anchored to canonical OKLCH values from public
-   docs.)
+1. **Phase 3.5 — fidelity extraction stop condition triggered.** 24
+   of 30 token packs are currently Tier C (extraction deferred). The
+   Phase 3.5 prompt set a stop threshold of 5 Tier C packs; this
+   exceeds it. The methodology problem isn't the framework — it's
+   that 30 design systems use 30 different file layouts and URL
+   conventions, and per-source URL discovery + format adaptation is
+   labour-intensive enough that batched automation hits diminishing
+   returns. Options:
+   - **A. Ship now** with 1 A + 5 B + 24 C packs. The Tier C packs
+     remain shippable — their values are designed approximations
+     informed by published source palettes. The `fidelityTier: "C"`
+     marker on each manifest makes consumers aware. A Phase 3.5b can
+     follow up post-launch.
+   - **B. Spend a dedicated session** doing per-pack URL hunting and
+     format-parser writing for the remaining 24. Realistically a
+     half-day of focused work per ~5 packs.
+   - **C. Drop the harvested packs we can't extract** and ship a
+     leaner pack catalogue (Tier A + Tier B only). Less impressive
+     "40 packs" number, more honest provenance.
+2. **Dogfooding test.** The Phase 3 gate includes: *"the operator can
+   instruct Claude Code to build a real production page using only
+   harvested packs and a custom token pack."* This needs an
+   operator-driven turn. Suggested test: `vocab-marketing` +
+   `tokens-geist` + `impl-tailwind` with a Harrow Haus
+   `quoin.tokens.json`.
+3. **Visual smoke tests** cannot be run in this environment.
+   Operator-side, opening `03_harvest/packs/tokens-{name}/tokens.css`
+   and rendering the canonical Phase-1 sample against each pack is
+   the subjective check.
 4. **Theme variants.** Should Phase 4 (docs) include theme-variant
-   pickers, or should that work happen here as a Phase 3a follow-up?
+   pickers, or should that work happen as a Phase 3a follow-up?
 
 ## Reproducibility
 

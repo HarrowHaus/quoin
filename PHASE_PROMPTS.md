@@ -176,6 +176,57 @@ When complete, commit all harvested packs and the harvest report, push to origin
 
 ---
 
+## Phase 3.5 — Token Fidelity Pass
+
+Run between Phase 3 and Phase 4 (or as a post-launch follow-up). Upgrades harvested token packs from interpretation to byte-faithful extraction without changing the canonical semantic namespace.
+
+```
+Before 5e ships, run Phase 3.5 — Token Fidelity Pass. This phase upgrades every harvested token pack from "interpretation" to "extraction": byte-faithful values harvested directly from each source design system's official token files, mapped onto Quoin's canonical semantic namespace.
+
+Required reading before you start:
+- quoin/README.md
+- quoin/HANDOFF.md
+- quoin/00_spec/spec.md and quoin/00_spec/tokens.md (the canonical namespace contract — do not modify)
+- quoin/03_harvest/README.md
+- quoin/03_harvest/REPORT.md (current tier classification)
+- quoin/03_harvest/verify-tier-b.js and quoin/03_harvest/verify-tier-b/REPORT.md
+- quoin/03_harvest/sources/*.json
+
+For every token pack in quoin/03_harvest/packs/tokens-*/, replace eyeballed/training-data values with byte-faithful values extracted from the source system's official token files. The canonical 30-token namespace stays exactly the same; only the values within it change.
+
+Hard constraints:
+1. Do NOT extend the canonical semantic namespace.
+2. Do NOT modify 00_spec/tokens.md.
+3. Optional system-native extension tokens are OUT OF SCOPE.
+4. Preserve license attribution. Copy values, not source code.
+5. Do not embed copyrighted typefaces.
+6. License compatibility check before publication.
+
+Methodology per pack: fetch canonical source → parse with format-specific parser → map onto Quoin canonical → convert to OKLCH via culori → write to tokens.css + tokens/index.json → update manifest attribution (sourceUrl, sourceCommit, harvestedAt, harvestNotes, fidelityTier).
+
+Verification: every pack still passes 03_harvest/validate.js; compiler test suite 77/77 still green; demos still build; visual smoke test against showcase-tailwind.
+
+Tier reclassification after extraction:
+- Tier A: byte-faithful extraction.
+- Tier B: extracted with mapping notes.
+- Tier C: extraction deferred; current values stand.
+
+Stop and request operator input if more than 5 packs would fall to Tier C — a methodology problem worth discussing before continuing.
+
+Commit incrementally (one commit per pack), push to origin/main, then explicitly request operator review against Phase 3.5 exit criteria.
+```
+
+The framework that supports this phase lives at `03_harvest/fidelity/`:
+- `fidelity/extract.js` — orchestrator
+- `fidelity/parsers.js` — SCSS / CSS vars / JS+TS / DTCG / YAML / Style-Dictionary parsers
+- `fidelity/oklch.js` — culori wrappers
+- `fidelity/specs/*.js` — per-source extraction specs (one file per pack)
+- `fidelity/annotate-tier-c.js` — stamps `fidelityTier: "C"` on every source that hasn't been extracted
+
+After the initial Phase 3.5 run, the per-pack `attribution.fidelityTier` records the status. Phase 3.5b (a follow-up batch) promotes Tier C packs to A/B by adding/fixing per-source specs.
+
+---
+
 ## Phase 4 — Documentation
 
 ```

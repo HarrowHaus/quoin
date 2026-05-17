@@ -72,6 +72,29 @@ Exit criteria for each phase. A phase is complete when **every** criterion in it
 
 ---
 
+## Phase 3.5 — Token Fidelity Pass
+
+**Output location:** `03_harvest/fidelity/` (framework) + per-pack manifest annotations (`attribution.fidelityTier`, `attribution.sourceCommit`).
+
+**Goal:** upgrade harvested token packs from interpretation to extraction — byte-faithful values harvested from each source design system's official token files, mapped onto Quoin's canonical semantic namespace. The canonical namespace is fixed; only the values within it change.
+
+**Exit criteria:**
+
+- [x] Fidelity extraction framework exists (per-source specs, format-aware parsers, OKLCH conversion via culori).
+- [x] All 30 token packs declare `attribution.fidelityTier` ∈ {A, B, C} in their manifest.
+- [x] All 30 packs still pass `03_harvest/validate.js` after extraction (no regressions in canonical namespace coverage).
+- [x] All 30 packs still build cleanly through the Phase 1 compiler (compiler test suite 77/77).
+- [x] Demo build (`02_reference-packs/demos/build.js`) still passes for all three demos.
+- [x] `03_harvest/REPORT.md` updated with new Tier A/B/C classification and a per-pack table.
+- [x] Per-pack harvest notes document the extraction source, commit/version, and any mapping decisions.
+- [ ] **≤5 Tier C packs** (current state: 24 Tier C — stop condition triggered; awaiting operator decision per the ask in `03_harvest/REPORT.md`).
+- [ ] Visual smoke tests rendered for each pack against the showcase-tailwind demo.
+- [ ] Operator review completed.
+
+**Status:** **partial** — framework shipped, 6 packs upgraded (1 A + 5 B), 24 packs awaiting per-source URL discovery and format-specific extraction in a Phase 3.5b follow-up. Stop condition triggered; operator decision required before continuation.
+
+---
+
 ## Phase 4 — Documentation
 
 **Output location:** `04_docs/`
