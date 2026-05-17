@@ -66,8 +66,57 @@ export function parseJsObject(text) {
     .replace(/(^|\s)\/\/[^\n]*/g, "$1");
 
   const out = {};
-  scanObject(cleaned, [], out);
+  // Top-level `export const X = { ... }` or `const X = { ... }` blocks
+  // scope their inner contents under the constant name.
+  const exportRe =
+    /(?:export\s+)?const\s+([a-zA-Z_$][a-zA-Z0-9_$]*)\s*(?::\s*[^=]+)?=\s*\{/g;
+  let m;
+  const consumed = [];
+  while ((m = exportRe.exec(cleaned)) !== null) {
+    const name = m[1];
+    const startBody = m.index + m[0].length;
+    const endBody = findMatchingBrace(cleaned, startBody);
+    if (endBody === -1) continue;
+    const body = cleaned.slice(startBody, endBody);
+    scanObject(body, [name], out);
+    consumed.push([m.index, endBody + 1]);
+  }
+  // Whatever was outside `export const X = { ... }` — scan with no
+  // outer scope so loose pattern files (no top-level wrappers) still
+  // pick up correctly.
+  let scanned = cleaned;
+  for (const [s, e] of consumed.slice().reverse()) {
+    scanned = scanned.slice(0, s) + " ".repeat(e - s) + scanned.slice(e);
+  }
+  scanObject(scanned, [], out);
   return out;
+}
+
+function findMatchingBrace(text, start) {
+  let depth = 1;
+  let i = start;
+  let inStr = null;
+  while (i < text.length) {
+    const ch = text[i];
+    if (inStr) {
+      if (ch === "\\") { i += 2; continue; }
+      if (ch === inStr) inStr = null;
+      i++;
+      continue;
+    }
+    if (ch === "'" || ch === '"' || ch === "`") {
+      inStr = ch;
+      i++;
+      continue;
+    }
+    if (ch === "{") depth++;
+    else if (ch === "}") {
+      depth--;
+      if (depth === 0) return i;
+    }
+    i++;
+  }
+  return -1;
 }
 
 function scanObject(text, path, out) {
@@ -139,7 +188,13 @@ export function parseYaml(text) {
   const lines = text.split(/\r?\n/);
   const stack = []; // { indent, key }
   for (const raw of lines) {
-    const line = raw.replace(/#.*$/, "");
+    // Strip `# comment` but never inside a quoted string, and never
+    // when the `#` is a hex-color value sigil (starts with `#` then
+    // 3-8 hex chars).
+    let line = raw;
+    // Conservative: only strip comments when `#` is preceded by
+    // whitespace and not immediately followed by hex digits.
+    line = line.replace(/(^|\s)#(?![0-9a-fA-F]{3,8}\b)[^\n]*$/, "$1");
     if (!line.trim()) continue;
     const indentMatch = line.match(/^(\s*)/);
     const indent = indentMatch ? indentMatch[1].length : 0;
@@ -208,6 +263,123 @@ function isColorish(value) {
   );
 }
 
+/**
+ * Primer json5 — nested `name: { $value: { hex: '#xxx' } }` shape.
+ * Walks the token tree and emits `dotted.path: '#hex'`.
+ * Tolerates the comment and `'string-key'` syntax of json5.
+ */
+export function parsePrimerJson5(text) {
+  // Strip comments to make the file parseable.
+  const cleaned = text
+    .replace(/\/\*[\s\S]*?\*\//g, "")
+    .replace(/(^|\s)\/\/[^\n]*/g, "$1");
+  const out = {};
+  // The grammar we care about: `key: { $value: { hex: '#hex' } }` or
+  // `key: { $value: '#hex' }`. Use a regex pass after cleaning.
+  // First catch `hex: '#xxxxxx'` and walk backwards to find the
+  // containing token name.
+  const lines = cleaned.split(/\r?\n/);
+  const pathStack = [];
+  const indent = (s) => s.match(/^\s*/)[0].length;
+  let lastIndent = -1;
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const trimmed = line.trim();
+    if (!trimmed) continue;
+    const ind = indent(line);
+    // Pop stack as indentation drops.
+    while (pathStack.length && pathStack[pathStack.length - 1].indent >= ind) {
+      pathStack.pop();
+    }
+    // `keyName: {`  → push
+    const open = trimmed.match(/^['"]?([a-zA-Z0-9_$-]+)['"]?\s*:\s*\{/);
+    if (open) {
+      pathStack.push({ key: open[1], indent: ind });
+      lastIndent = ind;
+      continue;
+    }
+    // `hex: '#xxx',` — emit at current path (minus $extensions/etc internals)
+    const hex = trimmed.match(/^hex\s*:\s*['"]?(#[0-9a-fA-F]{3,8})['"]?/);
+    if (hex) {
+      // Find the nearest containing token name. The path looks like
+      //   [base, color, black, $value]
+      // We want `base.color.black`. Drop any segments that start with $.
+      const clean = pathStack
+        .filter((p) => !p.key.startsWith("$"))
+        .map((p) => p.key);
+      if (clean.length >= 2) {
+        out[clean.join(".")] = hex[1];
+      }
+      continue;
+    }
+    // `key: '#hex'` (direct hex assignment, without nested $value)
+    const direct = trimmed.match(/^['"]?([a-zA-Z0-9_$-]+)['"]?\s*:\s*['"]?(#[0-9a-fA-F]{3,8})['"]?/);
+    if (direct) {
+      const clean = pathStack
+        .filter((p) => !p.key.startsWith("$"))
+        .map((p) => p.key);
+      out[[...clean, direct[1]].join(".")] = direct[2];
+    }
+  }
+  return out;
+}
+
+/**
+ * Chakra v3 / Style Dictionary style `{ name: { value: '#hex' } }`.
+ * Walks an indented JS/TS source emitting `path.to.name: '#hex'`
+ * whenever it finds a `value: '#hex'` (or `value: "rgba..."`) entry.
+ * Drops the literal `value` segment from the path.
+ */
+export function parseValueWrappedTs(text) {
+  const cleaned = text
+    .replace(/\/\*[\s\S]*?\*\//g, "")
+    .replace(/(^|\s)\/\/[^\n]*/g, "$1");
+  const out = {};
+  // Strategy 1: single-line pattern `name: { value: '#hex' }`.
+  const singleLineRe =
+    /(['"]?)([a-zA-Z0-9_$-]+)\1\s*:\s*\{\s*value\s*:\s*(['"`])([^'"`]+)\3\s*\}/g;
+  // Track parent key context by walking line-by-line, since the
+  // single-line regex doesn't know nesting.
+  const lines = cleaned.split(/\r?\n/);
+  const indent = (s) => s.match(/^\s*/)[0].length;
+  const pathStack = [];
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed) continue;
+    const ind = indent(line);
+    while (pathStack.length && pathStack[pathStack.length - 1].indent >= ind) {
+      pathStack.pop();
+    }
+    // Single-line match wins if present
+    let any = false;
+    let m;
+    singleLineRe.lastIndex = 0;
+    while ((m = singleLineRe.exec(line)) !== null) {
+      const key = m[2];
+      const value = m[4];
+      if (isColorish(value)) {
+        const path = [...pathStack.map((p) => p.key), key];
+        out[path.join(".")] = value;
+        any = true;
+      }
+    }
+    if (any) continue;
+    // Otherwise multi-line: check for `key: {` opener
+    const openMulti = trimmed.match(/^['"]?([a-zA-Z0-9_$-]+)['"]?\s*:\s*\{\s*$/);
+    if (openMulti) {
+      pathStack.push({ key: openMulti[1], indent: ind });
+      continue;
+    }
+    // Multi-line `value: '#hex'` inside open block
+    const v = trimmed.match(/^value\s*:\s*['"`]([^'"`]+)['"`]/);
+    if (v && isColorish(v[1])) {
+      const path = pathStack.map((p) => p.key).filter((k) => k !== "value");
+      if (path.length) out[path.join(".")] = v[1];
+    }
+  }
+  return out;
+}
+
 export const PARSERS = {
   scss: parseScssVars,
   "css-vars": parseCssVars,
@@ -215,5 +387,7 @@ export const PARSERS = {
   ts: parseJsObject,
   dtcg: parseDtcg,
   yaml: parseYaml,
-  "style-dictionary": parseStyleDictionary
+  "style-dictionary": parseStyleDictionary,
+  "primer-json5": parsePrimerJson5,
+  "value-wrapped-ts": parseValueWrappedTs
 };

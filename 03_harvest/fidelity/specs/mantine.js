@@ -19,10 +19,11 @@ export default {
     const lift = (name) => {
       const out = {};
       for (const [k, v] of Object.entries(values)) {
-        const prefix = `${name}.`;
-        if (k.startsWith(prefix)) {
-          out[k.slice(prefix.length)] = v;
-        }
+        // Match the family at any depth — handles both bare `gray.0`
+        // and scoped `DEFAULT_COLORS.gray.0` after the parser update.
+        const re = new RegExp(`(?:^|\\.)${name}\\.(\\d+)$`);
+        const m = k.match(re);
+        if (m) out[m[1]] = v;
       }
       return out;
     };

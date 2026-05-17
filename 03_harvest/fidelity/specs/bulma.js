@@ -5,7 +5,8 @@
 export default {
   fetch: {
     urls: [
-      "https://raw.githubusercontent.com/jgthms/bulma/main/sass/utilities/initial-variables.scss"
+      "https://raw.githubusercontent.com/jgthms/bulma/main/sass/utilities/initial-variables.scss",
+      "https://raw.githubusercontent.com/jgthms/bulma/master/sass/utilities/initial-variables.sass"
     ],
     format: "scss",
     commit: "main"

@@ -5,7 +5,7 @@
 export default {
   fetch: {
     urls: [
-      "https://raw.githubusercontent.com/segmentio/evergreen/master/src/themes/default-theme/foundational-styles/colors.js"
+      "https://raw.githubusercontent.com/segmentio/evergreen/master/src/themes/default/tokens/colors.js"
     ],
     format: "js",
     commit: "master"

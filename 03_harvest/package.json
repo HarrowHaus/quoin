@@ -11,6 +11,14 @@
     "extract": "node fidelity/extract.js"
   },
   "dependencies": {
+    "@ant-design/colors": "^8.0.1",
+    "@carbon/colors": "^11.51.0",
+    "@material/material-color-utilities": "^0.2.7",
     "culori": "^4.0.2"
+  },
+  "devDependencies": {
+    "@adobe/spectrum-tokens": "^14.7.0",
+    "@atlaskit/tokens": "^13.0.4",
+    "@shopify/polaris-tokens": "^9.4.2"
   }
 }

@@ -1,21 +1,16 @@
 #!/usr/bin/env node
 /**
- * Phase 3.5 fidelity extractor.
+ * Phase 3.5/3.5b fidelity extractor.
  *
- * For each per-source extraction spec under fidelity/specs/<name>.js:
- *   1. Fetch the canonical upstream source file(s).
- *   2. Parse with the declared format-specific parser.
- *   3. Convert raw values to canonical OKLCH strings via culori.
- *   4. Apply the spec's mapping function to produce the `base` palette
- *      structure consumed by build.js.
- *   5. Rewrite sources/<name>.json with extracted values + updated
- *      attribution (sourceUrl, sourceCommit, harvestedAt,
- *      harvestNotes).
- *   6. Record per-pack outcome (tier, missing tokens, fetch status).
+ * Dispatches across three extraction methods based on spec shape:
  *
- * After extraction, the existing 03_harvest/build.js regenerates each
- * pack's tokens.css and tokens/index.json from the updated source
- * config. Run `node 03_harvest/build.js` after this to materialise.
+ *   Method A — `spec.fetch.urls`     → static fetch + parser
+ *   Method B — `spec.algorithm()`    → algorithm execution at extract time
+ *   Method C — `spec.files[]`        → per-file structured extraction
+ *
+ * A spec can declare any one or any combination. The orchestrator
+ * runs each method that's declared and merges the resulting flat
+ * `{name → rawColor}` maps before handing them to spec.map().
  *
  * Single-pack run:    node fidelity/extract.js material3
  * All packs:          node fidelity/extract.js
@@ -24,20 +19,19 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { PARSERS } from "./parsers.js";
-import { convertRecord, toCanonicalOklch } from "./oklch.js";
+import { toCanonicalOklch } from "./oklch.js";
+import { runMethodA, runMethodB, runMethodC } from "./runner.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const HARVEST_ROOT = path.resolve(__dirname, "..");
 const SOURCES_DIR = path.join(HARVEST_ROOT, "sources");
 const SPECS_DIR = path.join(__dirname, "specs");
-const CANONICAL_CACHE = path.join(__dirname, "canonical");
 const TODAY = new Date().toISOString().slice(0, 10);
 
 async function loadSpec(name) {
   const file = path.join(SPECS_DIR, `${name}.js`);
   const url = new URL(`file://${file.replace(/\\/g, "/")}`);
-  const mod = await import(url.href);
+  const mod = await import(url.href + `?t=${Date.now()}`);
   return mod.default ?? mod.spec;
 }
 
@@ -52,77 +46,56 @@ async function saveSource(name, data) {
   await fs.writeFile(file, JSON.stringify(data, null, 2) + "\n");
 }
 
-async function fetchWithFallback(urls) {
-  for (const url of urls) {
-    try {
-      const resp = await fetch(url, {
-        headers: { "User-Agent": "quoin-fidelity-extract/0.1" }
-      });
-      if (!resp.ok) continue;
-      const text = await resp.text();
-      return { ok: true, url, text };
-    } catch {
-      // try next
-    }
-  }
-  return { ok: false };
-}
-
-async function cacheCanonical(name, url, text) {
-  await fs.mkdir(CANONICAL_CACHE, { recursive: true });
-  const file = path.join(CANONICAL_CACHE, `${name}.txt`);
-  await fs.writeFile(file, `<!-- fetched ${TODAY} from ${url} -->\n${text}`);
-}
-
 async function processSpec(name) {
   let spec;
   try {
     spec = await loadSpec(name);
   } catch (err) {
-    return { name, tier: "C", reason: `no spec: ${err.message}` };
+    return { name, tier: "C", reason: `no-spec: ${err.message}` };
   }
 
-  const fetch = await fetchWithFallback(spec.fetch.urls);
-  if (!fetch.ok) {
-    return { name, tier: "C", reason: "fetch-failed", urls: spec.fetch.urls };
-  }
-  await cacheCanonical(name, fetch.url, fetch.text);
+  const rawValues = {};
+  let fetchedUrl = spec.fetch?.urls?.[0] ?? null;
+  let methodMeta = null;
+  const methodsUsed = [];
 
-  // Concatenate multiple fetches if the spec says so (e.g. a system
-  // with separate light + base files we both need).
-  let combinedText = fetch.text;
-  const extraTexts = [];
-  if (spec.fetch.additionalUrls && spec.fetch.additionalUrls.length) {
-    for (const url of spec.fetch.additionalUrls) {
-      const r = await fetchWithFallback([url]);
-      if (r.ok) {
-        extraTexts.push(r.text);
-        await cacheCanonical(`${name}--${path.basename(url).slice(0, 30)}`, url, r.text);
-      }
+  if (spec.fetch && Array.isArray(spec.fetch.urls)) {
+    const r = await runMethodA(spec, name);
+    if (r.error) {
+      // continue — other methods may yield values
+    } else {
+      Object.assign(rawValues, r.rawValues);
+      fetchedUrl = r.fetchedUrl ?? fetchedUrl;
+      methodsUsed.push("A");
     }
-    combinedText = [fetch.text, ...extraTexts].join("\n");
+  }
+  if (Array.isArray(spec.files) && spec.files.length > 0) {
+    const r = await runMethodC(spec, name);
+    if (!r.error) {
+      Object.assign(rawValues, r.rawValues);
+      fetchedUrl = fetchedUrl ?? r.fetchedUrl;
+      methodsUsed.push("C");
+    }
+  }
+  if (typeof spec.algorithm === "function") {
+    const r = await runMethodB(spec);
+    if (!r.error) {
+      Object.assign(rawValues, r.rawValues);
+      methodMeta = r.methodMeta;
+      methodsUsed.push("B");
+    }
   }
 
-  const parser = PARSERS[spec.fetch.format];
-  if (!parser) {
-    return { name, tier: "C", reason: `unknown format ${spec.fetch.format}` };
-  }
-  const rawValues = parser(combinedText);
-  const count = Object.keys(rawValues).length;
-  if (count === 0) {
-    return { name, tier: "C", reason: "parse-yielded-no-values", url: fetch.url };
+  if (Object.keys(rawValues).length === 0) {
+    return { name, tier: "C", reason: "no-values-from-any-method", spec: methodsUsed };
   }
 
   const oklch = {};
-  const failedConvert = [];
   for (const [key, value] of Object.entries(rawValues)) {
     const ok = toCanonicalOklch(value);
     if (ok) oklch[key] = ok;
-    else failedConvert.push({ key, value });
   }
 
-  // Apply the spec's mapping function to translate fetched names into
-  // the `base.{family}.{step}` palette structure consumed by build.js.
   let base;
   let mappingNotes;
   try {
@@ -133,8 +106,7 @@ async function processSpec(name) {
     return { name, tier: "C", reason: `mapping-error: ${err.message}` };
   }
 
-  // Walk the existing semantic refs to confirm they still resolve
-  // against the new base. If not, that's the heart of a Tier B note.
+  // Verify semantic refs still resolve against new base
   const source = await loadSource(name);
   const requiredFamilies = new Set();
   for (const value of Object.values(source.semantic ?? {})) {
@@ -142,7 +114,6 @@ async function processSpec(name) {
     if (m) {
       const ref = m[1];
       const parts = ref.split(".");
-      // `{neutral.98}` or `{color.neutral.98}` style
       const family = parts[parts[0] === "color" ? 1 : 0];
       requiredFamilies.add(family);
     }
@@ -152,21 +123,30 @@ async function processSpec(name) {
     if (!base[fam]) missingFamilies.push(fam);
   }
 
-  const tier = missingFamilies.length === 0 && (mappingNotes ?? "").length === 0 ? "A" : "B";
+  const tier =
+    missingFamilies.length === 0 && (mappingNotes ?? "").length === 0 ? "A" : "B";
 
-  // Preserve untouched semantic mapping; only replace `base`.
+  // Build harvest-notes including method meta
+  const baseNotes = spec.harvestNotes ?? source.attribution.harvestNotes ?? "";
+  const methodNote = methodsUsed.length
+    ? `Extraction method: ${methodsUsed.join("+")}.`
+    : "";
+  const algoNote = methodMeta
+    ? `Algorithm: ${methodMeta.library}@${methodMeta.version}, inputs ${JSON.stringify(methodMeta.inputs)}.`
+    : "";
+  const mappingPart = mappingNotes ? `Mapping: ${mappingNotes}` : "";
+  const notes = [baseNotes, methodNote, algoNote, mappingPart].filter(Boolean).join(" ");
+
   const updated = {
     ...source,
     base,
     attribution: {
       ...source.attribution,
-      sourceUrl: fetch.url,
-      sourceCommit: spec.fetch.commit ?? "main",
+      sourceUrl: fetchedUrl ?? source.attribution.sourceUrl,
+      sourceCommit: spec.fetch?.commit ?? methodMeta?.version ?? "main",
       harvestedAt: TODAY,
       fidelityTier: tier,
-      harvestNotes:
-        (spec.harvestNotes ?? source.attribution.harvestNotes ?? "") +
-        (mappingNotes ? `\n\nExtraction notes: ${mappingNotes}` : "")
+      harvestNotes: notes
     }
   };
 
@@ -175,10 +155,10 @@ async function processSpec(name) {
   return {
     name,
     tier,
-    url: fetch.url,
-    valuesExtracted: count,
+    url: fetchedUrl,
+    methods: methodsUsed,
+    valuesExtracted: Object.keys(rawValues).length,
     valuesConverted: Object.keys(oklch).length,
-    failedConvert: failedConvert.length,
     missingFamilies,
     notes: mappingNotes ?? null
   };
@@ -200,15 +180,18 @@ async function main() {
     results.push(result);
     const summary =
       result.tier === "A"
-        ? `tier A — ${result.valuesExtracted} values`
+        ? `tier A — ${result.valuesExtracted} values (method ${result.methods.join("+")})`
         : result.tier === "B"
-          ? `tier B — ${result.valuesExtracted} values, ${result.missingFamilies?.length ?? 0} families missing`
+          ? `tier B — ${result.valuesExtracted} values, ${result.missingFamilies?.length ?? 0} missing families (method ${result.methods.join("+")})`
           : `tier C — ${result.reason}`;
     console.log(`${result.name.padEnd(20)} ${summary}`);
   }
 
   const reportPath = path.join(__dirname, "extract-report.json");
-  await fs.writeFile(reportPath, JSON.stringify({ ranAt: TODAY, results }, null, 2) + "\n");
+  await fs.writeFile(
+    reportPath,
+    JSON.stringify({ ranAt: TODAY, results }, null, 2) + "\n"
+  );
   console.log(`\n${results.length} packs processed. Report: ${reportPath}`);
 }
 

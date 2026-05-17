@@ -2,66 +2,47 @@
   "ranAt": "2026-05-17",
   "results": [
     {
-      "name": "tailwind",
-      "tier": "A",
-      "url": "https://raw.githubusercontent.com/tailwindlabs/tailwindcss/main/packages/tailwindcss/theme.css",
-      "valuesExtracted": 288,
-      "valuesConverted": 288,
-      "failedConvert": 0,
+      "name": "paste",
+      "tier": "B",
+      "url": "https://raw.githubusercontent.com/twilio-labs/paste/main/packages/paste-design-tokens/tokens/aliases/color-palette.yml",
+      "methods": [
+        "A"
+      ],
+      "valuesExtracted": 131,
+      "valuesConverted": 131,
       "missingFamilies": [],
-      "notes": null
+      "notes": "Paste 12-step ramps for gray/blue/red/green/orange/yellow/purple/cyan/pink. Default accent = blue.60 (Twilio brand)."
     },
     {
-      "name": "open-props",
+      "name": "lightning",
       "tier": "B",
-      "url": "https://raw.githubusercontent.com/argyleink/open-props/main/src/props.colors.css",
-      "valuesExtracted": 247,
-      "valuesConverted": 247,
-      "failedConvert": 0,
-      "missingFamilies": [],
-      "notes": "Status hues mapped: critical = red-7, success = green-7, warning = orange-7 (matches Open Props' own usage in props.shadows.css), info = blue-7. Hex source → OKLCH at extraction."
-    },
-    {
-      "name": "bootstrap",
-      "tier": "B",
-      "url": "https://raw.githubusercontent.com/twbs/bootstrap/main/scss/_variables.scss",
-      "valuesExtracted": 43,
-      "valuesConverted": 21,
-      "failedConvert": 22,
-      "missingFamilies": [],
-      "notes": "Bootstrap's $primary/$danger/$success/$warning/$info aliases resolve at compile time to $blue/$red/$green/$yellow/$cyan; we read those directly. The tint-color($blue, 80%) pre-computation Bootstrap uses for soft accent variants is not evaluated by this pipeline — we substitute an OKLCH approximation of that lightness/chroma."
-    },
-    {
-      "name": "radix",
-      "tier": "B",
-      "url": "https://raw.githubusercontent.com/radix-ui/colors/main/src/light.ts",
-      "valuesExtracted": 744,
-      "valuesConverted": 744,
-      "failedConvert": 0,
+      "url": "https://raw.githubusercontent.com/salesforce-ux/design-system/main/design-tokens/aliases/color-palettes.yml",
+      "methods": [
+        "A"
+      ],
+      "valuesExtracted": 234,
+      "valuesConverted": 234,
       "missingFamilies": [
+        "neutral",
+        "brand",
+        "error",
+        "success",
+        "warning",
         "info"
       ],
-      "notes": "Radix's 12-step scale (gray, slate, blue, red, green, amber, sky) extracted byte-faithful from src/light.ts. Flattened onto Quoin's 4-surface model: step-1 → surface-elevated, step-2 → surface, step-3 → surface-recessed, step-12 → surface-inverse. Accent = slate.12."
+      "notes": "SLDS cool-gray + warm-gray + blue/green/red/orange/yellow ramps (steps 1-13). Default accent = BLUE_4 (Salesforce brand)."
     },
     {
-      "name": "mantine",
+      "name": "primer",
       "tier": "B",
-      "url": "https://raw.githubusercontent.com/mantinedev/mantine/master/packages/%40mantine/core/src/core/MantineProvider/default-colors.ts",
-      "valuesExtracted": 140,
-      "valuesConverted": 140,
-      "failedConvert": 0,
+      "url": "https://raw.githubusercontent.com/primer/primitives/main/src/tokens/base/color/light/light.json5",
+      "methods": [
+        "A"
+      ],
+      "valuesExtracted": 95,
+      "valuesConverted": 95,
       "missingFamilies": [],
-      "notes": "Mantine 10-step ramps (indices 0-9) extracted verbatim from default-colors.ts. The 'primaryShade' default is 6 (light theme); accent = blue.6 per Mantine's own convention."
-    },
-    {
-      "name": "mui",
-      "tier": "B",
-      "url": "https://raw.githubusercontent.com/mui/material-ui/master/packages/mui-material/src/colors/indigo.js",
-      "valuesExtracted": 14,
-      "valuesConverted": 14,
-      "failedConvert": 0,
-      "missingFamilies": [],
-      "notes": "MUI's per-colour files (indigo.js, gray.js, red.js, etc.) share step keys; concatenating them in this pipeline collapses values into the last file's keys. Per-file fidelity extraction is deferred; OKLCH approximations of MUI's Material Design v2 palette stand, anchored to documented hex values from mui/material-ui."
+      "notes": "Primer 10-step scales for gray/blue/green/red/orange/yellow/purple/pink/coral. Functional mapping: surface = white, text = gray.9, accent = blue.5 (Primer's --color-accent-emphasis), critical = red.5, success = green.5, warning = yellow.5, info = blue.5."
     }
   ]
 }

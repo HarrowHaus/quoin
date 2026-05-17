@@ -1,0 +1,59 @@
+<!-- fetched 2026-05-17 from https://raw.githubusercontent.com/kiwicom/orbit/master/packages/orbit-design-tokens/src/dictionary/definitions/foundation/palette/green.json -->
+{
+  "foundation": {
+    "palette": {
+      "green": {
+        "dark": {
+          "value": "#296B33",
+          "internal": true,
+          "type": "color"
+        },
+        "dark-active": {
+          "value": "#1C4A23",
+          "internal": true,
+          "type": "color"
+        },
+        "dark-hover": {
+          "value": "#21592A",
+          "internal": true,
+          "type": "color"
+        },
+        "darker": {
+          "value": "#163B1C",
+          "internal": true,
+          "type": "color"
+        },
+        "light": {
+          "value": "#EAF5EA",
+          "internal": true,
+          "type": "color"
+        },
+        "light-active": {
+          "value": "#CDE4CF",
+          "internal": true,
+          "type": "color"
+        },
+        "light-hover": {
+          "value": "#E1EFE2",
+          "internal": true,
+          "type": "color"
+        },
+        "normal": {
+          "value": "#048724",
+          "internal": true,
+          "type": "color"
+        },
+        "normal-active": {
+          "value": "#03631B",
+          "internal": true,
+          "type": "color"
+        },
+        "normal-hover": {
+          "value": "#047620",
+          "internal": true,
+          "type": "color"
+        }
+      }
+    }
+  }
+}

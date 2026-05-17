@@ -151,9 +151,18 @@ async function buildPack(source) {
 function buildBaseTokens(base) {
   const out = { color: {} };
   for (const [group, entries] of Object.entries(base)) {
-    out.color[group] = {};
+    out.color[group] = out.color[group] ?? {};
     for (const [name, value] of Object.entries(entries)) {
-      out.color[group][name] = { $value: value, $type: inferType(value) };
+      // Expand dotted step keys (e.g. `foundationColors.primary`) into
+      // nested DTCG structure so the compiler's path-based reference
+      // resolver can walk to them via `{color.group.foundationColors.primary}`.
+      const parts = name.split(".");
+      let node = out.color[group];
+      for (let i = 0; i < parts.length - 1; i++) {
+        node[parts[i]] = node[parts[i]] ?? {};
+        node = node[parts[i]];
+      }
+      node[parts[parts.length - 1]] = { $value: value, $type: inferType(value) };
     }
   }
   return out;
@@ -238,11 +247,22 @@ function buildCss(source, baseTokens, semanticTokens) {
     `:root {`,
     `  /* base palette */`
   ];
-  // baseTokens is { color: { group: { step: { $value } } } }
-  for (const [familyName, family] of Object.entries(baseTokens.color)) {
-    for (const [step, entry] of Object.entries(family)) {
-      lines.push(`  --color-${familyName}-${step}: ${entry.$value};`);
+  // baseTokens is { color: { group: { ...nested DTCG... } } }.
+  // Walk recursively, emitting `--color-{path-joined}` for each leaf
+  // that has `$value`. This handles both flat (`{step: {$value}}`)
+  // and nested (`{group: { sub: { step: {$value} } } }`) structures.
+  const walk = (node, path) => {
+    if (node && typeof node === "object" && "$value" in node) {
+      lines.push(`  --color-${path.join("-")}: ${node.$value};`);
+      return;
     }
+    for (const [k, v] of Object.entries(node ?? {})) {
+      if (k.startsWith("$")) continue;
+      walk(v, [...path, k]);
+    }
+  };
+  for (const [familyName, family] of Object.entries(baseTokens.color)) {
+    walk(family, [familyName]);
   }
   lines.push(``, `  /* semantic */`);
   for (const [name, entry] of Object.entries(semanticTokens)) {

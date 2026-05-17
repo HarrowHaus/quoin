@@ -1,0 +1,24 @@
+<!-- fetched 2026-05-17 from https://raw.githubusercontent.com/kiwicom/orbit/master/packages/orbit-design-tokens/src/dictionary/definitions/foundation/palette/white.json -->
+{
+  "foundation": {
+    "palette": {
+      "white": {
+        "normal": {
+          "value": "#FFFFFF",
+          "internal": true,
+          "type": "color"
+        },
+        "normal-active": {
+          "value": "#E7ECF1",
+          "internal": true,
+          "type": "color"
+        },
+        "normal-hover": {
+          "value": "#F1F4F7",
+          "internal": true,
+          "type": "color"
+        }
+      }
+    }
+  }
+}

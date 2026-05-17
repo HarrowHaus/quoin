@@ -17,7 +17,9 @@ export default {
     const pickScale = (prefix) => {
       const out = {};
       for (const [k, v] of Object.entries(values)) {
-        const m = k.match(new RegExp(`^${prefix}(\\d+)$`));
+        // Match `slate1` or `slate.slate1` (the latter when the
+        // parser scopes inside the `export const slate = { ... }`).
+        const m = k.match(new RegExp(`(?:^|\\.)${prefix}(\\d+)$`));
         if (m) out[m[1]] = v;
       }
       return out;

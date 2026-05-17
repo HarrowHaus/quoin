@@ -1,5 +1,10 @@
 /**
- * GitHub Primer — primitives/data/colors/light.json (DTCG-ish).
+ * GitHub Primer — Method A (static fetch + primer-json5 parser).
+ *
+ * Primer's base palette ships as json5 with the shape
+ *   name: { $value: { hex: '#hex' } }
+ * The custom primer-json5 parser walks the indented tree and emits
+ * dotted paths.
  */
 
 export default {
@@ -7,16 +12,40 @@ export default {
     urls: [
       "https://raw.githubusercontent.com/primer/primitives/main/src/tokens/base/color/light/light.json5"
     ],
-    format: "js",
+    format: "primer-json5",
     commit: "main"
   },
   harvestNotes:
-    "Primer light theme extracted from primer/primitives. Functional colour tokens map onto Quoin's surface/text/border/accent/status namespace.",
+    "Primer base/color/light/light.json5 extracted byte-faithfully. The json5 source nests hex inside `$value.hex`; the primer-json5 parser walks the indented tree and emits `base.color.{family}.{step}: '#hex'`.",
   map(values) {
+    // Primer paths look like `base.color.gray.0`, `base.color.blue.5`, etc.
+    const pick = (family) => {
+      const out = {};
+      for (const [k, v] of Object.entries(values)) {
+        const prefix = `base.color.${family}.`;
+        if (k.startsWith(prefix)) {
+          out[k.slice(prefix.length)] = v;
+        }
+      }
+      return out;
+    };
     return {
-      base: { primer: values, white: { 0: "oklch(100% 0 0)" } },
+      base: {
+        gray: pick("gray"),
+        blue: pick("blue"),
+        green: pick("green"),
+        red: pick("red"),
+        orange: pick("orange"),
+        yellow: pick("yellow"),
+        purple: pick("purple"),
+        pink: pick("pink"),
+        coral: pick("coral"),
+        neutral: pick("neutral"),
+        black: { 0: values["base.color.black"] ?? "oklch(0% 0 0)" },
+        white: { 0: values["base.color.white"] ?? "oklch(100% 0 0)" }
+      },
       notes:
-        "Primer's functional namespace (canvas, fg, accent, danger, success, attention, severe, done, sponsors) flattened onto Quoin: canvas.default → surface, fg.default → text, accent.emphasis → accent, danger.emphasis → critical, attention.emphasis → warning, success.emphasis → success."
+        "Primer 10-step scales for gray/blue/green/red/orange/yellow/purple/pink/coral. Functional mapping: surface = white, text = gray.9, accent = blue.5 (Primer's --color-accent-emphasis), critical = red.5, success = green.5, warning = yellow.5, info = blue.5."
     };
   }
 };

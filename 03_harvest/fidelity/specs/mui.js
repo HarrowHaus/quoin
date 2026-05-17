@@ -1,74 +1,56 @@
 /**
- * Material UI v5 — packages/mui-material/src/colors/.
- * The classic indigo/pink/grey palettes published as JS modules.
+ * Material UI (MUI) v5 — Method C (per-file structured extraction).
+ *
+ * MUI ships each colour family as a separate `packages/mui-material/
+ * src/colors/<name>.js` module. Each module is a flat hex object
+ * sharing step keys (50, 100, ..., 900, A100..A700). Concatenating
+ * the files defeats step-key uniqueness; we fetch each file
+ * separately and namespace by family.
  */
 
-export default {
-  fetch: {
-    urls: [
-      "https://raw.githubusercontent.com/mui/material-ui/master/packages/mui-material/src/colors/indigo.js"
-    ],
-    additionalUrls: [
-      "https://raw.githubusercontent.com/mui/material-ui/master/packages/mui-material/src/colors/grey.js",
-      "https://raw.githubusercontent.com/mui/material-ui/master/packages/mui-material/src/colors/red.js",
-      "https://raw.githubusercontent.com/mui/material-ui/master/packages/mui-material/src/colors/green.js",
-      "https://raw.githubusercontent.com/mui/material-ui/master/packages/mui-material/src/colors/orange.js",
-      "https://raw.githubusercontent.com/mui/material-ui/master/packages/mui-material/src/colors/blue.js"
-    ],
-    format: "js",
-    commit: "master"
-  },
-  harvestNotes:
-    "Material UI default (Material Design v1/v2) palettes: indigo + grey + red + green + orange + blue. Each file ships a flat hex object; we capture step 500 + a few neighbours.",
-  map(values) {
-    // Each MUI color file exports a flat hex object: `{ 50: '#x', 100: '#x', ... }`.
-    // Lift them to bare family.step paths so semantic refs `{gray.50}`,
-    // `{indigo.500}`, `{red.500}` etc. resolve.
-    const lift = () => {
-      const families = {};
-      for (const [k, v] of Object.entries(values)) {
-        // Keys arrive as `50`, `100`, `A100`, etc. Distribution across
-        // families happens because we fetched per-family files but the
-        // parser doesn't know which is which.
-        // We rely on the cached file paths instead — but those are
-        // dropped after parse. So instead we lean on the secondary
-        // strategy: examine the OKLCH hue ranges.
-        // Pragmatic fallback: treat all extracted as `mui-default.{step}`
-        // and let semantic refs use `mui-default` family names.
-      }
-      return families;
-    };
+const BASE = "https://raw.githubusercontent.com/mui/material-ui/master/packages/mui-material/src/colors/";
 
-    // Each MUI color file is a flat object with step keys. Since we
-    // concatenated multiple files, the same step (e.g. 500) appears
-    // multiple times and only one wins. To preserve them, we'd need
-    // per-file parsing.
-    //
-    // For now: the extracted `values` is a flat map of {step → hex}
-    // taken from the *last* file fetched (orange.js in our spec). This
-    // is a known limitation — see mappingNotes.
+export default {
+  fetch: { commit: "master" },
+  harvestNotes:
+    "Per-file extraction from mui/material-ui packages/mui-material/src/colors/. Each colour family (grey, indigo, red, green, amber, blue) parsed independently and namespaced by family.",
+  files: [
+    { name: "grey", namespace: "grey", url: `${BASE}grey.js`, format: "js" },
+    { name: "indigo", namespace: "indigo", url: `${BASE}indigo.js`, format: "js" },
+    { name: "red", namespace: "red", url: `${BASE}red.js`, format: "js" },
+    { name: "green", namespace: "green", url: `${BASE}green.js`, format: "js" },
+    { name: "amber", namespace: "amber", url: `${BASE}amber.js`, format: "js" },
+    { name: "blue", namespace: "blue", url: `${BASE}blue.js`, format: "js" }
+  ],
+  map(values) {
+    const pick = (family) => {
+      const out = {};
+      for (const [k, v] of Object.entries(values)) {
+        // After the parser update, keys are `family.family.step` because
+        // we use the namespace AND the export-const wrapper. Strip both.
+        const re = new RegExp(`(?:^|\\.)${family}\\.(\\d+|A\\d+)$`);
+        const m = k.match(re);
+        if (m) out[m[1]] = v;
+      }
+      return out;
+    };
+    const grey = pick("grey");
     return {
       base: {
-        // Conservative fallback: preserve the existing OKLCH approxima-
-        // tions for now, ship extraction metadata in attribution. A
-        // per-file extractor is the proper fix.
-        gray: {
-          50: "oklch(98.5% 0.001 0)",
-          100: "oklch(96% 0.002 0)",
-          200: "oklch(93% 0.003 0)",
-          400: "oklch(74% 0.005 0)",
-          700: "oklch(38% 0.008 0)",
-          900: "oklch(13% 0.01 0)"
-        },
-        indigo: { 50: "oklch(95% 0.04 280)", 500: "oklch(48% 0.18 280)", 700: "oklch(38% 0.18 280)" },
-        red: { 500: "oklch(60% 0.22 25)" },
-        green: { 500: "oklch(58% 0.16 145)" },
-        amber: { 500: "oklch(78% 0.17 80)" },
-        blue: { 500: "oklch(58% 0.17 240)" },
+        grey,
+        // Alias `gray` → `grey` so existing semantic refs `{gray.X}`
+        // (American spelling) keep resolving without changing the
+        // sources/mui.json semantic block.
+        gray: grey,
+        indigo: pick("indigo"),
+        red: pick("red"),
+        green: pick("green"),
+        amber: pick("amber"),
+        blue: pick("blue"),
         white: { 0: "oklch(100% 0 0)" }
       },
       notes:
-        "MUI's per-colour files (indigo.js, gray.js, red.js, etc.) share step keys; concatenating them in this pipeline collapses values into the last file's keys. Per-file fidelity extraction is deferred; OKLCH approximations of MUI's Material Design v2 palette stand, anchored to documented hex values from mui/material-ui."
+        "MUI ships Material Design v1/v2-style 50-900 + A100-A700 ramps per colour. Default light theme: surface = grey.50, text = grey.900, accent = indigo.500, critical = red.500, success = green.500, warning = amber.500, info = blue.500."
     };
   }
 };
