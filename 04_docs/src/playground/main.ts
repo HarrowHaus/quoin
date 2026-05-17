@@ -1,18 +1,13 @@
 /**
  * Live playground — browser-side compiler driver.
  *
- * Pulls the compiled compiler bundle from @quoin/compiler (Vite alias
- * to 01_compiler/dist/browser.js) and a curated set of in-memory pack
- * objects from ./packs. On any input change, recompiles and updates
- * both the compiled-HTML pane and the live iframe render.
- *
- * Phase 5e additions:
- *   - Preset selector loads one of four seed sources (article /
- *     marketing / dashboard / app-shell) AND auto-toggles the vocab
- *     packs each seed needs.
- *   - Vocab-pack multi-select checkboxes let the user load any
- *     combination of the 8 preloaded vocabs alongside the active
- *     token + impl pack.
+ * Phase 4.5 upgrade:
+ *   - Three-pane layout (source / compiled HTML / preview).
+ *   - All 30 token packs available with fidelity-tier badges.
+ *   - Shareable URL state — `?p=<base64-source>&t=<tokenPackId>&i=<implId>&v=<vocab1,vocab2>`.
+ *   - Token efficiency badge — counts Quoin tags vs emitted Tailwind
+ *     classes and prints the ratio.
+ *   - Example gallery — picking an example loads its source + vocabs.
  */
 
 import { compile } from "@quoin/compiler";
@@ -20,6 +15,7 @@ import {
   COMPANION_CSS,
   IMPL_PACKS,
   SHIM_CSS,
+  TOKEN_PACK_TIERS,
   TOKEN_PACKS,
   VOCAB_PACKS,
   type ImplPackId,
@@ -38,43 +34,79 @@ const tokenSelect = document.getElementById("token-pack") as HTMLSelectElement;
 const implSelect = document.getElementById("impl-pack") as HTMLSelectElement;
 const presetSelect = document.getElementById("preset") as HTMLSelectElement;
 const vocabChecks = document.getElementById("vocab-checks") as HTMLElement;
-const tabs = document.querySelectorAll<HTMLButtonElement>("[data-tab][role='tab']");
-const bodies = document.querySelectorAll<HTMLElement>(".tab-body[data-tab]");
+const efficiencyEl = document.getElementById("efficiency") as HTMLElement;
+const tierBadgeEl = document.getElementById("token-tier") as HTMLElement;
+const shareBtn = document.getElementById("share-link") as HTMLButtonElement;
+const shareToast = document.getElementById("share-toast") as HTMLElement;
 
-/* ─────────────── populate dropdowns ─────────────── */
-
-function fillDropdown<T extends string>(
-  el: HTMLSelectElement,
-  options: T[],
-  selected: T,
-  labels: Record<string, string> = {}
-): void {
-  el.innerHTML = options
-    .map(
-      (o) =>
-        `<option value="${o}" ${o === selected ? "selected" : ""}>${labels[o] ?? o}</option>`
-    )
-    .join("");
-}
+/* ─────────────── pack ID arrays ─────────────── */
 
 const tokenPackIds = Object.keys(TOKEN_PACKS) as TokenPackId[];
 const implPackIds = Object.keys(IMPL_PACKS) as ImplPackId[];
 const vocabPackIds = Object.keys(VOCAB_PACKS) as VocabPackId[];
 const presetIds = Object.keys(PRESETS) as PresetId[];
 
-let activeTokenPackId: TokenPackId = "tokens-baseline";
-let activeImplPackId: ImplPackId = "impl-tailwind";
-let activeVocabIds = new Set<VocabPackId>(["vocab-editorial", "vocab-dashboard"]);
-let activePresetId: PresetId = "article";
+/* ─────────────── default state ─────────────── */
 
-fillDropdown(tokenSelect, tokenPackIds, activeTokenPackId);
-fillDropdown(implSelect, implPackIds, activeImplPackId);
-fillDropdown(
-  presetSelect,
-  presetIds,
-  activePresetId,
-  Object.fromEntries(presetIds.map((id) => [id, PRESETS[id].label]))
-);
+let activeTokenPackId: TokenPackId = "tokens-tailwind";
+let activeImplPackId: ImplPackId = "impl-tailwind";
+let activeVocabIds = new Set<VocabPackId>([
+  "vocab-editorial",
+  "vocab-dashboard",
+  "vocab-essentials"
+]);
+let activePresetId: PresetId = "hero";
+
+/* ─────────────── populate dropdowns ─────────────── */
+
+function tierLabel(id: TokenPackId): string {
+  const tier = TOKEN_PACK_TIERS[id];
+  if (!tier) return ""; // reference packs
+  return ` · ${tier}`;
+}
+
+function fillTokenSelect(): void {
+  tokenSelect.innerHTML = tokenPackIds
+    .map((id) => {
+      const label = `${id}${tierLabel(id)}`;
+      return `<option value="${id}" ${id === activeTokenPackId ? "selected" : ""}>${label}</option>`;
+    })
+    .join("");
+}
+
+function fillImplSelect(): void {
+  implSelect.innerHTML = implPackIds
+    .map(
+      (id) =>
+        `<option value="${id}" ${id === activeImplPackId ? "selected" : ""}>${id}</option>`
+    )
+    .join("");
+}
+
+function fillPresetSelect(): void {
+  presetSelect.innerHTML =
+    `<option value="">— Examples —</option>` +
+    presetIds
+      .map((id) => `<option value="${id}">${PRESETS[id].label}</option>`)
+      .join("");
+}
+
+fillTokenSelect();
+fillImplSelect();
+fillPresetSelect();
+
+/* ─────────────── tier badge ─────────────── */
+
+function updateTierBadge(): void {
+  const tier = TOKEN_PACK_TIERS[activeTokenPackId];
+  if (!tier) {
+    tierBadgeEl.textContent = "reference";
+    tierBadgeEl.dataset.tier = "ref";
+    return;
+  }
+  tierBadgeEl.textContent = `Tier ${tier}`;
+  tierBadgeEl.dataset.tier = tier;
+}
 
 /* ─────────────── vocab checkboxes ─────────────── */
 
@@ -82,9 +114,9 @@ function renderVocabChecks(): void {
   vocabChecks.innerHTML = vocabPackIds
     .map(
       (id) => `
-      <label style="display: inline-flex; align-items: center; gap: 0.375rem; cursor: pointer">
+      <label class="vocab-check">
         <input type="checkbox" data-vocab="${id}" ${activeVocabIds.has(id) ? "checked" : ""} />
-        <code style="font-family: var(--font-mono); font-size: var(--type-size-xs)">${id}</code>
+        <code>${id}</code>
       </label>
     `
     )
@@ -95,14 +127,93 @@ function renderVocabChecks(): void {
       if (cb.checked) activeVocabIds.add(id);
       else activeVocabIds.delete(id);
       recompile();
+      updateUrl();
     });
   });
 }
-renderVocabChecks();
 
-/* ─────────────── initial seed ─────────────── */
+/* ─────────────── URL state ─────────────── */
 
-source.value = PRESETS[activePresetId].source;
+interface UrlState {
+  source?: string;
+  token?: TokenPackId;
+  impl?: ImplPackId;
+  vocabs?: VocabPackId[];
+}
+
+function encodeUrlState(state: UrlState): string {
+  const parts: string[] = [];
+  if (state.source) {
+    try {
+      parts.push(`p=${btoa(unescape(encodeURIComponent(state.source)))}`);
+    } catch {
+      // Skip on encoding error
+    }
+  }
+  if (state.token) parts.push(`t=${state.token}`);
+  if (state.impl) parts.push(`i=${state.impl}`);
+  if (state.vocabs && state.vocabs.length) parts.push(`v=${state.vocabs.join(",")}`);
+  return parts.join("&");
+}
+
+function decodeUrlState(hash: string): UrlState {
+  const params = new URLSearchParams(hash.replace(/^#/, ""));
+  const out: UrlState = {};
+  const p = params.get("p");
+  if (p) {
+    try {
+      out.source = decodeURIComponent(escape(atob(p)));
+    } catch {
+      // ignore
+    }
+  }
+  const t = params.get("t");
+  if (t && (t as TokenPackId) in TOKEN_PACKS) out.token = t as TokenPackId;
+  const i = params.get("i");
+  if (i && (i as ImplPackId) in IMPL_PACKS) out.impl = i as ImplPackId;
+  const v = params.get("v");
+  if (v) {
+    out.vocabs = v
+      .split(",")
+      .filter((id) => (id as VocabPackId) in VOCAB_PACKS) as VocabPackId[];
+  }
+  return out;
+}
+
+function updateUrl(): void {
+  const enc = encodeUrlState({
+    source: source.value,
+    token: activeTokenPackId,
+    impl: activeImplPackId,
+    vocabs: [...activeVocabIds]
+  });
+  // Use replaceState to avoid spamming history on every keystroke.
+  history.replaceState(null, "", `#${enc}`);
+}
+
+function copyShareUrl(): void {
+  const enc = encodeUrlState({
+    source: source.value,
+    token: activeTokenPackId,
+    impl: activeImplPackId,
+    vocabs: [...activeVocabIds]
+  });
+  const url = `${location.origin}${location.pathname}#${enc}`;
+  navigator.clipboard
+    .writeText(url)
+    .then(() => {
+      shareToast.textContent = "Link copied";
+      shareToast.dataset.state = "ok";
+      setTimeout(() => {
+        shareToast.textContent = "";
+        delete shareToast.dataset.state;
+      }, 2200);
+    })
+    .catch(() => {
+      shareToast.textContent = `Copy failed — ${url}`;
+      shareToast.dataset.state = "error";
+    });
+}
 
 /* ─────────────── render plumbing ─────────────── */
 
@@ -116,6 +227,7 @@ function renderIntoFrame(html: string, css: string, implPackId: ImplPackId): voi
   const page = `<!doctype html>
 <html><head>
   <meta charset="utf-8">
+  <base target="_parent">
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     body { margin: 0; padding: 1rem; font-family: var(--font-sans, system-ui); background: var(--surface, #fff); color: var(--text, #111); line-height: 1.4; }
@@ -133,6 +245,42 @@ function renderIntoFrame(html: string, css: string, implPackId: ImplPackId): voi
   doc.close();
 }
 
+/* ─────────────── efficiency metric ─────────────── */
+
+function countQuoinTags(src: string): number {
+  // Count opening tags whose name contains a hyphen (custom element).
+  let count = 0;
+  const re = /<([a-z][a-z0-9]*(?:-[a-z0-9]+)+)\b/gi;
+  let m;
+  while ((m = re.exec(src)) !== null) count++;
+  return count;
+}
+
+function countTailwindClasses(html: string): number {
+  // Sum the length of every `class="..."` attribute, counting tokens.
+  let count = 0;
+  const re = /class="([^"]+)"/g;
+  let m;
+  while ((m = re.exec(html)) !== null) {
+    count += m[1].split(/\s+/).filter(Boolean).length;
+  }
+  return count;
+}
+
+function updateEfficiencyBadge(quoinTags: number, classCount: number): void {
+  if (quoinTags === 0) {
+    efficiencyEl.textContent = "";
+    return;
+  }
+  const ratio = classCount > 0 ? Math.round(classCount / quoinTags) : 0;
+  efficiencyEl.textContent =
+    ratio > 0
+      ? `${quoinTags} tags → ${classCount} classes · ${ratio}× compression`
+      : `${quoinTags} tags → ${classCount} classes`;
+}
+
+/* ─────────────── compile loop ─────────────── */
+
 function recompile(): void {
   const tokenEntry = TOKEN_PACKS[activeTokenPackId];
   const impl = IMPL_PACKS[activeImplPackId];
@@ -141,6 +289,7 @@ function recompile(): void {
     setStatus("error: pick at least one vocab pack", "error");
     compiledEl.textContent = "// pick at least one vocab pack from the Vocab packs fieldset";
     markFrameError();
+    updateEfficiencyBadge(0, 0);
     return;
   }
   try {
@@ -155,11 +304,18 @@ function recompile(): void {
     renderIntoFrame(result.html, tokenEntry.css, activeImplPackId);
     setStatus(`compiled — ${result.html.length} bytes`, "ok");
     clearFrameError();
+    const tagCount = countQuoinTags(source.value);
+    const classCount =
+      activeImplPackId === "impl-tailwind"
+        ? countTailwindClasses(result.html)
+        : 0;
+    updateEfficiencyBadge(tagCount, classCount);
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     compiledEl.textContent = `// ${message}`;
     setStatus(`error: ${message.slice(0, 120)}`, "error");
     markFrameError();
+    updateEfficiencyBadge(0, 0);
   }
 }
 
@@ -175,29 +331,69 @@ function clearFrameError(): void {
   renderFrame.style.outlineOffset = "";
 }
 
+/* ─────────────── load initial state ─────────────── */
+
+function loadFromUrlOrDefault(): void {
+  const fromUrl = decodeUrlState(location.hash);
+  if (fromUrl.source) source.value = fromUrl.source;
+  else source.value = PRESETS[activePresetId].source;
+  if (fromUrl.token) activeTokenPackId = fromUrl.token;
+  if (fromUrl.impl) activeImplPackId = fromUrl.impl;
+  if (fromUrl.vocabs) activeVocabIds = new Set(fromUrl.vocabs);
+  if (activeVocabIds.size === 0) {
+    activeVocabIds = new Set([
+      "vocab-editorial",
+      "vocab-dashboard",
+      "vocab-essentials"
+    ]);
+  }
+  fillTokenSelect();
+  fillImplSelect();
+  renderVocabChecks();
+  updateTierBadge();
+}
+
+renderVocabChecks();
+loadFromUrlOrDefault();
+
 /* ─────────────── wire events ─────────────── */
 
-source.addEventListener("input", recompile);
+source.addEventListener("input", () => {
+  recompile();
+  updateUrl();
+});
 
 tokenSelect.addEventListener("change", () => {
   activeTokenPackId = tokenSelect.value as TokenPackId;
+  updateTierBadge();
   recompile();
+  updateUrl();
 });
+
 implSelect.addEventListener("change", () => {
   activeImplPackId = implSelect.value as ImplPackId;
   recompile();
+  updateUrl();
 });
 
 presetSelect.addEventListener("change", () => {
+  if (!presetSelect.value) return;
   activePresetId = presetSelect.value as PresetId;
   const preset = PRESETS[activePresetId];
   source.value = preset.source;
-  // Auto-toggle vocab checkboxes to match the preset's needs
   activeVocabIds = new Set(preset.vocabs);
   renderVocabChecks();
   recompile();
+  updateUrl();
+  // Reset selection so the same preset can be reloaded.
+  presetSelect.value = "";
 });
 
+shareBtn.addEventListener("click", copyShareUrl);
+
+// Tabs on the secondary pane (compiled HTML vs preview).
+const tabs = document.querySelectorAll<HTMLButtonElement>("[data-tab][role='tab']");
+const bodies = document.querySelectorAll<HTMLElement>(".tab-body[data-tab]");
 tabs.forEach((tab) => {
   tab.addEventListener("click", () => {
     const target = tab.dataset.tab!;

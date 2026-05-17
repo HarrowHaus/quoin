@@ -1,7 +1,9 @@
 /**
- * Playground preset seeds — four canonical example sources that
- * exercise different vocab combinations. Picking a preset replaces
- * the source AND toggles the vocab checkboxes the seed needs.
+ * Playground preset seeds — canonical example sources that exercise
+ * different vocab combinations. Picking a preset replaces the source
+ * AND toggles the vocab checkboxes the seed needs.
+ *
+ * Phase 4.5 expanded from 4 presets to 10.
  */
 
 import type { VocabPackId } from "./packs";
@@ -62,99 +64,78 @@ export const PRESETS: Record<string, Preset> = {
 </canvas-block>`
   },
 
-  marketing: {
-    label: "Marketing",
-    description: "Landing page: hero with stats, feature grid, pricing tiers, CTA band, FAQ.",
-    vocabs: ["vocab-editorial", "vocab-dashboard", "vocab-essentials", "vocab-marketing"],
+  hero: {
+    label: "Hero + CTA",
+    description: "Marketing hero with headline, lead, and a paired call-to-action.",
+    vocabs: ["vocab-editorial", "vocab-dashboard", "vocab-marketing"],
     source: `<hero-banner variant="centered">
   <stack gap="loose">
-    <authority-mark>Tools for people who write code.</authority-mark>
+    <authority-mark>Build interfaces, not boilerplate.</authority-mark>
     <lead-graf>
-      A small studio. We design and build software in the open —
-      interfaces, languages, and operating procedures that outlive
-      their first user.
+      Quoin turns the boilerplate of utility CSS into a vocabulary of
+      semantic primitives. You write what you mean. The compiler
+      handles the rest.
     </lead-graf>
     <cluster>
-      <primary-action>See the work</primary-action>
-      <secondary-action>Read the journal</secondary-action>
+      <primary-action>Open the playground</primary-action>
+      <secondary-action>Read the spec</secondary-action>
     </cluster>
   </stack>
-</hero-banner>
+</hero-banner>`
+  },
 
-<canvas-block>
+  pricing: {
+    label: "Pricing (3-tier)",
+    description: "Three pricing tiers in a row, middle tier featured.",
+    vocabs: ["vocab-editorial", "vocab-dashboard", "vocab-essentials", "vocab-marketing"],
+    source: `<canvas-block>
   <stack gap="loose">
-
-    <columns ratio="1:1:1">
-      <stat-display>
-        <div style="font-size: 3rem; font-family: var(--font-display); line-height: 1">12</div>
-        <recede-block>shipped projects</recede-block>
-      </stat-display>
-      <stat-display>
-        <div style="font-size: 3rem; font-family: var(--font-display); line-height: 1">4</div>
-        <recede-block>active engagements</recede-block>
-      </stat-display>
-      <stat-display>
-        <div style="font-size: 3rem; font-family: var(--font-display); line-height: 1">96%</div>
-        <recede-block>client retention</recede-block>
-      </stat-display>
-    </columns>
-
-    <feature-grid min-cell-width="280px">
-      <feature-cell>
-        <stack>
-          <lead-graf weight="emphasize">Languages</lead-graf>
-          <recede-block>Small DSLs, semantic compilers, type-driven tooling.</recede-block>
-        </stack>
-      </feature-cell>
-      <feature-cell>
-        <stack>
-          <lead-graf weight="emphasize">Interfaces</lead-graf>
-          <recede-block>Editorial product surfaces. Long-form reading, dense data, internal tooling.</recede-block>
-        </stack>
-      </feature-cell>
-      <feature-cell>
-        <stack>
-          <lead-graf weight="emphasize">Operations</lead-graf>
-          <recede-block>How small teams ship without the overhead of a large one.</recede-block>
-        </stack>
-      </feature-cell>
-    </feature-grid>
+    <stack>
+      <authority-mark weight="emphasize">Pricing</authority-mark>
+      <lead-graf>One plan per shape of team.</lead-graf>
+    </stack>
 
     <columns ratio="1:1:1">
       <pricing-tier>
         <stack>
-          <lead-graf weight="emphasize">Workshop</lead-graf>
-          <recede-block>1-2 week residency.</recede-block>
-          <primary-action>Apply</primary-action>
+          <lead-graf weight="emphasize">Solo</lead-graf>
+          <div style="font-size: 2.5rem; font-family: var(--font-display)">$0</div>
+          <recede-block>For one builder.</recede-block>
+          <ul style="margin: 0; padding-left: 1.25rem; font-size: var(--type-size-sm)">
+            <li>1 project</li>
+            <li>Community support</li>
+            <li>All open packs</li>
+          </ul>
+          <secondary-action>Start free</secondary-action>
         </stack>
       </pricing-tier>
       <pricing-tier variant="featured">
         <stack>
-          <lead-graf weight="emphasize">Studio engagement</lead-graf>
-          <recede-block>3-6 month build.</recede-block>
-          <primary-action>Discuss</primary-action>
+          <lead-graf weight="emphasize">Studio</lead-graf>
+          <div style="font-size: 2.5rem; font-family: var(--font-display)">$24</div>
+          <recede-block>Per seat. Most teams pick this.</recede-block>
+          <ul style="margin: 0; padding-left: 1.25rem; font-size: var(--type-size-sm)">
+            <li>Unlimited projects</li>
+            <li>Email support, 24h</li>
+            <li>Private pack registry</li>
+          </ul>
+          <primary-action>Try Studio</primary-action>
         </stack>
       </pricing-tier>
       <pricing-tier>
         <stack>
-          <lead-graf weight="emphasize">Open course</lead-graf>
-          <recede-block>Cohort-based. Free, MIT.</recede-block>
-          <secondary-action>Browse</secondary-action>
+          <lead-graf weight="emphasize">Enterprise</lead-graf>
+          <div style="font-size: 2.5rem; font-family: var(--font-display)">Talk</div>
+          <recede-block>SSO, audit, custom packs.</recede-block>
+          <ul style="margin: 0; padding-left: 1.25rem; font-size: var(--type-size-sm)">
+            <li>SAML SSO</li>
+            <li>Dedicated support</li>
+            <li>Custom token packs</li>
+          </ul>
+          <secondary-action>Contact sales</secondary-action>
         </stack>
       </pricing-tier>
     </columns>
-
-    <cta-band variant="split">
-      <stack>
-        <authority-mark weight="emphasize">Have something specific in mind?</authority-mark>
-        <recede-block>Send a short note.</recede-block>
-      </stack>
-      <cluster>
-        <primary-action>Get in touch</primary-action>
-        <secondary-action>See calendar</secondary-action>
-      </cluster>
-    </cta-band>
-
   </stack>
 </canvas-block>`
   },
@@ -203,23 +184,6 @@ export const PRESETS: Record<string, Preset> = {
       <button role="tab">Month</button>
     </segment-control>
 
-    <data-table>
-      <table style="width: 100%; border-collapse: collapse; font-size: var(--type-size-sm)">
-        <thead>
-          <tr>
-            <th style="text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border)">Job</th>
-            <th style="text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border)">Status</th>
-            <th style="text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border)">Duration</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td style="padding: 0.5rem 0.75rem">build-prod</td><td><resolved-mark>complete</resolved-mark></td><td>2m 41s</td></tr>
-          <tr><td style="padding: 0.5rem 0.75rem">sync-tokens</td><td><pending-block>running</pending-block></td><td>—</td></tr>
-          <tr><td style="padding: 0.5rem 0.75rem">audit-report</td><td><resolved-mark>complete</resolved-mark></td><td>11s</td></tr>
-        </tbody>
-      </table>
-    </data-table>
-
     <cluster>
       <primary-action>Run build</primary-action>
       <secondary-action>View logs</secondary-action>
@@ -252,11 +216,6 @@ export const PRESETS: Record<string, Preset> = {
       <a href="#">Projects</a>
       <a href="#">Team</a>
     </stack>
-    <stack>
-      <recede-block>Settings</recede-block>
-      <a href="#">Billing</a>
-      <a href="#">Account</a>
-    </stack>
   </sidebar-nav>
 
   <content-region>
@@ -269,24 +228,134 @@ export const PRESETS: Record<string, Preset> = {
       <authority-mark>Projects</authority-mark>
       <lead-graf>Eight active. Two awaiting review.</lead-graf>
     </page-header>
-
-    <columns ratio="1:1:1">
-      <stat-display>
-        <div style="font-size: 2.5rem; font-family: var(--font-display); line-height: 1">8</div>
-        <recede-block>active</recede-block>
-      </stat-display>
-      <stat-display>
-        <div style="font-size: 2.5rem; font-family: var(--font-display); line-height: 1">2</div>
-        <recede-block>awaiting review</recede-block>
-      </stat-display>
-      <stat-display>
-        <div style="font-size: 2.5rem; font-family: var(--font-display); line-height: 1">14</div>
-        <recede-block>shipped 2026</recede-block>
-      </stat-display>
-    </columns>
-
   </content-region>
 </app-shell>`
+  },
+
+  navigation: {
+    label: "Navigation bar",
+    description: "Top-level nav with logo, links, and a primary action.",
+    vocabs: ["vocab-editorial", "vocab-dashboard"],
+    source: `<wayfinder>
+  <strong style="font-family: var(--font-display); font-size: 1.25rem">Quoin</strong>
+  <a href="/spec/">Spec</a>
+  <a href="/playground/">Playground</a>
+  <a href="/packs/">Packs</a>
+  <a href="/components/">Components</a>
+  <primary-action>Get started</primary-action>
+</wayfinder>`
+  },
+
+  form: {
+    label: "Form",
+    description: "Form with multiple input types, label/help layout, and submit.",
+    vocabs: ["vocab-editorial", "vocab-dashboard", "vocab-forms"],
+    source: `<canvas-block>
+  <stack gap="loose">
+    <stack>
+      <authority-mark weight="emphasize">Account settings</authority-mark>
+      <lead-graf>Profile and notifications.</lead-graf>
+    </stack>
+
+    <stack>
+      <recede-block>Display name</recede-block>
+      <input-cell type="text" value="Jane Doe" />
+      <recede-block style="font-size: var(--type-size-xs)">Visible on your public profile.</recede-block>
+    </stack>
+
+    <stack>
+      <recede-block>Email</recede-block>
+      <input-cell type="email" value="jane@example.com" />
+    </stack>
+
+    <stack>
+      <recede-block>Notifications</recede-block>
+      <cluster>
+        <label style="display: flex; gap: 0.5rem; align-items: center">
+          <input type="checkbox" checked />
+          <span>Weekly digest</span>
+        </label>
+        <label style="display: flex; gap: 0.5rem; align-items: center">
+          <input type="checkbox" />
+          <span>Mentions</span>
+        </label>
+        <label style="display: flex; gap: 0.5rem; align-items: center">
+          <input type="checkbox" checked />
+          <span>Direct messages</span>
+        </label>
+      </cluster>
+    </stack>
+
+    <cluster>
+      <primary-action>Save changes</primary-action>
+      <secondary-action>Cancel</secondary-action>
+    </cluster>
+  </stack>
+</canvas-block>`
+  },
+
+  "empty-state": {
+    label: "Empty state",
+    description: "First-run empty state with a single clear call to action.",
+    vocabs: ["vocab-editorial", "vocab-dashboard"],
+    source: `<canvas-block>
+  <stack gap="loose">
+    <empty-state>
+      <stack>
+        <authority-mark>No projects yet</authority-mark>
+        <lead-graf>
+          Projects organise your work and let you invite collaborators.
+          Start with a template or import from another tool.
+        </lead-graf>
+        <cluster>
+          <primary-action>Create project</primary-action>
+          <secondary-action>Import</secondary-action>
+        </cluster>
+      </stack>
+    </empty-state>
+  </stack>
+</canvas-block>`
+  },
+
+  alert: {
+    label: "Alert band",
+    description: "All four alert intents stacked, with compact pill variant.",
+    vocabs: ["vocab-editorial", "vocab-dashboard"],
+    source: `<canvas-block>
+  <stack gap="loose">
+    <alert-band intent="info">
+      The new version of Quoin ships <strong>variants</strong> on key primitives.
+    </alert-band>
+    <alert-band intent="success">
+      Build complete. <strong>3.2s</strong> total, <strong>0 warnings</strong>.
+    </alert-band>
+    <alert-band intent="warning">
+      Your trial expires in 5 days. <a href="#">Upgrade now</a> to continue.
+    </alert-band>
+    <alert-band intent="critical">
+      <strong>Deploy failed.</strong> The production token pack is missing a required token.
+    </alert-band>
+    <cluster>
+      <alert-band intent="info" variant="compact">Cmd-K opens search</alert-band>
+      <alert-band intent="success" variant="compact">2 ahead</alert-band>
+      <alert-band intent="warning" variant="compact">Drafts</alert-band>
+    </cluster>
+  </stack>
+</canvas-block>`
+  },
+
+  blank: {
+    label: "Blank",
+    description: "Empty starting point.",
+    vocabs: ["vocab-editorial", "vocab-dashboard"],
+    source: `<canvas-block>
+  <stack>
+    <authority-mark>Start here</authority-mark>
+    <reading-flow>
+      <p>Replace this with your own Quoin source.</p>
+    </reading-flow>
+  </stack>
+</canvas-block>`
   }
 };
 
