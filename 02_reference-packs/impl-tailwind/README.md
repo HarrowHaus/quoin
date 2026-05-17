@@ -35,11 +35,34 @@ Tailwind v4 toolchain:
 ```html
 <link rel="stylesheet" href="/node_modules/@quoin/tokens-baseline/tokens.css">
 <link rel="stylesheet" href="/dist/tailwind.css">
+<link rel="stylesheet" href="/node_modules/@quoin/impl-tailwind/companion.css">
 ```
 
 Tailwind v4 picks up the arbitrary-value classes during its content
 scan and emits the corresponding CSS. The variables resolve at runtime
 against the token pack's stylesheet.
+
+## Companion stylesheet (Phase 5a polish)
+
+`companion.css` ships alongside `emit.js` and applies the visual-maturity
+layer — hover, focus, active, and motion states for every primitive —
+via attribute selectors that match the arbitrary-value classes the
+emitter produces. Loading it gives you, for free:
+
+- Tactile button hover (1px lift + brightness shift) and active state.
+- Universal keyboard focus rings on every interactive primitive.
+- Card hover lift (border + shadow) for emphasis-card, pricing-tier,
+  feature-cell, kpi-card, etc.
+- Input focus rings on input-cell, textarea-cell, pin-entry.
+- Animated entrance for alert-band, resolved-mark, active-zone.
+- Shimmer animation for pending-block + skeleton-placeholder.
+- Refined tab states for segment-control.
+- Custom scrollbar styling.
+- `prefers-reduced-motion` honoured throughout.
+
+The companion uses the canonical `--motion-*` and `--ease-*` token
+namespace, so durations and easings respect whatever your active token
+pack defines. No JavaScript required — every effect is pure CSS.
 
 ## Coverage
 

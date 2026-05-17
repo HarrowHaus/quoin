@@ -61,5 +61,22 @@ await fs.writeFile(
   path.join(publicDir, "tokens.css"),
   `${baseCss}\n/* ---- 04_docs project-local override (quoin.tokens.json) ---- */\n${overrideCss}`
 );
-await fs.copyFile(shimCssSrc, path.join(publicDir, "impl.css"));
-console.log(`copied tokens.css (${ACTIVE_TOKEN_PACK} + project overrides) + impl.css -> 04_docs/public/`);
+// 3. Concatenate the lab Tailwind shim + the impl-tailwind companion
+//    (Phase 5a polish: hover/focus/motion/microinteractions). In a real
+//    project with Tailwind installed, the user just links companion.css
+//    after their Tailwind build. The shim is the lab stand-in.
+const companionCssSrc = path.join(
+  labRoot,
+  "02_reference-packs",
+  "impl-tailwind",
+  "companion.css"
+);
+const shimCss = await fs.readFile(shimCssSrc, "utf8");
+const companionCss = await fs.readFile(companionCssSrc, "utf8");
+await fs.writeFile(
+  path.join(publicDir, "impl.css"),
+  `${shimCss}\n/* ---- @quoin/impl-tailwind companion (Phase 5a polish) ---- */\n${companionCss}`
+);
+console.log(
+  `copied tokens.css (${ACTIVE_TOKEN_PACK} + project overrides) + impl.css (Tailwind shim + companion) -> 04_docs/public/`
+);

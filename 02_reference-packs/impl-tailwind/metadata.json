@@ -3,5 +3,14 @@
   "tailwindVersion": "^4.0.0",
   "supportedPrimitives": ["*"],
   "emittedFormat": "html-with-classes",
-  "capabilities": ["data-theme", "css-vars"]
+  "capabilities": [
+    "data-theme",
+    "css-vars",
+    "companion-css",
+    "hover-states",
+    "focus-visible",
+    "motion",
+    "prefers-reduced-motion"
+  ],
+  "companionStylesheet": "./companion.css"
 }

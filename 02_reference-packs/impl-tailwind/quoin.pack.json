@@ -7,7 +7,8 @@
   "description": "Tailwind v4 emitter for Quoin. Token-bearing classes use arbitrary-value syntax referencing CSS custom properties, so the pack is token-pack agnostic.",
   "exports": {
     "emit": "./emit.js",
-    "metadata": "./metadata.json"
+    "metadata": "./metadata.json",
+    "css": "./companion.css"
   },
   "metadata": {
     "author": "Quoin",
