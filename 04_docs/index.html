@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/impl.css" />
     <link rel="stylesheet" href="/site.css" />
     <script type="module" src="/impl.js"></script>
+    <script type="module" src="/cmd-k.js"></script>
   </head>
   <body class="min-h-screen" style="background: var(--surface); color: var(--text); font-family: var(--font-sans)">
 
@@ -20,6 +21,7 @@
       <a href="/spec/">Spec</a>
       <a href="/playground/">Playground</a>
       <a href="/packs/">Packs</a>
+      <a href="/components/">Components</a>
       <a href="/start/">Get started</a>
       <a href="https://github.com/harrowhaus/quoin">GitHub</a>
     </wayfinder>
@@ -202,7 +204,7 @@
 
         <stack>
           <authority-mark weight="emphasize">Where to start</authority-mark>
-          <feature-grid min-cell-width="280px">
+          <feature-grid min-cell-width="260px">
             <feature-cell>
               <stack>
                 <lead-graf weight="emphasize"><a href="/start/">Getting started</a></lead-graf>
@@ -212,19 +214,31 @@
             <feature-cell>
               <stack>
                 <lead-graf weight="emphasize"><a href="/playground/">Live playground</a></lead-graf>
-                <recede-block>Type semantic markup; see compiled output and the rendered result in real time. Swap token packs from a dropdown.</recede-block>
+                <recede-block>Type semantic markup; see compiled output and the rendered result in real time. Preset seeds + token / vocab / impl pickers.</recede-block>
+              </stack>
+            </feature-cell>
+            <feature-cell>
+              <stack>
+                <lead-graf weight="emphasize"><a href="/components/">Components</a></lead-graf>
+                <recede-block>Every variant + new primitive on one page. Stat displays, browser frames, tab panels with keyboard nav, command-menu live.</recede-block>
               </stack>
             </feature-cell>
             <feature-cell>
               <stack>
                 <lead-graf weight="emphasize"><a href="/packs/">Pack browser</a></lead-graf>
-                <recede-block>All 45 packs with attribution, license, npm install commands, source links.</recede-block>
+                <recede-block>All 46 packs with attribution, license, npm install commands, source links.</recede-block>
               </stack>
             </feature-cell>
             <feature-cell>
               <stack>
                 <lead-graf weight="emphasize"><a href="/spec/">Specification</a></lead-graf>
                 <recede-block>The four canonical documents — language reference, pack format, primitives, tokens.</recede-block>
+              </stack>
+            </feature-cell>
+            <feature-cell>
+              <stack>
+                <lead-graf weight="emphasize">Press <kbd style="font-family: var(--font-mono); font-size: 0.875em; padding: 0.1em 0.35em; background: var(--surface-recessed); border-radius: var(--radius-sm)">Cmd-K</kbd></lead-graf>
+                <recede-block>Jump anywhere in the docs from the keyboard. Live demo of the <code>command-menu</code> primitive from <code>@quoin/vocab-shadcn</code>.</recede-block>
               </stack>
             </feature-cell>
           </feature-grid>

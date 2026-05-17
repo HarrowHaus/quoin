@@ -8,4 +8,5 @@ spec/tokens/
 spec/index.html
 public/tokens.css
 public/impl.css
+public/impl.js
 .vite/

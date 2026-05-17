@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Components — Quoin docs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/tokens.css" />
+    <link rel="stylesheet" href="/impl.css" />
+    <link rel="stylesheet" href="/site.css" />
+    <script type="module" src="/impl.js"></script>
+    <script type="module" src="/cmd-k.js"></script>
+  </head>
+  <body class="min-h-screen" style="background: var(--surface); color: var(--text); font-family: var(--font-sans)">
+
+    <wayfinder>
+      <a href="/">Quoin</a>
+      <a href="/spec/">Spec</a>
+      <a href="/playground/">Playground</a>
+      <a href="/packs/">Packs</a>
+      <a href="/components/">Components</a>
+      <a href="/start/">Get started</a>
+      <a href="https://github.com/harrowhaus/quoin">GitHub</a>
+    </wayfinder>
+
+    <canvas-block>
+      <stack gap="loose">
+
+        <breadcrumb-trail>
+          <a href="/">Home</a>
+          <span>/</span>
+          <span>Components</span>
+        </breadcrumb-trail>
+
+        <authority-mark>Components</authority-mark>
+
+        <lead-graf>
+          Every primitive that ships in the v0.1 reference packs, plus
+          the variants and Phase 5 additions. Each section shows the
+          authored Quoin source and the rendered result.
+        </lead-graf>
+
+        <alert-band intent="info">
+          Press <kbd style="font-family: var(--font-mono); font-size: 0.875em; padding: 0.1em 0.35em; background: var(--surface-recessed); border-radius: var(--radius-sm)">Cmd-K</kbd> (or <kbd style="font-family: var(--font-mono); font-size: 0.875em; padding: 0.1em 0.35em; background: var(--surface-recessed); border-radius: var(--radius-sm)">Ctrl-K</kbd>) anywhere on the docs to jump between pages — that's <code>companion.js</code> handling the command-menu primitive live.
+        </alert-band>
+
+        <!-- ─── Stat display ─── -->
+        <stack>
+          <authority-mark weight="emphasize">Stat display</authority-mark>
+          <recede-block>
+            Big number + label. Use for marketing-page metrics, dashboard
+            KPIs. <code>intent="success" | "warning" | "critical"</code>
+            tints the number.
+          </recede-block>
+          <columns ratio="1:1:1">
+            <stat-display>
+              <div style="font-size: 3rem; font-family: var(--font-display); line-height: 1">45</div>
+              <recede-block>packs</recede-block>
+            </stat-display>
+            <stat-display intent="success">
+              <div style="font-size: 3rem; font-family: var(--font-display); line-height: 1">96</div>
+              <recede-block>primitives</recede-block>
+            </stat-display>
+            <stat-display intent="warning">
+              <div style="font-size: 3rem; font-family: var(--font-display); line-height: 1">8</div>
+              <recede-block>variants</recede-block>
+            </stat-display>
+          </columns>
+        </stack>
+
+        <!-- ─── Emphasis-card variants ─── -->
+        <stack>
+          <authority-mark weight="emphasize">Emphasis-card variants</authority-mark>
+          <recede-block>
+            <code>variant="default"</code>, <code>variant="featured"</code>,
+            <code>variant="quiet"</code>. Same primitive, different role
+            on the page.
+          </recede-block>
+          <columns ratio="1:1:1">
+            <emphasis-card>
+              <stack>
+                <lead-graf weight="emphasize">Default</lead-graf>
+                <recede-block>Border + elevated surface + card radius. The workhorse.</recede-block>
+              </stack>
+            </emphasis-card>
+            <emphasis-card variant="featured">
+              <stack>
+                <lead-graf weight="emphasize">Featured</lead-graf>
+                <recede-block>Accent strip on top, larger panel padding. Eye anchor.</recede-block>
+              </stack>
+            </emphasis-card>
+            <emphasis-card variant="quiet">
+              <stack>
+                <lead-graf weight="emphasize">Quiet</lead-graf>
+                <recede-block>No border, recessed surface fill. Supporting content.</recede-block>
+              </stack>
+            </emphasis-card>
+          </columns>
+        </stack>
+
+        <!-- ─── Alert-band variants + intents ─── -->
+        <stack>
+          <authority-mark weight="emphasize">Alert-band</authority-mark>
+          <recede-block>
+            Four intents — <code>info</code>, <code>success</code>,
+            <code>warning</code>, <code>critical</code> — plus a
+            <code>variant="compact"</code> pill for ambient status.
+          </recede-block>
+          <stack>
+            <alert-band intent="info">Informational. Build queue depth normal.</alert-band>
+            <alert-band intent="success">Build complete. Three new packs published.</alert-band>
+            <alert-band intent="warning">Cache reduced. Next build may be slower than usual.</alert-band>
+            <alert-band intent="critical">Build failed. One token reference unresolved.</alert-band>
+          </stack>
+          <cluster>
+            <alert-band intent="info" variant="compact">Compact pill</alert-band>
+            <alert-band intent="success" variant="compact">Saved</alert-band>
+            <alert-band intent="warning" variant="compact">Stale</alert-band>
+            <alert-band intent="critical" variant="compact">Error</alert-band>
+          </cluster>
+        </stack>
+
+        <!-- ─── Step-flow ─── -->
+        <stack>
+          <authority-mark weight="emphasize">Step-flow</authority-mark>
+          <recede-block>
+            Numbered horizontal steps with connecting lines. Install
+            flows, onboarding, process diagrams.
+          </recede-block>
+          <step-flow>
+            <li><stack>
+              <div style="font-family: var(--font-display); font-size: 2rem; line-height: 1; color: var(--text-emphasis)">01</div>
+              <lead-graf weight="emphasize">Install</lead-graf>
+              <recede-block><code>npm install @quoin/compiler</code></recede-block>
+            </stack></li>
+            <li><stack>
+              <div style="font-family: var(--font-display); font-size: 2rem; line-height: 1; color: var(--text-emphasis)">02</div>
+              <lead-graf weight="emphasize">Pack</lead-graf>
+              <recede-block>Pick one of each — token, vocab, impl.</recede-block>
+            </stack></li>
+            <li><stack>
+              <div style="font-family: var(--font-display); font-size: 2rem; line-height: 1; color: var(--text-emphasis)">03</div>
+              <lead-graf weight="emphasize">Write</lead-graf>
+              <recede-block>Author in semantic elements.</recede-block>
+            </stack></li>
+            <li><stack>
+              <div style="font-family: var(--font-display); font-size: 2rem; line-height: 1; color: var(--text-emphasis)">04</div>
+              <lead-graf weight="emphasize">Build</lead-graf>
+              <recede-block><code>npm run build</code>. Done.</recede-block>
+            </stack></li>
+          </step-flow>
+        </stack>
+
+        <!-- ─── Browser-frame + terminal-frame ─── -->
+        <stack>
+          <authority-mark weight="emphasize">Chrome wrappers</authority-mark>
+          <recede-block>
+            <code>&lt;browser-frame&gt;</code> wraps any content in a
+            browser-window chrome. <code>&lt;terminal-frame&gt;</code>
+            does the same for code with a dark surface.
+          </recede-block>
+          <columns ratio="1:1">
+            <browser-frame url="harrow.haus/quoin">
+              <div style="padding: 2rem; background: var(--surface)">
+                <stack>
+                  <authority-mark weight="emphasize">A page in Quoin</authority-mark>
+                  <reading-flow>
+                    <p>This is what an embedded browser frame looks like. Wrap any markup in <code>&lt;browser-frame&gt;</code> to give it screenshot chrome.</p>
+                  </reading-flow>
+                </stack>
+              </div>
+            </browser-frame>
+            <terminal-frame title="dist/index.html">
+              <code>&lt;button type="button" class="px-4 py-2
+  bg-[var(--accent)]
+  text-[var(--text-on-accent)]
+  rounded-[var(--radius-md)]"&gt;
+  Save
+&lt;/button&gt;</code>
+            </terminal-frame>
+          </columns>
+        </stack>
+
+        <!-- ─── Hero-banner variants ─── -->
+        <stack>
+          <authority-mark weight="emphasize">Hero-banner variants</authority-mark>
+          <recede-block>
+            <code>variant="default"</code>, <code>variant="split"</code>
+            (two-column desktop), <code>variant="centered"</code>
+            (narrow, axis-centered).
+          </recede-block>
+        </stack>
+
+        <hero-banner variant="centered">
+          <stack>
+            <authority-mark weight="emphasize">Centered hero</authority-mark>
+            <lead-graf>Content centered on the page axis, narrower measure, editorial feel.</lead-graf>
+            <cluster><primary-action>Primary</primary-action><secondary-action>Secondary</secondary-action></cluster>
+          </stack>
+        </hero-banner>
+
+        <hero-banner variant="split">
+          <stack>
+            <authority-mark weight="emphasize">Split hero — content side</authority-mark>
+            <lead-graf>Two-column layout on desktop, stacks on mobile. The right slot takes any content — image, illustration, animation.</lead-graf>
+            <cluster><primary-action>Primary</primary-action><secondary-action>Secondary</secondary-action></cluster>
+          </stack>
+          <emphasis-card variant="quiet">
+            <stack>
+              <recede-block>Right slot</recede-block>
+              <reading-flow><p>This could be a screenshot, an illustration, a video, or an embedded demo. The split hero is the most-used variant in modern marketing.</p></reading-flow>
+            </stack>
+          </emphasis-card>
+        </hero-banner>
+
+        <!-- ─── Pricing-tier with featured ─── -->
+        <stack>
+          <authority-mark weight="emphasize">Pricing tiers</authority-mark>
+          <recede-block>
+            <code>variant="featured"</code> adds an accent ring +
+            slight scale to anchor the recommended tier.
+          </recede-block>
+          <columns ratio="1:1:1">
+            <pricing-tier>
+              <stack>
+                <lead-graf weight="emphasize">Free</lead-graf>
+                <div style="font-family: var(--font-display); font-size: 2.5rem; line-height: 1">$0</div>
+                <recede-block>Solo projects.</recede-block>
+                <secondary-action>Start</secondary-action>
+              </stack>
+            </pricing-tier>
+            <pricing-tier variant="featured">
+              <stack>
+                <recede-block style="text-transform: uppercase; letter-spacing: var(--tracking-wide, 0.05em); font-family: var(--font-mono); font-size: var(--type-size-xs)">Popular</recede-block>
+                <lead-graf weight="emphasize">Studio</lead-graf>
+                <div style="font-family: var(--font-display); font-size: 2.5rem; line-height: 1">$24</div>
+                <recede-block>per editor, per month.</recede-block>
+                <primary-action>Start</primary-action>
+              </stack>
+            </pricing-tier>
+            <pricing-tier>
+              <stack>
+                <lead-graf weight="emphasize">Enterprise</lead-graf>
+                <div style="font-family: var(--font-display); font-size: 2.5rem; line-height: 1">Talk</div>
+                <recede-block>Custom contracts.</recede-block>
+                <secondary-action>Contact</secondary-action>
+              </stack>
+            </pricing-tier>
+          </columns>
+        </stack>
+
+        <!-- ─── Tab panels (5c keyboard nav) ─── -->
+        <stack>
+          <authority-mark weight="emphasize">Tab panels</authority-mark>
+          <recede-block>
+            <code>companion.js</code> wires arrow-key navigation
+            between <code>[role="tab"]</code> buttons, shows the
+            corresponding <code>[role="tabpanel"]</code>. Try the arrow
+            keys.
+          </recede-block>
+          <emphasis-card variant="quiet">
+            <stack>
+              <div role="tablist" style="display: inline-flex; padding: 0.25rem; background: var(--surface-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); gap: 0.125rem">
+                <button role="tab" type="button" id="t-overview" aria-controls="p-overview" aria-selected="true">Overview</button>
+                <button role="tab" type="button" id="t-spec" aria-controls="p-spec" aria-selected="false" tabindex="-1">Spec</button>
+                <button role="tab" type="button" id="t-roadmap" aria-controls="p-roadmap" aria-selected="false" tabindex="-1">Roadmap</button>
+              </div>
+              <div id="p-overview" role="tabpanel" aria-labelledby="t-overview">
+                <reading-flow><p>Overview panel content. Arrow-key over the tab strip to switch.</p></reading-flow>
+              </div>
+              <div id="p-spec" role="tabpanel" aria-labelledby="t-spec" hidden>
+                <reading-flow><p>Spec panel content. Same primitive, different active tab.</p></reading-flow>
+              </div>
+              <div id="p-roadmap" role="tabpanel" aria-labelledby="t-roadmap" hidden>
+                <reading-flow><p>Roadmap panel content. Phase 5e and beyond.</p></reading-flow>
+              </div>
+            </stack>
+          </emphasis-card>
+        </stack>
+
+        <!-- ─── Comparison table ─── -->
+        <stack>
+          <authority-mark weight="emphasize">Comparison table</authority-mark>
+          <recede-block>Feature × tier grid. Hover any row to highlight.</recede-block>
+          <comparison-table>
+            <thead>
+              <tr>
+                <th style="text-align: left; padding: 0.75rem 1rem; border-bottom: 1px solid var(--border)">Capability</th>
+                <th style="text-align: left; padding: 0.75rem 1rem; border-bottom: 1px solid var(--border)">v0.1</th>
+                <th style="text-align: left; padding: 0.75rem 1rem; border-bottom: 1px solid var(--border)">Phase 5</th>
+                <th style="text-align: left; padding: 0.75rem 1rem; border-bottom: 1px solid var(--border)">Roadmap</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--border)">36 v1 primitives</td><td style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--border)">✓</td><td style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--border)">✓</td><td style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--border)">✓</td></tr>
+              <tr><td style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--border)">vocab-essentials (10 layout primitives)</td><td style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--border)">—</td><td style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--border)">✓</td><td style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--border)">✓</td></tr>
+              <tr><td style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--border)">vocab-app-shell (5 app-surface primitives)</td><td style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--border)">—</td><td style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--border)">✓</td><td style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--border)">✓</td></tr>
+              <tr><td style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--border)">8 variants on existing primitives</td><td style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--border)">—</td><td style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--border)">✓</td><td style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--border)">25–40 total</td></tr>
+              <tr><td style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--border)">companion.css polish (hover / focus / motion)</td><td style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--border)">—</td><td style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--border)">✓</td><td style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--border)">✓</td></tr>
+              <tr><td style="padding: 0.75rem 1rem">companion.js interactive behaviors</td><td style="padding: 0.75rem 1rem">—</td><td style="padding: 0.75rem 1rem">✓</td><td style="padding: 0.75rem 1rem">Web Components</td></tr>
+            </tbody>
+          </comparison-table>
+        </stack>
+
+        <!-- ─── Disclosure / FAQ ─── -->
+        <stack>
+          <authority-mark weight="emphasize">Disclosure</authority-mark>
+          <recede-block>
+            Native <code>&lt;details&gt;</code> with smooth height
+            animation via <code>companion.js</code>. Respects
+            <code>prefers-reduced-motion</code>.
+          </recede-block>
+          <stack>
+            <faq-disclosure summary="What is Quoin?">
+              <reading-flow><p>A semantic design language with a build-time compiler. You write intent-bearing elements; the compiler resolves them against pluggable packs into standard HTML and CSS.</p></reading-flow>
+            </faq-disclosure>
+            <faq-disclosure summary="How do I get started?">
+              <reading-flow><p>Install <code>@quoin/compiler</code>, pick one pack of each type (token, vocab, impl), wire the Vite plugin. Five minutes for anyone who's used Tailwind. See the <a href="/start/">getting started guide</a>.</p></reading-flow>
+            </faq-disclosure>
+            <faq-disclosure summary="What licence does Quoin ship under?">
+              <reading-flow><p>MIT. All reference packs are MIT. Harvested packs preserve their source licence (mix of MIT, Apache-2.0, BSD, CC0).</p></reading-flow>
+            </faq-disclosure>
+          </stack>
+        </stack>
+
+        <!-- ─── CTA band split ─── -->
+        <cta-band variant="split">
+          <stack>
+            <authority-mark weight="emphasize">Ship something in Quoin</authority-mark>
+            <recede-block>The full vocab is yours.</recede-block>
+          </stack>
+          <cluster>
+            <primary-action><a href="/start/" style="color: inherit; text-decoration: none">Get started</a></primary-action>
+            <secondary-action><a href="/playground/" style="color: inherit; text-decoration: none">Open the playground</a></secondary-action>
+          </cluster>
+        </cta-band>
+
+        <colophon>
+          Components page. Phase 5a polish + 5b variants + 5c JS + 5d app-shell, all on one page.
+          Source: <code>04_docs/components/index.html</code>.
+        </colophon>
+
+      </stack>
+    </canvas-block>
+  </body>
+</html>

@@ -35,6 +35,7 @@ function layout({ title, slug, body }) {
     <link rel="stylesheet" href="/impl.css" />
     <link rel="stylesheet" href="/site.css" />
     <script type="module" src="/impl.js"></script>
+    <script type="module" src="/cmd-k.js"></script>
   </head>
   <body class="min-h-screen" style="background: var(--surface); color: var(--text); font-family: var(--font-sans)">
     <wayfinder>
@@ -42,6 +43,7 @@ function layout({ title, slug, body }) {
       <a href="/spec/">Spec</a>
       <a href="/playground/">Playground</a>
       <a href="/packs/">Packs</a>
+      <a href="/components/">Components</a>
       <a href="/start/">Get started</a>
       <a href="https://github.com/harrowhaus/quoin">GitHub</a>
     </wayfinder>
@@ -87,6 +89,7 @@ async function main() {
     <link rel="stylesheet" href="/impl.css" />
     <link rel="stylesheet" href="/site.css" />
     <script type="module" src="/impl.js"></script>
+    <script type="module" src="/cmd-k.js"></script>
   </head>
   <body class="min-h-screen" style="background: var(--surface); color: var(--text); font-family: var(--font-sans)">
     <wayfinder>
@@ -94,6 +97,7 @@ async function main() {
       <a href="/spec/">Spec</a>
       <a href="/playground/">Playground</a>
       <a href="/packs/">Packs</a>
+      <a href="/components/">Components</a>
       <a href="/start/">Get started</a>
       <a href="https://github.com/harrowhaus/quoin">GitHub</a>
     </wayfinder>

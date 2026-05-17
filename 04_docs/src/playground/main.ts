@@ -2,58 +2,33 @@
  * Live playground — browser-side compiler driver.
  *
  * Pulls the compiled compiler bundle from @quoin/compiler (Vite alias
- * to 01_compiler/dist) and a curated set of in-memory pack objects
- * from ./packs. On every input change, recompiles and updates both the
- * "Compiled HTML" pane and the live iframe render.
+ * to 01_compiler/dist/browser.js) and a curated set of in-memory pack
+ * objects from ./packs. On any input change, recompiles and updates
+ * both the compiled-HTML pane and the live iframe render.
+ *
+ * Phase 5e additions:
+ *   - Preset selector loads one of four seed sources (article /
+ *     marketing / dashboard / app-shell) AND auto-toggles the vocab
+ *     packs each seed needs.
+ *   - Vocab-pack multi-select checkboxes let the user load any
+ *     combination of the 8 preloaded vocabs alongside the active
+ *     token + impl pack.
  */
 
 import { compile } from "@quoin/compiler";
 import {
+  COMPANION_CSS,
   IMPL_PACKS,
   SHIM_CSS,
   TOKEN_PACKS,
   VOCAB_PACKS,
   type ImplPackId,
-  type TokenPackId
+  type TokenPackId,
+  type VocabPackId
 } from "./packs";
+import { PRESETS, type PresetId } from "./presets";
 
-const STARTER_SOURCE = `<canvas-block>
-  <stack gap="loose">
-
-    <authority-mark>Playground</authority-mark>
-
-    <lead-graf>
-      Edit this source. The compiler runs in your browser and renders
-      the result on the right. Pick a different token pack from the
-      dropdown — same source, different aesthetic.
-    </lead-graf>
-
-    <cluster>
-      <primary-action>Save</primary-action>
-      <secondary-action>Cancel</secondary-action>
-      <destructive-action>Delete</destructive-action>
-    </cluster>
-
-    <alert-band intent="info">Tokens swapped at compile time. No runtime overhead.</alert-band>
-
-    <emphasis-card>
-      <stack>
-        <lead-graf weight="emphasize">A line about the brand</lead-graf>
-        <reading-flow>
-          <p>
-            Body prose inside reading-flow at the pack's chosen measure
-            and leading. Try changing the token pack from the dropdown.
-          </p>
-        </reading-flow>
-      </stack>
-    </emphasis-card>
-
-    <pull-quote>The grid is a refusal of chance.</pull-quote>
-
-    <colophon>Composed live in the Quoin playground.</colophon>
-
-  </stack>
-</canvas-block>`;
+/* ─────────────── DOM handles ─────────────── */
 
 const source = document.getElementById("source") as HTMLTextAreaElement;
 const compiledEl = document.getElementById("compiled") as HTMLElement;
@@ -61,32 +36,75 @@ const renderFrame = document.getElementById("render") as HTMLIFrameElement;
 const status = document.getElementById("playground-status") as HTMLElement;
 const tokenSelect = document.getElementById("token-pack") as HTMLSelectElement;
 const implSelect = document.getElementById("impl-pack") as HTMLSelectElement;
+const presetSelect = document.getElementById("preset") as HTMLSelectElement;
+const vocabChecks = document.getElementById("vocab-checks") as HTMLElement;
 const tabs = document.querySelectorAll<HTMLButtonElement>("[data-tab][role='tab']");
 const bodies = document.querySelectorAll<HTMLElement>(".tab-body[data-tab]");
+
+/* ─────────────── populate dropdowns ─────────────── */
 
 function fillDropdown<T extends string>(
   el: HTMLSelectElement,
   options: T[],
-  selected: T
+  selected: T,
+  labels: Record<string, string> = {}
 ): void {
   el.innerHTML = options
     .map(
       (o) =>
-        `<option value="${o}" ${o === selected ? "selected" : ""}>${o}</option>`
+        `<option value="${o}" ${o === selected ? "selected" : ""}>${labels[o] ?? o}</option>`
     )
     .join("");
 }
 
 const tokenPackIds = Object.keys(TOKEN_PACKS) as TokenPackId[];
 const implPackIds = Object.keys(IMPL_PACKS) as ImplPackId[];
+const vocabPackIds = Object.keys(VOCAB_PACKS) as VocabPackId[];
+const presetIds = Object.keys(PRESETS) as PresetId[];
 
 let activeTokenPackId: TokenPackId = "tokens-baseline";
 let activeImplPackId: ImplPackId = "impl-tailwind";
+let activeVocabIds = new Set<VocabPackId>(["vocab-editorial", "vocab-dashboard"]);
+let activePresetId: PresetId = "article";
 
 fillDropdown(tokenSelect, tokenPackIds, activeTokenPackId);
 fillDropdown(implSelect, implPackIds, activeImplPackId);
+fillDropdown(
+  presetSelect,
+  presetIds,
+  activePresetId,
+  Object.fromEntries(presetIds.map((id) => [id, PRESETS[id].label]))
+);
 
-source.value = STARTER_SOURCE;
+/* ─────────────── vocab checkboxes ─────────────── */
+
+function renderVocabChecks(): void {
+  vocabChecks.innerHTML = vocabPackIds
+    .map(
+      (id) => `
+      <label style="display: inline-flex; align-items: center; gap: 0.375rem; cursor: pointer">
+        <input type="checkbox" data-vocab="${id}" ${activeVocabIds.has(id) ? "checked" : ""} />
+        <code style="font-family: var(--font-mono); font-size: var(--type-size-xs)">${id}</code>
+      </label>
+    `
+    )
+    .join("");
+  vocabChecks.querySelectorAll<HTMLInputElement>("[data-vocab]").forEach((cb) => {
+    cb.addEventListener("change", () => {
+      const id = cb.dataset.vocab as VocabPackId;
+      if (cb.checked) activeVocabIds.add(id);
+      else activeVocabIds.delete(id);
+      recompile();
+    });
+  });
+}
+renderVocabChecks();
+
+/* ─────────────── initial seed ─────────────── */
+
+source.value = PRESETS[activePresetId].source;
+
+/* ─────────────── render plumbing ─────────────── */
 
 function setStatus(text: string, state: "ok" | "error" | "idle" = "idle"): void {
   status.textContent = text;
@@ -94,8 +112,6 @@ function setStatus(text: string, state: "ok" | "error" | "idle" = "idle"): void 
 }
 
 function renderIntoFrame(html: string, css: string, implPackId: ImplPackId): void {
-  // The render iframe gets the token pack's tokens.css plus, for the
-  // Tailwind impl, the lab shim that resolves arbitrary-value classes.
   const usesTailwind = implPackId === "impl-tailwind";
   const page = `<!doctype html>
 <html><head>
@@ -108,10 +124,8 @@ function renderIntoFrame(html: string, css: string, implPackId: ImplPackId): voi
     pre, code { font-family: var(--font-mono, ui-monospace, monospace); }
   </style>
   <style>${css}</style>
-  ${usesTailwind ? `<style>${SHIM_CSS}</style>` : ""}
+  ${usesTailwind ? `<style>${SHIM_CSS}</style><style>${COMPANION_CSS}</style>` : ""}
 </head><body>${html}</body></html>`;
-  // Avoid using srcdoc directly for large content reliability — write
-  // into the iframe's document.
   const doc = renderFrame.contentDocument;
   if (!doc) return;
   doc.open();
@@ -122,21 +136,23 @@ function renderIntoFrame(html: string, css: string, implPackId: ImplPackId): voi
 function recompile(): void {
   const tokenEntry = TOKEN_PACKS[activeTokenPackId];
   const impl = IMPL_PACKS[activeImplPackId];
+  const vocabs = Array.from(activeVocabIds).map((id) => VOCAB_PACKS[id]);
+  if (vocabs.length === 0) {
+    setStatus("error: pick at least one vocab pack", "error");
+    compiledEl.textContent = "// pick at least one vocab pack from the Vocab packs fieldset";
+    return;
+  }
   try {
     const result = compile({
       source: source.value,
       tokenPack: tokenEntry.pack,
-      vocabularyPacks: VOCAB_PACKS,
+      vocabularyPacks: vocabs,
       implementationPack: impl,
       filename: "playground.html"
     });
     compiledEl.textContent = result.html;
     renderIntoFrame(result.html, tokenEntry.css, activeImplPackId);
-    const warnings = result.warnings.length;
-    setStatus(
-      `compiled — ${result.html.length} bytes${warnings > 0 ? ` (${warnings} non-fatal warnings)` : ""}`,
-      "ok"
-    );
+    setStatus(`compiled — ${result.html.length} bytes`, "ok");
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     compiledEl.textContent = `// ${message}`;
@@ -144,15 +160,26 @@ function recompile(): void {
   }
 }
 
-source.addEventListener("input", () => {
-  recompile();
-});
+/* ─────────────── wire events ─────────────── */
+
+source.addEventListener("input", recompile);
+
 tokenSelect.addEventListener("change", () => {
   activeTokenPackId = tokenSelect.value as TokenPackId;
   recompile();
 });
 implSelect.addEventListener("change", () => {
   activeImplPackId = implSelect.value as ImplPackId;
+  recompile();
+});
+
+presetSelect.addEventListener("change", () => {
+  activePresetId = presetSelect.value as PresetId;
+  const preset = PRESETS[activePresetId];
+  source.value = preset.source;
+  // Auto-toggle vocab checkboxes to match the preset's needs
+  activeVocabIds = new Set(preset.vocabs);
+  renderVocabChecks();
   recompile();
 });
 
@@ -166,5 +193,4 @@ tabs.forEach((tab) => {
   });
 });
 
-// Wait one tick so the iframe finishes initialising before first write.
 queueMicrotask(() => recompile());

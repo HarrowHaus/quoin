@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/impl.css" />
     <link rel="stylesheet" href="/site.css" />
     <script type="module" src="/impl.js"></script>
+    <script type="module" src="/cmd-k.js"></script>
     <style>
       .playground-grid {
         display: grid;
@@ -134,6 +135,7 @@
       <a href="/spec/">Spec</a>
       <a href="/playground/">Playground</a>
       <a href="/packs/">Packs</a>
+      <a href="/components/">Components</a>
       <a href="/start/">Get started</a>
       <a href="https://github.com/harrowhaus/quoin">GitHub</a>
     </wayfinder>
@@ -157,6 +159,10 @@
 
         <div class="playground-controls">
           <label>
+            Preset
+            <select id="preset"></select>
+          </label>
+          <label>
             Token pack
             <select id="token-pack"></select>
           </label>
@@ -166,6 +172,13 @@
           </label>
           <span id="playground-status">Loading compiler…</span>
         </div>
+
+        <fieldset id="vocab-fieldset" style="border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.75rem 1rem">
+          <legend style="font-size: var(--type-size-xs); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: var(--tracking-wide); color: var(--text-recede); padding: 0 0.5rem">
+            Vocab packs
+          </legend>
+          <div id="vocab-checks" style="display: flex; flex-wrap: wrap; gap: 0.75rem 1.25rem; font-size: var(--type-size-sm)"></div>
+        </fieldset>
 
         <div class="playground-grid">
           <section class="playground-pane">

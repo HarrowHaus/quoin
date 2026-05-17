@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/impl.css" />
     <link rel="stylesheet" href="/site.css" />
     <script type="module" src="/impl.js"></script>
+    <script type="module" src="/cmd-k.js"></script>
   </head>
   <body class="min-h-screen" style="background: var(--surface); color: var(--text); font-family: var(--font-sans)">
 
@@ -16,6 +17,7 @@
       <a href="/spec/">Spec</a>
       <a href="/playground/">Playground</a>
       <a href="/packs/">Packs</a>
+      <a href="/components/">Components</a>
       <a href="/start/">Get started</a>
       <a href="https://github.com/harrowhaus/quoin">GitHub</a>
     </wayfinder>
@@ -34,6 +36,29 @@
           Five minutes if you've used Tailwind. The flow: install the compiler,
           install one pack of each type, write a page, build.
         </lead-graf>
+
+        <step-flow>
+          <li><stack>
+            <div style="font-family: var(--font-display); font-size: 2rem; line-height: 1; color: var(--text-emphasis)">01</div>
+            <lead-graf weight="emphasize">Install</lead-graf>
+            <recede-block>Compiler + one pack of each type.</recede-block>
+          </stack></li>
+          <li><stack>
+            <div style="font-family: var(--font-display); font-size: 2rem; line-height: 1; color: var(--text-emphasis)">02</div>
+            <lead-graf weight="emphasize">Wire</lead-graf>
+            <recede-block>Vite plugin in <code>vite.config.ts</code>.</recede-block>
+          </stack></li>
+          <li><stack>
+            <div style="font-family: var(--font-display); font-size: 2rem; line-height: 1; color: var(--text-emphasis)">03</div>
+            <lead-graf weight="emphasize">Write</lead-graf>
+            <recede-block>Author in semantic elements.</recede-block>
+          </stack></li>
+          <li><stack>
+            <div style="font-family: var(--font-display); font-size: 2rem; line-height: 1; color: var(--text-emphasis)">04</div>
+            <lead-graf weight="emphasize">Build</lead-graf>
+            <recede-block><code>npm run build</code>. Done.</recede-block>
+          </stack></li>
+        </step-flow>
 
         <stack>
           <authority-mark weight="emphasize">1. Install</authority-mark>
