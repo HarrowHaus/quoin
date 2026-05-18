@@ -1,0 +1,19 @@
+{
+  "name": "@quoin/theme-letterpress",
+  "version": "1.0.0",
+  "description": "Tactile Warmth theme for Quoin — Pantone Cloud Dancer ground + Junicode + Ranade + grain texture.",
+  "license": "MIT",
+  "main": "./quoin.pack.json",
+  "files": [
+    "quoin.pack.json",
+    "overrides/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "theme", "tactile", "warm", "klim", "magazine"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "02_reference-packs/themes/letterpress"
+  }
+}

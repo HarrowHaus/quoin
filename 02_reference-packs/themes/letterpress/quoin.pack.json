@@ -1,0 +1,22 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/theme-letterpress",
+  "version": "1.0.0",
+  "type": "theme",
+  "quoinVersion": "^0.1.0",
+  "description": "Tactile Warmth — Pantone Cloud Dancer ground, cream/sand/oat/terracotta palette, magazine-grid rhythm, grain overlay instead of shadow. For studio sites and agency portfolios.",
+  "exports": {
+    "lightModeOverrides": "./overrides/light.json",
+    "darkModeOverrides": "./overrides/dark.json",
+    "p3WideGamutOverrides": "./overrides/p3.json"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/themes/letterpress",
+    "tags": ["theme", "tactile", "klim", "pantone-cloud-dancer", "magazine", "warm"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0"
+  }
+}

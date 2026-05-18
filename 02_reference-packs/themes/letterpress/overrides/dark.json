@@ -1,0 +1,30 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "@quoin/theme-letterpress — dark mode. Lamp-lit study register: deep umber surfaces (not pure black), cream ink, terracotta accent preserved. Maintains the warm-paper feeling in low-light.",
+
+  "surface":          { "$type": "color", "$value": "oklch(20% 0.020 55)" },
+  "surface-elevated": { "$type": "color", "$value": "oklch(24% 0.022 55)" },
+  "surface-recessed": { "$type": "color", "$value": "oklch(15% 0.018 55)" },
+  "surface-inverse":  { "$type": "color", "$value": "oklch(92% 0.025 70)" },
+  "scrim":            { "$type": "color", "$value": "oklch(8% 0.012 55 / 0.78)" },
+
+  "text":             { "$type": "color", "$value": "oklch(88% 0.020 75)" },
+  "text-emphasis":    { "$type": "color", "$value": "oklch(96% 0.018 75)" },
+  "text-recede":      { "$type": "color", "$value": "oklch(64% 0.020 75)" },
+  "text-disabled":    { "$type": "color", "$value": "oklch(42% 0.018 70)" },
+  "text-on-accent":   { "$type": "color", "$value": "oklch(96% 0.015 75)" },
+  "highlight":        { "$type": "color", "$value": "oklch(64% 0.14 45 / 0.30)" },
+
+  "border":           { "$type": "color", "$value": "oklch(32% 0.022 55)" },
+  "border-emphasis":  { "$type": "color", "$value": "oklch(58% 0.020 75)" },
+  "border-recede":    { "$type": "color", "$value": "oklch(26% 0.020 55)" },
+
+  "accent":           { "$type": "color", "$value": "oklch(68% 0.14 45)" },
+  "accent-recede":    { "$type": "color", "$value": "oklch(45% 0.10 45)" },
+  "focus-ring":       { "$type": "color", "$value": "oklch(68% 0.14 45)" },
+  "shadow-tint":      { "$type": "color", "$value": "oklch(0% 0 0 / 0)" },
+
+  "link":             { "$type": "color", "$value": "oklch(78% 0.12 45)" },
+  "link-visited":     { "$type": "color", "$value": "oklch(72% 0.10 120)" },
+  "link-hover":       { "$type": "color", "$value": "oklch(85% 0.14 45)" }
+}

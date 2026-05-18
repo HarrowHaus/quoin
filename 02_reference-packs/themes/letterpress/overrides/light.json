@@ -1,0 +1,51 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "@quoin/theme-letterpress — light mode. Pantone Cloud Dancer #f1ece4 ground (oklch ~95% 0.018 80), companion palette: cream, sand, oat, terracotta, dusty olive. Quoin identity typography (Junicode + Ranade). Low saturation across the board — texture (grain overlay at 3–8% opacity) replaces shadow.",
+
+  "surface":          { "$type": "color", "$value": "oklch(95% 0.018 80)" },
+  "surface-elevated": { "$type": "color", "$value": "oklch(92% 0.025 70)" },
+  "surface-recessed": { "$type": "color", "$value": "oklch(88% 0.030 70)" },
+  "surface-inverse":  { "$type": "color", "$value": "oklch(30% 0.020 60)" },
+  "scrim":            { "$type": "color", "$value": "oklch(30% 0.020 60 / 0.55)" },
+
+  "text":             { "$type": "color", "$value": "oklch(28% 0.020 60)" },
+  "text-emphasis":    { "$type": "color", "$value": "oklch(18% 0.020 60)" },
+  "text-recede":      { "$type": "color", "$value": "oklch(48% 0.020 60)" },
+  "text-disabled":    { "$type": "color", "$value": "oklch(70% 0.018 70)" },
+  "text-on-accent":   { "$type": "color", "$value": "oklch(95% 0.015 70)" },
+  "highlight":        { "$type": "color", "$value": "oklch(72% 0.12 45 / 0.20)" },
+
+  "border":           { "$type": "color", "$value": "oklch(82% 0.030 65)" },
+  "border-emphasis":  { "$type": "color", "$value": "oklch(30% 0.020 60)" },
+  "border-recede":    { "$type": "color", "$value": "oklch(88% 0.025 70)" },
+
+  "accent":           { "$type": "color", "$value": "oklch(58% 0.12 45)" },
+  "accent-recede":    { "$type": "color", "$value": "oklch(75% 0.06 45)" },
+  "focus-ring":       { "$type": "color", "$value": "oklch(58% 0.12 45)" },
+  "shadow-tint":      { "$type": "color", "$value": "oklch(30% 0.020 60 / 0.04)" },
+
+  "link":             { "$type": "color", "$value": "oklch(45% 0.10 45)" },
+  "link-visited":     { "$type": "color", "$value": "oklch(45% 0.08 120)" },
+  "link-hover":       { "$type": "color", "$value": "oklch(58% 0.12 45)" },
+
+  "font-display": { "$type": "fontFamily", "$value": "'Junicode 2', 'Junicode', 'Tiempos Headline', ui-serif, Georgia, serif" },
+  "font-serif":   { "$type": "fontFamily", "$value": "'Junicode 2', 'Junicode', 'Tiempos Text', ui-serif, Georgia, serif" },
+  "font-sans":    { "$type": "fontFamily", "$value": "'Ranade Variable', 'Ranade', 'Untitled Sans', system-ui, sans-serif" },
+  "font-mono":    { "$type": "fontFamily", "$value": "'Monaspace Neon', 'Monaspace Neon Variable', 'JetBrains Mono', ui-monospace, monospace" },
+  "font-mono-pixel": { "$type": "fontFamily", "$value": "'Departure Mono', 'Departure Mono Variable', monospace" },
+
+  "radius-md":   { "$type": "dimension", "$value": "2px" },
+  "radius-lg":   { "$type": "dimension", "$value": "4px" },
+  "radius-card": { "$type": "dimension", "$value": "0px" },
+
+  "motion-fast":   { "$type": "duration", "$value": "320ms" },
+  "motion-normal": { "$type": "duration", "$value": "600ms" },
+  "motion-slow":   { "$type": "duration", "$value": "800ms" },
+
+  "shadow-md": { "$type": "shadow", "$value": [
+    { "color": "{shadow-tint}", "offsetX": "0", "offsetY": "0", "blur": "0", "spread": "0", "inset": false }
+  ] },
+  "shadow-lg": { "$type": "shadow", "$value": [
+    { "color": "{shadow-tint}", "offsetX": "0", "offsetY": "0", "blur": "0", "spread": "0", "inset": false }
+  ] }
+}

@@ -1,0 +1,8 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "@quoin/theme-letterpress — P3 wide-gamut. Terracotta accent gains depth via Display-P3 coordinates. Earth-tone palette benefits less from wide gamut than saturated themes — the difference is most visible on the accent.",
+
+  "accent":     { "$type": "color", "$value": "color(display-p3 0.78 0.42 0.30)" },
+  "focus-ring": { "$type": "color", "$value": "color(display-p3 0.78 0.42 0.30)" },
+  "link-hover": { "$type": "color", "$value": "color(display-p3 0.78 0.42 0.30)" }
+}
