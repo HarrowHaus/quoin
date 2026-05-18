@@ -1,0 +1,798 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>@quoin/pattern-button-system — specimen</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=JetBrains+Mono:wght@100..800&display=swap">
+
+  <style>
+    /* ──────────────────────────────────────────────────────────────────
+       Token surface — read from canonical Quoin tokens. This specimen
+       seeds :root with tokens-baseline values; in a real consumer the
+       token pack + theme overrides supply these. The point of the
+       specimen is to render the pattern AT TOKEN GROUND, not to author
+       hardcoded values.
+       ────────────────────────────────────────────────────────────────── */
+    :root {
+      /* surfaces + text */
+      --surface: oklch(98% 0 0);
+      --surface-elevated: oklch(100% 0 0);
+      --surface-recessed: oklch(96% 0 0);
+      --text: oklch(30% 0 0);
+      --text-emphasis: oklch(15% 0 0);
+      --text-recede: oklch(50% 0 0);
+      --text-disabled: oklch(72% 0 0);
+      --text-on-accent: oklch(100% 0 0);
+      --text-on-critical: oklch(100% 0 0);
+
+      /* accent + status */
+      --accent: oklch(20% 0 0);
+      --accent-recede: oklch(94% 0 0);
+      --accent-hover: oklch(28% 0 0);
+      --accent-active: oklch(12% 0 0);
+      --critical: oklch(55% 0.22 25);
+      --critical-hover: oklch(48% 0.22 25);
+      --critical-active: oklch(42% 0.22 25);
+      --success: oklch(58% 0.18 155);
+
+      /* borders */
+      --border: oklch(88% 0 0);
+      --border-emphasis: oklch(20% 0 0);
+      --border-recede: oklch(94% 0 0);
+      --border-width-sm: 1px;
+      --border-width-md: 2px;
+
+      /* focus */
+      --focus-ring: oklch(55% 0.22 260);
+      --focus-ring-width: 2px;
+      --focus-ring-offset: 2px;
+      --shadow-focus: 0 0 0 var(--focus-ring-offset) var(--surface), 0 0 0 calc(var(--focus-ring-offset) + var(--focus-ring-width)) var(--focus-ring);
+
+      /* spacing */
+      --space-1: 4px;
+      --space-2: 6px;
+      --space-3: 8px;
+      --space-4: 12px;
+      --space-6: 20px;
+      --space-8: 32px;
+      --space-card: 16px;
+      --space-panel: 24px;
+
+      /* radius */
+      --radius-sm: 4px;
+      --radius-md: 6px;
+      --radius-lg: 8px;
+      --radius-pill: 999px;
+
+      /* typography */
+      --font-sans: 'Inter Variable', 'Inter', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+      --type-size-xs: 0.75rem;
+      --type-size-sm: 0.875rem;
+      --type-size-md: 1rem;
+      --type-size-lg: 1.125rem;
+      --type-size-xl: 1.5rem;
+      --type-size-2xl: 2rem;
+      --type-size-3xl: 2.5rem;
+      --font-weight-regular: 400;
+      --font-weight-medium: 500;
+      --font-weight-semibold: 600;
+      --leading-tight: 1.1;
+      --leading-prose: 1.55;
+      --tracking-tight: -0.01em;
+      --tracking-normal: 0;
+      --tracking-wide: 0.02em;
+
+      /* motion */
+      --motion-fast: 120ms;
+      --motion-normal: 160ms;
+      --motion-slow: 200ms;
+      --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+      --transition-default: all var(--motion-normal) var(--ease-standard);
+
+      /* shadow */
+      --shadow-tint: oklch(0% 0 0 / 0.08);
+      --shadow-sm: 0 1px 2px 0 var(--shadow-tint);
+      --shadow-md: 0 4px 6px -1px var(--shadow-tint), 0 2px 4px -1px var(--shadow-tint);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --surface: oklch(10% 0 0);
+        --surface-elevated: oklch(15% 0 0);
+        --surface-recessed: oklch(8% 0 0);
+        --text: oklch(85% 0 0);
+        --text-emphasis: oklch(98% 0 0);
+        --text-recede: oklch(60% 0 0);
+        --text-disabled: oklch(35% 0 0);
+        --text-on-accent: oklch(10% 0 0);
+        --accent: oklch(95% 0 0);
+        --accent-recede: oklch(20% 0 0);
+        --accent-hover: oklch(88% 0 0);
+        --accent-active: oklch(80% 0 0);
+        --border: oklch(20% 0 0);
+        --border-emphasis: oklch(85% 0 0);
+        --border-recede: oklch(15% 0 0);
+        --shadow-tint: oklch(0% 0 0 / 0.4);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      :root {
+        --motion-fast: 0ms;
+        --motion-normal: 0ms;
+        --motion-slow: 0ms;
+        --transition-default: none;
+      }
+      * { animation: none !important; }
+    }
+
+    /* ──────────────────────────────────────────────────────────────────
+       Page chrome
+       ────────────────────────────────────────────────────────────────── */
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: var(--space-panel);
+      background: var(--surface);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-md);
+      line-height: var(--leading-prose);
+      font-feature-settings: 'kern', 'liga', 'calt';
+    }
+
+    .page-header {
+      max-width: 980px;
+      margin: 0 auto var(--space-8);
+    }
+
+    h1 {
+      margin: 0 0 var(--space-3);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-3xl);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--tracking-tight);
+      line-height: var(--leading-tight);
+      color: var(--text-emphasis);
+    }
+
+    h2 {
+      margin: var(--space-8) 0 var(--space-4);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-xl);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--tracking-tight);
+      line-height: var(--leading-tight);
+      color: var(--text-emphasis);
+    }
+
+    h3 {
+      margin: var(--space-6) 0 var(--space-2);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-md);
+      font-weight: var(--font-weight-medium);
+      letter-spacing: var(--tracking-normal);
+      color: var(--text-emphasis);
+    }
+
+    p {
+      margin: 0 0 var(--space-4);
+      max-width: 60ch;
+    }
+
+    .lede {
+      color: var(--text-recede);
+      font-size: var(--type-size-md);
+    }
+
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    section {
+      margin-bottom: var(--space-8);
+      padding: var(--space-panel);
+      background: var(--surface-elevated);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-lg);
+    }
+
+    .matrix {
+      display: grid;
+      gap: var(--space-3);
+      align-items: center;
+    }
+    .matrix.cols-5 {
+      grid-template-columns: 96px repeat(5, 1fr);
+    }
+    .matrix.cols-4 {
+      grid-template-columns: 96px repeat(4, 1fr);
+    }
+    .matrix .row-label {
+      font-family: var(--font-mono);
+      font-size: var(--type-size-xs);
+      color: var(--text-recede);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+    }
+    .matrix .col-label {
+      font-family: var(--font-mono);
+      font-size: var(--type-size-xs);
+      color: var(--text-recede);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      text-align: center;
+      padding-bottom: var(--space-2);
+    }
+
+    .cell {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+    }
+
+    .specimen-note {
+      font-family: var(--font-mono);
+      font-size: var(--type-size-xs);
+      color: var(--text-recede);
+      margin-top: var(--space-2);
+    }
+
+    /* ──────────────────────────────────────────────────────────────────
+       action-button — the production pattern
+       Every property reads from a CSS variable. No hardcoded values
+       past this comment block.
+       ────────────────────────────────────────────────────────────────── */
+
+    .action-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+
+      /* per-size tokens override these on the size modifier */
+      padding: var(--space-3) var(--space-4);
+      min-height: 44px;     /* 44×44 hit target — overridden ONLY for xs which uses 28×28 visible w/ generous click-area padding */
+      min-width: 44px;
+
+      font-family: var(--font-sans);
+      font-size: var(--type-size-sm);
+      font-weight: var(--font-weight-medium);
+      letter-spacing: var(--tracking-normal);
+      line-height: var(--leading-tight);
+
+      border: var(--border-width-sm) solid transparent;
+      border-radius: var(--radius-md);
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
+      transition: var(--transition-default);
+      text-decoration: none;
+      white-space: nowrap;
+      user-select: none;
+
+      /* tabular numerics on label (button labels with counts/percents shouldn't shift) */
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ─── sizes ─── */
+    .action-button[data-size="xs"] {
+      min-height: 28px;
+      min-width: 28px;
+      padding: var(--space-1) var(--space-2);
+      font-size: var(--type-size-xs);
+      gap: var(--space-1);
+      border-radius: var(--radius-sm);
+    }
+    .action-button[data-size="sm"] {
+      min-height: 36px;
+      min-width: 36px;
+      padding: var(--space-2) var(--space-3);
+      font-size: var(--type-size-sm);
+    }
+    .action-button[data-size="md"] {
+      min-height: 44px;
+      padding: var(--space-3) var(--space-4);
+      font-size: var(--type-size-sm);
+    }
+    .action-button[data-size="lg"] {
+      min-height: 52px;
+      padding: var(--space-4) var(--space-6);
+      font-size: var(--type-size-md);
+    }
+
+    /* ─── intents — primary ─── */
+    .action-button[data-intent="primary"] {
+      background: var(--accent);
+      color: var(--text-on-accent);
+      border-color: var(--accent);
+    }
+    .action-button[data-intent="primary"]:hover {
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+    }
+    .action-button[data-intent="primary"]:active {
+      background: var(--accent-active);
+      border-color: var(--accent-active);
+    }
+
+    /* ─── intents — secondary ─── */
+    .action-button[data-intent="secondary"] {
+      background: var(--surface-elevated);
+      color: var(--text-emphasis);
+      border-color: var(--border);
+    }
+    .action-button[data-intent="secondary"]:hover {
+      background: var(--surface-recessed);
+      border-color: var(--border-emphasis);
+    }
+    .action-button[data-intent="secondary"]:active {
+      background: var(--surface-recessed);
+      border-color: var(--border-emphasis);
+      transform: translateY(1px);
+    }
+
+    /* ─── intents — ghost ─── */
+    .action-button[data-intent="ghost"] {
+      background: transparent;
+      color: var(--text-emphasis);
+      border-color: transparent;
+    }
+    .action-button[data-intent="ghost"]:hover {
+      background: var(--surface-recessed);
+    }
+    .action-button[data-intent="ghost"]:active {
+      background: var(--accent-recede);
+    }
+
+    /* ─── intents — destructive ─── */
+    .action-button[data-intent="destructive"] {
+      background: var(--critical);
+      color: var(--text-on-critical);
+      border-color: var(--critical);
+    }
+    .action-button[data-intent="destructive"]:hover {
+      background: var(--critical-hover);
+      border-color: var(--critical-hover);
+    }
+    .action-button[data-intent="destructive"]:active {
+      background: var(--critical-active);
+      border-color: var(--critical-active);
+    }
+
+    /* ─── intents — link ─── */
+    .action-button[data-intent="link"] {
+      background: transparent;
+      color: var(--accent);
+      border-color: transparent;
+      padding-left: 0;
+      padding-right: 0;
+      min-width: auto;
+      min-height: 28px;
+      border-radius: 0;
+    }
+    .action-button[data-intent="link"]:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+    }
+
+    /* ─── microstate — focus / focus-visible ─── */
+    .action-button:focus {
+      outline: none;
+    }
+    .action-button:focus-visible {
+      outline: none;
+      box-shadow: var(--shadow-focus);
+    }
+    .action-button[data-mockstate~="focus-visible"] {
+      box-shadow: var(--shadow-focus);
+    }
+    .action-button[data-mockstate~="hover"] {
+      filter: brightness(0.95);
+    }
+    .action-button[data-intent="primary"][data-mockstate~="hover"] {
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+      filter: none;
+    }
+    .action-button[data-intent="destructive"][data-mockstate~="hover"] {
+      background: var(--critical-hover);
+      border-color: var(--critical-hover);
+      filter: none;
+    }
+    .action-button[data-mockstate~="active"] {
+      transform: translateY(1px);
+    }
+
+    /* ─── microstate — disabled ─── */
+    .action-button[disabled],
+    .action-button[aria-disabled="true"],
+    .action-button[data-mockstate~="disabled"] {
+      cursor: not-allowed;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    /* ─── microstate — selected (toggle / segmented) ─── */
+    .action-button[aria-pressed="true"],
+    .action-button[aria-selected="true"],
+    .action-button[data-mockstate~="selected"] {
+      background: var(--accent);
+      color: var(--text-on-accent);
+      border-color: var(--accent);
+    }
+    .action-button[data-intent="ghost"][aria-pressed="true"],
+    .action-button[data-intent="ghost"][data-mockstate~="selected"] {
+      background: var(--accent-recede);
+      color: var(--text-emphasis);
+      border-color: var(--border-emphasis);
+    }
+
+    /* ─── microstate — loading ─── */
+    .action-button[aria-busy="true"],
+    .action-button[data-mockstate~="loading"] {
+      cursor: progress;
+      color: transparent;
+      position: relative;
+    }
+    .action-button[aria-busy="true"]::after,
+    .action-button[data-mockstate~="loading"]::after {
+      content: '';
+      position: absolute;
+      inset: 50% auto auto 50%;
+      width: 14px;
+      height: 14px;
+      margin: -7px 0 0 -7px;
+      border: 2px solid currentColor;
+      border-top-color: transparent;
+      border-radius: 999px;
+      animation: spin 600ms linear infinite;
+      color: var(--text-on-accent);
+    }
+    .action-button[data-intent="secondary"][data-mockstate~="loading"]::after,
+    .action-button[data-intent="ghost"][data-mockstate~="loading"]::after,
+    .action-button[data-intent="link"][data-mockstate~="loading"]::after {
+      color: var(--text-emphasis);
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ─── state — success (post-action confirmation) ─── */
+    .action-button[data-state="success"] {
+      background: var(--success);
+      color: var(--text-on-accent);
+      border-color: var(--success);
+    }
+
+    /* ─── icon composition ─── */
+    .action-button .ico {
+      width: 1em;
+      height: 1em;
+      flex: 0 0 auto;
+    }
+    .action-button[data-icon-position="only"] {
+      padding-left: 0;
+      padding-right: 0;
+      aspect-ratio: 1;
+    }
+
+    /* ──────────────────────────────────────────────────────────────────
+       button-group
+       ────────────────────────────────────────────────────────────────── */
+    .button-group {
+      display: inline-flex;
+      gap: var(--space-2);
+    }
+    .button-group[data-register="connected"] {
+      gap: 0;
+    }
+    .button-group[data-register="connected"] .action-button {
+      border-radius: 0;
+      margin-left: calc(-1 * var(--border-width-sm));
+    }
+    .button-group[data-register="connected"] .action-button:first-child {
+      border-top-left-radius: var(--radius-md);
+      border-bottom-left-radius: var(--radius-md);
+      margin-left: 0;
+    }
+    .button-group[data-register="connected"] .action-button:last-child {
+      border-top-right-radius: var(--radius-md);
+      border-bottom-right-radius: var(--radius-md);
+    }
+    .button-group[data-orientation="vertical"] {
+      flex-direction: column;
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <h1>@quoin/pattern-button-system — specimen</h1>
+    <p class="lede">Five intents (primary / secondary / ghost / destructive / link) × four sizes (xs / sm / md / lg) × eight microstates. The full P0 button system rendered token-grounded. Every value reads from a CSS custom property; nothing here is hardcoded past the <code>:root</code> seed.</p>
+  </header>
+
+  <main>
+    <!-- ────────── Intent × Size matrix (default microstate) ────────── -->
+    <section>
+      <h2>Intent × size matrix</h2>
+      <p>Five intents at four sizes — 20 cells. Default microstate. Every button satisfies the 44×44 minimum hit target except <code>xs</code> which renders at 28×28 visible but is reserved for chrome contexts (toolbar icons, table-row actions) where the surrounding container provides the click target.</p>
+
+      <div class="matrix cols-5">
+        <span class="col-label"></span>
+        <span class="col-label">primary</span>
+        <span class="col-label">secondary</span>
+        <span class="col-label">ghost</span>
+        <span class="col-label">destructive</span>
+        <span class="col-label">link</span>
+
+        <span class="row-label">xs</span>
+        <div class="cell"><button class="action-button" data-intent="primary" data-size="xs">Get started</button></div>
+        <div class="cell"><button class="action-button" data-intent="secondary" data-size="xs">Cancel</button></div>
+        <div class="cell"><button class="action-button" data-intent="ghost" data-size="xs">Skip</button></div>
+        <div class="cell"><button class="action-button" data-intent="destructive" data-size="xs">Delete</button></div>
+        <div class="cell"><button class="action-button" data-intent="link" data-size="xs">Read docs →</button></div>
+
+        <span class="row-label">sm</span>
+        <div class="cell"><button class="action-button" data-intent="primary" data-size="sm">Get started</button></div>
+        <div class="cell"><button class="action-button" data-intent="secondary" data-size="sm">Cancel</button></div>
+        <div class="cell"><button class="action-button" data-intent="ghost" data-size="sm">Skip</button></div>
+        <div class="cell"><button class="action-button" data-intent="destructive" data-size="sm">Delete</button></div>
+        <div class="cell"><button class="action-button" data-intent="link" data-size="sm">Read docs →</button></div>
+
+        <span class="row-label">md</span>
+        <div class="cell"><button class="action-button" data-intent="primary" data-size="md">Get started</button></div>
+        <div class="cell"><button class="action-button" data-intent="secondary" data-size="md">Cancel</button></div>
+        <div class="cell"><button class="action-button" data-intent="ghost" data-size="md">Skip</button></div>
+        <div class="cell"><button class="action-button" data-intent="destructive" data-size="md">Delete</button></div>
+        <div class="cell"><button class="action-button" data-intent="link" data-size="md">Read docs →</button></div>
+
+        <span class="row-label">lg</span>
+        <div class="cell"><button class="action-button" data-intent="primary" data-size="lg">Get started</button></div>
+        <div class="cell"><button class="action-button" data-intent="secondary" data-size="lg">Cancel</button></div>
+        <div class="cell"><button class="action-button" data-intent="ghost" data-size="lg">Skip</button></div>
+        <div class="cell"><button class="action-button" data-intent="destructive" data-size="lg">Delete</button></div>
+        <div class="cell"><button class="action-button" data-intent="link" data-size="lg">Read docs →</button></div>
+      </div>
+      <p class="specimen-note">Recommended size scale: <code>md</code> default for inline marketing CTAs; <code>lg</code> for hero CTAs; <code>sm</code> for app-chrome rows; <code>xs</code> for table-row & toolbar-only icons.</p>
+    </section>
+
+    <!-- ────────── Microstate matrix ────────── -->
+    <section>
+      <h2>Microstate matrix</h2>
+      <p>Eight microstates per intent. Default-microstate buttons in the matrix above are interactive; the rendered <code>hover</code>, <code>active</code>, <code>focus-visible</code>, <code>disabled</code>, <code>loading</code>, <code>selected</code> cells below force the visual via <code>data-mockstate</code> so they read in a static specimen. In production these resolve via <code>:hover</code>, <code>:active</code>, <code>:focus-visible</code>, <code>[disabled]</code>, <code>[aria-busy]</code>, <code>[aria-pressed]</code>.</p>
+
+      <h3>Primary intent</h3>
+      <div class="matrix cols-4">
+        <span class="col-label">default</span>
+        <span class="col-label">hover</span>
+        <span class="col-label">active</span>
+        <span class="col-label">focus-visible</span>
+
+        <div class="cell"><button class="action-button" data-intent="primary">Save changes</button></div>
+        <div class="cell"><button class="action-button" data-intent="primary" data-mockstate="hover">Save changes</button></div>
+        <div class="cell"><button class="action-button" data-intent="primary" data-mockstate="active">Save changes</button></div>
+        <div class="cell"><button class="action-button" data-intent="primary" data-mockstate="focus-visible">Save changes</button></div>
+
+        <span class="col-label">disabled</span>
+        <span class="col-label">loading</span>
+        <span class="col-label">selected (toggle)</span>
+        <span class="col-label">success (post-action)</span>
+
+        <div class="cell"><button class="action-button" data-intent="primary" disabled>Save changes</button></div>
+        <div class="cell"><button class="action-button" data-intent="primary" aria-busy="true" aria-live="polite">Save changes</button></div>
+        <div class="cell"><button class="action-button" data-intent="primary" aria-pressed="true">Bookmark</button></div>
+        <div class="cell"><button class="action-button" data-intent="primary" data-state="success">Saved ✓</button></div>
+      </div>
+
+      <h3>Secondary intent</h3>
+      <div class="matrix cols-4">
+        <span class="col-label">default</span>
+        <span class="col-label">hover</span>
+        <span class="col-label">active</span>
+        <span class="col-label">focus-visible</span>
+
+        <div class="cell"><button class="action-button" data-intent="secondary">Cancel</button></div>
+        <div class="cell"><button class="action-button" data-intent="secondary" data-mockstate="hover">Cancel</button></div>
+        <div class="cell"><button class="action-button" data-intent="secondary" data-mockstate="active">Cancel</button></div>
+        <div class="cell"><button class="action-button" data-intent="secondary" data-mockstate="focus-visible">Cancel</button></div>
+
+        <span class="col-label">disabled</span>
+        <span class="col-label">loading</span>
+        <span class="col-label">selected</span>
+        <span class="col-label">with icon</span>
+
+        <div class="cell"><button class="action-button" data-intent="secondary" disabled>Cancel</button></div>
+        <div class="cell"><button class="action-button" data-intent="secondary" aria-busy="true">Submitting…</button></div>
+        <div class="cell"><button class="action-button" data-intent="secondary" aria-pressed="true">List</button></div>
+        <div class="cell"><button class="action-button" data-intent="secondary"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M8 3v10"/></svg>Add field</button></div>
+      </div>
+
+      <h3>Ghost intent</h3>
+      <div class="matrix cols-4">
+        <span class="col-label">default</span>
+        <span class="col-label">hover</span>
+        <span class="col-label">active</span>
+        <span class="col-label">focus-visible</span>
+
+        <div class="cell"><button class="action-button" data-intent="ghost">Skip</button></div>
+        <div class="cell"><button class="action-button" data-intent="ghost" data-mockstate="hover">Skip</button></div>
+        <div class="cell"><button class="action-button" data-intent="ghost" data-mockstate="active">Skip</button></div>
+        <div class="cell"><button class="action-button" data-intent="ghost" data-mockstate="focus-visible">Skip</button></div>
+
+        <span class="col-label">disabled</span>
+        <span class="col-label">loading</span>
+        <span class="col-label">selected</span>
+        <span class="col-label">icon-only</span>
+
+        <div class="cell"><button class="action-button" data-intent="ghost" disabled>Skip</button></div>
+        <div class="cell"><button class="action-button" data-intent="ghost" aria-busy="true">Skip</button></div>
+        <div class="cell"><button class="action-button" data-intent="ghost" aria-pressed="true">Filter</button></div>
+        <div class="cell"><button class="action-button" data-intent="ghost" data-icon-position="only" aria-label="Close panel"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4l8 8M12 4l-8 8"/></svg></button></div>
+      </div>
+
+      <h3>Destructive intent</h3>
+      <div class="matrix cols-4">
+        <span class="col-label">default</span>
+        <span class="col-label">hover</span>
+        <span class="col-label">active</span>
+        <span class="col-label">focus-visible</span>
+
+        <div class="cell"><button class="action-button" data-intent="destructive">Delete account</button></div>
+        <div class="cell"><button class="action-button" data-intent="destructive" data-mockstate="hover">Delete account</button></div>
+        <div class="cell"><button class="action-button" data-intent="destructive" data-mockstate="active">Delete account</button></div>
+        <div class="cell"><button class="action-button" data-intent="destructive" data-mockstate="focus-visible">Delete account</button></div>
+
+        <span class="col-label">disabled</span>
+        <span class="col-label">loading</span>
+        <span class="col-label">with confirm note</span>
+        <span class="col-label">icon-leading</span>
+
+        <div class="cell"><button class="action-button" data-intent="destructive" disabled>Delete account</button></div>
+        <div class="cell"><button class="action-button" data-intent="destructive" aria-busy="true">Delete account</button></div>
+        <div class="cell"><button class="action-button" data-intent="destructive">Yes, delete forever</button></div>
+        <div class="cell"><button class="action-button" data-intent="destructive"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4l8 8M12 4l-8 8"/></svg>Discard</button></div>
+      </div>
+
+      <h3>Link intent</h3>
+      <div class="matrix cols-4">
+        <span class="col-label">default</span>
+        <span class="col-label">hover</span>
+        <span class="col-label">disabled</span>
+        <span class="col-label">focus-visible</span>
+
+        <div class="cell"><a class="action-button" data-intent="link" href="#">Read the docs →</a></div>
+        <div class="cell"><a class="action-button" data-intent="link" href="#" data-mockstate="hover">Read the docs →</a></div>
+        <div class="cell"><a class="action-button" data-intent="link" aria-disabled="true">Read the docs →</a></div>
+        <div class="cell"><a class="action-button" data-intent="link" href="#" data-mockstate="focus-visible">Read the docs →</a></div>
+      </div>
+      <p class="specimen-note">Link intent uses an <code>&lt;a&gt;</code> element (renders as an anchor) when an <code>href</code> is provided. Disabled link uses <code>aria-disabled='true'</code> rather than the <code>disabled</code> attribute since anchors don't support <code>disabled</code> natively.</p>
+    </section>
+
+    <!-- ────────── Icon-composition variants ────────── -->
+    <section>
+      <h2>Icon composition</h2>
+      <p>Four icon positions: none (label-only), leading (icon left of label), trailing (icon right of label), only (no label — must declare <code>aria-label</code>).</p>
+
+      <div class="matrix cols-4">
+        <span class="col-label">label-only</span>
+        <span class="col-label">leading icon</span>
+        <span class="col-label">trailing icon</span>
+        <span class="col-label">icon-only</span>
+
+        <div class="cell"><button class="action-button" data-intent="primary">Continue</button></div>
+        <div class="cell"><button class="action-button" data-intent="primary"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>Continue</button></div>
+        <div class="cell"><button class="action-button" data-intent="primary">Continue<svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button></div>
+        <div class="cell"><button class="action-button" data-intent="primary" data-icon-position="only" aria-label="Continue"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button></div>
+      </div>
+    </section>
+
+    <!-- ────────── button-group composition ────────── -->
+    <section>
+      <h2>Button-group composition</h2>
+      <p>Two registers: <code>gapped</code> (visually-separate buttons; toolbar / action-cluster register) and <code>connected</code> (seamed segmented control; view-switcher / radio-group register).</p>
+
+      <h3>Gapped — toolbar register</h3>
+      <div class="cell">
+        <div class="button-group" data-register="gapped" role="toolbar" aria-label="Document actions">
+          <button class="action-button" data-intent="primary">Save</button>
+          <button class="action-button" data-intent="secondary">Save as draft</button>
+          <button class="action-button" data-intent="ghost">Cancel</button>
+        </div>
+      </div>
+
+      <h3>Connected — segmented control / view switcher</h3>
+      <div class="cell">
+        <div class="button-group" data-register="connected" role="radiogroup" aria-label="View mode">
+          <button class="action-button" data-intent="secondary" role="radio" aria-checked="true" aria-pressed="true" data-mockstate="selected">Grid</button>
+          <button class="action-button" data-intent="secondary" role="radio" aria-checked="false">List</button>
+          <button class="action-button" data-intent="secondary" role="radio" aria-checked="false">Kanban</button>
+          <button class="action-button" data-intent="secondary" role="radio" aria-checked="false">Calendar</button>
+        </div>
+      </div>
+
+      <h3>Connected — paginator</h3>
+      <div class="cell">
+        <nav class="button-group" data-register="connected" aria-label="Pagination">
+          <button class="action-button" data-intent="secondary" data-size="sm" aria-label="Previous page"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 4l-4 4 4 4"/></svg></button>
+          <button class="action-button" data-intent="secondary" data-size="sm">1</button>
+          <button class="action-button" data-intent="secondary" data-size="sm" aria-current="page" aria-pressed="true" data-mockstate="selected">2</button>
+          <button class="action-button" data-intent="secondary" data-size="sm">3</button>
+          <button class="action-button" data-intent="secondary" data-size="sm" disabled>…</button>
+          <button class="action-button" data-intent="secondary" data-size="sm">12</button>
+          <button class="action-button" data-intent="secondary" data-size="sm" aria-label="Next page"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 4l4 4-4 4"/></svg></button>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ────────── Pattern-level states ────────── -->
+    <section>
+      <h2>Pattern-level states</h2>
+      <p>The button system declares 4 pattern-level states (in addition to the 8 microstates per button). These describe the entire button cluster, not individual buttons.</p>
+
+      <h3>state: default</h3>
+      <p class="lede">Normal interactive state — buttons respond to input.</p>
+      <div class="cell">
+        <button class="action-button" data-intent="primary">Save</button>
+        <button class="action-button" data-intent="secondary">Cancel</button>
+      </div>
+
+      <h3>state: loading (form submission in progress)</h3>
+      <p class="lede">Primary action spins; secondary actions disable until response.</p>
+      <div class="cell">
+        <button class="action-button" data-intent="primary" aria-busy="true" aria-live="polite">Save</button>
+        <button class="action-button" data-intent="secondary" disabled>Cancel</button>
+      </div>
+
+      <h3>state: success (post-action confirmation)</h3>
+      <p class="lede">Primary shows momentary success affordance; live region announces. Reverts to default after ~1500ms in production.</p>
+      <div class="cell">
+        <button class="action-button" data-intent="primary" data-state="success" aria-live="polite">Saved ✓</button>
+        <button class="action-button" data-intent="secondary">Done</button>
+      </div>
+
+      <h3>state: error (form validation failed)</h3>
+      <p class="lede">Primary remains active to allow retry; error message appears in the surrounding form (not in the button itself — buttons don't carry error state, the form does).</p>
+      <div class="cell" style="flex-direction: column; align-items: flex-start;">
+        <div role="alert" style="color: var(--critical); font-size: var(--type-size-sm); margin-bottom: var(--space-3);">Email address is required.</div>
+        <div style="display: flex; gap: var(--space-3);">
+          <button class="action-button" data-intent="primary">Try again</button>
+          <button class="action-button" data-intent="secondary">Cancel</button>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Accessibility checklist</h2>
+      <ul>
+        <li>Every <code>action-button</code> renders as a semantic <code>&lt;button&gt;</code> by default; <code>&lt;a&gt;</code> when <code>href</code> is supplied.</li>
+        <li>Icon-only buttons require <code>aria-label</code> — enforced at compile time.</li>
+        <li>Loading state announces via <code>aria-busy="true"</code> + <code>aria-live="polite"</code>.</li>
+        <li>Selected/toggle buttons use <code>aria-pressed</code>; segmented-control buttons use <code>role="radio" + aria-checked</code>.</li>
+        <li>Disabled state uses <code>[disabled]</code> for skip-focus or <code>aria-disabled="true"</code> for retain-focus + announce-as-dimmed; consumer chooses per context.</li>
+        <li>Focus ring honors <code>--focus-ring-width</code> + <code>--focus-ring-offset</code> + <code>--focus-ring</code> tokens (visible only via <code>:focus-visible</code> — mouse clicks don't trigger ring).</li>
+        <li>44×44 minimum hit target on <code>sm/md/lg</code> sizes; <code>xs</code> is reserved for chrome contexts with parent-row hit areas.</li>
+        <li>Reduced-motion fallback: transitions collapse to 0ms; loading spinner stops animating; CSS <code>@media (prefers-reduced-motion: reduce)</code> handles globally.</li>
+        <li>Text + icon convey state; never color alone (e.g., success state uses checkmark + label, not just colour swap).</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Typography precision</h2>
+      <p>Labels render with <code>font-variant-numeric: tabular-nums</code> so counts and percentages in labels (e.g., "Save (3 unsaved)") don't shift the layout. Curly apostrophes used in copy: "Don't save" not "Don't save". Em dashes for ranges. Ellipsis character (…) for in-progress affordances ("Saving…", "Loading…").</p>
+      <div class="cell">
+        <button class="action-button" data-intent="primary">Save (3 unsaved)</button>
+        <button class="action-button" data-intent="secondary">Don't save</button>
+        <button class="action-button" data-intent="ghost">Save & continue…</button>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

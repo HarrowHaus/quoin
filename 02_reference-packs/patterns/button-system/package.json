@@ -1,0 +1,20 @@
+{
+  "name": "@quoin/pattern-button-system",
+  "version": "1.0.0",
+  "description": "Foundational P0 button pattern for Quoin — 5 intents × 4 sizes × 8 microstates + button-group composition.",
+  "license": "MIT",
+  "main": "./quoin.pack.json",
+  "files": [
+    "quoin.pack.json",
+    "primitives/",
+    "examples/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "pattern", "button", "action", "p0", "foundational"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "02_reference-packs/patterns/button-system"
+  }
+}

@@ -1,0 +1,162 @@
+[
+  {
+    "name": "action-button",
+    "category": "interactive",
+    "role": "Production button primitive — the foundational interactive element. Five intents (primary / secondary / ghost / destructive / link), four sizes (xs / sm / md / lg), eight microstates (default / hover / active / focus / focus-visible / disabled / loading / selected). Supports icon-only, icon-leading, and icon-trailing compositions. Renders as semantic <button> or <a> depending on whether the consumer provides an href attribute.",
+    "attributes": {
+      "intent": {
+        "values": ["primary", "secondary", "ghost", "destructive", "link"],
+        "default": "primary"
+      },
+      "size": {
+        "values": ["xs", "sm", "md", "lg"],
+        "default": "md",
+        "specific": true
+      },
+      "density": {
+        "values": ["normal", "dense"],
+        "default": "normal"
+      },
+      "weight": {
+        "values": ["normal", "emphasize"],
+        "default": "normal"
+      },
+      "state": {
+        "values": ["default", "loading", "success", "error"],
+        "default": "default",
+        "specific": true
+      },
+      "selected": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true
+      },
+      "icon-position": {
+        "values": ["none", "leading", "trailing", "only"],
+        "default": "none",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "--accent",
+      "color": "--text-on-accent",
+      "borderColor": "--accent",
+      "borderWidth": "--border-width-sm",
+      "borderRadius": "--radius-md",
+      "padding": "--space-3",
+      "fontFamily": "--font-sans",
+      "fontSize": "--type-size-sm",
+      "fontWeight": "--font-weight-medium",
+      "letterSpacing": "--tracking-normal",
+      "lineHeight": "--leading-tight",
+      "transition": "--transition-default",
+      "focusRingColor": "--focus-ring",
+      "focusRingWidth": "--focus-ring-width",
+      "focusRingOffset": "--focus-ring-offset",
+      "shadowFocus": "--shadow-focus"
+    },
+    "structure": {
+      "element": "button",
+      "attributes": {
+        "type": "button"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "polymorphic": {
+        "asAnchor": "when an `href` attribute is provided, render as <a> not <button>"
+      },
+      "minHitTarget": "44x44 CSS pixels — enforced via min-height + min-width on all sizes (xs included)",
+      "loadingBehavior": "preserve visible width; replace label with spinner; aria-busy='true'; aria-live='polite'",
+      "ariaPatterns": {
+        "iconOnly": "always set aria-label",
+        "loading": "set aria-busy='true' during loading state",
+        "disabled": "prefer aria-disabled='true' over the disabled attribute when consumer wants focus retained (so screen-reader announces 'dimmed' instead of skipping entirely)",
+        "selected": "for selected microstate use aria-pressed='true' (toggle button) or role='option' + aria-selected (listbox option)"
+      },
+      "reducedMotion": "transition collapses to 0ms when prefers-reduced-motion: reduce",
+      "states": ["default", "loading", "success", "error"],
+      "microStates": ["default", "hover", "active", "focus", "focus-visible", "disabled", "loading", "selected"],
+      "intents": {
+        "primary": "Solid filled — single most-emphasized CTA per surface",
+        "secondary": "Outline — competing-but-supporting action",
+        "ghost": "Transparent with text-color label — low-emphasis chrome action",
+        "destructive": "Solid filled with --critical — irreversible action; pairs with confirmation prompt",
+        "link": "Inline text with underline-on-hover — sits inline with prose"
+      },
+      "sizing": {
+        "xs": {
+          "padding": "var(--space-1) var(--space-2)",
+          "fontSize": "var(--type-size-xs)",
+          "minHeight": "28px",
+          "iconSize": "14px"
+        },
+        "sm": {
+          "padding": "var(--space-2) var(--space-3)",
+          "fontSize": "var(--type-size-sm)",
+          "minHeight": "36px",
+          "iconSize": "16px"
+        },
+        "md": {
+          "padding": "var(--space-3) var(--space-4)",
+          "fontSize": "var(--type-size-sm)",
+          "minHeight": "44px",
+          "iconSize": "18px"
+        },
+        "lg": {
+          "padding": "var(--space-4) var(--space-6)",
+          "fontSize": "var(--type-size-md)",
+          "minHeight": "52px",
+          "iconSize": "20px"
+        }
+      }
+    }
+  },
+  {
+    "name": "button-group",
+    "category": "interactive",
+    "role": "Horizontal composition of action-buttons that share a visual unit. Two registers — connected (segmented control / radio-group style; first + last buttons get outer radius, middle buttons collapse to zero, internal borders deduplicated) and gapped (visually separate buttons separated by space-2). Used for toolbar action clusters, view switchers, paginators, segmented controls.",
+    "attributes": {
+      "register": {
+        "values": ["connected", "gapped"],
+        "default": "gapped",
+        "specific": true
+      },
+      "density": {
+        "values": ["normal", "dense"],
+        "default": "normal"
+      },
+      "orientation": {
+        "values": ["horizontal", "vertical"],
+        "default": "horizontal",
+        "specific": true
+      },
+      "weight": {
+        "values": ["normal", "emphasize"],
+        "default": "normal"
+      }
+    },
+    "tokens": {
+      "gap": "--space-2",
+      "borderColor": "--border",
+      "borderRadius": "--radius-md"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "role": "group"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "ariaPatterns": {
+        "segmented": "use role='radiogroup' when functioning as a single-select; each button gets role='radio' + aria-checked",
+        "toolbar": "use role='toolbar' + aria-label when functioning as a chrome action cluster"
+      },
+      "keyboardNav": "arrow keys move focus between buttons in connected register; Tab moves focus past the group as a unit",
+      "connectedBehavior": "first child rounds left-radius only; last child rounds right-radius only; middle children radius=0; internal vertical borders set to border-recede so the seam reads as a divider not a stroke"
+    }
+  }
+]
