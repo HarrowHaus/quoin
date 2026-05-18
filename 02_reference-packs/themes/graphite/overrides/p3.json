@@ -1,0 +1,8 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "@quoin/theme-graphite — P3 wide-gamut. The developer-green accent is the only chromatic note; it gains roughly 12% more chroma in Display-P3 territory. Surfaces stay achromatic (no benefit from wider gamut on pure black/white).",
+
+  "accent":     { "$type": "color", "$value": "color(display-p3 0.30 0.85 0.40)" },
+  "link-hover": { "$type": "color", "$value": "color(display-p3 0.30 0.85 0.40)" },
+  "focus-ring": { "$type": "color", "$value": "color(display-p3 0.20 0.55 1.0)" }
+}

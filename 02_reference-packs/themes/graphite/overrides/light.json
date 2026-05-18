@@ -1,0 +1,54 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "@quoin/theme-graphite — light mode. Pure white #fff, near-pure black #000, hairline 1px borders #e5e5e5 (oklch 92% 0 0), developer-green accent oklch(70% 0.20 145). Engineering-grade restraint per vercel.com / v0.dev.",
+
+  "surface":          { "$type": "color", "$value": "oklch(100% 0 0)" },
+  "surface-elevated": { "$type": "color", "$value": "oklch(100% 0 0)" },
+  "surface-recessed": { "$type": "color", "$value": "oklch(98% 0 0)" },
+  "surface-inverse":  { "$type": "color", "$value": "oklch(0% 0 0)" },
+  "scrim":            { "$type": "color", "$value": "oklch(0% 0 0 / 0.4)" },
+
+  "text":             { "$type": "color", "$value": "oklch(20% 0 0)" },
+  "text-emphasis":    { "$type": "color", "$value": "oklch(0% 0 0)" },
+  "text-recede":      { "$type": "color", "$value": "oklch(50% 0 0)" },
+  "text-disabled":    { "$type": "color", "$value": "oklch(72% 0 0)" },
+  "text-on-accent":   { "$type": "color", "$value": "oklch(0% 0 0)" },
+  "highlight":        { "$type": "color", "$value": "oklch(96% 0.04 90)" },
+
+  "border":           { "$type": "color", "$value": "oklch(92% 0 0)" },
+  "border-emphasis":  { "$type": "color", "$value": "oklch(0% 0 0)" },
+  "border-recede":    { "$type": "color", "$value": "oklch(96% 0 0)" },
+
+  "accent":           { "$type": "color", "$value": "oklch(70% 0.20 145)" },
+  "accent-recede":    { "$type": "color", "$value": "oklch(85% 0.10 145)" },
+  "focus-ring":       { "$type": "color", "$value": "oklch(55% 0.22 260)" },
+  "shadow-tint":      { "$type": "color", "$value": "oklch(0% 0 0 / 0.04)" },
+
+  "link":             { "$type": "color", "$value": "oklch(0% 0 0)" },
+  "link-visited":     { "$type": "color", "$value": "oklch(40% 0 0)" },
+  "link-hover":       { "$type": "color", "$value": "oklch(70% 0.20 145)" },
+
+  "font-display": { "$type": "fontFamily", "$value": "'Geist Variable', 'Geist', 'Inter Variable', 'Inter', -apple-system, 'Segoe UI', sans-serif" },
+  "font-sans":    { "$type": "fontFamily", "$value": "'Geist Variable', 'Geist', 'Inter Variable', 'Inter', -apple-system, 'Segoe UI', sans-serif" },
+  "font-mono":    { "$type": "fontFamily", "$value": "'Geist Mono Variable', 'Geist Mono', 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace" },
+  "font-mono-pixel": { "$type": "fontFamily", "$value": "'Geist Pixel', 'Departure Mono', 'Pixelify Sans', monospace" },
+
+  "border-width-hairline": { "$type": "dimension", "$value": "1px" },
+  "border-width-sm":       { "$type": "dimension", "$value": "1px" },
+
+  "radius-sm":   { "$type": "dimension", "$value": "4px" },
+  "radius-md":   { "$type": "dimension", "$value": "6px" },
+  "radius-lg":   { "$type": "dimension", "$value": "8px" },
+  "radius-card": { "$type": "dimension", "$value": "8px" },
+
+  "motion-fast":   { "$type": "duration", "$value": "120ms" },
+  "motion-normal": { "$type": "duration", "$value": "160ms" },
+  "motion-slow":   { "$type": "duration", "$value": "200ms" },
+
+  "shadow-md": { "$type": "shadow", "$value": [
+    { "color": "{shadow-tint}", "offsetX": "0", "offsetY": "0", "blur": "0", "spread": "1px", "inset": false }
+  ] },
+  "shadow-lg": { "$type": "shadow", "$value": [
+    { "color": "{shadow-tint}", "offsetX": "0", "offsetY": "0", "blur": "0", "spread": "1px", "inset": false }
+  ] }
+}

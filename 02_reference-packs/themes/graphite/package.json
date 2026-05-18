@@ -1,0 +1,19 @@
+{
+  "name": "@quoin/theme-graphite",
+  "version": "1.0.0",
+  "description": "Geist Precision theme for Quoin — vercel.com-lineage pure black-and-white + hairline borders + Geist type stack.",
+  "license": "MIT",
+  "main": "./quoin.pack.json",
+  "files": [
+    "quoin.pack.json",
+    "overrides/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "theme", "geist", "swiss", "monochrome", "developer"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "02_reference-packs/themes/graphite"
+  }
+}

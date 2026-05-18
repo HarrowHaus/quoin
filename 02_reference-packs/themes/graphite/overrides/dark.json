@@ -1,0 +1,30 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "@quoin/theme-graphite — dark mode. True-black ground, near-white ink, hairline borders in #1f1f1f. Single developer-green accent preserved. The light/dark inversion is mechanical — no warm-shift, no chroma drift.",
+
+  "surface":          { "$type": "color", "$value": "oklch(0% 0 0)" },
+  "surface-elevated": { "$type": "color", "$value": "oklch(8% 0 0)" },
+  "surface-recessed": { "$type": "color", "$value": "oklch(0% 0 0)" },
+  "surface-inverse":  { "$type": "color", "$value": "oklch(100% 0 0)" },
+  "scrim":            { "$type": "color", "$value": "oklch(0% 0 0 / 0.7)" },
+
+  "text":             { "$type": "color", "$value": "oklch(92% 0 0)" },
+  "text-emphasis":    { "$type": "color", "$value": "oklch(100% 0 0)" },
+  "text-recede":      { "$type": "color", "$value": "oklch(60% 0 0)" },
+  "text-disabled":    { "$type": "color", "$value": "oklch(40% 0 0)" },
+  "text-on-accent":   { "$type": "color", "$value": "oklch(0% 0 0)" },
+  "highlight":        { "$type": "color", "$value": "oklch(40% 0.15 90)" },
+
+  "border":           { "$type": "color", "$value": "oklch(18% 0 0)" },
+  "border-emphasis":  { "$type": "color", "$value": "oklch(100% 0 0)" },
+  "border-recede":    { "$type": "color", "$value": "oklch(12% 0 0)" },
+
+  "accent":           { "$type": "color", "$value": "oklch(75% 0.22 145)" },
+  "accent-recede":    { "$type": "color", "$value": "oklch(45% 0.15 145)" },
+  "focus-ring":       { "$type": "color", "$value": "oklch(70% 0.22 260)" },
+  "shadow-tint":      { "$type": "color", "$value": "oklch(0% 0 0 / 0)" },
+
+  "link":             { "$type": "color", "$value": "oklch(100% 0 0)" },
+  "link-visited":     { "$type": "color", "$value": "oklch(75% 0 0)" },
+  "link-hover":       { "$type": "color", "$value": "oklch(75% 0.22 145)" }
+}
