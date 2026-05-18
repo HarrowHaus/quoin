@@ -1,0 +1,9 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "@quoin/theme-bloom — P3 wide-gamut. The peach/coral accent + warm gradient palette gain visible saturation on capable monitors — bloom benefits more from wide gamut than most themes thanks to its mid-saturation palette.",
+
+  "accent":     { "$type": "color", "$value": "color(display-p3 0.95 0.45 0.35)" },
+  "focus-ring": { "$type": "color", "$value": "color(display-p3 0.95 0.45 0.35)" },
+  "link":       { "$type": "color", "$value": "color(display-p3 0.85 0.40 0.30)" },
+  "link-hover": { "$type": "color", "$value": "color(display-p3 0.95 0.45 0.35)" }
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "@quoin/theme-bloom — light mode. Soft pastel-to-coral gradient palette: cream ground, sage and rose tints on surfaces, peach accent. Impl pack emits flowing gradient mesh sections at the hero/section transitions.",
+
+  "surface":          { "$type": "color", "$value": "oklch(97% 0.015 75)" },
+  "surface-elevated": { "$type": "color", "$value": "oklch(98% 0.020 30)" },
+  "surface-recessed": { "$type": "color", "$value": "oklch(94% 0.025 60)" },
+  "surface-inverse":  { "$type": "color", "$value": "oklch(25% 0.020 40)" },
+  "scrim":            { "$type": "color", "$value": "oklch(35% 0.025 40 / 0.5)" },
+
+  "text":             { "$type": "color", "$value": "oklch(32% 0.030 35)" },
+  "text-emphasis":    { "$type": "color", "$value": "oklch(20% 0.025 35)" },
+  "text-recede":      { "$type": "color", "$value": "oklch(55% 0.030 40)" },
+  "text-disabled":    { "$type": "color", "$value": "oklch(75% 0.025 50)" },
+  "text-on-accent":   { "$type": "color", "$value": "oklch(98% 0.012 50)" },
+  "highlight":        { "$type": "color", "$value": "oklch(82% 0.18 30 / 0.25)" },
+
+  "border":           { "$type": "color", "$value": "oklch(88% 0.030 50)" },
+  "border-emphasis":  { "$type": "color", "$value": "oklch(70% 0.18 25)" },
+  "border-recede":    { "$type": "color", "$value": "oklch(92% 0.025 50)" },
+
+  "accent":           { "$type": "color", "$value": "oklch(70% 0.18 25)" },
+  "accent-recede":    { "$type": "color", "$value": "oklch(85% 0.10 30)" },
+  "focus-ring":       { "$type": "color", "$value": "oklch(70% 0.18 25)" },
+  "shadow-tint":      { "$type": "color", "$value": "oklch(35% 0.025 40 / 0.10)" },
+
+  "link":             { "$type": "color", "$value": "oklch(58% 0.18 25)" },
+  "link-visited":     { "$type": "color", "$value": "oklch(50% 0.14 320)" },
+  "link-hover":       { "$type": "color", "$value": "oklch(70% 0.18 25)" },
+
+  "font-display": { "$type": "fontFamily", "$value": "'DM Serif Display', 'PP Editorial New', 'Synonym Variable', ui-serif, Georgia, serif" },
+  "font-sans":    { "$type": "fontFamily", "$value": "'Synonym Variable', 'Synonym', 'Plein Variable', 'General Sans', 'Inter Variable', system-ui, sans-serif" },
+  "font-mono":    { "$type": "fontFamily", "$value": "'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace" },
+
+  "radius-md":   { "$type": "dimension", "$value": "12px" },
+  "radius-lg":   { "$type": "dimension", "$value": "20px" },
+  "radius-card": { "$type": "dimension", "$value": "24px" },
+  "radius-pill": { "$type": "dimension", "$value": "999px" },
+
+  "motion-fast":   { "$type": "duration", "$value": "300ms" },
+  "motion-normal": { "$type": "duration", "$value": "700ms" },
+  "motion-slow":   { "$type": "duration", "$value": "1200ms" },
+
+  "shadow-md": { "$type": "shadow", "$value": [
+    { "color": "{shadow-tint}", "offsetX": "0", "offsetY": "8px",  "blur": "32px", "spread": "-8px", "inset": false }
+  ] },
+  "shadow-lg": { "$type": "shadow", "$value": [
+    { "color": "{shadow-tint}", "offsetX": "0", "offsetY": "16px", "blur": "48px", "spread": "-12px", "inset": false }
+  ] }
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/theme-bloom",
+  "version": "1.0.0",
+  "type": "theme",
+  "quoinVersion": "^0.1.0",
+  "description": "Organic Anti-Grid — flowing gradient mesh sections, soft pastel-to-coral palette, irregular boundaries, humanist sans. For consumer apps and lifestyle SaaS.",
+  "exports": {
+    "lightModeOverrides": "./overrides/light.json",
+    "darkModeOverrides": "./overrides/dark.json",
+    "p3WideGamutOverrides": "./overrides/p3.json"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/themes/bloom",
+    "tags": ["theme", "organic", "gradient", "pastel", "humanist", "consumer"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0"
+  }
+}

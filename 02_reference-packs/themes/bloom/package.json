@@ -1,0 +1,19 @@
+{
+  "name": "@quoin/theme-bloom",
+  "version": "1.0.0",
+  "description": "Organic Anti-Grid theme for Quoin — pastel gradients + humanist sans + flowing layouts.",
+  "license": "MIT",
+  "main": "./quoin.pack.json",
+  "files": [
+    "quoin.pack.json",
+    "overrides/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "theme", "organic", "gradient", "pastel", "consumer"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "02_reference-packs/themes/bloom"
+  }
+}
