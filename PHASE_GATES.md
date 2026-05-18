@@ -4,6 +4,32 @@ Exit criteria for each phase. A phase is complete when **every** criterion in it
 
 ---
 
+## Phase Themes — 10 v1.0 theme packs
+
+**Output location:** `02_reference-packs/themes/{vellum,graphite,aurora,letterpress,terminal,broadsheet,bloom,arcade,prism,vapor}/` (10 theme packs), `02_reference-packs/themes/{validate.js,showcase.js,showcase.html,README.md}` (cross-theme tooling).
+
+**Goal:** Ship 10 theme packs covering the 2026 trend landscape from research Section 1A. Each pack declares trend lineage + reference site + published sources, ships light + dark + P3 mode override files, uses OKLCH authoring with sRGB hex documented, and meets the cross-trend baseline expectations in Section 1C.
+
+**Exit criteria:**
+
+- [x] 10 theme packs shipped (vellum / graphite / aurora / letterpress / terminal / broadsheet / bloom / arcade / prism / vapor).
+- [x] Each pack cites trend lineage + reference site + published sources in README.
+- [x] Light + dark mode override files for all 10.
+- [x] P3 wide-gamut variant for all 10.
+- [x] All 10 pack manifests validate (each enforces `type: "theme"` discriminated schema, including `exports.lightModeOverrides` requirement).
+- [x] Theme overrides only canonical token names — loader-enforced; no pack ships extras.
+- [x] Cross-diversity test: each theme has a distinct `(accent, surface, text-emphasis)` palette signature.
+- [x] Side-by-side render: `showcase.html` writes 20 cells (10 themes × light/dark) for operator visual inspection.
+- [x] `validate.js` passes 10/10 themes across baseline checks + composition smoke test + diversity gate.
+- [x] All cross-trend baseline expectations met: OKLCH authoring, P3 opt-in, light + dark, system-font fallback stacks, APCA contrast targeting (operator verification), identity typography respected where used.
+- [x] `theme-vapor` ships with a novel layered-mesh gradient generator (not a Stripe-clone) — stop condition cleared. Theme pack declares `capabilities: ["layered-mesh-gradient"]`.
+- [x] `theme-prism` ships as opt-in with `capabilities: ["backdrop-filter"]` declared in manifest.
+- [ ] Operator review (side-by-side showcase visual check).
+
+**Status:** complete pending operator review. 10 distinct themes ship; cross-diversity verified by signature + visual showcase; both stop conditions for `vapor` and `prism` cleared via novel compositional contracts.
+
+---
+
 ## Phase 0.5-extension — New Pack Types
 
 **Output location:** `00_spec/{pack-types,theme-pack,template-pack,pattern-pack,icon-pack}.md` (specs), `01_compiler/src/schema/pack-manifest.json` + `types.ts` + `pack-loader.ts` + `compiler.ts` + `errors.ts` + `index.ts` (compiler), `02_reference-packs/{theme-baseline-reference,pattern-button-reference,icons-reference,template-blank-reference}/` (4 reference packs), `02_reference-packs/validate-extension.js` (validator), `01_compiler/test/extension.test.ts` (tests).
@@ -83,8 +109,8 @@ A `quoin-handoff` package was delivered describing the v1.0 launch plan. Mapping
 | **Phase 0.5 — Canonical Namespace Expansion** | **Done** via Phase 0.5 + handoff additive. 175-token namespace across 11 DTCG types. Identity typography (Junicode + Ranade + Monaspace + Departure Mono) wired into `tokens-baseline`. |
 | **Phase 3.5c — Composite Token Fidelity** | **Done** via Phase 3.5c + 3.5d. All 30 packs validate against the expanded namespace. 3 packs (tailwind, material3, bootstrap) refined with source-faithful composite values; 27 on programmatic defaults. |
 | **Phase 0.5-extension — New pack types** | **Done** — 4 pack types (theme/template/pattern/icon) defined; manifest schema extended; compiler hooks land theme override resolution, pattern registry merge, and icon resolution; 4 reference packs ship; 96/96 tests pass. |
-| **Phase Theme Packs** (10 packs) | Unblocked — next phase. Ship 9 additional theme packs against the harvested token catalogue. |
-| **Phase Template Packs** (10 packs) | Unblocked — can ship after theme packs land. |
+| **Phase Theme Packs** (10 packs) | **Done** — 10 packs ship (vellum / graphite / aurora / letterpress / terminal / broadsheet / bloom / arcade / prism / vapor); cross-diversity verified; validator + showcase tooling lands. |
+| **Phase Template Packs** (10 packs) | Unblocked — next phase. |
 | **Phase Pattern Packs** (~80–150) | Unblocked — depends on impl-pack pattern emission story (Phase 5a-cont / 5c-cont). |
 | **Phase Icon Packs** (17–18) | Blocked on 0.5-extension. |
 | **Phase 6 — Marketing site** | Independent; can start after themes. |

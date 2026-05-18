@@ -56,22 +56,29 @@ At each phase gate, run the same prompt through two different models (Claude + C
 
 ## What to do right now
 
-Current state: Phases 0–4, 4.5, 5a–5d, 0.5, 0.5-ext, 3.5c, and 3.5d
-are complete. The canonical token namespace is frozen at its v1.0
-surface area — 175 tokens across 11 DTCG 2025.10 types — and every
-token pack (reference + 30 harvested) supplies a `$value` for every
-canonical name. Strict validation passes catalogue-wide. Phase 3.5 +
-3.5b shipped the existing color/dimension extractions; Phase 3.5c
-filled the geometric/typographic gap with programmatic defaults so
-the namespace contract is satisfied. Phase 0.5-extension added 4
-new pack types (theme / template / pattern / icon) on top of the
-original 3 (token / vocabulary / implementation), with compiler
-hooks for theme override resolution, pattern primitive registration,
-and icon resolution; 4 reference packs ship; 96/96 compiler tests
-pass. An optional Phase 3.5d-cont would refine per-pack composite
-values for the remaining 27 packs — incremental polish, not blocking.
-Phase 4.5 refreshed the docs site. Phase 5e (launch) is staged but
-not executed.
+Current state: Phases 0–4, 4.5, 5a–5d, 0.5, 0.5-ext, Themes, 3.5c,
+and 3.5d are complete. The canonical token namespace is frozen at
+its v1.0 surface area — 175 tokens across 11 DTCG 2025.10 types —
+and every token pack (reference + 30 harvested) supplies a `$value`
+for every canonical name. Strict validation passes catalogue-wide.
+Phase 3.5 + 3.5b shipped the existing color/dimension extractions;
+Phase 3.5c filled the geometric/typographic gap with programmatic
+defaults. Phase 0.5-extension added 4 new pack types (theme /
+template / pattern / icon) on top of the original 3 (token /
+vocabulary / implementation), with compiler hooks for theme override
+resolution, pattern primitive registration, and icon resolution; 4
+reference packs ship; 96/96 compiler tests pass. The Themes phase
+shipped 10 v1.0 theme packs covering the 2026 trend forecast — vellum
+(anthropic.com lineage), graphite (vercel.com), aurora (linear.app),
+letterpress (klim.co.nz), terminal (rauno.me / departuremono.com),
+broadsheet (pangrampangram.com), bloom (organic anti-grid), arcade
+(dopamine saturation), prism (liquid glass, opt-in), vapor (stripe
+atmospheric with novel layered-mesh) — each with light + dark + P3
+modes; cross-diversity verified by signature + 20-cell side-by-side
+showcase. An optional Phase 3.5d-cont would refine per-pack composite
+values for the remaining 27 token packs — incremental polish, not
+blocking. Phase 4.5 refreshed the docs site. Phase 5e (launch) is
+staged but not executed. Next unblocked phase: Template Packs (10).
 
 If this is your first time opening this lab:
 

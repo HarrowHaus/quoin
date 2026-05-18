@@ -6,6 +6,44 @@ versioning follows pre-1.0 conventions until v1.0.0 publication.
 
 ## [Unreleased]
 
+### Phase Themes — 10 v1.0 theme packs (2026-05-17)
+
+Ships 10 theme packs at v1.0 per the 2026 trend forecast in research
+Section 1A. Each pack carries a documented trend lineage, reference
+site, light + dark + P3 wide-gamut variants, palette derived in OKLCH
+with hex source documented, typography stack with OFL fallback
+substitutions, and explicit motion + depth strategy.
+
+#### Themes shipped
+
+| Pack | Lineage (§1A) | Reference |
+|---|---|---|
+| `@quoin/theme-vellum` | Calm Ivory Editorial (peaking) | anthropic.com |
+| `@quoin/theme-graphite` | Geist Precision / Cold Liquid Linear | vercel.com |
+| `@quoin/theme-aurora` | Warm Liquid Linear | linear.app |
+| `@quoin/theme-letterpress` | Tactile Warmth (Pantone Cloud Dancer) | klim.co.nz |
+| `@quoin/theme-terminal` | Honest Brutalism / Mono | rauno.me, departuremono.com |
+| `@quoin/theme-broadsheet` | Big Editorial Headline | pangrampangram.com |
+| `@quoin/theme-bloom` | Organic Anti-Grid | stripe.com derivative |
+| `@quoin/theme-arcade` | Dopamine Saturation | Vacation (suncare) |
+| `@quoin/theme-prism` | Liquid Glass (opt-in via `capabilities`) | linear.app mobile, iOS 26 |
+| `@quoin/theme-vapor` | Stripe Atmospheric (with novel layered-mesh) | stripe.com |
+
+#### Novel composition contracts
+
+- **`@quoin/theme-prism`** declares `capabilities: ["backdrop-filter"]`. Surface tokens carry alpha values so `backdrop-filter: blur(…)` reveals underlying content as material depth. `blur-sm/md/lg` tuned to 12/20/32px.
+- **`@quoin/theme-vapor`** declares `capabilities: ["layered-mesh-gradient"]` — the gradient is NOT CSS `radial-gradient`/`conic-gradient` syntax but rather four absolutely-positioned blurred surface layers (sky / horizon / ground / chromatic-dust) composited via `filter: blur()` on solid-fill divs. `blur-sm/md/lg` lifted to 40/80/140px. Palette tilted +6° from the original Stripe indigo to clear the stop-condition for cloning.
+
+#### Validation + showcase
+
+- `02_reference-packs/themes/validate.js` — loads all 10 manifests, asserts cross-trend baseline (Section 1C — light + dark + P3 populated, ≥5 tokens per mode), compiles each through the full token + vocab + impl pipeline, enforces a cross-diversity gate (distinct `accent` / `surface` / `text-emphasis` triple per pack). All 10 pass.
+- `02_reference-packs/themes/showcase.js` — compiles ONE shared source against all 10 themes × 2 modes and writes a 20-cell HTML grid (`showcase.html`, ~51KB) for operator-side visual differentiation inspection.
+- `02_reference-packs/themes/README.md` — catalogue with use-case and reference-site table per pack.
+
+#### Cross-trend baseline (every theme meets)
+
+OKLCH authoring with sRGB hex documented for traceability; light + dark + P3 variants; theme overrides only canonical token names (loader-enforced); identity typography stack respected where used; system-font fallback stacks throughout (Inter / JetBrains Mono / DM Serif Display / Source Serif 4 / Synonym / Plein where the named OFL faces aren't installed); APCA contrast Lc ≥ 60 body / Lc ≥ 75 fine print (operator-side verification).
+
 ### Phase 0.5-extension — New Pack Types (2026-05-17)
 
 Adds 4 new pack types to the Quoin distribution model — **theme**,
