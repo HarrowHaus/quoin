@@ -82,5 +82,31 @@
     "structure": { "element": "header" },
     "children": "flow-content",
     "scope": "block"
+  },
+  {
+    "name": "avatar-stack",
+    "category": "content",
+    "role": "User identity primitive. Renders a single user avatar OR a horizontally-stacked group of avatars with overflow indicator (“+N”) when count exceeds visible cap. Used by app-shell patterns (assignee row, presence indicators, comment threads, multi-collaborator displays).",
+    "attributes": {
+      "density": { "values": ["sparse", "normal", "dense"], "default": "normal" },
+      "shape": { "values": ["circle", "square", "rounded"], "default": "circle", "specific": true },
+      "size": { "values": ["xs", "sm", "md", "lg"], "default": "md", "specific": true },
+      "overlap": { "values": ["none", "tight", "loose"], "default": "tight", "specific": true },
+      "visible-cap": { "values": [], "default": "3", "specific": true }
+    },
+    "tokens": {
+      "borderColor": "--surface",
+      "background": "--surface-recessed",
+      "color": "--text-emphasis",
+      "borderRadius": "--radius-pill"
+    },
+    "structure": { "element": "div" },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "overflowGlyph": "+",
+      "fallbackInitialsFromAttr": "data-name",
+      "ariaLabelPattern": "<count> people: <names list>"
+    }
   }
 ]

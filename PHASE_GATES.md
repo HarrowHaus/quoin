@@ -165,8 +165,8 @@ A `quoin-handoff` package was delivered describing the v1.0 launch plan. Mapping
 | **Phase 3.5c — Composite Token Fidelity** | **Done** via Phase 3.5c + 3.5d. All 30 packs validate against the expanded namespace. 3 packs (tailwind, material3, bootstrap) refined with source-faithful composite values; 27 on programmatic defaults. |
 | **Phase 0.5-extension — New pack types** | **Done** — 4 pack types (theme/template/pattern/icon) defined; manifest schema extended; compiler hooks land theme override resolution, pattern registry merge, and icon resolution; 4 reference packs ship; 96/96 tests pass. |
 | **Phase Theme Packs** (10 packs) | **Done** — 10 packs ship (vellum / graphite / aurora / letterpress / terminal / broadsheet / bloom / arcade / prism / vapor); cross-diversity verified; validator + showcase tooling lands. |
-| **Phase Template Packs** (10 packs) | Unblocked — next phase. |
-| **Phase Pattern Packs** (~80–150) | Unblocked — depends on impl-pack pattern emission story (Phase 5a-cont / 5c-cont). |
+| **Phase Pattern Packs** (~30 covering P0 + P1 + Forme F.01–F.18) | **Active — must complete before Templates.** Phase reorder 2026-05-17: Templates halted mid-execution when the dependency error in the original graph (Templates marked parallel with Patterns) surfaced. Templates composes Patterns the way a SaaS app composes a component library; if Patterns don't ship first, Templates either author primitives inline (violating composition architecture) or fall to scaffold quality (violating universal pack quality bar in `skills/quoin-pack-author.md`). |
+| **Phase Template Packs** (10 packs) | **Blocked on Pattern Packs phase complete + operator-approved.** Resumes after Patterns ships at full quality bar. |
 | **Phase Icon Packs** (17–18) | Blocked on 0.5-extension. |
 | **Phase 6 — Marketing site** | Independent; can start after themes. |
 | **Phase 6.5 — harrow.haus rebuild** | Independent; can start after templates. |

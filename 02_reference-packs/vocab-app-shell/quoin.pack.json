@@ -1,10 +1,10 @@
 {
   "$schema": "https://harrow.haus/quoin/schema/pack.json",
   "name": "@quoin/vocab-app-shell",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "vocabulary",
   "quoinVersion": "^0.1.0",
-  "description": "Application-shell primitives — app-shell, page-header, sidebar-nav, content-region, command-bar. Compose into full app surfaces.",
+  "description": "Application-shell primitives — app-shell, page-header, sidebar-nav, content-region, command-bar, avatar-stack. Compose into full app surfaces.",
   "exports": {
     "primitives": "./primitives/index.json"
   },
