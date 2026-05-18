@@ -6,6 +6,111 @@ versioning follows pre-1.0 conventions until v1.0.0 publication.
 
 ## [Unreleased]
 
+### Pre-Phase-Templates cleanup — commercial fonts removed + Departure Mono vendored + Universal Gate (2026-05-17)
+
+Three followup tasks before Phase Templates, shipped as a single
+cleanup commit.
+
+#### Commercial fonts removed from all theme stacks
+
+Operator decision: no commercial fonts in any Quoin pack — they
+wouldn't load for self-hosting consumers and create license risk. The
+following were stripped from theme override files; each affected
+theme now leads with an OFL-only font stack:
+
+| Pack | Removed faces | Primary face is now |
+|---|---|---|
+| `theme-vellum` | Tiempos Headline, Tiempos Text, Styrene B LC, Anthropic Mono | Source Serif 4 + Inter + JetBrains Mono |
+| `theme-letterpress` | Tiempos Headline, Tiempos Text, Untitled Sans | Junicode 2 + Ranade + Monaspace Neon + Departure Mono |
+| `theme-broadsheet` | PP Editorial New, GT Alpina, PP Fragment Sans | Junicode 2 + Ranade |
+| `theme-bloom` | PP Editorial New, Synonym, Plein Variable, General Sans | DM Serif Display + Inter |
+| `theme-arcade` | PP Editorial New, Clash Display, PP Fragment Sans | Inter Display + Inter |
+| `theme-vapor` | Söhne, Söhne Mono, Helvetica Neue | Inter Display + Inter + JetBrains Mono |
+| `theme-graphite` | Pixelify Sans (mono-pixel fallback) | Geist Pixel → Departure Mono → monospace |
+
+`theme-prism` retains SF Pro Display / SF Pro Text / SF Mono as the
+documented Apple-system-font exception — these resolve from the OS on
+macOS / iOS with zero network load and fall back to Inter elsewhere.
+
+Per-theme READMEs updated to document the substitution.
+
+#### Departure Mono vendored
+
+Pixelify Sans does NOT substitute for Departure Mono — different
+aesthetic (soft pixel-art vs rigid 80s terminal). `rektdeckard/departure-mono`
+ships only a `.zip` release with no CDN-direct WOFF2 path, so the v1.500
+WOFF2 (22 KB, SIL OFL 1.1 by Helena Zhang of helenazhang.com) is now
+vendored at `02_reference-packs/themes/_fonts/DepartureMono-Regular.woff2`
+alongside its OFL license file. The showcase declares a relative
+`@font-face` pointing at the vendored binary.
+
+Pixelify Sans removed from the showcase font-loading list and from
+theme stacks. The composition gained a `.composition-caption` element
+using `var(--font-mono-pixel)` so every cell visibly exercises the
+mono-pixel slot — verified that terminal, letterpress (explicit
+overrides) and vellum / vapor / aurora / arcade / prism / broadsheet
+/ bloom (baseline inheritance) all render Departure Mono in the
+caption tier. Graphite shows `Geist Pixel` first in the stack and
+falls through to Departure Mono since Geist Pixel isn't loaded.
+
+#### Universal Gate added to PHASE_GATES
+
+A new "Universal Gate — Visual regression checkpoint" section sits at
+the top of `PHASE_GATES.md` and applies to every future visual phase
+(Templates, Patterns, Icons, Marketing, Docs Refresh, harrow.haus
+rebuild, Examples Gallery, Showcase Wall). Every visual phase must
+ship a screenshot grid that:
+
+- Renders every pack / template / pattern at production scale
+- Shows light + dark side by side
+- Uses realistic content density (not "Hello World")
+- Attaches computed-style spot-checks (font-family, font-size, padding)
+- Dumps `document.fonts` with all referenced faces at status `"loaded"`
+- Fails the gate if two cells look identical beyond palette
+
+Why the gate exists: during Phase Themes the initial showcase passed
+every programmatic validator but rendered every cell as Times New
+Roman because (1) no `@font-face` declarations existed in the HTML
+and (2) Tailwind arbitrary-value classes were inert without a Tailwind
+CSS bundle. The validator had no way to detect this. The Universal
+Gate makes visual verification mandatory and explicit; future visual
+phase prompts reference it.
+
+#### Cross-diversity observation
+
+After the commercial-font removal, three themes share the
+`Inter Display Variable + Inter Variable` typography stack:
+**aurora**, **arcade**, **vapor**. Visual differentiation between them
+now relies entirely on palette + border radius + shadow recipe + surface
+saturation — typography no longer participates. They remain
+distinguishable in the showcase via:
+
+- Border radius: aurora 12px, arcade 20px, vapor 6px, prism 28px
+- Shadow recipe: aurora subtle 2-layer warm, arcade hot magenta glow
+  (oklch(70% 0.25 350 / 0.45) 0 0 20px), vapor atmospheric 32px-blur
+  diffusion
+- Palette saturation + hue: aurora violet, arcade neon magenta, vapor
+  warm-indigo
+- Surface treatment: aurora warm off-white, arcade near-white, vapor
+  pale-mint cream
+
+This passes the halt-condition (cells are NOT indistinguishable —
+they're distinguishable via non-typographic tokens). But operator
+should know the typography differentiation collapsed for these three;
+future phases may want to consider whether the underlying token
+differentiation is sufficient or whether one of {aurora, arcade,
+vapor} should drop from v1.0 in favour of a more typographically
+distinct theme.
+
+#### Validation
+
+- `02_reference-packs/themes/validate.js`: 10/10 themes pass (cross-diversity signatures still distinct).
+- `02_reference-packs/validate.js`: 80/80 reference checks.
+- `02_reference-packs/validate-extension.js`: all Phase 0.5-extension checks pass.
+- `01_compiler` test suite: 96/96.
+- `03_harvest/validate.js`: 40/40 harvested packs.
+- Showcase regenerated; verified in Chrome DevTools that `document.fonts` shows every referenced face at status `"loaded"` (Source Serif 4, Inter, DM Serif Display, Junicode 2, Monaspace Neon, Ranade, Geist, Geist Mono, Departure Mono, etc.).
+
 ### Phase Themes followup — showcase rendering fix (2026-05-17)
 
 The initial showcase shipped passed validators but rendered wrong:

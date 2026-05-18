@@ -28,12 +28,12 @@ The terracotta accent is **held in reserve** — never used for body chrome, onl
 
 | Slot | Stack |
 |---|---|
-| `font-display` | `Source Serif 4 Display` → `Source Serif 4` → `Tiempos Headline` → `ui-serif` → Georgia |
-| `font-serif` | `Source Serif 4` → `Tiempos Text` → `ui-serif` → Georgia |
-| `font-sans` | `Inter Variable` → `Inter` → `Styrene B LC` → `system-ui` |
-| `font-mono` | `JetBrains Mono Variable` → `JetBrains Mono` → `Anthropic Mono` → `ui-monospace` |
+| `font-display` | `Source Serif 4 Display` → `Source Serif 4` → `ui-serif` → Georgia |
+| `font-serif` | `Source Serif 4` → `ui-serif` → Georgia |
+| `font-sans` | `Inter Variable` → `Inter` → `system-ui` |
+| `font-mono` | `JetBrains Mono Variable` → `JetBrains Mono` → `ui-monospace` |
 
-> **Substitution note:** Anthropic ships proprietary Anthropic Sans + Anthropic Serif. Vellum uses OFL equivalents — Source Serif 4 (Adobe) and Inter (Rasmus Andersson) — that approximate the optical register. Consumers wanting the proprietary stack must license it directly from Anthropic.
+> **Substitution note:** Anthropic ships proprietary Anthropic Sans + Anthropic Serif + Anthropic Mono. Vellum uses OFL equivalents — Source Serif 4 (Adobe) + Inter (Rasmus Andersson) + JetBrains Mono — that approximate the optical register without the licensing burden. The proprietary faces were previously aliased in the stack but were removed in the pre-Phase-Templates cleanup: every Quoin theme now ships with OFL/system fonts only.
 
 ## Motion
 

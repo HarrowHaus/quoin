@@ -29,10 +29,12 @@ Uses **Quoin identity stack** end-to-end:
 
 | Slot | Stack |
 |---|---|
-| `font-display` / `font-serif` | `Junicode 2` → `Junicode` → `Tiempos Headline` → `ui-serif` → Georgia |
-| `font-sans` | `Ranade Variable` → `Ranade` → `Untitled Sans` → `system-ui` |
-| `font-mono` | `Monaspace Neon` → `JetBrains Mono` → `ui-monospace` |
-| `font-mono-pixel` | `Departure Mono` |
+| `font-display` / `font-serif` | `Junicode 2` → `Junicode` → `ui-serif` → Georgia |
+| `font-sans` | `Ranade Variable` → `Ranade` → `system-ui` |
+| `font-mono` | `Monaspace Neon Variable` → `Monaspace Neon` → `JetBrains Mono` → `ui-monospace` |
+| `font-mono-pixel` | `Departure Mono` → `monospace` |
+
+> Commercial peer-foundry faces (Tiempos Headline / Text, Untitled Sans) were removed in the pre-Phase-Templates cleanup. The Quoin identity stack (Junicode + Ranade + Monaspace + Departure Mono) — all OFL — fully carries the typographic register.
 
 ## Motion
 

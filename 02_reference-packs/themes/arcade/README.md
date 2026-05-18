@@ -31,9 +31,11 @@ Bold display sans for the headline tier; humanist body.
 
 | Slot | Stack |
 |---|---|
-| `font-display` | `PP Editorial New` → `Clash Display` → `PP Fragment Sans` → `Inter Display` |
-| `font-sans` | `Inter Variable` → `Inter` → `PP Fragment Sans` → `system-ui` |
-| `font-mono` | `JetBrains Mono Variable` |
+| `font-display` | `Inter Display Variable` → `Inter Display` → `Inter Variable` → `Inter` → `system-ui` |
+| `font-sans` | `Inter Variable` → `Inter` → `system-ui` |
+| `font-mono` | `JetBrains Mono Variable` → `JetBrains Mono` → `ui-monospace` |
+
+> Commercial display faces (PP Editorial New, Clash Display, PP Fragment Sans) were removed in the pre-Phase-Templates cleanup. Inter Display + Inter (OFL by Rasmus Andersson) at heavy weights carry the dopamine-saturation display register. The visual loudness comes from the hyper-saturated colour palette + glow shadows + spring motion — the type contribution is restrained-but-bold.
 
 Type-size scale lifted: `5xl` is 8rem (128px), `display` is 10rem (160px).
 

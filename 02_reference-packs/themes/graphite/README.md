@@ -29,7 +29,7 @@ B2B SaaS.
 |---|---|
 | `font-display` / `font-sans` | `Geist Variable` → `Geist` → `Inter Variable` → `Inter` → system |
 | `font-mono` | `Geist Mono Variable` → `Geist Mono` → `JetBrains Mono` → `ui-monospace` |
-| `font-mono-pixel` | `Geist Pixel` → `Departure Mono` → `Pixelify Sans` |
+| `font-mono-pixel` | `Geist Pixel` → `Departure Mono` → `monospace` |
 
 > **License note:** Geist Sans, Geist Mono, and Geist Pixel are OFL-licensed by Vercel / Basement Studio. Consumers should self-host with `@font-face` declarations and proper metric overrides. System-font fallbacks (Inter, JetBrains Mono) are populated automatically if the named faces aren't installed.
 

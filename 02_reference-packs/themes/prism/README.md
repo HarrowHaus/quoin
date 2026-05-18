@@ -59,6 +59,15 @@ native system register exactly. Elsewhere, Inter substitutes with
 metric-override scaffolding handled by `tokens-baseline`'s `@font-face`
 declarations.
 
+> **Commercial-font exception:** SF Pro Display / SF Pro Text / SF
+> Mono are Apple proprietary faces, but they resolve from the OS on
+> macOS / iOS with zero network load and gracefully fall back to
+> Inter elsewhere. They're the only non-OFL faces retained in any
+> Quoin theme stack after the pre-Phase-Templates commercial-font
+> cleanup. Rationale: a theme that targets the iOS-26 native register
+> would feel wrong with anything but the actual system font on Apple
+> platforms; on non-Apple platforms the user never sees them anyway.
+
 ## Motion
 
 200–400ms organic ease. Light moves through space (where the GPU

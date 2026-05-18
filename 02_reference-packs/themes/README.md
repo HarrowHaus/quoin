@@ -96,30 +96,52 @@ about what the theme packs do.
 
 ### Font loading
 
-Verified-and-current CDN paths as of May 17 2026:
+Every theme stack ships with OFL fonts or Apple system fonts only —
+no commercial faces. Verified-and-current sources as of May 17 2026:
 
 | Source | Families |
 |---|---|
-| Google Fonts CSS link | Source Serif 4 Variable, Inter Variable, DM Serif Display, JetBrains Mono Variable, Pixelify Sans |
+| Google Fonts CSS link | Source Serif 4 Variable, Inter Variable, DM Serif Display, JetBrains Mono Variable |
 | Fontshare CSS link | Ranade Variable |
 | jsDelivr (`@font-face`) | Junicode 2 Beta VF, Junicode VF (Roman + Italic), Monaspace Neon / Argon / Xenon / Radon / Krypton, Geist Variable, Geist Mono Variable |
+| Vendored locally (`./_fonts/`) | `DepartureMono-Regular.woff2` (OFL by Helena Zhang, `departuremono.com`) — repo ships only a `.zip` release; no CDN-direct path |
 
 Aliased family names — `Geist Variable`, `Geist Mono Variable`,
 `Monaspace Neon Variable` — point at the same WOFF2 binary as the
 canonical name. Themes can reference either form and the first stack
 entry resolves.
 
-### Documented font fallbacks
+### Apple system-font exception
 
-| Font in theme stack | Loaded via | Notes |
+`theme-prism` retains `SF Pro Display` / `SF Pro Text` / `SF Mono` as
+the primary face in its stack. These are Apple proprietary fonts that
+resolve from the OS on macOS / iOS with zero network load — they're
+the only non-OFL faces in any Quoin theme stack. Rationale: a theme
+that targets the iOS-26 native register would feel wrong with anything
+but the actual system font on Apple platforms; on non-Apple platforms
+the user falls back to Inter (OFL) and never sees them.
+
+### Commercial-font cleanup (pre-Phase-Templates)
+
+Phase Themes initially aliased several commercial peer-foundry faces
+as primary entries in theme stacks. These were removed in a single
+cleanup commit before Phase Templates because they wouldn't load for
+self-hosting consumers and created license risk:
+
+| Pack | Removed faces | Now leads with |
 |---|---|---|
-| Departure Mono | (not loaded) | Repo ships only a `.zip` release; no CDN-direct WOFF2 path. Showcase falls back to Pixelify Sans. |
-| Geist Pixel | (not loaded) | npm:geist@1.7.0 does not yet ship the Pixel variant (released Feb 2026). Falls back to Pixelify Sans / Departure Mono. |
-| Söhne | (not loaded) | Commercial — Klim Type Foundry. Vapor falls back to Inter. |
-| PP Editorial New | (not loaded) | Commercial — Pangram Pangram. Arcade falls back to Inter Display. |
-| SF Pro Display / SF Pro Text | system-only | Apple proprietary. Prism resolves on macOS / iOS; falls back to Inter elsewhere. |
-| Synonym / Plein / General Sans | (not loaded) | Commercial. Bloom falls back to DM Serif Display (display) + Inter (sans). |
-| Anthropic Sans / Anthropic Serif / Anthropic Mono | (not loaded) | Proprietary to Anthropic. Vellum substitutes Source Serif 4 + Inter + JetBrains Mono. |
+| `theme-vellum` | Tiempos Headline / Text, Styrene B LC, Anthropic Mono | Source Serif 4 + Inter + JetBrains Mono |
+| `theme-letterpress` | Tiempos Headline / Text, Untitled Sans | Junicode 2 + Ranade + Monaspace Neon + Departure Mono |
+| `theme-broadsheet` | PP Editorial New, GT Alpina, PP Fragment Sans | Junicode 2 + Ranade |
+| `theme-bloom` | PP Editorial New, Synonym, Plein, General Sans | DM Serif Display + Inter |
+| `theme-arcade` | PP Editorial New, Clash Display, PP Fragment Sans | Inter Display + Inter |
+| `theme-vapor` | Söhne, Söhne Mono, Helvetica Neue | Inter Display + Inter + JetBrains Mono |
+| `theme-graphite` | Pixelify Sans (mono-pixel fallback) | Geist Pixel → Departure Mono → monospace |
+
+Visual differentiation survives the removal because each pack's
+primary identity face (Junicode, Ranade, Geist, Source Serif 4,
+Monaspace, DM Serif Display, Inter Display) is OFL and carries the
+register independently of the commercial peer faces it used to alias.
 
 ### Headline scaling
 

@@ -28,9 +28,9 @@
   "link-visited":     { "$type": "color", "$value": "oklch(30% 0 0)" },
   "link-hover":       { "$type": "color", "$value": "oklch(50% 0.18 270)" },
 
-  "font-display": { "$type": "fontFamily", "$value": "'Junicode 2', 'Junicode', 'PP Editorial New', 'GT Alpina', ui-serif, Georgia, serif" },
-  "font-serif":   { "$type": "fontFamily", "$value": "'Junicode 2', 'Junicode', 'PP Editorial New', ui-serif, Georgia, serif" },
-  "font-sans":    { "$type": "fontFamily", "$value": "'Ranade Variable', 'Ranade', 'PP Fragment Sans', 'Inter Variable', system-ui, sans-serif" },
+  "font-display": { "$type": "fontFamily", "$value": "'Junicode 2', 'Junicode', ui-serif, Georgia, serif" },
+  "font-serif":   { "$type": "fontFamily", "$value": "'Junicode 2', 'Junicode', ui-serif, Georgia, serif" },
+  "font-sans":    { "$type": "fontFamily", "$value": "'Ranade Variable', 'Ranade', 'Inter Variable', 'Inter', system-ui, sans-serif" },
   "font-mono":    { "$type": "fontFamily", "$value": "'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace" },
 
   "type-size-2xl":     { "$type": "dimension", "$value": "3.5rem" },

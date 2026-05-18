@@ -32,8 +32,8 @@
   "link-visited":     { "$type": "color", "$value": "oklch(60% 0.22 320)" },
   "link-hover":       { "$type": "color", "$value": "oklch(70% 0.25 350)" },
 
-  "font-display": { "$type": "fontFamily", "$value": "'PP Editorial New', 'Clash Display', 'PP Fragment Sans', 'Inter Display Variable', 'Inter Display', system-ui, sans-serif" },
-  "font-sans":    { "$type": "fontFamily", "$value": "'Inter Variable', 'Inter', 'PP Fragment Sans', system-ui, sans-serif" },
+  "font-display": { "$type": "fontFamily", "$value": "'Inter Display Variable', 'Inter Display', 'Inter Variable', 'Inter', system-ui, sans-serif" },
+  "font-sans":    { "$type": "fontFamily", "$value": "'Inter Variable', 'Inter', system-ui, sans-serif" },
   "font-mono":    { "$type": "fontFamily", "$value": "'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace" },
 
   "type-size-3xl":     { "$type": "dimension", "$value": "4.5rem" },

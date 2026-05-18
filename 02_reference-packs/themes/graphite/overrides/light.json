@@ -31,7 +31,7 @@
   "font-display": { "$type": "fontFamily", "$value": "'Geist Variable', 'Geist', 'Inter Variable', 'Inter', -apple-system, 'Segoe UI', sans-serif" },
   "font-sans":    { "$type": "fontFamily", "$value": "'Geist Variable', 'Geist', 'Inter Variable', 'Inter', -apple-system, 'Segoe UI', sans-serif" },
   "font-mono":    { "$type": "fontFamily", "$value": "'Geist Mono Variable', 'Geist Mono', 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace" },
-  "font-mono-pixel": { "$type": "fontFamily", "$value": "'Geist Pixel', 'Departure Mono', 'Pixelify Sans', monospace" },
+  "font-mono-pixel": { "$type": "fontFamily", "$value": "'Geist Pixel', 'Departure Mono', monospace" },
 
   "border-width-hairline": { "$type": "dimension", "$value": "1px" },
   "border-width-sm":       { "$type": "dimension", "$value": "1px" },

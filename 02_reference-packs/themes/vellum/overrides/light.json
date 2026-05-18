@@ -28,10 +28,10 @@
   "link-visited":     { "$type": "color", "$value": "oklch(35% 0.010 75)" },
   "link-hover":       { "$type": "color", "$value": "oklch(66% 0.14 40)" },
 
-  "font-display": { "$type": "fontFamily", "$value": "'Source Serif 4 Display', 'Source Serif 4', 'Tiempos Headline', ui-serif, Georgia, 'Times New Roman', serif" },
-  "font-serif":   { "$type": "fontFamily", "$value": "'Source Serif 4', 'Tiempos Text', ui-serif, Georgia, serif" },
-  "font-sans":    { "$type": "fontFamily", "$value": "'Inter Variable', 'Inter', 'Styrene B LC', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" },
-  "font-mono":    { "$type": "fontFamily", "$value": "'JetBrains Mono Variable', 'JetBrains Mono', 'Anthropic Mono', ui-monospace, SFMono-Regular, Menlo, monospace" },
+  "font-display": { "$type": "fontFamily", "$value": "'Source Serif 4 Display', 'Source Serif 4', ui-serif, Georgia, 'Times New Roman', serif" },
+  "font-serif":   { "$type": "fontFamily", "$value": "'Source Serif 4', ui-serif, Georgia, serif" },
+  "font-sans":    { "$type": "fontFamily", "$value": "'Inter Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" },
+  "font-mono":    { "$type": "fontFamily", "$value": "'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace" },
 
   "radius-md":   { "$type": "dimension", "$value": "6px" },
   "radius-lg":   { "$type": "dimension", "$value": "8px" },

@@ -12,13 +12,25 @@
 
   <link
     rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,200..900&family=Inter:opsz,wght@14..32,100..900&family=DM+Serif+Display&family=JetBrains+Mono:wght@100..800&family=Pixelify+Sans:wght@400..700&display=swap">
+    href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,200..900&family=Inter:opsz,wght@14..32,100..900&family=DM+Serif+Display&family=JetBrains+Mono:wght@100..800&display=swap">
 
   <link
     rel="stylesheet"
     href="https://api.fontshare.com/v2/css?f[]=ranade@400,500,700&display=swap">
 
   <style>
+    /* ─── Departure Mono — vendored locally (OFL by Helena Zhang) ───
+       Source: github.com/rektdeckard/departure-mono v1.500 release zip.
+       File: ./_fonts/DepartureMono-Regular.woff2 (22 KB).
+       License: ./_fonts/DepartureMono-LICENSE (SIL Open Font License 1.1).
+       No public CDN-direct WOFF2 path exists; the repo ships only a
+       .zip release asset. The font is OFL-licensed and bundled inline. */
+    @font-face {
+      font-family: 'Departure Mono';
+      font-style: normal; font-weight: 400; font-display: swap;
+      src: url('./_fonts/DepartureMono-Regular.woff2') format('woff2');
+    }
+
     /* ─── Junicode 2 (Beta VF) + Junicode (VF) — psb1558/Junicode-font@2.223 ─── */
     @font-face {
       font-family: 'Junicode 2';
@@ -429,10 +441,10 @@
   --link: oklch(20% 0.006 75);
   --link-visited: oklch(35% 0.010 75);
   --link-hover: oklch(66% 0.14 40);
-  --font-display: 'Source Serif 4 Display', 'Source Serif 4', 'Tiempos Headline', ui-serif, Georgia, 'Times New Roman', serif;
-  --font-serif: 'Source Serif 4', 'Tiempos Text', ui-serif, Georgia, serif;
-  --font-sans: 'Inter Variable', 'Inter', 'Styrene B LC', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', 'Anthropic Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: 'Source Serif 4 Display', 'Source Serif 4', ui-serif, Georgia, 'Times New Roman', serif;
+  --font-serif: 'Source Serif 4', ui-serif, Georgia, serif;
+  --font-sans: 'Inter Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   --radius-md: 6px;
   --radius-lg: 8px;
   --radius-card: 8px;
@@ -492,7 +504,7 @@
   --font-display: 'Geist Variable', 'Geist', 'Inter Variable', 'Inter', -apple-system, 'Segoe UI', sans-serif;
   --font-sans: 'Geist Variable', 'Geist', 'Inter Variable', 'Inter', -apple-system, 'Segoe UI', sans-serif;
   --font-mono: 'Geist Mono Variable', 'Geist Mono', 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
-  --font-mono-pixel: 'Geist Pixel', 'Departure Mono', 'Pixelify Sans', monospace;
+  --font-mono-pixel: 'Geist Pixel', 'Departure Mono', monospace;
   --border-width-hairline: 1px;
   --border-width-sm: 1px;
   --radius-sm: 4px;
@@ -612,11 +624,11 @@
   --link: oklch(45% 0.10 45);
   --link-visited: oklch(45% 0.08 120);
   --link-hover: oklch(58% 0.12 45);
-  --font-display: 'Junicode 2', 'Junicode', 'Tiempos Headline', ui-serif, Georgia, serif;
-  --font-serif: 'Junicode 2', 'Junicode', 'Tiempos Text', ui-serif, Georgia, serif;
-  --font-sans: 'Ranade Variable', 'Ranade', 'Untitled Sans', system-ui, sans-serif;
-  --font-mono: 'Monaspace Neon', 'Monaspace Neon Variable', 'JetBrains Mono', ui-monospace, monospace;
-  --font-mono-pixel: 'Departure Mono', 'Departure Mono Variable', monospace;
+  --font-display: 'Junicode 2', 'Junicode', ui-serif, Georgia, serif;
+  --font-serif: 'Junicode 2', 'Junicode', ui-serif, Georgia, serif;
+  --font-sans: 'Ranade Variable', 'Ranade', system-ui, sans-serif;
+  --font-mono: 'Monaspace Neon Variable', 'Monaspace Neon', 'JetBrains Mono', ui-monospace, monospace;
+  --font-mono-pixel: 'Departure Mono', monospace;
   --radius-md: 2px;
   --radius-lg: 4px;
   --radius-card: 0px;
@@ -740,9 +752,9 @@
   --link: oklch(0% 0 0);
   --link-visited: oklch(30% 0 0);
   --link-hover: oklch(50% 0.18 270);
-  --font-display: 'Junicode 2', 'Junicode', 'PP Editorial New', 'GT Alpina', ui-serif, Georgia, serif;
-  --font-serif: 'Junicode 2', 'Junicode', 'PP Editorial New', ui-serif, Georgia, serif;
-  --font-sans: 'Ranade Variable', 'Ranade', 'PP Fragment Sans', 'Inter Variable', system-ui, sans-serif;
+  --font-display: 'Junicode 2', 'Junicode', ui-serif, Georgia, serif;
+  --font-serif: 'Junicode 2', 'Junicode', ui-serif, Georgia, serif;
+  --font-sans: 'Ranade Variable', 'Ranade', 'Inter Variable', 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
   --type-size-2xl: 3.5rem;
   --type-size-3xl: 5rem;
@@ -811,8 +823,8 @@
   --link: oklch(58% 0.18 25);
   --link-visited: oklch(50% 0.14 320);
   --link-hover: oklch(70% 0.18 25);
-  --font-display: 'DM Serif Display', 'PP Editorial New', 'Synonym Variable', ui-serif, Georgia, serif;
-  --font-sans: 'Synonym Variable', 'Synonym', 'Plein Variable', 'General Sans', 'Inter Variable', system-ui, sans-serif;
+  --font-display: 'DM Serif Display', ui-serif, Georgia, serif;
+  --font-sans: 'Inter Variable', 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
   --radius-md: 12px;
   --radius-lg: 20px;
@@ -875,8 +887,8 @@
   --link: oklch(60% 0.30 270);
   --link-visited: oklch(60% 0.22 320);
   --link-hover: oklch(70% 0.25 350);
-  --font-display: 'PP Editorial New', 'Clash Display', 'PP Fragment Sans', 'Inter Display Variable', 'Inter Display', system-ui, sans-serif;
-  --font-sans: 'Inter Variable', 'Inter', 'PP Fragment Sans', system-ui, sans-serif;
+  --font-display: 'Inter Display Variable', 'Inter Display', 'Inter Variable', 'Inter', system-ui, sans-serif;
+  --font-sans: 'Inter Variable', 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
   --type-size-3xl: 4.5rem;
   --type-size-4xl: 6rem;
@@ -1006,9 +1018,9 @@
   --link: oklch(48% 0.20 265);
   --link-visited: oklch(45% 0.18 295);
   --link-hover: oklch(40% 0.22 265);
-  --font-display: 'Söhne', 'Inter Display Variable', 'Inter Display', 'Helvetica Neue', system-ui, sans-serif;
-  --font-sans: 'Söhne', 'Inter Variable', 'Inter', 'Helvetica Neue', system-ui, sans-serif;
-  --font-mono: 'Söhne Mono', 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+  --font-display: 'Inter Display Variable', 'Inter Display', 'Inter Variable', 'Inter', system-ui, sans-serif;
+  --font-sans: 'Inter Variable', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
   --blur-sm: 40px;
   --blur-md: 80px;
   --blur-lg: 140px;
@@ -1096,6 +1108,18 @@
     font-size: var(--type-size-sm, 0.875rem);
     line-height: var(--leading-prose, 1.55);
     color: var(--text, currentColor);
+  }
+
+  /* Mono-pixel caption — exercises the canonical --font-mono-pixel slot
+     so the vendored Departure Mono renders visibly in every cell. Themes
+     that override font-mono-pixel (terminal, letterpress, graphite) show
+     their override; others inherit baseline Departure Mono. */
+  .composition-caption {
+    margin: 0;
+    font-family: var(--font-mono-pixel, var(--font-mono, ui-monospace, monospace));
+    font-size: var(--type-size-xs, 0.75rem);
+    color: var(--text-recede, currentColor);
+    letter-spacing: 0.04em;
   }
 
   .composition-actions {
@@ -1196,11 +1220,12 @@
   <p class="legend">
     Headline uses <code>clamp(1.75rem, 18cqi, var(--type-size-display))</code>;
     the full display tier (e.g. broadsheet's 11rem) only renders at very
-    wide cells. Fonts load from Google Fonts (Source Serif 4, Inter,
-    DM Serif Display, JetBrains Mono, Pixelify Sans), Fontshare (Ranade
-    Variable), and jsDelivr (Junicode 2, Monaspace ×5, Geist Variable +
-    Mono). Departure Mono is not on a CDN; falls back to Pixelify Sans
-    visually.
+    wide cells. Fonts load from Google Fonts (Source Serif 4 Variable,
+    Inter Variable, DM Serif Display, JetBrains Mono Variable), Fontshare
+    (Ranade Variable), jsDelivr (Junicode 2, Monaspace ×5, Geist Variable
+    + Mono), and a vendored <code>_fonts/DepartureMono-Regular.woff2</code>
+    (OFL by Helena Zhang). Every face is OFL or an Apple system font —
+    no commercial faces in any theme stack.
   </p>
   <div class="grid">
     
@@ -1218,6 +1243,7 @@
                 Each pack supplies its own palette, typography, motion, and
                 depth strategy on top of the canonical token namespace.
               </p>
+              <p class="composition-caption">v1.0 · 175 tokens · 11 DTCG types</p>
               <div class="composition-actions">
                 <button class="composition-action-primary">Get started</button>
                 <button class="composition-action-secondary">Read the spec</button>
@@ -1241,6 +1267,7 @@
                 Each pack supplies its own palette, typography, motion, and
                 depth strategy on top of the canonical token namespace.
               </p>
+              <p class="composition-caption">v1.0 · 175 tokens · 11 DTCG types</p>
               <div class="composition-actions">
                 <button class="composition-action-primary">Get started</button>
                 <button class="composition-action-secondary">Read the spec</button>
@@ -1264,6 +1291,7 @@
                 Each pack supplies its own palette, typography, motion, and
                 depth strategy on top of the canonical token namespace.
               </p>
+              <p class="composition-caption">v1.0 · 175 tokens · 11 DTCG types</p>
               <div class="composition-actions">
                 <button class="composition-action-primary">Get started</button>
                 <button class="composition-action-secondary">Read the spec</button>
@@ -1287,6 +1315,7 @@
                 Each pack supplies its own palette, typography, motion, and
                 depth strategy on top of the canonical token namespace.
               </p>
+              <p class="composition-caption">v1.0 · 175 tokens · 11 DTCG types</p>
               <div class="composition-actions">
                 <button class="composition-action-primary">Get started</button>
                 <button class="composition-action-secondary">Read the spec</button>
@@ -1310,6 +1339,7 @@
                 Each pack supplies its own palette, typography, motion, and
                 depth strategy on top of the canonical token namespace.
               </p>
+              <p class="composition-caption">v1.0 · 175 tokens · 11 DTCG types</p>
               <div class="composition-actions">
                 <button class="composition-action-primary">Get started</button>
                 <button class="composition-action-secondary">Read the spec</button>
@@ -1333,6 +1363,7 @@
                 Each pack supplies its own palette, typography, motion, and
                 depth strategy on top of the canonical token namespace.
               </p>
+              <p class="composition-caption">v1.0 · 175 tokens · 11 DTCG types</p>
               <div class="composition-actions">
                 <button class="composition-action-primary">Get started</button>
                 <button class="composition-action-secondary">Read the spec</button>
@@ -1356,6 +1387,7 @@
                 Each pack supplies its own palette, typography, motion, and
                 depth strategy on top of the canonical token namespace.
               </p>
+              <p class="composition-caption">v1.0 · 175 tokens · 11 DTCG types</p>
               <div class="composition-actions">
                 <button class="composition-action-primary">Get started</button>
                 <button class="composition-action-secondary">Read the spec</button>
@@ -1379,6 +1411,7 @@
                 Each pack supplies its own palette, typography, motion, and
                 depth strategy on top of the canonical token namespace.
               </p>
+              <p class="composition-caption">v1.0 · 175 tokens · 11 DTCG types</p>
               <div class="composition-actions">
                 <button class="composition-action-primary">Get started</button>
                 <button class="composition-action-secondary">Read the spec</button>
@@ -1402,6 +1435,7 @@
                 Each pack supplies its own palette, typography, motion, and
                 depth strategy on top of the canonical token namespace.
               </p>
+              <p class="composition-caption">v1.0 · 175 tokens · 11 DTCG types</p>
               <div class="composition-actions">
                 <button class="composition-action-primary">Get started</button>
                 <button class="composition-action-secondary">Read the spec</button>
@@ -1425,6 +1459,7 @@
                 Each pack supplies its own palette, typography, motion, and
                 depth strategy on top of the canonical token namespace.
               </p>
+              <p class="composition-caption">v1.0 · 175 tokens · 11 DTCG types</p>
               <div class="composition-actions">
                 <button class="composition-action-primary">Get started</button>
                 <button class="composition-action-secondary">Read the spec</button>
@@ -1448,6 +1483,7 @@
                 Each pack supplies its own palette, typography, motion, and
                 depth strategy on top of the canonical token namespace.
               </p>
+              <p class="composition-caption">v1.0 · 175 tokens · 11 DTCG types</p>
               <div class="composition-actions">
                 <button class="composition-action-primary">Get started</button>
                 <button class="composition-action-secondary">Read the spec</button>
@@ -1471,6 +1507,7 @@
                 Each pack supplies its own palette, typography, motion, and
                 depth strategy on top of the canonical token namespace.
               </p>
+              <p class="composition-caption">v1.0 · 175 tokens · 11 DTCG types</p>
               <div class="composition-actions">
                 <button class="composition-action-primary">Get started</button>
                 <button class="composition-action-secondary">Read the spec</button>
@@ -1494,6 +1531,7 @@
                 Each pack supplies its own palette, typography, motion, and
                 depth strategy on top of the canonical token namespace.
               </p>
+              <p class="composition-caption">v1.0 · 175 tokens · 11 DTCG types</p>
               <div class="composition-actions">
                 <button class="composition-action-primary">Get started</button>
                 <button class="composition-action-secondary">Read the spec</button>
@@ -1517,6 +1555,7 @@
                 Each pack supplies its own palette, typography, motion, and
                 depth strategy on top of the canonical token namespace.
               </p>
+              <p class="composition-caption">v1.0 · 175 tokens · 11 DTCG types</p>
               <div class="composition-actions">
                 <button class="composition-action-primary">Get started</button>
                 <button class="composition-action-secondary">Read the spec</button>
@@ -1540,6 +1579,7 @@
                 Each pack supplies its own palette, typography, motion, and
                 depth strategy on top of the canonical token namespace.
               </p>
+              <p class="composition-caption">v1.0 · 175 tokens · 11 DTCG types</p>
               <div class="composition-actions">
                 <button class="composition-action-primary">Get started</button>
                 <button class="composition-action-secondary">Read the spec</button>
@@ -1563,6 +1603,7 @@
                 Each pack supplies its own palette, typography, motion, and
                 depth strategy on top of the canonical token namespace.
               </p>
+              <p class="composition-caption">v1.0 · 175 tokens · 11 DTCG types</p>
               <div class="composition-actions">
                 <button class="composition-action-primary">Get started</button>
                 <button class="composition-action-secondary">Read the spec</button>
@@ -1586,6 +1627,7 @@
                 Each pack supplies its own palette, typography, motion, and
                 depth strategy on top of the canonical token namespace.
               </p>
+              <p class="composition-caption">v1.0 · 175 tokens · 11 DTCG types</p>
               <div class="composition-actions">
                 <button class="composition-action-primary">Get started</button>
                 <button class="composition-action-secondary">Read the spec</button>
@@ -1609,6 +1651,7 @@
                 Each pack supplies its own palette, typography, motion, and
                 depth strategy on top of the canonical token namespace.
               </p>
+              <p class="composition-caption">v1.0 · 175 tokens · 11 DTCG types</p>
               <div class="composition-actions">
                 <button class="composition-action-primary">Get started</button>
                 <button class="composition-action-secondary">Read the spec</button>
@@ -1632,6 +1675,7 @@
                 Each pack supplies its own palette, typography, motion, and
                 depth strategy on top of the canonical token namespace.
               </p>
+              <p class="composition-caption">v1.0 · 175 tokens · 11 DTCG types</p>
               <div class="composition-actions">
                 <button class="composition-action-primary">Get started</button>
                 <button class="composition-action-secondary">Read the spec</button>
@@ -1655,6 +1699,7 @@
                 Each pack supplies its own palette, typography, motion, and
                 depth strategy on top of the canonical token namespace.
               </p>
+              <p class="composition-caption">v1.0 · 175 tokens · 11 DTCG types</p>
               <div class="composition-actions">
                 <button class="composition-action-primary">Get started</button>
                 <button class="composition-action-secondary">Read the spec</button>

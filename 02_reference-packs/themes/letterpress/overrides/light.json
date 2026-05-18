@@ -28,11 +28,11 @@
   "link-visited":     { "$type": "color", "$value": "oklch(45% 0.08 120)" },
   "link-hover":       { "$type": "color", "$value": "oklch(58% 0.12 45)" },
 
-  "font-display": { "$type": "fontFamily", "$value": "'Junicode 2', 'Junicode', 'Tiempos Headline', ui-serif, Georgia, serif" },
-  "font-serif":   { "$type": "fontFamily", "$value": "'Junicode 2', 'Junicode', 'Tiempos Text', ui-serif, Georgia, serif" },
-  "font-sans":    { "$type": "fontFamily", "$value": "'Ranade Variable', 'Ranade', 'Untitled Sans', system-ui, sans-serif" },
-  "font-mono":    { "$type": "fontFamily", "$value": "'Monaspace Neon', 'Monaspace Neon Variable', 'JetBrains Mono', ui-monospace, monospace" },
-  "font-mono-pixel": { "$type": "fontFamily", "$value": "'Departure Mono', 'Departure Mono Variable', monospace" },
+  "font-display": { "$type": "fontFamily", "$value": "'Junicode 2', 'Junicode', ui-serif, Georgia, serif" },
+  "font-serif":   { "$type": "fontFamily", "$value": "'Junicode 2', 'Junicode', ui-serif, Georgia, serif" },
+  "font-sans":    { "$type": "fontFamily", "$value": "'Ranade Variable', 'Ranade', system-ui, sans-serif" },
+  "font-mono":    { "$type": "fontFamily", "$value": "'Monaspace Neon Variable', 'Monaspace Neon', 'JetBrains Mono', ui-monospace, monospace" },
+  "font-mono-pixel": { "$type": "fontFamily", "$value": "'Departure Mono', monospace" },
 
   "radius-md":   { "$type": "dimension", "$value": "2px" },
   "radius-lg":   { "$type": "dimension", "$value": "4px" },

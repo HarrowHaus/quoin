@@ -4,6 +4,39 @@ Exit criteria for each phase. A phase is complete when **every** criterion in it
 
 ---
 
+## Universal Gate — Visual regression checkpoint (applies to every visual phase)
+
+**Applies to:** Phase Templates, Phase Patterns, Phase Marketing Site, Phase Icon Packs, Phase Docs Refresh (4.5+), Phase harrow.haus rebuild, Phase Examples Gallery, Phase Showcase Wall, and every future phase whose deliverable is something a user sees.
+
+**Goal:** catch rendering bugs that pass programmatic validators but fail visual diversity / fidelity. Programmatic checks (manifest validation, signature uniqueness, composition smoke tests) prove the pack contract; they do NOT prove that the rendered output is what the operator approved.
+
+**Required deliverable before phase commit:**
+
+A **screenshot grid** showing every pack / template / pattern / page rendered side-by-side. The grid MUST satisfy all of:
+
+1. **Production scale.** Every cell rendered at production size, not thumbnails. Headlines at their canonical `--type-size-display`, body at `--type-size-md`, padding from `--space-panel`. If a cell is too small to show the canonical display tier, document the trade-off (e.g. "broadsheet's 11rem only renders at >1000px-per-cell viewports").
+2. **Light + dark side by side.** Each pack rendered in both light and dark mode in adjacent cells. Dark cells must show the same typography / spacing / radii / motion as light cells with only color overrides applied (matches how real apps treat dark mode).
+3. **Realistic content density.** Cells render representative content — not just "Hello World" or one-word headlines. Templates render a real page section (hero + content row + footer); patterns render at least three states (default + hover + focus or default + selected + disabled); themes render headline + lede + body + CTA cluster.
+4. **Computed-style spot-checks attached to the report.** For at least one cell per pack, attach via DevTools (or `getComputedStyle` JS dump):
+   - `font-family` resolution (must show the declared OFL face actually loading, not falling through to a system default)
+   - `font-size` resolution (must reflect the theme's `--type-size-*` tokens, not browser default `2em`)
+   - `padding`, `border-radius`, `box-shadow` (must reflect the theme's overrides, not the cell-render base)
+5. **Loaded-fonts list.** Dump `document.fonts` and confirm every face the pack stacks reference is actually loaded (`status: "loaded"`) — not just declared.
+6. **No identical cells beyond color.** If two cells look indistinguishable except for hue/luminance, HALT and report. That means the differentiation rested on a deeper token (typography, depth, motion) that isn't actually being applied — debug before commit.
+
+**Halt conditions:**
+
+- Two cells look typographically identical with only palette differences.
+- A pack's primary face fails to load (the declared `@font-face` 404s or the family-name doesn't resolve in `document.fonts`).
+- A cell falls back to system defaults silently (computed `font-family` = `Times New Roman` or `Arial` when the pack declared something else).
+- The grid only renders at viewport widths above what real users have.
+
+**Why this exists:** during Phase Themes the initial showcase shipped passed every validator but rendered every cell as Times New Roman because (1) no `@font-face` declarations existed in the HTML and (2) Tailwind arbitrary-value classes were inert without a Tailwind CSS bundle. The validator had no way to detect this — it only checked that token maps and manifests were structurally correct. Visual diversity was assumed but not actually verified. The Universal Gate makes the visual verification mandatory and explicit.
+
+**Note for templates / patterns / icons / marketing-site phases:** if the deliverable consumes `impl-tailwind` output, the rendering harness MUST bundle Tailwind CSS — otherwise every Tailwind arbitrary-value class string is meaningless. Document the bundler step in the phase deliverable.
+
+---
+
 ## Phase Themes — 10 v1.0 theme packs
 
 **Output location:** `02_reference-packs/themes/{vellum,graphite,aurora,letterpress,terminal,broadsheet,bloom,arcade,prism,vapor}/` (10 theme packs), `02_reference-packs/themes/{validate.js,showcase.js,showcase.html,README.md}` (cross-theme tooling).

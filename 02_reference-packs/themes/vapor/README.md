@@ -57,13 +57,18 @@ with the same warm-indigo accent preserved.
 
 | Slot | Stack |
 |---|---|
-| `font-display` / `font-sans` | `Söhne` → `Inter Display/Variable` → `Helvetica Neue` → `system-ui` |
-| `font-mono` | `Söhne Mono` → `JetBrains Mono Variable` → `ui-monospace` |
+| `font-display` | `Inter Display Variable` → `Inter Display` → `Inter Variable` → `Inter` → `system-ui` |
+| `font-sans` | `Inter Variable` → `Inter` → `system-ui` → `-apple-system` |
+| `font-mono` | `JetBrains Mono Variable` → `JetBrains Mono` → `ui-monospace` |
 
-> **Licensing note:** Söhne by Klim Type Foundry is a commercial
-> typeface. Consumers wanting the proprietary stack must license it
-> directly from Klim. Inter (OFL) is the listed fallback and produces
-> a close-enough geometric register for development.
+> **Licensing note:** The original lineage source (stripe.com) uses
+> Söhne by Klim Type Foundry — a commercial typeface. Söhne was
+> previously aliased as the primary face in vapor's stack but was
+> removed in the pre-Phase-Templates cleanup: Quoin theme packs ship
+> with OFL fonts only. The atmospheric register comes from the
+> layered-mesh gradient + indigo palette + tabular numerics; Inter
+> at the display tier reads close enough to the institutional-fintech
+> identity without the licensing burden.
 
 ## Motion
 

@@ -19,16 +19,24 @@
  *
  *   2. Fonts load via:
  *        - Google Fonts CSS link  (Source Serif 4, Inter, DM Serif Display,
- *                                  JetBrains Mono, Pixelify Sans)
+ *                                  JetBrains Mono)
  *        - Fontshare CSS link     (Ranade Variable)
  *        - @font-face declarations pointing at jsDelivr (Junicode 2 Beta VF,
  *          Junicode VF, Monaspace family ×5, Geist Variable, Geist Mono
  *          Variable)
- *      All CDN paths were HEAD-verified before commit.
+ *        - Vendored ./_fonts/DepartureMono-Regular.woff2 (OFL by Helena
+ *          Zhang, helenazhang.com — extracted from the v1.500 release zip;
+ *          repo doesn't expose a direct CDN path).
+ *      All external CDN paths were HEAD-verified before commit.
  *
- *   3. Departure Mono ships only as a .zip release with no CDN-direct
- *      WOFF2 path. The showcase falls back to Pixelify Sans (Google Fonts)
- *      as a visual approximation. Documented in README.md.
+ *   3. Every theme font stack uses ONLY OFL / free faces or Apple system
+ *      fonts (-apple-system, SF Pro, SF Mono — these resolve natively on
+ *      macOS/iOS with zero load weight; theme-prism is the documented
+ *      exception). Commercial faces (Söhne, PP Editorial New, GT Alpina,
+ *      Synonym, Plein, General Sans, Untitled Sans, Styrene, Anthropic
+ *      stack, Tiempos, Clash Display, Helvetica Neue) were removed in
+ *      the cleanup commit prior to Phase Templates — they wouldn't load
+ *      for self-hosting consumers and created license risk.
  *
  *   4. CSS variable names with dots (e.g. `--color.stone.50`) are invalid
  *      CSS identifiers and are SKIPPED at emit time. Only the canonical
@@ -180,13 +188,25 @@ const FONT_HEAD = `
 
   <link
     rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,200..900&family=Inter:opsz,wght@14..32,100..900&family=DM+Serif+Display&family=JetBrains+Mono:wght@100..800&family=Pixelify+Sans:wght@400..700&display=swap">
+    href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,200..900&family=Inter:opsz,wght@14..32,100..900&family=DM+Serif+Display&family=JetBrains+Mono:wght@100..800&display=swap">
 
   <link
     rel="stylesheet"
     href="https://api.fontshare.com/v2/css?f[]=ranade@400,500,700&display=swap">
 
   <style>
+    /* ─── Departure Mono — vendored locally (OFL by Helena Zhang) ───
+       Source: github.com/rektdeckard/departure-mono v1.500 release zip.
+       File: ./_fonts/DepartureMono-Regular.woff2 (22 KB).
+       License: ./_fonts/DepartureMono-LICENSE (SIL Open Font License 1.1).
+       No public CDN-direct WOFF2 path exists; the repo ships only a
+       .zip release asset. The font is OFL-licensed and bundled inline. */
+    @font-face {
+      font-family: 'Departure Mono';
+      font-style: normal; font-weight: 400; font-display: swap;
+      src: url('./_fonts/DepartureMono-Regular.woff2') format('woff2');
+    }
+
     /* ─── Junicode 2 (Beta VF) + Junicode (VF) — psb1558/Junicode-font@2.223 ─── */
     @font-face {
       font-family: 'Junicode 2';
@@ -343,6 +363,18 @@ const COMPOSITION_CSS = `
     color: var(--text, currentColor);
   }
 
+  /* Mono-pixel caption — exercises the canonical --font-mono-pixel slot
+     so the vendored Departure Mono renders visibly in every cell. Themes
+     that override font-mono-pixel (terminal, letterpress, graphite) show
+     their override; others inherit baseline Departure Mono. */
+  .composition-caption {
+    margin: 0;
+    font-family: var(--font-mono-pixel, var(--font-mono, ui-monospace, monospace));
+    font-size: var(--type-size-xs, 0.75rem);
+    color: var(--text-recede, currentColor);
+    letter-spacing: 0.04em;
+  }
+
   .composition-actions {
     display: flex;
     flex-wrap: wrap;
@@ -497,6 +529,7 @@ async function main() {
                 Each pack supplies its own palette, typography, motion, and
                 depth strategy on top of the canonical token namespace.
               </p>
+              <p class="composition-caption">v1.0 · 175 tokens · 11 DTCG types</p>
               <div class="composition-actions">
                 <button class="composition-action-primary">Get started</button>
                 <button class="composition-action-secondary">Read the spec</button>
@@ -539,11 +572,12 @@ ${SHELL_CSS}
   <p class="legend">
     Headline uses <code>clamp(1.75rem, 18cqi, var(--type-size-display))</code>;
     the full display tier (e.g. broadsheet's 11rem) only renders at very
-    wide cells. Fonts load from Google Fonts (Source Serif 4, Inter,
-    DM Serif Display, JetBrains Mono, Pixelify Sans), Fontshare (Ranade
-    Variable), and jsDelivr (Junicode 2, Monaspace ×5, Geist Variable +
-    Mono). Departure Mono is not on a CDN; falls back to Pixelify Sans
-    visually.
+    wide cells. Fonts load from Google Fonts (Source Serif 4 Variable,
+    Inter Variable, DM Serif Display, JetBrains Mono Variable), Fontshare
+    (Ranade Variable), jsDelivr (Junicode 2, Monaspace ×5, Geist Variable
+    + Mono), and a vendored <code>_fonts/DepartureMono-Regular.woff2</code>
+    (OFL by Helena Zhang). Every face is OFL or an Apple system font —
+    no commercial faces in any theme stack.
   </p>
   <div class="grid">
     ${cells.join("\n")}

@@ -30,9 +30,11 @@ Humanist sans (Synonym / Plein / General Sans) paired with display serif accents
 
 | Slot | Stack |
 |---|---|
-| `font-display` | `DM Serif Display` → `PP Editorial New` → `Synonym Variable` |
-| `font-sans` | `Synonym Variable` → `Synonym` → `Plein Variable` → `General Sans` → `Inter` |
-| `font-mono` | `JetBrains Mono Variable` |
+| `font-display` | `DM Serif Display` → `ui-serif` → Georgia |
+| `font-sans` | `Inter Variable` → `Inter` → `system-ui` |
+| `font-mono` | `JetBrains Mono Variable` → `JetBrains Mono` → `ui-monospace` |
+
+> Commercial peer-foundry faces (PP Editorial New for display, Synonym + Plein + General Sans for body) were removed in the pre-Phase-Templates cleanup. DM Serif Display (OFL, Colophon Foundry via Google Fonts) + Inter (OFL) now carry the pastel-floral register.
 
 ## Motion
 

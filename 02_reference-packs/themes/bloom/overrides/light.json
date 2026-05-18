@@ -28,8 +28,8 @@
   "link-visited":     { "$type": "color", "$value": "oklch(50% 0.14 320)" },
   "link-hover":       { "$type": "color", "$value": "oklch(70% 0.18 25)" },
 
-  "font-display": { "$type": "fontFamily", "$value": "'DM Serif Display', 'PP Editorial New', 'Synonym Variable', ui-serif, Georgia, serif" },
-  "font-sans":    { "$type": "fontFamily", "$value": "'Synonym Variable', 'Synonym', 'Plein Variable', 'General Sans', 'Inter Variable', system-ui, sans-serif" },
+  "font-display": { "$type": "fontFamily", "$value": "'DM Serif Display', ui-serif, Georgia, serif" },
+  "font-sans":    { "$type": "fontFamily", "$value": "'Inter Variable', 'Inter', system-ui, -apple-system, sans-serif" },
   "font-mono":    { "$type": "fontFamily", "$value": "'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace" },
 
   "radius-md":   { "$type": "dimension", "$value": "12px" },

@@ -30,10 +30,12 @@ Quoin identity stack — Junicode for display, Ranade for body.
 
 | Slot | Stack |
 |---|---|
-| `font-display` | `Junicode 2` → `Junicode` → `PP Editorial New` → `GT Alpina` |
-| `font-serif` | `Junicode 2` → `Junicode` → `PP Editorial New` |
-| `font-sans` | `Ranade Variable` → `Ranade` → `PP Fragment Sans` → `Inter` |
-| `font-mono` | `JetBrains Mono Variable` → `JetBrains Mono` |
+| `font-display` | `Junicode 2` → `Junicode` → `ui-serif` → Georgia |
+| `font-serif` | `Junicode 2` → `Junicode` → `ui-serif` → Georgia |
+| `font-sans` | `Ranade Variable` → `Ranade` → `Inter Variable` → `Inter` → `system-ui` |
+| `font-mono` | `JetBrains Mono Variable` → `JetBrains Mono` → `ui-monospace` |
+
+> Commercial peer-foundry faces (PP Editorial New, GT Alpina, PP Fragment Sans) were removed in the pre-Phase-Templates cleanup. The OFL Junicode + Ranade pairing carries the broadsheet register independently.
 
 ### Type scale (light/dark, both)
 
