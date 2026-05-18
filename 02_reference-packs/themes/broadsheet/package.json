@@ -1,0 +1,19 @@
+{
+  "name": "@quoin/theme-broadsheet",
+  "version": "1.0.0",
+  "description": "Big Editorial Headline theme for Quoin — type-as-design with Junicode + Ranade and variable-axis demos.",
+  "license": "MIT",
+  "main": "./quoin.pack.json",
+  "files": [
+    "quoin.pack.json",
+    "overrides/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "theme", "editorial", "display-type", "variable-font"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "02_reference-packs/themes/broadsheet"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "@quoin/theme-broadsheet — dark mode. True-black ground, near-white type. The display register inverts cleanly because there's no colour to negotiate.",
+
+  "surface":          { "$type": "color", "$value": "oklch(0% 0 0)" },
+  "surface-elevated": { "$type": "color", "$value": "oklch(8% 0 0)" },
+  "surface-recessed": { "$type": "color", "$value": "oklch(0% 0 0)" },
+  "surface-inverse":  { "$type": "color", "$value": "oklch(99% 0 0)" },
+  "scrim":            { "$type": "color", "$value": "oklch(0% 0 0 / 0.75)" },
+
+  "text":             { "$type": "color", "$value": "oklch(94% 0 0)" },
+  "text-emphasis":    { "$type": "color", "$value": "oklch(100% 0 0)" },
+  "text-recede":      { "$type": "color", "$value": "oklch(60% 0 0)" },
+  "text-disabled":    { "$type": "color", "$value": "oklch(35% 0 0)" },
+  "text-on-accent":   { "$type": "color", "$value": "oklch(0% 0 0)" },
+  "highlight":        { "$type": "color", "$value": "oklch(80% 0.16 90 / 0.30)" },
+
+  "border":           { "$type": "color", "$value": "oklch(100% 0 0)" },
+  "border-emphasis":  { "$type": "color", "$value": "oklch(100% 0 0)" },
+  "border-recede":    { "$type": "color", "$value": "oklch(28% 0 0)" },
+
+  "accent":           { "$type": "color", "$value": "oklch(100% 0 0)" },
+  "accent-recede":    { "$type": "color", "$value": "oklch(72% 0 0)" },
+  "focus-ring":       { "$type": "color", "$value": "oklch(72% 0.18 270)" },
+  "shadow-tint":      { "$type": "color", "$value": "oklch(0% 0 0 / 0)" },
+
+  "link":             { "$type": "color", "$value": "oklch(100% 0 0)" },
+  "link-visited":     { "$type": "color", "$value": "oklch(75% 0 0)" },
+  "link-hover":       { "$type": "color", "$value": "oklch(72% 0.18 270)" }
+}

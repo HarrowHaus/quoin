@@ -1,0 +1,7 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "@quoin/theme-broadsheet — P3 wide-gamut. Achromatic by design; the focus ring is the only chromatic note that benefits from wider gamut. Pure monochrome surfaces stay sRGB-clamped.",
+
+  "focus-ring": { "$type": "color", "$value": "color(display-p3 0.40 0.45 1.0)" },
+  "link-hover": { "$type": "color", "$value": "color(display-p3 0.40 0.45 1.0)" }
+}
