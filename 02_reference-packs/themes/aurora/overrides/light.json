@@ -1,0 +1,51 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "@quoin/theme-aurora — light mode. Warm off-white #fafafa ground, warm-gray neutrals, Linear violet #5e6ad2 accent. Note: aurora is primarily a dark-mode theme; light mode is a courteous bidirectional rather than the canonical surface.",
+
+  "surface":          { "$type": "color", "$value": "oklch(98.5% 0.003 280)" },
+  "surface-elevated": { "$type": "color", "$value": "oklch(100% 0 0)" },
+  "surface-recessed": { "$type": "color", "$value": "oklch(96% 0.005 280)" },
+  "surface-inverse":  { "$type": "color", "$value": "oklch(15% 0.020 270)" },
+  "scrim":            { "$type": "color", "$value": "oklch(15% 0.020 270 / 0.5)" },
+
+  "text":             { "$type": "color", "$value": "oklch(22% 0.015 270)" },
+  "text-emphasis":    { "$type": "color", "$value": "oklch(12% 0.015 270)" },
+  "text-recede":      { "$type": "color", "$value": "oklch(48% 0.012 270)" },
+  "text-disabled":    { "$type": "color", "$value": "oklch(72% 0.008 270)" },
+  "text-on-accent":   { "$type": "color", "$value": "oklch(98% 0.005 270)" },
+  "highlight":        { "$type": "color", "$value": "oklch(80% 0.10 280 / 0.25)" },
+
+  "border":           { "$type": "color", "$value": "oklch(90% 0.005 280)" },
+  "border-emphasis":  { "$type": "color", "$value": "oklch(60% 0.18 270)" },
+  "border-recede":    { "$type": "color", "$value": "oklch(94% 0.004 280)" },
+
+  "accent":           { "$type": "color", "$value": "oklch(58% 0.20 268)" },
+  "accent-recede":    { "$type": "color", "$value": "oklch(78% 0.10 268)" },
+  "focus-ring":       { "$type": "color", "$value": "oklch(58% 0.20 268)" },
+  "shadow-tint":      { "$type": "color", "$value": "oklch(20% 0.02 270 / 0.08)" },
+
+  "link":             { "$type": "color", "$value": "oklch(58% 0.20 268)" },
+  "link-visited":     { "$type": "color", "$value": "oklch(50% 0.16 295)" },
+  "link-hover":       { "$type": "color", "$value": "oklch(48% 0.22 268)" },
+
+  "font-display": { "$type": "fontFamily", "$value": "'Inter Display Variable', 'Inter Display', 'Inter Variable', 'Inter', system-ui, sans-serif" },
+  "font-sans":    { "$type": "fontFamily", "$value": "'Inter Variable', 'Inter', system-ui, -apple-system, sans-serif" },
+  "font-mono":    { "$type": "fontFamily", "$value": "'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace" },
+
+  "radius-md":   { "$type": "dimension", "$value": "8px" },
+  "radius-lg":   { "$type": "dimension", "$value": "12px" },
+  "radius-card": { "$type": "dimension", "$value": "12px" },
+  "radius-pill": { "$type": "dimension", "$value": "999px" },
+
+  "motion-fast":   { "$type": "duration", "$value": "180ms" },
+  "motion-normal": { "$type": "duration", "$value": "260ms" },
+  "motion-slow":   { "$type": "duration", "$value": "400ms" },
+
+  "shadow-md": { "$type": "shadow", "$value": [
+    { "color": "{shadow-tint}", "offsetX": "0", "offsetY": "1px", "blur": "3px",  "spread": "0", "inset": false },
+    { "color": "{shadow-tint}", "offsetX": "0", "offsetY": "8px", "blur": "24px", "spread": "-8px", "inset": false }
+  ] },
+  "shadow-lg": { "$type": "shadow", "$value": [
+    { "color": "{shadow-tint}", "offsetX": "0", "offsetY": "12px", "blur": "32px", "spread": "-10px", "inset": false }
+  ] }
+}

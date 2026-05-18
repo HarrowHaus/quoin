@@ -1,0 +1,19 @@
+{
+  "name": "@quoin/theme-aurora",
+  "version": "1.0.0",
+  "description": "Warm Liquid Linear theme for Quoin — linear.app-lineage warm-dark + violet anchor + frosted-glass elevation.",
+  "license": "MIT",
+  "main": "./quoin.pack.json",
+  "files": [
+    "quoin.pack.json",
+    "overrides/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "theme", "linear", "warm-dark", "frosted-glass", "violet"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "02_reference-packs/themes/aurora"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "@quoin/theme-aurora — P3 wide-gamut. Linear violet pushed into Display-P3 territory; ~15% richer chroma on capable monitors. Surfaces and neutrals stay sRGB-clamped (the gamut difference is imperceptible on near-black).",
+
+  "accent":     { "$type": "color", "$value": "color(display-p3 0.55 0.45 0.95)" },
+  "link":       { "$type": "color", "$value": "color(display-p3 0.62 0.55 0.95)" },
+  "link-hover": { "$type": "color", "$value": "color(display-p3 0.72 0.65 0.95)" },
+  "focus-ring": { "$type": "color", "$value": "color(display-p3 0.65 0.55 1.0)" }
+}

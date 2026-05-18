@@ -1,0 +1,30 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "@quoin/theme-aurora — dark mode (canonical). Warm-gray near-black grounds #08090a–#16161a, warm-gray neutrals, Linear violet #5e6ad2 anchor. This is the primary surface — light mode is courteous bidirectional.",
+
+  "surface":          { "$type": "color", "$value": "oklch(12% 0.012 270)" },
+  "surface-elevated": { "$type": "color", "$value": "oklch(16% 0.015 270)" },
+  "surface-recessed": { "$type": "color", "$value": "oklch(9% 0.010 270)" },
+  "surface-inverse":  { "$type": "color", "$value": "oklch(96% 0.005 280)" },
+  "scrim":            { "$type": "color", "$value": "oklch(5% 0.008 270 / 0.72)" },
+
+  "text":             { "$type": "color", "$value": "oklch(88% 0.012 270)" },
+  "text-emphasis":    { "$type": "color", "$value": "oklch(98% 0.008 270)" },
+  "text-recede":      { "$type": "color", "$value": "oklch(62% 0.015 270)" },
+  "text-disabled":    { "$type": "color", "$value": "oklch(38% 0.010 270)" },
+  "text-on-accent":   { "$type": "color", "$value": "oklch(98% 0.005 270)" },
+  "highlight":        { "$type": "color", "$value": "oklch(58% 0.20 268 / 0.28)" },
+
+  "border":           { "$type": "color", "$value": "oklch(22% 0.018 270)" },
+  "border-emphasis":  { "$type": "color", "$value": "oklch(70% 0.18 268)" },
+  "border-recede":    { "$type": "color", "$value": "oklch(16% 0.012 270)" },
+
+  "accent":           { "$type": "color", "$value": "oklch(70% 0.18 268)" },
+  "accent-recede":    { "$type": "color", "$value": "oklch(42% 0.16 268)" },
+  "focus-ring":       { "$type": "color", "$value": "oklch(75% 0.20 268)" },
+  "shadow-tint":      { "$type": "color", "$value": "oklch(0% 0 0 / 0.55)" },
+
+  "link":             { "$type": "color", "$value": "oklch(75% 0.16 268)" },
+  "link-visited":     { "$type": "color", "$value": "oklch(70% 0.14 295)" },
+  "link-hover":       { "$type": "color", "$value": "oklch(85% 0.18 268)" }
+}

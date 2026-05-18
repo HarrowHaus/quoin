@@ -1,0 +1,22 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/theme-aurora",
+  "version": "1.0.0",
+  "type": "theme",
+  "quoinVersion": "^0.1.0",
+  "description": "Warm Liquid Linear — linear.app lineage. Warm-gray near-black ground, gradient violet anchor, GPU-driven frosted-glass elevation. For project management and productivity tools.",
+  "exports": {
+    "lightModeOverrides": "./overrides/light.json",
+    "darkModeOverrides": "./overrides/dark.json",
+    "p3WideGamutOverrides": "./overrides/p3.json"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/themes/aurora",
+    "tags": ["theme", "linear", "warm-dark", "frosted-glass", "violet", "productivity"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0"
+  }
+}
