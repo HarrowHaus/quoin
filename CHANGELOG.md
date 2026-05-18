@@ -6,6 +6,131 @@ versioning follows pre-1.0 conventions until v1.0.0 publication.
 
 ## [Unreleased]
 
+### Phase 0.5-extension — New Pack Types (2026-05-17)
+
+Adds 4 new pack types to the Quoin distribution model — **theme**,
+**template**, **pattern**, **icon** — bringing the total from 3 to 7.
+Spec docs, manifest schema, compiler hooks, reference packs, and
+tests all land in this single phase.
+
+#### New spec docs
+
+- **[`00_spec/pack-types.md`](00_spec/pack-types.md)** — catalogue of
+  all 7 pack types with role + composability table; documents the
+  compile-time composition order (token → theme → project overrides
+  → vocab → pattern → icon → impl).
+- **[`00_spec/theme-pack.md`](00_spec/theme-pack.md)** — manifest
+  format, override file shape, light / dark / P3 modes, validation
+  rules (override names MUST exist in canonical namespace).
+- **[`00_spec/template-pack.md`](00_spec/template-pack.md)** —
+  scaffold-time pack with declared `category`, `pages`,
+  `dependencies` (token / impl / vocab / theme / pattern / icon
+  peer packs). Templates are NOT compiled at build time; they're
+  scaffolded via `npx @quoin/create <template>`.
+- **[`00_spec/pattern-pack.md`](00_spec/pattern-pack.md)** —
+  pattern-pack manifest with `category`, `variant`, `states[]`
+  (must include `default`), `microStates[]` (must include `default`
+  and `focus`). Pattern primitives share the vocabulary-pack
+  resolution pipeline.
+- **[`00_spec/icon-pack.md`](00_spec/icon-pack.md)** — manifest with
+  `iconStyle`, `iconCount`, `recommendedSize`, `semanticTag`
+  (defaults to `icon`). SVG conventions: single root `<svg>`,
+  `viewBox` required, `currentColor` for theming, no `width` /
+  `height` attrs (compiler injects from `--icon-size-*`).
+
+#### Schema
+
+- **[`01_compiler/src/schema/pack-manifest.json`](01_compiler/src/schema/pack-manifest.json)** —
+  `type` enum extended to `["token", "vocabulary", "implementation",
+  "theme", "template", "pattern", "icon"]`. 4 new `if/then` branches
+  in the discriminated union enforce per-type required exports +
+  fields (e.g. theme requires `exports.lightModeOverrides`; icon
+  requires `iconStyle`, `iconCount`, `recommendedSize`,
+  `exports.{icons,manifest}`; pattern requires `category`, `states`,
+  `microStates`; template requires `category`, `pages`,
+  `dependencies.{tokenPack, implementationPack, vocabularyPacks}`).
+
+#### Compiler
+
+- **[`01_compiler/src/types.ts`](01_compiler/src/types.ts)** — added
+  `PackType` union; new interfaces `ThemePack`, `PatternPack`,
+  `IconPack`, `IconDefinition` and their `*PackSource` aliases.
+  `PackManifest` extended with the new optional fields. `CompileOptions`
+  gets `themePack`, `patternPacks`, `iconPacks` optional fields.
+- **[`01_compiler/src/pack-loader.ts`](01_compiler/src/pack-loader.ts)** —
+  new `loadThemePack`, `loadPatternPack`, `loadIconPack` functions
+  (template packs are scaffold-time, no runtime loader). Theme
+  overrides are validated against the canonical namespace at load
+  time — extras throw `PackValidationError`. Icon packs auto-derive
+  a short-name from the pack name (e.g. `@quoin/icons-mynaui` →
+  `"mynaui"`).
+- **[`01_compiler/src/compiler.ts`](01_compiler/src/compiler.ts)** —
+  three new hooks: (1) `mergedTokens` applies theme light-mode
+  overrides between token pack and project tokens; (2)
+  `buildPrimitiveRegistry` merges pattern-pack primitives into the
+  same registry as vocab primitives; (3) `compileNode` intercepts
+  icon-pack tags (default `icon`) and resolves the SVG via
+  `emitIcon`, inlining with size from `--icon-size-{xs|sm|md|lg|xl}`,
+  `aria-label` (auto-generated from name when missing), `role="img"`
+  (unless `aria-hidden="true"`).
+- **[`01_compiler/src/errors.ts`](01_compiler/src/errors.ts)** — new
+  error codes: `MISSING_ATTRIBUTE`, `MISSING_ICON`, `MISSING_ICON_PACK`,
+  `INVALID_ICON_SVG`.
+- **[`01_compiler/src/index.ts`](01_compiler/src/index.ts)** — new
+  public exports for the loaders + types.
+
+#### Reference packs
+
+- **[`@quoin/theme-baseline-reference`](02_reference-packs/theme-baseline-reference)** —
+  light pass-through, full greyscale-inverted dark mode (20 token
+  overrides), P3 wide-gamut accent + status colours (5 overrides).
+- **[`@quoin/pattern-button-reference`](02_reference-packs/pattern-button-reference)** —
+  one `<action-button>` primitive with full state matrix
+  (default/hover/active/disabled/loading) and microStates
+  (default/focus/focus-visible).
+- **[`@quoin/icons-reference`](02_reference-packs/icons-reference)** —
+  five outline glyphs (home, search, chevron-down, x, check) with
+  aliases (house → home, magnifier → search, close → x, tick → check).
+- **[`@quoin/template-blank-reference`](02_reference-packs/template-blank-reference)** —
+  single-page starter scaffold wired to baseline + essentials +
+  reference theme + reference icons.
+
+#### Validation + tests
+
+- **[`02_reference-packs/validate-extension.js`](02_reference-packs/validate-extension.js)** —
+  new validator for the 4 new pack types. Verifies manifests load,
+  override / pattern / icon contracts hold, template manifest is
+  internally consistent, full token + vocab + pattern + theme +
+  icons composition compiles cleanly, and missing icon names throw
+  `MISSING_ICON`.
+- **[`01_compiler/test/extension.test.ts`](01_compiler/test/extension.test.ts)** —
+  19 new Vitest cases covering: theme/pattern/icon loaders, theme
+  override resolution, project token precedence, pattern primitive
+  registration, icon inlining with size resolution, aria-label
+  auto-generation, decorative (`aria-hidden`) handling, alias
+  resolution, `pack="…"` disambiguation, error paths.
+
+#### Validation status
+
+- All 40 packs in the original catalogue still pass strict validation.
+- All 4 new reference packs pass `validate-extension.js`.
+- Compiler test suite at 96/96 (was 77/77; +19 for new pack types).
+- All three reference demos build cleanly (article-tailwind,
+  dashboard-rawcss, showcase-tailwind).
+- Docs site builds clean.
+
+#### Composition order
+
+After Phase 0.5-extension the canonical composition order at compile
+time is:
+
+```
+token pack → theme overrides → project overrides → vocab + pattern primitives → icon resolution → impl pack emit
+```
+
+Template packs sit outside this chain — they declare the pack set a
+consumer should compose with, scaffolded via the create CLI.
+
 ### Handoff additive — namespace expanded 164 → 175 (2026-05-17)
 
 The `quoin-handoff` v1.0 launch package delivered a fresh design vision

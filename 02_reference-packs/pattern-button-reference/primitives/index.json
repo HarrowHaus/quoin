@@ -1,0 +1,51 @@
+[
+  {
+    "name": "action-button",
+    "category": "interactive",
+    "role": "Reference button pattern — the canonical interactive element with full state coverage (default/hover/active/disabled/loading) and microStates (default/focus/focus-visible).",
+    "attributes": {
+      "intent": {
+        "values": ["primary", "secondary", "tertiary", "critical", "success"],
+        "default": "primary"
+      },
+      "density": {
+        "values": ["sparse", "normal", "dense"],
+        "default": "normal"
+      },
+      "weight": {
+        "values": ["normal", "emphasize"],
+        "default": "normal"
+      },
+      "state": {
+        "values": ["default", "hover", "active", "disabled", "loading"],
+        "default": "default",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "--text-on-accent",
+      "background": "--accent",
+      "borderColor": "--border-emphasis",
+      "borderRadius": "--radius-md",
+      "padding": "--space-card",
+      "fontWeight": "--font-weight-medium",
+      "transition": "--transition-default",
+      "focusRingColor": "--focus-ring",
+      "focusRingWidth": "--focus-ring-width",
+      "focusRingOffset": "--focus-ring-offset"
+    },
+    "structure": {
+      "element": "button",
+      "attributes": {
+        "type": "button"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "states": ["default", "hover", "active", "disabled", "loading"],
+      "microStates": ["default", "focus", "focus-visible"],
+      "patternCategory": "button"
+    }
+  }
+]

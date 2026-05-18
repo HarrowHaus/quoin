@@ -1,0 +1,8 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/config.json",
+  "tokenPack": "@quoin/tokens-baseline",
+  "implementationPack": "@quoin/impl-tailwind",
+  "vocabularyPacks": ["@quoin/vocab-essentials"],
+  "themePack": "@quoin/theme-baseline-reference",
+  "iconPacks": ["@quoin/icons-reference"]
+}

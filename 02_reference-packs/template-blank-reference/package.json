@@ -1,0 +1,21 @@
+{
+  "name": "@quoin/template-blank-reference",
+  "version": "0.1.0",
+  "description": "Reference blank template for Quoin — single-page scaffold wired to baseline packs.",
+  "license": "MIT",
+  "main": "./pages/index.qm.html",
+  "files": [
+    "quoin.pack.json",
+    "pages/",
+    "examples/",
+    "quoin.config.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "template", "starter", "scaffold"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "02_reference-packs/template-blank-reference"
+  }
+}

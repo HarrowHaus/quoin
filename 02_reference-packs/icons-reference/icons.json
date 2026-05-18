@@ -1,0 +1,10 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/icon-manifest.json",
+  "icons": [
+    { "name": "home", "aliases": ["house"], "file": "home.svg" },
+    { "name": "search", "aliases": ["magnifier", "magnifying-glass"], "file": "search.svg" },
+    { "name": "chevron-down", "aliases": ["arrow-down-small"], "file": "chevron-down.svg" },
+    { "name": "x", "aliases": ["close", "dismiss"], "file": "x.svg" },
+    { "name": "check", "aliases": ["tick"], "file": "check.svg" }
+  ]
+}

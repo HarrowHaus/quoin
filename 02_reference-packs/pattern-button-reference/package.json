@@ -1,0 +1,19 @@
+{
+  "name": "@quoin/pattern-button-reference",
+  "version": "0.1.0",
+  "description": "Reference button pattern for Quoin — <action-button> with full state + microState matrix.",
+  "license": "MIT",
+  "main": "./primitives/index.json",
+  "files": [
+    "quoin.pack.json",
+    "primitives/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "pattern", "button", "interactive"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "02_reference-packs/pattern-button-reference"
+  }
+}

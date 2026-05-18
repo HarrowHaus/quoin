@@ -1,0 +1,24 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/pattern-button-reference",
+  "version": "0.1.0",
+  "type": "pattern",
+  "quoinVersion": "^0.1.0",
+  "description": "Reference button pattern — semantic <action-button> primitive with intent + density attributes, full state + microState matrix (default/hover/active/disabled/loading; default/focus).",
+  "category": "button",
+  "variant": "default",
+  "exports": {
+    "primitives": "./primitives/index.json"
+  },
+  "states": ["default", "hover", "active", "disabled", "loading"],
+  "microStates": ["default", "focus", "focus-visible"],
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/pattern-button-reference",
+    "tags": ["pattern", "button", "reference", "interactive"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0"
+  }
+}

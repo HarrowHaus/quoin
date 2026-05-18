@@ -1,0 +1,5 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "Light-mode overrides for theme-baseline-reference. Pass-through except for a slightly retuned focus ring — the underlying tokens-baseline pack already targets the light register.",
+  "focus-ring": { "$type": "color", "$value": "oklch(60% 0.16 250)" }
+}

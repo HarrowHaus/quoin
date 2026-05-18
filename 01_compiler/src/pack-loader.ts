@@ -15,17 +15,25 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 import type {
   EmitFn,
+  IconDefinition,
+  IconPack,
+  IconPackSource,
   ImplementationPack,
+  ImplementationPackSource,
   PackManifest,
+  PatternPack,
+  PatternPackSource,
   PrimitiveDefinition,
+  ThemePack,
+  ThemePackSource,
   TokenPack,
   TokenPackSource,
   VocabularyPack,
-  VocabularyPackSource,
-  ImplementationPackSource
+  VocabularyPackSource
 } from "./types.js";
 import { validateManifest } from "./pack-validator.js";
 import {
+  REQUIRED_SEMANTIC_TOKENS,
   findMissingSemanticTokens,
   flattenDtcg,
   resolveReferences
@@ -143,6 +151,182 @@ function normalisePrimitivesList(input: unknown): PrimitiveDefinition[] {
   throw new PackValidationError(
     'Vocabulary pack primitives entry must be an array or `{ "primitives": [...] }`'
   );
+}
+
+/* ────────────────────── Theme pack ────────────────────── */
+
+export async function loadThemePack(source: ThemePackSource): Promise<ThemePack> {
+  if (typeof source !== "string") return source;
+  const manifest = await readManifest(source);
+  if (manifest.type !== "theme") {
+    throw new PackValidationError(
+      `Expected theme pack, got "${manifest.type}" for ${manifest.name}`,
+      manifest.name
+    );
+  }
+  const lightPath = manifest.exports.lightModeOverrides;
+  if (!lightPath) {
+    throw new PackValidationError(
+      `Theme pack ${manifest.name} missing "exports.lightModeOverrides"`,
+      manifest.name
+    );
+  }
+  const lightModeOverrides = await readOverrideFile(source, lightPath, manifest.name);
+  const darkPath = manifest.exports.darkModeOverrides;
+  const darkModeOverrides = darkPath
+    ? await readOverrideFile(source, darkPath, manifest.name)
+    : undefined;
+  const p3Path = manifest.exports.p3WideGamutOverrides;
+  const p3WideGamutOverrides = p3Path
+    ? await readOverrideFile(source, p3Path, manifest.name)
+    : undefined;
+  return { manifest, lightModeOverrides, darkModeOverrides, p3WideGamutOverrides };
+}
+
+async function readOverrideFile(
+  packDir: string,
+  relPath: string,
+  packName: string
+): Promise<Record<string, string>> {
+  const file = path.join(packDir, relPath);
+  const raw = JSON.parse(await fs.readFile(file, "utf8"));
+  const flat = flattenDtcg(raw);
+  const tokens = resolveReferences(flat);
+  // Theme packs MUST NOT introduce names outside the canonical namespace.
+  const canonical = new Set(REQUIRED_SEMANTIC_TOKENS);
+  const extras = Object.keys(tokens).filter((n) => !canonical.has(n));
+  if (extras.length > 0) {
+    throw new PackValidationError(
+      `Theme pack ${packName} (${relPath}) introduces non-canonical token names: ` +
+        extras.slice(0, 5).join(", ") +
+        (extras.length > 5 ? `, ... (+${extras.length - 5} more)` : ""),
+      packName
+    );
+  }
+  return tokens;
+}
+
+/* ────────────────────── Pattern pack ────────────────────── */
+
+export async function loadPatternPack(source: PatternPackSource): Promise<PatternPack> {
+  if (typeof source !== "string") return source;
+  const manifest = await readManifest(source);
+  if (manifest.type !== "pattern") {
+    throw new PackValidationError(
+      `Expected pattern pack, got "${manifest.type}" for ${manifest.name}`,
+      manifest.name
+    );
+  }
+  const primitivesPath = manifest.exports.primitives;
+  if (!primitivesPath) {
+    throw new PackValidationError(
+      `Pattern pack ${manifest.name} missing "exports.primitives"`,
+      manifest.name
+    );
+  }
+  const file = path.join(source, primitivesPath);
+  const data = JSON.parse(await fs.readFile(file, "utf8")) as unknown;
+  const list = normalisePrimitivesList(data);
+  const primitives: Record<string, PrimitiveDefinition> = {};
+  for (const p of list) {
+    if (primitives[p.name]) {
+      throw new PackValidationError(
+        `Duplicate primitive "${p.name}" in pattern pack ${manifest.name}`,
+        manifest.name
+      );
+    }
+    primitives[p.name] = p;
+  }
+
+  let componentTokens: Record<string, string> | undefined;
+  const compPath = manifest.exports.componentTokens;
+  if (compPath) {
+    try {
+      const raw = JSON.parse(await fs.readFile(path.join(source, compPath), "utf8"));
+      componentTokens = flattenDtcg(raw);
+    } catch {
+      componentTokens = undefined;
+    }
+  }
+
+  const states = manifest.states ?? [];
+  const microStates = manifest.microStates ?? [];
+  if (!states.includes("default")) {
+    throw new PackValidationError(
+      `Pattern pack ${manifest.name}: "states" must include "default"`,
+      manifest.name
+    );
+  }
+  if (!microStates.includes("default") || !microStates.includes("focus")) {
+    throw new PackValidationError(
+      `Pattern pack ${manifest.name}: "microStates" must include "default" and "focus"`,
+      manifest.name
+    );
+  }
+
+  return { manifest, primitives, componentTokens, states, microStates };
+}
+
+/* ────────────────────── Icon pack ────────────────────── */
+
+export async function loadIconPack(source: IconPackSource): Promise<IconPack> {
+  if (typeof source !== "string") return source;
+  const manifest = await readManifest(source);
+  if (manifest.type !== "icon") {
+    throw new PackValidationError(
+      `Expected icon pack, got "${manifest.type}" for ${manifest.name}`,
+      manifest.name
+    );
+  }
+  const iconsDir = manifest.exports.icons;
+  const iconManifestPath = manifest.exports.manifest;
+  if (!iconsDir || !iconManifestPath) {
+    throw new PackValidationError(
+      `Icon pack ${manifest.name} missing "exports.icons" or "exports.manifest"`,
+      manifest.name
+    );
+  }
+  const iconManifest = JSON.parse(
+    await fs.readFile(path.join(source, iconManifestPath), "utf8")
+  ) as { icons?: IconDefinition[] };
+  const defs = iconManifest.icons ?? [];
+  if (!Array.isArray(defs)) {
+    throw new PackValidationError(
+      `Icon pack ${manifest.name} manifest must declare "icons" as an array`,
+      manifest.name
+    );
+  }
+
+  const icons: Record<string, string> = {};
+  const definitions: Record<string, IconDefinition> = {};
+  for (const def of defs) {
+    if (!def.name || !def.file) {
+      throw new PackValidationError(
+        `Icon pack ${manifest.name}: every icon entry must declare "name" and "file"`,
+        manifest.name
+      );
+    }
+    const svgPath = path.join(source, iconsDir, def.file);
+    const svg = await fs.readFile(svgPath, "utf8");
+    icons[def.name] = svg;
+    definitions[def.name] = def;
+    for (const alias of def.aliases ?? []) {
+      if (!icons[alias]) icons[alias] = svg;
+      if (!definitions[alias]) definitions[alias] = def;
+    }
+  }
+
+  const semanticTag = manifest.semanticTag ?? "icon";
+  const shortName = deriveIconPackShortName(manifest.name);
+  return { manifest, semanticTag, shortName, icons, definitions };
+}
+
+function deriveIconPackShortName(packName: string): string {
+  // "@quoin/icons-mynaui" -> "mynaui"
+  const slash = packName.lastIndexOf("/");
+  const tail = slash >= 0 ? packName.slice(slash + 1) : packName;
+  const stripped = tail.replace(/^icons?-/, "");
+  return stripped || tail;
 }
 
 /* ────────────────────── Implementation pack ────────────────────── */

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/template-blank-reference",
+  "version": "0.1.0",
+  "type": "template",
+  "quoinVersion": "^0.1.0",
+  "description": "Minimal reference template — single-page Quoin scaffold (index.qm.html) wired to baseline tokens + essentials vocab + reference theme + reference icons. Demonstrates the template-pack contract end-to-end.",
+  "category": "starter",
+  "pages": ["index"],
+  "exports": {
+    "pages": "./pages"
+  },
+  "dependencies": {
+    "tokenPack": "@quoin/tokens-baseline",
+    "implementationPack": "@quoin/impl-tailwind",
+    "vocabularyPacks": ["@quoin/vocab-essentials"],
+    "themePack": "@quoin/theme-baseline-reference",
+    "iconPacks": ["@quoin/icons-reference"]
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/template-blank-reference",
+    "tags": ["template", "starter", "reference"]
+  }
+}

@@ -50,24 +50,28 @@ At each phase gate, run the same prompt through two different models (Claude + C
 
 - **Phase** — a numbered work unit with its own folder, README, and exit criteria.
 - **Gate** — the boundary between phases. A gate has explicit pass/fail criteria.
-- **Pack** — a distributable unit. Three types: token, vocabulary, implementation.
+- **Pack** — a distributable unit. Seven types: token, vocabulary, implementation, theme, template, pattern, icon.
 - **Primitive** — a single semantic element defined by a vocabulary pack.
 - **Implementation target** — the output format the compiler emits (Tailwind v4, raw CSS, Open Props, etc.).
 
 ## What to do right now
 
-Current state: Phases 0–4, 4.5, 5a–5d, 0.5, 3.5c, and 3.5d are complete.
-The canonical token namespace is frozen at its v1.0 surface area —
-164 tokens across 11 DTCG 2025.10 types — and every token pack
-(reference + 30 harvested) supplies a `$value` for every canonical
-name. Strict validation passes catalogue-wide. Phase 3.5 + 3.5b
-shipped the existing color/dimension extractions; Phase 3.5c filled
-the geometric/typographic gap with programmatic defaults so the
-namespace contract is satisfied. An optional Phase 3.5d would refine
-per-pack shadow / border / typography composite values to match each
-source system's actual geometric specs — incremental polish, not
-blocking. Phase 4.5 refreshed the docs site. Phase 5e (launch) is
-staged but not executed.
+Current state: Phases 0–4, 4.5, 5a–5d, 0.5, 0.5-ext, 3.5c, and 3.5d
+are complete. The canonical token namespace is frozen at its v1.0
+surface area — 175 tokens across 11 DTCG 2025.10 types — and every
+token pack (reference + 30 harvested) supplies a `$value` for every
+canonical name. Strict validation passes catalogue-wide. Phase 3.5 +
+3.5b shipped the existing color/dimension extractions; Phase 3.5c
+filled the geometric/typographic gap with programmatic defaults so
+the namespace contract is satisfied. Phase 0.5-extension added 4
+new pack types (theme / template / pattern / icon) on top of the
+original 3 (token / vocabulary / implementation), with compiler
+hooks for theme override resolution, pattern primitive registration,
+and icon resolution; 4 reference packs ship; 96/96 compiler tests
+pass. An optional Phase 3.5d-cont would refine per-pack composite
+values for the remaining 27 packs — incremental polish, not blocking.
+Phase 4.5 refreshed the docs site. Phase 5e (launch) is staged but
+not executed.
 
 If this is your first time opening this lab:
 

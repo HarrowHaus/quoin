@@ -1,0 +1,33 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/icons-reference",
+  "version": "0.1.0",
+  "type": "icon",
+  "quoinVersion": "^0.1.0",
+  "description": "Reference icon pack — five hand-drawn outline glyphs (home, search, chevron-down, x, check) for validating the icon-pack resolver and as a known-good baseline for app shells.",
+  "iconStyle": "outline",
+  "iconCount": 5,
+  "exports": {
+    "icons": "./icons",
+    "manifest": "./icons.json"
+  },
+  "recommendedSize": {
+    "min": "16px",
+    "max": "24px",
+    "sweetSpot": "20px"
+  },
+  "semanticTag": "icon",
+  "sizeTokensConsumed": [
+    "--icon-size-xs",
+    "--icon-size-sm",
+    "--icon-size-md",
+    "--icon-size-lg",
+    "--icon-size-xl"
+  ],
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/icons-reference",
+    "tags": ["icon", "reference", "outline"]
+  }
+}

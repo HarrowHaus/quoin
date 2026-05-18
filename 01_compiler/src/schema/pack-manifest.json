@@ -14,7 +14,17 @@
       "type": "string",
       "pattern": "^\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$"
     },
-    "type": { "enum": ["token", "vocabulary", "implementation"] },
+    "type": {
+      "enum": [
+        "token",
+        "vocabulary",
+        "implementation",
+        "theme",
+        "template",
+        "pattern",
+        "icon"
+      ]
+    },
     "quoinVersion": { "type": "string" },
     "description": { "type": "string", "minLength": 1, "maxLength": 200 },
     "exports": {
@@ -59,11 +69,77 @@
       "type": "string",
       "enum": ["pending-3.5c-fill"],
       "description": "Phase 0.5 transitional status. Packs marked 'pending-3.5c-fill' emit validation warnings instead of errors for missing canonical tokens. Removed after Phase 3.5c populates the expanded namespace."
+    },
+    "category": {
+      "type": "string",
+      "description": "Template or pattern category (e.g. 'marketing', 'dashboard', 'button')."
+    },
+    "pages": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Template pack: list of page identifiers shipped (e.g. ['index', 'about', 'pricing'])."
+    },
+    "dependencies": {
+      "type": "object",
+      "description": "Template pack: peer packs the template depends on.",
+      "properties": {
+        "tokenPack": { "type": "string" },
+        "implementationPack": { "type": "string" },
+        "vocabularyPacks": { "type": "array", "items": { "type": "string" } },
+        "themePack": { "type": "string" },
+        "patternPacks": { "type": "array", "items": { "type": "string" } },
+        "iconPacks": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "variant": {
+      "type": "string",
+      "description": "Pattern pack: variant identifier within a category (e.g. 'pill', 'block', 'compact')."
+    },
+    "states": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Pattern pack: pattern-level states the pack provides. MUST include 'default'."
+    },
+    "microStates": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Pattern pack: per-element micro-states. MUST include 'default' and 'focus'."
+    },
+    "iconStyle": {
+      "type": "string",
+      "enum": ["outline", "solid", "duotone", "bold", "bold-duotone", "two-tone"],
+      "description": "Icon pack: visual style of the icon set."
+    },
+    "iconCount": {
+      "type": "number",
+      "minimum": 1,
+      "description": "Icon pack: total number of icons in the set."
+    },
+    "recommendedSize": {
+      "type": "object",
+      "description": "Icon pack: recommended display sizes.",
+      "required": ["min", "max", "sweetSpot"],
+      "properties": {
+        "min": { "type": "string" },
+        "max": { "type": "string" },
+        "sweetSpot": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "semanticTag": {
+      "type": "string",
+      "description": "Icon pack: the semantic tag the pack registers; defaults to 'icon'."
+    },
+    "sizeTokensConsumed": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Icon pack: canonical icon-size dimension tokens the pack reads."
     }
   },
   "allOf": [
     {
-      "if": { "properties": { "type": { "const": "token" } } },
+      "if": { "properties": { "type": { "const": "token" } }, "required": ["type"] },
       "then": {
         "properties": {
           "exports": {
@@ -74,7 +150,7 @@
       }
     },
     {
-      "if": { "properties": { "type": { "const": "vocabulary" } } },
+      "if": { "properties": { "type": { "const": "vocabulary" } }, "required": ["type"] },
       "then": {
         "properties": {
           "exports": {
@@ -88,7 +164,7 @@
       }
     },
     {
-      "if": { "properties": { "type": { "const": "implementation" } } },
+      "if": { "properties": { "type": { "const": "implementation" } }, "required": ["type"] },
       "then": {
         "properties": {
           "exports": {
@@ -96,6 +172,79 @@
             "properties": {
               "emit": { "type": "string" },
               "metadata": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "type": { "const": "theme" } }, "required": ["type"] },
+      "then": {
+        "properties": {
+          "exports": {
+            "required": ["lightModeOverrides"],
+            "properties": {
+              "lightModeOverrides": { "type": "string" },
+              "darkModeOverrides": { "type": "string" },
+              "p3WideGamutOverrides": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "type": { "const": "template" } }, "required": ["type"] },
+      "then": {
+        "required": ["category", "pages", "dependencies"],
+        "properties": {
+          "exports": {
+            "required": ["pages"],
+            "properties": {
+              "pages": { "type": "string" }
+            }
+          },
+          "dependencies": {
+            "required": ["tokenPack", "implementationPack", "vocabularyPacks"]
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "type": { "const": "pattern" } }, "required": ["type"] },
+      "then": {
+        "required": ["category", "states", "microStates"],
+        "properties": {
+          "exports": {
+            "required": ["primitives"],
+            "properties": {
+              "primitives": { "type": "string" },
+              "componentTokens": { "type": "string" }
+            }
+          },
+          "states": {
+            "type": "array",
+            "contains": { "const": "default" }
+          },
+          "microStates": {
+            "type": "array",
+            "allOf": [
+              { "contains": { "const": "default" } },
+              { "contains": { "const": "focus" } }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "type": { "const": "icon" } }, "required": ["type"] },
+      "then": {
+        "required": ["iconStyle", "iconCount", "recommendedSize"],
+        "properties": {
+          "exports": {
+            "required": ["icons", "manifest"],
+            "properties": {
+              "icons": { "type": "string" },
+              "manifest": { "type": "string" }
             }
           }
         }

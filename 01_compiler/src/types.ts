@@ -101,11 +101,20 @@ export interface HTMLText {
 
 /* ────────────────────── Pack model ────────────────────── */
 
+export type PackType =
+  | "token"
+  | "vocabulary"
+  | "implementation"
+  | "theme"
+  | "template"
+  | "pattern"
+  | "icon";
+
 export interface PackManifest {
   $schema?: string;
   name: string;
   version: string;
-  type: "token" | "vocabulary" | "implementation";
+  type: PackType;
   quoinVersion: string;
   description: string;
   exports: Record<string, string>;
@@ -125,6 +134,39 @@ export interface PackManifest {
   };
   peerPacks?: Record<string, string>;
   capabilities?: string[];
+  /** Template pack: category (e.g. 'marketing'). */
+  category?: string;
+  /** Template pack: list of page identifiers. */
+  pages?: string[];
+  /** Template pack: peer pack dependencies. */
+  dependencies?: {
+    tokenPack?: string;
+    implementationPack?: string;
+    vocabularyPacks?: string[];
+    themePack?: string;
+    patternPacks?: string[];
+    iconPacks?: string[];
+  };
+  /** Pattern pack: variant within a category. */
+  variant?: string;
+  /** Pattern pack: supported pattern-level states (must include 'default'). */
+  states?: string[];
+  /** Pattern pack: per-element micro-states (must include 'default' + 'focus'). */
+  microStates?: string[];
+  /** Icon pack: style of the icon set. */
+  iconStyle?: "outline" | "solid" | "duotone" | "bold" | "bold-duotone" | "two-tone";
+  /** Icon pack: total icon count. */
+  iconCount?: number;
+  /** Icon pack: recommended display sizes. */
+  recommendedSize?: {
+    min: string;
+    max: string;
+    sweetSpot: string;
+  };
+  /** Icon pack: tag the pack registers (defaults to 'icon'). */
+  semanticTag?: string;
+  /** Icon pack: canonical icon-size dimension tokens the pack reads. */
+  sizeTokensConsumed?: string[];
 }
 
 /** A loaded token pack. */
@@ -170,6 +212,80 @@ export interface ImplementationPack {
   };
 }
 
+/* ────────────────────── Theme pack ────────────────────── */
+
+/**
+ * A loaded theme pack. Theme packs supply mode-scoped overrides on
+ * top of a token pack. The override files are DTCG documents whose
+ * `$value` entries replace tokens already declared in the canonical
+ * namespace — adding new names is a validation error.
+ *
+ * Composition order at compile time:
+ *   token pack → theme pack (light) → project overrides
+ *
+ * Dark mode and P3 wide-gamut overrides are carried through to the
+ * implementation pack so it can emit `[data-theme="dark"]` and
+ * `@media (color-gamut: p3)` blocks. The compiler itself applies
+ * the light-mode overrides at primitive-token resolution time.
+ */
+export interface ThemePack {
+  manifest: PackManifest;
+  /** Light-mode override map — token name -> value. Always present. */
+  lightModeOverrides: Record<string, string>;
+  /** Dark-mode override map — optional. */
+  darkModeOverrides?: Record<string, string>;
+  /** P3 wide-gamut override map — optional. */
+  p3WideGamutOverrides?: Record<string, string>;
+}
+
+/* ────────────────────── Pattern pack ────────────────────── */
+
+/**
+ * A loaded pattern pack. Pattern packs ship one primitive (the
+ * pattern element) plus its supported states and microstates. They
+ * share the vocabulary-pack resolution pipeline — the compiler
+ * merges pattern primitives into the same primitive registry, so
+ * `<button-pattern>` and `<emphasis-card>` are resolved identically.
+ */
+export interface PatternPack {
+  manifest: PackManifest;
+  primitives: Record<string, PrimitiveDefinition>;
+  /** Component tokens (optional, same shape as vocab pack). */
+  componentTokens?: Record<string, string>;
+  /** Pattern-level states the pack provides (always includes 'default'). */
+  states: string[];
+  /** Per-element micro-states (always includes 'default' and 'focus'). */
+  microStates: string[];
+}
+
+/* ────────────────────── Icon pack ────────────────────── */
+
+/** A single icon entry from an icon-pack manifest. */
+export interface IconDefinition {
+  name: string;
+  file: string;
+  aliases?: string[];
+}
+
+/**
+ * A loaded icon pack. Each pack registers a semantic tag (default
+ * `icon`) under which named glyphs are looked up at compile time.
+ * The compiler resolves `<icon name="home" size="md" />` by reading
+ * the matching SVG from the pack and inlining it with size from
+ * the canonical `--icon-size-*` tokens.
+ */
+export interface IconPack {
+  manifest: PackManifest;
+  /** The tag this pack registers (defaults to 'icon'). */
+  semanticTag: string;
+  /** Short-name handle used by authors via `pack="<short>"`. */
+  shortName: string;
+  /** Map of icon-name (or alias) → SVG source string. */
+  icons: Record<string, string>;
+  /** Map of icon-name → canonical definition (for diagnostics). */
+  definitions: Record<string, IconDefinition>;
+}
+
 /* ────────────────────── Compiler I/O ────────────────────── */
 
 export interface CompileOptions {
@@ -177,6 +293,12 @@ export interface CompileOptions {
   tokenPack: TokenPack;
   vocabularyPacks: VocabularyPack[];
   implementationPack: ImplementationPack;
+  /** Optional theme pack — light-mode overrides applied at compile time. */
+  themePack?: ThemePack;
+  /** Optional pattern packs — merged into the primitive registry. */
+  patternPacks?: PatternPack[];
+  /** Optional icon packs — searched in load order on `<icon>` resolution. */
+  iconPacks?: IconPack[];
   /** Project-local token overrides (token name -> value). Highest precedence. */
   projectTokens?: Record<string, string>;
   /** Source file path, used in diagnostics only. */
@@ -206,3 +328,6 @@ export interface CompilerDiagnostic {
 export type TokenPackSource = TokenPack | string;
 export type VocabularyPackSource = VocabularyPack | string;
 export type ImplementationPackSource = ImplementationPack | string;
+export type ThemePackSource = ThemePack | string;
+export type PatternPackSource = PatternPack | string;
+export type IconPackSource = IconPack | string;

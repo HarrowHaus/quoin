@@ -1,0 +1,19 @@
+{
+  "name": "@quoin/theme-baseline-reference",
+  "version": "0.1.0",
+  "description": "Reference theme pack for Quoin — neutral light, inverted dark, P3 wide-gamut.",
+  "license": "MIT",
+  "main": "./quoin.pack.json",
+  "files": [
+    "quoin.pack.json",
+    "overrides/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "theme", "design-tokens", "dtcg", "dark-mode"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "02_reference-packs/theme-baseline-reference"
+  }
+}

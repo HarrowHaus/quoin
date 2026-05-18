@@ -1,0 +1,59 @@
+<!--
+  index.qm.html — Quoin source page.
+
+  This template scaffolds a single Quoin page wired to the baseline
+  packs declared in quoin.config.json. Edit freely; the build
+  pipeline (`npx @quoin/build`) compiles each .qm.html page to
+  standard HTML + CSS via the named impl pack.
+-->
+<header-region>
+  <site-title>My Site</site-title>
+  <primary-nav>
+    <nav-link href="/">Home</nav-link>
+    <nav-link href="/about">About</nav-link>
+    <nav-link href="/contact">Contact</nav-link>
+  </primary-nav>
+</header-region>
+
+<page-body>
+  <hero-block>
+    <display-heading>Hello, Quoin.</display-heading>
+    <lede>
+      A blank reference template wired to baseline tokens, essentials
+      vocabulary, the reference theme, and the reference icon set.
+    </lede>
+  </hero-block>
+
+  <feature-row>
+    <feature-card>
+      <icon name="home" size="lg" aria-hidden="true" />
+      <emphasis-heading>Semantic by default</emphasis-heading>
+      <body-text>
+        Author intent, not utility classes. The compiler emits standard
+        HTML + CSS at build time.
+      </body-text>
+    </feature-card>
+
+    <feature-card>
+      <icon name="search" size="lg" aria-hidden="true" />
+      <emphasis-heading>Themed at compile time</emphasis-heading>
+      <body-text>
+        The theme pack applies light overrides at primitive resolution.
+        Dark and P3 variants are carried through to the impl pack.
+      </body-text>
+    </feature-card>
+
+    <feature-card>
+      <icon name="check" size="lg" aria-hidden="true" />
+      <emphasis-heading>No runtime cost</emphasis-heading>
+      <body-text>
+        The browser ships plain HTML and CSS. No Quoin runtime, no
+        proprietary engine, no AI inference at render time.
+      </body-text>
+    </feature-card>
+  </feature-row>
+</page-body>
+
+<footer-region>
+  <body-text>Built with Quoin · MIT licensed</body-text>
+</footer-region>

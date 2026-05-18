@@ -31,13 +31,17 @@ Four layers, three of which already exist as standards or shipped products:
 
 ## Pack types
 
-Three composable pack categories distributed via npm under the `@quoin/*` scope:
+Seven composable pack categories distributed via npm under the `@quoin/*` scope:
 
 - **Token packs** — aesthetic-bearing (colors, type, spacing, motion, radius). Reference: `@quoin/tokens-baseline`. Harvested: 30 production packs from Material 3, Carbon, Polaris, Fluent, Primer, Geist, Tailwind defaults, and more (see `03_harvest/`).
 - **Vocabulary packs** — semantic element definitions for a domain. Reference: `@quoin/vocab-editorial` (21 primitives), `@quoin/vocab-dashboard` (15), `@quoin/vocab-essentials` (10), `@quoin/vocab-app-shell` (5). Harvested: 10 more covering shadcn, Radix, Headless, forms, docs, marketing.
 - **Implementation packs** — compilation targets. Reference: `@quoin/impl-tailwind` (Tailwind v4 arbitrary-value classes, ships `companion.css` for hover/focus/motion polish + `companion.js` for tab / disclosure / modal / Cmd-K behaviors), `@quoin/impl-raw-css` (zero-dependency inline-style emitter).
+- **Theme packs** *(Phase 0.5-extension)* — mode-scoped token overrides (light / dark / P3 wide-gamut). Reference: `@quoin/theme-baseline-reference`.
+- **Pattern packs** *(Phase 0.5-extension)* — pre-styled compositions with declared states + microStates. Reference: `@quoin/pattern-button-reference`.
+- **Icon packs** *(Phase 0.5-extension)* — named glyphs resolved by `<icon name="…" size="…" />`. Reference: `@quoin/icons-reference`.
+- **Template packs** *(Phase 0.5-extension)* — scaffoldable starter projects with declared pack dependencies. Reference: `@quoin/template-blank-reference`.
 
-A user composes their build by installing one of each.
+A user composes their build by installing one token pack, one impl pack, one or more vocabulary packs, and (optionally) a theme pack, any number of pattern + icon packs, and a template pack to scaffold from.
 
 ## Intellectual lineage
 
@@ -54,6 +58,7 @@ A user composes their build by installing one of each.
 |-------|--------|--------|--------|
 | 0 | `00_spec/` | Specification document (spec, pack-format, primitives, tokens) | shipped |
 | 0.5 | `00_spec/tokens.md` | Canonical Namespace Expansion — token namespace expanded from ~30 to 175 tokens across 11 DTCG 2025.10 types (164 in original 0.5 + 11 from handoff additive). Identity typography (Junicode + Ranade + Monaspace + Departure Mono) wired into `tokens-baseline`. Frozen at v1.0. | complete |
+| 0.5-ext | `00_spec/{pack-types,theme-pack,template-pack,pattern-pack,icon-pack}.md` | New Pack Types — adds 4 pack types (theme / template / pattern / icon) to the existing 3 (token / vocabulary / implementation). Compiler hooks for theme override resolution + pattern primitive registration + icon resolution. 4 reference packs shipped. | complete |
 | 3.5c | `03_harvest/build.js` | Geometric & typographic fidelity — all 30 harvested packs filled with `$value` for every v1.0 canonical token; strict validation passes catalog-wide. | complete |
 | 3.5d | `03_harvest/fidelity/extract.js` | Per-pack source-faithful composite refinement — fidelity framework extended to accept composite + atomic overrides. 3 packs refined (tailwind, material3, bootstrap); remaining 27 stay on 3.5c programmatic defaults. | partial — framework + 3 packs |
 | 1 | `01_compiler/` | Reference compiler (TypeScript, ESM, Vite plugin, browser entry) | shipped |
@@ -71,16 +76,19 @@ A user composes their build by installing one of each.
 
 ## Status
 
-Phases 0–4, 4.5, 5a–5d, 0.5, 3.5c, and 3.5d are complete. The
-canonical namespace is at its v1.0 surface area — 164 tokens across
-11 DTCG 2025.10 types — and frozen. Every token pack (reference +
-30 harvested) supplies a `$value` for every canonical name; strict
-validation passes catalogue-wide. Phase 3.5d extended the fidelity
-framework to support composite + atomic overrides and refined three
-packs (tailwind, material3, bootstrap) with source-faithful shadow /
-motion / border-width values. The remaining 27 packs continue on
-Phase 3.5c programmatic defaults — incremental refinement that can
-land any time without blocking launch.
+Phases 0–4, 4.5, 5a–5d, 0.5, 0.5-ext, 3.5c, and 3.5d are complete.
+The canonical namespace is at its v1.0 surface area — 175 tokens
+across 11 DTCG 2025.10 types — and frozen. Every token pack (reference
++ 30 harvested) supplies a `$value` for every canonical name; strict
+validation passes catalogue-wide. Phase 0.5-ext landed 4 new pack
+types (theme / template / pattern / icon) with compiler hooks, 4
+reference packs, and 19 new tests (96 total, all passing). Phase
+3.5d extended the fidelity framework to support composite + atomic
+overrides and refined three packs (tailwind, material3, bootstrap)
+with source-faithful shadow / motion / border-width values. The
+remaining 27 packs continue on Phase 3.5c programmatic defaults —
+incremental refinement that can land any time without blocking
+launch.
 
 Phase 3.5 + 3.5b (Token Fidelity Pass + Comprehensive Fidelity Pass)
 are complete: 27 of 30 token packs extract byte-faithfully from

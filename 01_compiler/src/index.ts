@@ -6,7 +6,10 @@ export { compile, createCompiler } from "./compiler.js";
 export {
   loadTokenPack,
   loadVocabularyPack,
-  loadImplementationPack
+  loadImplementationPack,
+  loadThemePack,
+  loadPatternPack,
+  loadIconPack
 } from "./pack-loader.js";
 export { validateManifest } from "./pack-validator.js";
 export {
@@ -31,14 +34,25 @@ export type {
   HTMLElement,
   HTMLNode,
   HTMLText,
+  IconDefinition,
+  IconPack,
+  IconPackSource,
   ImplementationPack,
+  ImplementationPackSource,
   PackManifest,
+  PackType,
+  PatternPack,
+  PatternPackSource,
   PrimitiveCategory,
   PrimitiveDefinition,
   ResolvedAttributes,
   ResolvedTokens,
+  ThemePack,
+  ThemePackSource,
   TokenPack,
-  VocabularyPack
+  TokenPackSource,
+  VocabularyPack,
+  VocabularyPackSource
 } from "./types.js";
 
 export { CANONICAL_ATTRIBUTES, CANONICAL_VALUE_SETS } from "./types.js";

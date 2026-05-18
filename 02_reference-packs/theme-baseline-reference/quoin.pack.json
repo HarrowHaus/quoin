@@ -1,0 +1,22 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/theme-baseline-reference",
+  "version": "0.1.0",
+  "type": "theme",
+  "quoinVersion": "^0.1.0",
+  "description": "Reference theme pack — neutral light mode pass-through plus an inverted dark mode and a P3 wide-gamut variant.",
+  "exports": {
+    "lightModeOverrides": "./overrides/light.json",
+    "darkModeOverrides": "./overrides/dark.json",
+    "p3WideGamutOverrides": "./overrides/p3.json"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/packs/theme-baseline-reference",
+    "tags": ["theme", "reference", "dark-mode", "p3"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0"
+  }
+}

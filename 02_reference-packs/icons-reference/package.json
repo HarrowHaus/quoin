@@ -1,0 +1,20 @@
+{
+  "name": "@quoin/icons-reference",
+  "version": "0.1.0",
+  "description": "Reference icon pack for Quoin — five outline glyphs for resolver smoke tests and app-shell baseline use.",
+  "license": "MIT",
+  "main": "./icons.json",
+  "files": [
+    "quoin.pack.json",
+    "icons/",
+    "icons.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "icon", "svg", "outline"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "02_reference-packs/icons-reference"
+  }
+}

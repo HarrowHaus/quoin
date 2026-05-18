@@ -4,6 +4,34 @@ Exit criteria for each phase. A phase is complete when **every** criterion in it
 
 ---
 
+## Phase 0.5-extension — New Pack Types
+
+**Output location:** `00_spec/{pack-types,theme-pack,template-pack,pattern-pack,icon-pack}.md` (specs), `01_compiler/src/schema/pack-manifest.json` + `types.ts` + `pack-loader.ts` + `compiler.ts` + `errors.ts` + `index.ts` (compiler), `02_reference-packs/{theme-baseline-reference,pattern-button-reference,icons-reference,template-blank-reference}/` (4 reference packs), `02_reference-packs/validate-extension.js` (validator), `01_compiler/test/extension.test.ts` (tests).
+
+**Goal:** add 4 new pack types (theme / template / pattern / icon) to the distribution model alongside the existing 3 (token / vocabulary / implementation). Ship spec docs, manifest schema, compiler hooks, reference packs, and tests in a single phase.
+
+**Exit criteria:**
+
+- [x] Spec docs written for all 4 new pack types + a catalogue (`pack-types.md`).
+- [x] `pack-manifest.json` schema extended with `type` enum + 4 discriminated `if/then` branches.
+- [x] Compiler `types.ts` adds `ThemePack`, `PatternPack`, `IconPack`, `IconDefinition` interfaces and `themePack` / `patternPacks` / `iconPacks` on `CompileOptions`.
+- [x] `loadThemePack`, `loadPatternPack`, `loadIconPack` implemented and exported.
+- [x] Theme override resolution applied at compile time (between token pack and project tokens).
+- [x] Pattern primitives merged into the same primitive registry as vocabulary primitives.
+- [x] Icon-pack tag resolution (default `icon`) intercepts before primitive lookup; size, aria-label, role, decorative handling all work.
+- [x] 4 reference packs ship under `02_reference-packs/` with manifests, payloads, READMEs, LICENSEs.
+- [x] `validate-extension.js` passes all checks for the new packs.
+- [x] Compiler test suite — 96/96 passes (was 77/77; +19 new tests for theme/pattern/icon).
+- [x] Original `validate.js` still passes 80/80 checks.
+- [x] All 40 harvested packs still pass strict validation.
+- [x] All 3 reference demos still build cleanly.
+- [x] Docs site builds clean.
+- [ ] Operator review.
+
+**Status:** complete pending operator review.
+
+---
+
 ## Phase 3.5d — Per-pack source-faithful composite refinement
 
 **Output location:** `03_harvest/fidelity/extract.js` (framework extension), `03_harvest/fidelity/specs/{tailwind,material3,bootstrap}.js` (extended specs), `03_harvest/sources/{tailwind,material3,bootstrap}.json` (composite + semantic override fields).
@@ -54,10 +82,10 @@ A `quoin-handoff` package was delivered describing the v1.0 launch plan. Mapping
 |---------------|--------|
 | **Phase 0.5 — Canonical Namespace Expansion** | **Done** via Phase 0.5 + handoff additive. 175-token namespace across 11 DTCG types. Identity typography (Junicode + Ranade + Monaspace + Departure Mono) wired into `tokens-baseline`. |
 | **Phase 3.5c — Composite Token Fidelity** | **Done** via Phase 3.5c + 3.5d. All 30 packs validate against the expanded namespace. 3 packs (tailwind, material3, bootstrap) refined with source-faithful composite values; 27 on programmatic defaults. |
-| **Phase 0.5-extension — New pack types** | **Not started** — next blocking phase. Needs theme/template/pattern/icon manifest schemas + validator extensions. |
-| **Phase Theme Packs** (10 packs) | Blocked on 0.5-extension. |
-| **Phase Template Packs** (10 packs) | Blocked on 0.5-extension. |
-| **Phase Pattern Packs** (~80–150) | Blocked on Template Packs. |
+| **Phase 0.5-extension — New pack types** | **Done** — 4 pack types (theme/template/pattern/icon) defined; manifest schema extended; compiler hooks land theme override resolution, pattern registry merge, and icon resolution; 4 reference packs ship; 96/96 tests pass. |
+| **Phase Theme Packs** (10 packs) | Unblocked — next phase. Ship 9 additional theme packs against the harvested token catalogue. |
+| **Phase Template Packs** (10 packs) | Unblocked — can ship after theme packs land. |
+| **Phase Pattern Packs** (~80–150) | Unblocked — depends on impl-pack pattern emission story (Phase 5a-cont / 5c-cont). |
 | **Phase Icon Packs** (17–18) | Blocked on 0.5-extension. |
 | **Phase 6 — Marketing site** | Independent; can start after themes. |
 | **Phase 6.5 — harrow.haus rebuild** | Independent; can start after templates. |

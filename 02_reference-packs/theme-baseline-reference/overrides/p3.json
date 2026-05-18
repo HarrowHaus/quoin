@@ -1,0 +1,9 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "P3 wide-gamut overrides — saturates the accent + status colours into Display-P3 territory for capable monitors. Falls back to sRGB-clamped values on standard displays via the impl pack's @media (color-gamut: p3) gate.",
+  "accent":   { "$type": "color", "$value": "color(display-p3 0.35 0.55 0.95)" },
+  "critical": { "$type": "color", "$value": "color(display-p3 0.95 0.25 0.30)" },
+  "success":  { "$type": "color", "$value": "color(display-p3 0.30 0.75 0.45)" },
+  "warning":  { "$type": "color", "$value": "color(display-p3 0.97 0.70 0.20)" },
+  "info":     { "$type": "color", "$value": "color(display-p3 0.30 0.65 0.95)" }
+}
