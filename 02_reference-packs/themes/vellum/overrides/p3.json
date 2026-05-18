@@ -1,0 +1,8 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "@quoin/theme-vellum — P3 wide-gamut. The terracotta accent gains saturation on capable monitors via Display-P3 coordinates. Ivory page surface remains in sRGB territory (the gamut difference is imperceptible on neutrals).",
+
+  "accent":     { "$type": "color", "$value": "color(display-p3 0.85 0.45 0.30)" },
+  "focus-ring": { "$type": "color", "$value": "color(display-p3 0.85 0.45 0.30)" },
+  "link-hover": { "$type": "color", "$value": "color(display-p3 0.85 0.45 0.30)" }
+}

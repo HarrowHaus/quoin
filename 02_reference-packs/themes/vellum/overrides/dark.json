@@ -1,0 +1,30 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "@quoin/theme-vellum — dark mode. Ink-and-parchment inverted: near-black ground, warm ivory ink, terracotta accent preserved. Cards are charcoal not pure-black, sustaining the warm-paper register in low light.",
+
+  "surface":          { "$type": "color", "$value": "oklch(14% 0.008 75)" },
+  "surface-elevated": { "$type": "color", "$value": "oklch(18% 0.010 75)" },
+  "surface-recessed": { "$type": "color", "$value": "oklch(10% 0.006 75)" },
+  "surface-inverse":  { "$type": "color", "$value": "oklch(96% 0.012 80)" },
+  "scrim":            { "$type": "color", "$value": "oklch(5% 0.004 75 / 0.7)" },
+
+  "text":             { "$type": "color", "$value": "oklch(92% 0.012 80)" },
+  "text-emphasis":    { "$type": "color", "$value": "oklch(98% 0.010 80)" },
+  "text-recede":      { "$type": "color", "$value": "oklch(68% 0.010 80)" },
+  "text-disabled":    { "$type": "color", "$value": "oklch(45% 0.008 80)" },
+  "text-on-accent":   { "$type": "color", "$value": "oklch(98% 0.010 80)" },
+  "highlight":        { "$type": "color", "$value": "oklch(66% 0.14 40 / 0.20)" },
+
+  "border":           { "$type": "color", "$value": "oklch(26% 0.010 75)" },
+  "border-emphasis":  { "$type": "color", "$value": "oklch(50% 0.012 80)" },
+  "border-recede":    { "$type": "color", "$value": "oklch(20% 0.008 75)" },
+
+  "accent":           { "$type": "color", "$value": "oklch(72% 0.14 40)" },
+  "accent-recede":    { "$type": "color", "$value": "oklch(45% 0.10 40)" },
+  "focus-ring":       { "$type": "color", "$value": "oklch(72% 0.14 40)" },
+  "shadow-tint":      { "$type": "color", "$value": "oklch(0% 0 0 / 0.55)" },
+
+  "link":             { "$type": "color", "$value": "oklch(92% 0.012 80)" },
+  "link-visited":     { "$type": "color", "$value": "oklch(78% 0.012 80)" },
+  "link-hover":       { "$type": "color", "$value": "oklch(72% 0.14 40)" }
+}
