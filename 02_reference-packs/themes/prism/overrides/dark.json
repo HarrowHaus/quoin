@@ -1,0 +1,30 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "@quoin/theme-prism — dark mode. Dark translucent material — surface-elevated still carries alpha so backdrop-filter blur reveals the underlying near-black + saturated content. This is the canonical iOS-26 dark register.",
+
+  "surface":          { "$type": "color", "$value": "oklch(10% 0.012 240)" },
+  "surface-elevated": { "$type": "color", "$value": "oklch(14% 0.015 240 / 0.45)" },
+  "surface-recessed": { "$type": "color", "$value": "oklch(6% 0.010 240 / 0.55)" },
+  "surface-inverse":  { "$type": "color", "$value": "oklch(96% 0.008 240)" },
+  "scrim":            { "$type": "color", "$value": "oklch(0% 0 0 / 0.65)" },
+
+  "text":             { "$type": "color", "$value": "oklch(92% 0.010 240)" },
+  "text-emphasis":    { "$type": "color", "$value": "oklch(100% 0 0)" },
+  "text-recede":      { "$type": "color", "$value": "oklch(62% 0.012 240)" },
+  "text-disabled":    { "$type": "color", "$value": "oklch(40% 0.010 240)" },
+  "text-on-accent":   { "$type": "color", "$value": "oklch(98% 0.005 240)" },
+  "highlight":        { "$type": "color", "$value": "oklch(70% 0.18 230 / 0.40)" },
+
+  "border":           { "$type": "color", "$value": "oklch(28% 0.015 240 / 0.6)" },
+  "border-emphasis":  { "$type": "color", "$value": "oklch(72% 0.18 230)" },
+  "border-recede":    { "$type": "color", "$value": "oklch(18% 0.012 240 / 0.5)" },
+
+  "accent":           { "$type": "color", "$value": "oklch(72% 0.18 230)" },
+  "accent-recede":    { "$type": "color", "$value": "oklch(48% 0.14 230)" },
+  "focus-ring":       { "$type": "color", "$value": "oklch(78% 0.20 230)" },
+  "shadow-tint":      { "$type": "color", "$value": "oklch(0% 0 0 / 0.50)" },
+
+  "link":             { "$type": "color", "$value": "oklch(78% 0.16 230)" },
+  "link-visited":     { "$type": "color", "$value": "oklch(72% 0.14 295)" },
+  "link-hover":       { "$type": "color", "$value": "oklch(88% 0.18 230)" }
+}

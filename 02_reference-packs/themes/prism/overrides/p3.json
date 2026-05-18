@@ -1,0 +1,9 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "@quoin/theme-prism — P3 wide-gamut. The blue accent reads especially well on Display-P3 because translucent surfaces blend background content into the colour calculation; wide-gamut backgrounds make the glass material feel physical.",
+
+  "accent":     { "$type": "color", "$value": "color(display-p3 0.20 0.45 1.0)" },
+  "focus-ring": { "$type": "color", "$value": "color(display-p3 0.35 0.55 1.0)" },
+  "link":       { "$type": "color", "$value": "color(display-p3 0.25 0.45 1.0)" },
+  "link-hover": { "$type": "color", "$value": "color(display-p3 0.15 0.40 1.0)" }
+}

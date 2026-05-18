@@ -1,0 +1,23 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/theme-prism",
+  "version": "1.0.0",
+  "type": "theme",
+  "quoinVersion": "^0.1.0",
+  "description": "Liquid Glass — frosted-glass material as depth, light-responsive surfaces, floating chromes. Use when shipping iOS 26-adjacent feel. Requires backdrop-filter support.",
+  "exports": {
+    "lightModeOverrides": "./overrides/light.json",
+    "darkModeOverrides": "./overrides/dark.json",
+    "p3WideGamutOverrides": "./overrides/p3.json"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/themes/prism",
+    "tags": ["theme", "liquid-glass", "frosted-glass", "translucent", "mobile-first", "ios-26"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0"
+  },
+  "capabilities": ["backdrop-filter"]
+}

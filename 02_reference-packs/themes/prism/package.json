@@ -1,0 +1,19 @@
+{
+  "name": "@quoin/theme-prism",
+  "version": "1.0.0",
+  "description": "Liquid Glass theme for Quoin — frosted-glass material, translucent overlays, iOS-26-adjacent feel.",
+  "license": "MIT",
+  "main": "./quoin.pack.json",
+  "files": [
+    "quoin.pack.json",
+    "overrides/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "theme", "liquid-glass", "frosted", "translucent", "mobile"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "02_reference-packs/themes/prism"
+  }
+}
