@@ -1,0 +1,63 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "@quoin/theme-terminal — light mode. Inverted-terminal register: paper-cream ground, near-black ink, acid-lime accent preserved. Light mode is the courteous bidirectional; the canonical surface is dark.",
+
+  "surface":          { "$type": "color", "$value": "oklch(98% 0.005 100)" },
+  "surface-elevated": { "$type": "color", "$value": "oklch(100% 0 0)" },
+  "surface-recessed": { "$type": "color", "$value": "oklch(95% 0.008 100)" },
+  "surface-inverse":  { "$type": "color", "$value": "oklch(8% 0.005 100)" },
+  "scrim":            { "$type": "color", "$value": "oklch(8% 0.005 100 / 0.55)" },
+
+  "text":             { "$type": "color", "$value": "oklch(10% 0.005 100)" },
+  "text-emphasis":    { "$type": "color", "$value": "oklch(0% 0 0)" },
+  "text-recede":      { "$type": "color", "$value": "oklch(45% 0.005 100)" },
+  "text-disabled":    { "$type": "color", "$value": "oklch(70% 0.005 100)" },
+  "text-on-accent":   { "$type": "color", "$value": "oklch(0% 0 0)" },
+  "highlight":        { "$type": "color", "$value": "oklch(85% 0.20 130 / 0.45)" },
+
+  "border":           { "$type": "color", "$value": "oklch(10% 0.005 100)" },
+  "border-emphasis":  { "$type": "color", "$value": "oklch(0% 0 0)" },
+  "border-recede":    { "$type": "color", "$value": "oklch(40% 0.005 100)" },
+
+  "accent":           { "$type": "color", "$value": "oklch(78% 0.22 130)" },
+  "accent-recede":    { "$type": "color", "$value": "oklch(60% 0.18 130)" },
+  "focus-ring":       { "$type": "color", "$value": "oklch(78% 0.22 130)" },
+  "shadow-tint":      { "$type": "color", "$value": "oklch(0% 0 0 / 0)" },
+
+  "link":             { "$type": "color", "$value": "oklch(0% 0 0)" },
+  "link-visited":     { "$type": "color", "$value": "oklch(35% 0.005 100)" },
+  "link-hover":       { "$type": "color", "$value": "oklch(78% 0.22 130)" },
+
+  "font-display": { "$type": "fontFamily", "$value": "'Monaspace Neon Variable', 'Monaspace Neon', 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace" },
+  "font-serif":   { "$type": "fontFamily", "$value": "'Monaspace Neon Variable', 'Monaspace Neon', ui-monospace, monospace" },
+  "font-sans":    { "$type": "fontFamily", "$value": "'Monaspace Neon Variable', 'Monaspace Neon', 'JetBrains Mono', ui-monospace, monospace" },
+  "font-mono":    { "$type": "fontFamily", "$value": "'Monaspace Neon Variable', 'Monaspace Neon', 'JetBrains Mono', ui-monospace, monospace" },
+  "font-mono-pixel": { "$type": "fontFamily", "$value": "'Departure Mono', 'Departure Mono Variable', monospace" },
+
+  "border-width-hairline": { "$type": "dimension", "$value": "1px" },
+  "border-width-sm":       { "$type": "dimension", "$value": "1px" },
+
+  "radius-sm":   { "$type": "dimension", "$value": "0px" },
+  "radius-md":   { "$type": "dimension", "$value": "0px" },
+  "radius-lg":   { "$type": "dimension", "$value": "0px" },
+  "radius-card": { "$type": "dimension", "$value": "0px" },
+  "radius-pill": { "$type": "dimension", "$value": "0px" },
+
+  "motion-fast":   { "$type": "duration", "$value": "80ms" },
+  "motion-normal": { "$type": "duration", "$value": "100ms" },
+  "motion-slow":   { "$type": "duration", "$value": "150ms" },
+
+  "ease-standard":   { "$type": "cubicBezier", "$value": [0, 0, 1, 1] },
+  "ease-decelerate": { "$type": "cubicBezier", "$value": [0, 0, 1, 1] },
+  "ease-accelerate": { "$type": "cubicBezier", "$value": [0, 0, 1, 1] },
+
+  "shadow-md": { "$type": "shadow", "$value": [
+    { "color": "{shadow-tint}", "offsetX": "0", "offsetY": "0", "blur": "0", "spread": "0", "inset": false }
+  ] },
+  "shadow-lg": { "$type": "shadow", "$value": [
+    { "color": "{shadow-tint}", "offsetX": "0", "offsetY": "0", "blur": "0", "spread": "0", "inset": false }
+  ] },
+
+  "stroke-solid":  { "$type": "strokeStyle", "$value": "solid" },
+  "stroke-dashed": { "$type": "strokeStyle", "$value": "dashed" }
+}

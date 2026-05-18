@@ -1,0 +1,22 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/theme-terminal",
+  "version": "1.0.0",
+  "type": "theme",
+  "quoinVersion": "^0.1.0",
+  "description": "Honest Brutalism / Editorial Mono — pure-black ground with one acid accent, mono-everywhere, ASCII rules, deliberate column-collision. For engineering blogs and terminal-adjacent apps.",
+  "exports": {
+    "lightModeOverrides": "./overrides/light.json",
+    "darkModeOverrides": "./overrides/dark.json",
+    "p3WideGamutOverrides": "./overrides/p3.json"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/themes/terminal",
+    "tags": ["theme", "monospace", "brutalist", "terminal", "lime", "engineering"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0"
+  }
+}

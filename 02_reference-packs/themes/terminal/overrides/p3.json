@@ -1,0 +1,9 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "@quoin/theme-terminal — P3 wide-gamut. The acid-lime accent gains a particularly visible bump on capable monitors — wide-gamut greens are noticeably hotter than their sRGB-clamped counterparts.",
+
+  "accent":     { "$type": "color", "$value": "color(display-p3 0.70 1.0 0.10)" },
+  "focus-ring": { "$type": "color", "$value": "color(display-p3 0.70 1.0 0.10)" },
+  "link":       { "$type": "color", "$value": "color(display-p3 0.70 1.0 0.10)" },
+  "link-hover": { "$type": "color", "$value": "color(display-p3 0.85 1.0 0.30)" }
+}
