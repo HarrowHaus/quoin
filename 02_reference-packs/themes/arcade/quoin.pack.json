@@ -1,0 +1,22 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/theme-arcade",
+  "version": "1.0.0",
+  "type": "theme",
+  "quoinVersion": "^0.1.0",
+  "description": "Dopamine Saturation — hyper-saturated palette, oversized display sans, spring-overshoot motion, retro-future glow shadows. For consumer products and creator tools.",
+  "exports": {
+    "lightModeOverrides": "./overrides/light.json",
+    "darkModeOverrides": "./overrides/dark.json",
+    "p3WideGamutOverrides": "./overrides/p3.json"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/themes/arcade",
+    "tags": ["theme", "saturated", "neon", "y2k", "spring", "consumer", "playful"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0"
+  }
+}

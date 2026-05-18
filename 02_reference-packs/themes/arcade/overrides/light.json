@@ -1,0 +1,62 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "@quoin/theme-arcade — light mode. Hyper-saturated palette over a near-white canvas: neon magenta oklch(70% 0.25 350) accent, acid lime support, electric blue focus. Glow shadows (coloured spread) substitute for grey drop-shadows.",
+
+  "surface":          { "$type": "color", "$value": "oklch(99% 0.005 90)" },
+  "surface-elevated": { "$type": "color", "$value": "oklch(100% 0 0)" },
+  "surface-recessed": { "$type": "color", "$value": "oklch(96% 0.008 90)" },
+  "surface-inverse":  { "$type": "color", "$value": "oklch(15% 0.025 270)" },
+  "scrim":            { "$type": "color", "$value": "oklch(15% 0.025 270 / 0.5)" },
+
+  "text":             { "$type": "color", "$value": "oklch(18% 0.020 270)" },
+  "text-emphasis":    { "$type": "color", "$value": "oklch(10% 0.025 270)" },
+  "text-recede":      { "$type": "color", "$value": "oklch(48% 0.020 270)" },
+  "text-disabled":    { "$type": "color", "$value": "oklch(72% 0.010 270)" },
+  "text-on-accent":   { "$type": "color", "$value": "oklch(98% 0.005 350)" },
+  "highlight":        { "$type": "color", "$value": "oklch(78% 0.20 130 / 0.45)" },
+
+  "border":           { "$type": "color", "$value": "oklch(88% 0.012 270)" },
+  "border-emphasis":  { "$type": "color", "$value": "oklch(70% 0.25 350)" },
+  "border-recede":    { "$type": "color", "$value": "oklch(94% 0.008 270)" },
+
+  "accent":           { "$type": "color", "$value": "oklch(70% 0.25 350)" },
+  "accent-recede":    { "$type": "color", "$value": "oklch(82% 0.16 350)" },
+  "critical":         { "$type": "color", "$value": "oklch(65% 0.28 25)" },
+  "success":          { "$type": "color", "$value": "oklch(78% 0.22 130)" },
+  "warning":          { "$type": "color", "$value": "oklch(82% 0.20 75)" },
+  "info":             { "$type": "color", "$value": "oklch(60% 0.30 270)" },
+  "focus-ring":       { "$type": "color", "$value": "oklch(60% 0.30 270)" },
+  "shadow-tint":      { "$type": "color", "$value": "oklch(70% 0.25 350 / 0.45)" },
+
+  "link":             { "$type": "color", "$value": "oklch(60% 0.30 270)" },
+  "link-visited":     { "$type": "color", "$value": "oklch(60% 0.22 320)" },
+  "link-hover":       { "$type": "color", "$value": "oklch(70% 0.25 350)" },
+
+  "font-display": { "$type": "fontFamily", "$value": "'PP Editorial New', 'Clash Display', 'PP Fragment Sans', 'Inter Display Variable', 'Inter Display', system-ui, sans-serif" },
+  "font-sans":    { "$type": "fontFamily", "$value": "'Inter Variable', 'Inter', 'PP Fragment Sans', system-ui, sans-serif" },
+  "font-mono":    { "$type": "fontFamily", "$value": "'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace" },
+
+  "type-size-3xl":     { "$type": "dimension", "$value": "4.5rem" },
+  "type-size-4xl":     { "$type": "dimension", "$value": "6rem" },
+  "type-size-5xl":     { "$type": "dimension", "$value": "8rem" },
+  "type-size-display": { "$type": "dimension", "$value": "10rem" },
+
+  "radius-md":   { "$type": "dimension", "$value": "10px" },
+  "radius-lg":   { "$type": "dimension", "$value": "16px" },
+  "radius-card": { "$type": "dimension", "$value": "20px" },
+  "radius-pill": { "$type": "dimension", "$value": "999px" },
+
+  "motion-fast":   { "$type": "duration", "$value": "260ms" },
+  "motion-normal": { "$type": "duration", "$value": "380ms" },
+  "motion-slow":   { "$type": "duration", "$value": "520ms" },
+
+  "ease-emphasized": { "$type": "cubicBezier", "$value": [0.34, 1.56, 0.64, 1] },
+  "ease-spring":     { "$type": "cubicBezier", "$value": [0.42, 1.62, 0.58, 1.05] },
+
+  "shadow-md": { "$type": "shadow", "$value": [
+    { "color": "{shadow-tint}", "offsetX": "0", "offsetY": "0", "blur": "20px", "spread": "0", "inset": false }
+  ] },
+  "shadow-lg": { "$type": "shadow", "$value": [
+    { "color": "{shadow-tint}", "offsetX": "0", "offsetY": "0", "blur": "40px", "spread": "0", "inset": false }
+  ] }
+}

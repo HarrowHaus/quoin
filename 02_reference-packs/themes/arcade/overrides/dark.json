@@ -1,0 +1,34 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "@quoin/theme-arcade — dark mode. Near-black ground with the same hyper-saturated palette. Glow shadows really sing in dark mode — magenta spread reads as light emitting from the element rather than dropping below it.",
+
+  "surface":          { "$type": "color", "$value": "oklch(8% 0.020 270)" },
+  "surface-elevated": { "$type": "color", "$value": "oklch(14% 0.025 270)" },
+  "surface-recessed": { "$type": "color", "$value": "oklch(4% 0.015 270)" },
+  "surface-inverse":  { "$type": "color", "$value": "oklch(98% 0.005 90)" },
+  "scrim":            { "$type": "color", "$value": "oklch(0% 0 0 / 0.8)" },
+
+  "text":             { "$type": "color", "$value": "oklch(94% 0.012 90)" },
+  "text-emphasis":    { "$type": "color", "$value": "oklch(100% 0 0)" },
+  "text-recede":      { "$type": "color", "$value": "oklch(65% 0.012 90)" },
+  "text-disabled":    { "$type": "color", "$value": "oklch(40% 0.012 90)" },
+  "text-on-accent":   { "$type": "color", "$value": "oklch(10% 0.020 350)" },
+  "highlight":        { "$type": "color", "$value": "oklch(78% 0.22 130 / 0.40)" },
+
+  "border":           { "$type": "color", "$value": "oklch(22% 0.025 270)" },
+  "border-emphasis":  { "$type": "color", "$value": "oklch(75% 0.25 350)" },
+  "border-recede":    { "$type": "color", "$value": "oklch(15% 0.020 270)" },
+
+  "accent":           { "$type": "color", "$value": "oklch(75% 0.25 350)" },
+  "accent-recede":    { "$type": "color", "$value": "oklch(50% 0.20 350)" },
+  "critical":         { "$type": "color", "$value": "oklch(70% 0.28 25)" },
+  "success":          { "$type": "color", "$value": "oklch(82% 0.22 130)" },
+  "warning":          { "$type": "color", "$value": "oklch(85% 0.22 75)" },
+  "info":             { "$type": "color", "$value": "oklch(68% 0.30 270)" },
+  "focus-ring":       { "$type": "color", "$value": "oklch(68% 0.30 270)" },
+  "shadow-tint":      { "$type": "color", "$value": "oklch(75% 0.25 350 / 0.55)" },
+
+  "link":             { "$type": "color", "$value": "oklch(75% 0.25 350)" },
+  "link-visited":     { "$type": "color", "$value": "oklch(70% 0.22 320)" },
+  "link-hover":       { "$type": "color", "$value": "oklch(85% 0.25 350)" }
+}

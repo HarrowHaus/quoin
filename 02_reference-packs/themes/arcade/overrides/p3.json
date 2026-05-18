@@ -1,0 +1,13 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "@quoin/theme-arcade — P3 wide-gamut. This is THE theme that benefits most from wide gamut: every accent + status colour is selected to clip on sRGB displays. On Display-P3 monitors the magenta, lime, and electric blue are noticeably hotter and the glow shadows read as physical light.",
+
+  "accent":     { "$type": "color", "$value": "color(display-p3 1.0 0.20 0.70)" },
+  "critical":   { "$type": "color", "$value": "color(display-p3 1.0 0.20 0.30)" },
+  "success":    { "$type": "color", "$value": "color(display-p3 0.55 1.0 0.20)" },
+  "warning":    { "$type": "color", "$value": "color(display-p3 1.0 0.75 0.10)" },
+  "info":       { "$type": "color", "$value": "color(display-p3 0.30 0.40 1.0)" },
+  "focus-ring": { "$type": "color", "$value": "color(display-p3 0.30 0.40 1.0)" },
+  "link":       { "$type": "color", "$value": "color(display-p3 1.0 0.20 0.70)" },
+  "link-hover": { "$type": "color", "$value": "color(display-p3 1.0 0.30 0.80)" }
+}

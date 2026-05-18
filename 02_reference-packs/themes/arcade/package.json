@@ -1,0 +1,19 @@
+{
+  "name": "@quoin/theme-arcade",
+  "version": "1.0.0",
+  "description": "Dopamine Saturation theme for Quoin — neon palette + display sans + spring motion + glow shadows.",
+  "license": "MIT",
+  "main": "./quoin.pack.json",
+  "files": [
+    "quoin.pack.json",
+    "overrides/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "theme", "saturated", "neon", "y2k", "consumer"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "02_reference-packs/themes/arcade"
+  }
+}
