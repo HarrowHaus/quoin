@@ -1,0 +1,25 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/pattern-testimonial",
+  "version": "1.0.0",
+  "type": "pattern",
+  "quoinVersion": "^0.1.0",
+  "description": "Testimonial pattern — single card + grid + featured pull-quote variants. Composes avatar-stack for attribution. P0.",
+  "category": "social-proof",
+  "variant": "system",
+  "exports": {
+    "primitives": "./primitives/index.json"
+  },
+  "states": ["default", "empty", "sparse", "dense", "loading", "success"],
+  "microStates": ["default", "hover", "active", "focus", "focus-visible", "disabled", "loading", "selected"],
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/patterns/testimonial",
+    "tags": ["testimonial", "social-proof", "marketing", "p0"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0",
+    "@quoin/vocab-app-shell": "^0.2.0"
+  }
+}

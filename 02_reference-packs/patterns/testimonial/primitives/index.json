@@ -1,0 +1,117 @@
+[
+  {
+    "name": "testimonial-card",
+    "category": "content",
+    "role": "Single testimonial card. Renders a customer quote with attribution (name, title, company, avatar). Three variants: compact (chip-sized, fits in a grid cell), default (card-sized, fits two-up on desktop), featured (full-width with display-tier pull-quote treatment). Variants are not visual flourishes — they correspond to layout slots a marketing template uses (grid cell vs. testimonial section vs. hero pull-quote).",
+    "attributes": {
+      "variant": {
+        "values": ["compact", "default", "featured"],
+        "default": "default",
+        "specific": true
+      },
+      "density": {
+        "values": ["normal", "dense"],
+        "default": "normal"
+      },
+      "weight": {
+        "values": ["normal", "emphasize"],
+        "default": "normal"
+      },
+      "rating": {
+        "values": ["none", "stars", "score"],
+        "default": "none",
+        "specific": true
+      },
+      "loading": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "--surface-elevated",
+      "color": "--text",
+      "borderColor": "--border",
+      "borderWidth": "--border-width-sm",
+      "borderRadius": "--radius-card",
+      "padding": "--space-card",
+      "shadow": "--shadow-sm",
+      "quoteColor": "--text-emphasis",
+      "attributionColor": "--text-recede",
+      "fontFamily": "--font-serif",
+      "fontSize": "--type-size-md",
+      "lineHeight": "--leading-prose"
+    },
+    "structure": {
+      "element": "figure"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticChildren": [
+        "<blockquote> — the testimonial body (theme uses --font-serif at type-size-md by default; featured variant uses --text-display composite)",
+        "<figcaption> — wraps the attribution (cite + role + company)",
+        "<cite> — the customer's name (rendered without italic — cite element is semantic not stylistic)",
+        "<avatar-stack> — the customer's avatar (single by default; team-testimonial uses count=N)"
+      ],
+      "ratingPattern": {
+        "stars": "renders 5 filled/unfilled star glyphs; aria-label=\"<rating> out of 5 stars\"",
+        "score": "renders Lc-12pt big-number + max-denominator (e.g. \"9.4/10\")"
+      },
+      "variants": {
+        "compact": "type-size-sm body, avatar size=sm, no rating, no logo. Used in 6-tile grids.",
+        "default": "type-size-md body, avatar size=md, optional rating, optional company-logo footer. Used in 3-up grids.",
+        "featured": "type-size-2xl pull-quote body, avatar size=lg, prominent attribution. Used as section-anchor element."
+      },
+      "loadingBehavior": "render skeleton lines matching default-line-count (4 lines body, 1 line attribution, 1 avatar circle). 'loading' attribute = true.",
+      "ariaPatterns": {
+        "figcaptionVoiceOver": "screen readers announce blockquote body then figcaption; ensure attribution reads as second-class info",
+        "starsRating": "aria-label on the rating element only; do NOT label individual stars",
+        "loadingState": "aria-busy='true' on the figure element"
+      }
+    }
+  },
+  {
+    "name": "testimonial-grid",
+    "category": "content",
+    "role": "Composition primitive for laying out multiple testimonial-cards. Renders a responsive grid (1-col mobile → 2-col tablet → 3-col desktop by default; 6-tile dense variant supports 4×6 on large viewports). Handles empty / sparse / dense / loading states at the grid level rather than per-card.",
+    "attributes": {
+      "density": {
+        "values": ["sparse", "normal", "dense"],
+        "default": "normal"
+      },
+      "columns": {
+        "values": ["2", "3", "4"],
+        "default": "3",
+        "specific": true
+      },
+      "state": {
+        "values": ["default", "empty", "loading", "error"],
+        "default": "default",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "gap": "--space-card",
+      "background": "--surface",
+      "color": "--text",
+      "padding": "--space-panel"
+    },
+    "structure": {
+      "element": "section",
+      "attributes": {
+        "aria-label": "Testimonials"
+      }
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "responsiveGrid": "grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) when density=normal; minmax(240px, 1fr) when dense; full 1-col when sparse.",
+      "stateBehavior": {
+        "empty": "render empty-state primitive ('No testimonials yet. Be the first.') with optional CTA",
+        "loading": "render N skeleton testimonial-cards at the grid's expected density",
+        "error": "render error-state ('Couldn't load testimonials. Retry.') with retry action"
+      }
+    }
+  }
+]

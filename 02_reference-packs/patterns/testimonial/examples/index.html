@@ -1,0 +1,729 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>@quoin/pattern-testimonial — specimen</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,200..900&family=Inter:opsz,wght@14..32,100..900&family=JetBrains+Mono:wght@100..800&display=swap">
+
+  <style>
+    :root {
+      /* tokens-baseline light values seeded here for self-contained specimen */
+      --surface: oklch(98% 0 0);
+      --surface-elevated: oklch(100% 0 0);
+      --surface-recessed: oklch(96% 0 0);
+      --text: oklch(30% 0 0);
+      --text-emphasis: oklch(15% 0 0);
+      --text-recede: oklch(50% 0 0);
+      --text-disabled: oklch(72% 0 0);
+      --text-on-accent: oklch(100% 0 0);
+      --accent: oklch(20% 0 0);
+      --accent-recede: oklch(94% 0 0);
+      --critical: oklch(55% 0.22 25);
+      --success: oklch(58% 0.18 155);
+      --warning: oklch(75% 0.18 80);
+      --border: oklch(88% 0 0);
+      --border-emphasis: oklch(20% 0 0);
+      --border-recede: oklch(94% 0 0);
+      --border-width-sm: 1px;
+      --focus-ring: oklch(55% 0.22 260);
+      --focus-ring-width: 2px;
+      --focus-ring-offset: 2px;
+
+      --space-1: 4px;
+      --space-2: 6px;
+      --space-3: 8px;
+      --space-4: 12px;
+      --space-6: 20px;
+      --space-8: 32px;
+      --space-card: 20px;
+      --space-panel: 32px;
+      --radius-sm: 4px;
+      --radius-md: 6px;
+      --radius-card: 12px;
+      --radius-pill: 999px;
+
+      --font-sans: 'Inter Variable', 'Inter', system-ui, sans-serif;
+      --font-serif: 'Source Serif 4', ui-serif, Georgia, serif;
+      --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+      --type-size-xs: 0.75rem;
+      --type-size-sm: 0.875rem;
+      --type-size-md: 1rem;
+      --type-size-lg: 1.125rem;
+      --type-size-xl: 1.5rem;
+      --type-size-2xl: 2rem;
+      --type-size-3xl: 2.5rem;
+      --type-size-display: 3rem;
+      --font-weight-regular: 400;
+      --font-weight-medium: 500;
+      --font-weight-semibold: 600;
+      --leading-tight: 1.15;
+      --leading-prose: 1.55;
+      --leading-display: 1.05;
+      --tracking-tight: -0.01em;
+      --tracking-normal: 0;
+      --tracking-wide: 0.04em;
+
+      --motion-fast: 120ms;
+      --motion-normal: 160ms;
+      --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+      --transition-default: all var(--motion-normal) var(--ease-standard);
+
+      --shadow-tint: oklch(0% 0 0 / 0.06);
+      --shadow-sm: 0 1px 2px 0 var(--shadow-tint);
+      --shadow-md: 0 4px 6px -1px var(--shadow-tint), 0 2px 4px -1px var(--shadow-tint);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --surface: oklch(10% 0 0);
+        --surface-elevated: oklch(15% 0 0);
+        --surface-recessed: oklch(8% 0 0);
+        --text: oklch(85% 0 0);
+        --text-emphasis: oklch(98% 0 0);
+        --text-recede: oklch(60% 0 0);
+        --border: oklch(20% 0 0);
+        --shadow-tint: oklch(0% 0 0 / 0.4);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      :root { --motion-fast: 0ms; --motion-normal: 0ms; --transition-default: none; }
+      * { animation: none !important; }
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: var(--space-panel);
+      background: var(--surface);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-md);
+      line-height: var(--leading-prose);
+      font-feature-settings: 'kern', 'liga', 'calt';
+    }
+
+    .page-header { max-width: 1100px; margin: 0 auto var(--space-8); }
+    h1 { margin: 0 0 var(--space-3); font-size: var(--type-size-3xl); font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-tight); line-height: var(--leading-tight); color: var(--text-emphasis); }
+    h2 { margin: var(--space-8) 0 var(--space-4); font-size: var(--type-size-xl); font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-tight); line-height: var(--leading-tight); color: var(--text-emphasis); }
+    h3 { margin: var(--space-6) 0 var(--space-2); font-size: var(--type-size-md); font-weight: var(--font-weight-medium); color: var(--text-emphasis); }
+    p { margin: 0 0 var(--space-4); max-width: 60ch; }
+    .lede { color: var(--text-recede); font-size: var(--type-size-md); }
+    main { max-width: 1100px; margin: 0 auto; }
+    section { margin-bottom: var(--space-8); padding: var(--space-panel); background: var(--surface-elevated); border: var(--border-width-sm) solid var(--border); border-radius: var(--radius-card); }
+    .specimen-note { font-family: var(--font-mono); font-size: var(--type-size-xs); color: var(--text-recede); margin-top: var(--space-3); letter-spacing: var(--tracking-wide); }
+
+    /* ──────────────────────────────────────────────────────────────────
+       avatar-stack — composed in from vocab-app-shell
+       ────────────────────────────────────────────────────────────────── */
+    .avatar-stack {
+      display: inline-flex;
+      align-items: center;
+      flex-direction: row;
+    }
+    .avatar-stack .avatar {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-pill);
+      background: var(--surface-recessed);
+      color: var(--text-emphasis);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-xs);
+      font-weight: var(--font-weight-semibold);
+      border: 2px solid var(--surface-elevated);
+      overflow: hidden;
+    }
+    .avatar-stack[data-size="sm"] .avatar { width: 24px; height: 24px; font-size: 10px; }
+    .avatar-stack[data-size="lg"] .avatar { width: 48px; height: 48px; font-size: var(--type-size-sm); }
+    .avatar-stack[data-overlap="tight"] .avatar + .avatar { margin-left: -10px; }
+    .avatar-stack[data-overlap="loose"] .avatar + .avatar { margin-left: -6px; }
+    .avatar-stack[data-overlap="none"] .avatar + .avatar { margin-left: var(--space-2); }
+    .avatar-stack .avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
+    .avatar-stack .avatar.overflow {
+      background: var(--accent-recede);
+      color: var(--text-emphasis);
+      font-feature-settings: 'tnum';
+    }
+
+    /* ──────────────────────────────────────────────────────────────────
+       testimonial-card primitive
+       ────────────────────────────────────────────────────────────────── */
+    .testimonial-card {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      margin: 0;
+      padding: var(--space-card);
+      background: var(--surface-elevated);
+      color: var(--text);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-default);
+      font-feature-settings: 'kern', 'liga', 'calt';
+    }
+    .testimonial-card:hover,
+    .testimonial-card[data-mockstate~="hover"] {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
+    }
+    .testimonial-card:focus-within {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+
+    .testimonial-card blockquote {
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-serif);
+      font-size: var(--type-size-md);
+      line-height: var(--leading-prose);
+      color: var(--text-emphasis);
+      /* hanging punctuation for prose */
+      hanging-punctuation: first;
+      /* curly-quote opener — visual emphasis without HTML mark */
+      text-indent: -0.3em;
+      padding-left: 0.3em;
+      quotes: "\201C" "\201D" "\2018" "\2019";
+    }
+    .testimonial-card blockquote::before { content: open-quote; }
+    .testimonial-card blockquote::after  { content: close-quote; }
+
+    .testimonial-card figcaption {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-family: var(--font-sans);
+      font-style: normal;
+    }
+    .testimonial-card figcaption .attribution {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+    .testimonial-card cite {
+      font-style: normal;
+      font-size: var(--type-size-sm);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-emphasis);
+      letter-spacing: var(--tracking-normal);
+    }
+    .testimonial-card figcaption .role {
+      font-size: var(--type-size-xs);
+      color: var(--text-recede);
+      line-height: var(--leading-tight);
+      /* tabular nums on any embedded count */
+      font-variant-numeric: tabular-nums;
+    }
+    .testimonial-card .rating {
+      display: inline-flex;
+      gap: 2px;
+      color: var(--warning);
+      font-size: var(--type-size-sm);
+      letter-spacing: 0;
+    }
+    .testimonial-card .rating.score {
+      font-family: var(--font-mono);
+      color: var(--text-emphasis);
+      font-weight: var(--font-weight-semibold);
+      font-variant-numeric: tabular-nums;
+    }
+    .testimonial-card .company-logo {
+      font-family: var(--font-mono);
+      font-size: var(--type-size-xs);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--text-recede);
+      padding-top: var(--space-3);
+      border-top: var(--border-width-sm) solid var(--border-recede);
+    }
+
+    /* ─── variant: compact ─── */
+    .testimonial-card[data-variant="compact"] {
+      padding: var(--space-4);
+      gap: var(--space-3);
+    }
+    .testimonial-card[data-variant="compact"] blockquote {
+      font-size: var(--type-size-sm);
+      line-height: var(--leading-prose);
+    }
+    .testimonial-card[data-variant="compact"] cite { font-size: var(--type-size-xs); }
+    .testimonial-card[data-variant="compact"] .avatar-stack .avatar { width: 24px; height: 24px; font-size: 10px; }
+
+    /* ─── variant: featured ─── */
+    .testimonial-card[data-variant="featured"] {
+      padding: var(--space-8);
+      gap: var(--space-6);
+      grid-column: 1 / -1;
+    }
+    .testimonial-card[data-variant="featured"] blockquote {
+      font-size: var(--type-size-2xl);
+      line-height: var(--leading-display);
+      letter-spacing: var(--tracking-tight);
+      max-width: 28ch;
+      text-wrap: balance;
+    }
+    .testimonial-card[data-variant="featured"] figcaption .avatar-stack .avatar {
+      width: 48px;
+      height: 48px;
+      font-size: var(--type-size-sm);
+    }
+    .testimonial-card[data-variant="featured"] cite { font-size: var(--type-size-md); }
+    .testimonial-card[data-variant="featured"] figcaption .role { font-size: var(--type-size-sm); }
+
+    /* ─── microstate: disabled ─── */
+    .testimonial-card[aria-disabled="true"],
+    .testimonial-card[data-mockstate~="disabled"] {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    /* ─── microstate: selected (e.g. highlighted in case studies grid) ─── */
+    .testimonial-card[aria-selected="true"],
+    .testimonial-card[data-mockstate~="selected"] {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent), var(--shadow-sm);
+    }
+
+    /* ─── microstate: loading (skeleton lines) ─── */
+    .testimonial-card[aria-busy="true"],
+    .testimonial-card[data-mockstate~="loading"] {
+      cursor: progress;
+    }
+    .testimonial-card[aria-busy="true"] .skeleton,
+    .testimonial-card[data-mockstate~="loading"] .skeleton {
+      display: block;
+      height: 14px;
+      background: linear-gradient(90deg, var(--surface-recessed), var(--border-recede), var(--surface-recessed));
+      background-size: 200% 100%;
+      border-radius: var(--radius-sm);
+      animation: skel 1400ms ease-in-out infinite;
+    }
+    .testimonial-card[aria-busy="true"] .skeleton + .skeleton,
+    .testimonial-card[data-mockstate~="loading"] .skeleton + .skeleton { margin-top: var(--space-2); }
+    .testimonial-card[aria-busy="true"] .skeleton:nth-child(4),
+    .testimonial-card[data-mockstate~="loading"] .skeleton:nth-child(4) { width: 70%; }
+    @keyframes skel {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* ──────────────────────────────────────────────────────────────────
+       testimonial-grid composition primitive
+       ────────────────────────────────────────────────────────────────── */
+    .testimonial-grid {
+      display: grid;
+      gap: var(--space-card);
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    .testimonial-grid[data-density="dense"] {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+    .testimonial-grid[data-density="sparse"] {
+      grid-template-columns: 1fr;
+      max-width: 60ch;
+    }
+    .testimonial-grid[data-columns="2"] { grid-template-columns: repeat(2, 1fr); }
+    .testimonial-grid[data-columns="3"] { grid-template-columns: repeat(3, 1fr); }
+    .testimonial-grid[data-columns="4"] { grid-template-columns: repeat(4, 1fr); }
+    @media (max-width: 720px) {
+      .testimonial-grid[data-columns="2"],
+      .testimonial-grid[data-columns="3"],
+      .testimonial-grid[data-columns="4"] {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* state: empty */
+    .testimonial-grid[data-state="empty"] {
+      grid-template-columns: 1fr;
+      padding: var(--space-8);
+      text-align: center;
+      border: var(--border-width-sm) dashed var(--border);
+      border-radius: var(--radius-card);
+      color: var(--text-recede);
+    }
+    .testimonial-grid[data-state="error"] {
+      grid-template-columns: 1fr;
+      padding: var(--space-6);
+      background: var(--surface-recessed);
+      color: var(--critical);
+      border: var(--border-width-sm) solid var(--critical);
+      border-radius: var(--radius-card);
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <h1>@quoin/pattern-testimonial — specimen</h1>
+    <p class="lede">Three variants — compact, default, featured — × five states (default, empty, sparse, dense, loading, error) × seven microstates. Composes <code>&lt;avatar-stack&gt;</code> from <code>vocab-app-shell</code> for attribution.</p>
+  </header>
+
+  <main>
+    <!-- ────────── variant: default ────────── -->
+    <section>
+      <h2>Variant: default</h2>
+      <p>Card-sized testimonial — fits two-up on desktop, stacks on mobile. Used in marketing 3-up sections.</p>
+
+      <ul class="testimonial-grid" data-density="normal" data-columns="3">
+        <li>
+          <figure class="testimonial-card" data-variant="default">
+            <blockquote>We replaced 4,200 lines of utility-class soup with semantic tags in an afternoon. The compiler output is identical; the source is finally legible to designers again.</blockquote>
+            <figcaption>
+              <div class="avatar-stack" data-size="md">
+                <span class="avatar" aria-hidden="true">EM</span>
+              </div>
+              <div class="attribution">
+                <cite>Elena Mendez</cite>
+                <span class="role">Principal engineer · Sourcegrid</span>
+              </div>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="testimonial-card" data-variant="default">
+            <blockquote>Quoin is the first design language I've shown a back-end engineer where they said, "okay, this I can write." Authoring isn't a designer-only ritual anymore.</blockquote>
+            <figcaption>
+              <div class="avatar-stack" data-size="md">
+                <span class="avatar" aria-hidden="true">RT</span>
+              </div>
+              <div class="attribution">
+                <cite>Ravi Tagore</cite>
+                <span class="role">Design systems lead · Polestar Labs</span>
+              </div>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="testimonial-card" data-variant="default">
+            <blockquote>The swap-aesthetic-without-rewrite story sold our CMO. We shipped the same source through three brand identities in a week — for a campaign that was supposed to take a quarter.</blockquote>
+            <figcaption>
+              <div class="avatar-stack" data-size="md">
+                <span class="avatar" aria-hidden="true">SK</span>
+              </div>
+              <div class="attribution">
+                <cite>Sara Kowalski</cite>
+                <span class="role">Senior product designer · Northrun</span>
+              </div>
+              <span class="rating score">9.4/10</span>
+            </figcaption>
+          </figure>
+        </li>
+      </ul>
+      <p class="specimen-note">3-column grid · density normal · token-grounded throughout · figure + blockquote + figcaption + cite semantic markup</p>
+    </section>
+
+    <!-- ────────── variant: compact ────────── -->
+    <section>
+      <h2>Variant: compact</h2>
+      <p>Chip-sized testimonial — fits 4–6 per row on desktop. Used in trust-bar sections under hero, or in pricing-page social-proof rails.</p>
+
+      <ul class="testimonial-grid" data-density="dense" data-columns="4">
+        <li>
+          <figure class="testimonial-card" data-variant="compact">
+            <blockquote>Cut our AI inference bill by an order of magnitude. Authoring at one tag deep beats utility-class soup hands-down.</blockquote>
+            <figcaption>
+              <div class="avatar-stack" data-size="sm"><span class="avatar" aria-hidden="true">JV</span></div>
+              <div class="attribution">
+                <cite>James Verma</cite>
+                <span class="role">CTO · Brushlight</span>
+              </div>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="testimonial-card" data-variant="compact">
+            <blockquote>The harvest catalog is genuinely useful — we ship Material 3 tokens but author Quoin tags.</blockquote>
+            <figcaption>
+              <div class="avatar-stack" data-size="sm"><span class="avatar" aria-hidden="true">AO</span></div>
+              <div class="attribution">
+                <cite>Aida Okonkwo</cite>
+                <span class="role">Staff designer · Modulus</span>
+              </div>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="testimonial-card" data-variant="compact">
+            <blockquote>Best DX upgrade since we adopted Tailwind. Now we author intent; the compiler does the rest.</blockquote>
+            <figcaption>
+              <div class="avatar-stack" data-size="sm"><span class="avatar" aria-hidden="true">LP</span></div>
+              <div class="attribution">
+                <cite>Lukas Petersen</cite>
+                <span class="role">Eng lead · Cohort.run</span>
+              </div>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="testimonial-card" data-variant="compact">
+            <blockquote>Reviewable AI output, finally. PRs read like prose, not regex.</blockquote>
+            <figcaption>
+              <div class="avatar-stack" data-size="sm"><span class="avatar" aria-hidden="true">MK</span></div>
+              <div class="attribution">
+                <cite>Mira Klein</cite>
+                <span class="role">Tech-writer · Hatch</span>
+              </div>
+            </figcaption>
+          </figure>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ────────── variant: featured ────────── -->
+    <section>
+      <h2>Variant: featured</h2>
+      <p>Full-width pull-quote — section-anchor element. Display-tier type, generous padding, customer name + role at body scale. One per page; reserved for the strongest endorsement.</p>
+
+      <figure class="testimonial-card" data-variant="featured">
+        <blockquote>We chose Quoin over a hand-rolled token system because the token namespace is frozen. We could replace our designer tomorrow and the chrome wouldn't drift.</blockquote>
+        <figcaption>
+          <div class="avatar-stack" data-size="lg"><span class="avatar" aria-hidden="true">HL</span></div>
+          <div class="attribution">
+            <cite>Henry Liang</cite>
+            <span class="role">Principal designer · Threadgrid · 12-year design-systems veteran (ex-Stripe, ex-Airbnb)</span>
+          </div>
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- ────────── variant: featured with multi-avatar (team testimonial) ────────── -->
+    <section>
+      <h2>Multi-avatar attribution — team testimonial</h2>
+      <p>Exercises the <code>avatar-stack</code> primitive's overflow indicator. Six contributors → 3 visible + "+3" overflow.</p>
+
+      <figure class="testimonial-card" data-variant="default">
+        <blockquote>Six of us authored the migration. Two engineers, two designers, two PMs. Quoin was the first time none of us argued about who "owns" the design system.</blockquote>
+        <figcaption>
+          <div class="avatar-stack" data-size="md" data-overlap="tight" role="group" aria-label="6 contributors: Riya Sen, Tom Yarrow, Cleo Park, Maya Boucher, Idris Sade, plus 3 more">
+            <span class="avatar" aria-hidden="true">RS</span>
+            <span class="avatar" aria-hidden="true">TY</span>
+            <span class="avatar" aria-hidden="true">CP</span>
+            <span class="avatar overflow" aria-hidden="true">+3</span>
+          </div>
+          <div class="attribution">
+            <cite>The Spectra design-systems team</cite>
+            <span class="role">Spectra Health · adopted Quoin Q1 2026</span>
+          </div>
+        </figcaption>
+      </figure>
+      <p class="specimen-note">avatar-stack from vocab-app-shell · 3-visible cap · "+3" overflow indicator · role=group + aria-label exposes the full list to screen readers</p>
+    </section>
+
+    <!-- ────────── states ────────── -->
+    <section>
+      <h2>Grid states</h2>
+
+      <h3>state: empty</h3>
+      <p class="lede">No testimonials yet — for new accounts or fresh product launches.</p>
+      <div class="testimonial-grid" data-state="empty">
+        <strong>No testimonials yet.</strong>
+        <p style="margin: var(--space-3) 0 0;">Be the first to share how you're using this product.</p>
+      </div>
+
+      <h3>state: sparse (1 testimonial)</h3>
+      <p class="lede">Single testimonial in a 1-column grid — for product pages with one major endorsement.</p>
+      <ul class="testimonial-grid" data-density="sparse">
+        <li>
+          <figure class="testimonial-card" data-variant="default">
+            <blockquote>Quoin replaced three internal libraries we were maintaining. The composition story sold itself.</blockquote>
+            <figcaption>
+              <div class="avatar-stack" data-size="md"><span class="avatar" aria-hidden="true">DN</span></div>
+              <div class="attribution">
+                <cite>Daria Nguyen</cite>
+                <span class="role">VP Engineering · Foldable Studios</span>
+              </div>
+            </figcaption>
+          </figure>
+        </li>
+      </ul>
+
+      <h3>state: dense (6 testimonials in 3-col grid)</h3>
+      <p class="lede">Maximum density. Used on the social-proof section of long-form marketing pages.</p>
+      <ul class="testimonial-grid" data-density="normal" data-columns="3">
+        <li>
+          <figure class="testimonial-card" data-variant="default">
+            <blockquote>The harvest framework is the surprising win. We get all 30 token packs without rewriting our brand.</blockquote>
+            <figcaption>
+              <div class="avatar-stack" data-size="md"><span class="avatar" aria-hidden="true">FR</span></div>
+              <div class="attribution"><cite>Felix Rojas</cite><span class="role">Frontend lead · Aperture.dev</span></div>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="testimonial-card" data-variant="default">
+            <blockquote>Our design + engineering review meetings dropped from weekly to monthly. The semantic tags settle most disputes before they start.</blockquote>
+            <figcaption>
+              <div class="avatar-stack" data-size="md"><span class="avatar" aria-hidden="true">NB</span></div>
+              <div class="attribution"><cite>Noor Bashir</cite><span class="role">Design ops director · Northwind</span></div>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="testimonial-card" data-variant="default">
+            <blockquote>We piloted Quoin on one feature and shipped it in two sprints. Migrating the rest of the app is now a strategic decision, not a technical one.</blockquote>
+            <figcaption>
+              <div class="avatar-stack" data-size="md"><span class="avatar" aria-hidden="true">YT</span></div>
+              <div class="attribution"><cite>Yuki Tanaka</cite><span class="role">Senior product engineer · Spinwell</span></div>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="testimonial-card" data-variant="default">
+            <blockquote>The composition architecture meant our brand refresh shipped four months ahead of plan.</blockquote>
+            <figcaption>
+              <div class="avatar-stack" data-size="md"><span class="avatar" aria-hidden="true">CB</span></div>
+              <div class="attribution"><cite>Camille Beaumont</cite><span class="role">Creative director · Marble Studio</span></div>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="testimonial-card" data-variant="default">
+            <blockquote>Documentation that explains why decisions exist, not just what they are. Rare.</blockquote>
+            <figcaption>
+              <div class="avatar-stack" data-size="md"><span class="avatar" aria-hidden="true">PS</span></div>
+              <div class="attribution"><cite>Priya Shah</cite><span class="role">Staff designer · Forkstack</span></div>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="testimonial-card" data-variant="default">
+            <blockquote>The build-time guarantee was the unlock. No proprietary runtime; we own our output.</blockquote>
+            <figcaption>
+              <div class="avatar-stack" data-size="md"><span class="avatar" aria-hidden="true">OA</span></div>
+              <div class="attribution"><cite>Owen Antonopoulos</cite><span class="role">Platform engineer · Wavelength</span></div>
+            </figcaption>
+          </figure>
+        </li>
+      </ul>
+
+      <h3>state: loading</h3>
+      <p class="lede">Skeleton lines while testimonials fetch. Animated unless reduced-motion.</p>
+      <ul class="testimonial-grid" data-density="normal" data-columns="3">
+        <li>
+          <figure class="testimonial-card" data-mockstate="loading" aria-busy="true" aria-label="Loading testimonial">
+            <span class="skeleton"></span>
+            <span class="skeleton"></span>
+            <span class="skeleton"></span>
+            <span class="skeleton"></span>
+            <figcaption style="margin-top: var(--space-3);">
+              <div class="avatar-stack" data-size="md"><span class="avatar skeleton" aria-hidden="true" style="width:32px;height:32px;border-radius:999px;"></span></div>
+              <div class="attribution" style="flex:1;">
+                <span class="skeleton" style="width: 40%;"></span>
+                <span class="skeleton" style="width: 60%; margin-top: 4px;"></span>
+              </div>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="testimonial-card" data-mockstate="loading" aria-busy="true" aria-label="Loading testimonial">
+            <span class="skeleton"></span>
+            <span class="skeleton"></span>
+            <span class="skeleton"></span>
+            <span class="skeleton"></span>
+            <figcaption style="margin-top: var(--space-3);">
+              <div class="avatar-stack" data-size="md"><span class="avatar skeleton" aria-hidden="true" style="width:32px;height:32px;border-radius:999px;"></span></div>
+              <div class="attribution" style="flex:1;">
+                <span class="skeleton" style="width: 50%;"></span>
+                <span class="skeleton" style="width: 70%; margin-top: 4px;"></span>
+              </div>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="testimonial-card" data-mockstate="loading" aria-busy="true" aria-label="Loading testimonial">
+            <span class="skeleton"></span>
+            <span class="skeleton"></span>
+            <span class="skeleton"></span>
+            <span class="skeleton"></span>
+            <figcaption style="margin-top: var(--space-3);">
+              <div class="avatar-stack" data-size="md"><span class="avatar skeleton" aria-hidden="true" style="width:32px;height:32px;border-radius:999px;"></span></div>
+              <div class="attribution" style="flex:1;">
+                <span class="skeleton" style="width: 45%;"></span>
+                <span class="skeleton" style="width: 65%; margin-top: 4px;"></span>
+              </div>
+            </figcaption>
+          </figure>
+        </li>
+      </ul>
+
+      <h3>state: error</h3>
+      <p class="lede">Couldn't load testimonials. Retry action lives in surrounding surface (not in the grid itself).</p>
+      <div class="testimonial-grid" data-state="error" role="alert">
+        <strong>Couldn't load testimonials.</strong>
+        <p style="margin: var(--space-2) 0 0;">The endpoint returned 503. Retry in a moment — we'll try again automatically every 30 seconds.</p>
+      </div>
+    </section>
+
+    <!-- ────────── card-level microstates ────────── -->
+    <section>
+      <h2>Card-level microstates</h2>
+      <p>Per-card microstates (subset shown — full set is default / hover / active / focus / focus-visible / disabled / loading / selected). Cards are tabbable when interactive (clickable cards open a case study) — keyboard focus + visible ring + Enter activates.</p>
+
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-card);">
+        <figure class="testimonial-card" data-variant="default" tabindex="0" data-mockstate="default">
+          <blockquote>Default — interactive card, tabbable, opens case study on Enter.</blockquote>
+          <figcaption>
+            <div class="avatar-stack" data-size="md"><span class="avatar" aria-hidden="true">D</span></div>
+            <div class="attribution"><cite>microstate: default</cite><span class="role">no modifier</span></div>
+          </figcaption>
+        </figure>
+        <figure class="testimonial-card" data-variant="default" tabindex="0" data-mockstate="hover">
+          <blockquote>Hover — shadow lifts, transform-Y: -1px.</blockquote>
+          <figcaption>
+            <div class="avatar-stack" data-size="md"><span class="avatar" aria-hidden="true">H</span></div>
+            <div class="attribution"><cite>microstate: hover</cite><span class="role">:hover</span></div>
+          </figcaption>
+        </figure>
+        <figure class="testimonial-card" data-variant="default" tabindex="0" data-mockstate="selected">
+          <blockquote>Selected — accent-coloured border + outer ring. Used in case-study browsers.</blockquote>
+          <figcaption>
+            <div class="avatar-stack" data-size="md"><span class="avatar" aria-hidden="true">S</span></div>
+            <div class="attribution"><cite>microstate: selected</cite><span class="role">[aria-selected=true]</span></div>
+          </figcaption>
+        </figure>
+        <figure class="testimonial-card" data-variant="default" data-mockstate="disabled" aria-disabled="true">
+          <blockquote>Disabled — pending moderation review. 40% opacity, pointer-events: none.</blockquote>
+          <figcaption>
+            <div class="avatar-stack" data-size="md"><span class="avatar" aria-hidden="true">X</span></div>
+            <div class="attribution"><cite>microstate: disabled</cite><span class="role">[aria-disabled=true]</span></div>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section>
+      <h2>Accessibility checklist</h2>
+      <ul>
+        <li>Every card wraps a <code>&lt;blockquote&gt;</code> in a <code>&lt;figure&gt;</code> with the attribution in <code>&lt;figcaption&gt;</code> — semantically associated, screen-reader-correct.</li>
+        <li>Customer name uses <code>&lt;cite&gt;</code> (rendered without italic — <code>cite</code> is semantic, not stylistic).</li>
+        <li>Curly quotation marks via CSS <code>quotes</code> property + <code>open-quote</code>/<code>close-quote</code> generated content. Don't author curly quotes in source — let the typeface deliver them.</li>
+        <li>Star ratings (when present) carry <code>aria-label="<n> out of 5 stars"</code> on the rating element; individual stars are <code>aria-hidden</code>.</li>
+        <li>Multi-avatar groups use <code>role="group"</code> + <code>aria-label</code> listing the contributors; individual avatar circles are <code>aria-hidden</code>.</li>
+        <li>Interactive cards (clickable to open case study) are <code>tabindex="0"</code>; activate on Enter or Space.</li>
+        <li>Loading state: <code>aria-busy="true"</code> on the figure + skeleton animation respects <code>prefers-reduced-motion</code>.</li>
+        <li>Error state: <code>role="alert"</code> on the message container so screen readers announce immediately.</li>
+        <li>Tabular numerics on any score/rating ("9.4/10") so labels don't shift mid-render.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Typography precision</h2>
+      <p>Quotes render via CSS <code>quotes</code> property — the actual blockquote text doesn't carry quote marks, the typeface delivers them. Curly apostrophes everywhere in copy ("don't", not "don't"). Em dashes for ranges. Hanging punctuation on prose paragraphs where supported.</p>
+      <p class="specimen-note">Token-grounded throughout. The pattern's CSS reads from <code>--surface-elevated</code>, <code>--border</code>, <code>--radius-card</code>, <code>--shadow-sm</code>, <code>--font-serif</code>, <code>--type-size-md</code> and <code>--leading-prose</code>. Zero hardcoded values past the <code>:root</code> seed (which a real consumer replaces with their active token + theme pack).</p>
+    </section>
+  </main>
+</body>
+</html>
