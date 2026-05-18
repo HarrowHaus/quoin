@@ -1,0 +1,53 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "@quoin/theme-vapor — light mode. Atmospheric Layered Mesh (LAG): novel gradient strategy. surface = sky tier (top), surface-elevated = card tier above the atmospheric backdrop, surface-recessed = horizon tier. Impl packs read these as compositional layers, not stack levels. Palette tilted from Stripe's pure cream/indigo/navy toward pale-mint-cream / warm-indigo / deep-teal-navy — same chromatic territory, different atmospheric register.",
+
+  "surface":          { "$type": "color", "$value": "oklch(97% 0.012 200)" },
+  "surface-elevated": { "$type": "color", "$value": "oklch(99% 0.005 230)" },
+  "surface-recessed": { "$type": "color", "$value": "oklch(90% 0.030 240)" },
+  "surface-inverse":  { "$type": "color", "$value": "oklch(20% 0.045 240)" },
+  "scrim":            { "$type": "color", "$value": "oklch(20% 0.045 240 / 0.55)" },
+
+  "text":             { "$type": "color", "$value": "oklch(22% 0.030 240)" },
+  "text-emphasis":    { "$type": "color", "$value": "oklch(14% 0.025 240)" },
+  "text-recede":      { "$type": "color", "$value": "oklch(52% 0.020 240)" },
+  "text-disabled":    { "$type": "color", "$value": "oklch(75% 0.012 240)" },
+  "text-on-accent":   { "$type": "color", "$value": "oklch(98% 0.005 240)" },
+  "highlight":        { "$type": "color", "$value": "oklch(58% 0.22 265 / 0.20)" },
+
+  "border":           { "$type": "color", "$value": "oklch(88% 0.020 230)" },
+  "border-emphasis":  { "$type": "color", "$value": "oklch(58% 0.22 265)" },
+  "border-recede":    { "$type": "color", "$value": "oklch(92% 0.015 230)" },
+
+  "accent":           { "$type": "color", "$value": "oklch(58% 0.22 265)" },
+  "accent-recede":    { "$type": "color", "$value": "oklch(78% 0.12 265)" },
+  "focus-ring":       { "$type": "color", "$value": "oklch(58% 0.22 265)" },
+  "shadow-tint":      { "$type": "color", "$value": "oklch(20% 0.045 240 / 0.20)" },
+
+  "link":             { "$type": "color", "$value": "oklch(48% 0.20 265)" },
+  "link-visited":     { "$type": "color", "$value": "oklch(45% 0.18 295)" },
+  "link-hover":       { "$type": "color", "$value": "oklch(40% 0.22 265)" },
+
+  "font-display": { "$type": "fontFamily", "$value": "'Söhne', 'Inter Display Variable', 'Inter Display', 'Helvetica Neue', system-ui, sans-serif" },
+  "font-sans":    { "$type": "fontFamily", "$value": "'Söhne', 'Inter Variable', 'Inter', 'Helvetica Neue', system-ui, sans-serif" },
+  "font-mono":    { "$type": "fontFamily", "$value": "'Söhne Mono', 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace" },
+
+  "blur-sm": { "$type": "dimension", "$value": "40px" },
+  "blur-md": { "$type": "dimension", "$value": "80px" },
+  "blur-lg": { "$type": "dimension", "$value": "140px" },
+
+  "radius-md":   { "$type": "dimension", "$value": "4px" },
+  "radius-lg":   { "$type": "dimension", "$value": "6px" },
+  "radius-card": { "$type": "dimension", "$value": "6px" },
+
+  "motion-fast":   { "$type": "duration", "$value": "240ms" },
+  "motion-normal": { "$type": "duration", "$value": "320ms" },
+  "motion-slow":   { "$type": "duration", "$value": "400ms" },
+
+  "shadow-md": { "$type": "shadow", "$value": [
+    { "color": "{shadow-tint}", "offsetX": "0", "offsetY": "0",   "blur": "32px", "spread": "8px",  "inset": false }
+  ] },
+  "shadow-lg": { "$type": "shadow", "$value": [
+    { "color": "{shadow-tint}", "offsetX": "0", "offsetY": "0",   "blur": "60px", "spread": "12px", "inset": false }
+  ] }
+}

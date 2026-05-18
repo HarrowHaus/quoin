@@ -1,0 +1,23 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/theme-vapor",
+  "version": "1.0.0",
+  "type": "theme",
+  "quoinVersion": "^0.1.0",
+  "description": "Atmospheric Layered Mesh — sky / horizon / ground composed as positioned blurred surfaces, palette tilted toward atmospheric morning. For fintech and payment infrastructure.",
+  "exports": {
+    "lightModeOverrides": "./overrides/light.json",
+    "darkModeOverrides": "./overrides/dark.json",
+    "p3WideGamutOverrides": "./overrides/p3.json"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/themes/vapor",
+    "tags": ["theme", "atmospheric", "gradient", "fintech", "navy", "indigo"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0"
+  },
+  "capabilities": ["layered-mesh-gradient"]
+}

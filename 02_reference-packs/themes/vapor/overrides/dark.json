@@ -1,0 +1,30 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "@quoin/theme-vapor — dark mode. Deep-teal-navy ground beneath the atmospheric mesh. surface = midnight horizon, surface-elevated = card tier above, surface-recessed = abyss tier (the layer that absorbs the mesh's chromatic dust).",
+
+  "surface":          { "$type": "color", "$value": "oklch(14% 0.040 240)" },
+  "surface-elevated": { "$type": "color", "$value": "oklch(20% 0.040 240)" },
+  "surface-recessed": { "$type": "color", "$value": "oklch(8% 0.030 240)" },
+  "surface-inverse":  { "$type": "color", "$value": "oklch(97% 0.012 200)" },
+  "scrim":            { "$type": "color", "$value": "oklch(4% 0.020 240 / 0.75)" },
+
+  "text":             { "$type": "color", "$value": "oklch(92% 0.012 220)" },
+  "text-emphasis":    { "$type": "color", "$value": "oklch(100% 0 0)" },
+  "text-recede":      { "$type": "color", "$value": "oklch(65% 0.018 230)" },
+  "text-disabled":    { "$type": "color", "$value": "oklch(42% 0.018 240)" },
+  "text-on-accent":   { "$type": "color", "$value": "oklch(100% 0 0)" },
+  "highlight":        { "$type": "color", "$value": "oklch(70% 0.22 265 / 0.32)" },
+
+  "border":           { "$type": "color", "$value": "oklch(28% 0.040 240)" },
+  "border-emphasis":  { "$type": "color", "$value": "oklch(72% 0.22 265)" },
+  "border-recede":    { "$type": "color", "$value": "oklch(20% 0.035 240)" },
+
+  "accent":           { "$type": "color", "$value": "oklch(72% 0.22 265)" },
+  "accent-recede":    { "$type": "color", "$value": "oklch(48% 0.18 265)" },
+  "focus-ring":       { "$type": "color", "$value": "oklch(78% 0.22 265)" },
+  "shadow-tint":      { "$type": "color", "$value": "oklch(0% 0 0 / 0.45)" },
+
+  "link":             { "$type": "color", "$value": "oklch(78% 0.20 265)" },
+  "link-visited":     { "$type": "color", "$value": "oklch(72% 0.18 295)" },
+  "link-hover":       { "$type": "color", "$value": "oklch(88% 0.20 265)" }
+}

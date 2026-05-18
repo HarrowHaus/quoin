@@ -1,0 +1,9 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "@quoin/theme-vapor — P3 wide-gamut. The atmospheric mesh benefits substantially from Display-P3: indigo and teal-navy both gain perceptible depth, making the layered-mesh composition feel three-dimensional on capable monitors.",
+
+  "accent":     { "$type": "color", "$value": "color(display-p3 0.40 0.30 1.0)" },
+  "focus-ring": { "$type": "color", "$value": "color(display-p3 0.40 0.30 1.0)" },
+  "link":       { "$type": "color", "$value": "color(display-p3 0.30 0.25 0.95)" },
+  "link-hover": { "$type": "color", "$value": "color(display-p3 0.20 0.20 0.95)" }
+}
