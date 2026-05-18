@@ -24,10 +24,15 @@ export interface DtcgNode {
  * list (or declare `"status": "pending-3.5c-fill"` during the
  * transitional window). See `00_spec/tokens.md` §3.
  *
- * 164 tokens across 11 DTCG 2025.10 types:
- *   color (29), dimension (64), number (21), fontFamily (4),
- *   fontWeight (6), duration (5), cubicBezier (6), shadow (7),
- *   border (3), typography (13), transition (3), strokeStyle (3).
+ * 175 tokens across 11 DTCG 2025.10 types:
+ *   color (29), dimension (64), number (21), fontFamily (9),
+ *   fontWeight (6), duration (5), cubicBezier (6), shadow (10),
+ *   border (3), typography (13), transition (6), strokeStyle (3).
+ *
+ * Handoff additive (May 2026): 11 new tokens — 5 mono-variant
+ * fontFamily slots (Monaspace Argon/Xenon/Radon/Krypton + Departure
+ * Mono), 3 new shadow composites (none/focus/focus-error), 3 new
+ * transition composites (color/transform/opacity).
  */
 const CANONICAL_SEMANTIC_TOKENS: readonly string[] = [
   // §3.1 color — surfaces (5)
@@ -76,8 +81,11 @@ const CANONICAL_SEMANTIC_TOKENS: readonly string[] = [
   "aspect-square", "aspect-video", "aspect-portrait", "aspect-banner",
   // §3.19 number — leading multipliers (4)
   "leading-tight", "leading-normal", "leading-prose", "leading-loose",
-  // §3.20 fontFamily (4)
+  // §3.20 fontFamily (9) — handoff additive: 5 mono-variant slots for
+  // the Monaspace family + Departure Mono pixel/retro mono.
   "font-sans", "font-serif", "font-mono", "font-display",
+  "font-mono-warm", "font-mono-slab", "font-mono-script",
+  "font-mono-mechanical", "font-mono-pixel",
   // §3.21 fontWeight (6)
   "font-weight-light", "font-weight-regular", "font-weight-medium",
   "font-weight-semibold", "font-weight-bold", "font-weight-black",
@@ -86,8 +94,11 @@ const CANONICAL_SEMANTIC_TOKENS: readonly string[] = [
   // §3.23 cubicBezier — easing (6)
   "ease-linear", "ease-standard", "ease-decelerate", "ease-accelerate",
   "ease-emphasized", "ease-spring",
-  // §3.24 shadow (composite, 7)
+  // §3.24 shadow (composite, 10) — handoff additive: shadow-none for
+  // explicit "remove elevation"; shadow-focus + shadow-focus-error for
+  // focus-ring composites distinct from drop-shadow scale.
   "shadow-xs", "shadow-sm", "shadow-md", "shadow-lg", "shadow-xl", "shadow-2xl", "shadow-inner",
+  "shadow-none", "shadow-focus", "shadow-focus-error",
   // §3.25 border (composite, 3)
   "border-default", "border-emphasis-stroke", "border-divider",
   // §3.26 typography (composite, 13)
@@ -96,8 +107,10 @@ const CANONICAL_SEMANTIC_TOKENS: readonly string[] = [
   "text-title-lg", "text-title-md", "text-title-sm",
   "text-body-lg", "text-body-md", "text-body-sm",
   "text-label-lg", "text-label-md", "text-label-sm",
-  // §3.27 transition (composite, 3)
+  // §3.27 transition (composite, 6) — handoff additive: per-property
+  // transition composites for the three commonest interaction targets.
   "transition-default", "transition-emphasis", "transition-fast",
+  "transition-color", "transition-transform", "transition-opacity",
   // §3.28 strokeStyle (3)
   "stroke-solid", "stroke-dashed", "stroke-dotted"
 ];

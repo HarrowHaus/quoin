@@ -219,6 +219,11 @@
   --font-serif: 'IBM Plex Serif', Georgia, serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
   --font-display: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono-warm: 'Monaspace Argon Var', 'Monaspace Argon', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-mono-slab: 'Monaspace Xenon Var', 'Monaspace Xenon', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-mono-script: 'Monaspace Radon Var', 'Monaspace Radon', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-mono-mechanical: 'Monaspace Krypton Var', 'Monaspace Krypton', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-mono-pixel: 'Departure Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
   --surface: var(--color-white-0);
   --surface-elevated: var(--color-white-0);
   --surface-recessed: var(--color-gray-10);
@@ -255,6 +260,9 @@
   --shadow-xl: 0 20px 25px -5px var(--shadow-tint), 0 8px 10px -6px var(--shadow-tint);
   --shadow-2xl: 0 25px 50px -12px var(--shadow-tint);
   --shadow-inner: inset 0 2px 4px 0 var(--shadow-tint);
+  --shadow-none: 0 0 0 0 transparent;
+  --shadow-focus: 0 0 0 var(--focus-ring-width) var(--focus-ring);
+  --shadow-focus-error: 0 0 0 var(--focus-ring-width) var(--critical);
   --border-default: var(--border-width-sm) solid var(--border);
   --border-emphasis-stroke: var(--border-width-md) solid var(--border-emphasis);
   --border-divider: var(--border-width-sm) solid var(--border-recede);
@@ -274,5 +282,8 @@
   --transition-default: all var(--motion-normal) var(--ease-standard);
   --transition-emphasis: all var(--motion-slow) var(--ease-emphasized);
   --transition-fast: all var(--motion-fast) var(--ease-standard);
+  --transition-color: color, background-color, border-color, fill, stroke var(--motion-fast) var(--ease-standard);
+  --transition-transform: transform var(--motion-normal) var(--ease-standard);
+  --transition-opacity: opacity var(--motion-fast) var(--ease-standard);
   --stroke-dashed: dashed;
 }

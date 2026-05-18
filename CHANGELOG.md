@@ -6,6 +6,72 @@ versioning follows pre-1.0 conventions until v1.0.0 publication.
 
 ## [Unreleased]
 
+### Handoff additive — namespace expanded 164 → 175 (2026-05-17)
+
+The `quoin-handoff` v1.0 launch package delivered a fresh design vision
+including a specific identity typography stack (Junicode + Ranade +
+Monaspace family + Departure Mono) and a slightly broader canonical
+namespace than v0.5 shipped. Reconciled by adding the missing pieces
+without renaming or refactoring anything already on origin/main.
+
+#### Added (11 canonical tokens)
+
+- **fontFamily +5**: `font-mono-warm` (Monaspace Argon), `font-mono-slab`
+  (Monaspace Xenon), `font-mono-script` (Monaspace Radon),
+  `font-mono-mechanical` (Monaspace Krypton), `font-mono-pixel`
+  (Departure Mono). Joins the existing `font-sans`, `font-serif`,
+  `font-mono`, `font-display`.
+- **shadow +3 composites**: `shadow-none` (explicit reset to
+  transparent), `shadow-focus` (focus-ring composite — `focus-ring`
+  color, `focus-ring-width` spread), `shadow-focus-error` (focus ring
+  in critical state).
+- **transition +3 composites**: `transition-color`,
+  `transition-transform`, `transition-opacity`. Per-property
+  transitions emit `property duration timing` shorthand instead of the
+  generic `all`, keeping the GPU rasteriser path tight.
+
+#### Identity typography wired into `tokens-baseline`
+
+- `font-display` + `font-serif`: Junicode 2 stack
+  (`'Junicode 2', 'Junicode', ui-serif, Georgia, …`).
+- `font-sans`: Ranade stack (`'Ranade Variable', 'Ranade', ui-sans-serif, …`).
+- `font-mono`: Monaspace Neon stack.
+- All five new mono-variants point at their respective Monaspace +
+  Departure Mono identities. System-font fallbacks preserved.
+
+#### Compiler
+
+- `CANONICAL_SEMANTIC_TOKENS` extended (175 names; comment header
+  updated). Strict validation enforces the new tokens.
+
+#### build.js
+
+- `DEFAULT_FONTS` adds the 5 new mono-variants so every harvested pack
+  inherits the identity stack by default (overridable via
+  `source.fonts`).
+- `DEFAULT_COMPOSITES` adds the 3 new shadow + 3 new transition shapes
+  so every pack ships them populated.
+- `renderCssValue` for transitions: emits `color, background-color,
+  border-color, fill, stroke duration timing` for `transition-color`;
+  `transform duration timing` for `transition-transform`; `opacity
+  duration timing` for `transition-opacity`. Other transitions still
+  use `all`.
+
+#### Validation
+
+- All 40 packs pass strict validation (no warnings).
+- Compiler test suite 77/77 still passes.
+- All three reference demos build cleanly.
+- Docs site builds clean.
+
+#### Phase mapping
+
+The handoff describes Phase 0.5 and 3.5c as not-yet-done; reality is
+they're complete. `PHASE_GATES.md` now includes a "Handoff cross-check"
+section mapping each handoff phase against shipped work. Next blocking
+phase is **0.5-extension** (define theme/template/pattern/icon pack
+types).
+
 ### Phase 3.5d — Per-pack source-faithful composite refinement (2026-05-17)
 
 Extends the Phase 3.5b fidelity framework to refine composite tokens

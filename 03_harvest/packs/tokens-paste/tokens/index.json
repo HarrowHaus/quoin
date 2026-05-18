@@ -804,6 +804,26 @@
     "$value": "'Inter', system-ui, sans-serif",
     "$type": "fontFamily"
   },
+  "font-mono-warm": {
+    "$value": "'Monaspace Argon Var', 'Monaspace Argon', ui-monospace, SFMono-Regular, Menlo, monospace",
+    "$type": "fontFamily"
+  },
+  "font-mono-slab": {
+    "$value": "'Monaspace Xenon Var', 'Monaspace Xenon', ui-monospace, SFMono-Regular, Menlo, monospace",
+    "$type": "fontFamily"
+  },
+  "font-mono-script": {
+    "$value": "'Monaspace Radon Var', 'Monaspace Radon', ui-monospace, SFMono-Regular, Menlo, monospace",
+    "$type": "fontFamily"
+  },
+  "font-mono-mechanical": {
+    "$value": "'Monaspace Krypton Var', 'Monaspace Krypton', ui-monospace, SFMono-Regular, Menlo, monospace",
+    "$type": "fontFamily"
+  },
+  "font-mono-pixel": {
+    "$value": "'Departure Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace",
+    "$type": "fontFamily"
+  },
   "surface": {
     "$value": "{color.gray.10}",
     "$type": "color"
@@ -1027,6 +1047,39 @@
     },
     "$type": "shadow"
   },
+  "shadow-none": {
+    "$value": {
+      "color": "transparent",
+      "offsetX": "0",
+      "offsetY": "0",
+      "blur": "0",
+      "spread": "0",
+      "inset": false
+    },
+    "$type": "shadow"
+  },
+  "shadow-focus": {
+    "$value": {
+      "color": "{focus-ring}",
+      "offsetX": "0",
+      "offsetY": "0",
+      "blur": "0",
+      "spread": "{focus-ring-width}",
+      "inset": false
+    },
+    "$type": "shadow"
+  },
+  "shadow-focus-error": {
+    "$value": {
+      "color": "{critical}",
+      "offsetX": "0",
+      "offsetY": "0",
+      "blur": "0",
+      "spread": "{focus-ring-width}",
+      "inset": false
+    },
+    "$type": "shadow"
+  },
   "border-default": {
     "$value": {
       "color": "{border}",
@@ -1198,6 +1251,30 @@
     "$type": "transition"
   },
   "transition-fast": {
+    "$value": {
+      "duration": "{motion-fast}",
+      "delay": "0ms",
+      "timingFunction": "{ease-standard}"
+    },
+    "$type": "transition"
+  },
+  "transition-color": {
+    "$value": {
+      "duration": "{motion-fast}",
+      "delay": "0ms",
+      "timingFunction": "{ease-standard}"
+    },
+    "$type": "transition"
+  },
+  "transition-transform": {
+    "$value": {
+      "duration": "{motion-normal}",
+      "delay": "0ms",
+      "timingFunction": "{ease-standard}"
+    },
+    "$type": "transition"
+  },
+  "transition-opacity": {
     "$value": {
       "duration": "{motion-fast}",
       "delay": "0ms",

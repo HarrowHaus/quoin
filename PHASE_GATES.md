@@ -46,6 +46,31 @@ Exit criteria for each phase. A phase is complete when **every** criterion in it
 
 ---
 
+## Handoff cross-check (2026-05-17)
+
+A `quoin-handoff` package was delivered describing the v1.0 launch plan. Mapping its phases against shipped work:
+
+| Handoff phase | Status |
+|---------------|--------|
+| **Phase 0.5 — Canonical Namespace Expansion** | **Done** via Phase 0.5 + handoff additive. 175-token namespace across 11 DTCG types. Identity typography (Junicode + Ranade + Monaspace + Departure Mono) wired into `tokens-baseline`. |
+| **Phase 3.5c — Composite Token Fidelity** | **Done** via Phase 3.5c + 3.5d. All 30 packs validate against the expanded namespace. 3 packs (tailwind, material3, bootstrap) refined with source-faithful composite values; 27 on programmatic defaults. |
+| **Phase 0.5-extension — New pack types** | **Not started** — next blocking phase. Needs theme/template/pattern/icon manifest schemas + validator extensions. |
+| **Phase Theme Packs** (10 packs) | Blocked on 0.5-extension. |
+| **Phase Template Packs** (10 packs) | Blocked on 0.5-extension. |
+| **Phase Pattern Packs** (~80–150) | Blocked on Template Packs. |
+| **Phase Icon Packs** (17–18) | Blocked on 0.5-extension. |
+| **Phase 6 — Marketing site** | Independent; can start after themes. |
+| **Phase 6.5 — harrow.haus rebuild** | Independent; can start after templates. |
+| **Phase 7 — Examples gallery** | Blocked on templates + patterns. |
+| **Phase 8 — Docs refresh** | Independent. |
+| **Phase 9 — Blog + changelog** | Independent. |
+| **Phase 10 — Showcase wall** | Blocked on all content phases. |
+| **Phase 5e — CLI + npm publish + launch** | Final. Blocked on all prior. |
+
+**Next blocking phase**: `handoff/prompts/02_phase_0.5_extension_new_pack_types.md` — define theme, template, pattern, icon pack types in spec + manifest schemas + validator support.
+
+---
+
 ## Phase 0.5 — Canonical Namespace Expansion
 
 **Output location:** `00_spec/tokens.md` (rewritten), `01_compiler/src/token-resolver.ts` (expanded canonical list), `02_reference-packs/tokens-baseline/` (full reference implementation), all 30 harvested token packs flagged `"status": "pending-3.5c-fill"`.

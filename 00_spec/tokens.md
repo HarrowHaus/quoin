@@ -289,16 +289,23 @@ DTCG number type, unitless.
 | `leading-prose` | `1.6` |
 | `leading-loose` | `1.9` |
 
-### 3.20 `fontFamily` (4)
+### 3.20 `fontFamily` (9)
 
 Each token's `$value` is an array of family names with fallbacks per DTCG `fontFamily` type.
 
 | Token | Purpose |
 |-------|---------|
-| `font-sans` | Default sans-serif family. |
+| `font-sans` | Default sans-serif family (body copy). |
 | `font-serif` | Serif family. |
-| `font-mono` | Monospace family. |
+| `font-mono` | Monospace family (primary UI mono). |
 | `font-display` | Display family (headlines, hero copy). |
+| `font-mono-warm` | Warmer monospace variant (inline code in marketing copy). |
+| `font-mono-slab` | Slab-style monospace (`<kbd>` labels, terminal frames). |
+| `font-mono-script` | Script-style monospace (annotations, handwritten feel). |
+| `font-mono-mechanical` | Mechanical monospace (AI suggestion / diff hunks). |
+| `font-mono-pixel` | Pixel/retro monospace (caption mono, terminal aesthetic). |
+
+The Quoin identity baseline pairs Junicode 2 (`font-display`/`font-serif`) + Ranade (`font-sans`) + the Monaspace family (`font-mono*`) + Departure Mono (`font-mono-pixel`). Packs may override any slot via their `fonts` block.
 
 ### 3.21 `fontWeight` (6)
 
@@ -332,7 +339,7 @@ Each token's `$value` is an array of family names with fallbacks per DTCG `fontF
 | `ease-emphasized` | `[0.2, 0, 0, 1]` (Material-style emphasized) |
 | `ease-spring` | `[0.5, 1.5, 0.5, 1]` (bouncy / spring-physics feel) |
 
-### 3.24 `shadow` (composite, 7)
+### 3.24 `shadow` (composite, 10)
 
 `$value` follows DTCG `shadow` composite. See §4.1 for the object shape. Where source systems layer multiple shadows for one elevation step, encode as an array of composite objects.
 
@@ -345,6 +352,9 @@ Each token's `$value` is an array of family names with fallbacks per DTCG `fontF
 | `shadow-xl` | Toasts, prominent overlays. |
 | `shadow-2xl` | Maximum emphasis — rare. |
 | `shadow-inner` | Inset — sunken surfaces. |
+| `shadow-none` | Explicit "no shadow" reset (transparent). |
+| `shadow-focus` | Focus-ring composite — color `focus-ring`, spread `focus-ring-width`. |
+| `shadow-focus-error` | Focus-ring composite in critical state. |
 
 ### 3.25 `border` (composite, 3)
 
@@ -378,7 +388,7 @@ Note: `border-emphasis-stroke` is the composite token (border-style spec); `bord
 | `text-label-md` | Default label (form labels, captions). |
 | `text-label-sm` | Small label (chips, fine metadata). |
 
-### 3.27 `transition` (composite, 3)
+### 3.27 `transition` (composite, 6)
 
 `$value` follows DTCG `transition` composite. See §4.4.
 
@@ -387,6 +397,11 @@ Note: `border-emphasis-stroke` is the composite token (border-style spec); `bord
 | `transition-default` | `{duration: {motion-normal}, delay: "0ms", timingFunction: {ease-standard}}` |
 | `transition-emphasis` | `{duration: {motion-slow}, delay: "0ms", timingFunction: {ease-emphasized}}` |
 | `transition-fast` | `{duration: {motion-fast}, delay: "0ms", timingFunction: {ease-standard}}` |
+| `transition-color` | Color-property hover/focus transitions. Default duration `motion-fast`. |
+| `transition-transform` | Transform-property animations (scale, translate). Default duration `motion-normal`. |
+| `transition-opacity` | Opacity-property fades. Default duration `motion-fast`. |
+
+CSS emission for the per-property tokens uses the matching CSS property name in shorthand (e.g. `--transition-transform: transform 200ms cubic-bezier(...)`), not `all`. This keeps the GPU rasteriser path tight.
 
 ### 3.28 `strokeStyle` (3)
 
@@ -403,16 +418,18 @@ Note: `border-emphasis-stroke` is the composite token (border-style spec); `bord
 | `color` | 29 |
 | `dimension` | 64 |
 | `number` | 21 |
-| `fontFamily` | 4 |
+| `fontFamily` | 9 |
 | `fontWeight` | 6 |
 | `duration` | 5 |
 | `cubicBezier` | 6 |
-| `shadow` | 7 |
+| `shadow` | 10 |
 | `border` | 3 |
 | `typography` | 13 |
-| `transition` | 3 |
+| `transition` | 6 |
 | `strokeStyle` | 3 |
-| **Total** | **164** |
+| **Total** | **175** |
+
+The fontFamily / shadow / transition increases over v0.5's original 164 reflect the handoff additive — Quoin's identity typography stack (Junicode + Ranade + Monaspace family + Departure Mono) plus focus-ring and per-property transition composites. No tokens renamed or removed from v0.5.
 
 ## 4. DTCG composite structures
 

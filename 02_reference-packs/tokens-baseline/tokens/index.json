@@ -181,11 +181,16 @@
   "leading-prose":  { "$value": "1.6",  "$type": "number" },
   "leading-loose":  { "$value": "1.9",  "$type": "number" },
 
-  "_comment_3_20_fontFamily": "§3.20 fontFamily (4)",
-  "font-sans":    { "$value": "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif", "$type": "fontFamily" },
-  "font-serif":   { "$value": "ui-serif, Georgia, 'Times New Roman', serif", "$type": "fontFamily" },
-  "font-mono":    { "$value": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace", "$type": "fontFamily" },
-  "font-display": { "$value": "ui-serif, Georgia, 'Times New Roman', serif", "$type": "fontFamily" },
+  "_comment_3_20_fontFamily": "§3.20 fontFamily (9 — handoff additive)",
+  "font-sans":    { "$value": "'Ranade Variable', 'Ranade', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif", "$type": "fontFamily" },
+  "font-serif":   { "$value": "'Junicode 2', 'Junicode', ui-serif, Georgia, 'Times New Roman', serif", "$type": "fontFamily" },
+  "font-mono":    { "$value": "'Monaspace Neon Var', 'Monaspace Neon', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace", "$type": "fontFamily" },
+  "font-display": { "$value": "'Junicode 2', 'Junicode', ui-serif, Georgia, 'Times New Roman', serif", "$type": "fontFamily" },
+  "font-mono-warm":       { "$value": "'Monaspace Argon Var', 'Monaspace Argon', ui-monospace, SFMono-Regular, Menlo, monospace", "$type": "fontFamily" },
+  "font-mono-slab":       { "$value": "'Monaspace Xenon Var', 'Monaspace Xenon', ui-monospace, SFMono-Regular, Menlo, monospace", "$type": "fontFamily" },
+  "font-mono-script":     { "$value": "'Monaspace Radon Var', 'Monaspace Radon', ui-monospace, SFMono-Regular, Menlo, monospace", "$type": "fontFamily" },
+  "font-mono-mechanical": { "$value": "'Monaspace Krypton Var', 'Monaspace Krypton', ui-monospace, SFMono-Regular, Menlo, monospace", "$type": "fontFamily" },
+  "font-mono-pixel":      { "$value": "'Departure Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace", "$type": "fontFamily" },
 
   "_comment_3_21_fontWeight": "§3.21 fontWeight (6)",
   "font-weight-light":    { "$value": "300", "$type": "fontWeight" },
@@ -247,6 +252,18 @@
   "shadow-inner": {
     "$type": "shadow",
     "$value": { "color": "{shadow-tint}", "offsetX": "0", "offsetY": "2px", "blur": "4px", "spread": "0", "inset": true }
+  },
+  "shadow-none": {
+    "$type": "shadow",
+    "$value": { "color": "transparent", "offsetX": "0", "offsetY": "0", "blur": "0", "spread": "0", "inset": false }
+  },
+  "shadow-focus": {
+    "$type": "shadow",
+    "$value": { "color": "{focus-ring}", "offsetX": "0", "offsetY": "0", "blur": "0", "spread": "{focus-ring-width}", "inset": false }
+  },
+  "shadow-focus-error": {
+    "$type": "shadow",
+    "$value": { "color": "{critical}", "offsetX": "0", "offsetY": "0", "blur": "0", "spread": "{focus-ring-width}", "inset": false }
   },
 
   "_comment_3_25_border_composite": "§3.25 border (composite, 3)",
@@ -395,7 +412,7 @@
     }
   },
 
-  "_comment_3_27_transition": "§3.27 transition (composite, 3)",
+  "_comment_3_27_transition": "§3.27 transition (composite, 6 — handoff additive)",
   "transition-default": {
     "$type": "transition",
     "$value": { "duration": "{motion-normal}", "delay": "0ms", "timingFunction": "{ease-standard}" }
@@ -405,6 +422,18 @@
     "$value": { "duration": "{motion-slow}", "delay": "0ms", "timingFunction": "{ease-emphasized}" }
   },
   "transition-fast": {
+    "$type": "transition",
+    "$value": { "duration": "{motion-fast}", "delay": "0ms", "timingFunction": "{ease-standard}" }
+  },
+  "transition-color": {
+    "$type": "transition",
+    "$value": { "duration": "{motion-fast}", "delay": "0ms", "timingFunction": "{ease-standard}" }
+  },
+  "transition-transform": {
+    "$type": "transition",
+    "$value": { "duration": "{motion-normal}", "delay": "0ms", "timingFunction": "{ease-standard}" }
+  },
+  "transition-opacity": {
     "$type": "transition",
     "$value": { "duration": "{motion-fast}", "delay": "0ms", "timingFunction": "{ease-standard}" }
   },

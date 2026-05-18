@@ -53,7 +53,7 @@ A user composes their build by installing one of each.
 | Phase | Folder | Output | Status |
 |-------|--------|--------|--------|
 | 0 | `00_spec/` | Specification document (spec, pack-format, primitives, tokens) | shipped |
-| 0.5 | `00_spec/tokens.md` | Canonical Namespace Expansion — token namespace expanded from ~30 to 164 tokens across 11 DTCG 2025.10 types. Frozen at v1.0. | complete |
+| 0.5 | `00_spec/tokens.md` | Canonical Namespace Expansion — token namespace expanded from ~30 to 175 tokens across 11 DTCG 2025.10 types (164 in original 0.5 + 11 from handoff additive). Identity typography (Junicode + Ranade + Monaspace + Departure Mono) wired into `tokens-baseline`. Frozen at v1.0. | complete |
 | 3.5c | `03_harvest/build.js` | Geometric & typographic fidelity — all 30 harvested packs filled with `$value` for every v1.0 canonical token; strict validation passes catalog-wide. | complete |
 | 3.5d | `03_harvest/fidelity/extract.js` | Per-pack source-faithful composite refinement — fidelity framework extended to accept composite + atomic overrides. 3 packs refined (tailwind, material3, bootstrap); remaining 27 stay on 3.5c programmatic defaults. | partial — framework + 3 packs |
 | 1 | `01_compiler/` | Reference compiler (TypeScript, ESM, Vite plugin, browser entry) | shipped |

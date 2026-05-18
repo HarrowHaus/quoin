@@ -110,7 +110,15 @@ const DEFAULT_FONTS = {
   "font-sans": "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
   "font-serif": "ui-serif, Georgia, 'Times New Roman', serif",
   "font-mono": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",
-  "font-display": "ui-serif, Georgia, 'Times New Roman', serif"
+  "font-display": "ui-serif, Georgia, 'Times New Roman', serif",
+  // Handoff additive: Quoin identity mono variants. Each pack inherits
+  // the Monaspace + Departure Mono identity stack by default; per-pack
+  // overrides via source.fonts can replace.
+  "font-mono-warm": "'Monaspace Argon Var', 'Monaspace Argon', ui-monospace, SFMono-Regular, Menlo, monospace",
+  "font-mono-slab": "'Monaspace Xenon Var', 'Monaspace Xenon', ui-monospace, SFMono-Regular, Menlo, monospace",
+  "font-mono-script": "'Monaspace Radon Var', 'Monaspace Radon', ui-monospace, SFMono-Regular, Menlo, monospace",
+  "font-mono-mechanical": "'Monaspace Krypton Var', 'Monaspace Krypton', ui-monospace, SFMono-Regular, Menlo, monospace",
+  "font-mono-pixel": "'Departure Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace"
 };
 
 const DEFAULT_FONT_WEIGHTS = {
@@ -236,6 +244,20 @@ const DEFAULT_COMPOSITES = {
     color: "{shadow-tint}", offsetX: "0", offsetY: "2px",
     blur: "4px", spread: "0", inset: true
   }),
+  // Handoff additive: explicit "no shadow" + focus-ring composites
+  // that compose differently from the drop-shadow elevation scale.
+  "shadow-none": () => ({
+    color: "transparent", offsetX: "0", offsetY: "0",
+    blur: "0", spread: "0", inset: false
+  }),
+  "shadow-focus": () => ({
+    color: "{focus-ring}", offsetX: "0", offsetY: "0",
+    blur: "0", spread: "{focus-ring-width}", inset: false
+  }),
+  "shadow-focus-error": () => ({
+    color: "{critical}", offsetX: "0", offsetY: "0",
+    blur: "0", spread: "{focus-ring-width}", inset: false
+  }),
   // §3.25 border
   "border-default": () => ({ color: "{border}", width: "{border-width-sm}", style: "solid" }),
   "border-emphasis-stroke": () => ({ color: "{border-emphasis}", width: "{border-width-md}", style: "solid" }),
@@ -297,6 +319,13 @@ const DEFAULT_COMPOSITES = {
   "transition-default": () => ({ duration: "{motion-normal}", delay: "0ms", timingFunction: "{ease-standard}" }),
   "transition-emphasis": () => ({ duration: "{motion-slow}", delay: "0ms", timingFunction: "{ease-emphasized}" }),
   "transition-fast": () => ({ duration: "{motion-fast}", delay: "0ms", timingFunction: "{ease-standard}" }),
+  // Handoff additive: per-property transition composites for the
+  // three commonest interaction targets (color hover, transform
+  // hover, opacity fade). Specifying a single property keeps the
+  // GPU rasteriser path tight.
+  "transition-color": () => ({ duration: "{motion-fast}", delay: "0ms", timingFunction: "{ease-standard}" }),
+  "transition-transform": () => ({ duration: "{motion-normal}", delay: "0ms", timingFunction: "{ease-standard}" }),
+  "transition-opacity": () => ({ duration: "{motion-fast}", delay: "0ms", timingFunction: "{ease-standard}" }),
   // §3.28 strokeStyle composite (object form for dashed)
   "stroke-dashed": () => ({ dashArray: ["4px", "2px"], lineCap: "butt" })
 };
@@ -580,7 +609,15 @@ function renderCssValue(name, entry) {
     const delay = resolveCssRefs(String($value.delay ?? "0ms"));
     const timing = resolveCssRefs(String($value.timingFunction ?? "linear"));
     const delayPart = delay && delay !== "0ms" ? ` ${delay}` : "";
-    return `all ${duration} ${timing}${delayPart}`;
+    // Handoff additive: per-property transition tokens emit
+    // `property duration timing` instead of the generic "all".
+    const propertyMap = {
+      "transition-color": "color, background-color, border-color, fill, stroke",
+      "transition-transform": "transform",
+      "transition-opacity": "opacity"
+    };
+    const property = propertyMap[name] ?? "all";
+    return `${property} ${duration} ${timing}${delayPart}`;
   }
 
   if ($type === "typography") {
