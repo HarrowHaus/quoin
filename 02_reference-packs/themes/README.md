@@ -101,7 +101,7 @@ no commercial faces. Verified-and-current sources as of May 17 2026:
 
 | Source | Families |
 |---|---|
-| Google Fonts CSS link | Source Serif 4 Variable, Inter Variable, DM Serif Display, JetBrains Mono Variable |
+| Google Fonts CSS link | Source Serif 4 Variable, Inter Variable, DM Serif Display, JetBrains Mono Variable, **Manrope**, **Unbounded**, **IBM Plex Sans / Condensed / Mono** |
 | Fontshare CSS link | Ranade Variable |
 | jsDelivr (`@font-face`) | Junicode 2 Beta VF, Junicode VF (Roman + Italic), Monaspace Neon / Argon / Xenon / Radon / Krypton, Geist Variable, Geist Mono Variable |
 | Vendored locally (`./_fonts/`) | `DepartureMono-Regular.woff2` (OFL by Helena Zhang, `departuremono.com`) — repo ships only a `.zip` release; no CDN-direct path |
@@ -140,8 +140,29 @@ self-hosting consumers and created license risk:
 
 Visual differentiation survives the removal because each pack's
 primary identity face (Junicode, Ranade, Geist, Source Serif 4,
-Monaspace, DM Serif Display, Inter Display) is OFL and carries the
-register independently of the commercial peer faces it used to alias.
+Monaspace, DM Serif Display, Manrope, Unbounded, IBM Plex Sans) is
+OFL and carries the register independently of the commercial peer
+faces it used to alias.
+
+### Typographic distinctness redesign (aurora / arcade / vapor)
+
+The initial commercial-font cleanup left three themes sharing
+`Inter Display Variable + Inter Variable` as their typography. To
+restore typographic identity-separation across the catalogue, all
+three were redesigned with distinct OFL faces:
+
+| Pack | New primary face | Source | Aesthetic role |
+|---|---|---|---|
+| `theme-aurora` | **Manrope** | OFL by Mikhail Sharanda (Google Fonts) | Geometric grotesque with subtle humanist warmth — the warm-Linear register |
+| `theme-arcade` | **Unbounded** | OFL by Indian Type Foundry (Google Fonts) | Bold geometric display with rounded terminals — Y2K-adjacent maximalist register |
+| `theme-vapor` | **IBM Plex Sans / Condensed / Mono** | OFL by IBM (Google Fonts) | Canonical institutional grotesque — fintech / enterprise register |
+
+After the redesign, every theme in the catalogue has a distinct
+primary face: Source Serif 4 (vellum), Geist (graphite), Manrope
+(aurora), Junicode 2 (letterpress / broadsheet), Monaspace Neon
+(terminal), DM Serif Display (bloom), Unbounded (arcade), SF Pro
+(prism), IBM Plex Sans Condensed (vapor). Cross-pack typographic
+diversity restored without re-introducing commercial fonts.
 
 ### Headline scaling
 

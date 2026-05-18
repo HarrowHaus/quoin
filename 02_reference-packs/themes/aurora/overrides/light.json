@@ -28,8 +28,8 @@
   "link-visited":     { "$type": "color", "$value": "oklch(50% 0.16 295)" },
   "link-hover":       { "$type": "color", "$value": "oklch(48% 0.22 268)" },
 
-  "font-display": { "$type": "fontFamily", "$value": "'Inter Display Variable', 'Inter Display', 'Inter Variable', 'Inter', system-ui, sans-serif" },
-  "font-sans":    { "$type": "fontFamily", "$value": "'Inter Variable', 'Inter', system-ui, -apple-system, sans-serif" },
+  "font-display": { "$type": "fontFamily", "$value": "'Manrope Variable', 'Manrope', 'Inter Variable', 'Inter', system-ui, sans-serif" },
+  "font-sans":    { "$type": "fontFamily", "$value": "'Manrope Variable', 'Manrope', 'Inter Variable', 'Inter', system-ui, -apple-system, sans-serif" },
   "font-mono":    { "$type": "fontFamily", "$value": "'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace" },
 
   "radius-md":   { "$type": "dimension", "$value": "8px" },

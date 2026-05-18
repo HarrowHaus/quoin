@@ -31,11 +31,11 @@ Bold display sans for the headline tier; humanist body.
 
 | Slot | Stack |
 |---|---|
-| `font-display` | `Inter Display Variable` → `Inter Display` → `Inter Variable` → `Inter` → `system-ui` |
+| `font-display` | `Unbounded` → `Inter Display Variable` → `Inter Display` → `system-ui` |
 | `font-sans` | `Inter Variable` → `Inter` → `system-ui` |
 | `font-mono` | `JetBrains Mono Variable` → `JetBrains Mono` → `ui-monospace` |
 
-> Commercial display faces (PP Editorial New, Clash Display, PP Fragment Sans) were removed in the pre-Phase-Templates cleanup. Inter Display + Inter (OFL by Rasmus Andersson) at heavy weights carry the dopamine-saturation display register. The visual loudness comes from the hyper-saturated colour palette + glow shadows + spring motion — the type contribution is restrained-but-bold.
+> **Why Unbounded:** arcade was briefly Inter Display + Inter after the commercial-font cleanup but that collided typographically with aurora and vapor. Unbounded by Indian Type Foundry (OFL via Google Fonts) is a bold geometric display with rounded terminals and a maximalist Y2K-adjacent register — the dopamine-saturation reading the theme needs, which Inter Display can't carry. Body stays Inter for legibility at small sizes. The visual loudness now comes from Unbounded's display drama + the hyper-saturated palette + glow shadows + spring motion working together; arcade's identity no longer rests on color alone.
 
 Type-size scale lifted: `5xl` is 8rem (128px), `display` is 10rem (160px).
 

@@ -6,6 +6,57 @@ versioning follows pre-1.0 conventions until v1.0.0 publication.
 
 ## [Unreleased]
 
+### Typography distinctness — aurora / arcade / vapor redesigned with distinct OFL faces (2026-05-17)
+
+After the commercial-font cleanup three themes shared
+`Inter Display Variable + Inter Variable` as their typography
+(aurora, arcade, vapor — the cross-diversity observation flagged
+in the cleanup commit). Operator approved redesigning all three
+with typographically distinct OFL faces so each pack carries its
+own identity register independently of palette + radius + shadow
+differentiation.
+
+| Pack | Now leads with | Foundry / source | Aesthetic role |
+|---|---|---|---|
+| `theme-aurora` | **Manrope** | OFL by Mikhail Sharanda (Google Fonts) | Geometric grotesque with subtle humanist warmth — the warm-Linear register, distinct from Geist and Inter |
+| `theme-arcade` | **Unbounded** | OFL by Indian Type Foundry (Google Fonts) | Bold geometric display with rounded terminals — Y2K-adjacent maximalist register that Inter Display couldn't carry |
+| `theme-vapor` | **IBM Plex Sans / Sans Condensed / Mono** | OFL by IBM (Google Fonts) | Canonical institutional grotesque — fintech / enterprise register; mono variant strengthens data-table register |
+
+After the redesign the catalogue has **9 distinct primary faces
+across 10 themes**:
+
+- vellum: Source Serif 4 Display
+- graphite: Geist Variable
+- aurora: Manrope Variable
+- letterpress: Junicode 2
+- terminal: Monaspace Neon Variable
+- broadsheet: Junicode 2 *(intentionally shared with letterpress — the Quoin identity stack; differentiation via type scale + surface treatment)*
+- bloom: DM Serif Display
+- arcade: Unbounded
+- prism: SF Pro Display
+- vapor: IBM Plex Sans Condensed
+
+The only intentional overlap is broadsheet / letterpress sharing the
+Junicode 2 + Ranade Quoin-identity pairing. Every other pack has a
+distinct primary face. Cross-pack typographic diversity restored
+without re-introducing commercial fonts.
+
+#### Showcase
+
+`showcase.js` Google Fonts CSS link extended to load Manrope,
+Unbounded, and IBM Plex Sans / Condensed / Mono alongside the
+existing faces. The legend at the top of the page lists every
+loaded face. Verified in Chrome DevTools: each theme's computed
+`font-family` resolves to its declared OFL primary face (Manrope
+Variable, Unbounded, IBM Plex Sans Condensed); `document.fonts`
+shows all three new families at status `"loaded"`.
+
+#### Validation
+
+All validators still pass: 10/10 themes cross-diversity, 80/80
+reference checks, all Phase 0.5-extension checks, 96/96 compiler
+tests, 40/40 harvested packs.
+
 ### Pre-Phase-Templates cleanup — commercial fonts removed + Departure Mono vendored + Universal Gate (2026-05-17)
 
 Three followup tasks before Phase Templates, shipped as a single

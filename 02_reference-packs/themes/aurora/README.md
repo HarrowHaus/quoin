@@ -28,11 +28,11 @@ Note: aurora is **primarily a dark-mode theme.** Light mode is a courteous bidir
 
 | Slot | Stack |
 |---|---|
-| `font-display` | `Inter Display Variable` → `Inter Display` → `Inter Variable` → system |
-| `font-sans` | `Inter Variable` → `Inter` → `system-ui` → `-apple-system` |
+| `font-display` | `Manrope Variable` → `Manrope` → `Inter Variable` → `Inter` → `system-ui` |
+| `font-sans` | `Manrope Variable` → `Manrope` → `Inter Variable` → `Inter` → `system-ui` → `-apple-system` |
 | `font-mono` | `JetBrains Mono Variable` → `JetBrains Mono` → `ui-monospace` |
 
-> Linear ships a proprietary type pairing; Inter is the closest OFL approximation that preserves the geometric grotesque register.
+> **Why Manrope:** aurora was previously Inter Display + Inter, which collided typographically with arcade and vapor after the pre-Phase-Templates commercial-font cleanup. Manrope by Mikhail Sharanda (OFL via Google Fonts) is a geometric grotesque with subtle humanist warmth at body sizes — distinctly different from Inter's neutral grotesque register. The slight terminal-curvature softening matches the warm-Linear aesthetic better than Inter, while remaining a clean modern sans for productivity UI. Linear ships proprietary type; Manrope is the closest OFL approximation to the warm-grotesque register without aliasing Inter.
 
 ## Motion
 

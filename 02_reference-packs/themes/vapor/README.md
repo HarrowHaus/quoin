@@ -57,18 +57,22 @@ with the same warm-indigo accent preserved.
 
 | Slot | Stack |
 |---|---|
-| `font-display` | `Inter Display Variable` → `Inter Display` → `Inter Variable` → `Inter` → `system-ui` |
-| `font-sans` | `Inter Variable` → `Inter` → `system-ui` → `-apple-system` |
-| `font-mono` | `JetBrains Mono Variable` → `JetBrains Mono` → `ui-monospace` |
+| `font-display` | `IBM Plex Sans Condensed` → `IBM Plex Sans` → `Inter Display Variable` → `Inter Display` → `system-ui` |
+| `font-sans` | `IBM Plex Sans` → `Inter Variable` → `Inter` → `system-ui` → `-apple-system` |
+| `font-mono` | `IBM Plex Mono` → `JetBrains Mono Variable` → `JetBrains Mono` → `ui-monospace` |
 
-> **Licensing note:** The original lineage source (stripe.com) uses
-> Söhne by Klim Type Foundry — a commercial typeface. Söhne was
-> previously aliased as the primary face in vapor's stack but was
-> removed in the pre-Phase-Templates cleanup: Quoin theme packs ship
-> with OFL fonts only. The atmospheric register comes from the
-> layered-mesh gradient + indigo palette + tabular numerics; Inter
-> at the display tier reads close enough to the institutional-fintech
-> identity without the licensing burden.
+> **Why IBM Plex:** the original lineage source (stripe.com) uses Söhne
+> by Klim Type Foundry — a commercial typeface. After the
+> commercial-font cleanup vapor briefly fell back to Inter Display +
+> Inter, which collided typographically with aurora and arcade. IBM
+> Plex Sans / Sans Condensed / Mono (OFL by IBM via Google Fonts) is
+> the canonical institutional grotesque — purpose-designed for
+> enterprise / financial brand registers, with subtle technical
+> precision in its terminals and a condensed display variant that
+> reads as fintech-institutional at scale. The Plex family carries
+> vapor's "considered institutional" identity in a way Inter cannot,
+> and its mono variant strengthens the data-table register expected
+> in payment infrastructure UIs.
 
 ## Motion
 

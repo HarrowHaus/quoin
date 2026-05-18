@@ -19,7 +19,8 @@
  *
  *   2. Fonts load via:
  *        - Google Fonts CSS link  (Source Serif 4, Inter, DM Serif Display,
- *                                  JetBrains Mono)
+ *                                  JetBrains Mono, Manrope, Unbounded,
+ *                                  IBM Plex Sans / Condensed / Mono)
  *        - Fontshare CSS link     (Ranade Variable)
  *        - @font-face declarations pointing at jsDelivr (Junicode 2 Beta VF,
  *          Junicode VF, Monaspace family ×5, Geist Variable, Geist Mono
@@ -188,7 +189,7 @@ const FONT_HEAD = `
 
   <link
     rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,200..900&family=Inter:opsz,wght@14..32,100..900&family=DM+Serif+Display&family=JetBrains+Mono:wght@100..800&display=swap">
+    href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,200..900&family=Inter:opsz,wght@14..32,100..900&family=DM+Serif+Display&family=JetBrains+Mono:wght@100..800&family=Manrope:wght@200..800&family=Unbounded:wght@200..900&family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@400;500;600;700&family=IBM+Plex+Mono:wght@100;200;300;400;500;600;700&display=swap">
 
   <link
     rel="stylesheet"
@@ -573,11 +574,12 @@ ${SHELL_CSS}
     Headline uses <code>clamp(1.75rem, 18cqi, var(--type-size-display))</code>;
     the full display tier (e.g. broadsheet's 11rem) only renders at very
     wide cells. Fonts load from Google Fonts (Source Serif 4 Variable,
-    Inter Variable, DM Serif Display, JetBrains Mono Variable), Fontshare
-    (Ranade Variable), jsDelivr (Junicode 2, Monaspace ×5, Geist Variable
-    + Mono), and a vendored <code>_fonts/DepartureMono-Regular.woff2</code>
-    (OFL by Helena Zhang). Every face is OFL or an Apple system font —
-    no commercial faces in any theme stack.
+    Inter Variable, DM Serif Display, JetBrains Mono Variable, Manrope,
+    Unbounded, IBM Plex Sans / Condensed / Mono), Fontshare (Ranade
+    Variable), jsDelivr (Junicode 2, Monaspace ×5, Geist Variable + Mono),
+    and a vendored <code>_fonts/DepartureMono-Regular.woff2</code> (OFL
+    by Helena Zhang). Every face is OFL or an Apple system font — no
+    commercial faces in any theme stack.
   </p>
   <div class="grid">
     ${cells.join("\n")}
