@@ -1,0 +1,1669 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Quoin Theme Showcase — 10 v1.0 themes × light/dark</title>
+  <style>
+:root {
+  --color.stone.50: oklch(98% 0 0);
+  --color.stone.100: oklch(96% 0 0);
+  --color.stone.200: oklch(90% 0 0);
+  --color.stone.300: oklch(80% 0 0);
+  --color.stone.400: oklch(65% 0 0);
+  --color.stone.500: oklch(50% 0 0);
+  --color.stone.600: oklch(40% 0 0);
+  --color.stone.700: oklch(30% 0 0);
+  --color.stone.800: oklch(20% 0 0);
+  --color.stone.900: oklch(15% 0 0);
+  --color.white: #ffffff;
+  --color.black: #000000;
+  --color.red: oklch(55% 0.22 25);
+  --color.red-soft: oklch(95% 0.04 25);
+  --color.amber: oklch(75% 0.18 80);
+  --color.amber-soft: oklch(96% 0.05 80);
+  --color.emerald: oklch(58% 0.18 155);
+  --color.emerald-soft: oklch(95% 0.05 155);
+  --color.sky: oklch(70% 0.15 235);
+  --color.sky-soft: oklch(95% 0.04 235);
+  --color.highlight: oklch(88% 0.16 90);
+  --color.scrim: oklch(0% 0 0 / 0.5);
+  --surface: oklch(98% 0 0);
+  --surface-elevated: #ffffff;
+  --surface-recessed: oklch(96% 0 0);
+  --surface-inverse: oklch(15% 0 0);
+  --scrim: oklch(0% 0 0 / 0.5);
+  --text: oklch(30% 0 0);
+  --text-emphasis: oklch(15% 0 0);
+  --text-recede: oklch(50% 0 0);
+  --text-disabled: oklch(80% 0 0);
+  --text-on-accent: #ffffff;
+  --text-on-critical: #ffffff;
+  --text-on-success: #ffffff;
+  --text-on-warning: oklch(15% 0 0);
+  --text-on-info: #ffffff;
+  --highlight: oklch(88% 0.16 90);
+  --border: oklch(90% 0 0);
+  --border-emphasis: oklch(15% 0 0);
+  --border-recede: oklch(96% 0 0);
+  --accent: oklch(15% 0 0);
+  --accent-recede: oklch(96% 0 0);
+  --critical: oklch(55% 0.22 25);
+  --success: oklch(58% 0.18 155);
+  --warning: oklch(75% 0.18 80);
+  --info: oklch(70% 0.15 235);
+  --focus-ring: oklch(15% 0 0);
+  --link: oklch(30% 0 0);
+  --link-visited: oklch(50% 0 0);
+  --link-hover: oklch(15% 0 0);
+  --shadow-tint: oklch(0% 0 0 / 0.1);
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+  --space-stack-compact: 0.5rem;
+  --space-stack-normal: 1rem;
+  --space-stack-loose: 2rem;
+  --space-inline-tight: 0.25rem;
+  --space-inline-normal: 0.5rem;
+  --space-inline-loose: 1rem;
+  --space-card: 1.5rem;
+  --space-panel: 1.5rem;
+  --space-frame: 1rem;
+  --type-size-xs: 0.75rem;
+  --type-size-sm: 0.875rem;
+  --type-size-md: 1rem;
+  --type-size-lg: 1.125rem;
+  --type-size-xl: 1.25rem;
+  --type-size-2xl: 1.5rem;
+  --type-size-3xl: 1.875rem;
+  --type-size-4xl: 2.25rem;
+  --type-size-5xl: 3rem;
+  --type-size-display: 4.5rem;
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.05em;
+  --radius-none: 0;
+  --radius-sm: 0.125rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 1rem;
+  --radius-pill: 9999px;
+  --radius-card: 0.5rem;
+  --radius-frame: 0.25rem;
+  --radius-media: 0.25rem;
+  --border-width-hairline: 0.5px;
+  --border-width-sm: 1px;
+  --border-width-md: 2px;
+  --border-width-lg: 4px;
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+  --icon-size-xs: 0.75rem;
+  --icon-size-sm: 1rem;
+  --icon-size-md: 1.25rem;
+  --icon-size-lg: 1.5rem;
+  --icon-size-xl: 2rem;
+  --container-narrow: 40rem;
+  --container-default: 64rem;
+  --container-wide: 80rem;
+  --container-full: 100%;
+  --measure-prose: 65ch;
+  --blur-sm: 4px;
+  --blur-md: 12px;
+  --blur-lg: 24px;
+  --opacity-disabled: 0.38;
+  --opacity-recede: 0.6;
+  --opacity-hover-layer: 0.08;
+  --opacity-active-layer: 0.12;
+  --opacity-scrim: 0.5;
+  --z-base: 0;
+  --z-raised: 1;
+  --z-sticky: 100;
+  --z-dropdown: 1000;
+  --z-modal: 2000;
+  --z-popover: 3000;
+  --z-tooltip: 4000;
+  --z-toast: 5000;
+  --aspect-square: 1.0;
+  --aspect-video: 1.7778;
+  --aspect-portrait: 0.75;
+  --aspect-banner: 3.0;
+  --leading-tight: 1.15;
+  --leading-normal: 1.4;
+  --leading-prose: 1.6;
+  --leading-loose: 1.9;
+  --font-sans: 'Ranade Variable', 'Ranade', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Junicode 2', 'Junicode', ui-serif, Georgia, 'Times New Roman', serif;
+  --font-mono: 'Monaspace Neon Var', 'Monaspace Neon', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-display: 'Junicode 2', 'Junicode', ui-serif, Georgia, 'Times New Roman', serif;
+  --font-mono-warm: 'Monaspace Argon Var', 'Monaspace Argon', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-mono-slab: 'Monaspace Xenon Var', 'Monaspace Xenon', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-mono-script: 'Monaspace Radon Var', 'Monaspace Radon', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-mono-mechanical: 'Monaspace Krypton Var', 'Monaspace Krypton', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-mono-pixel: 'Departure Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+  --motion-instant: 50ms;
+  --motion-fast: 100ms;
+  --motion-normal: 200ms;
+  --motion-slow: 400ms;
+  --motion-slower: 800ms;
+  --ease-linear: cubic-bezier(0, 0, 1, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-decelerate: cubic-bezier(0, 0, 0.2, 1);
+  --ease-accelerate: cubic-bezier(0.4, 0, 1, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --ease-spring: cubic-bezier(0.5, 1.5, 0.5, 1);
+  --stroke-solid: solid;
+  --stroke-dotted: dotted;
+}
+
+[data-theme="theme-vellum"][data-mode="light"] {
+  --surface: oklch(97.5% 0.011 85);
+  --surface-elevated: oklch(96% 0.012 80);
+  --surface-recessed: oklch(92% 0.018 80);
+  --surface-inverse: oklch(20% 0.005 80);
+  --scrim: oklch(20% 0.005 80 / 0.5);
+  --text: oklch(20% 0.006 75);
+  --text-emphasis: oklch(12% 0.005 75);
+  --text-recede: oklch(45% 0.008 75);
+  --text-disabled: oklch(70% 0.010 80);
+  --text-on-accent: oklch(98% 0.008 80);
+  --highlight: oklch(72% 0.16 45 / 0.18);
+  --border: oklch(86% 0.015 80);
+  --border-emphasis: oklch(20% 0.006 75);
+  --border-recede: oklch(91% 0.012 80);
+  --accent: oklch(66% 0.14 40);
+  --accent-recede: oklch(82% 0.06 40);
+  --focus-ring: oklch(66% 0.14 40);
+  --shadow-tint: oklch(20% 0.006 75 / 0.06);
+  --link: oklch(20% 0.006 75);
+  --link-visited: oklch(35% 0.010 75);
+  --link-hover: oklch(66% 0.14 40);
+  --font-display: 'Source Serif 4 Display', 'Source Serif 4', 'Tiempos Headline', ui-serif, Georgia, 'Times New Roman', serif;
+  --font-serif: 'Source Serif 4', 'Tiempos Text', ui-serif, Georgia, serif;
+  --font-sans: 'Inter Variable', 'Inter', 'Styrene B LC', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', 'Anthropic Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-card: 8px;
+  --motion-fast: 200ms;
+  --motion-normal: 240ms;
+  --motion-slow: 280ms;
+}
+
+[data-theme="theme-vellum"][data-mode="dark"] {
+  --surface: oklch(14% 0.008 75);
+  --surface-elevated: oklch(18% 0.010 75);
+  --surface-recessed: oklch(10% 0.006 75);
+  --surface-inverse: oklch(96% 0.012 80);
+  --scrim: oklch(5% 0.004 75 / 0.7);
+  --text: oklch(92% 0.012 80);
+  --text-emphasis: oklch(98% 0.010 80);
+  --text-recede: oklch(68% 0.010 80);
+  --text-disabled: oklch(45% 0.008 80);
+  --text-on-accent: oklch(98% 0.010 80);
+  --highlight: oklch(66% 0.14 40 / 0.20);
+  --border: oklch(26% 0.010 75);
+  --border-emphasis: oklch(50% 0.012 80);
+  --border-recede: oklch(20% 0.008 75);
+  --accent: oklch(72% 0.14 40);
+  --accent-recede: oklch(45% 0.10 40);
+  --focus-ring: oklch(72% 0.14 40);
+  --shadow-tint: oklch(0% 0 0 / 0.55);
+  --link: oklch(92% 0.012 80);
+  --link-visited: oklch(78% 0.012 80);
+  --link-hover: oklch(72% 0.14 40);
+}
+
+[data-theme="theme-graphite"][data-mode="light"] {
+  --surface: oklch(100% 0 0);
+  --surface-elevated: oklch(100% 0 0);
+  --surface-recessed: oklch(98% 0 0);
+  --surface-inverse: oklch(0% 0 0);
+  --scrim: oklch(0% 0 0 / 0.4);
+  --text: oklch(20% 0 0);
+  --text-emphasis: oklch(0% 0 0);
+  --text-recede: oklch(50% 0 0);
+  --text-disabled: oklch(72% 0 0);
+  --text-on-accent: oklch(0% 0 0);
+  --highlight: oklch(96% 0.04 90);
+  --border: oklch(92% 0 0);
+  --border-emphasis: oklch(0% 0 0);
+  --border-recede: oklch(96% 0 0);
+  --accent: oklch(70% 0.20 145);
+  --accent-recede: oklch(85% 0.10 145);
+  --focus-ring: oklch(55% 0.22 260);
+  --shadow-tint: oklch(0% 0 0 / 0.04);
+  --link: oklch(0% 0 0);
+  --link-visited: oklch(40% 0 0);
+  --link-hover: oklch(70% 0.20 145);
+  --font-display: 'Geist Variable', 'Geist', 'Inter Variable', 'Inter', -apple-system, 'Segoe UI', sans-serif;
+  --font-sans: 'Geist Variable', 'Geist', 'Inter Variable', 'Inter', -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'Geist Mono Variable', 'Geist Mono', 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  --font-mono-pixel: 'Geist Pixel', 'Departure Mono', 'Pixelify Sans', monospace;
+  --border-width-hairline: 1px;
+  --border-width-sm: 1px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-card: 8px;
+  --motion-fast: 120ms;
+  --motion-normal: 160ms;
+  --motion-slow: 200ms;
+}
+
+[data-theme="theme-graphite"][data-mode="dark"] {
+  --surface: oklch(0% 0 0);
+  --surface-elevated: oklch(8% 0 0);
+  --surface-recessed: oklch(0% 0 0);
+  --surface-inverse: oklch(100% 0 0);
+  --scrim: oklch(0% 0 0 / 0.7);
+  --text: oklch(92% 0 0);
+  --text-emphasis: oklch(100% 0 0);
+  --text-recede: oklch(60% 0 0);
+  --text-disabled: oklch(40% 0 0);
+  --text-on-accent: oklch(0% 0 0);
+  --highlight: oklch(40% 0.15 90);
+  --border: oklch(18% 0 0);
+  --border-emphasis: oklch(100% 0 0);
+  --border-recede: oklch(12% 0 0);
+  --accent: oklch(75% 0.22 145);
+  --accent-recede: oklch(45% 0.15 145);
+  --focus-ring: oklch(70% 0.22 260);
+  --shadow-tint: oklch(0% 0 0 / 0);
+  --link: oklch(100% 0 0);
+  --link-visited: oklch(75% 0 0);
+  --link-hover: oklch(75% 0.22 145);
+}
+
+[data-theme="theme-aurora"][data-mode="light"] {
+  --surface: oklch(98.5% 0.003 280);
+  --surface-elevated: oklch(100% 0 0);
+  --surface-recessed: oklch(96% 0.005 280);
+  --surface-inverse: oklch(15% 0.020 270);
+  --scrim: oklch(15% 0.020 270 / 0.5);
+  --text: oklch(22% 0.015 270);
+  --text-emphasis: oklch(12% 0.015 270);
+  --text-recede: oklch(48% 0.012 270);
+  --text-disabled: oklch(72% 0.008 270);
+  --text-on-accent: oklch(98% 0.005 270);
+  --highlight: oklch(80% 0.10 280 / 0.25);
+  --border: oklch(90% 0.005 280);
+  --border-emphasis: oklch(60% 0.18 270);
+  --border-recede: oklch(94% 0.004 280);
+  --accent: oklch(58% 0.20 268);
+  --accent-recede: oklch(78% 0.10 268);
+  --focus-ring: oklch(58% 0.20 268);
+  --shadow-tint: oklch(20% 0.02 270 / 0.08);
+  --link: oklch(58% 0.20 268);
+  --link-visited: oklch(50% 0.16 295);
+  --link-hover: oklch(48% 0.22 268);
+  --font-display: 'Inter Display Variable', 'Inter Display', 'Inter Variable', 'Inter', system-ui, sans-serif;
+  --font-sans: 'Inter Variable', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-card: 12px;
+  --radius-pill: 999px;
+  --motion-fast: 180ms;
+  --motion-normal: 260ms;
+  --motion-slow: 400ms;
+}
+
+[data-theme="theme-aurora"][data-mode="dark"] {
+  --surface: oklch(12% 0.012 270);
+  --surface-elevated: oklch(16% 0.015 270);
+  --surface-recessed: oklch(9% 0.010 270);
+  --surface-inverse: oklch(96% 0.005 280);
+  --scrim: oklch(5% 0.008 270 / 0.72);
+  --text: oklch(88% 0.012 270);
+  --text-emphasis: oklch(98% 0.008 270);
+  --text-recede: oklch(62% 0.015 270);
+  --text-disabled: oklch(38% 0.010 270);
+  --text-on-accent: oklch(98% 0.005 270);
+  --highlight: oklch(58% 0.20 268 / 0.28);
+  --border: oklch(22% 0.018 270);
+  --border-emphasis: oklch(70% 0.18 268);
+  --border-recede: oklch(16% 0.012 270);
+  --accent: oklch(70% 0.18 268);
+  --accent-recede: oklch(42% 0.16 268);
+  --focus-ring: oklch(75% 0.20 268);
+  --shadow-tint: oklch(0% 0 0 / 0.55);
+  --link: oklch(75% 0.16 268);
+  --link-visited: oklch(70% 0.14 295);
+  --link-hover: oklch(85% 0.18 268);
+}
+
+[data-theme="theme-letterpress"][data-mode="light"] {
+  --surface: oklch(95% 0.018 80);
+  --surface-elevated: oklch(92% 0.025 70);
+  --surface-recessed: oklch(88% 0.030 70);
+  --surface-inverse: oklch(30% 0.020 60);
+  --scrim: oklch(30% 0.020 60 / 0.55);
+  --text: oklch(28% 0.020 60);
+  --text-emphasis: oklch(18% 0.020 60);
+  --text-recede: oklch(48% 0.020 60);
+  --text-disabled: oklch(70% 0.018 70);
+  --text-on-accent: oklch(95% 0.015 70);
+  --highlight: oklch(72% 0.12 45 / 0.20);
+  --border: oklch(82% 0.030 65);
+  --border-emphasis: oklch(30% 0.020 60);
+  --border-recede: oklch(88% 0.025 70);
+  --accent: oklch(58% 0.12 45);
+  --accent-recede: oklch(75% 0.06 45);
+  --focus-ring: oklch(58% 0.12 45);
+  --shadow-tint: oklch(30% 0.020 60 / 0.04);
+  --link: oklch(45% 0.10 45);
+  --link-visited: oklch(45% 0.08 120);
+  --link-hover: oklch(58% 0.12 45);
+  --font-display: 'Junicode 2', 'Junicode', 'Tiempos Headline', ui-serif, Georgia, serif;
+  --font-serif: 'Junicode 2', 'Junicode', 'Tiempos Text', ui-serif, Georgia, serif;
+  --font-sans: 'Ranade Variable', 'Ranade', 'Untitled Sans', system-ui, sans-serif;
+  --font-mono: 'Monaspace Neon', 'Monaspace Neon Variable', 'JetBrains Mono', ui-monospace, monospace;
+  --font-mono-pixel: 'Departure Mono', 'Departure Mono Variable', monospace;
+  --radius-md: 2px;
+  --radius-lg: 4px;
+  --radius-card: 0px;
+  --motion-fast: 320ms;
+  --motion-normal: 600ms;
+  --motion-slow: 800ms;
+}
+
+[data-theme="theme-letterpress"][data-mode="dark"] {
+  --surface: oklch(20% 0.020 55);
+  --surface-elevated: oklch(24% 0.022 55);
+  --surface-recessed: oklch(15% 0.018 55);
+  --surface-inverse: oklch(92% 0.025 70);
+  --scrim: oklch(8% 0.012 55 / 0.78);
+  --text: oklch(88% 0.020 75);
+  --text-emphasis: oklch(96% 0.018 75);
+  --text-recede: oklch(64% 0.020 75);
+  --text-disabled: oklch(42% 0.018 70);
+  --text-on-accent: oklch(96% 0.015 75);
+  --highlight: oklch(64% 0.14 45 / 0.30);
+  --border: oklch(32% 0.022 55);
+  --border-emphasis: oklch(58% 0.020 75);
+  --border-recede: oklch(26% 0.020 55);
+  --accent: oklch(68% 0.14 45);
+  --accent-recede: oklch(45% 0.10 45);
+  --focus-ring: oklch(68% 0.14 45);
+  --shadow-tint: oklch(0% 0 0 / 0);
+  --link: oklch(78% 0.12 45);
+  --link-visited: oklch(72% 0.10 120);
+  --link-hover: oklch(85% 0.14 45);
+}
+
+[data-theme="theme-terminal"][data-mode="light"] {
+  --surface: oklch(98% 0.005 100);
+  --surface-elevated: oklch(100% 0 0);
+  --surface-recessed: oklch(95% 0.008 100);
+  --surface-inverse: oklch(8% 0.005 100);
+  --scrim: oklch(8% 0.005 100 / 0.55);
+  --text: oklch(10% 0.005 100);
+  --text-emphasis: oklch(0% 0 0);
+  --text-recede: oklch(45% 0.005 100);
+  --text-disabled: oklch(70% 0.005 100);
+  --text-on-accent: oklch(0% 0 0);
+  --highlight: oklch(85% 0.20 130 / 0.45);
+  --border: oklch(10% 0.005 100);
+  --border-emphasis: oklch(0% 0 0);
+  --border-recede: oklch(40% 0.005 100);
+  --accent: oklch(78% 0.22 130);
+  --accent-recede: oklch(60% 0.18 130);
+  --focus-ring: oklch(78% 0.22 130);
+  --shadow-tint: oklch(0% 0 0 / 0);
+  --link: oklch(0% 0 0);
+  --link-visited: oklch(35% 0.005 100);
+  --link-hover: oklch(78% 0.22 130);
+  --font-display: 'Monaspace Neon Variable', 'Monaspace Neon', 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  --font-serif: 'Monaspace Neon Variable', 'Monaspace Neon', ui-monospace, monospace;
+  --font-sans: 'Monaspace Neon Variable', 'Monaspace Neon', 'JetBrains Mono', ui-monospace, monospace;
+  --font-mono: 'Monaspace Neon Variable', 'Monaspace Neon', 'JetBrains Mono', ui-monospace, monospace;
+  --font-mono-pixel: 'Departure Mono', 'Departure Mono Variable', monospace;
+  --border-width-hairline: 1px;
+  --border-width-sm: 1px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-card: 0px;
+  --radius-pill: 0px;
+  --motion-fast: 80ms;
+  --motion-normal: 100ms;
+  --motion-slow: 150ms;
+  --stroke-solid: solid;
+  --stroke-dashed: dashed;
+}
+
+[data-theme="theme-terminal"][data-mode="dark"] {
+  --surface: oklch(0% 0 0);
+  --surface-elevated: oklch(6% 0 0);
+  --surface-recessed: oklch(0% 0 0);
+  --surface-inverse: oklch(98% 0.005 100);
+  --scrim: oklch(0% 0 0 / 0.85);
+  --text: oklch(90% 0.012 100);
+  --text-emphasis: oklch(98% 0.008 100);
+  --text-recede: oklch(60% 0.008 100);
+  --text-disabled: oklch(35% 0.005 100);
+  --text-on-accent: oklch(0% 0 0);
+  --highlight: oklch(85% 0.20 130 / 0.35);
+  --border: oklch(35% 0.008 100);
+  --border-emphasis: oklch(85% 0.20 130);
+  --border-recede: oklch(18% 0.005 100);
+  --accent: oklch(85% 0.22 130);
+  --accent-recede: oklch(58% 0.18 130);
+  --focus-ring: oklch(85% 0.22 130);
+  --shadow-tint: oklch(0% 0 0 / 0);
+  --link: oklch(85% 0.22 130);
+  --link-visited: oklch(72% 0.16 130);
+  --link-hover: oklch(95% 0.22 130);
+}
+
+[data-theme="theme-broadsheet"][data-mode="light"] {
+  --surface: oklch(100% 0 0);
+  --surface-elevated: oklch(99% 0 0);
+  --surface-recessed: oklch(96% 0 0);
+  --surface-inverse: oklch(10% 0 0);
+  --scrim: oklch(10% 0 0 / 0.45);
+  --text: oklch(14% 0 0);
+  --text-emphasis: oklch(0% 0 0);
+  --text-recede: oklch(40% 0 0);
+  --text-disabled: oklch(70% 0 0);
+  --text-on-accent: oklch(100% 0 0);
+  --highlight: oklch(90% 0.12 90 / 0.35);
+  --border: oklch(0% 0 0);
+  --border-emphasis: oklch(0% 0 0);
+  --border-recede: oklch(85% 0 0);
+  --accent: oklch(0% 0 0);
+  --accent-recede: oklch(35% 0 0);
+  --focus-ring: oklch(50% 0.18 270);
+  --shadow-tint: oklch(0% 0 0 / 0.05);
+  --link: oklch(0% 0 0);
+  --link-visited: oklch(30% 0 0);
+  --link-hover: oklch(50% 0.18 270);
+  --font-display: 'Junicode 2', 'Junicode', 'PP Editorial New', 'GT Alpina', ui-serif, Georgia, serif;
+  --font-serif: 'Junicode 2', 'Junicode', 'PP Editorial New', ui-serif, Georgia, serif;
+  --font-sans: 'Ranade Variable', 'Ranade', 'PP Fragment Sans', 'Inter Variable', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+  --type-size-2xl: 3.5rem;
+  --type-size-3xl: 5rem;
+  --type-size-4xl: 7rem;
+  --type-size-5xl: 9rem;
+  --type-size-display: 11rem;
+  --tracking-tight: -0.04em;
+  --tracking-normal: -0.01em;
+  --leading-tight: 0.95;
+  --leading-prose: 1.55;
+  --container-narrow: 640px;
+  --container-default: 720px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-card: 0px;
+  --motion-fast: 180ms;
+  --motion-normal: 320ms;
+  --motion-slow: 600ms;
+}
+
+[data-theme="theme-broadsheet"][data-mode="dark"] {
+  --surface: oklch(0% 0 0);
+  --surface-elevated: oklch(8% 0 0);
+  --surface-recessed: oklch(0% 0 0);
+  --surface-inverse: oklch(99% 0 0);
+  --scrim: oklch(0% 0 0 / 0.75);
+  --text: oklch(94% 0 0);
+  --text-emphasis: oklch(100% 0 0);
+  --text-recede: oklch(60% 0 0);
+  --text-disabled: oklch(35% 0 0);
+  --text-on-accent: oklch(0% 0 0);
+  --highlight: oklch(80% 0.16 90 / 0.30);
+  --border: oklch(100% 0 0);
+  --border-emphasis: oklch(100% 0 0);
+  --border-recede: oklch(28% 0 0);
+  --accent: oklch(100% 0 0);
+  --accent-recede: oklch(72% 0 0);
+  --focus-ring: oklch(72% 0.18 270);
+  --shadow-tint: oklch(0% 0 0 / 0);
+  --link: oklch(100% 0 0);
+  --link-visited: oklch(75% 0 0);
+  --link-hover: oklch(72% 0.18 270);
+}
+
+[data-theme="theme-bloom"][data-mode="light"] {
+  --surface: oklch(97% 0.015 75);
+  --surface-elevated: oklch(98% 0.020 30);
+  --surface-recessed: oklch(94% 0.025 60);
+  --surface-inverse: oklch(25% 0.020 40);
+  --scrim: oklch(35% 0.025 40 / 0.5);
+  --text: oklch(32% 0.030 35);
+  --text-emphasis: oklch(20% 0.025 35);
+  --text-recede: oklch(55% 0.030 40);
+  --text-disabled: oklch(75% 0.025 50);
+  --text-on-accent: oklch(98% 0.012 50);
+  --highlight: oklch(82% 0.18 30 / 0.25);
+  --border: oklch(88% 0.030 50);
+  --border-emphasis: oklch(70% 0.18 25);
+  --border-recede: oklch(92% 0.025 50);
+  --accent: oklch(70% 0.18 25);
+  --accent-recede: oklch(85% 0.10 30);
+  --focus-ring: oklch(70% 0.18 25);
+  --shadow-tint: oklch(35% 0.025 40 / 0.10);
+  --link: oklch(58% 0.18 25);
+  --link-visited: oklch(50% 0.14 320);
+  --link-hover: oklch(70% 0.18 25);
+  --font-display: 'DM Serif Display', 'PP Editorial New', 'Synonym Variable', ui-serif, Georgia, serif;
+  --font-sans: 'Synonym Variable', 'Synonym', 'Plein Variable', 'General Sans', 'Inter Variable', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-card: 24px;
+  --radius-pill: 999px;
+  --motion-fast: 300ms;
+  --motion-normal: 700ms;
+  --motion-slow: 1200ms;
+}
+
+[data-theme="theme-bloom"][data-mode="dark"] {
+  --surface: oklch(18% 0.025 320);
+  --surface-elevated: oklch(22% 0.030 330);
+  --surface-recessed: oklch(12% 0.020 320);
+  --surface-inverse: oklch(95% 0.020 40);
+  --scrim: oklch(8% 0.015 320 / 0.72);
+  --text: oklch(90% 0.020 40);
+  --text-emphasis: oklch(98% 0.018 40);
+  --text-recede: oklch(65% 0.025 40);
+  --text-disabled: oklch(42% 0.022 40);
+  --text-on-accent: oklch(15% 0.020 320);
+  --highlight: oklch(75% 0.18 25 / 0.32);
+  --border: oklch(30% 0.030 330);
+  --border-emphasis: oklch(75% 0.18 25);
+  --border-recede: oklch(22% 0.025 330);
+  --accent: oklch(78% 0.18 25);
+  --accent-recede: oklch(50% 0.14 25);
+  --focus-ring: oklch(78% 0.18 25);
+  --shadow-tint: oklch(0% 0 0 / 0.50);
+  --link: oklch(82% 0.16 25);
+  --link-visited: oklch(72% 0.14 320);
+  --link-hover: oklch(90% 0.18 25);
+}
+
+[data-theme="theme-arcade"][data-mode="light"] {
+  --surface: oklch(99% 0.005 90);
+  --surface-elevated: oklch(100% 0 0);
+  --surface-recessed: oklch(96% 0.008 90);
+  --surface-inverse: oklch(15% 0.025 270);
+  --scrim: oklch(15% 0.025 270 / 0.5);
+  --text: oklch(18% 0.020 270);
+  --text-emphasis: oklch(10% 0.025 270);
+  --text-recede: oklch(48% 0.020 270);
+  --text-disabled: oklch(72% 0.010 270);
+  --text-on-accent: oklch(98% 0.005 350);
+  --highlight: oklch(78% 0.20 130 / 0.45);
+  --border: oklch(88% 0.012 270);
+  --border-emphasis: oklch(70% 0.25 350);
+  --border-recede: oklch(94% 0.008 270);
+  --accent: oklch(70% 0.25 350);
+  --accent-recede: oklch(82% 0.16 350);
+  --critical: oklch(65% 0.28 25);
+  --success: oklch(78% 0.22 130);
+  --warning: oklch(82% 0.20 75);
+  --info: oklch(60% 0.30 270);
+  --focus-ring: oklch(60% 0.30 270);
+  --shadow-tint: oklch(70% 0.25 350 / 0.45);
+  --link: oklch(60% 0.30 270);
+  --link-visited: oklch(60% 0.22 320);
+  --link-hover: oklch(70% 0.25 350);
+  --font-display: 'PP Editorial New', 'Clash Display', 'PP Fragment Sans', 'Inter Display Variable', 'Inter Display', system-ui, sans-serif;
+  --font-sans: 'Inter Variable', 'Inter', 'PP Fragment Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+  --type-size-3xl: 4.5rem;
+  --type-size-4xl: 6rem;
+  --type-size-5xl: 8rem;
+  --type-size-display: 10rem;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-card: 20px;
+  --radius-pill: 999px;
+  --motion-fast: 260ms;
+  --motion-normal: 380ms;
+  --motion-slow: 520ms;
+}
+
+[data-theme="theme-arcade"][data-mode="dark"] {
+  --surface: oklch(8% 0.020 270);
+  --surface-elevated: oklch(14% 0.025 270);
+  --surface-recessed: oklch(4% 0.015 270);
+  --surface-inverse: oklch(98% 0.005 90);
+  --scrim: oklch(0% 0 0 / 0.8);
+  --text: oklch(94% 0.012 90);
+  --text-emphasis: oklch(100% 0 0);
+  --text-recede: oklch(65% 0.012 90);
+  --text-disabled: oklch(40% 0.012 90);
+  --text-on-accent: oklch(10% 0.020 350);
+  --highlight: oklch(78% 0.22 130 / 0.40);
+  --border: oklch(22% 0.025 270);
+  --border-emphasis: oklch(75% 0.25 350);
+  --border-recede: oklch(15% 0.020 270);
+  --accent: oklch(75% 0.25 350);
+  --accent-recede: oklch(50% 0.20 350);
+  --critical: oklch(70% 0.28 25);
+  --success: oklch(82% 0.22 130);
+  --warning: oklch(85% 0.22 75);
+  --info: oklch(68% 0.30 270);
+  --focus-ring: oklch(68% 0.30 270);
+  --shadow-tint: oklch(75% 0.25 350 / 0.55);
+  --link: oklch(75% 0.25 350);
+  --link-visited: oklch(70% 0.22 320);
+  --link-hover: oklch(85% 0.25 350);
+}
+
+[data-theme="theme-prism"][data-mode="light"] {
+  --surface: oklch(98% 0.005 240);
+  --surface-elevated: oklch(98% 0.005 240 / 0.45);
+  --surface-recessed: oklch(94% 0.008 240 / 0.55);
+  --surface-inverse: oklch(15% 0.015 240);
+  --scrim: oklch(15% 0.015 240 / 0.35);
+  --text: oklch(18% 0.012 240);
+  --text-emphasis: oklch(8% 0.010 240);
+  --text-recede: oklch(48% 0.012 240);
+  --text-disabled: oklch(72% 0.008 240);
+  --text-on-accent: oklch(98% 0.005 240);
+  --highlight: oklch(70% 0.18 230 / 0.30);
+  --border: oklch(85% 0.012 240 / 0.6);
+  --border-emphasis: oklch(60% 0.18 230);
+  --border-recede: oklch(92% 0.008 240 / 0.5);
+  --accent: oklch(60% 0.18 230);
+  --accent-recede: oklch(78% 0.12 230);
+  --focus-ring: oklch(60% 0.18 230);
+  --shadow-tint: oklch(15% 0.015 240 / 0.10);
+  --link: oklch(60% 0.18 230);
+  --link-visited: oklch(55% 0.14 295);
+  --link-hover: oklch(50% 0.20 230);
+  --font-display: 'SF Pro Display', '-apple-system', 'Inter Display Variable', 'Inter Display', system-ui, sans-serif;
+  --font-sans: 'SF Pro Text', '-apple-system', 'Inter Variable', 'Inter', system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  --blur-sm: 12px;
+  --blur-md: 20px;
+  --blur-lg: 32px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-card: 28px;
+  --radius-pill: 999px;
+  --motion-fast: 200ms;
+  --motion-normal: 320ms;
+  --motion-slow: 400ms;
+}
+
+[data-theme="theme-prism"][data-mode="dark"] {
+  --surface: oklch(10% 0.012 240);
+  --surface-elevated: oklch(14% 0.015 240 / 0.45);
+  --surface-recessed: oklch(6% 0.010 240 / 0.55);
+  --surface-inverse: oklch(96% 0.008 240);
+  --scrim: oklch(0% 0 0 / 0.65);
+  --text: oklch(92% 0.010 240);
+  --text-emphasis: oklch(100% 0 0);
+  --text-recede: oklch(62% 0.012 240);
+  --text-disabled: oklch(40% 0.010 240);
+  --text-on-accent: oklch(98% 0.005 240);
+  --highlight: oklch(70% 0.18 230 / 0.40);
+  --border: oklch(28% 0.015 240 / 0.6);
+  --border-emphasis: oklch(72% 0.18 230);
+  --border-recede: oklch(18% 0.012 240 / 0.5);
+  --accent: oklch(72% 0.18 230);
+  --accent-recede: oklch(48% 0.14 230);
+  --focus-ring: oklch(78% 0.20 230);
+  --shadow-tint: oklch(0% 0 0 / 0.50);
+  --link: oklch(78% 0.16 230);
+  --link-visited: oklch(72% 0.14 295);
+  --link-hover: oklch(88% 0.18 230);
+}
+
+[data-theme="theme-vapor"][data-mode="light"] {
+  --surface: oklch(97% 0.012 200);
+  --surface-elevated: oklch(99% 0.005 230);
+  --surface-recessed: oklch(90% 0.030 240);
+  --surface-inverse: oklch(20% 0.045 240);
+  --scrim: oklch(20% 0.045 240 / 0.55);
+  --text: oklch(22% 0.030 240);
+  --text-emphasis: oklch(14% 0.025 240);
+  --text-recede: oklch(52% 0.020 240);
+  --text-disabled: oklch(75% 0.012 240);
+  --text-on-accent: oklch(98% 0.005 240);
+  --highlight: oklch(58% 0.22 265 / 0.20);
+  --border: oklch(88% 0.020 230);
+  --border-emphasis: oklch(58% 0.22 265);
+  --border-recede: oklch(92% 0.015 230);
+  --accent: oklch(58% 0.22 265);
+  --accent-recede: oklch(78% 0.12 265);
+  --focus-ring: oklch(58% 0.22 265);
+  --shadow-tint: oklch(20% 0.045 240 / 0.20);
+  --link: oklch(48% 0.20 265);
+  --link-visited: oklch(45% 0.18 295);
+  --link-hover: oklch(40% 0.22 265);
+  --font-display: 'Söhne', 'Inter Display Variable', 'Inter Display', 'Helvetica Neue', system-ui, sans-serif;
+  --font-sans: 'Söhne', 'Inter Variable', 'Inter', 'Helvetica Neue', system-ui, sans-serif;
+  --font-mono: 'Söhne Mono', 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+  --blur-sm: 40px;
+  --blur-md: 80px;
+  --blur-lg: 140px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+  --radius-card: 6px;
+  --motion-fast: 240ms;
+  --motion-normal: 320ms;
+  --motion-slow: 400ms;
+}
+
+[data-theme="theme-vapor"][data-mode="dark"] {
+  --surface: oklch(14% 0.040 240);
+  --surface-elevated: oklch(20% 0.040 240);
+  --surface-recessed: oklch(8% 0.030 240);
+  --surface-inverse: oklch(97% 0.012 200);
+  --scrim: oklch(4% 0.020 240 / 0.75);
+  --text: oklch(92% 0.012 220);
+  --text-emphasis: oklch(100% 0 0);
+  --text-recede: oklch(65% 0.018 230);
+  --text-disabled: oklch(42% 0.018 240);
+  --text-on-accent: oklch(100% 0 0);
+  --highlight: oklch(70% 0.22 265 / 0.32);
+  --border: oklch(28% 0.040 240);
+  --border-emphasis: oklch(72% 0.22 265);
+  --border-recede: oklch(20% 0.035 240);
+  --accent: oklch(72% 0.22 265);
+  --accent-recede: oklch(48% 0.18 265);
+  --focus-ring: oklch(78% 0.22 265);
+  --shadow-tint: oklch(0% 0 0 / 0.45);
+  --link: oklch(78% 0.20 265);
+  --link-visited: oklch(72% 0.18 295);
+  --link-hover: oklch(88% 0.20 265);
+}
+
+  body {
+    margin: 0;
+    padding: 24px;
+    background: #f1ece4;
+    color: #141413;
+    font: 14px/1.5 system-ui, -apple-system, sans-serif;
+  }
+  h1 { font-size: 32px; margin: 0 0 8px; }
+  .intro { max-width: 720px; margin-bottom: 24px; color: #555; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(260px, 1fr));
+    gap: 12px;
+  }
+  @media (max-width: 1280px) {
+    .grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 960px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+  .cell {
+    border: 1px solid #d4cfc4;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--surface);
+    color: var(--text);
+    font-family: var(--font-sans);
+  }
+  .cell-meta {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background: var(--surface-recessed);
+    color: var(--text-recede);
+    font: 11px/1 ui-monospace, monospace;
+    border-bottom: 1px solid var(--border);
+  }
+  .cell-render {
+    padding: 16px;
+    min-height: 200px;
+  }
+  </style>
+</head>
+<body>
+  <h1>Quoin theme showcase</h1>
+  <p class="intro">
+    Same source rendered through 10 v1.0 theme packs in light + dark
+    mode. This is the cross-pack diversity check from the phase exit
+    criteria: each cell should read as a distinct aesthetic.
+  </p>
+  <div class="grid">
+    
+        <article class="cell" data-theme="theme-vellum" data-mode="light">
+          <header class="cell-meta">
+            <span class="cell-name">@quoin/theme-vellum</span>
+            <span class="cell-mode">light</span>
+          </header>
+          <div class="cell-render">
+
+<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
+
+  
+  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
+
+  
+  <emphasis-mark>A semantic design language</emphasis-mark>
+
+  
+  <prose>
+    The same source, rendered through ten distinct theme packs.
+    Each pack supplies its own palette, typography, motion, and depth
+    strategy on top of the canonical token namespace.
+  </prose>
+
+  
+  <div class="flex flex-wrap gap-2">
+
+    
+    <primary-action>Get started</primary-action>
+
+    
+    <secondary-action>Read the spec</secondary-action>
+
+  
+  </div>
+
+
+</section>
+
+</div>
+        </article>
+      
+
+        <article class="cell" data-theme="theme-vellum" data-mode="dark">
+          <header class="cell-meta">
+            <span class="cell-name">@quoin/theme-vellum</span>
+            <span class="cell-mode">dark</span>
+          </header>
+          <div class="cell-render">
+
+<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
+
+  
+  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
+
+  
+  <emphasis-mark>A semantic design language</emphasis-mark>
+
+  
+  <prose>
+    The same source, rendered through ten distinct theme packs.
+    Each pack supplies its own palette, typography, motion, and depth
+    strategy on top of the canonical token namespace.
+  </prose>
+
+  
+  <div class="flex flex-wrap gap-2">
+
+    
+    <primary-action>Get started</primary-action>
+
+    
+    <secondary-action>Read the spec</secondary-action>
+
+  
+  </div>
+
+
+</section>
+
+</div>
+        </article>
+      
+
+        <article class="cell" data-theme="theme-graphite" data-mode="light">
+          <header class="cell-meta">
+            <span class="cell-name">@quoin/theme-graphite</span>
+            <span class="cell-mode">light</span>
+          </header>
+          <div class="cell-render">
+
+<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
+
+  
+  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
+
+  
+  <emphasis-mark>A semantic design language</emphasis-mark>
+
+  
+  <prose>
+    The same source, rendered through ten distinct theme packs.
+    Each pack supplies its own palette, typography, motion, and depth
+    strategy on top of the canonical token namespace.
+  </prose>
+
+  
+  <div class="flex flex-wrap gap-2">
+
+    
+    <primary-action>Get started</primary-action>
+
+    
+    <secondary-action>Read the spec</secondary-action>
+
+  
+  </div>
+
+
+</section>
+
+</div>
+        </article>
+      
+
+        <article class="cell" data-theme="theme-graphite" data-mode="dark">
+          <header class="cell-meta">
+            <span class="cell-name">@quoin/theme-graphite</span>
+            <span class="cell-mode">dark</span>
+          </header>
+          <div class="cell-render">
+
+<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
+
+  
+  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
+
+  
+  <emphasis-mark>A semantic design language</emphasis-mark>
+
+  
+  <prose>
+    The same source, rendered through ten distinct theme packs.
+    Each pack supplies its own palette, typography, motion, and depth
+    strategy on top of the canonical token namespace.
+  </prose>
+
+  
+  <div class="flex flex-wrap gap-2">
+
+    
+    <primary-action>Get started</primary-action>
+
+    
+    <secondary-action>Read the spec</secondary-action>
+
+  
+  </div>
+
+
+</section>
+
+</div>
+        </article>
+      
+
+        <article class="cell" data-theme="theme-aurora" data-mode="light">
+          <header class="cell-meta">
+            <span class="cell-name">@quoin/theme-aurora</span>
+            <span class="cell-mode">light</span>
+          </header>
+          <div class="cell-render">
+
+<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
+
+  
+  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
+
+  
+  <emphasis-mark>A semantic design language</emphasis-mark>
+
+  
+  <prose>
+    The same source, rendered through ten distinct theme packs.
+    Each pack supplies its own palette, typography, motion, and depth
+    strategy on top of the canonical token namespace.
+  </prose>
+
+  
+  <div class="flex flex-wrap gap-2">
+
+    
+    <primary-action>Get started</primary-action>
+
+    
+    <secondary-action>Read the spec</secondary-action>
+
+  
+  </div>
+
+
+</section>
+
+</div>
+        </article>
+      
+
+        <article class="cell" data-theme="theme-aurora" data-mode="dark">
+          <header class="cell-meta">
+            <span class="cell-name">@quoin/theme-aurora</span>
+            <span class="cell-mode">dark</span>
+          </header>
+          <div class="cell-render">
+
+<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
+
+  
+  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
+
+  
+  <emphasis-mark>A semantic design language</emphasis-mark>
+
+  
+  <prose>
+    The same source, rendered through ten distinct theme packs.
+    Each pack supplies its own palette, typography, motion, and depth
+    strategy on top of the canonical token namespace.
+  </prose>
+
+  
+  <div class="flex flex-wrap gap-2">
+
+    
+    <primary-action>Get started</primary-action>
+
+    
+    <secondary-action>Read the spec</secondary-action>
+
+  
+  </div>
+
+
+</section>
+
+</div>
+        </article>
+      
+
+        <article class="cell" data-theme="theme-letterpress" data-mode="light">
+          <header class="cell-meta">
+            <span class="cell-name">@quoin/theme-letterpress</span>
+            <span class="cell-mode">light</span>
+          </header>
+          <div class="cell-render">
+
+<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
+
+  
+  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
+
+  
+  <emphasis-mark>A semantic design language</emphasis-mark>
+
+  
+  <prose>
+    The same source, rendered through ten distinct theme packs.
+    Each pack supplies its own palette, typography, motion, and depth
+    strategy on top of the canonical token namespace.
+  </prose>
+
+  
+  <div class="flex flex-wrap gap-2">
+
+    
+    <primary-action>Get started</primary-action>
+
+    
+    <secondary-action>Read the spec</secondary-action>
+
+  
+  </div>
+
+
+</section>
+
+</div>
+        </article>
+      
+
+        <article class="cell" data-theme="theme-letterpress" data-mode="dark">
+          <header class="cell-meta">
+            <span class="cell-name">@quoin/theme-letterpress</span>
+            <span class="cell-mode">dark</span>
+          </header>
+          <div class="cell-render">
+
+<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
+
+  
+  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
+
+  
+  <emphasis-mark>A semantic design language</emphasis-mark>
+
+  
+  <prose>
+    The same source, rendered through ten distinct theme packs.
+    Each pack supplies its own palette, typography, motion, and depth
+    strategy on top of the canonical token namespace.
+  </prose>
+
+  
+  <div class="flex flex-wrap gap-2">
+
+    
+    <primary-action>Get started</primary-action>
+
+    
+    <secondary-action>Read the spec</secondary-action>
+
+  
+  </div>
+
+
+</section>
+
+</div>
+        </article>
+      
+
+        <article class="cell" data-theme="theme-terminal" data-mode="light">
+          <header class="cell-meta">
+            <span class="cell-name">@quoin/theme-terminal</span>
+            <span class="cell-mode">light</span>
+          </header>
+          <div class="cell-render">
+
+<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
+
+  
+  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
+
+  
+  <emphasis-mark>A semantic design language</emphasis-mark>
+
+  
+  <prose>
+    The same source, rendered through ten distinct theme packs.
+    Each pack supplies its own palette, typography, motion, and depth
+    strategy on top of the canonical token namespace.
+  </prose>
+
+  
+  <div class="flex flex-wrap gap-2">
+
+    
+    <primary-action>Get started</primary-action>
+
+    
+    <secondary-action>Read the spec</secondary-action>
+
+  
+  </div>
+
+
+</section>
+
+</div>
+        </article>
+      
+
+        <article class="cell" data-theme="theme-terminal" data-mode="dark">
+          <header class="cell-meta">
+            <span class="cell-name">@quoin/theme-terminal</span>
+            <span class="cell-mode">dark</span>
+          </header>
+          <div class="cell-render">
+
+<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
+
+  
+  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
+
+  
+  <emphasis-mark>A semantic design language</emphasis-mark>
+
+  
+  <prose>
+    The same source, rendered through ten distinct theme packs.
+    Each pack supplies its own palette, typography, motion, and depth
+    strategy on top of the canonical token namespace.
+  </prose>
+
+  
+  <div class="flex flex-wrap gap-2">
+
+    
+    <primary-action>Get started</primary-action>
+
+    
+    <secondary-action>Read the spec</secondary-action>
+
+  
+  </div>
+
+
+</section>
+
+</div>
+        </article>
+      
+
+        <article class="cell" data-theme="theme-broadsheet" data-mode="light">
+          <header class="cell-meta">
+            <span class="cell-name">@quoin/theme-broadsheet</span>
+            <span class="cell-mode">light</span>
+          </header>
+          <div class="cell-render">
+
+<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
+
+  
+  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
+
+  
+  <emphasis-mark>A semantic design language</emphasis-mark>
+
+  
+  <prose>
+    The same source, rendered through ten distinct theme packs.
+    Each pack supplies its own palette, typography, motion, and depth
+    strategy on top of the canonical token namespace.
+  </prose>
+
+  
+  <div class="flex flex-wrap gap-2">
+
+    
+    <primary-action>Get started</primary-action>
+
+    
+    <secondary-action>Read the spec</secondary-action>
+
+  
+  </div>
+
+
+</section>
+
+</div>
+        </article>
+      
+
+        <article class="cell" data-theme="theme-broadsheet" data-mode="dark">
+          <header class="cell-meta">
+            <span class="cell-name">@quoin/theme-broadsheet</span>
+            <span class="cell-mode">dark</span>
+          </header>
+          <div class="cell-render">
+
+<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
+
+  
+  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
+
+  
+  <emphasis-mark>A semantic design language</emphasis-mark>
+
+  
+  <prose>
+    The same source, rendered through ten distinct theme packs.
+    Each pack supplies its own palette, typography, motion, and depth
+    strategy on top of the canonical token namespace.
+  </prose>
+
+  
+  <div class="flex flex-wrap gap-2">
+
+    
+    <primary-action>Get started</primary-action>
+
+    
+    <secondary-action>Read the spec</secondary-action>
+
+  
+  </div>
+
+
+</section>
+
+</div>
+        </article>
+      
+
+        <article class="cell" data-theme="theme-bloom" data-mode="light">
+          <header class="cell-meta">
+            <span class="cell-name">@quoin/theme-bloom</span>
+            <span class="cell-mode">light</span>
+          </header>
+          <div class="cell-render">
+
+<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
+
+  
+  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
+
+  
+  <emphasis-mark>A semantic design language</emphasis-mark>
+
+  
+  <prose>
+    The same source, rendered through ten distinct theme packs.
+    Each pack supplies its own palette, typography, motion, and depth
+    strategy on top of the canonical token namespace.
+  </prose>
+
+  
+  <div class="flex flex-wrap gap-2">
+
+    
+    <primary-action>Get started</primary-action>
+
+    
+    <secondary-action>Read the spec</secondary-action>
+
+  
+  </div>
+
+
+</section>
+
+</div>
+        </article>
+      
+
+        <article class="cell" data-theme="theme-bloom" data-mode="dark">
+          <header class="cell-meta">
+            <span class="cell-name">@quoin/theme-bloom</span>
+            <span class="cell-mode">dark</span>
+          </header>
+          <div class="cell-render">
+
+<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
+
+  
+  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
+
+  
+  <emphasis-mark>A semantic design language</emphasis-mark>
+
+  
+  <prose>
+    The same source, rendered through ten distinct theme packs.
+    Each pack supplies its own palette, typography, motion, and depth
+    strategy on top of the canonical token namespace.
+  </prose>
+
+  
+  <div class="flex flex-wrap gap-2">
+
+    
+    <primary-action>Get started</primary-action>
+
+    
+    <secondary-action>Read the spec</secondary-action>
+
+  
+  </div>
+
+
+</section>
+
+</div>
+        </article>
+      
+
+        <article class="cell" data-theme="theme-arcade" data-mode="light">
+          <header class="cell-meta">
+            <span class="cell-name">@quoin/theme-arcade</span>
+            <span class="cell-mode">light</span>
+          </header>
+          <div class="cell-render">
+
+<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
+
+  
+  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
+
+  
+  <emphasis-mark>A semantic design language</emphasis-mark>
+
+  
+  <prose>
+    The same source, rendered through ten distinct theme packs.
+    Each pack supplies its own palette, typography, motion, and depth
+    strategy on top of the canonical token namespace.
+  </prose>
+
+  
+  <div class="flex flex-wrap gap-2">
+
+    
+    <primary-action>Get started</primary-action>
+
+    
+    <secondary-action>Read the spec</secondary-action>
+
+  
+  </div>
+
+
+</section>
+
+</div>
+        </article>
+      
+
+        <article class="cell" data-theme="theme-arcade" data-mode="dark">
+          <header class="cell-meta">
+            <span class="cell-name">@quoin/theme-arcade</span>
+            <span class="cell-mode">dark</span>
+          </header>
+          <div class="cell-render">
+
+<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
+
+  
+  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
+
+  
+  <emphasis-mark>A semantic design language</emphasis-mark>
+
+  
+  <prose>
+    The same source, rendered through ten distinct theme packs.
+    Each pack supplies its own palette, typography, motion, and depth
+    strategy on top of the canonical token namespace.
+  </prose>
+
+  
+  <div class="flex flex-wrap gap-2">
+
+    
+    <primary-action>Get started</primary-action>
+
+    
+    <secondary-action>Read the spec</secondary-action>
+
+  
+  </div>
+
+
+</section>
+
+</div>
+        </article>
+      
+
+        <article class="cell" data-theme="theme-prism" data-mode="light">
+          <header class="cell-meta">
+            <span class="cell-name">@quoin/theme-prism</span>
+            <span class="cell-mode">light</span>
+          </header>
+          <div class="cell-render">
+
+<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
+
+  
+  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
+
+  
+  <emphasis-mark>A semantic design language</emphasis-mark>
+
+  
+  <prose>
+    The same source, rendered through ten distinct theme packs.
+    Each pack supplies its own palette, typography, motion, and depth
+    strategy on top of the canonical token namespace.
+  </prose>
+
+  
+  <div class="flex flex-wrap gap-2">
+
+    
+    <primary-action>Get started</primary-action>
+
+    
+    <secondary-action>Read the spec</secondary-action>
+
+  
+  </div>
+
+
+</section>
+
+</div>
+        </article>
+      
+
+        <article class="cell" data-theme="theme-prism" data-mode="dark">
+          <header class="cell-meta">
+            <span class="cell-name">@quoin/theme-prism</span>
+            <span class="cell-mode">dark</span>
+          </header>
+          <div class="cell-render">
+
+<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
+
+  
+  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
+
+  
+  <emphasis-mark>A semantic design language</emphasis-mark>
+
+  
+  <prose>
+    The same source, rendered through ten distinct theme packs.
+    Each pack supplies its own palette, typography, motion, and depth
+    strategy on top of the canonical token namespace.
+  </prose>
+
+  
+  <div class="flex flex-wrap gap-2">
+
+    
+    <primary-action>Get started</primary-action>
+
+    
+    <secondary-action>Read the spec</secondary-action>
+
+  
+  </div>
+
+
+</section>
+
+</div>
+        </article>
+      
+
+        <article class="cell" data-theme="theme-vapor" data-mode="light">
+          <header class="cell-meta">
+            <span class="cell-name">@quoin/theme-vapor</span>
+            <span class="cell-mode">light</span>
+          </header>
+          <div class="cell-render">
+
+<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
+
+  
+  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
+
+  
+  <emphasis-mark>A semantic design language</emphasis-mark>
+
+  
+  <prose>
+    The same source, rendered through ten distinct theme packs.
+    Each pack supplies its own palette, typography, motion, and depth
+    strategy on top of the canonical token namespace.
+  </prose>
+
+  
+  <div class="flex flex-wrap gap-2">
+
+    
+    <primary-action>Get started</primary-action>
+
+    
+    <secondary-action>Read the spec</secondary-action>
+
+  
+  </div>
+
+
+</section>
+
+</div>
+        </article>
+      
+
+        <article class="cell" data-theme="theme-vapor" data-mode="dark">
+          <header class="cell-meta">
+            <span class="cell-name">@quoin/theme-vapor</span>
+            <span class="cell-mode">dark</span>
+          </header>
+          <div class="cell-render">
+
+<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
+
+  
+  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
+
+  
+  <emphasis-mark>A semantic design language</emphasis-mark>
+
+  
+  <prose>
+    The same source, rendered through ten distinct theme packs.
+    Each pack supplies its own palette, typography, motion, and depth
+    strategy on top of the canonical token namespace.
+  </prose>
+
+  
+  <div class="flex flex-wrap gap-2">
+
+    
+    <primary-action>Get started</primary-action>
+
+    
+    <secondary-action>Read the spec</secondary-action>
+
+  
+  </div>
+
+
+</section>
+
+</div>
+        </article>
+      
+  </div>
+</body>
+</html>
