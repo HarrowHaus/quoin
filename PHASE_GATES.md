@@ -24,9 +24,31 @@ Exit criteria for each phase. A phase is complete when **every** criterion in it
 - [x] All cross-trend baseline expectations met: OKLCH authoring, P3 opt-in, light + dark, system-font fallback stacks, APCA contrast targeting (operator verification), identity typography respected where used.
 - [x] `theme-vapor` ships with a novel layered-mesh gradient generator (not a Stripe-clone) — stop condition cleared. Theme pack declares `capabilities: ["layered-mesh-gradient"]`.
 - [x] `theme-prism` ships as opt-in with `capabilities: ["backdrop-filter"]` declared in manifest.
+- [x] Showcase HTML actually renders the visual diversity (font loading + real CSS, not inert Tailwind class strings — see followup fix below).
 - [ ] Operator review (side-by-side showcase visual check).
 
 **Status:** complete pending operator review. 10 distinct themes ship; cross-diversity verified by signature + visual showcase; both stop conditions for `vapor` and `prism` cleared via novel compositional contracts.
+
+### Followup fix — showcase rendering (2026-05-17)
+
+The initial showcase shipped passed the validator + cross-diversity signature gate but rendered wrong in the browser:
+
+1. **No fonts loaded.** Zero `@font-face` declarations and zero CDN `<link>` tags in `showcase.html`. Every `--font-display`, `--font-sans`, `--font-mono` resolved to OS fallback — Junicode, Source Serif 4, Monaspace, Geist, etc. never loaded.
+2. **Tailwind arbitrary-value classes were inert.** The composition was compiled through `impl-tailwind`, which emitted strings like `text-[var(--type-size-display)]`. The showcase did not bundle Tailwind. Result: every typography / spacing / shadow / radius class was a meaningless string. Only the color CSS variables applied (via real CSS scopes), which made every cell look structurally identical.
+3. **Custom elements had no baseline styling.** `<emphasis-mark>`, `<prose>`, `<primary-action>` rendered as inline spans without dimension.
+
+Fix (in `02_reference-packs/themes/showcase.js`):
+
+- Added Google Fonts + Fontshare `<link>` and jsDelivr `@font-face` declarations for every face referenced by the 10 themes. CDN paths HEAD-verified before commit. Documented fallbacks for fonts without a public CDN (Departure Mono, Geist Pixel, Söhne, PP Editorial New, SF Pro Display, Anthropic typefaces).
+- Rewrote the cell composition with semantic class names (`.composition`, `.composition-headline`, `.composition-mark`, `.composition-prose`, `.composition-actions`) backed by real CSS that reads from CSS custom properties.
+- Dark-mode cascade: apply light overrides to BOTH modes (typography / spacing / motion / radii stay consistent across modes) and layer dark **color** overrides on top for dark mode only. This matches how real apps treat dark mode and fixes a bug where dark cells fell through to baseline Junicode 2 for every theme.
+- Composite shadow tokens render to CSS box-shadow shorthand via `renderShadow()` rather than emitted as raw JSON. Per-theme depth strategy (arcade's magenta glow, bloom's diffused 32px blur, vellum's 1px hairline, terminal's zero) now shows in the cells.
+- Headline sizing uses container queries (`clamp(1.75rem, 18cqi, var(--type-size-display))`) so headlines scale with cell width rather than viewport width.
+- Skipped CSS variable names with dots (e.g. `--color.stone.50`) because they're not valid CSS identifiers and the browser silently drops them.
+
+Verified in browser DevTools: per-theme `font-family` resolves to declared `@font-face` faces (Source Serif 4 for vellum, Geist for graphite, Inter Display for aurora, Junicode 2 for letterpress / broadsheet, Monaspace Neon for terminal, DM Serif Display for bloom, …); per-theme `box-shadow` reflects each theme's depth strategy; per-theme `border-radius` differs (0px terminal / broadsheet vs 28px prism).
+
+**Lesson for future showcase pages:** if a showcase consumes impl-tailwind output, it MUST also bundle a Tailwind CSS file. Otherwise the demo lies about what the theme packs do.
 
 ---
 

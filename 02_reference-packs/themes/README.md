@@ -66,7 +66,10 @@ node 02_reference-packs/themes/validate.js
 
 # Generate the side-by-side showcase HTML (20 cells, 10 themes × light/dark).
 node 02_reference-packs/themes/showcase.js
-open 02_reference-packs/themes/showcase.html
+
+# Serve and open — file:// won't load external font CDNs via all browsers.
+python -m http.server -d 02_reference-packs/themes 8765
+# → http://localhost:8765/showcase.html
 ```
 
 The validator asserts each theme passes cross-trend baseline checks
@@ -75,6 +78,63 @@ the full pipeline, and has a distinct (accent, surface, text-emphasis)
 signature relative to every other theme. The showcase renders one
 shared source through every (theme × mode) so visual diversity can be
 inspected side-by-side.
+
+## About the showcase
+
+The showcase HTML is a **static page** — it does NOT depend on
+impl-tailwind output. An earlier draft compiled the source through
+impl-tailwind, which emitted Tailwind arbitrary-value classes like
+`text-[var(--type-size-display)]`. A static HTML page without a
+Tailwind bundle treats those as inert strings: every cell rendered
+identically except for colour. The current `showcase.js` writes the
+composition with semantic class names backed by real CSS that reads
+from CSS custom properties, sidestepping the issue entirely.
+
+If a future showcase needs to render an impl-tailwind-compiled source,
+it MUST also bundle a Tailwind CSS file — otherwise the demo lies
+about what the theme packs do.
+
+### Font loading
+
+Verified-and-current CDN paths as of May 17 2026:
+
+| Source | Families |
+|---|---|
+| Google Fonts CSS link | Source Serif 4 Variable, Inter Variable, DM Serif Display, JetBrains Mono Variable, Pixelify Sans |
+| Fontshare CSS link | Ranade Variable |
+| jsDelivr (`@font-face`) | Junicode 2 Beta VF, Junicode VF (Roman + Italic), Monaspace Neon / Argon / Xenon / Radon / Krypton, Geist Variable, Geist Mono Variable |
+
+Aliased family names — `Geist Variable`, `Geist Mono Variable`,
+`Monaspace Neon Variable` — point at the same WOFF2 binary as the
+canonical name. Themes can reference either form and the first stack
+entry resolves.
+
+### Documented font fallbacks
+
+| Font in theme stack | Loaded via | Notes |
+|---|---|---|
+| Departure Mono | (not loaded) | Repo ships only a `.zip` release; no CDN-direct WOFF2 path. Showcase falls back to Pixelify Sans. |
+| Geist Pixel | (not loaded) | npm:geist@1.7.0 does not yet ship the Pixel variant (released Feb 2026). Falls back to Pixelify Sans / Departure Mono. |
+| Söhne | (not loaded) | Commercial — Klim Type Foundry. Vapor falls back to Inter. |
+| PP Editorial New | (not loaded) | Commercial — Pangram Pangram. Arcade falls back to Inter Display. |
+| SF Pro Display / SF Pro Text | system-only | Apple proprietary. Prism resolves on macOS / iOS; falls back to Inter elsewhere. |
+| Synonym / Plein / General Sans | (not loaded) | Commercial. Bloom falls back to DM Serif Display (display) + Inter (sans). |
+| Anthropic Sans / Anthropic Serif / Anthropic Mono | (not loaded) | Proprietary to Anthropic. Vellum substitutes Source Serif 4 + Inter + JetBrains Mono. |
+
+### Headline scaling
+
+The headline uses container queries:
+
+```css
+font-size: clamp(1.75rem, 18cqi, var(--type-size-display, 3rem));
+```
+
+At ~440px cell width, the middle term (18cqi ≈ 79px) caps before any
+theme's `--type-size-display` (4.5rem–11rem). Broadsheet's canonical
+11rem (176px) only renders at viewport widths above ~1000px-per-cell.
+This is the deliberate trade-off: every cell shows a comparable
+headline-tier render, but the full display tier reads only at wide
+viewports.
 
 ## License
 

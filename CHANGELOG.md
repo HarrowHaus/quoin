@@ -6,6 +6,65 @@ versioning follows pre-1.0 conventions until v1.0.0 publication.
 
 ## [Unreleased]
 
+### Phase Themes followup — showcase rendering fix (2026-05-17)
+
+The initial showcase shipped passed validators but rendered wrong:
+fonts never loaded, Tailwind arbitrary-value class strings were inert
+without a Tailwind bundle, custom elements had no baseline styling.
+Result: every cell looked structurally identical except for colour,
+which defeated the visual-diversity gate.
+
+Fix (single commit on `02_reference-packs/themes/showcase.js`):
+
+- **Loaded fonts** via verified CDNs — Google Fonts (Source Serif 4
+  Variable, Inter Variable, DM Serif Display, JetBrains Mono Variable,
+  Pixelify Sans), Fontshare (Ranade Variable), and jsDelivr
+  `@font-face` declarations for Junicode 2 Beta VF, Junicode VF
+  (Roman + Italic), Monaspace family ×5 (Neon, Argon, Xenon, Radon,
+  Krypton), Geist Variable, Geist Mono Variable. Every CDN path
+  HEAD-verified before commit. Documented fallbacks in the showcase
+  README for fonts without a public CDN (Departure Mono, Geist
+  Pixel, Söhne, PP Editorial New, SF Pro Display, Anthropic stack).
+- **Replaced impl-tailwind output with real CSS.** Rewrote the cell
+  composition with semantic class names (`.composition`,
+  `.composition-headline`, `.composition-mark`, `.composition-prose`,
+  `.composition-actions`) backed by CSS rules that read directly from
+  CSS custom properties. The showcase no longer compiles through
+  `impl-tailwind`.
+- **Fixed dark-mode cascade.** Light overrides apply to BOTH modes
+  (typography / spacing / motion / radii stay consistent across
+  modes); dark color overrides layer on top for dark only. Before
+  this fix every theme's dark cells fell through to baseline
+  Junicode 2 for typography because dark.json files only declare
+  color overrides.
+- **Rendered shadow composites** to CSS box-shadow shorthand via
+  `renderShadow()` rather than emitting raw JSON. Per-theme depth
+  strategy now reads in the cells: arcade's magenta glow at
+  `oklch(70% 0.25 350 / 0.45) 0 0 20px`, bloom's diffused
+  `0 8px 32px -8px`, vellum's hairline `0 1px 2px 0`, terminal's
+  zero, graphite's flat `0 0 0 1px` rule.
+- **Container-query headline scaling.** `clamp(1.75rem, 18cqi,
+  var(--type-size-display))` scales the headline with cell width.
+  Broadsheet's full 11rem only renders at very wide viewports —
+  documented trade-off.
+- **Aliased variable-font names** (`Geist Variable`, `Geist Mono
+  Variable`, `Monaspace Neon Variable`) so theme stacks whose first
+  entry references the Variable form resolve to the same WOFF2
+  binary as the canonical name.
+- **Skipped invalid CSS identifiers** (e.g. `--color.stone.50` —
+  dots not permitted in custom-property names; browser silently
+  drops the declarations).
+
+Lesson recorded in `PHASE_GATES.md`: showcase pages that consume
+impl-tailwind output MUST also bundle a Tailwind CSS file; otherwise
+the demo lies about what the theme packs do.
+
+Verified in Chrome DevTools per the validation checklist: per-theme
+`font-family` computed style resolves to the declared `@font-face`
+faces; per-theme `box-shadow` reflects each pack's depth strategy;
+per-theme `border-radius` differs (0px terminal / broadsheet vs 28px
+prism); padding from `--space-panel` overrides the cell-render base.
+
 ### Phase Themes — 10 v1.0 theme packs (2026-05-17)
 
 Ships 10 theme packs at v1.0 per the 2026 trend forecast in research

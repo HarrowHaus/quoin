@@ -2,31 +2,116 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Quoin Theme Showcase — 10 v1.0 themes × light/dark</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,200..900&family=Inter:opsz,wght@14..32,100..900&family=DM+Serif+Display&family=JetBrains+Mono:wght@100..800&family=Pixelify+Sans:wght@400..700&display=swap">
+
+  <link
+    rel="stylesheet"
+    href="https://api.fontshare.com/v2/css?f[]=ranade@400,500,700&display=swap">
+
+  <style>
+    /* ─── Junicode 2 (Beta VF) + Junicode (VF) — psb1558/Junicode-font@2.223 ─── */
+    @font-face {
+      font-family: 'Junicode 2';
+      font-style: normal;
+      font-weight: 400 700;
+      font-display: swap;
+      src: url('https://cdn.jsdelivr.net/gh/psb1558/Junicode-font@2.223/webfiles/JunicodeTwoBetaVF-Roman.woff2') format('woff2-variations');
+    }
+    @font-face {
+      font-family: 'Junicode';
+      font-style: normal;
+      font-weight: 400 700;
+      font-display: swap;
+      src: url('https://cdn.jsdelivr.net/gh/psb1558/Junicode-font@2.223/webfiles/JunicodeVF-Roman.woff2') format('woff2-variations');
+    }
+    @font-face {
+      font-family: 'Junicode';
+      font-style: italic;
+      font-weight: 400 700;
+      font-display: swap;
+      src: url('https://cdn.jsdelivr.net/gh/psb1558/Junicode-font@2.223/webfiles/JunicodeVF-Italic.woff2') format('woff2-variations');
+    }
+
+    /* ─── Monaspace family — githubnext/monaspace@v1.101 ─── */
+    @font-face {
+      font-family: 'Monaspace Neon';
+      font-style: normal; font-weight: 400; font-display: swap;
+      src: url('https://cdn.jsdelivr.net/gh/githubnext/monaspace@v1.101/fonts/webfonts/MonaspaceNeon-Regular.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Monaspace Neon';
+      font-style: normal; font-weight: 500; font-display: swap;
+      src: url('https://cdn.jsdelivr.net/gh/githubnext/monaspace@v1.101/fonts/webfonts/MonaspaceNeon-Medium.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Monaspace Neon';
+      font-style: normal; font-weight: 700; font-display: swap;
+      src: url('https://cdn.jsdelivr.net/gh/githubnext/monaspace@v1.101/fonts/webfonts/MonaspaceNeon-Bold.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Monaspace Argon';
+      font-style: normal; font-weight: 400; font-display: swap;
+      src: url('https://cdn.jsdelivr.net/gh/githubnext/monaspace@v1.101/fonts/webfonts/MonaspaceArgon-Regular.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Monaspace Xenon';
+      font-style: normal; font-weight: 400; font-display: swap;
+      src: url('https://cdn.jsdelivr.net/gh/githubnext/monaspace@v1.101/fonts/webfonts/MonaspaceXenon-Regular.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Monaspace Radon';
+      font-style: normal; font-weight: 400; font-display: swap;
+      src: url('https://cdn.jsdelivr.net/gh/githubnext/monaspace@v1.101/fonts/webfonts/MonaspaceRadon-Regular.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Monaspace Krypton';
+      font-style: normal; font-weight: 400; font-display: swap;
+      src: url('https://cdn.jsdelivr.net/gh/githubnext/monaspace@v1.101/fonts/webfonts/MonaspaceKrypton-Regular.woff2') format('woff2');
+    }
+
+    /* ─── Geist (Sans + Mono) Variable — npm:geist@1.7.0 ─── */
+    /* Declared under both canonical + "Variable" aliases so theme stacks
+       that lead with 'Geist Variable' / 'Geist Mono Variable' / 'Monaspace
+       Neon Variable' resolve to the same binary as the canonical name. */
+    @font-face {
+      font-family: 'Geist';
+      font-style: normal; font-weight: 100 900; font-display: swap;
+      src: url('https://cdn.jsdelivr.net/npm/geist@latest/dist/fonts/geist-sans/Geist-Variable.woff2') format('woff2-variations');
+    }
+    @font-face {
+      font-family: 'Geist Variable';
+      font-style: normal; font-weight: 100 900; font-display: swap;
+      src: url('https://cdn.jsdelivr.net/npm/geist@latest/dist/fonts/geist-sans/Geist-Variable.woff2') format('woff2-variations');
+    }
+    @font-face {
+      font-family: 'Geist Mono';
+      font-style: normal; font-weight: 100 900; font-display: swap;
+      src: url('https://cdn.jsdelivr.net/npm/geist@latest/dist/fonts/geist-mono/GeistMono-Variable.woff2') format('woff2-variations');
+    }
+    @font-face {
+      font-family: 'Geist Mono Variable';
+      font-style: normal; font-weight: 100 900; font-display: swap;
+      src: url('https://cdn.jsdelivr.net/npm/geist@latest/dist/fonts/geist-mono/GeistMono-Variable.woff2') format('woff2-variations');
+    }
+    @font-face {
+      font-family: 'Monaspace Neon Variable';
+      font-style: normal; font-weight: 400; font-display: swap;
+      src: url('https://cdn.jsdelivr.net/gh/githubnext/monaspace@v1.101/fonts/webfonts/MonaspaceNeon-Regular.woff2') format('woff2');
+    }
+  </style>
+
   <style>
 :root {
-  --color.stone.50: oklch(98% 0 0);
-  --color.stone.100: oklch(96% 0 0);
-  --color.stone.200: oklch(90% 0 0);
-  --color.stone.300: oklch(80% 0 0);
-  --color.stone.400: oklch(65% 0 0);
-  --color.stone.500: oklch(50% 0 0);
-  --color.stone.600: oklch(40% 0 0);
-  --color.stone.700: oklch(30% 0 0);
-  --color.stone.800: oklch(20% 0 0);
-  --color.stone.900: oklch(15% 0 0);
-  --color.white: #ffffff;
-  --color.black: #000000;
-  --color.red: oklch(55% 0.22 25);
-  --color.red-soft: oklch(95% 0.04 25);
-  --color.amber: oklch(75% 0.18 80);
-  --color.amber-soft: oklch(96% 0.05 80);
-  --color.emerald: oklch(58% 0.18 155);
-  --color.emerald-soft: oklch(95% 0.05 155);
-  --color.sky: oklch(70% 0.15 235);
-  --color.sky-soft: oklch(95% 0.04 235);
-  --color.highlight: oklch(88% 0.16 90);
-  --color.scrim: oklch(0% 0 0 / 0.5);
   --surface: oklch(98% 0 0);
   --surface-elevated: #ffffff;
   --surface-recessed: oklch(96% 0 0);
@@ -167,11 +252,162 @@
   --ease-accelerate: cubic-bezier(0.4, 0, 1, 1);
   --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
   --ease-spring: cubic-bezier(0.5, 1.5, 0.5, 1);
+  --shadow-md: 0 4px 6px -1px oklch(0% 0 0 / 0.1), 0 2px 4px -1px oklch(0% 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px oklch(0% 0 0 / 0.1), 0 4px 6px -2px oklch(0% 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px oklch(0% 0 0 / 0.1), 0 8px 10px -6px oklch(0% 0 0 / 0.1);
   --stroke-solid: solid;
   --stroke-dotted: dotted;
 }
 
-[data-theme="theme-vellum"][data-mode="light"] {
+.cell-render {
+  --surface: oklch(98% 0 0);
+  --surface-elevated: #ffffff;
+  --surface-recessed: oklch(96% 0 0);
+  --surface-inverse: oklch(15% 0 0);
+  --scrim: oklch(0% 0 0 / 0.5);
+  --text: oklch(30% 0 0);
+  --text-emphasis: oklch(15% 0 0);
+  --text-recede: oklch(50% 0 0);
+  --text-disabled: oklch(80% 0 0);
+  --text-on-accent: #ffffff;
+  --text-on-critical: #ffffff;
+  --text-on-success: #ffffff;
+  --text-on-warning: oklch(15% 0 0);
+  --text-on-info: #ffffff;
+  --highlight: oklch(88% 0.16 90);
+  --border: oklch(90% 0 0);
+  --border-emphasis: oklch(15% 0 0);
+  --border-recede: oklch(96% 0 0);
+  --accent: oklch(15% 0 0);
+  --accent-recede: oklch(96% 0 0);
+  --critical: oklch(55% 0.22 25);
+  --success: oklch(58% 0.18 155);
+  --warning: oklch(75% 0.18 80);
+  --info: oklch(70% 0.15 235);
+  --focus-ring: oklch(15% 0 0);
+  --link: oklch(30% 0 0);
+  --link-visited: oklch(50% 0 0);
+  --link-hover: oklch(15% 0 0);
+  --shadow-tint: oklch(0% 0 0 / 0.1);
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+  --space-stack-compact: 0.5rem;
+  --space-stack-normal: 1rem;
+  --space-stack-loose: 2rem;
+  --space-inline-tight: 0.25rem;
+  --space-inline-normal: 0.5rem;
+  --space-inline-loose: 1rem;
+  --space-card: 1.5rem;
+  --space-panel: 1.5rem;
+  --space-frame: 1rem;
+  --type-size-xs: 0.75rem;
+  --type-size-sm: 0.875rem;
+  --type-size-md: 1rem;
+  --type-size-lg: 1.125rem;
+  --type-size-xl: 1.25rem;
+  --type-size-2xl: 1.5rem;
+  --type-size-3xl: 1.875rem;
+  --type-size-4xl: 2.25rem;
+  --type-size-5xl: 3rem;
+  --type-size-display: 4.5rem;
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.05em;
+  --radius-none: 0;
+  --radius-sm: 0.125rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 1rem;
+  --radius-pill: 9999px;
+  --radius-card: 0.5rem;
+  --radius-frame: 0.25rem;
+  --radius-media: 0.25rem;
+  --border-width-hairline: 0.5px;
+  --border-width-sm: 1px;
+  --border-width-md: 2px;
+  --border-width-lg: 4px;
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+  --icon-size-xs: 0.75rem;
+  --icon-size-sm: 1rem;
+  --icon-size-md: 1.25rem;
+  --icon-size-lg: 1.5rem;
+  --icon-size-xl: 2rem;
+  --container-narrow: 40rem;
+  --container-default: 64rem;
+  --container-wide: 80rem;
+  --container-full: 100%;
+  --measure-prose: 65ch;
+  --blur-sm: 4px;
+  --blur-md: 12px;
+  --blur-lg: 24px;
+  --opacity-disabled: 0.38;
+  --opacity-recede: 0.6;
+  --opacity-hover-layer: 0.08;
+  --opacity-active-layer: 0.12;
+  --opacity-scrim: 0.5;
+  --z-base: 0;
+  --z-raised: 1;
+  --z-sticky: 100;
+  --z-dropdown: 1000;
+  --z-modal: 2000;
+  --z-popover: 3000;
+  --z-tooltip: 4000;
+  --z-toast: 5000;
+  --aspect-square: 1.0;
+  --aspect-video: 1.7778;
+  --aspect-portrait: 0.75;
+  --aspect-banner: 3.0;
+  --leading-tight: 1.15;
+  --leading-normal: 1.4;
+  --leading-prose: 1.6;
+  --leading-loose: 1.9;
+  --font-sans: 'Ranade Variable', 'Ranade', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Junicode 2', 'Junicode', ui-serif, Georgia, 'Times New Roman', serif;
+  --font-mono: 'Monaspace Neon Var', 'Monaspace Neon', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-display: 'Junicode 2', 'Junicode', ui-serif, Georgia, 'Times New Roman', serif;
+  --font-mono-warm: 'Monaspace Argon Var', 'Monaspace Argon', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-mono-slab: 'Monaspace Xenon Var', 'Monaspace Xenon', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-mono-script: 'Monaspace Radon Var', 'Monaspace Radon', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-mono-mechanical: 'Monaspace Krypton Var', 'Monaspace Krypton', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-mono-pixel: 'Departure Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+  --motion-instant: 50ms;
+  --motion-fast: 100ms;
+  --motion-normal: 200ms;
+  --motion-slow: 400ms;
+  --motion-slower: 800ms;
+  --ease-linear: cubic-bezier(0, 0, 1, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-decelerate: cubic-bezier(0, 0, 0.2, 1);
+  --ease-accelerate: cubic-bezier(0.4, 0, 1, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --ease-spring: cubic-bezier(0.5, 1.5, 0.5, 1);
+  --shadow-md: 0 4px 6px -1px oklch(0% 0 0 / 0.1), 0 2px 4px -1px oklch(0% 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px oklch(0% 0 0 / 0.1), 0 4px 6px -2px oklch(0% 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px oklch(0% 0 0 / 0.1), 0 8px 10px -6px oklch(0% 0 0 / 0.1);
+  --stroke-solid: solid;
+  --stroke-dotted: dotted;
+}
+
+.cell[data-theme="theme-vellum"] .cell-render {
   --surface: oklch(97.5% 0.011 85);
   --surface-elevated: oklch(96% 0.012 80);
   --surface-recessed: oklch(92% 0.018 80);
@@ -203,9 +439,11 @@
   --motion-fast: 200ms;
   --motion-normal: 240ms;
   --motion-slow: 280ms;
+  --shadow-md: 0 1px 2px 0 oklch(20% 0.006 75 / 0.06);
+  --shadow-lg: 0 2px 6px 0 oklch(20% 0.006 75 / 0.06);
 }
 
-[data-theme="theme-vellum"][data-mode="dark"] {
+.cell[data-theme="theme-vellum"][data-mode="dark"] .cell-render {
   --surface: oklch(14% 0.008 75);
   --surface-elevated: oklch(18% 0.010 75);
   --surface-recessed: oklch(10% 0.006 75);
@@ -229,7 +467,7 @@
   --link-hover: oklch(72% 0.14 40);
 }
 
-[data-theme="theme-graphite"][data-mode="light"] {
+.cell[data-theme="theme-graphite"] .cell-render {
   --surface: oklch(100% 0 0);
   --surface-elevated: oklch(100% 0 0);
   --surface-recessed: oklch(98% 0 0);
@@ -264,9 +502,11 @@
   --motion-fast: 120ms;
   --motion-normal: 160ms;
   --motion-slow: 200ms;
+  --shadow-md: 0 0 0 1px oklch(0% 0 0 / 0.04);
+  --shadow-lg: 0 0 0 1px oklch(0% 0 0 / 0.04);
 }
 
-[data-theme="theme-graphite"][data-mode="dark"] {
+.cell[data-theme="theme-graphite"][data-mode="dark"] .cell-render {
   --surface: oklch(0% 0 0);
   --surface-elevated: oklch(8% 0 0);
   --surface-recessed: oklch(0% 0 0);
@@ -290,7 +530,7 @@
   --link-hover: oklch(75% 0.22 145);
 }
 
-[data-theme="theme-aurora"][data-mode="light"] {
+.cell[data-theme="theme-aurora"] .cell-render {
   --surface: oklch(98.5% 0.003 280);
   --surface-elevated: oklch(100% 0 0);
   --surface-recessed: oklch(96% 0.005 280);
@@ -322,9 +562,11 @@
   --motion-fast: 180ms;
   --motion-normal: 260ms;
   --motion-slow: 400ms;
+  --shadow-md: 0 1px 3px 0 oklch(20% 0.02 270 / 0.08), 0 8px 24px -8px oklch(20% 0.02 270 / 0.08);
+  --shadow-lg: 0 12px 32px -10px oklch(20% 0.02 270 / 0.08);
 }
 
-[data-theme="theme-aurora"][data-mode="dark"] {
+.cell[data-theme="theme-aurora"][data-mode="dark"] .cell-render {
   --surface: oklch(12% 0.012 270);
   --surface-elevated: oklch(16% 0.015 270);
   --surface-recessed: oklch(9% 0.010 270);
@@ -348,7 +590,7 @@
   --link-hover: oklch(85% 0.18 268);
 }
 
-[data-theme="theme-letterpress"][data-mode="light"] {
+.cell[data-theme="theme-letterpress"] .cell-render {
   --surface: oklch(95% 0.018 80);
   --surface-elevated: oklch(92% 0.025 70);
   --surface-recessed: oklch(88% 0.030 70);
@@ -381,9 +623,11 @@
   --motion-fast: 320ms;
   --motion-normal: 600ms;
   --motion-slow: 800ms;
+  --shadow-md: 0 0 0 0 oklch(30% 0.020 60 / 0.04);
+  --shadow-lg: 0 0 0 0 oklch(30% 0.020 60 / 0.04);
 }
 
-[data-theme="theme-letterpress"][data-mode="dark"] {
+.cell[data-theme="theme-letterpress"][data-mode="dark"] .cell-render {
   --surface: oklch(20% 0.020 55);
   --surface-elevated: oklch(24% 0.022 55);
   --surface-recessed: oklch(15% 0.018 55);
@@ -407,7 +651,7 @@
   --link-hover: oklch(85% 0.14 45);
 }
 
-[data-theme="theme-terminal"][data-mode="light"] {
+.cell[data-theme="theme-terminal"] .cell-render {
   --surface: oklch(98% 0.005 100);
   --surface-elevated: oklch(100% 0 0);
   --surface-recessed: oklch(95% 0.008 100);
@@ -444,11 +688,13 @@
   --motion-fast: 80ms;
   --motion-normal: 100ms;
   --motion-slow: 150ms;
+  --shadow-md: 0 0 0 0 oklch(0% 0 0 / 0);
+  --shadow-lg: 0 0 0 0 oklch(0% 0 0 / 0);
   --stroke-solid: solid;
   --stroke-dashed: dashed;
 }
 
-[data-theme="theme-terminal"][data-mode="dark"] {
+.cell[data-theme="theme-terminal"][data-mode="dark"] .cell-render {
   --surface: oklch(0% 0 0);
   --surface-elevated: oklch(6% 0 0);
   --surface-recessed: oklch(0% 0 0);
@@ -472,7 +718,7 @@
   --link-hover: oklch(95% 0.22 130);
 }
 
-[data-theme="theme-broadsheet"][data-mode="light"] {
+.cell[data-theme="theme-broadsheet"] .cell-render {
   --surface: oklch(100% 0 0);
   --surface-elevated: oklch(99% 0 0);
   --surface-recessed: oklch(96% 0 0);
@@ -515,9 +761,11 @@
   --motion-fast: 180ms;
   --motion-normal: 320ms;
   --motion-slow: 600ms;
+  --shadow-md: 0 0 0 0 oklch(0% 0 0 / 0.05);
+  --shadow-lg: 0 0 0 0 oklch(0% 0 0 / 0.05);
 }
 
-[data-theme="theme-broadsheet"][data-mode="dark"] {
+.cell[data-theme="theme-broadsheet"][data-mode="dark"] .cell-render {
   --surface: oklch(0% 0 0);
   --surface-elevated: oklch(8% 0 0);
   --surface-recessed: oklch(0% 0 0);
@@ -541,7 +789,7 @@
   --link-hover: oklch(72% 0.18 270);
 }
 
-[data-theme="theme-bloom"][data-mode="light"] {
+.cell[data-theme="theme-bloom"] .cell-render {
   --surface: oklch(97% 0.015 75);
   --surface-elevated: oklch(98% 0.020 30);
   --surface-recessed: oklch(94% 0.025 60);
@@ -573,9 +821,11 @@
   --motion-fast: 300ms;
   --motion-normal: 700ms;
   --motion-slow: 1200ms;
+  --shadow-md: 0 8px 32px -8px oklch(35% 0.025 40 / 0.10);
+  --shadow-lg: 0 16px 48px -12px oklch(35% 0.025 40 / 0.10);
 }
 
-[data-theme="theme-bloom"][data-mode="dark"] {
+.cell[data-theme="theme-bloom"][data-mode="dark"] .cell-render {
   --surface: oklch(18% 0.025 320);
   --surface-elevated: oklch(22% 0.030 330);
   --surface-recessed: oklch(12% 0.020 320);
@@ -599,7 +849,7 @@
   --link-hover: oklch(90% 0.18 25);
 }
 
-[data-theme="theme-arcade"][data-mode="light"] {
+.cell[data-theme="theme-arcade"] .cell-render {
   --surface: oklch(99% 0.005 90);
   --surface-elevated: oklch(100% 0 0);
   --surface-recessed: oklch(96% 0.008 90);
@@ -639,9 +889,11 @@
   --motion-fast: 260ms;
   --motion-normal: 380ms;
   --motion-slow: 520ms;
+  --shadow-md: 0 0 20px 0 oklch(70% 0.25 350 / 0.45);
+  --shadow-lg: 0 0 40px 0 oklch(70% 0.25 350 / 0.45);
 }
 
-[data-theme="theme-arcade"][data-mode="dark"] {
+.cell[data-theme="theme-arcade"][data-mode="dark"] .cell-render {
   --surface: oklch(8% 0.020 270);
   --surface-elevated: oklch(14% 0.025 270);
   --surface-recessed: oklch(4% 0.015 270);
@@ -669,7 +921,7 @@
   --link-hover: oklch(85% 0.25 350);
 }
 
-[data-theme="theme-prism"][data-mode="light"] {
+.cell[data-theme="theme-prism"] .cell-render {
   --surface: oklch(98% 0.005 240);
   --surface-elevated: oklch(98% 0.005 240 / 0.45);
   --surface-recessed: oklch(94% 0.008 240 / 0.55);
@@ -704,9 +956,11 @@
   --motion-fast: 200ms;
   --motion-normal: 320ms;
   --motion-slow: 400ms;
+  --shadow-md: 0 1px 2px 0 oklch(15% 0.015 240 / 0.10), 0 6px 20px -6px oklch(15% 0.015 240 / 0.10);
+  --shadow-lg: 0 12px 32px -10px oklch(15% 0.015 240 / 0.10);
 }
 
-[data-theme="theme-prism"][data-mode="dark"] {
+.cell[data-theme="theme-prism"][data-mode="dark"] .cell-render {
   --surface: oklch(10% 0.012 240);
   --surface-elevated: oklch(14% 0.015 240 / 0.45);
   --surface-recessed: oklch(6% 0.010 240 / 0.55);
@@ -730,7 +984,7 @@
   --link-hover: oklch(88% 0.18 230);
 }
 
-[data-theme="theme-vapor"][data-mode="light"] {
+.cell[data-theme="theme-vapor"] .cell-render {
   --surface: oklch(97% 0.012 200);
   --surface-elevated: oklch(99% 0.005 230);
   --surface-recessed: oklch(90% 0.030 240);
@@ -764,9 +1018,11 @@
   --motion-fast: 240ms;
   --motion-normal: 320ms;
   --motion-slow: 400ms;
+  --shadow-md: 0 0 32px 8px oklch(20% 0.045 240 / 0.20);
+  --shadow-lg: 0 0 60px 12px oklch(20% 0.045 240 / 0.20);
 }
 
-[data-theme="theme-vapor"][data-mode="dark"] {
+.cell[data-theme="theme-vapor"][data-mode="dark"] .cell-render {
   --surface: oklch(14% 0.040 240);
   --surface-elevated: oklch(20% 0.040 240);
   --surface-recessed: oklch(8% 0.030 240);
@@ -790,58 +1046,161 @@
   --link-hover: oklch(88% 0.20 265);
 }
 
+.cell-render { container-type: inline-size; }
+
+  .composition {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-stack-normal, 12px);
+    background: var(--surface-elevated, var(--surface, #fff));
+    color: var(--text, currentColor);
+    padding: var(--space-panel, 24px);
+    border: 1px solid var(--border, transparent);
+    border-radius: var(--radius-card, var(--radius-md, 0));
+    box-shadow: var(--shadow-md, none);
+    font-family: var(--font-sans, system-ui, sans-serif);
+    /* tabular numerics per cross-trend baseline */
+    font-variant-numeric: tabular-nums;
+  }
+
+  .composition-mark {
+    margin: 0;
+    font-family: var(--font-sans, system-ui, sans-serif);
+    font-size: var(--type-size-xs, 0.75rem);
+    font-weight: var(--font-weight-medium, 500);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-recede, currentColor);
+  }
+
+  .composition-headline {
+    margin: 0;
+    font-family: var(--font-display, var(--font-serif, var(--font-sans, system-ui, serif)));
+    font-size: clamp(1.75rem, 18cqi, var(--type-size-display, 3rem));
+    font-weight: var(--font-weight-medium, 500);
+    line-height: var(--leading-tight, 1.05);
+    letter-spacing: var(--tracking-tight, -0.02em);
+    color: var(--text-emphasis, var(--text, currentColor));
+    text-wrap: balance;
+  }
+
+  .composition-prose {
+    margin: 0;
+    max-width: 38ch;
+    /* Prose uses the theme's font-sans rather than font-serif. Themes
+       that don't override font-serif inherit the baseline Junicode 2
+       stack, which collides with sans-identity themes (graphite, aurora,
+       arcade, prism, vapor). Sans is the universal-correct choice; each
+       theme's font-sans is already tuned to its identity register. */
+    font-family: var(--font-sans, system-ui, sans-serif);
+    font-size: var(--type-size-sm, 0.875rem);
+    line-height: var(--leading-prose, 1.55);
+    color: var(--text, currentColor);
+  }
+
+  .composition-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3, 8px);
+    margin-top: var(--space-4, 12px);
+  }
+
+  .composition-action-primary,
+  .composition-action-secondary {
+    font: inherit;
+    cursor: pointer;
+    padding: var(--space-2, 6px) var(--space-4, 12px);
+    font-family: var(--font-sans, system-ui, sans-serif);
+    font-size: var(--type-size-sm, 0.875rem);
+    font-weight: var(--font-weight-medium, 500);
+    border-radius: var(--radius-md, 4px);
+    transition: opacity var(--motion-fast, 180ms) var(--ease-standard, ease-out);
+    min-height: 36px;
+  }
+  .composition-action-primary {
+    background: var(--accent, currentColor);
+    color: var(--text-on-accent, white);
+    border: 1px solid var(--accent, currentColor);
+  }
+  .composition-action-secondary {
+    background: transparent;
+    color: var(--text-emphasis, currentColor);
+    border: 1px solid var(--border-emphasis, var(--border, currentColor));
+  }
+  .composition-action-primary:hover,
+  .composition-action-secondary:hover {
+    opacity: 0.85;
+  }
+
+* { box-sizing: border-box; }
   body {
     margin: 0;
     padding: 24px;
-    background: #f1ece4;
-    color: #141413;
-    font: 14px/1.5 system-ui, -apple-system, sans-serif;
+    background: oklch(94% 0.005 80);
+    color: oklch(18% 0.005 80);
+    font: 14px/1.5 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   }
-  h1 { font-size: 32px; margin: 0 0 8px; }
-  .intro { max-width: 720px; margin-bottom: 24px; color: #555; }
+  h1 { font-size: 28px; margin: 0 0 8px; letter-spacing: -0.02em; }
+  .intro { max-width: 760px; margin: 0 0 24px; color: oklch(40% 0.005 80); }
+  .legend { margin-bottom: 16px; font-size: 12px; color: oklch(40% 0.005 80); }
+  .legend code { background: oklch(96% 0.005 80); padding: 1px 4px; border-radius: 2px; }
+
   .grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(260px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
+    gap: 16px;
   }
-  @media (max-width: 1280px) {
-    .grid { grid-template-columns: repeat(3, 1fr); }
-  }
-  @media (max-width: 960px) {
-    .grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 640px) {
-    .grid { grid-template-columns: 1fr; }
-  }
+
   .cell {
-    border: 1px solid #d4cfc4;
+    border: 1px solid oklch(85% 0.008 80);
     border-radius: 8px;
     overflow: hidden;
-    background: var(--surface);
-    color: var(--text);
-    font-family: var(--font-sans);
+    background: var(--surface, white);
   }
   .cell-meta {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 8px 12px;
-    background: var(--surface-recessed);
-    color: var(--text-recede);
-    font: 11px/1 ui-monospace, monospace;
-    border-bottom: 1px solid var(--border);
+    background: oklch(96% 0.005 80);
+    color: oklch(28% 0.005 80);
+    font: 600 11px/1 ui-monospace, 'Geist Mono', 'JetBrains Mono', SFMono-Regular, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-bottom: 1px solid oklch(88% 0.008 80);
   }
+  .cell-mode {
+    padding: 2px 6px;
+    background: var(--mode-badge, oklch(20% 0.005 80));
+    color: oklch(96% 0.005 80);
+    border-radius: 3px;
+    font-size: 10px;
+  }
+  .cell[data-mode="dark"] .cell-mode { --mode-badge: oklch(50% 0 0); }
+  .cell[data-mode="light"] .cell-mode { --mode-badge: oklch(18% 0.005 80); }
+
   .cell-render {
-    padding: 16px;
-    min-height: 200px;
+    padding: 24px;
+    background: var(--surface, white);
+    min-height: 280px;
   }
   </style>
 </head>
 <body>
   <h1>Quoin theme showcase</h1>
   <p class="intro">
-    Same source rendered through 10 v1.0 theme packs in light + dark
-    mode. This is the cross-pack diversity check from the phase exit
-    criteria: each cell should read as a distinct aesthetic.
+    Same source rendered through 10 v1.0 theme packs in
+    light + dark mode. Cross-pack diversity check from the Phase Themes
+    exit criteria: each cell should read as a distinct aesthetic.
+  </p>
+  <p class="legend">
+    Headline uses <code>clamp(1.75rem, 18cqi, var(--type-size-display))</code>;
+    the full display tier (e.g. broadsheet's 11rem) only renders at very
+    wide cells. Fonts load from Google Fonts (Source Serif 4, Inter,
+    DM Serif Display, JetBrains Mono, Pixelify Sans), Fontshare (Ranade
+    Variable), and jsDelivr (Junicode 2, Monaspace ×5, Geist Variable +
+    Mono). Departure Mono is not on a CDN; falls back to Pixelify Sans
+    visually.
   </p>
   <div class="grid">
     
@@ -851,38 +1210,20 @@
             <span class="cell-mode">light</span>
           </header>
           <div class="cell-render">
-
-<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
-
-  
-  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
-
-  
-  <emphasis-mark>A semantic design language</emphasis-mark>
-
-  
-  <prose>
-    The same source, rendered through ten distinct theme packs.
-    Each pack supplies its own palette, typography, motion, and depth
-    strategy on top of the canonical token namespace.
-  </prose>
-
-  
-  <div class="flex flex-wrap gap-2">
-
-    
-    <primary-action>Get started</primary-action>
-
-    
-    <secondary-action>Read the spec</secondary-action>
-
-  
-  </div>
-
-
-</section>
-
-</div>
+            <section class="composition">
+              <p class="composition-mark">A semantic design language</p>
+              <h1 class="composition-headline">Quoin Showcase</h1>
+              <p class="composition-prose">
+                The same source rendered through ten distinct theme packs.
+                Each pack supplies its own palette, typography, motion, and
+                depth strategy on top of the canonical token namespace.
+              </p>
+              <div class="composition-actions">
+                <button class="composition-action-primary">Get started</button>
+                <button class="composition-action-secondary">Read the spec</button>
+              </div>
+            </section>
+          </div>
         </article>
       
 
@@ -892,38 +1233,20 @@
             <span class="cell-mode">dark</span>
           </header>
           <div class="cell-render">
-
-<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
-
-  
-  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
-
-  
-  <emphasis-mark>A semantic design language</emphasis-mark>
-
-  
-  <prose>
-    The same source, rendered through ten distinct theme packs.
-    Each pack supplies its own palette, typography, motion, and depth
-    strategy on top of the canonical token namespace.
-  </prose>
-
-  
-  <div class="flex flex-wrap gap-2">
-
-    
-    <primary-action>Get started</primary-action>
-
-    
-    <secondary-action>Read the spec</secondary-action>
-
-  
-  </div>
-
-
-</section>
-
-</div>
+            <section class="composition">
+              <p class="composition-mark">A semantic design language</p>
+              <h1 class="composition-headline">Quoin Showcase</h1>
+              <p class="composition-prose">
+                The same source rendered through ten distinct theme packs.
+                Each pack supplies its own palette, typography, motion, and
+                depth strategy on top of the canonical token namespace.
+              </p>
+              <div class="composition-actions">
+                <button class="composition-action-primary">Get started</button>
+                <button class="composition-action-secondary">Read the spec</button>
+              </div>
+            </section>
+          </div>
         </article>
       
 
@@ -933,38 +1256,20 @@
             <span class="cell-mode">light</span>
           </header>
           <div class="cell-render">
-
-<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
-
-  
-  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
-
-  
-  <emphasis-mark>A semantic design language</emphasis-mark>
-
-  
-  <prose>
-    The same source, rendered through ten distinct theme packs.
-    Each pack supplies its own palette, typography, motion, and depth
-    strategy on top of the canonical token namespace.
-  </prose>
-
-  
-  <div class="flex flex-wrap gap-2">
-
-    
-    <primary-action>Get started</primary-action>
-
-    
-    <secondary-action>Read the spec</secondary-action>
-
-  
-  </div>
-
-
-</section>
-
-</div>
+            <section class="composition">
+              <p class="composition-mark">A semantic design language</p>
+              <h1 class="composition-headline">Quoin Showcase</h1>
+              <p class="composition-prose">
+                The same source rendered through ten distinct theme packs.
+                Each pack supplies its own palette, typography, motion, and
+                depth strategy on top of the canonical token namespace.
+              </p>
+              <div class="composition-actions">
+                <button class="composition-action-primary">Get started</button>
+                <button class="composition-action-secondary">Read the spec</button>
+              </div>
+            </section>
+          </div>
         </article>
       
 
@@ -974,38 +1279,20 @@
             <span class="cell-mode">dark</span>
           </header>
           <div class="cell-render">
-
-<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
-
-  
-  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
-
-  
-  <emphasis-mark>A semantic design language</emphasis-mark>
-
-  
-  <prose>
-    The same source, rendered through ten distinct theme packs.
-    Each pack supplies its own palette, typography, motion, and depth
-    strategy on top of the canonical token namespace.
-  </prose>
-
-  
-  <div class="flex flex-wrap gap-2">
-
-    
-    <primary-action>Get started</primary-action>
-
-    
-    <secondary-action>Read the spec</secondary-action>
-
-  
-  </div>
-
-
-</section>
-
-</div>
+            <section class="composition">
+              <p class="composition-mark">A semantic design language</p>
+              <h1 class="composition-headline">Quoin Showcase</h1>
+              <p class="composition-prose">
+                The same source rendered through ten distinct theme packs.
+                Each pack supplies its own palette, typography, motion, and
+                depth strategy on top of the canonical token namespace.
+              </p>
+              <div class="composition-actions">
+                <button class="composition-action-primary">Get started</button>
+                <button class="composition-action-secondary">Read the spec</button>
+              </div>
+            </section>
+          </div>
         </article>
       
 
@@ -1015,38 +1302,20 @@
             <span class="cell-mode">light</span>
           </header>
           <div class="cell-render">
-
-<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
-
-  
-  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
-
-  
-  <emphasis-mark>A semantic design language</emphasis-mark>
-
-  
-  <prose>
-    The same source, rendered through ten distinct theme packs.
-    Each pack supplies its own palette, typography, motion, and depth
-    strategy on top of the canonical token namespace.
-  </prose>
-
-  
-  <div class="flex flex-wrap gap-2">
-
-    
-    <primary-action>Get started</primary-action>
-
-    
-    <secondary-action>Read the spec</secondary-action>
-
-  
-  </div>
-
-
-</section>
-
-</div>
+            <section class="composition">
+              <p class="composition-mark">A semantic design language</p>
+              <h1 class="composition-headline">Quoin Showcase</h1>
+              <p class="composition-prose">
+                The same source rendered through ten distinct theme packs.
+                Each pack supplies its own palette, typography, motion, and
+                depth strategy on top of the canonical token namespace.
+              </p>
+              <div class="composition-actions">
+                <button class="composition-action-primary">Get started</button>
+                <button class="composition-action-secondary">Read the spec</button>
+              </div>
+            </section>
+          </div>
         </article>
       
 
@@ -1056,38 +1325,20 @@
             <span class="cell-mode">dark</span>
           </header>
           <div class="cell-render">
-
-<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
-
-  
-  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
-
-  
-  <emphasis-mark>A semantic design language</emphasis-mark>
-
-  
-  <prose>
-    The same source, rendered through ten distinct theme packs.
-    Each pack supplies its own palette, typography, motion, and depth
-    strategy on top of the canonical token namespace.
-  </prose>
-
-  
-  <div class="flex flex-wrap gap-2">
-
-    
-    <primary-action>Get started</primary-action>
-
-    
-    <secondary-action>Read the spec</secondary-action>
-
-  
-  </div>
-
-
-</section>
-
-</div>
+            <section class="composition">
+              <p class="composition-mark">A semantic design language</p>
+              <h1 class="composition-headline">Quoin Showcase</h1>
+              <p class="composition-prose">
+                The same source rendered through ten distinct theme packs.
+                Each pack supplies its own palette, typography, motion, and
+                depth strategy on top of the canonical token namespace.
+              </p>
+              <div class="composition-actions">
+                <button class="composition-action-primary">Get started</button>
+                <button class="composition-action-secondary">Read the spec</button>
+              </div>
+            </section>
+          </div>
         </article>
       
 
@@ -1097,38 +1348,20 @@
             <span class="cell-mode">light</span>
           </header>
           <div class="cell-render">
-
-<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
-
-  
-  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
-
-  
-  <emphasis-mark>A semantic design language</emphasis-mark>
-
-  
-  <prose>
-    The same source, rendered through ten distinct theme packs.
-    Each pack supplies its own palette, typography, motion, and depth
-    strategy on top of the canonical token namespace.
-  </prose>
-
-  
-  <div class="flex flex-wrap gap-2">
-
-    
-    <primary-action>Get started</primary-action>
-
-    
-    <secondary-action>Read the spec</secondary-action>
-
-  
-  </div>
-
-
-</section>
-
-</div>
+            <section class="composition">
+              <p class="composition-mark">A semantic design language</p>
+              <h1 class="composition-headline">Quoin Showcase</h1>
+              <p class="composition-prose">
+                The same source rendered through ten distinct theme packs.
+                Each pack supplies its own palette, typography, motion, and
+                depth strategy on top of the canonical token namespace.
+              </p>
+              <div class="composition-actions">
+                <button class="composition-action-primary">Get started</button>
+                <button class="composition-action-secondary">Read the spec</button>
+              </div>
+            </section>
+          </div>
         </article>
       
 
@@ -1138,38 +1371,20 @@
             <span class="cell-mode">dark</span>
           </header>
           <div class="cell-render">
-
-<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
-
-  
-  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
-
-  
-  <emphasis-mark>A semantic design language</emphasis-mark>
-
-  
-  <prose>
-    The same source, rendered through ten distinct theme packs.
-    Each pack supplies its own palette, typography, motion, and depth
-    strategy on top of the canonical token namespace.
-  </prose>
-
-  
-  <div class="flex flex-wrap gap-2">
-
-    
-    <primary-action>Get started</primary-action>
-
-    
-    <secondary-action>Read the spec</secondary-action>
-
-  
-  </div>
-
-
-</section>
-
-</div>
+            <section class="composition">
+              <p class="composition-mark">A semantic design language</p>
+              <h1 class="composition-headline">Quoin Showcase</h1>
+              <p class="composition-prose">
+                The same source rendered through ten distinct theme packs.
+                Each pack supplies its own palette, typography, motion, and
+                depth strategy on top of the canonical token namespace.
+              </p>
+              <div class="composition-actions">
+                <button class="composition-action-primary">Get started</button>
+                <button class="composition-action-secondary">Read the spec</button>
+              </div>
+            </section>
+          </div>
         </article>
       
 
@@ -1179,38 +1394,20 @@
             <span class="cell-mode">light</span>
           </header>
           <div class="cell-render">
-
-<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
-
-  
-  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
-
-  
-  <emphasis-mark>A semantic design language</emphasis-mark>
-
-  
-  <prose>
-    The same source, rendered through ten distinct theme packs.
-    Each pack supplies its own palette, typography, motion, and depth
-    strategy on top of the canonical token namespace.
-  </prose>
-
-  
-  <div class="flex flex-wrap gap-2">
-
-    
-    <primary-action>Get started</primary-action>
-
-    
-    <secondary-action>Read the spec</secondary-action>
-
-  
-  </div>
-
-
-</section>
-
-</div>
+            <section class="composition">
+              <p class="composition-mark">A semantic design language</p>
+              <h1 class="composition-headline">Quoin Showcase</h1>
+              <p class="composition-prose">
+                The same source rendered through ten distinct theme packs.
+                Each pack supplies its own palette, typography, motion, and
+                depth strategy on top of the canonical token namespace.
+              </p>
+              <div class="composition-actions">
+                <button class="composition-action-primary">Get started</button>
+                <button class="composition-action-secondary">Read the spec</button>
+              </div>
+            </section>
+          </div>
         </article>
       
 
@@ -1220,38 +1417,20 @@
             <span class="cell-mode">dark</span>
           </header>
           <div class="cell-render">
-
-<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
-
-  
-  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
-
-  
-  <emphasis-mark>A semantic design language</emphasis-mark>
-
-  
-  <prose>
-    The same source, rendered through ten distinct theme packs.
-    Each pack supplies its own palette, typography, motion, and depth
-    strategy on top of the canonical token namespace.
-  </prose>
-
-  
-  <div class="flex flex-wrap gap-2">
-
-    
-    <primary-action>Get started</primary-action>
-
-    
-    <secondary-action>Read the spec</secondary-action>
-
-  
-  </div>
-
-
-</section>
-
-</div>
+            <section class="composition">
+              <p class="composition-mark">A semantic design language</p>
+              <h1 class="composition-headline">Quoin Showcase</h1>
+              <p class="composition-prose">
+                The same source rendered through ten distinct theme packs.
+                Each pack supplies its own palette, typography, motion, and
+                depth strategy on top of the canonical token namespace.
+              </p>
+              <div class="composition-actions">
+                <button class="composition-action-primary">Get started</button>
+                <button class="composition-action-secondary">Read the spec</button>
+              </div>
+            </section>
+          </div>
         </article>
       
 
@@ -1261,38 +1440,20 @@
             <span class="cell-mode">light</span>
           </header>
           <div class="cell-render">
-
-<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
-
-  
-  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
-
-  
-  <emphasis-mark>A semantic design language</emphasis-mark>
-
-  
-  <prose>
-    The same source, rendered through ten distinct theme packs.
-    Each pack supplies its own palette, typography, motion, and depth
-    strategy on top of the canonical token namespace.
-  </prose>
-
-  
-  <div class="flex flex-wrap gap-2">
-
-    
-    <primary-action>Get started</primary-action>
-
-    
-    <secondary-action>Read the spec</secondary-action>
-
-  
-  </div>
-
-
-</section>
-
-</div>
+            <section class="composition">
+              <p class="composition-mark">A semantic design language</p>
+              <h1 class="composition-headline">Quoin Showcase</h1>
+              <p class="composition-prose">
+                The same source rendered through ten distinct theme packs.
+                Each pack supplies its own palette, typography, motion, and
+                depth strategy on top of the canonical token namespace.
+              </p>
+              <div class="composition-actions">
+                <button class="composition-action-primary">Get started</button>
+                <button class="composition-action-secondary">Read the spec</button>
+              </div>
+            </section>
+          </div>
         </article>
       
 
@@ -1302,38 +1463,20 @@
             <span class="cell-mode">dark</span>
           </header>
           <div class="cell-render">
-
-<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
-
-  
-  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
-
-  
-  <emphasis-mark>A semantic design language</emphasis-mark>
-
-  
-  <prose>
-    The same source, rendered through ten distinct theme packs.
-    Each pack supplies its own palette, typography, motion, and depth
-    strategy on top of the canonical token namespace.
-  </prose>
-
-  
-  <div class="flex flex-wrap gap-2">
-
-    
-    <primary-action>Get started</primary-action>
-
-    
-    <secondary-action>Read the spec</secondary-action>
-
-  
-  </div>
-
-
-</section>
-
-</div>
+            <section class="composition">
+              <p class="composition-mark">A semantic design language</p>
+              <h1 class="composition-headline">Quoin Showcase</h1>
+              <p class="composition-prose">
+                The same source rendered through ten distinct theme packs.
+                Each pack supplies its own palette, typography, motion, and
+                depth strategy on top of the canonical token namespace.
+              </p>
+              <div class="composition-actions">
+                <button class="composition-action-primary">Get started</button>
+                <button class="composition-action-secondary">Read the spec</button>
+              </div>
+            </section>
+          </div>
         </article>
       
 
@@ -1343,38 +1486,20 @@
             <span class="cell-mode">light</span>
           </header>
           <div class="cell-render">
-
-<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
-
-  
-  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
-
-  
-  <emphasis-mark>A semantic design language</emphasis-mark>
-
-  
-  <prose>
-    The same source, rendered through ten distinct theme packs.
-    Each pack supplies its own palette, typography, motion, and depth
-    strategy on top of the canonical token namespace.
-  </prose>
-
-  
-  <div class="flex flex-wrap gap-2">
-
-    
-    <primary-action>Get started</primary-action>
-
-    
-    <secondary-action>Read the spec</secondary-action>
-
-  
-  </div>
-
-
-</section>
-
-</div>
+            <section class="composition">
+              <p class="composition-mark">A semantic design language</p>
+              <h1 class="composition-headline">Quoin Showcase</h1>
+              <p class="composition-prose">
+                The same source rendered through ten distinct theme packs.
+                Each pack supplies its own palette, typography, motion, and
+                depth strategy on top of the canonical token namespace.
+              </p>
+              <div class="composition-actions">
+                <button class="composition-action-primary">Get started</button>
+                <button class="composition-action-secondary">Read the spec</button>
+              </div>
+            </section>
+          </div>
         </article>
       
 
@@ -1384,38 +1509,20 @@
             <span class="cell-mode">dark</span>
           </header>
           <div class="cell-render">
-
-<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
-
-  
-  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
-
-  
-  <emphasis-mark>A semantic design language</emphasis-mark>
-
-  
-  <prose>
-    The same source, rendered through ten distinct theme packs.
-    Each pack supplies its own palette, typography, motion, and depth
-    strategy on top of the canonical token namespace.
-  </prose>
-
-  
-  <div class="flex flex-wrap gap-2">
-
-    
-    <primary-action>Get started</primary-action>
-
-    
-    <secondary-action>Read the spec</secondary-action>
-
-  
-  </div>
-
-
-</section>
-
-</div>
+            <section class="composition">
+              <p class="composition-mark">A semantic design language</p>
+              <h1 class="composition-headline">Quoin Showcase</h1>
+              <p class="composition-prose">
+                The same source rendered through ten distinct theme packs.
+                Each pack supplies its own palette, typography, motion, and
+                depth strategy on top of the canonical token namespace.
+              </p>
+              <div class="composition-actions">
+                <button class="composition-action-primary">Get started</button>
+                <button class="composition-action-secondary">Read the spec</button>
+              </div>
+            </section>
+          </div>
         </article>
       
 
@@ -1425,38 +1532,20 @@
             <span class="cell-mode">light</span>
           </header>
           <div class="cell-render">
-
-<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
-
-  
-  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
-
-  
-  <emphasis-mark>A semantic design language</emphasis-mark>
-
-  
-  <prose>
-    The same source, rendered through ten distinct theme packs.
-    Each pack supplies its own palette, typography, motion, and depth
-    strategy on top of the canonical token namespace.
-  </prose>
-
-  
-  <div class="flex flex-wrap gap-2">
-
-    
-    <primary-action>Get started</primary-action>
-
-    
-    <secondary-action>Read the spec</secondary-action>
-
-  
-  </div>
-
-
-</section>
-
-</div>
+            <section class="composition">
+              <p class="composition-mark">A semantic design language</p>
+              <h1 class="composition-headline">Quoin Showcase</h1>
+              <p class="composition-prose">
+                The same source rendered through ten distinct theme packs.
+                Each pack supplies its own palette, typography, motion, and
+                depth strategy on top of the canonical token namespace.
+              </p>
+              <div class="composition-actions">
+                <button class="composition-action-primary">Get started</button>
+                <button class="composition-action-secondary">Read the spec</button>
+              </div>
+            </section>
+          </div>
         </article>
       
 
@@ -1466,38 +1555,20 @@
             <span class="cell-mode">dark</span>
           </header>
           <div class="cell-render">
-
-<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
-
-  
-  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
-
-  
-  <emphasis-mark>A semantic design language</emphasis-mark>
-
-  
-  <prose>
-    The same source, rendered through ten distinct theme packs.
-    Each pack supplies its own palette, typography, motion, and depth
-    strategy on top of the canonical token namespace.
-  </prose>
-
-  
-  <div class="flex flex-wrap gap-2">
-
-    
-    <primary-action>Get started</primary-action>
-
-    
-    <secondary-action>Read the spec</secondary-action>
-
-  
-  </div>
-
-
-</section>
-
-</div>
+            <section class="composition">
+              <p class="composition-mark">A semantic design language</p>
+              <h1 class="composition-headline">Quoin Showcase</h1>
+              <p class="composition-prose">
+                The same source rendered through ten distinct theme packs.
+                Each pack supplies its own palette, typography, motion, and
+                depth strategy on top of the canonical token namespace.
+              </p>
+              <div class="composition-actions">
+                <button class="composition-action-primary">Get started</button>
+                <button class="composition-action-secondary">Read the spec</button>
+              </div>
+            </section>
+          </div>
         </article>
       
 
@@ -1507,38 +1578,20 @@
             <span class="cell-mode">light</span>
           </header>
           <div class="cell-render">
-
-<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
-
-  
-  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
-
-  
-  <emphasis-mark>A semantic design language</emphasis-mark>
-
-  
-  <prose>
-    The same source, rendered through ten distinct theme packs.
-    Each pack supplies its own palette, typography, motion, and depth
-    strategy on top of the canonical token namespace.
-  </prose>
-
-  
-  <div class="flex flex-wrap gap-2">
-
-    
-    <primary-action>Get started</primary-action>
-
-    
-    <secondary-action>Read the spec</secondary-action>
-
-  
-  </div>
-
-
-</section>
-
-</div>
+            <section class="composition">
+              <p class="composition-mark">A semantic design language</p>
+              <h1 class="composition-headline">Quoin Showcase</h1>
+              <p class="composition-prose">
+                The same source rendered through ten distinct theme packs.
+                Each pack supplies its own palette, typography, motion, and
+                depth strategy on top of the canonical token namespace.
+              </p>
+              <div class="composition-actions">
+                <button class="composition-action-primary">Get started</button>
+                <button class="composition-action-secondary">Read the spec</button>
+              </div>
+            </section>
+          </div>
         </article>
       
 
@@ -1548,38 +1601,20 @@
             <span class="cell-mode">dark</span>
           </header>
           <div class="cell-render">
-
-<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
-
-  
-  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
-
-  
-  <emphasis-mark>A semantic design language</emphasis-mark>
-
-  
-  <prose>
-    The same source, rendered through ten distinct theme packs.
-    Each pack supplies its own palette, typography, motion, and depth
-    strategy on top of the canonical token namespace.
-  </prose>
-
-  
-  <div class="flex flex-wrap gap-2">
-
-    
-    <primary-action>Get started</primary-action>
-
-    
-    <secondary-action>Read the spec</secondary-action>
-
-  
-  </div>
-
-
-</section>
-
-</div>
+            <section class="composition">
+              <p class="composition-mark">A semantic design language</p>
+              <h1 class="composition-headline">Quoin Showcase</h1>
+              <p class="composition-prose">
+                The same source rendered through ten distinct theme packs.
+                Each pack supplies its own palette, typography, motion, and
+                depth strategy on top of the canonical token namespace.
+              </p>
+              <div class="composition-actions">
+                <button class="composition-action-primary">Get started</button>
+                <button class="composition-action-secondary">Read the spec</button>
+              </div>
+            </section>
+          </div>
         </article>
       
 
@@ -1589,38 +1624,20 @@
             <span class="cell-mode">light</span>
           </header>
           <div class="cell-render">
-
-<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
-
-  
-  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
-
-  
-  <emphasis-mark>A semantic design language</emphasis-mark>
-
-  
-  <prose>
-    The same source, rendered through ten distinct theme packs.
-    Each pack supplies its own palette, typography, motion, and depth
-    strategy on top of the canonical token namespace.
-  </prose>
-
-  
-  <div class="flex flex-wrap gap-2">
-
-    
-    <primary-action>Get started</primary-action>
-
-    
-    <secondary-action>Read the spec</secondary-action>
-
-  
-  </div>
-
-
-</section>
-
-</div>
+            <section class="composition">
+              <p class="composition-mark">A semantic design language</p>
+              <h1 class="composition-headline">Quoin Showcase</h1>
+              <p class="composition-prose">
+                The same source rendered through ten distinct theme packs.
+                Each pack supplies its own palette, typography, motion, and
+                depth strategy on top of the canonical token namespace.
+              </p>
+              <div class="composition-actions">
+                <button class="composition-action-primary">Get started</button>
+                <button class="composition-action-secondary">Read the spec</button>
+              </div>
+            </section>
+          </div>
         </article>
       
 
@@ -1630,38 +1647,20 @@
             <span class="cell-mode">dark</span>
           </header>
           <div class="cell-render">
-
-<section class="shadow-xs bg-[var(--surface-elevated)] p-[var(--space-panel)]">
-
-  
-  <h1 class="font-medium text-[var(--type-size-display)] font-[var(--font-display)] text-[var(--text-emphasis)] tracking-[var(--tracking-tight)] leading-[var(--leading-tight)]">Quoin Showcase</h1>
-
-  
-  <emphasis-mark>A semantic design language</emphasis-mark>
-
-  
-  <prose>
-    The same source, rendered through ten distinct theme packs.
-    Each pack supplies its own palette, typography, motion, and depth
-    strategy on top of the canonical token namespace.
-  </prose>
-
-  
-  <div class="flex flex-wrap gap-2">
-
-    
-    <primary-action>Get started</primary-action>
-
-    
-    <secondary-action>Read the spec</secondary-action>
-
-  
-  </div>
-
-
-</section>
-
-</div>
+            <section class="composition">
+              <p class="composition-mark">A semantic design language</p>
+              <h1 class="composition-headline">Quoin Showcase</h1>
+              <p class="composition-prose">
+                The same source rendered through ten distinct theme packs.
+                Each pack supplies its own palette, typography, motion, and
+                depth strategy on top of the canonical token namespace.
+              </p>
+              <div class="composition-actions">
+                <button class="composition-action-primary">Get started</button>
+                <button class="composition-action-secondary">Read the spec</button>
+              </div>
+            </section>
+          </div>
         </article>
       
   </div>
