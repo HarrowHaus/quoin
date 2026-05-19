@@ -1,0 +1,269 @@
+[
+  {
+    "name": "page-header",
+    "category": "product",
+    "role": "Top-level in-app page-header strip rendered below pattern-nav-app-chrome. Hosts eyebrow + title + subtitle + optional breadcrumb + meta cluster + action cluster. Three registers — minimal (just title), default (title + actions), extended (everything: eyebrow + breadcrumb + title + subtitle + meta + actions + optional tab-strip). Three sizes — sm (compact), md (default), lg (hero-ish; used on flagship page entries).",
+    "attributes": {
+      "register": {
+        "values": ["minimal", "default", "extended"],
+        "default": "default",
+        "specific": true
+      },
+      "size": {
+        "values": ["sm", "md", "lg"],
+        "default": "md",
+        "specific": true
+      },
+      "background": {
+        "values": ["surface", "surface-recessed", "surface-elevated"],
+        "default": "surface",
+        "specific": true
+      },
+      "state": {
+        "values": ["default", "loading", "error"],
+        "default": "default",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "var(--surface)",
+      "backgroundRecessed": "var(--surface-recessed)",
+      "backgroundElevated": "var(--surface-elevated)",
+      "color": "var(--text)",
+      "borderColor": "var(--border)",
+      "borderWidth": "var(--border-width-sm)",
+      "padding": "var(--space-card) var(--space-panel)",
+      "paddingSm": "var(--space-3) var(--space-card)",
+      "paddingLg": "var(--space-section) var(--space-panel)",
+      "gap": "var(--space-3)",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "header"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<header data-pattern='page-header' data-register='extended'>",
+        "  <div class='inner'>",
+        "    <div class='primary-cluster'>",
+        "      (optional) <page-header-eyebrow> — small uppercase pre-heading + breadcrumb",
+        "      <page-header-title-block>",
+        "        <page-header-title> — h1 or h2",
+        "        (optional) <page-header-subtitle>",
+        "      </page-header-title-block>",
+        "      (optional) <page-header-meta> — badges, owner, last-updated, avatar-stack",
+        "    </div>",
+        "    (optional) <page-header-actions> — action button cluster",
+        "  </div>",
+        "  (optional) <nav data-pattern='app-page-tabs'> — composing from nav-app-chrome's tabs primitive",
+        "</header>"
+      ],
+      "headingHierarchy": "page-header-title uses <h1> when the page-header is the FIRST heading on the page (typical for app-shell pages where nav-app-chrome contains no headings). Use <h2> when the page already has an <h1> elsewhere (e.g., when embedded inside a marketing template that has its own hero h1).",
+      "navAppChromeRelationship": "Designed to sit BELOW pattern-nav-app-chrome. The chrome handles workspace-level identity (workspace switcher, top breadcrumb showing Workspace > Project); this page-header handles page-level identity (the page title + page-level actions). They don't overlap responsibilities.",
+      "tabsCoupling": "When the register is 'extended' and the page has sub-sections, page-header may host an <app-page-tabs> instance composed from pattern-nav-app-chrome. This is a sibling-pack composition — nav-app-chrome's app-page-tabs is general enough to live below the page-header as well as below the chrome.",
+      "ariaPatterns": {
+        "noBannerLandmark": "page-header is just a <header> element WITHOUT role='banner'. The role='banner' lives on the parent nav-app-chrome (only ONE banner landmark per page).",
+        "ariaLabelledby": "If the page-header has descendant interactive regions (action cluster, tabs), they get their own role + aria-label per the contracts of the composed patterns."
+      }
+    }
+  },
+  {
+    "name": "page-header-eyebrow",
+    "category": "product",
+    "role": "Small uppercase pre-heading rendered above the title. Used for category breadcrumbs ('Settings · Billing'), section names, or status badges. Renders as a small text strip; may include a breadcrumb-style chevron-separated path.",
+    "attributes": {
+      "register": {
+        "values": ["text", "breadcrumb", "badge-row"],
+        "default": "text",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "var(--text-recede)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-xs)",
+      "fontWeight": "var(--font-weight-semibold)",
+      "letterSpacing": "var(--tracking-wide)",
+      "textTransform": "uppercase",
+      "lineHeight": "var(--leading-tight)",
+      "gap": "var(--space-2)",
+      "margin": "0 0 var(--space-2)",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "registers": {
+        "text": "Single line of uppercase text. Used as a categoricalbreadcrumb-lite ('Settings · Billing' / 'Notes · Drafts').",
+        "breadcrumb": "Composes app-breadcrumb from nav-app-chrome — renders chevron-separated segments with the last as the current page (aria-current='page').",
+        "badge-row": "Inline row of status badges (using the same status-badge styling as data-table-cell's status-badge content type)."
+      },
+      "ariaPatterns": {
+        "breadcrumbAria": "When register='breadcrumb', the inner <nav aria-label='Breadcrumb'> + <ol> structure follows the same contract as nav-app-chrome's app-breadcrumb."
+      }
+    }
+  },
+  {
+    "name": "page-header-title-block",
+    "category": "product",
+    "role": "Wrapper that groups the title + subtitle. Allows the title and subtitle to share a single flex column so the meta cluster and action cluster can align relative to the visual centre of the block.",
+    "attributes": {},
+    "tokens": {
+      "gap": "var(--space-2)",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<div data-pattern='page-header-title-block'>",
+        "  <page-header-title> — h1 or h2",
+        "  (optional) <page-header-subtitle>"
+      ]
+    }
+  },
+  {
+    "name": "page-header-title",
+    "category": "product",
+    "role": "The page title. Sized per parent's data-size attribute. h1 by default (when no other h1 on page); h2 when the page is nested within a larger context (e.g., marketing template with its own h1).",
+    "attributes": {
+      "level": {
+        "values": ["h1", "h2"],
+        "default": "h1",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "var(--text-emphasis)",
+      "fontFamily": "var(--font-display)",
+      "fontSizeSm": "var(--type-size-xl)",
+      "fontSizeMd": "var(--type-size-2xl)",
+      "fontSizeLg": "var(--type-size-3xl)",
+      "fontWeight": "var(--font-weight-semibold)",
+      "lineHeight": "var(--leading-tight)",
+      "letterSpacing": "var(--tracking-tight)",
+      "margin": "0",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "h1"
+    },
+    "children": "phrasing-content",
+    "scope": "block",
+    "meta": {
+      "textWrapBalance": "Apply text-wrap: balance for visually-balanced multi-line titles.",
+      "editableInPlace": "If the page-header is editable (e.g., document name in Galley Notes), the title element can be contenteditable + role='textbox' aria-label='Document title'. Inline editing behaviour is out of scope for v1 — host page provides."
+    }
+  },
+  {
+    "name": "page-header-subtitle",
+    "category": "product",
+    "role": "Descriptive subtitle below the title. 1-2 lines max. Used for page descriptions ('Track every recurring charge across all Galley tools'), document tag lines, or admin-style descriptions.",
+    "attributes": {},
+    "tokens": {
+      "color": "var(--text-recede)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-md)",
+      "fontWeight": "var(--font-weight-medium)",
+      "lineHeight": "var(--leading-prose)",
+      "margin": "0",
+      "maxWidth": "72ch",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "p"
+    },
+    "children": "phrasing-content",
+    "scope": "block",
+    "meta": {
+      "textWrapPretty": "Apply text-wrap: pretty for orphan-avoidance on multi-line subtitles."
+    }
+  },
+  {
+    "name": "page-header-meta",
+    "category": "product",
+    "role": "Metadata cluster below or beside the title. Hosts owner avatar (composing avatar-stack from vocab-app-shell), last-updated timestamp, badges, status pills, member count. Renders as an inline-flex row.",
+    "attributes": {
+      "layout": {
+        "values": ["inline", "stack"],
+        "default": "inline",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "var(--text-recede)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-sm)",
+      "fontWeight": "var(--font-weight-medium)",
+      "gap": "var(--space-3)",
+      "margin": "var(--space-2) 0 0",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "semanticStructure": [
+        "<div data-pattern='page-header-meta' data-layout='inline'>",
+        "  <avatar-stack> — composes from vocab-app-shell. 'Owned by Elena Park' or 'Shared with 3 people'",
+        "  <span class='separator' aria-hidden='true'>·</span>",
+        "  <span>Last updated 2 min ago</span>",
+        "  <span class='separator' aria-hidden='true'>·</span>",
+        "  <span class='status-badge' data-tone='success'>Active</span>"
+      ],
+      "composesFrom": "@quoin/vocab-app-shell (avatar-stack primitive)",
+      "ariaPatterns": {
+        "separators": "Visual separators (· or |) are aria-hidden='true'.",
+        "avatarStackLabel": "avatar-stack inherits its aria-label from vocab-app-shell ('Owned by Elena Park' / 'Shared with 3 people')."
+      }
+    }
+  },
+  {
+    "name": "page-header-actions",
+    "category": "product",
+    "role": "Action button cluster on the right side of the page-header. Composes <action-button> from pattern-button-system. Typical pattern: 1-2 ghost actions (Share, Filter, Export) + 1 primary action (Add, Save, Publish). Optional kebab menu for overflow.",
+    "attributes": {
+      "register": {
+        "values": ["primary-only", "secondary-plus-primary", "extended"],
+        "default": "secondary-plus-primary",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "gap": "var(--space-2)",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "role": "group",
+        "aria-label": "Page actions"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "registers": {
+        "primary-only": "Single primary CTA ('Add subscription', 'New document'). Used on simple list views.",
+        "secondary-plus-primary": "Ghost / secondary action + primary action ('Share' + 'Save', 'Export' + 'New'). The 80% choice.",
+        "extended": "Multiple ghost actions + secondary + primary + overflow kebab menu. Used on power-user surfaces (admin dashboards, multi-action editors)."
+      },
+      "composesFrom": "@quoin/pattern-button-system (every CTA is an action-button)",
+      "responsiveBehaviour": "At narrow viewport widths, the action cluster collapses to a single overflow kebab menu containing every action. The primary CTA may stay visible while secondaries collapse, depending on viewport width.",
+      "ariaPatterns": {
+        "groupRole": "<div role='group' aria-label='Page actions'> wraps the cluster.",
+        "iconOnlyAtNarrow": "When collapsed at narrow widths, icon-only buttons must have explicit aria-label."
+      }
+    }
+  }
+]
