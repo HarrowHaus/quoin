@@ -135,8 +135,15 @@ const ENROLLMENT = {
     composesSiblings: ['pattern-button-system'],
     markers: ['Galley', 'WCAG 2.2.2', 'playsinline', 'PLACEHOLDER FIXTURE'],
   },
+  'nav-docs': {
+    requireGalley: false,
+    requireLineage: true,
+    composesSiblings: ['pattern-button-system'],
+    markers: ['Quoin', 'WCAG 2.4.1', 'aria-current', 'Cmd+K'],
+  },
   // Pre-GALLEY P0 patterns (button-system, testimonial, feature-grid, form-fields)
   // intentionally not enrolled. They predate the GALLEY narrative.
+  // nav-docs intentionally NOT requireGalley — it's the Quoin Docs nav, not a Galley product surface.
 };
 
 function startServer() {

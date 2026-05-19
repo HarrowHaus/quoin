@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>@quoin/pattern-nav-docs — specimen</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=JetBrains+Mono:wght@100..800&display=swap">
+
+  <style>
+    :root {
+      color-scheme: light dark;
+      --surface: oklch(98% 0 0); --surface-elevated: oklch(100% 0 0); --surface-recessed: oklch(96% 0 0);
+      --text: oklch(30% 0 0); --text-emphasis: oklch(15% 0 0); --text-recede: oklch(50% 0 0); --text-disabled: oklch(72% 0 0); --text-on-accent: oklch(100% 0 0);
+      --accent: oklch(20% 0 0); --accent-hover: oklch(28% 0 0); --accent-recede: oklch(94% 0 0);
+      --success: oklch(50% 0.18 155); --warning: oklch(75% 0.18 80); --critical: oklch(55% 0.22 25);
+      --border: oklch(88% 0 0); --border-emphasis: oklch(20% 0 0); --border-recede: oklch(94% 0 0);
+      --border-width-sm: 1px; --border-width-md: 2px;
+      --focus-ring: oklch(55% 0.22 260); --focus-ring-width: 2px; --focus-ring-offset: 2px;
+      --space-1: 4px; --space-2: 6px; --space-3: 8px; --space-4: 12px; --space-5: 16px; --space-6: 20px; --space-8: 32px;
+      --space-card: 24px; --space-panel: 32px; --space-section: 64px;
+      --radius-sm: 4px; --radius-md: 6px; --radius-card: 12px; --radius-pill: 999px;
+      --font-sans: 'Inter Variable', 'Inter', system-ui, sans-serif;
+      --font-display: 'Inter Variable', 'Inter', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+      --type-size-xs: 0.75rem; --type-size-sm: 0.875rem; --type-size-md: 1rem; --type-size-lg: 1.125rem;
+      --type-size-xl: 1.5rem; --type-size-2xl: 2rem; --type-size-3xl: 2.5rem; --type-size-4xl: 3.5rem;
+      --font-weight-medium: 500; --font-weight-semibold: 600; --font-weight-bold: 700;
+      --leading-tight: 1.15; --leading-prose: 1.55; --leading-display: 1.05;
+      --tracking-tight: -0.02em; --tracking-wide: 0.08em;
+      --motion-fast: 120ms; --motion-normal: 160ms;
+      --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+      --transition-default: all var(--motion-normal) var(--ease-standard);
+      --shadow-tint: oklch(0% 0 0 / 0.06);
+      --shadow-sm: 0 1px 2px 0 var(--shadow-tint);
+      --shadow-md: 0 4px 6px -1px var(--shadow-tint), 0 2px 4px -1px var(--shadow-tint);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --surface: oklch(10% 0 0); --surface-elevated: oklch(15% 0 0); --surface-recessed: oklch(8% 0 0);
+        --text: oklch(85% 0 0); --text-emphasis: oklch(98% 0 0); --text-recede: oklch(60% 0 0);
+        --accent: oklch(95% 0 0); --accent-recede: oklch(20% 0 0);
+        --border: oklch(20% 0 0);
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      :root { --motion-fast: 0ms; --motion-normal: 0ms; --transition-default: none; }
+      * { animation: none !important; }
+    }
+    * { box-sizing: border-box; }
+  </style>
+
+  <style>
+    html, body { margin: 0; padding: 0; background: var(--surface); color: var(--text); font-family: var(--font-sans); font-size: var(--type-size-md); line-height: var(--leading-prose); -webkit-font-smoothing: antialiased; }
+    main { max-width: 1280px; margin: 0 auto; padding: var(--space-section) var(--space-panel); }
+    h1.doc { font-family: var(--font-display); font-size: var(--type-size-3xl); font-weight: var(--font-weight-semibold); line-height: var(--leading-display); letter-spacing: var(--tracking-tight); margin: 0 0 var(--space-4); text-wrap: balance; }
+    main > h2 { font-family: var(--font-display); font-size: var(--type-size-2xl); font-weight: var(--font-weight-semibold); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); margin: var(--space-section) 0 var(--space-4); text-wrap: balance; }
+    .lede { font-size: var(--type-size-lg); line-height: var(--leading-prose); color: var(--text-recede); max-width: 70ch; margin: 0 0 var(--space-section); }
+    .meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-4); padding: var(--space-4); background: var(--surface-elevated); border: var(--border-width-sm) solid var(--border); border-radius: var(--radius-card); margin-bottom: var(--space-section); font-size: var(--type-size-sm); }
+    .meta dt { font-weight: var(--font-weight-semibold); color: var(--text-emphasis); margin-bottom: var(--space-1); }
+    .meta dd { margin: 0; color: var(--text-recede); }
+    .specimen-divider { margin: var(--space-section) 0 var(--space-card); padding-bottom: var(--space-2); border-bottom: var(--border-width-sm) solid var(--border); }
+    .specimen-divider h2 { margin: 0; font-family: var(--font-display); font-size: var(--type-size-2xl); font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-tight); }
+    .specimen-divider p { margin: var(--space-2) 0 0; color: var(--text-recede); font-size: var(--type-size-sm); }
+    .label-row { font-size: var(--type-size-xs); color: var(--text-recede); font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-wide); text-transform: uppercase; margin: 0 0 var(--space-2); }
+    .stage { background: var(--surface-recessed); border: var(--border-width-sm) solid var(--border); border-radius: var(--radius-card); overflow: hidden; margin-bottom: var(--space-card); position: relative; }
+    .docs-stage { min-height: 480px; display: grid; grid-template-rows: 56px 1fr; }
+
+    /* ===== NAV-DOCS PRODUCTION STYLES ===== */
+
+    [data-pattern="nav-docs-section"] {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      grid-template-rows: 56px 1fr;
+      min-height: 480px;
+      background: var(--surface);
+      color: var(--text);
+    }
+    [data-pattern="nav-docs-section"][data-sidebar-width="narrow"] { grid-template-columns: 220px 1fr; }
+    [data-pattern="nav-docs-section"][data-sidebar-width="wide"] { grid-template-columns: 320px 1fr; }
+    [data-pattern="nav-docs-section"][data-register="topbar-only"] {
+      grid-template-columns: 1fr;
+    }
+
+    /* ===== SKIP LINK ===== */
+    [data-pattern="nav-docs-skip-link"] {
+      position: absolute;
+      top: var(--space-3);
+      left: var(--space-3);
+      background: var(--accent);
+      color: var(--text-on-accent);
+      padding: var(--space-3) var(--space-card);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-sm);
+      font-weight: var(--font-weight-semibold);
+      text-decoration: none;
+      z-index: 999;
+      clip: rect(0, 0, 0, 0);
+      width: 1px; height: 1px;
+      overflow: hidden;
+      white-space: nowrap;
+      transition: var(--transition-default);
+    }
+    [data-pattern="nav-docs-skip-link"]:focus,
+    [data-pattern="nav-docs-skip-link"]:focus-visible {
+      clip: auto;
+      width: auto; height: auto;
+      overflow: visible;
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+
+    /* ===== TOP BAR ===== */
+    [data-pattern="nav-docs-topbar"] {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-3) var(--space-card);
+      background: var(--surface);
+      border-bottom: var(--border-width-sm) solid var(--border);
+      height: 56px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    [data-pattern="nav-docs-section"][data-register="topbar-only"] [data-pattern="nav-docs-topbar"] { grid-column: 1; }
+    [data-pattern="nav-docs-topbar"] .spacer { flex: 1; }
+
+    /* nav-docs-brand */
+    [data-pattern="nav-docs-brand"] {
+      display: inline-flex;
+      align-items: baseline;
+      gap: var(--space-2);
+      color: var(--text-emphasis);
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-size: var(--type-size-lg);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--tracking-tight);
+    }
+    [data-pattern="nav-docs-brand"]::before { content: "▢"; color: var(--accent); font-size: var(--type-size-md); }
+    [data-pattern="nav-docs-brand"] .subtitle {
+      color: var(--text-recede);
+      font-weight: var(--font-weight-medium);
+      font-size: var(--type-size-sm);
+      letter-spacing: 0;
+    }
+    [data-pattern="nav-docs-brand"]:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+      border-radius: var(--radius-sm);
+    }
+
+    /* nav-docs-search */
+    [data-pattern="nav-docs-search"] {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: var(--surface-elevated);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: var(--space-2) var(--space-3);
+      color: var(--text-recede);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-sm);
+      cursor: pointer;
+      min-width: 280px;
+      transition: var(--transition-default);
+    }
+    [data-pattern="nav-docs-search"]:hover { border-color: var(--border-emphasis); }
+    [data-pattern="nav-docs-search"]:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+    [data-pattern="nav-docs-search"] .placeholder { flex: 1; text-align: left; }
+    [data-pattern="nav-docs-search"] kbd {
+      background: var(--surface-recessed);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-recede);
+    }
+    [data-pattern="nav-docs-search"] svg.icon { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* meta-actions */
+    [data-pattern="nav-docs-meta-actions"] {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+    [data-pattern="nav-docs-meta-actions"] .action {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      background: transparent;
+      border: var(--border-width-sm) solid transparent;
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-sm);
+      font-weight: var(--font-weight-medium);
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition-default);
+    }
+    [data-pattern="nav-docs-meta-actions"] .action:hover { background: var(--surface-elevated); color: var(--accent-hover); }
+    [data-pattern="nav-docs-meta-actions"] .action:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+    [data-pattern="nav-docs-meta-actions"] .action svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    [data-pattern="nav-docs-meta-actions"] .version {
+      display: inline-flex; align-items: center; gap: 2px;
+      background: var(--surface-elevated);
+      border: var(--border-width-sm) solid var(--border);
+      padding: var(--space-1) var(--space-2);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: var(--type-size-xs);
+    }
+
+    /* ===== SIDEBAR ===== */
+    [data-pattern="nav-docs-sidebar"] {
+      grid-row: 2;
+      background: var(--surface);
+      color: var(--text);
+      border-right: var(--border-width-sm) solid var(--border);
+      padding: var(--space-3) var(--space-3);
+      overflow-y: auto;
+      max-height: calc(100vh - 56px);
+      position: sticky;
+      top: 56px;
+      z-index: 90;
+    }
+    [data-pattern="nav-docs-section"][data-register="topbar-only"] [data-pattern="nav-docs-sidebar"] { display: none; }
+
+    /* nav-docs-sidebar-section */
+    [data-pattern="nav-docs-sidebar-section"] {
+      margin-bottom: var(--space-3);
+    }
+    [data-pattern="nav-docs-sidebar-section"] h3 {
+      margin: var(--space-3) 0 var(--space-1);
+      padding: 0;
+    }
+    [data-pattern="nav-docs-sidebar-section"] h3 button {
+      display: inline-flex; align-items: center; gap: var(--space-1);
+      width: 100%;
+      background: transparent;
+      border: 0;
+      padding: var(--space-1) var(--space-2);
+      color: var(--text-emphasis);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-xs);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      cursor: pointer;
+      text-align: left;
+      border-radius: var(--radius-sm);
+      transition: var(--transition-default);
+    }
+    [data-pattern="nav-docs-sidebar-section"] h3 button:hover { background: var(--surface-elevated); }
+    [data-pattern="nav-docs-sidebar-section"] h3 button:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+    [data-pattern="nav-docs-sidebar-section"] h3 button .chevron {
+      width: 12px; height: 12px;
+      stroke: currentColor; fill: none; stroke-width: 2;
+      stroke-linecap: round; stroke-linejoin: round;
+      margin-left: auto;
+      transition: transform var(--motion-fast) var(--ease-standard);
+    }
+    [data-pattern="nav-docs-sidebar-section"][data-expanded="false"] h3 button .chevron { transform: rotate(-90deg); }
+    [data-pattern="nav-docs-sidebar-section"][data-expanded="false"] ul { display: none; }
+    [data-pattern="nav-docs-sidebar-section"] ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    /* nav-docs-sidebar-link */
+    [data-pattern="nav-docs-sidebar-link"] {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-3);
+      color: var(--text);
+      text-decoration: none;
+      font-family: var(--font-sans);
+      font-size: var(--type-size-sm);
+      font-weight: var(--font-weight-medium);
+      border-radius: var(--radius-sm);
+      position: relative;
+      transition: var(--transition-default);
+    }
+    [data-pattern="nav-docs-sidebar-link"]:hover { background: var(--surface-elevated); color: var(--accent-hover); }
+    [data-pattern="nav-docs-sidebar-link"]:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+    [data-pattern="nav-docs-sidebar-link"][aria-current="page"] {
+      background: var(--accent-recede);
+      color: var(--text-emphasis);
+      font-weight: var(--font-weight-semibold);
+    }
+    [data-pattern="nav-docs-sidebar-link"][aria-current="page"]::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: var(--space-1);
+      bottom: var(--space-1);
+      width: 2px;
+      background: var(--accent);
+      border-radius: 0 2px 2px 0;
+    }
+    [data-pattern="nav-docs-sidebar-link"][data-depth="2"] { padding-left: var(--space-card); }
+    [data-pattern="nav-docs-sidebar-link"][data-depth="3"] { padding-left: var(--space-panel); }
+    [data-pattern="nav-docs-sidebar-link"] .badge {
+      display: inline-flex; align-items: center;
+      padding: 1px var(--space-2);
+      border-radius: var(--radius-pill);
+      font-size: 0.6rem;
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      margin-left: auto;
+      flex: 0 0 auto;
+    }
+    [data-pattern="nav-docs-sidebar-link"] .badge[data-tone="new"] { background: var(--success); color: var(--text-on-accent); }
+    [data-pattern="nav-docs-sidebar-link"] .badge[data-tone="beta"] { background: var(--accent-recede); color: var(--accent); }
+    [data-pattern="nav-docs-sidebar-link"] .badge[data-tone="deprecated"] { background: var(--critical); color: var(--text-on-accent); }
+
+    /* Mobile toggle */
+    [data-pattern="nav-docs-mobile-toggle"] {
+      display: none;
+      background: transparent;
+      border: 0;
+      padding: var(--space-2);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      cursor: pointer;
+      transition: var(--transition-default);
+    }
+    [data-pattern="nav-docs-mobile-toggle"]:hover { background: var(--surface-elevated); }
+    [data-pattern="nav-docs-mobile-toggle"]:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+    @media (max-width: 960px) {
+      [data-pattern="nav-docs-mobile-toggle"] { display: inline-flex; }
+      [data-pattern="nav-docs-section"][data-register="with-sidebar"] {
+        grid-template-columns: 1fr;
+      }
+      [data-pattern="nav-docs-sidebar"] {
+        position: fixed;
+        top: 56px;
+        left: 0;
+        width: 280px;
+        height: calc(100vh - 56px);
+        transform: translateX(-100%);
+        transition: transform var(--motion-normal) var(--ease-standard);
+        z-index: 200;
+      }
+      [data-pattern="nav-docs-section"][data-state="mobile-drawer-open"] [data-pattern="nav-docs-sidebar"] {
+        transform: translateX(0);
+      }
+    }
+
+    /* Demo content stub */
+    .docs-content-stub {
+      grid-row: 2;
+      padding: var(--space-section) var(--space-panel);
+      color: var(--text);
+      max-width: 720px;
+    }
+    .docs-content-stub h3 { font-family: var(--font-display); font-size: var(--type-size-2xl); font-weight: var(--font-weight-semibold); margin: 0 0 var(--space-3); color: var(--text-emphasis); }
+    .docs-content-stub p { color: var(--text-recede); }
+
+    .lineage { width: 100%; border-collapse: collapse; font-size: var(--type-size-sm); }
+    .lineage th, .lineage td { text-align: left; padding: var(--space-2) var(--space-3); border-bottom: var(--border-width-sm) solid var(--border); vertical-align: top; }
+    .lineage th { background: var(--surface-elevated); color: var(--text-emphasis); font-weight: var(--font-weight-semibold); font-size: var(--type-size-xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; }
+    .lineage code { font-family: var(--font-mono); font-size: var(--type-size-xs); background: var(--surface-recessed); padding: 0 4px; border-radius: 3px; color: var(--text-emphasis); }
+    .a11y-list { font-size: var(--type-size-sm); line-height: var(--leading-prose); color: var(--text-recede); padding-left: var(--space-card); }
+    .a11y-list code { font-family: var(--font-mono); font-size: 0.85em; background: var(--surface-recessed); padding: 0 4px; border-radius: 3px; color: var(--text-emphasis); }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1 class="doc">pattern-nav-docs — specimen</h1>
+      <p class="lede">Docs site navigation — top-bar (logo + search + version + theme + GitHub) plus collapsible left sidebar (docs tree). The Quoin Docs / Stripe Docs / Vercel Docs / Linear Docs convention. 10 primitives. <strong>WCAG 2.4.1 skip-to-content link is part of the hard contract</strong> — visually hidden until focused, first focusable element in the tree.</p>
+      <dl class="meta">
+        <div><dt>Pack</dt><dd>@quoin/pattern-nav-docs@1.0.0</dd></div>
+        <div><dt>Primitives</dt><dd>10 (section · topbar · brand · search · meta-actions · sidebar · sidebar-section · sidebar-link · mobile-toggle · skip-link)</dd></div>
+        <div><dt>Registers</dt><dd>with-sidebar / topbar-only</dd></div>
+        <div><dt>States</dt><dd>default / sidebar-collapsed / mobile-drawer-open / search-open</dd></div>
+        <div><dt>Composes</dt><dd>button-system (search trigger and meta-actions); soft-composes pattern-modal-dialog (Cmd+K palette)</dd></div>
+        <div><dt>WCAG</dt><dd>2.4.1 (skip link), 2.4.6 (nav labels), 4.1.2 (aria-current, aria-expanded)</dd></div>
+      </dl>
+    </header>
+
+    <!-- =================== CANONICAL WITH-SIDEBAR =================== -->
+    <section class="specimen-divider">
+      <h2>Register: with-sidebar · canonical Quoin Docs</h2>
+      <p>Top-bar with brand + Cmd+K search + version selector + theme switcher + GitHub link. Left sidebar with collapsible category sections. Active page highlighted with accent indicator. Skip-to-content link is the first focusable element (Tab to reveal).</p>
+    </section>
+    <div class="stage">
+      <div data-pattern="nav-docs-section" data-register="with-sidebar" data-sidebar-width="default" data-state="default">
+        <a data-pattern="nav-docs-skip-link" href="#main">Skip to main content</a>
+        <nav data-pattern="nav-docs-topbar" aria-label="Top">
+          <button data-pattern="nav-docs-mobile-toggle" type="button" aria-expanded="false" aria-controls="docs-sidebar" aria-label="Open documentation menu">
+            <svg style="width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2;" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" /></svg>
+          </button>
+          <a data-pattern="nav-docs-brand" href="/" aria-label="Quoin home">
+            Quoin
+            <span class="subtitle">Docs</span>
+          </a>
+          <button data-pattern="nav-docs-search" type="button" aria-keyshortcuts="Meta+K Control+K" aria-expanded="false" aria-haspopup="dialog" aria-label="Search docs; press Command K">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            <span class="placeholder">Search docs…</span>
+            <kbd>⌘K</kbd>
+          </button>
+          <div class="spacer"></div>
+          <div data-pattern="nav-docs-meta-actions" role="group" aria-label="Documentation actions">
+            <button class="action version" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Documentation version">
+              v1.0
+              <svg style="width: 10px; height: 10px; stroke: currentColor; fill: none; stroke-width: 2;" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5"/></svg>
+            </button>
+            <button class="action" type="button" aria-label="Theme: auto" aria-pressed="false">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+            </button>
+            <a class="action" href="https://github.com/harrowhaus/quoin" rel="noopener noreferrer" aria-label="Quoin on GitHub (opens in new tab)">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.1.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z" stroke="none" fill="currentColor"/></svg>
+              <span class="sr-only" style="position: absolute; left: -9999px;">GitHub</span>
+            </a>
+          </div>
+        </nav>
+        <nav data-pattern="nav-docs-sidebar" id="docs-sidebar" role="navigation" aria-label="Documentation">
+          <div data-pattern="nav-docs-sidebar-section" data-expanded="true">
+            <h3 id="sec-getting-started"><button aria-expanded="true" aria-controls="sec-getting-started-list">Getting started <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5"/></svg></button></h3>
+            <ul id="sec-getting-started-list">
+              <li><a data-pattern="nav-docs-sidebar-link" href="/docs" data-depth="1">Introduction</a></li>
+              <li><a data-pattern="nav-docs-sidebar-link" href="/docs/install" data-depth="1">Install</a></li>
+              <li><a data-pattern="nav-docs-sidebar-link" href="/docs/first-pack" data-depth="1" aria-current="page">Build your first pack</a></li>
+              <li><a data-pattern="nav-docs-sidebar-link" href="/docs/configure" data-depth="1">Configure your project</a></li>
+            </ul>
+          </div>
+
+          <div data-pattern="nav-docs-sidebar-section" data-expanded="true">
+            <h3 id="sec-concepts"><button aria-expanded="true" aria-controls="sec-concepts-list">Concepts <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5"/></svg></button></h3>
+            <ul id="sec-concepts-list">
+              <li><a data-pattern="nav-docs-sidebar-link" href="/docs/packs" data-depth="1">Pack types</a></li>
+              <li><a data-pattern="nav-docs-sidebar-link" href="/docs/tokens" data-depth="2">Token packs</a></li>
+              <li><a data-pattern="nav-docs-sidebar-link" href="/docs/vocab" data-depth="2">Vocabulary packs</a></li>
+              <li><a data-pattern="nav-docs-sidebar-link" href="/docs/patterns" data-depth="2">Pattern packs <span class="badge" data-tone="new" aria-label="New release">NEW</span></a></li>
+              <li><a data-pattern="nav-docs-sidebar-link" href="/docs/aesthetics" data-depth="2">Aesthetic packs</a></li>
+              <li><a data-pattern="nav-docs-sidebar-link" href="/docs/compilation" data-depth="1">Compilation model</a></li>
+              <li><a data-pattern="nav-docs-sidebar-link" href="/docs/cascade" data-depth="1">Token cascade</a></li>
+            </ul>
+          </div>
+
+          <div data-pattern="nav-docs-sidebar-section" data-expanded="false">
+            <h3 id="sec-reference"><button aria-expanded="false" aria-controls="sec-reference-list">Reference <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5"/></svg></button></h3>
+            <ul id="sec-reference-list">
+              <li><a data-pattern="nav-docs-sidebar-link" href="/docs/api/compile" data-depth="1">compile()</a></li>
+              <li><a data-pattern="nav-docs-sidebar-link" href="/docs/api/load" data-depth="1">load()</a></li>
+              <li><a data-pattern="nav-docs-sidebar-link" href="/docs/api/validate" data-depth="1">validate()</a></li>
+            </ul>
+          </div>
+
+          <div data-pattern="nav-docs-sidebar-section" data-expanded="false">
+            <h3 id="sec-recipes"><button aria-expanded="false" aria-controls="sec-recipes-list">Recipes <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5"/></svg></button></h3>
+            <ul id="sec-recipes-list">
+              <li><a data-pattern="nav-docs-sidebar-link" href="/docs/recipes/multi-theme" data-depth="1">Multi-theme site</a></li>
+              <li><a data-pattern="nav-docs-sidebar-link" href="/docs/recipes/composing" data-depth="1">Composing pattern packs <span class="badge" data-tone="beta" aria-label="Beta release">BETA</span></a></li>
+            </ul>
+          </div>
+        </nav>
+        <div class="docs-content-stub" id="main">
+          <h3>Build your first pack</h3>
+          <p>Welcome to Quoin. This is a placeholder for the actual docs content — in production, the page renders here. The sidebar shows the active page (currently "Build your first pack") highlighted with the accent indicator.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================== SIDEBAR-COLLAPSED =================== -->
+    <section class="specimen-divider">
+      <h2>State: sidebar-collapsed (host-controlled)</h2>
+      <p>Sidebar collapsed to a thin icon column — saves horizontal space for long-form content. Host JS toggles via a sidebar-collapse button (not part of this pattern's primitives — host-supplied).</p>
+    </section>
+    <div class="stage">
+      <div data-pattern="nav-docs-section" data-register="with-sidebar" data-sidebar-width="default" data-state="sidebar-collapsed" style="grid-template-columns: 56px 1fr;">
+        <nav data-pattern="nav-docs-topbar" aria-label="Top">
+          <a data-pattern="nav-docs-brand" href="/" aria-label="Quoin home">
+            Quoin
+            <span class="subtitle">Docs</span>
+          </a>
+          <button data-pattern="nav-docs-search" type="button" aria-keyshortcuts="Meta+K Control+K" aria-label="Search docs">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            <span class="placeholder">Search docs…</span>
+            <kbd>⌘K</kbd>
+          </button>
+          <div class="spacer"></div>
+          <div data-pattern="nav-docs-meta-actions" role="group" aria-label="Documentation actions">
+            <a class="action" href="https://github.com/harrowhaus/quoin" aria-label="Quoin on GitHub">
+              <svg viewBox="0 0 24 24" stroke="none" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.1.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+            </a>
+          </div>
+        </nav>
+        <nav data-pattern="nav-docs-sidebar" role="navigation" aria-label="Documentation" style="padding: var(--space-3) var(--space-2); border-right: var(--border-width-sm) solid var(--border);">
+          <a class="action" href="/docs" aria-label="Getting started" title="Getting started" style="display: flex; padding: var(--space-3); color: var(--text-recede); border-radius: var(--radius-sm); margin-bottom: var(--space-1);">
+            <svg style="width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2;" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </a>
+          <a class="action" href="/docs/concepts" aria-label="Concepts" title="Concepts" style="display: flex; padding: var(--space-3); color: var(--accent); background: var(--accent-recede); border-radius: var(--radius-sm); margin-bottom: var(--space-1);">
+            <svg style="width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2;" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+          </a>
+          <a class="action" href="/docs/api" aria-label="Reference" title="Reference" style="display: flex; padding: var(--space-3); color: var(--text-recede); border-radius: var(--radius-sm);">
+            <svg style="width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2;" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+          </a>
+        </nav>
+        <div class="docs-content-stub">
+          <h3>More room for content</h3>
+          <p>With the sidebar collapsed, long code samples and wide diagrams have more horizontal real estate. Hover any sidebar icon to see its tooltip; click to expand.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================== TOPBAR-ONLY =================== -->
+    <section class="specimen-divider">
+      <h2>Register: topbar-only</h2>
+      <p>No sidebar. Used on docs landing pages or single-page docs where a tree isn't useful.</p>
+    </section>
+    <div class="stage">
+      <div data-pattern="nav-docs-section" data-register="topbar-only" data-state="default">
+        <nav data-pattern="nav-docs-topbar" aria-label="Top">
+          <a data-pattern="nav-docs-brand" href="/" aria-label="Quoin home">
+            Quoin
+            <span class="subtitle">Docs</span>
+          </a>
+          <button data-pattern="nav-docs-search" type="button" aria-label="Search docs">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            <span class="placeholder">Search docs…</span>
+            <kbd>⌘K</kbd>
+          </button>
+          <div class="spacer"></div>
+          <div data-pattern="nav-docs-meta-actions" role="group">
+            <button class="action version" type="button">v1.0</button>
+            <button class="action" type="button" aria-label="Theme"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"/></svg></button>
+            <a class="action" href="https://github.com/harrowhaus/quoin" aria-label="GitHub"><svg viewBox="0 0 24 24" stroke="none" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.1.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg></a>
+          </div>
+        </nav>
+        <div class="docs-content-stub" style="grid-row: 2; max-width: 100%; padding: var(--space-section) var(--space-panel);">
+          <h3>Docs landing</h3>
+          <p>The topbar-only register suits the docs index/landing page — no sidebar; content takes full width.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================== COMPOSITION LINEAGE =================== -->
+    <section class="specimen-divider">
+      <h2>Composition lineage — what nav-docs consumes</h2>
+    </section>
+    <table class="lineage">
+      <thead>
+        <tr><th>Consumed primitive</th><th>Source pack</th><th>Used in</th><th>How this pattern uses it</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>&lt;action-button intent="ghost"&gt;</code></td>
+          <td>@quoin/pattern-button-system</td>
+          <td>nav-docs-meta-actions (theme switcher, GitHub link, version selector) · nav-docs-mobile-toggle</td>
+          <td>Ghost intent for all top-bar utility buttons. Inherits all 8 microstates.</td>
+        </tr>
+        <tr>
+          <td><code>&lt;modal-dialog variant="command"&gt;</code> (soft)</td>
+          <td>@quoin/pattern-modal-dialog</td>
+          <td>Cmd+K search palette</td>
+          <td>The search trigger opens a command palette dialog (variant=command). Soft composition — referenced via aria-haspopup="dialog"; the palette is host-mounted, not bundled in this pattern.</td>
+        </tr>
+        <tr>
+          <td>canonical tokens</td>
+          <td>@quoin/tokens-baseline</td>
+          <td>every CSS value</td>
+          <td>Typography / spacing / borders / motion / focus-ring. Sidebar layout uses CSS Grid with named columns.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <section class="specimen-divider">
+      <h2>Accessibility checklist</h2>
+    </section>
+    <ul class="a11y-list">
+      <li><strong>WCAG 2.4.1 (Bypass Blocks):</strong> Skip-to-content link as first focusable element. Visually hidden until focused. Points to id="main" on the host page's main content wrapper.</li>
+      <li><strong>WCAG 2.4.6 (Headings and Labels):</strong> Top-bar nav has <code>aria-label="Top"</code>, sidebar has <code>aria-label="Documentation"</code>, meta-actions cluster has <code>role="group" aria-label="Documentation actions"</code>. Distinct nav landmarks.</li>
+      <li><strong>WCAG 4.1.2 (Name, Role, Value):</strong> Active sidebar link gets <code>aria-current="page"</code>. Collapsible section headings have <code>aria-expanded="true|false"</code> + <code>aria-controls</code>.</li>
+      <li><strong>Search ARIA:</strong> <code>aria-keyshortcuts="Meta+K Control+K"</code> + <code>aria-haspopup="dialog"</code> + <code>aria-expanded</code>. Same contract as nav-app-chrome's app-global-search.</li>
+      <li><strong>Mobile toggle:</strong> <code>aria-expanded</code> + <code>aria-controls="docs-sidebar"</code> + state-paired <code>aria-label</code> ("Open documentation menu" / "Close documentation menu").</li>
+      <li><strong>Mobile drawer:</strong> When open, sidebar gets <code>aria-modal="true"</code> + focus trap + Escape-to-close + body scroll lock.</li>
+      <li><strong>External link affordance:</strong> GitHub link carries <code>rel="noopener noreferrer"</code> + aria-label noting new-tab destination.</li>
+      <li><strong>Sidebar tree depth indicators:</strong> data-depth attribute on links signals visual indentation. Does NOT change the semantic structure — the flat <code>&lt;ul&gt;</code> remains accessible.</li>
+      <li><strong>Sidebar section collapse:</strong> Heading text is wrapped in <code>&lt;button aria-expanded&gt;</code> so keyboard users can collapse/expand. Enter+Space activate.</li>
+      <li><strong>Badge labels:</strong> NEW/BETA/DEPRECATED badges carry <code>aria-label</code> describing the badge meaning. Visual letters are aria-hidden.</li>
+      <li><strong>Theme switcher:</strong> Tri-state (light/dark/auto). Implemented as <code>aria-pressed</code> on the button, with aria-label naming the current state.</li>
+      <li><strong>Focus styles:</strong> Every interactive element receives visible <code>:focus-visible</code> outline via <code>--focus-ring</code> tokens.</li>
+      <li><strong>Reduced motion:</strong> Sidebar drawer slide-in collapses to instant under <code>prefers-reduced-motion: reduce</code>.</li>
+    </ul>
+  </main>
+</body>
+</html>

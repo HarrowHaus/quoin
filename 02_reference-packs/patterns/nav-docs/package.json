@@ -1,0 +1,24 @@
+{
+  "name": "@quoin/pattern-nav-docs",
+  "version": "1.0.0",
+  "description": "P1 docs-site nav for Quoin — top-bar + sidebar tree. 10 primitives. Skip-link contract. Mobile drawer. Composes button-system, soft-composes modal-dialog.",
+  "license": "MIT",
+  "main": "./quoin.pack.json",
+  "files": [
+    "quoin.pack.json",
+    "primitives/",
+    "examples/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "pattern", "nav", "docs", "sidebar", "p1"],
+  "peerDependencies": {
+    "@quoin/tokens-baseline": "^0.1.0",
+    "@quoin/pattern-button-system": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "02_reference-packs/patterns/nav-docs"
+  }
+}
