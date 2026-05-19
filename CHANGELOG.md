@@ -6,6 +6,75 @@ versioning follows pre-1.0 conventions until v1.0.0 publication.
 
 ## [Unreleased]
 
+### D.52 — Pack type rename: theme → aesthetic (2026-05-18)
+
+Per the v2 handoff `DECISIONS_UPDATES.md` D.52 plus the operator's
+explicit acknowledgment 2026-05-18, the canonical pack-type
+discriminator for visual-only token-rebinding packs is now
+**`"aesthetic"`**. `"theme"` is retained as a deprecated alias for
+backward compatibility and emits a one-line deprecation warning at
+load time.
+
+The v2 README's "NO code changes — only naming in docs and pack
+manifests" wording is explicitly **superseded** by the operator's
+2026-05-18 acknowledgment, which directed a full manifest-type rename
+plus TypeScript-types canonical-rename with deprecation aliases.
+
+#### Compiler
+
+- **`01_compiler/src/schema/pack-manifest.json`** — `type` enum now
+  includes `"aesthetic"` (canonical) alongside `"theme"` (deprecated).
+  A discriminated `if/then` branch for `"aesthetic"` enforces the same
+  `exports.lightModeOverrides` requirement as the legacy `"theme"`
+  branch. The `"theme"` branch carries a `$comment` explaining its
+  deprecated status.
+- **`01_compiler/src/types.ts`** — `PackType` union extended with
+  `"aesthetic"`. New interface `AestheticPack` is canonical;
+  `ThemePack` retained as a deprecated type alias pointing at
+  `AestheticPack`. Same pattern for `AestheticPackSource` /
+  `ThemePackSource`. `CompileOptions` gains canonical `aestheticPack`
+  field; `themePack` retained as deprecated optional field. New
+  exported constant `PACK_TYPE_ALIASES = { theme: "aesthetic" }`.
+- **`01_compiler/src/pack-loader.ts`** — new canonical
+  `loadAestheticPack()` function accepts manifests with `"type":
+  "aesthetic"` (clean) or `"type": "theme"` (with one-line deprecation
+  warning per pack-name per process via `console.warn`). The legacy
+  `loadThemePack` is exported as a deprecated alias that delegates to
+  `loadAestheticPack`. Warning format:
+  `[quoin] Pack "<name>" uses deprecated type: "theme" — rename to type: "aesthetic" per D.52 (2026-05-18); the "theme" alias will be removed in a future major version.`
+- **`01_compiler/src/compiler.ts`** — `runCompile()` reads
+  `options.aestheticPack ?? options.themePack` and emits a warning
+  diagnostic when only the deprecated field is supplied. `mergedTokens`
+  signature parameter renamed `themePack` → `aestheticPack`.
+- **`01_compiler/src/index.ts`** — public API exports `AestheticPack`,
+  `AestheticPackSource`, `loadAestheticPack` as canonical; the
+  `ThemePack`, `ThemePackSource`, `loadThemePack` exports carry
+  `@deprecated` JSDoc tags.
+
+#### Manifests updated
+
+All 11 aesthetic packs (10 v1.0 in `02_reference-packs/themes/` + the
+reference pack `theme-baseline-reference`) updated from
+`"type": "theme"` to `"type": "aesthetic"`. Directory paths preserved
+(operator decision didn't require directory rename). The npm package
+name `@quoin/theme-baseline-reference` is also preserved (separate
+publish concern; the type field is what canonicalizes).
+
+#### Audit docs
+
+`PHASE_GATES.md` + `plans/PHASE_GATES.md` updated so the "Phase
+Aesthetic Packs" section reads as canonical with a parenthetical
+"was 'Phase Theme Packs' pre-D.52 rename" for traceability.
+
+#### Validation
+
+- Compiler builds clean (TypeScript strict, no errors).
+- Compiler test suite still 96/96.
+- `02_reference-packs/themes/validate.js`: 10/10 packs pass; cross-diversity verified.
+- `02_reference-packs/validate.js`: 80/80 reference checks pass.
+- `02_reference-packs/validate-extension.js`: all Phase 0.5-extension checks pass.
+- `03_harvest/validate.js`: 40/40 harvested packs validate.
+
 ### Typography distinctness — aurora / arcade / vapor redesigned with distinct OFL faces (2026-05-17)
 
 After the commercial-font cleanup three themes shared

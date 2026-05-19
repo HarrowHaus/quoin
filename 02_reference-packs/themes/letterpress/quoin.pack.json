@@ -2,7 +2,7 @@
   "$schema": "https://harrow.haus/quoin/schema/pack.json",
   "name": "@quoin/theme-letterpress",
   "version": "1.0.0",
-  "type": "theme",
+  "type": "aesthetic",
   "quoinVersion": "^0.1.0",
   "description": "Tactile Warmth — Pantone Cloud Dancer ground, cream/sand/oat/terracotta palette, magazine-grid rhythm, grain overlay instead of shadow. For studio sites and agency portfolios.",
   "exports": {

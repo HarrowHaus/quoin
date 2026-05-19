@@ -2,7 +2,7 @@
   "$schema": "https://harrow.haus/quoin/schema/pack.json",
   "name": "@quoin/theme-arcade",
   "version": "1.0.0",
-  "type": "theme",
+  "type": "aesthetic",
   "quoinVersion": "^0.1.0",
   "description": "Dopamine Saturation — hyper-saturated palette, oversized display sans, spring-overshoot motion, retro-future glow shadows. For consumer products and creator tools.",
   "exports": {

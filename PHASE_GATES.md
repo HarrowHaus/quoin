@@ -37,11 +37,13 @@ A **screenshot grid** showing every pack / template / pattern / page rendered si
 
 ---
 
-## Phase Themes — 10 v1.0 theme packs
+## Phase Aesthetic Packs — 10 v1.0 packs (was "Phase Themes" pre-D.52 rename)
 
-**Output location:** `02_reference-packs/themes/{vellum,graphite,aurora,letterpress,terminal,broadsheet,bloom,arcade,prism,vapor}/` (10 theme packs), `02_reference-packs/themes/{validate.js,showcase.js,showcase.html,README.md}` (cross-theme tooling).
+**D.52 rename (operator-locked 2026-05-18):** the 10 packs in this section ship with `"type": "aesthetic"` per the canonical pack-type name. `"theme"` is retained only as a deprecated alias accepted by the loader. The directory path `02_reference-packs/themes/` is preserved (operator decision didn't require a directory rename).
 
-**Goal:** Ship 10 theme packs covering the 2026 trend landscape from research Section 1A. Each pack declares trend lineage + reference site + published sources, ships light + dark + P3 mode override files, uses OKLCH authoring with sRGB hex documented, and meets the cross-trend baseline expectations in Section 1C.
+**Output location:** `02_reference-packs/themes/{vellum,graphite,aurora,letterpress,terminal,broadsheet,bloom,arcade,prism,vapor}/` (10 aesthetic packs), `02_reference-packs/themes/{validate.js,showcase.js,showcase.html,README.md}` (cross-pack tooling).
+
+**Goal:** Ship 10 aesthetic packs covering the 2026 trend landscape from research Section 1A. Each pack declares trend lineage + reference site + published sources, ships light + dark + P3 mode override files, uses OKLCH authoring with sRGB hex documented, and meets the cross-trend baseline expectations in Section 1C.
 
 **Exit criteria:**
 
@@ -164,7 +166,7 @@ A `quoin-handoff` package was delivered describing the v1.0 launch plan. Mapping
 | **Phase 0.5 — Canonical Namespace Expansion** | **Done** via Phase 0.5 + handoff additive. 175-token namespace across 11 DTCG types. Identity typography (Junicode + Ranade + Monaspace + Departure Mono) wired into `tokens-baseline`. |
 | **Phase 3.5c — Composite Token Fidelity** | **Done** via Phase 3.5c + 3.5d. All 30 packs validate against the expanded namespace. 3 packs (tailwind, material3, bootstrap) refined with source-faithful composite values; 27 on programmatic defaults. |
 | **Phase 0.5-extension — New pack types** | **Done** — 4 pack types (theme/template/pattern/icon) defined; manifest schema extended; compiler hooks land theme override resolution, pattern registry merge, and icon resolution; 4 reference packs ship; 96/96 tests pass. |
-| **Phase Theme Packs** (10 packs) | **Done** — 10 packs ship (vellum / graphite / aurora / letterpress / terminal / broadsheet / bloom / arcade / prism / vapor); cross-diversity verified; validator + showcase tooling lands. |
+| **Phase Aesthetic Packs** (10 packs; was "Phase Theme Packs" pre-D.52 rename) | **Done** — 10 packs ship at `"type": "aesthetic"` (vellum / graphite / aurora / letterpress / terminal / broadsheet / bloom / arcade / prism / vapor); cross-diversity verified; validator + showcase tooling lands. |
 | **Phase Pattern Packs** (~30 covering P0 + P1 + Forme F.01–F.18) | **Active — must complete before Templates.** Phase reorder 2026-05-17: Templates halted mid-execution when the dependency error in the original graph (Templates marked parallel with Patterns) surfaced. Templates composes Patterns the way a SaaS app composes a component library; if Patterns don't ship first, Templates either author primitives inline (violating composition architecture) or fall to scaffold quality (violating universal pack quality bar in `skills/quoin-pack-author.md`). |
 | **Phase Template Packs** (10 packs) | **Blocked on Pattern Packs phase complete + operator-approved.** Resumes after Patterns ships at full quality bar. |
 | **Phase Icon Packs** (17–18) | Blocked on 0.5-extension. |

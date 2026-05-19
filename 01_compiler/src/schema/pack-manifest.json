@@ -19,11 +19,13 @@
         "token",
         "vocabulary",
         "implementation",
+        "aesthetic",
         "theme",
         "template",
         "pattern",
         "icon"
-      ]
+      ],
+      "description": "Pack type discriminator. Canonical value is 'aesthetic' for visual-only token-rebinding packs; 'theme' is accepted as a deprecated alias for backward compatibility and emits a one-line deprecation warning at load time. Other values: 'token' (rebind canonical tokens), 'vocabulary' (define semantic primitives), 'implementation' (CSS emitter), 'template' (page scaffold), 'pattern' (pre-composed pattern primitives), 'icon' (icon set). Backend packs (D.51) will add 'backend' in Phase 14."
     },
     "quoinVersion": { "type": "string" },
     "description": { "type": "string", "minLength": 1, "maxLength": 200 },
@@ -178,7 +180,7 @@
       }
     },
     {
-      "if": { "properties": { "type": { "const": "theme" } }, "required": ["type"] },
+      "if": { "properties": { "type": { "const": "aesthetic" } }, "required": ["type"] },
       "then": {
         "properties": {
           "exports": {
@@ -190,6 +192,22 @@
             }
           }
         }
+      }
+    },
+    {
+      "if": { "properties": { "type": { "const": "theme" } }, "required": ["type"] },
+      "then": {
+        "properties": {
+          "exports": {
+            "required": ["lightModeOverrides"],
+            "properties": {
+              "lightModeOverrides": { "type": "string" },
+              "darkModeOverrides": { "type": "string" },
+              "p3WideGamutOverrides": { "type": "string" }
+            }
+          }
+        },
+        "$comment": "Deprecated alias for 'aesthetic'. Accepted for backward compatibility; loader emits a one-line deprecation warning at load time (D.52 rename, operator-locked 2026-05-18)."
       }
     },
     {

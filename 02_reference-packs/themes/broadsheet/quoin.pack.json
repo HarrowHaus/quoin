@@ -2,7 +2,7 @@
   "$schema": "https://harrow.haus/quoin/schema/pack.json",
   "name": "@quoin/theme-broadsheet",
   "version": "1.0.0",
-  "type": "theme",
+  "type": "aesthetic",
   "quoinVersion": "^0.1.0",
   "description": "Big Editorial Headline — 100px+ display type as the design centerpiece, monochrome/duotone palette, single-column rhythm. For editorial publications and typography-forward brands.",
   "exports": {

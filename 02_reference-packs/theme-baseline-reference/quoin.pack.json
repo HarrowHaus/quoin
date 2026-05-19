@@ -2,7 +2,7 @@
   "$schema": "https://harrow.haus/quoin/schema/pack.json",
   "name": "@quoin/theme-baseline-reference",
   "version": "0.1.0",
-  "type": "theme",
+  "type": "aesthetic",
   "quoinVersion": "^0.1.0",
   "description": "Reference theme pack — neutral light mode pass-through plus an inverted dark mode and a P3 wide-gamut variant.",
   "exports": {

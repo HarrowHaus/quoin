@@ -39,14 +39,17 @@ Before any phase advances:
 - [ ] Compiler hooks for templates (scaffold-and-install vs build-time compile distinction).
 - [ ] At least 1 reference pack per new type ships in `02_reference-packs/`.
 
-## Phase Theme Packs
+## Phase Aesthetic Packs (was "Theme Packs", renamed per D.52)
 
-- [ ] 10 theme packs shipped: vellum, graphite, aurora, letterpress, terminal, broadsheet, bloom, arcade, prism (opt-in), vapor (only if gradient generator is novel).
+**D.52 rename (operator-locked 2026-05-18):** the canonical pack type is `"aesthetic"`. `"theme"` remains a valid manifest type for backward compatibility but emits a one-line deprecation warning at load time. All audit language below uses the canonical name.
+
+- [ ] 10 aesthetic packs shipped: vellum, graphite, aurora, letterpress, terminal, broadsheet, bloom, arcade, prism (opt-in), vapor (only if gradient generator is novel).
+- [ ] Every shipped manifest declares `"type": "aesthetic"` (the canonical name; not the deprecated `"theme"` alias).
 - [ ] Each pack cites the trend lineage from research doc.
 - [ ] Each pack cites the reference site whose aesthetic it approximates.
 - [ ] Each pack has light + dark mode.
-- [ ] All themes meet cross-trend baseline (OKLCH, variable fonts, dark default, reduced-motion respect, tabular numerics, APCA contrast).
-- [ ] Side-by-side rendering of showcase composition across all 10 themes reads as 10 visibly distinct aesthetics.
+- [ ] All aesthetic packs meet cross-trend baseline (OKLCH, variable fonts, dark default, reduced-motion respect, tabular numerics, APCA contrast).
+- [ ] Side-by-side rendering of showcase composition across all 10 packs reads as 10 visibly distinct aesthetics.
 
 ## Phase Template Packs
 

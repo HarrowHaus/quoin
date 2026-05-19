@@ -2,7 +2,7 @@
   "$schema": "https://harrow.haus/quoin/schema/pack.json",
   "name": "@quoin/theme-prism",
   "version": "1.0.0",
-  "type": "theme",
+  "type": "aesthetic",
   "quoinVersion": "^0.1.0",
   "description": "Liquid Glass — frosted-glass material as depth, light-responsive surfaces, floating chromes. Use when shipping iOS 26-adjacent feel. Requires backdrop-filter support.",
   "exports": {

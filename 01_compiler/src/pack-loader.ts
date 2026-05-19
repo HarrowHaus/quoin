@@ -153,21 +153,45 @@ function normalisePrimitivesList(input: unknown): PrimitiveDefinition[] {
   );
 }
 
-/* ────────────────────── Theme pack ────────────────────── */
+/* ────────────────────── Aesthetic pack (was "theme pack") ──────────────────────
+ *
+ * D.52 rename (operator-locked 2026-05-18): the canonical type is now
+ * "aesthetic". "theme" remains a valid manifest type for backward
+ * compatibility but emits a one-line deprecation warning at load time.
+ *
+ * The TypeScript interface name is `AestheticPack` (with `ThemePack` aliased
+ * for backcompat in types.ts). The canonical loader is `loadAestheticPack`;
+ * `loadThemePack` is exported as a deprecated alias that delegates here.
+ */
 
-export async function loadThemePack(source: ThemePackSource): Promise<ThemePack> {
+/** Has-already-warned tracking so we only emit the deprecation warning once per pack-name per process. */
+const themeTypeDeprecationWarned = new Set<string>();
+
+function warnIfDeprecatedThemeType(manifest: PackManifest): void {
+  if (manifest.type === "theme" && !themeTypeDeprecationWarned.has(manifest.name)) {
+    themeTypeDeprecationWarned.add(manifest.name);
+    if (typeof console !== "undefined" && typeof console.warn === "function") {
+      console.warn(
+        `[quoin] Pack "${manifest.name}" uses deprecated type: "theme" — rename to type: "aesthetic" per D.52 (2026-05-18); the "theme" alias will be removed in a future major version.`
+      );
+    }
+  }
+}
+
+export async function loadAestheticPack(source: ThemePackSource): Promise<ThemePack> {
   if (typeof source !== "string") return source;
   const manifest = await readManifest(source);
-  if (manifest.type !== "theme") {
+  if (manifest.type !== "aesthetic" && manifest.type !== "theme") {
     throw new PackValidationError(
-      `Expected theme pack, got "${manifest.type}" for ${manifest.name}`,
+      `Expected aesthetic pack (or deprecated "theme"), got "${manifest.type}" for ${manifest.name}`,
       manifest.name
     );
   }
+  warnIfDeprecatedThemeType(manifest);
   const lightPath = manifest.exports.lightModeOverrides;
   if (!lightPath) {
     throw new PackValidationError(
-      `Theme pack ${manifest.name} missing "exports.lightModeOverrides"`,
+      `Aesthetic pack ${manifest.name} missing "exports.lightModeOverrides"`,
       manifest.name
     );
   }
@@ -182,6 +206,13 @@ export async function loadThemePack(source: ThemePackSource): Promise<ThemePack>
     : undefined;
   return { manifest, lightModeOverrides, darkModeOverrides, p3WideGamutOverrides };
 }
+
+/**
+ * @deprecated Use `loadAestheticPack` instead. Retained as a backward-compat
+ * alias per D.52 (operator-locked 2026-05-18). Delegates to
+ * `loadAestheticPack` and will be removed in a future major version.
+ */
+export const loadThemePack = loadAestheticPack;
 
 async function readOverrideFile(
   packDir: string,

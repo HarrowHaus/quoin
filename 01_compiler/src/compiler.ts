@@ -17,13 +17,13 @@ import type {
   CompilerDiagnostic,
   EmitInput,
   EmitOutput,
+  AestheticPack,
   HTMLElement,
   HTMLNode,
   IconPack,
   PatternPack,
   PrimitiveDefinition,
   ResolvedTokens,
-  ThemePack,
   TokenPack,
   VocabularyPack
 } from "./types.js";
@@ -83,9 +83,22 @@ function runCompile(options: CompileOptions): CompileResult {
     options.patternPacks ?? [],
     warnings
   );
+  // D.52: aestheticPack is canonical; themePack is deprecated alias.
+  // If only the deprecated `themePack` is supplied (without `aestheticPack`),
+  // emit a one-line warning so callers know to switch field name.
+  const aestheticPack = options.aestheticPack ?? options.themePack;
+  if (options.themePack && !options.aestheticPack) {
+    warnings.push({
+      kind: "warning",
+      message:
+        `CompileOptions.themePack is deprecated per D.52 (2026-05-18); rename to aestheticPack. ` +
+        `The "themePack" field will be removed in a future major version.`,
+      pack: options.themePack.manifest?.name
+    });
+  }
   const tokens = mergedTokens(
     options.tokenPack,
-    options.themePack,
+    aestheticPack,
     options.projectTokens
   );
   const iconRegistry = buildIconRegistry(options.iconPacks ?? []);
@@ -319,16 +332,16 @@ function buildIconRegistry(packs: IconPack[]): IconRegistry {
 
 function mergedTokens(
   tokenPack: TokenPack,
-  themePack: ThemePack | undefined,
+  aestheticPack: AestheticPack | undefined,
   projectTokens: Record<string, string> | undefined
 ): Record<string, string> {
-  // Composition order: token pack → theme (light) → project overrides.
-  // Theme dark + p3 overrides aren't applied at compile time — the
-  // implementation pack reads them off the theme pack to emit
-  // mode-scoped CSS blocks alongside the resolved output.
+  // Composition order: token pack → aesthetic (light) → project overrides.
+  // Dark + p3 overrides aren't applied at compile time — the implementation
+  // pack reads them off the aesthetic pack to emit mode-scoped CSS blocks
+  // alongside the resolved output.
   const out: Record<string, string> = { ...tokenPack.tokens };
-  if (themePack) {
-    for (const [name, value] of Object.entries(themePack.lightModeOverrides)) {
+  if (aestheticPack) {
+    for (const [name, value] of Object.entries(aestheticPack.lightModeOverrides)) {
       out[normaliseTokenName(name)] = value;
     }
   }

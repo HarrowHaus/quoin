@@ -105,10 +105,26 @@ export type PackType =
   | "token"
   | "vocabulary"
   | "implementation"
+  | "aesthetic"
   | "theme"
   | "template"
   | "pattern"
   | "icon";
+
+/**
+ * Canonical pack-type discriminator names.
+ *
+ * D.52 (operator-locked 2026-05-18): "aesthetic" is the canonical name
+ * for visual-only token-rebinding packs. "theme" is retained as a
+ * deprecated alias for backward compatibility; the pack-loader emits a
+ * one-line deprecation warning at load time when it encounters a manifest
+ * with `type: "theme"`.
+ *
+ * Phase 14 (multi-backend compiler) will add `"backend"` to this union.
+ */
+export const PACK_TYPE_ALIASES = {
+  theme: "aesthetic"
+} as const;
 
 export interface PackManifest {
   $schema?: string;
@@ -212,23 +228,28 @@ export interface ImplementationPack {
   };
 }
 
-/* ────────────────────── Theme pack ────────────────────── */
+/* ────────────────────── Aesthetic pack (was "theme pack") ──────────────────────
+ *
+ * D.52 rename (operator-locked 2026-05-18): canonical name is now
+ * "aesthetic". `AestheticPack` is the canonical interface; `ThemePack`
+ * is retained as a deprecated alias for backward compatibility.
+ */
 
 /**
- * A loaded theme pack. Theme packs supply mode-scoped overrides on
- * top of a token pack. The override files are DTCG documents whose
+ * A loaded aesthetic pack. Aesthetic packs supply mode-scoped overrides
+ * on top of a token pack. The override files are DTCG documents whose
  * `$value` entries replace tokens already declared in the canonical
  * namespace — adding new names is a validation error.
  *
  * Composition order at compile time:
- *   token pack → theme pack (light) → project overrides
+ *   token pack → aesthetic pack (light) → project overrides
  *
  * Dark mode and P3 wide-gamut overrides are carried through to the
  * implementation pack so it can emit `[data-theme="dark"]` and
  * `@media (color-gamut: p3)` blocks. The compiler itself applies
  * the light-mode overrides at primitive-token resolution time.
  */
-export interface ThemePack {
+export interface AestheticPack {
   manifest: PackManifest;
   /** Light-mode override map — token name -> value. Always present. */
   lightModeOverrides: Record<string, string>;
@@ -237,6 +258,13 @@ export interface ThemePack {
   /** P3 wide-gamut override map — optional. */
   p3WideGamutOverrides?: Record<string, string>;
 }
+
+/**
+ * @deprecated Use `AestheticPack` instead. Retained as a backward-compat
+ * alias per D.52 (operator-locked 2026-05-18). Will be removed in a
+ * future major version.
+ */
+export type ThemePack = AestheticPack;
 
 /* ────────────────────── Pattern pack ────────────────────── */
 
@@ -293,7 +321,15 @@ export interface CompileOptions {
   tokenPack: TokenPack;
   vocabularyPacks: VocabularyPack[];
   implementationPack: ImplementationPack;
-  /** Optional theme pack — light-mode overrides applied at compile time. */
+  /** Optional aesthetic pack — light-mode overrides applied at compile time (D.52 canonical name). */
+  aestheticPack?: AestheticPack;
+  /**
+   * @deprecated Use `aestheticPack` instead. Retained for backward
+   * compatibility per D.52 (operator-locked 2026-05-18). The compiler
+   * reads `aestheticPack ?? themePack` so existing callers continue to
+   * work but emit a one-line warning at compile time when only `themePack`
+   * is supplied.
+   */
   themePack?: ThemePack;
   /** Optional pattern packs — merged into the primitive registry. */
   patternPacks?: PatternPack[];
@@ -328,6 +364,12 @@ export interface CompilerDiagnostic {
 export type TokenPackSource = TokenPack | string;
 export type VocabularyPackSource = VocabularyPack | string;
 export type ImplementationPackSource = ImplementationPack | string;
-export type ThemePackSource = ThemePack | string;
+export type AestheticPackSource = AestheticPack | string;
+
+/**
+ * @deprecated Use `AestheticPackSource` instead. Retained as a backward-compat
+ * alias per D.52 (operator-locked 2026-05-18).
+ */
+export type ThemePackSource = AestheticPackSource;
 export type PatternPackSource = PatternPack | string;
 export type IconPackSource = IconPack | string;

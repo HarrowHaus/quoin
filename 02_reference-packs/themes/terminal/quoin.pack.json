@@ -2,7 +2,7 @@
   "$schema": "https://harrow.haus/quoin/schema/pack.json",
   "name": "@quoin/theme-terminal",
   "version": "1.0.0",
-  "type": "theme",
+  "type": "aesthetic",
   "quoinVersion": "^0.1.0",
   "description": "Honest Brutalism / Editorial Mono — pure-black ground with one acid accent, mono-everywhere, ASCII rules, deliberate column-collision. For engineering blogs and terminal-adjacent apps.",
   "exports": {

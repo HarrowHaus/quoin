@@ -7,6 +7,8 @@ export {
   loadTokenPack,
   loadVocabularyPack,
   loadImplementationPack,
+  loadAestheticPack,
+  /** @deprecated D.52 — use loadAestheticPack. */
   loadThemePack,
   loadPatternPack,
   loadIconPack
@@ -23,6 +25,8 @@ export { serialize } from "./serializer.js";
 export { CompilerError, PackValidationError } from "./errors.js";
 
 export type {
+  AestheticPack,
+  AestheticPackSource,
   AttributeSpec,
   CanonicalAttribute,
   CompileOptions,
@@ -47,7 +51,9 @@ export type {
   PrimitiveDefinition,
   ResolvedAttributes,
   ResolvedTokens,
+  /** @deprecated D.52 — use AestheticPack. */
   ThemePack,
+  /** @deprecated D.52 — use AestheticPackSource. */
   ThemePackSource,
   TokenPack,
   TokenPackSource,
@@ -55,4 +61,4 @@ export type {
   VocabularyPackSource
 } from "./types.js";
 
-export { CANONICAL_ATTRIBUTES, CANONICAL_VALUE_SETS } from "./types.js";
+export { CANONICAL_ATTRIBUTES, CANONICAL_VALUE_SETS, PACK_TYPE_ALIASES } from "./types.js";
