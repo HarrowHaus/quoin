@@ -1,0 +1,25 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/pattern-hero-gradient-mesh",
+  "version": "1.0.0",
+  "type": "pattern",
+  "quoinVersion": "^0.1.0",
+  "description": "OKLCH gradient-mesh hero. Procedural radial-gradient background + typography. 5 palettes × 3 intensities × 2 textures. Hero category 3 of 5. Composes button-system.",
+  "category": "marketing",
+  "variant": "system",
+  "exports": {
+    "primitives": "./primitives/index.json"
+  },
+  "states": ["default", "shifting", "settled"],
+  "microStates": ["default", "hover", "active", "focus", "focus-visible", "disabled", "loading", "selected"],
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/patterns/hero-gradient-mesh",
+    "tags": ["hero", "marketing", "gradient", "mesh", "oklch", "p1"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0",
+    "@quoin/pattern-button-system": "^1.0.0"
+  }
+}
