@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>@quoin/pattern-empty-state — specimen</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=JetBrains+Mono:wght@100..800&display=swap">
+
+  <style>
+    :root {
+      color-scheme: light dark;
+
+      --surface: oklch(98% 0 0);
+      --surface-elevated: oklch(100% 0 0);
+      --surface-recessed: oklch(96% 0 0);
+      --text: oklch(30% 0 0);
+      --text-emphasis: oklch(15% 0 0);
+      --text-recede: oklch(50% 0 0);
+      --text-disabled: oklch(72% 0 0);
+      --text-on-accent: oklch(100% 0 0);
+      --accent: oklch(20% 0 0);
+      --accent-hover: oklch(28% 0 0);
+      --accent-active: oklch(12% 0 0);
+      --accent-recede: oklch(94% 0 0);
+      --critical: oklch(55% 0.22 25);
+      --critical-recede: oklch(95% 0.05 25);
+      --success: oklch(50% 0.18 155);
+      --success-recede: oklch(95% 0.05 155);
+      --warning: oklch(75% 0.18 80);
+      --warning-recede: oklch(95% 0.05 80);
+
+      --border: oklch(88% 0 0);
+      --border-emphasis: oklch(20% 0 0);
+      --border-recede: oklch(94% 0 0);
+      --border-width-sm: 1px;
+      --border-width-md: 2px;
+
+      --focus-ring: oklch(55% 0.22 260);
+      --focus-ring-width: 2px;
+      --focus-ring-offset: 2px;
+
+      --space-1: 4px;
+      --space-2: 6px;
+      --space-3: 8px;
+      --space-4: 12px;
+      --space-5: 16px;
+      --space-6: 20px;
+      --space-8: 32px;
+      --space-card: 24px;
+      --space-panel: 32px;
+      --space-section: 64px;
+
+      --radius-sm: 4px;
+      --radius-md: 6px;
+      --radius-card: 12px;
+      --radius-pill: 999px;
+
+      --font-sans: 'Inter Variable', 'Inter', system-ui, sans-serif;
+      --font-display: 'Inter Variable', 'Inter', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+      --type-size-xs: 0.75rem;
+      --type-size-sm: 0.875rem;
+      --type-size-md: 1rem;
+      --type-size-lg: 1.125rem;
+      --type-size-xl: 1.5rem;
+      --type-size-2xl: 2rem;
+      --type-size-3xl: 2.5rem;
+      --type-size-4xl: 3.5rem;
+      --font-weight-regular: 400;
+      --font-weight-medium: 500;
+      --font-weight-semibold: 600;
+      --font-weight-bold: 700;
+      --leading-tight: 1.15;
+      --leading-prose: 1.55;
+      --leading-display: 1.05;
+      --tracking-tight: -0.01em;
+      --tracking-normal: 0;
+      --tracking-wide: 0.08em;
+
+      --motion-fast: 120ms;
+      --motion-normal: 160ms;
+      --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+      --transition-default: all var(--motion-normal) var(--ease-standard);
+
+      --shadow-tint: oklch(0% 0 0 / 0.06);
+      --shadow-sm: 0 1px 2px 0 var(--shadow-tint);
+      --shadow-md: 0 4px 6px -1px var(--shadow-tint), 0 2px 4px -1px var(--shadow-tint);
+      --shadow-lg: 0 10px 25px -5px var(--shadow-tint), 0 6px 12px -3px var(--shadow-tint);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --surface: oklch(10% 0 0);
+        --surface-elevated: oklch(15% 0 0);
+        --surface-recessed: oklch(8% 0 0);
+        --text: oklch(85% 0 0);
+        --text-emphasis: oklch(98% 0 0);
+        --text-recede: oklch(60% 0 0);
+        --text-disabled: oklch(35% 0 0);
+        --text-on-accent: oklch(10% 0 0);
+        --accent: oklch(95% 0 0);
+        --accent-recede: oklch(20% 0 0);
+        --success-recede: oklch(18% 0.06 155);
+        --warning-recede: oklch(18% 0.06 80);
+        --critical-recede: oklch(18% 0.05 25);
+        --border: oklch(20% 0 0);
+        --shadow-tint: oklch(0% 0 0 / 0.4);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      :root { --motion-fast: 0ms; --motion-normal: 0ms; --transition-default: none; }
+      * { animation: none !important; }
+    }
+
+    * { box-sizing: border-box; }
+  </style>
+
+  <style>
+    html, body {
+      margin: 0; padding: 0;
+      background: var(--surface);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-md);
+      line-height: var(--leading-prose);
+      -webkit-font-smoothing: antialiased;
+    }
+    main { max-width: 1024px; margin: 0 auto; padding: var(--space-section) var(--space-panel); }
+    h1 {
+      font-family: var(--font-display); font-size: var(--type-size-3xl); font-weight: var(--font-weight-semibold);
+      line-height: var(--leading-display); letter-spacing: var(--tracking-tight);
+      margin: 0 0 var(--space-4); text-wrap: balance;
+    }
+    h2 {
+      font-family: var(--font-display); font-size: var(--type-size-2xl); font-weight: var(--font-weight-semibold);
+      line-height: var(--leading-tight); letter-spacing: var(--tracking-tight);
+      margin: var(--space-section) 0 var(--space-4); text-wrap: balance;
+    }
+    .lede {
+      font-size: var(--type-size-lg); line-height: var(--leading-prose);
+      color: var(--text-recede); max-width: 70ch; margin: 0 0 var(--space-section);
+    }
+    .meta {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--space-4); padding: var(--space-4);
+      background: var(--surface-elevated); border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-card); margin-bottom: var(--space-section);
+      font-size: var(--type-size-sm);
+    }
+    .meta dt { font-weight: var(--font-weight-semibold); color: var(--text-emphasis); margin-bottom: var(--space-1); }
+    .meta dd { margin: 0; color: var(--text-recede); }
+    .specimen-divider {
+      margin: var(--space-section) 0 var(--space-card);
+      padding-bottom: var(--space-2); border-bottom: var(--border-width-sm) solid var(--border);
+    }
+    .specimen-divider h2 { margin: 0; }
+    .specimen-divider p { margin: var(--space-2) 0 0; color: var(--text-recede); font-size: var(--type-size-sm); }
+
+    /* ===== EMPTY-STATE PRODUCTION STYLES ===== */
+    [data-pattern="empty-state"] {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      background: var(--surface);
+      color: var(--text-recede);
+      padding: var(--space-section) var(--space-card);
+      border-radius: var(--radius-card);
+      transition: var(--transition-default);
+    }
+    [data-pattern="empty-state"][data-size="sm"] { padding: var(--space-card) var(--space-3); }
+    [data-pattern="empty-state"][data-size="lg"] { padding: var(--space-section) var(--space-panel); }
+
+    [data-pattern="empty-state-illustration"] {
+      margin: 0 0 var(--space-3);
+      color: var(--text-disabled);
+    }
+    [data-pattern="empty-state-illustration"][data-tone="info"] { color: var(--accent); }
+    [data-pattern="empty-state-illustration"][data-tone="warning"] { color: var(--warning); }
+    [data-pattern="empty-state-illustration"][data-tone="critical"] { color: var(--critical); }
+    [data-pattern="empty-state-illustration"] svg {
+      stroke: currentColor; fill: none; stroke-width: 1.5;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+    [data-pattern="empty-state"][data-size="sm"] [data-pattern="empty-state-illustration"] svg { width: 24px; height: 24px; }
+    [data-pattern="empty-state"][data-size="md"] [data-pattern="empty-state-illustration"] svg { width: 48px; height: 48px; }
+    [data-pattern="empty-state"][data-size="lg"] [data-pattern="empty-state-illustration"] svg { width: 64px; height: 64px; }
+
+    [data-pattern="empty-state-heading"] {
+      font-family: var(--font-display);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-emphasis);
+      line-height: var(--leading-tight);
+      letter-spacing: var(--tracking-tight);
+      margin: 0 0 var(--space-2);
+      text-wrap: balance;
+    }
+    [data-pattern="empty-state"][data-size="sm"] [data-pattern="empty-state-heading"] { font-size: var(--type-size-md); }
+    [data-pattern="empty-state"][data-size="md"] [data-pattern="empty-state-heading"] { font-size: var(--type-size-lg); }
+    [data-pattern="empty-state"][data-size="lg"] [data-pattern="empty-state-heading"] { font-size: var(--type-size-2xl); }
+
+    [data-pattern="empty-state-body"] {
+      color: var(--text-recede);
+      font-size: var(--type-size-sm);
+      line-height: var(--leading-prose);
+      max-width: 48ch;
+      margin: 0 auto var(--space-card);
+      text-wrap: pretty;
+    }
+    [data-pattern="empty-state"][data-size="lg"] [data-pattern="empty-state-body"] { font-size: var(--type-size-md); max-width: 56ch; }
+
+    [data-pattern="empty-state-actions"] {
+      display: inline-flex;
+      gap: var(--space-2);
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    [data-pattern="empty-state-actions"] .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      padding: var(--space-2) var(--space-4);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans); font-size: var(--type-size-sm); font-weight: var(--font-weight-semibold);
+      text-decoration: none;
+      cursor: pointer;
+      border: var(--border-width-sm) solid transparent;
+      transition: var(--transition-default);
+    }
+    [data-pattern="empty-state-actions"] .cta[data-intent="primary"] { background: var(--accent); color: var(--text-on-accent); }
+    [data-pattern="empty-state-actions"] .cta[data-intent="primary"]:hover { background: var(--accent-hover); }
+    [data-pattern="empty-state-actions"] .cta[data-intent="ghost"] { background: transparent; color: var(--text); border-color: var(--border); }
+    [data-pattern="empty-state-actions"] .cta[data-intent="ghost"]:hover { background: var(--surface-elevated); color: var(--accent-hover); }
+    [data-pattern="empty-state-actions"] .cta[data-intent="secondary"] { background: var(--surface-elevated); color: var(--text-emphasis); border-color: var(--border-emphasis); }
+    [data-pattern="empty-state-actions"] .cta[data-intent="secondary"]:hover { background: var(--surface-recessed); }
+    [data-pattern="empty-state-actions"] .cta:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+
+    /* Preview stage */
+    .stage {
+      background: var(--surface-recessed);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-card);
+      margin-bottom: var(--space-card);
+      overflow: hidden;
+    }
+
+    /* Composition lineage */
+    .lineage { width: 100%; border-collapse: collapse; font-size: var(--type-size-sm); }
+    .lineage th, .lineage td {
+      text-align: left; padding: var(--space-2) var(--space-3);
+      border-bottom: var(--border-width-sm) solid var(--border); vertical-align: top;
+    }
+    .lineage th {
+      background: var(--surface-elevated); color: var(--text-emphasis);
+      font-weight: var(--font-weight-semibold); font-size: var(--type-size-xs);
+      letter-spacing: var(--tracking-wide); text-transform: uppercase;
+    }
+    .lineage code {
+      font-family: var(--font-mono); font-size: var(--type-size-xs);
+      background: var(--surface-recessed); padding: 0 4px; border-radius: 3px; color: var(--text-emphasis);
+    }
+    .a11y-list { font-size: var(--type-size-sm); line-height: var(--leading-prose); color: var(--text-recede); padding-left: var(--space-card); }
+    .a11y-list code {
+      font-family: var(--font-mono); font-size: 0.85em;
+      background: var(--surface-recessed); padding: 0 4px; border-radius: 3px; color: var(--text-emphasis);
+    }
+
+    .label-row {
+      font-size: var(--type-size-xs); color: var(--text-recede);
+      font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-wide); text-transform: uppercase;
+      padding: var(--space-3) var(--space-card) 0;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>pattern-empty-state — specimen</h1>
+      <p class="lede">Reusable empty-state primitive promoted from the data-table empty cell. Four variants (empty / filtered-empty / error / forbidden) × three sizes (sm / md / lg). Used anywhere a container has no content — list views, inboxes, search results, gallery grids, settings sub-pages, sidebar panels.</p>
+      <dl class="meta">
+        <div><dt>Pack</dt><dd>@quoin/pattern-empty-state@1.0.0</dd></div>
+        <div><dt>Primitives</dt><dd>5 (empty-state · illustration · heading · body · actions)</dd></div>
+        <div><dt>Variants</dt><dd>empty / filtered-empty / error / forbidden</dd></div>
+        <div><dt>Sizes</dt><dd>sm / md / lg</dd></div>
+        <div><dt>Composes</dt><dd>button-system</dd></div>
+        <div><dt>WCAG</dt><dd>1.3.1, 2.4.6, 4.1.3 (status messages)</dd></div>
+      </dl>
+    </header>
+
+    <!-- =================== VARIANTS — md =================== -->
+    <section class="specimen-divider">
+      <h2>Four variants at default (md) size</h2>
+      <p>Galley-themed empty states for the same Subscriptions list — empty (first run), filtered-empty (filter active), error (load failed), forbidden (workspace member without billing access).</p>
+    </section>
+    <div style="display: grid; gap: var(--space-card);">
+      <div class="stage">
+        <p class="label-row">empty</p>
+        <div data-pattern="empty-state" data-variant="empty" data-size="md" data-illustration="icon" role="region" aria-labelledby="empty-md-heading">
+          <div data-pattern="empty-state-illustration" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><rect x="6" y="6" width="36" height="36" rx="4"/><path d="M6 18h36M18 6v36"/></svg>
+          </div>
+          <h3 data-pattern="empty-state-heading" id="empty-md-heading">No subscriptions yet</h3>
+          <p data-pattern="empty-state-body">Galley Dues tracks every recurring charge in one ledger — auto-detected from your bank feeds or added manually.</p>
+          <div data-pattern="empty-state-actions" role="group" aria-label="Get started">
+            <a class="cta" data-intent="primary" href="#">
+              <svg style="width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2;" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+              Add first subscription
+            </a>
+            <a class="cta" data-intent="ghost" href="#">Connect bank account</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage">
+        <p class="label-row">filtered-empty</p>
+        <div data-pattern="empty-state" data-variant="filtered-empty" data-size="md" data-illustration="icon" role="region" aria-labelledby="filtered-md-heading" aria-live="polite">
+          <div data-pattern="empty-state-illustration" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><circle cx="22" cy="22" r="14"/><path d="M42 42l-9-9"/></svg>
+          </div>
+          <h3 data-pattern="empty-state-heading" id="filtered-md-heading">No matches</h3>
+          <p data-pattern="empty-state-body">12 subscriptions total — try a different search term or clear the active filters.</p>
+          <div data-pattern="empty-state-actions" role="group" aria-label="Filter actions">
+            <a class="cta" data-intent="ghost" href="#">Clear filters</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage">
+        <p class="label-row">error</p>
+        <div data-pattern="empty-state" data-variant="error" data-size="md" data-illustration="icon" role="region" aria-labelledby="error-md-heading">
+          <div data-pattern="empty-state-illustration" data-tone="critical" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20"/><path d="M24 14v12M24 32h.04"/></svg>
+          </div>
+          <h3 data-pattern="empty-state-heading" id="error-md-heading"><span role="alert">Couldn't load subscriptions</span></h3>
+          <p data-pattern="empty-state-body">The Galley Dues sync service at galley.harrow.haus is temporarily unreachable. Your data is safe — try again in a moment.</p>
+          <div data-pattern="empty-state-actions" role="group" aria-label="Recovery actions">
+            <a class="cta" data-intent="primary" href="#">
+              <svg style="width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2;" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 109-9 9.75 9.75 0 00-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+              Retry
+            </a>
+            <a class="cta" data-intent="ghost" href="https://status.galley.harrow.haus" rel="noopener">View status</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage">
+        <p class="label-row">forbidden</p>
+        <div data-pattern="empty-state" data-variant="forbidden" data-size="md" data-illustration="icon" role="region" aria-labelledby="forbidden-md-heading">
+          <div data-pattern="empty-state-illustration" data-tone="warning" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><rect x="12" y="22" width="24" height="20" rx="2"/><path d="M18 22v-6a6 6 0 0112 0v6"/></svg>
+          </div>
+          <h3 data-pattern="empty-state-heading" id="forbidden-md-heading">You don't have access</h3>
+          <p data-pattern="empty-state-body">Billing settings are admin-only in this Galley workspace. Ask the workspace owner to grant Billing role, or request access below.</p>
+          <div data-pattern="empty-state-actions" role="group" aria-label="Access actions">
+            <a class="cta" data-intent="primary" href="#">Request billing access</a>
+            <a class="cta" data-intent="ghost" href="/">Back to home</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================== SIZES =================== -->
+    <section class="specimen-divider">
+      <h2>Three sizes — same content at sm / md / lg</h2>
+      <p>Same Subscriptions-empty state at all three sizes for direct comparison. sm is inline-card-friendly; md is the default; lg is a full-page takeover with larger illustration and h2 heading.</p>
+    </section>
+    <div style="display: grid; gap: var(--space-card);">
+      <div class="stage">
+        <p class="label-row">sm (inline)</p>
+        <div data-pattern="empty-state" data-variant="empty" data-size="sm" data-illustration="icon" role="region" aria-labelledby="empty-sm-heading">
+          <div data-pattern="empty-state-illustration" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+          </div>
+          <h4 data-pattern="empty-state-heading" id="empty-sm-heading">No subscriptions</h4>
+          <p data-pattern="empty-state-body">Add your first to start tracking.</p>
+          <div data-pattern="empty-state-actions">
+            <a class="cta" data-intent="primary" href="#">Add subscription</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage">
+        <p class="label-row">md (default)</p>
+        <div data-pattern="empty-state" data-variant="empty" data-size="md" data-illustration="icon" role="region" aria-labelledby="empty-md2-heading">
+          <div data-pattern="empty-state-illustration" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><rect x="6" y="6" width="36" height="36" rx="4"/><path d="M6 18h36M18 6v36"/></svg>
+          </div>
+          <h3 data-pattern="empty-state-heading" id="empty-md2-heading">No subscriptions yet</h3>
+          <p data-pattern="empty-state-body">Galley Dues tracks every recurring charge in one ledger.</p>
+          <div data-pattern="empty-state-actions">
+            <a class="cta" data-intent="primary" href="#">Add first subscription</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage">
+        <p class="label-row">lg (full-page takeover)</p>
+        <div data-pattern="empty-state" data-variant="empty" data-size="lg" data-illustration="illustration" role="region" aria-labelledby="empty-lg-heading">
+          <div data-pattern="empty-state-illustration" aria-hidden="true">
+            <svg viewBox="0 0 64 64"><rect x="8" y="8" width="48" height="48" rx="6"/><path d="M8 24h48M24 8v48"/><circle cx="44" cy="44" r="8" fill="var(--surface-elevated)" stroke="currentColor"/><path d="M44 40v8M40 44h8"/></svg>
+          </div>
+          <h2 data-pattern="empty-state-heading" id="empty-lg-heading">Welcome to Galley Dues</h2>
+          <p data-pattern="empty-state-body">One ledger for every recurring charge across all 5 Galley tools. Track Linear, Notion, AWS, your power bill, Spotify — anything that bills on a schedule. Connect a bank feed to auto-detect, or add manually.</p>
+          <div data-pattern="empty-state-actions" role="group" aria-label="Onboarding">
+            <a class="cta" data-intent="primary" href="#">
+              <svg style="width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2;" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+              Add first subscription
+            </a>
+            <a class="cta" data-intent="secondary" href="#">Connect bank account</a>
+            <a class="cta" data-intent="ghost" href="#">Watch 90s overview</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================== COMPOSITION LINEAGE =================== -->
+    <section class="specimen-divider">
+      <h2>Composition lineage — what empty-state consumes</h2>
+    </section>
+    <table class="lineage">
+      <thead>
+        <tr><th>Consumed primitive</th><th>Source pack</th><th>Used in</th><th>How this pattern uses it</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>&lt;action-button intent="primary"&gt;</code></td>
+          <td>@quoin/pattern-button-system</td>
+          <td>empty-state-actions (primary CTA)</td>
+          <td>Primary action — Add first record / Retry / Request access. All 8 microstates inherited.</td>
+        </tr>
+        <tr>
+          <td><code>&lt;action-button intent="ghost"&gt;</code></td>
+          <td>@quoin/pattern-button-system</td>
+          <td>empty-state-actions (filtered-empty Clear filters · secondary in pairs)</td>
+          <td>De-escalated secondary CTA.</td>
+        </tr>
+        <tr>
+          <td><code>&lt;action-button intent="secondary"&gt;</code></td>
+          <td>@quoin/pattern-button-system</td>
+          <td>empty-state-actions (lg-size onboarding patterns)</td>
+          <td>Mid-intent CTA used in extended registers.</td>
+        </tr>
+        <tr>
+          <td>canonical tokens</td>
+          <td>@quoin/tokens-baseline</td>
+          <td>every CSS value</td>
+          <td>Surfaces / typography / borders / motion. Tone-coloured illustrations use --critical / --warning / --accent / --text-disabled.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <section class="specimen-divider">
+      <h2>Consumed by — patterns that use empty-state</h2>
+      <p>This primitive replaces the inline empty-state cell in <code>pattern-data-table</code> and is also consumed by other container patterns. Each consumer mounts <code>&lt;empty-state&gt;</code> inside its own container and inherits the 4-variant × 3-size contract.</p>
+    </section>
+    <table class="lineage">
+      <thead>
+        <tr><th>Consumer pattern</th><th>Where empty-state mounts</th><th>Typical variants used</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>@quoin/pattern-data-table</code></td><td>Inside <code>&lt;tbody&gt;&lt;tr&gt;&lt;td colspan=&quot;all&quot;&gt;</code> when no rows</td><td>empty / filtered-empty / error</td></tr>
+        <tr><td><code>@quoin/pattern-modal-dialog</code></td><td>Inside <code>modal-body</code> when the dialog's content is empty (e.g., "No notifications" in a notifications popover)</td><td>empty</td></tr>
+        <tr><td>Future <code>@quoin/pattern-sidebar-list</code></td><td>Inside the list panel when no items</td><td>empty / filtered-empty</td></tr>
+        <tr><td>Future <code>@quoin/pattern-gallery-grid</code></td><td>Inside the grid when no media</td><td>empty / filtered-empty / forbidden</td></tr>
+        <tr><td>Template-level surfaces</td><td>Full-page takeover on first-run app entry, or 404-like contexts</td><td>empty (lg) / forbidden (lg)</td></tr>
+      </tbody>
+    </table>
+
+    <section class="specimen-divider">
+      <h2>Accessibility checklist</h2>
+    </section>
+    <ul class="a11y-list">
+      <li><strong>Region landmark:</strong> <code>&lt;div role="region" aria-labelledby="..."&gt;</code> — gives the empty-state a named landmark.</li>
+      <li><strong>Error-variant announcement:</strong> Error heading wraps in <code>&lt;span role="alert"&gt;</code> so AT announces "Couldn't load…" on first paint.</li>
+      <li><strong>Filtered-empty live region:</strong> Parent container should have <code>aria-live="polite"</code> so AT announces "No matches" when the filter applies dynamically.</li>
+      <li><strong>Illustration aria-hidden:</strong> Decorative icons / illustrations are <code>aria-hidden="true"</code>. Heading + body carry the message per WCAG 1.4.1.</li>
+      <li><strong>Heading hierarchy:</strong> Default <code>&lt;h3&gt;</code> at md/sm; <code>&lt;h2&gt;</code> at lg (full-page).</li>
+      <li><strong>Action cluster role:</strong> <code>&lt;div role="group" aria-label="Actions"&gt;</code> wraps the cluster.</li>
+      <li><strong>Constructive copy:</strong> Body acknowledges absence and suggests next action ("12 subscriptions total — try a different filter" beats "No matches").</li>
+      <li><strong>Specific error context:</strong> Error body names the failure specifically ("Couldn't reach galley.harrow.haus") rather than generic "Something went wrong".</li>
+      <li><strong>External-link affordance:</strong> Status / docs links open with <code>rel="noopener"</code>.</li>
+    </ul>
+  </main>
+</body>
+</html>

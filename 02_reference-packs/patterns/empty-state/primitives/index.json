@@ -1,0 +1,215 @@
+[
+  {
+    "name": "empty-state",
+    "category": "product",
+    "role": "Reusable empty-state surface. Promoted from data-table's empty cell into a standalone primitive so any container (sidebar list, inbox, search results, gallery grid, settings sub-page) can render the same affordance. Four variants — empty (first-run, prompt to create), filtered-empty (filter yielded nothing, prompt to clear), error (load failed, prompt to retry), forbidden (no permission, prompt to request access). Three sizes — sm (inline within a small card), md (default), lg (full-page takeover). Optional illustration slot supports icon (24px), illustration (large SVG), or none.",
+    "attributes": {
+      "variant": {
+        "values": ["empty", "filtered-empty", "error", "forbidden"],
+        "default": "empty",
+        "specific": true
+      },
+      "size": {
+        "values": ["sm", "md", "lg"],
+        "default": "md",
+        "specific": true
+      },
+      "illustration": {
+        "values": ["icon", "illustration", "none"],
+        "default": "icon",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "var(--surface)",
+      "backgroundSubtle": "var(--surface-recessed)",
+      "color": "var(--text-recede)",
+      "headingColor": "var(--text-emphasis)",
+      "iconColor": "var(--text-disabled)",
+      "iconColorError": "var(--critical)",
+      "iconColorForbidden": "var(--warning)",
+      "padding": "var(--space-section) var(--space-card)",
+      "paddingCompact": "var(--space-card) var(--space-3)",
+      "paddingFullPage": "var(--space-section) var(--space-panel)",
+      "gap": "var(--space-3)",
+      "fontFamily": "var(--font-sans)",
+      "fontFamilyHeading": "var(--font-display)",
+      "fontSize": "var(--type-size-sm)",
+      "fontSizeHeading": "var(--type-size-lg)",
+      "fontWeightHeading": "var(--font-weight-semibold)",
+      "lineHeight": "var(--leading-prose)",
+      "letterSpacingHeading": "var(--tracking-tight)",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "role": "region"
+      }
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<div role='region' aria-labelledby='<id>-heading' data-variant='<variant>' data-size='<size>'>",
+        "  (optional) <empty-state-illustration> — slot for SVG illustration / icon / animated graphic",
+        "  <empty-state-heading id='<id>-heading'> — h2/h3 depending on context",
+        "  (optional) <empty-state-body> — supporting prose",
+        "  (optional) <empty-state-actions> — CTA cluster composing button-system"
+      ],
+      "variants": {
+        "empty": "First-run / never-had-data. Heading speaks to what's missing ('No subscriptions yet'). Body explains value-prop briefly. Primary CTA invites creation ('Add your first subscription'). Optional secondary CTA ('Connect bank account').",
+        "filtered-empty": "Filter or search yielded zero matches. Heading is brief ('No matches'). Body acknowledges total count ('12 subscriptions total — try a different filter'). Secondary CTA clears filters; no primary CTA needed.",
+        "error": "Load failed. Heading names the failure ('Couldn't load subscriptions'). Body provides context (auth issue, network, service status). Primary CTA is Retry; optional secondary links to status page. Heading uses role='alert' so AT announces.",
+        "forbidden": "User lacks permissions for the requested resource. Heading is brief ('You don't have access'). Body explains who can grant ('Ask the workspace admin'). Primary CTA may be 'Request access'; secondary 'Back to home'."
+      },
+      "sizes": {
+        "sm": "Inline within a small card or list. Heading at type-size-md (not lg); padding compact. Used in sidebar empty lists, inline-empty cards.",
+        "md": "Default. Heading at type-size-lg. Padding section/card. The 80% choice.",
+        "lg": "Full-page takeover. Heading at type-size-2xl. Padding full-page. Used as page-level empty state when an entire surface has no content."
+      },
+      "illustrationModes": {
+        "icon": "Single SVG icon at 48px. Most common. Tone-appropriate colour (text-disabled / critical / warning).",
+        "illustration": "Large SVG illustration (up to 200px tall). Used in lg-size full-page empty states. Should respect prefers-reduced-motion if animated.",
+        "none": "No illustration. Used when context makes the empty state obvious (e.g., inline within an already-illustrated container)."
+      },
+      "ariaPatterns": {
+        "regionLabel": "<div role='region' aria-labelledby='<heading-id>'> — gives the empty-state a named landmark.",
+        "errorAriaAlert": "Error-variant heading wraps in role='alert' so AT announces 'Couldn't load…' on first paint.",
+        "filteredEmptyAriaLive": "Filtered-empty heading is inside aria-live='polite' region (set on the parent container) so AT announces 'No matches' when the filter applies.",
+        "iconAriaHidden": "Decorative illustrations / icons are aria-hidden='true'. Heading + body carry the meaning."
+      }
+    }
+  },
+  {
+    "name": "empty-state-illustration",
+    "category": "product",
+    "role": "Visual slot in the empty-state. Renders an SVG illustration (large), icon (48px), or animated graphic. Always aria-hidden — the surrounding heading + body carry the message. Sizing is governed by the parent's data-size attribute.",
+    "attributes": {
+      "tone": {
+        "values": ["neutral", "info", "warning", "critical"],
+        "default": "neutral",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "var(--text-disabled)",
+      "colorInfo": "var(--accent)",
+      "colorWarning": "var(--warning)",
+      "colorCritical": "var(--critical)",
+      "sizeIconSm": "24px",
+      "sizeIconMd": "48px",
+      "sizeIconLg": "64px",
+      "sizeIllustrationLg": "200px",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "aria-hidden": "true"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "block",
+    "meta": {
+      "alwaysAriaHidden": "Always aria-hidden='true'. The heading + body carry semantic meaning; the illustration is visual reinforcement.",
+      "tonePicking": "Match the parent variant's tone: empty → neutral, filtered-empty → neutral, error → critical, forbidden → warning."
+    }
+  },
+  {
+    "name": "empty-state-heading",
+    "category": "product",
+    "role": "Heading element inside the empty-state. Auto-selects h2/h3/h4 based on the parent size + page context. Carries the id that the parent's aria-labelledby points to. Error-variant heading wraps in role='alert' for immediate AT announcement.",
+    "attributes": {
+      "level": {
+        "values": ["h2", "h3", "h4"],
+        "default": "h3",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "var(--text-emphasis)",
+      "fontFamily": "var(--font-display)",
+      "fontSizeSm": "var(--type-size-md)",
+      "fontSizeMd": "var(--type-size-lg)",
+      "fontSizeLg": "var(--type-size-2xl)",
+      "fontWeight": "var(--font-weight-semibold)",
+      "lineHeight": "var(--leading-tight)",
+      "letterSpacing": "var(--tracking-tight)",
+      "margin": "0 0 var(--space-2)",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "h3"
+    },
+    "children": "phrasing-content",
+    "scope": "block",
+    "meta": {
+      "headingLevelGuidance": "Default to h3 (matches the most common nesting context — empty-state inside a page section). Use h2 for full-page lg-size empty states. Use h4 if the empty-state is nested inside an already-h3'd container.",
+      "errorVariantRoleAlert": "When parent variant='error', wrap the heading text in <span role='alert'> so AT announces it on first paint."
+    }
+  },
+  {
+    "name": "empty-state-body",
+    "category": "product",
+    "role": "Supporting prose below the heading. 1-2 sentences explaining context or value-prop. Max ~48 characters per line via inline max-width.",
+    "attributes": {},
+    "tokens": {
+      "color": "var(--text-recede)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-sm)",
+      "lineHeight": "var(--leading-prose)",
+      "maxWidth": "48ch",
+      "margin": "0 auto var(--space-card)",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "p"
+    },
+    "children": "phrasing-content",
+    "scope": "block",
+    "meta": {
+      "copyGuidelines": [
+        "Acknowledge the absence ('12 subscriptions total — try a different filter' rather than just 'No matches').",
+        "Suggest the next action when relevant ('Use a different search term' / 'Try changing the date range').",
+        "Be specific and grounded — don't say 'Something went wrong'; say 'Couldn't reach galley.harrow.haus'."
+      ]
+    }
+  },
+  {
+    "name": "empty-state-actions",
+    "category": "product",
+    "role": "CTA cluster at the bottom of the empty-state. Composes <action-button> from pattern-button-system. Typical pattern: 1 primary action + 1 optional secondary. For error variant: 1 primary (Retry) + 1 secondary (View status). For filtered-empty: 1 secondary action (Clear filters) — no primary needed.",
+    "attributes": {
+      "register": {
+        "values": ["primary-only", "primary-plus-secondary", "secondary-only"],
+        "default": "primary-only",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "gap": "var(--space-2)",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "role": "group",
+        "aria-label": "Actions"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "registers": {
+        "primary-only": "Single primary CTA. Used for empty variant ('Add first subscription') and forbidden variant ('Request access').",
+        "primary-plus-secondary": "Primary + secondary alongside. Used for empty variant when there's a backup path ('Add manually' + 'Connect bank account') or error variant ('Retry' + 'View status').",
+        "secondary-only": "Ghost-intent button only. Used for filtered-empty variant ('Clear filters') — no primary because the user already has data, the filter just hid it."
+      },
+      "composesFrom": "@quoin/pattern-button-system (every CTA is an <action-button>)",
+      "ariaPatterns": {
+        "groupLabel": "<div role='group' aria-label='Actions'> wraps the cluster."
+      }
+    }
+  }
+]

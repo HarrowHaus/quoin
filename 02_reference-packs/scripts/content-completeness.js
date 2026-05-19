@@ -87,6 +87,12 @@ const ENROLLMENT = {
     composesSiblings: ['pattern-button-system'],
     markers: ['Galley', 'aria-live', 'WCAG 2.2.1'],
   },
+  'empty-state': {
+    requireGalley: true,
+    requireLineage: true,
+    composesSiblings: ['pattern-button-system'],
+    markers: ['Galley Dues', 'role="alert"', 'aria-live'],
+  },
   // Pre-GALLEY P0 patterns (button-system, testimonial, feature-grid, form-fields)
   // intentionally not enrolled. They predate the GALLEY narrative.
 };

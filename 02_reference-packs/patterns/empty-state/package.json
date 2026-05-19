@@ -1,0 +1,24 @@
+{
+  "name": "@quoin/pattern-empty-state",
+  "version": "1.0.0",
+  "description": "P0 empty-state for Quoin — 4 variants × 3 sizes × 3 illustration modes. Promoted from data-table's empty cell into a reusable building-block primitive.",
+  "license": "MIT",
+  "main": "./quoin.pack.json",
+  "files": [
+    "quoin.pack.json",
+    "primitives/",
+    "examples/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "pattern", "empty-state", "zero-state", "fallback", "p0"],
+  "peerDependencies": {
+    "@quoin/tokens-baseline": "^0.1.0",
+    "@quoin/pattern-button-system": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "02_reference-packs/patterns/empty-state"
+  }
+}
