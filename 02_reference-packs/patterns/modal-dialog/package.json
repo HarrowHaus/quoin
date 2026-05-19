@@ -1,0 +1,25 @@
+{
+  "name": "@quoin/pattern-modal-dialog",
+  "version": "1.0.0",
+  "description": "P0 modal-dialog pattern for Quoin — alert / form / panel / command (Cmd+K). Focus trap, inert background, dismiss policy. Composes button-system + form-fields.",
+  "license": "MIT",
+  "main": "./quoin.pack.json",
+  "files": [
+    "quoin.pack.json",
+    "primitives/",
+    "examples/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "pattern", "dialog", "modal", "command-palette", "p0"],
+  "peerDependencies": {
+    "@quoin/tokens-baseline": "^0.1.0",
+    "@quoin/pattern-button-system": "^1.0.0",
+    "@quoin/pattern-form-fields": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "02_reference-packs/patterns/modal-dialog"
+  }
+}

@@ -1,0 +1,301 @@
+[
+  {
+    "name": "modal-dialog",
+    "category": "product",
+    "role": "Top-level scope for a modal surface. Renders as <div role='dialog' aria-modal='true'> (or role='alertdialog' for alert variant). Four variants — alert (destructive / important confirmation), form (input collection), panel (rich content / detail view), command (Cmd+K palette). Four sizes — sm (360px max), md (520px), lg (720px), full (mobile takeover). Manages focus trap, body scroll lock, inert background content, Escape + backdrop dismiss, focus restoration on close.",
+    "attributes": {
+      "variant": {
+        "values": ["alert", "form", "panel", "command"],
+        "default": "form",
+        "specific": true
+      },
+      "size": {
+        "values": ["sm", "md", "lg", "full"],
+        "default": "md",
+        "specific": true
+      },
+      "open": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true
+      },
+      "state": {
+        "values": ["default", "opening", "open", "closing"],
+        "default": "default",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "--surface-elevated",
+      "color": "--text",
+      "borderColor": "--border",
+      "borderWidth": "--border-width-sm",
+      "borderRadius": "--radius-card",
+      "padding": "0",
+      "shadow": "var(--shadow-lg)",
+      "maxWidthSm": "360px",
+      "maxWidthMd": "520px",
+      "maxWidthLg": "720px",
+      "maxWidthFull": "100vw",
+      "maxHeight": "85vh",
+      "transition": "--transition-default",
+      "transitionDuration": "--motion-normal",
+      "zIndex": "500"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "role": "dialog",
+        "aria-modal": "true"
+      }
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<div role='dialog' aria-modal='true' aria-labelledby='<header-id>' aria-describedby='<body-id>'>",
+        "  <modal-header>",
+        "    <h2 id='<header-id>'>Dialog title</h2>",
+        "    <button aria-label='Close dialog'> ✕ </button>",
+        "  </modal-header>",
+        "  <modal-body id='<body-id>'> — scrollable content area",
+        "  <modal-footer> — action button cluster (Cancel, Confirm)"
+      ],
+      "variants": {
+        "alert": "role='alertdialog' + aria-describedby pointing to the alert message. Used for destructive confirmations (Delete, Cancel subscription) and critical errors. Escape may be intentionally suppressed if the user MUST acknowledge — but use sparingly; most alert dialogs should still close on Escape.",
+        "form": "role='dialog'. Hosts <form> with form-controls. Used for 'Add subscription', 'Edit profile', 'Invite member' flows. Submit + cancel in footer.",
+        "panel": "role='dialog'. Hosts rich content — detail view, image preview, embedded video, settings sub-page. May not have a footer; close button in header is primary dismiss.",
+        "command": "role='dialog' + aria-haspopup='dialog' on trigger. Cmd+K palette — a centered modal with prominent search input + list of results. Special variant: no backdrop dim by default (transparent overlay so user can see context), or very subtle dim. Up/Down arrow keys navigate results."
+      },
+      "sizes": {
+        "sm": "max-width 360px. Used for confirmation dialogs (alert variant primarily). Tight content; usually just a heading + 1-2 sentences + 2 buttons.",
+        "md": "max-width 520px. The 80% choice. Used for most form dialogs.",
+        "lg": "max-width 720px. Used for panel variant — rich detail views, multi-step flows, image previews.",
+        "full": "max-width 100vw, max-height 100vh. Mobile-takeover — full-screen modal that replaces the page. Used at narrow widths or for immersive flows (onboarding, command palette on mobile)."
+      },
+      "lifecycle": {
+        "opening": "data-state='opening'. Fade-in transition over --motion-normal. Body scroll locked. Background content gets inert attribute. Focus moves to dialog's first focusable element (or the dialog itself if no focusables).",
+        "open": "data-state='open'. Steady state. Focus is trapped — Tab cycles through dialog focusables; Shift+Tab cycles backward; Tab from last → first.",
+        "closing": "data-state='closing'. Fade-out transition. After transition completes, dialog removed from DOM (or hidden); body scroll restored; inert removed; focus returned to trigger.",
+        "default": "data-state='default'. Dialog not visible. Either not in DOM, or in DOM with [hidden] attribute and aria-hidden='true'."
+      },
+      "ariaPatterns": {
+        "ariaModal": "aria-modal='true' tells AT this dialog is modal — siblings outside the dialog are inaccessible while open.",
+        "ariaLabelledby": "Required. Points to the dialog's heading (usually inside modal-header).",
+        "ariaDescribedby": "Optional. Points to descriptive text in modal-body. Especially important for alertdialog variant.",
+        "inertBackground": "When open, set inert attribute (HTML spec) on every sibling of the dialog's root. This makes them non-interactive AND removes them from the accessibility tree. Polyfill for older browsers: aria-hidden='true' + tabindex='-1' on all focusable descendants.",
+        "bodyScrollLock": "Set overflow: hidden on <body> (or <html>) while dialog is open. Restore on close.",
+        "focusTrap": "On open: focus moves to first focusable inside dialog. Tab cycles through dialog focusables. Shift+Tab from first → last; Tab from last → first.",
+        "focusRestore": "On close: focus returns to the element that triggered the dialog. Store the trigger in JS state.",
+        "escapeKey": "Escape closes the dialog (for most variants). For alertdialog where dismissal is intentional, you may suppress this — but document the deviation.",
+        "backdropClick": "Click on backdrop (outside dialog content) closes the dialog (for most variants). For alertdialog requiring explicit action, may suppress — but the close button in the header should still work.",
+        "asyncSubmitButton": "When a form-variant dialog's submit triggers async work, the submit button gets aria-busy='true'. The cancel button gets aria-disabled='true' to prevent dismissal mid-submission."
+      }
+    }
+  },
+  {
+    "name": "modal-backdrop",
+    "category": "product",
+    "role": "Semi-opaque overlay behind the modal dialog. Click dismisses the dialog (except alertdialog variant where it may be suppressed). Renders as <div> with fixed positioning covering the viewport. Backdrop is conceptually paired with the dialog — they enter/exit together via opening/closing states.",
+    "attributes": {
+      "open": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true
+      },
+      "dim": {
+        "values": ["none", "subtle", "default", "strong"],
+        "default": "default",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "oklch(0% 0 0 / 0.4)",
+      "backgroundSubtle": "oklch(0% 0 0 / 0.2)",
+      "backgroundStrong": "oklch(0% 0 0 / 0.6)",
+      "transition": "opacity var(--motion-normal) var(--ease-standard)",
+      "zIndex": "499"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "aria-hidden": "true"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "block",
+    "meta": {
+      "dimLevels": {
+        "none": "Transparent. Used for command variant where the user needs to see context behind the palette.",
+        "subtle": "20% black. Used for command variant when slight dim is preferred.",
+        "default": "40% black. The canonical dim level for form and panel variants.",
+        "strong": "60% black. Used for alertdialog variant — strong focus on the dialog content."
+      },
+      "ariaPatterns": {
+        "ariaHidden": "Always aria-hidden='true'. The backdrop is decorative; the dialog itself carries semantic role.",
+        "noTabStop": "Not focusable. Click handler dismisses; doesn't participate in tab order."
+      }
+    }
+  },
+  {
+    "name": "modal-header",
+    "category": "product",
+    "role": "Top region of the dialog. Hosts the title heading (which the dialog's aria-labelledby points to) and an optional close button. Renders as a <header> inside the dialog.",
+    "attributes": {
+      "show-close": {
+        "values": ["true", "false"],
+        "default": "true",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "var(--surface-elevated)",
+      "borderColor": "var(--border)",
+      "borderWidth": "var(--border-width-sm)",
+      "padding": "var(--space-card) var(--space-card) var(--space-3)",
+      "gap": "var(--space-3)",
+      "fontFamily": "var(--font-display)",
+      "fontSizeHeading": "var(--type-size-lg)",
+      "fontWeightHeading": "var(--font-weight-semibold)",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "header"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<header>",
+        "  <h2 id='<dialog-id>-title'>Dialog title</h2>",
+        "  (optional) <p id='<dialog-id>-description' class='subtitle'>Optional supporting text</p>",
+        "  (if show-close=true) <button type='button' aria-label='Close dialog'>",
+        "    <svg aria-hidden='true'> ✕ </svg>",
+        "  </button>"
+      ],
+      "headingHierarchy": "Default <h2>. The dialog is treated as a sub-section of the page; <h2> is the most common choice. Use <h1> only if the dialog is the entire page content (e.g., full-takeover variant on mobile).",
+      "ariaPatterns": {
+        "headingId": "The h2 id must be referenced by the parent dialog's aria-labelledby attribute.",
+        "closeButtonLabel": "Close button uses aria-label='Close dialog' (or 'Close <dialog-title>' for more context). The ✕ glyph itself is aria-hidden."
+      }
+    }
+  },
+  {
+    "name": "modal-body",
+    "category": "product",
+    "role": "Content region of the dialog. Scrollable when content exceeds viewport / maxHeight. Hosts the dialog's primary content — form fields (form variant), descriptive text (alert variant), rich content (panel variant), or command-palette results list (command variant).",
+    "attributes": {
+      "padding": {
+        "values": ["compact", "default", "comfortable"],
+        "default": "default",
+        "specific": true
+      },
+      "scroll": {
+        "values": ["auto", "always", "never"],
+        "default": "auto",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "var(--surface-elevated)",
+      "color": "var(--text)",
+      "padding": "0 var(--space-card)",
+      "paddingCompact": "0 var(--space-3)",
+      "paddingComfortable": "0 var(--space-panel)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-sm)",
+      "lineHeight": "var(--leading-prose)",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "scrollBehaviour": "Vertical scroll appears when content height exceeds the dialog's max-height (default 85vh). The dialog's overflow-y: auto on this region keeps the header + footer pinned.",
+      "ariaPatterns": {
+        "bodyId": "If the dialog uses aria-describedby, this region's id is referenced.",
+        "scrollableRegion": "If scrollable, may need tabindex='0' to make it focusable for keyboard users (allows arrow-key scrolling)."
+      }
+    }
+  },
+  {
+    "name": "modal-footer",
+    "category": "product",
+    "role": "Bottom region of the dialog. Hosts the action buttons (Cancel, Confirm, custom). Renders as a <footer> with right-aligned button cluster by default. Composes <action-button> from pattern-button-system.",
+    "attributes": {
+      "align": {
+        "values": ["right", "between", "center", "fill"],
+        "default": "right",
+        "specific": true
+      },
+      "register": {
+        "values": ["primary-only", "cancel-plus-primary", "destructive", "extended"],
+        "default": "cancel-plus-primary",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "var(--surface-elevated)",
+      "borderColor": "var(--border)",
+      "borderWidth": "var(--border-width-sm)",
+      "padding": "var(--space-3) var(--space-card) var(--space-card)",
+      "gap": "var(--space-2)",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "footer"
+    },
+    "children": "phrasing-content",
+    "scope": "block",
+    "meta": {
+      "registers": {
+        "primary-only": "Single primary button (e.g., 'Got it', 'OK'). Used for informational dialogs.",
+        "cancel-plus-primary": "Cancel (ghost intent, leftmost) + Primary action (primary intent, rightmost). The 80% recommendation. Reading order: Cancel comes first; primary intent comes last (last position = highest emphasis).",
+        "destructive": "Cancel (ghost) + Destructive (critical intent). Used for delete confirmations. Same layout as cancel-plus-primary, but the rightmost is critical-intent, not primary.",
+        "extended": "Tertiary action (ghost, far-left) + Cancel (ghost) + Primary (primary). Used when there's a 'Save as draft' or 'Skip for now' option alongside Cancel + Submit."
+      },
+      "composesFrom": "@quoin/pattern-button-system (every footer button is an action-button)",
+      "ariaPatterns": {
+        "buttonOrder": "Cancel buttons live to the LEFT of primary buttons in the visual layout but should be the FIRST focusable element in tab order. This is intentional — keyboard users tab into the Cancel button first and must tab forward to reach the destructive primary action.",
+        "destructiveConfirmation": "For destructive registers, the primary action's button text should name the consequence explicitly ('Delete subscription' not 'Confirm'). This guards against accidental destructive activation."
+      }
+    }
+  },
+  {
+    "name": "dialog-trigger",
+    "category": "product",
+    "role": "Element that opens a dialog. Not a primitive in its own right — it's a contract that any clickable element can implement. The contract: button (or link) carries aria-haspopup='dialog' and aria-controls='<dialog-id>'. On activation: dialog opens; trigger's aria-expanded becomes 'true'. On close: focus returns to the trigger.",
+    "attributes": {
+      "controls": {
+        "values": [],
+        "default": "",
+        "specific": true
+      },
+      "expanded": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true
+      }
+    },
+    "tokens": {},
+    "structure": {
+      "element": "button"
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "contract": "Any button or link can be a dialog-trigger. Adds: type='button' aria-haspopup='dialog' aria-controls='<dialog-id>'. JS-side: clicking opens the dialog and stores 'this' as the focus-restoration target.",
+      "exampleUsage": [
+        "<action-button intent='critical' aria-haspopup='dialog' aria-controls='confirm-delete-dialog' onClick='openDialog(\"confirm-delete-dialog\")'>Delete</action-button>",
+        "<button type='button' aria-haspopup='dialog' aria-controls='kbd-shortcuts-dialog' aria-keyshortcuts='Shift+?'>Keyboard shortcuts</button>"
+      ],
+      "ariaPatterns": {
+        "haspopupValue": "aria-haspopup='dialog' (not 'true' or 'menu' or 'listbox'). The value specifies the popup type for AT.",
+        "controlsValue": "aria-controls points to the dialog's root id. Required so AT can announce the connection.",
+        "ariaExpanded": "aria-expanded reflects whether the dialog is currently open. Update on open/close."
+      }
+    }
+  }
+]

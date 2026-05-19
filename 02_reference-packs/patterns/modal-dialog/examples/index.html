@@ -1,0 +1,818 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>@quoin/pattern-modal-dialog — specimen</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=JetBrains+Mono:wght@100..800&display=swap">
+
+  <style>
+    :root {
+      color-scheme: light dark;
+
+      --surface: oklch(98% 0 0);
+      --surface-elevated: oklch(100% 0 0);
+      --surface-recessed: oklch(96% 0 0);
+      --text: oklch(30% 0 0);
+      --text-emphasis: oklch(15% 0 0);
+      --text-recede: oklch(50% 0 0);
+      --text-disabled: oklch(72% 0 0);
+      --text-on-accent: oklch(100% 0 0);
+      --accent: oklch(20% 0 0);
+      --accent-hover: oklch(28% 0 0);
+      --accent-active: oklch(12% 0 0);
+      --accent-recede: oklch(94% 0 0);
+      --critical: oklch(55% 0.22 25);
+      --critical-recede: oklch(95% 0.05 25);
+      --success: oklch(50% 0.18 155);
+      --success-recede: oklch(95% 0.05 155);
+      --warning: oklch(75% 0.18 80);
+      --warning-recede: oklch(95% 0.05 80);
+
+      --border: oklch(88% 0 0);
+      --border-emphasis: oklch(20% 0 0);
+      --border-recede: oklch(94% 0 0);
+      --border-width-sm: 1px;
+      --border-width-md: 2px;
+
+      --focus-ring: oklch(55% 0.22 260);
+      --focus-ring-width: 2px;
+      --focus-ring-offset: 2px;
+
+      --space-1: 4px;
+      --space-2: 6px;
+      --space-3: 8px;
+      --space-4: 12px;
+      --space-5: 16px;
+      --space-6: 20px;
+      --space-8: 32px;
+      --space-card: 24px;
+      --space-panel: 32px;
+      --space-section: 64px;
+
+      --radius-sm: 4px;
+      --radius-md: 6px;
+      --radius-card: 12px;
+      --radius-pill: 999px;
+
+      --font-sans: 'Inter Variable', 'Inter', system-ui, sans-serif;
+      --font-display: 'Inter Variable', 'Inter', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+      --type-size-xs: 0.75rem;
+      --type-size-sm: 0.875rem;
+      --type-size-md: 1rem;
+      --type-size-lg: 1.125rem;
+      --type-size-xl: 1.5rem;
+      --type-size-2xl: 2rem;
+      --type-size-3xl: 2.5rem;
+      --font-weight-regular: 400;
+      --font-weight-medium: 500;
+      --font-weight-semibold: 600;
+      --font-weight-bold: 700;
+      --leading-tight: 1.15;
+      --leading-prose: 1.55;
+      --leading-display: 1.05;
+      --tracking-tight: -0.01em;
+      --tracking-normal: 0;
+      --tracking-wide: 0.08em;
+
+      --motion-fast: 120ms;
+      --motion-normal: 160ms;
+      --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+      --transition-default: all var(--motion-normal) var(--ease-standard);
+
+      --shadow-tint: oklch(0% 0 0 / 0.06);
+      --shadow-sm: 0 1px 2px 0 var(--shadow-tint);
+      --shadow-md: 0 4px 6px -1px var(--shadow-tint), 0 2px 4px -1px var(--shadow-tint);
+      --shadow-lg: 0 10px 25px -5px var(--shadow-tint), 0 6px 12px -3px var(--shadow-tint);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --surface: oklch(10% 0 0);
+        --surface-elevated: oklch(15% 0 0);
+        --surface-recessed: oklch(8% 0 0);
+        --text: oklch(85% 0 0);
+        --text-emphasis: oklch(98% 0 0);
+        --text-recede: oklch(60% 0 0);
+        --text-disabled: oklch(35% 0 0);
+        --text-on-accent: oklch(10% 0 0);
+        --accent: oklch(95% 0 0);
+        --accent-recede: oklch(20% 0 0);
+        --success-recede: oklch(18% 0.06 155);
+        --warning-recede: oklch(18% 0.06 80);
+        --critical-recede: oklch(18% 0.05 25);
+        --border: oklch(20% 0 0);
+        --shadow-tint: oklch(0% 0 0 / 0.4);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      :root { --motion-fast: 0ms; --motion-normal: 0ms; --transition-default: none; }
+      * { animation: none !important; }
+    }
+
+    * { box-sizing: border-box; }
+  </style>
+
+  <style>
+    html, body {
+      margin: 0; padding: 0;
+      background: var(--surface);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-md);
+      line-height: var(--leading-prose);
+      -webkit-font-smoothing: antialiased;
+    }
+    main { max-width: 1024px; margin: 0 auto; padding: var(--space-section) var(--space-panel); }
+    h1 {
+      font-family: var(--font-display); font-size: var(--type-size-3xl); font-weight: var(--font-weight-semibold);
+      line-height: var(--leading-display); letter-spacing: var(--tracking-tight);
+      margin: 0 0 var(--space-4); text-wrap: balance;
+    }
+    h2 {
+      font-family: var(--font-display); font-size: var(--type-size-2xl); font-weight: var(--font-weight-semibold);
+      line-height: var(--leading-tight); letter-spacing: var(--tracking-tight);
+      margin: var(--space-section) 0 var(--space-4); text-wrap: balance;
+    }
+    .lede {
+      font-size: var(--type-size-lg); line-height: var(--leading-prose);
+      color: var(--text-recede); max-width: 70ch; margin: 0 0 var(--space-section);
+    }
+    .meta {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--space-4); padding: var(--space-4);
+      background: var(--surface-elevated); border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-card); margin-bottom: var(--space-section);
+      font-size: var(--type-size-sm);
+    }
+    .meta dt { font-weight: var(--font-weight-semibold); color: var(--text-emphasis); margin-bottom: var(--space-1); }
+    .meta dd { margin: 0; color: var(--text-recede); }
+    .specimen-divider {
+      margin: var(--space-section) 0 var(--space-card);
+      padding-bottom: var(--space-2);
+      border-bottom: var(--border-width-sm) solid var(--border);
+    }
+    .specimen-divider h2 { margin: 0; }
+    .specimen-divider p { margin: var(--space-2) 0 0; color: var(--text-recede); font-size: var(--type-size-sm); }
+
+    /* Preview stage — simulates a page with a modal overlay statically rendered for inspection */
+    .stage {
+      position: relative;
+      background: var(--surface-recessed);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      min-height: 360px;
+      margin-bottom: var(--space-card);
+    }
+    .stage .page-content {
+      padding: var(--space-card);
+      color: var(--text-recede);
+      font-size: var(--type-size-sm);
+      line-height: var(--leading-prose);
+    }
+    .stage .page-content h3 {
+      font-family: var(--font-display);
+      font-size: var(--type-size-md);
+      color: var(--text-emphasis);
+      margin: 0 0 var(--space-2);
+    }
+
+    /* ===== MODAL PRODUCTION STYLES ===== */
+    [data-pattern="modal-backdrop"] {
+      position: absolute; inset: 0;
+      background: oklch(0% 0 0 / 0.4);
+      z-index: 1;
+      transition: opacity var(--motion-normal) var(--ease-standard);
+    }
+    [data-pattern="modal-backdrop"][data-dim="none"] { background: transparent; }
+    [data-pattern="modal-backdrop"][data-dim="subtle"] { background: oklch(0% 0 0 / 0.2); }
+    [data-pattern="modal-backdrop"][data-dim="strong"] { background: oklch(0% 0 0 / 0.6); }
+    [data-pattern="modal-backdrop"][data-open="false"] { opacity: 0; pointer-events: none; }
+
+    [data-pattern="modal-dialog"] {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--surface-elevated);
+      color: var(--text);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-lg);
+      z-index: 2;
+      width: calc(100% - var(--space-card) * 2);
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      transition: opacity var(--motion-normal) var(--ease-standard), transform var(--motion-normal) var(--ease-standard);
+    }
+    [data-pattern="modal-dialog"][data-size="sm"] { max-width: 360px; }
+    [data-pattern="modal-dialog"][data-size="md"] { max-width: 520px; }
+    [data-pattern="modal-dialog"][data-size="lg"] { max-width: 720px; }
+    [data-pattern="modal-dialog"][data-size="full"] { max-width: 100%; max-height: 100%; top: 0; left: 0; transform: none; border-radius: 0; }
+    [data-pattern="modal-dialog"][data-state="closing"],
+    [data-pattern="modal-dialog"][data-open="false"] { opacity: 0; transform: translate(-50%, -48%); pointer-events: none; }
+    [data-pattern="modal-dialog"]:focus { outline: none; }
+
+    [data-pattern="modal-dialog"] header {
+      padding: var(--space-card) var(--space-card) var(--space-3);
+      display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-3);
+      border-bottom: var(--border-width-sm) solid var(--border);
+    }
+    [data-pattern="modal-dialog"] header .heading-block { flex: 1; min-width: 0; }
+    [data-pattern="modal-dialog"] header h2 {
+      margin: 0;
+      font-family: var(--font-display); font-size: var(--type-size-lg); font-weight: var(--font-weight-semibold);
+      color: var(--text-emphasis); letter-spacing: var(--tracking-tight); line-height: var(--leading-tight);
+    }
+    [data-pattern="modal-dialog"] header p.subtitle {
+      margin: var(--space-1) 0 0;
+      color: var(--text-recede); font-size: var(--type-size-sm); line-height: var(--leading-prose);
+    }
+    [data-pattern="modal-dialog"] header .close {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px;
+      background: transparent;
+      border: 0;
+      border-radius: var(--radius-sm);
+      color: var(--text-recede);
+      cursor: pointer;
+      flex: 0 0 auto;
+      transition: var(--transition-default);
+    }
+    [data-pattern="modal-dialog"] header .close:hover { background: var(--surface-recessed); color: var(--text-emphasis); }
+    [data-pattern="modal-dialog"] header .close:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+
+    [data-pattern="modal-dialog"] [data-pattern="modal-body"] {
+      flex: 1; overflow-y: auto;
+      padding: var(--space-card);
+      color: var(--text);
+      font-family: var(--font-sans); font-size: var(--type-size-sm); line-height: var(--leading-prose);
+    }
+    [data-pattern="modal-dialog"] [data-pattern="modal-body"][data-padding="compact"] { padding: var(--space-3); }
+    [data-pattern="modal-dialog"] [data-pattern="modal-body"][data-padding="comfortable"] { padding: var(--space-panel); }
+    [data-pattern="modal-dialog"] [data-pattern="modal-body"] p { margin: 0 0 var(--space-3); }
+    [data-pattern="modal-dialog"] [data-pattern="modal-body"] p:last-child { margin-bottom: 0; }
+
+    [data-pattern="modal-dialog"] footer {
+      padding: var(--space-3) var(--space-card) var(--space-card);
+      display: flex; align-items: center; gap: var(--space-2);
+      justify-content: flex-end;
+      border-top: var(--border-width-sm) solid var(--border);
+      flex-wrap: wrap;
+    }
+    [data-pattern="modal-dialog"] footer[data-align="between"] { justify-content: space-between; }
+    [data-pattern="modal-dialog"] footer[data-align="center"] { justify-content: center; }
+    [data-pattern="modal-dialog"] footer[data-align="fill"] > * { flex: 1; }
+    [data-pattern="modal-dialog"] footer .cta {
+      display: inline-flex; align-items: center; gap: var(--space-1);
+      padding: var(--space-2) var(--space-4);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans); font-size: var(--type-size-sm); font-weight: var(--font-weight-semibold);
+      cursor: pointer;
+      text-decoration: none;
+      border: var(--border-width-sm) solid transparent;
+      transition: var(--transition-default);
+    }
+    [data-pattern="modal-dialog"] footer .cta[data-intent="primary"] { background: var(--accent); color: var(--text-on-accent); }
+    [data-pattern="modal-dialog"] footer .cta[data-intent="primary"]:hover { background: var(--accent-hover); }
+    [data-pattern="modal-dialog"] footer .cta[data-intent="secondary"] { background: transparent; color: var(--text-emphasis); border-color: var(--border-emphasis); }
+    [data-pattern="modal-dialog"] footer .cta[data-intent="secondary"]:hover { background: var(--surface-recessed); }
+    [data-pattern="modal-dialog"] footer .cta[data-intent="ghost"] { background: transparent; color: var(--text); }
+    [data-pattern="modal-dialog"] footer .cta[data-intent="ghost"]:hover { background: var(--surface-recessed); color: var(--accent-hover); }
+    [data-pattern="modal-dialog"] footer .cta[data-intent="critical"] { background: var(--critical); color: var(--text-on-accent); }
+    [data-pattern="modal-dialog"] footer .cta[data-intent="critical"]:hover { background: oklch(48% 0.22 25); }
+    [data-pattern="modal-dialog"] footer .cta:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+    [data-pattern="modal-dialog"] footer .cta[aria-busy="true"] {
+      opacity: 0.7; cursor: wait;
+    }
+    [data-pattern="modal-dialog"] footer .cta[aria-disabled="true"] {
+      opacity: 0.55; cursor: not-allowed;
+    }
+
+    /* Form-variant body */
+    .modal-form .field { margin-bottom: var(--space-3); }
+    .modal-form .field label { display: block; font-size: var(--type-size-sm); font-weight: var(--font-weight-semibold); color: var(--text-emphasis); margin-bottom: var(--space-1); }
+    .modal-form .field .field-input {
+      width: 100%;
+      background: var(--surface);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: var(--space-2) var(--space-3);
+      font-family: var(--font-sans); font-size: var(--type-size-sm); color: var(--text);
+      transition: var(--transition-default);
+    }
+    .modal-form .field .field-input:focus-visible {
+      outline: none; border-color: var(--accent);
+      box-shadow: 0 0 0 var(--focus-ring-offset) var(--surface-elevated), 0 0 0 calc(var(--focus-ring-offset) + var(--focus-ring-width)) var(--focus-ring);
+    }
+
+    /* Alert-variant icon */
+    .alert-icon {
+      width: 40px; height: 40px;
+      background: var(--critical-recede);
+      color: var(--critical);
+      border-radius: 999px;
+      display: inline-flex; align-items: center; justify-content: center;
+      margin-bottom: var(--space-3);
+    }
+    .alert-icon svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* Command palette */
+    .cmd-search {
+      display: flex; align-items: center; gap: var(--space-2);
+      background: var(--surface-elevated);
+      padding: var(--space-3) var(--space-card);
+      border-bottom: var(--border-width-sm) solid var(--border);
+    }
+    .cmd-search svg { width: 18px; height: 18px; color: var(--text-recede); flex: 0 0 auto; }
+    .cmd-search input {
+      flex: 1; background: transparent; border: 0; outline: none;
+      font-family: var(--font-sans); font-size: var(--type-size-md); color: var(--text);
+    }
+    .cmd-search input::placeholder { color: var(--text-recede); }
+    .cmd-search kbd {
+      background: var(--surface-recessed); color: var(--text-recede);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: 4px; padding: 1px 6px;
+      font-family: var(--font-mono); font-size: 0.72rem; font-weight: var(--font-weight-medium);
+    }
+    .cmd-results {
+      list-style: none; padding: var(--space-2); margin: 0;
+      max-height: 360px; overflow-y: auto;
+    }
+    .cmd-results li[role="option"] {
+      display: flex; align-items: center; gap: var(--space-3);
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: var(--transition-default);
+    }
+    .cmd-results li[role="option"]:hover { background: var(--surface-recessed); }
+    .cmd-results li[role="option"][aria-selected="true"] { background: var(--accent-recede); }
+    .cmd-results li[role="option"] .glyph {
+      width: 24px; height: 24px;
+      background: var(--accent-recede); color: var(--accent);
+      border-radius: var(--radius-sm);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 0.85rem;
+      font-weight: var(--font-weight-bold);
+      flex: 0 0 auto;
+    }
+    .cmd-results li[role="option"] .label { flex: 1; font-size: var(--type-size-sm); color: var(--text); font-weight: var(--font-weight-medium); }
+    .cmd-results li[role="option"] .hint { font-size: var(--type-size-xs); color: var(--text-recede); font-family: var(--font-mono); }
+    .cmd-results .group-label {
+      padding: var(--space-3) var(--space-3) var(--space-1);
+      font-size: var(--type-size-xs); font-weight: var(--font-weight-semibold);
+      color: var(--text-recede); letter-spacing: var(--tracking-wide); text-transform: uppercase;
+    }
+    .cmd-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: var(--space-2) var(--space-card);
+      background: var(--surface-recessed);
+      border-top: var(--border-width-sm) solid var(--border);
+      font-size: var(--type-size-xs); color: var(--text-recede);
+      flex-wrap: wrap; gap: var(--space-3);
+    }
+    .cmd-footer .legend { display: inline-flex; gap: var(--space-3); }
+    .cmd-footer .legend > span { display: inline-flex; gap: var(--space-1); align-items: center; }
+    .cmd-footer kbd {
+      background: var(--surface-elevated); color: var(--text);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: 3px; padding: 0 4px;
+      font-family: var(--font-mono); font-size: 0.7rem;
+    }
+
+    /* Composition lineage */
+    .lineage { width: 100%; border-collapse: collapse; font-size: var(--type-size-sm); }
+    .lineage th, .lineage td {
+      text-align: left; padding: var(--space-2) var(--space-3);
+      border-bottom: var(--border-width-sm) solid var(--border); vertical-align: top;
+    }
+    .lineage th {
+      background: var(--surface-elevated); color: var(--text-emphasis);
+      font-weight: var(--font-weight-semibold); font-size: var(--type-size-xs);
+      letter-spacing: var(--tracking-wide); text-transform: uppercase;
+    }
+    .lineage code {
+      font-family: var(--font-mono); font-size: var(--type-size-xs);
+      background: var(--surface-recessed); padding: 0 4px; border-radius: 3px; color: var(--text-emphasis);
+    }
+    .a11y-list { font-size: var(--type-size-sm); line-height: var(--leading-prose); color: var(--text-recede); padding-left: var(--space-card); }
+    .a11y-list code {
+      font-family: var(--font-mono); font-size: 0.85em;
+      background: var(--surface-recessed); padding: 0 4px; border-radius: 3px; color: var(--text-emphasis);
+    }
+    .icon-12 { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .icon-14 { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .icon-16 { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>pattern-modal-dialog — specimen</h1>
+      <p class="lede">Modal dialogs — alert (destructive confirmation), form (input collection), panel (rich content), command (Cmd+K palette). Focus trap, body scroll lock, inert background, Escape + backdrop dismiss, focus restoration to trigger on close. Six primitives. Composes <code>@quoin/pattern-button-system</code> for action buttons and <code>@quoin/pattern-form-fields</code> for form-variant dialogs.</p>
+      <dl class="meta">
+        <div><dt>Pack</dt><dd>@quoin/pattern-modal-dialog@1.0.0</dd></div>
+        <div><dt>Primitives</dt><dd>6</dd></div>
+        <div><dt>Variants</dt><dd>alert / form / panel / command</dd></div>
+        <div><dt>Sizes</dt><dd>sm / md / lg / full</dd></div>
+        <div><dt>States</dt><dd>default / opening / open / closing</dd></div>
+        <div><dt>Composes</dt><dd>button-system + form-fields</dd></div>
+        <div><dt>WCAG</dt><dd>2.1.2 (no keyboard trap on dismiss), 2.4.3 (focus order), 4.1.2 (role + state)</dd></div>
+      </dl>
+    </header>
+
+    <!-- =================== ALERT (DESTRUCTIVE) =================== -->
+    <section class="specimen-divider">
+      <h2>Variant — alert · size sm · destructive</h2>
+      <p>Destructive confirmation pattern used by the Cancel-subscriptions bulk action in pattern-data-table. <code>role="alertdialog"</code> + <code>aria-describedby</code> pointing to the body text + strong backdrop dim. Cancel button is leftmost (visual) but FIRST in tab order — keyboard users must tab forward to reach the destructive action.</p>
+    </section>
+    <div class="stage">
+      <div class="page-content" inert>
+        <h3>Galley Dues · Subscriptions</h3>
+        <p>Behind the modal: a 12-row subscription table from pattern-data-table. The <code>inert</code> attribute on this region makes everything behind the dialog non-interactive and removes it from the accessibility tree.</p>
+      </div>
+      <div data-pattern="modal-backdrop" data-open="true" data-dim="strong" aria-hidden="true"></div>
+      <div data-pattern="modal-dialog" data-variant="alert" data-size="sm" data-open="true" data-state="open" role="alertdialog" aria-modal="true" aria-labelledby="alert-title" aria-describedby="alert-body" tabindex="-1">
+        <header>
+          <div class="heading-block">
+            <div class="alert-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+            </div>
+            <h2 id="alert-title">Cancel 2 subscriptions?</h2>
+          </div>
+          <button class="close" type="button" aria-label="Close dialog">
+            <svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          </button>
+        </header>
+        <div data-pattern="modal-body" id="alert-body">
+          <p><strong style="color: var(--text-emphasis);">Linear</strong> and <strong style="color: var(--text-emphasis);">Figma</strong> will be removed from your Galley Dues ledger. We won't actually cancel them with the providers — you'll need to log in to each service to do that.</p>
+          <p>This action can be undone within 30 days from Settings → Trash.</p>
+        </div>
+        <footer data-register="destructive">
+          <button class="cta" data-intent="ghost" type="button">Keep tracking</button>
+          <button class="cta" data-intent="critical" type="button">Remove subscriptions</button>
+        </footer>
+      </div>
+    </div>
+
+    <!-- =================== FORM (ADD SUBSCRIPTION) =================== -->
+    <section class="specimen-divider">
+      <h2>Variant — form · size md</h2>
+      <p>Input-collection dialog. <code>role="dialog"</code> with <code>aria-labelledby</code> to the heading. Tab order goes through form fields → Cancel → Submit. Submit composes <code>action-button intent="primary"</code> from button-system with all 8 microstates including <code>aria-busy</code> during async submit.</p>
+    </section>
+    <div class="stage" style="min-height: 480px;">
+      <div class="page-content" inert>
+        <h3>Galley Dues · Add subscription</h3>
+        <p>The page lists 12 existing subscriptions. Click "Add subscription" in the toolbar to open this dialog.</p>
+      </div>
+      <div data-pattern="modal-backdrop" data-open="true" data-dim="default" aria-hidden="true"></div>
+      <div data-pattern="modal-dialog" data-variant="form" data-size="md" data-open="true" data-state="open" role="dialog" aria-modal="true" aria-labelledby="form-title" tabindex="-1">
+        <header>
+          <div class="heading-block">
+            <h2 id="form-title">Add subscription</h2>
+            <p class="subtitle">Track a recurring charge in Galley Dues.</p>
+          </div>
+          <button class="close" type="button" aria-label="Close dialog">
+            <svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          </button>
+        </header>
+        <div data-pattern="modal-body">
+          <form class="modal-form">
+            <div class="field">
+              <label for="sub-service">Service name</label>
+              <input class="field-input" id="sub-service" type="text" placeholder="e.g. Linear" autocomplete="off" required>
+            </div>
+            <div class="field">
+              <label for="sub-cost">Monthly cost (USD)</label>
+              <input class="field-input" id="sub-cost" type="number" min="0" step="0.01" placeholder="0.00" required>
+            </div>
+            <div class="field">
+              <label for="sub-category">Category</label>
+              <select class="field-input" id="sub-category">
+                <option>Productivity</option>
+                <option>Infrastructure</option>
+                <option>Security</option>
+                <option>Creative</option>
+                <option>AI tools</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="sub-next-charge">Next charge date</label>
+              <input class="field-input" id="sub-next-charge" type="date">
+            </div>
+          </form>
+        </div>
+        <footer data-register="cancel-plus-primary">
+          <button class="cta" data-intent="ghost" type="button">Cancel</button>
+          <button class="cta" data-intent="primary" type="submit">Add to ledger</button>
+        </footer>
+      </div>
+    </div>
+
+    <!-- =================== PANEL (DETAIL VIEW) =================== -->
+    <section class="specimen-divider">
+      <h2>Variant — panel · size lg</h2>
+      <p>Rich content / detail view. Used for image previews, multi-step flows, embedded media. Often skips the footer entirely — close button in header is the primary dismiss. Body is scrollable.</p>
+    </section>
+    <div class="stage" style="min-height: 480px;">
+      <div class="page-content" inert>
+        <h3>Galley Dues · Linear subscription details</h3>
+      </div>
+      <div data-pattern="modal-backdrop" data-open="true" data-dim="default" aria-hidden="true"></div>
+      <div data-pattern="modal-dialog" data-variant="panel" data-size="lg" data-open="true" data-state="open" role="dialog" aria-modal="true" aria-labelledby="panel-title" tabindex="-1">
+        <header>
+          <div class="heading-block">
+            <h2 id="panel-title">Linear</h2>
+            <p class="subtitle">linear.app · Active · Monthly · Shared with 5 people</p>
+          </div>
+          <button class="close" type="button" aria-label="Close dialog">
+            <svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          </button>
+        </header>
+        <div data-pattern="modal-body">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-card); margin-bottom: var(--space-card);">
+            <div>
+              <h3 style="font-size: var(--type-size-xs); font-weight: var(--font-weight-semibold); color: var(--text-recede); letter-spacing: var(--tracking-wide); text-transform: uppercase; margin: 0 0 var(--space-2);">Monthly cost</h3>
+              <p style="font-family: var(--font-display); font-size: var(--type-size-2xl); font-weight: var(--font-weight-semibold); color: var(--text-emphasis); margin: 0; font-variant-numeric: tabular-nums;">$16.00</p>
+            </div>
+            <div>
+              <h3 style="font-size: var(--type-size-xs); font-weight: var(--font-weight-semibold); color: var(--text-recede); letter-spacing: var(--tracking-wide); text-transform: uppercase; margin: 0 0 var(--space-2);">Next charge</h3>
+              <p style="font-family: var(--font-display); font-size: var(--type-size-2xl); font-weight: var(--font-weight-semibold); color: var(--text-emphasis); margin: 0;">Dec 3, 2026</p>
+            </div>
+          </div>
+          <h3 style="font-size: var(--type-size-sm); font-weight: var(--font-weight-semibold); color: var(--text-emphasis); margin: 0 0 var(--space-2);">Last 12 charges</h3>
+          <table style="width: 100%; border-collapse: collapse; font-size: var(--type-size-sm);">
+            <thead>
+              <tr style="background: var(--surface-recessed);">
+                <th style="text-align: left; padding: var(--space-2); font-size: var(--type-size-xs); font-weight: var(--font-weight-semibold); color: var(--text-recede); letter-spacing: var(--tracking-wide); text-transform: uppercase;">Date</th>
+                <th style="text-align: right; padding: var(--space-2); font-size: var(--type-size-xs); font-weight: var(--font-weight-semibold); color: var(--text-recede); letter-spacing: var(--tracking-wide); text-transform: uppercase;">Amount</th>
+                <th style="text-align: left; padding: var(--space-2); font-size: var(--type-size-xs); font-weight: var(--font-weight-semibold); color: var(--text-recede); letter-spacing: var(--tracking-wide); text-transform: uppercase;">Method</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: var(--border-width-sm) solid var(--border);"><td style="padding: var(--space-2);">Nov 3, 2026</td><td style="padding: var(--space-2); text-align: right; font-variant-numeric: tabular-nums;">$16.00</td><td style="padding: var(--space-2); color: var(--text-recede);">Visa ···· 6411</td></tr>
+              <tr style="border-bottom: var(--border-width-sm) solid var(--border);"><td style="padding: var(--space-2);">Oct 3, 2026</td><td style="padding: var(--space-2); text-align: right; font-variant-numeric: tabular-nums;">$16.00</td><td style="padding: var(--space-2); color: var(--text-recede);">Visa ···· 6411</td></tr>
+              <tr style="border-bottom: var(--border-width-sm) solid var(--border);"><td style="padding: var(--space-2);">Sep 3, 2026</td><td style="padding: var(--space-2); text-align: right; font-variant-numeric: tabular-nums;">$16.00</td><td style="padding: var(--space-2); color: var(--text-recede);">Visa ···· 6411</td></tr>
+            </tbody>
+          </table>
+          <p style="color: var(--text-recede); font-size: var(--type-size-xs); margin-top: var(--space-3);">Showing 3 of 12. <a href="#" style="color: var(--accent);">View all charges →</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================== COMMAND PALETTE =================== -->
+    <section class="specimen-divider">
+      <h2>Variant — command · Cmd+K palette</h2>
+      <p>The Cmd+K command palette referenced by <code>pattern-nav-app-chrome</code>'s <code>app-global-search</code> trigger. <code>role="dialog"</code> with <code>aria-haspopup="dialog"</code> on the trigger; results list uses <code>role="listbox"</code> + <code>role="option"</code> with <code>aria-selected</code>; up/down arrow keys navigate; Enter activates.</p>
+    </section>
+    <div class="stage" style="min-height: 540px;">
+      <div class="page-content" inert>
+        <h3>Galley · Search anything</h3>
+        <p>Press Cmd+K from anywhere in the app to open the global search palette.</p>
+      </div>
+      <div data-pattern="modal-backdrop" data-open="true" data-dim="subtle" aria-hidden="true"></div>
+      <div data-pattern="modal-dialog" data-variant="command" data-size="md" data-open="true" data-state="open" role="dialog" aria-modal="true" aria-labelledby="cmd-title" tabindex="-1" style="top: 22%; transform: translate(-50%, 0);">
+        <h2 id="cmd-title" style="position: absolute; left: -9999px;">Command palette</h2>
+        <div class="cmd-search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          <input type="text" placeholder="Search Galley — tools, docs, settings, recent…" aria-label="Search" autofocus aria-controls="cmd-results" aria-activedescendant="cmd-option-1">
+          <kbd>esc</kbd>
+        </div>
+        <ul class="cmd-results" id="cmd-results" role="listbox" aria-label="Search results">
+          <li class="group-label" aria-hidden="true">Recent</li>
+          <li role="option" id="cmd-option-1" aria-selected="true" tabindex="-1">
+            <span class="glyph" aria-hidden="true">N</span>
+            <span class="label">Quoin spec drafts <span style="color: var(--text-recede); font-weight: var(--font-weight-regular);">— in Notes</span></span>
+            <span class="hint">⏎</span>
+          </li>
+          <li role="option" tabindex="-1">
+            <span class="glyph" aria-hidden="true" style="background: oklch(85% 0.08 200); color: oklch(35% 0.18 200);">D</span>
+            <span class="label">Subscriptions ledger <span style="color: var(--text-recede); font-weight: var(--font-weight-regular);">— in Dues</span></span>
+            <span class="hint">⏎</span>
+          </li>
+          <li role="option" tabindex="-1">
+            <span class="glyph" aria-hidden="true" style="background: oklch(85% 0.08 130); color: oklch(35% 0.18 130);">E</span>
+            <span class="label">Mockup_v3.psd <span style="color: var(--text-recede); font-weight: var(--font-weight-regular);">— in Easel</span></span>
+            <span class="hint">⏎</span>
+          </li>
+          <li class="group-label" aria-hidden="true">Tools</li>
+          <li role="option" tabindex="-1">
+            <span class="glyph" aria-hidden="true">P</span>
+            <span class="label">Open PDF Studio</span>
+            <span class="hint">G P</span>
+          </li>
+          <li role="option" tabindex="-1">
+            <span class="glyph" aria-hidden="true">N</span>
+            <span class="label">Open Notes</span>
+            <span class="hint">G N</span>
+          </li>
+          <li role="option" tabindex="-1">
+            <span class="glyph" aria-hidden="true">K</span>
+            <span class="label">Open Keys</span>
+            <span class="hint">G K</span>
+          </li>
+          <li class="group-label" aria-hidden="true">Actions</li>
+          <li role="option" tabindex="-1">
+            <span class="glyph" aria-hidden="true" style="background: var(--accent-recede); color: var(--accent);">+</span>
+            <span class="label">Add subscription</span>
+            <span class="hint">⌘ N</span>
+          </li>
+          <li role="option" tabindex="-1">
+            <span class="glyph" aria-hidden="true">⚙</span>
+            <span class="label">Workspace settings</span>
+            <span class="hint">⌘ ,</span>
+          </li>
+        </ul>
+        <div class="cmd-footer">
+          <div class="legend">
+            <span><kbd>↑↓</kbd> navigate</span>
+            <span><kbd>⏎</kbd> select</span>
+            <span><kbd>esc</kbd> close</span>
+          </div>
+          <span>Showing 8 of 312 indexed items</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================== SIZES STACKED =================== -->
+    <section class="specimen-divider">
+      <h2>Sizes — sm / md / lg side by side</h2>
+      <p>Same heading + 1 paragraph + cancel/confirm footer in all four widths. <code>sm</code> for confirmations (~360px), <code>md</code> for forms (~520px, the 80% choice), <code>lg</code> for rich content (~720px). <code>full</code> covered separately at mobile breakpoint.</p>
+    </section>
+    <div style="display: grid; gap: var(--space-card);">
+      <div class="stage" style="min-height: 240px;">
+        <div data-pattern="modal-backdrop" data-open="true" data-dim="default" aria-hidden="true"></div>
+        <div data-pattern="modal-dialog" data-variant="form" data-size="sm" data-open="true" data-state="open" role="dialog" aria-modal="true" aria-labelledby="size-sm-title" tabindex="-1">
+          <header>
+            <div class="heading-block">
+              <h2 id="size-sm-title">Size: sm (360px)</h2>
+            </div>
+            <button class="close" type="button" aria-label="Close dialog"><svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+          </header>
+          <div data-pattern="modal-body" data-padding="compact">
+            <p>Tight content. Used for confirmations.</p>
+          </div>
+          <footer>
+            <button class="cta" data-intent="ghost" type="button">Cancel</button>
+            <button class="cta" data-intent="primary" type="button">Confirm</button>
+          </footer>
+        </div>
+      </div>
+      <div class="stage" style="min-height: 240px;">
+        <div data-pattern="modal-backdrop" data-open="true" data-dim="default" aria-hidden="true"></div>
+        <div data-pattern="modal-dialog" data-variant="form" data-size="md" data-open="true" data-state="open" role="dialog" aria-modal="true" aria-labelledby="size-md-title" tabindex="-1">
+          <header>
+            <div class="heading-block">
+              <h2 id="size-md-title">Size: md (520px)</h2>
+            </div>
+            <button class="close" type="button" aria-label="Close dialog"><svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+          </header>
+          <div data-pattern="modal-body">
+            <p>The 80% choice. Forms, settings sub-pages, most modal dialogs.</p>
+          </div>
+          <footer>
+            <button class="cta" data-intent="ghost" type="button">Cancel</button>
+            <button class="cta" data-intent="primary" type="button">Confirm</button>
+          </footer>
+        </div>
+      </div>
+      <div class="stage" style="min-height: 280px;">
+        <div data-pattern="modal-backdrop" data-open="true" data-dim="default" aria-hidden="true"></div>
+        <div data-pattern="modal-dialog" data-variant="form" data-size="lg" data-open="true" data-state="open" role="dialog" aria-modal="true" aria-labelledby="size-lg-title" tabindex="-1">
+          <header>
+            <div class="heading-block">
+              <h2 id="size-lg-title">Size: lg (720px)</h2>
+              <p class="subtitle">Wider for rich content and multi-step flows.</p>
+            </div>
+            <button class="close" type="button" aria-label="Close dialog"><svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+          </header>
+          <div data-pattern="modal-body" data-padding="comfortable">
+            <p>Rich content. Detail views, image previews, multi-step flows. Often the footer is omitted entirely — the close button in the header is the primary dismiss.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================== FOOTER REGISTERS =================== -->
+    <section class="specimen-divider">
+      <h2>Footer registers — 4 patterns</h2>
+      <p>primary-only (informational), cancel-plus-primary (the 80% recommendation), destructive (delete confirmations — critical-intent right-most), extended (tertiary + cancel + primary). Cancel buttons live LEFT visually but should be FIRST in tab order.</p>
+    </section>
+    <div style="display: grid; gap: var(--space-3); max-width: 560px;">
+      <div style="background: var(--surface-elevated); border: var(--border-width-sm) solid var(--border); border-radius: var(--radius-card); padding: var(--space-3) var(--space-card);">
+        <div style="font-size: var(--type-size-xs); color: var(--text-recede); font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-wide); text-transform: uppercase; margin-bottom: var(--space-2);">primary-only</div>
+        <footer data-register="primary-only" style="display: flex; justify-content: flex-end; gap: var(--space-2); padding: 0; border: 0;">
+          <button class="cta" data-intent="primary" type="button">Got it</button>
+        </footer>
+      </div>
+      <div style="background: var(--surface-elevated); border: var(--border-width-sm) solid var(--border); border-radius: var(--radius-card); padding: var(--space-3) var(--space-card);">
+        <div style="font-size: var(--type-size-xs); color: var(--text-recede); font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-wide); text-transform: uppercase; margin-bottom: var(--space-2);">cancel-plus-primary</div>
+        <footer data-register="cancel-plus-primary" style="display: flex; justify-content: flex-end; gap: var(--space-2); padding: 0; border: 0;">
+          <button class="cta" data-intent="ghost" type="button">Cancel</button>
+          <button class="cta" data-intent="primary" type="button">Save changes</button>
+        </footer>
+      </div>
+      <div style="background: var(--surface-elevated); border: var(--border-width-sm) solid var(--border); border-radius: var(--radius-card); padding: var(--space-3) var(--space-card);">
+        <div style="font-size: var(--type-size-xs); color: var(--text-recede); font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-wide); text-transform: uppercase; margin-bottom: var(--space-2);">destructive</div>
+        <footer data-register="destructive" style="display: flex; justify-content: flex-end; gap: var(--space-2); padding: 0; border: 0;">
+          <button class="cta" data-intent="ghost" type="button">Keep workspace</button>
+          <button class="cta" data-intent="critical" type="button">Delete workspace</button>
+        </footer>
+      </div>
+      <div style="background: var(--surface-elevated); border: var(--border-width-sm) solid var(--border); border-radius: var(--radius-card); padding: var(--space-3) var(--space-card);">
+        <div style="font-size: var(--type-size-xs); color: var(--text-recede); font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-wide); text-transform: uppercase; margin-bottom: var(--space-2);">extended</div>
+        <footer data-register="extended" style="display: flex; justify-content: space-between; gap: var(--space-2); padding: 0; border: 0;">
+          <button class="cta" data-intent="ghost" type="button">Save as draft</button>
+          <div style="display: flex; gap: var(--space-2);">
+            <button class="cta" data-intent="ghost" type="button">Cancel</button>
+            <button class="cta" data-intent="primary" type="button">Publish</button>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <!-- =================== COMPOSITION LINEAGE =================== -->
+    <section class="specimen-divider">
+      <h2>Composition lineage — what modal-dialog consumes</h2>
+    </section>
+    <table class="lineage">
+      <thead>
+        <tr><th>Consumed primitive</th><th>Source pack</th><th>Used in</th><th>How this pattern uses it</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>&lt;action-button intent="primary"&gt;</code></td>
+          <td>@quoin/pattern-button-system</td>
+          <td>modal-footer (primary action)</td>
+          <td>Submit / Confirm / Save button. Inherits all 8 microstates including <code>aria-busy</code> during async submission.</td>
+        </tr>
+        <tr>
+          <td><code>&lt;action-button intent="critical"&gt;</code></td>
+          <td>@quoin/pattern-button-system</td>
+          <td>modal-footer (destructive register)</td>
+          <td>The destructive primary action in delete-confirmation dialogs. Button text names the consequence explicitly ("Remove subscriptions", not "Confirm").</td>
+        </tr>
+        <tr>
+          <td><code>&lt;action-button intent="ghost"&gt;</code></td>
+          <td>@quoin/pattern-button-system</td>
+          <td>modal-header close button · modal-footer Cancel</td>
+          <td>De-escalated CTAs. Header close uses ghost + icon-only treatment.</td>
+        </tr>
+        <tr>
+          <td><code>&lt;form-control&gt;</code> (all types)</td>
+          <td>@quoin/pattern-form-fields</td>
+          <td>modal-body (form variant)</td>
+          <td>Every form-variant dialog's body hosts form-controls. The form-control's existing 4 field-level states (default / invalid / loading / disabled) handle the visual register.</td>
+        </tr>
+        <tr>
+          <td><code>&lt;validation-summary&gt;</code> + <code>&lt;validation-message&gt;</code></td>
+          <td>@quoin/pattern-form-validation</td>
+          <td>modal-body (form variant) on submit-failed</td>
+          <td>When the form-variant dialog's submit fails, the validation-summary mounts at the top of the modal-body. Focus moves to it on submit-failed (same focus management contract as standalone forms).</td>
+        </tr>
+        <tr>
+          <td>canonical tokens</td>
+          <td>@quoin/tokens-baseline</td>
+          <td>every CSS value</td>
+          <td>Surfaces / typography / borders / motion / shadows / focus-ring. Backdrop opacity scale, dialog shadow scale, motion timing all read from tokens.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <section class="specimen-divider">
+      <h2>Accessibility checklist</h2>
+    </section>
+    <ul class="a11y-list">
+      <li><strong>Dialog role:</strong> <code>role="dialog"</code> for most variants; <code>role="alertdialog"</code> for alert variant. <code>aria-modal="true"</code> tells AT siblings outside dialog are inaccessible.</li>
+      <li><strong>Dialog naming:</strong> <code>aria-labelledby="..."</code> required, pointing to heading inside modal-header. <code>aria-describedby="..."</code> optional, especially important for alertdialog.</li>
+      <li><strong>Inert background:</strong> Every sibling of the dialog's root gets the <code>inert</code> HTML attribute when dialog is open. Removes them from accessibility tree AND makes non-interactive. Polyfill: <code>aria-hidden="true"</code> + <code>tabindex="-1"</code> on focusable descendants.</li>
+      <li><strong>Body scroll lock:</strong> <code>overflow: hidden</code> on <code>&lt;body&gt;</code> (or <code>&lt;html&gt;</code>) while dialog is open. Restore on close. Prevents accidental background scroll on touch devices.</li>
+      <li><strong>Focus trap:</strong> On open, focus moves to first focusable inside dialog. Tab cycles through dialog focusables; Tab from last → first; Shift+Tab from first → last.</li>
+      <li><strong>Focus restoration:</strong> On close, focus returns to the element that triggered the dialog. Store trigger in JS state.</li>
+      <li><strong>Escape closes:</strong> Escape key closes most variants. For alertdialog where dismissal is intentional, MAY suppress — document the deviation.</li>
+      <li><strong>Backdrop click dismisses:</strong> Click on backdrop closes most variants. For alertdialog, MAY suppress — but close button in header still works.</li>
+      <li><strong>Cancel button tab order:</strong> Visually leftmost (in cancel-plus-primary register) but FIRST in tab order. Keyboard users tab into Cancel and must tab forward to reach destructive primary action.</li>
+      <li><strong>Destructive button text:</strong> Names the consequence explicitly ("Remove subscriptions" not "Confirm"). Guards against accidental destructive activation.</li>
+      <li><strong>Async submit state:</strong> Submit button gets <code>aria-busy="true"</code>. Cancel button gets <code>aria-disabled="true"</code> to prevent dismissal mid-submission.</li>
+      <li><strong>Command palette ARIA:</strong> <code>role="dialog"</code> + <code>aria-haspopup="dialog"</code> on trigger; <code>aria-keyshortcuts="Meta+K Control+K"</code> on trigger. Results list uses <code>role="listbox"</code> + <code>role="option"</code> with <code>aria-selected</code>; <code>aria-activedescendant</code> on the input announces selected result without moving DOM focus.</li>
+      <li><strong>Close button labelling:</strong> <code>aria-label="Close dialog"</code> (or "Close &lt;dialog-title&gt;"). The ✕ glyph itself is aria-hidden.</li>
+      <li><strong>Reduced motion:</strong> Fade-in / fade-out transitions collapse to instant under <code>prefers-reduced-motion: reduce</code>. No popping-in animation for users sensitive to motion.</li>
+    </ul>
+  </main>
+</body>
+</html>
