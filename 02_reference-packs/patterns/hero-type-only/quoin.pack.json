@@ -1,0 +1,25 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/pattern-hero-type-only",
+  "version": "1.0.0",
+  "type": "pattern",
+  "quoinVersion": "^0.1.0",
+  "description": "Typography-only marketing hero. Eyebrow + huge headline + subhead + CTAs + optional meta. 4 alignment registers × 3 sizes × 5 backgrounds. First of 5 hero variants. Composes button-system.",
+  "category": "marketing",
+  "variant": "system",
+  "exports": {
+    "primitives": "./primitives/index.json"
+  },
+  "states": ["default"],
+  "microStates": ["default", "hover", "active", "focus", "focus-visible", "disabled", "loading", "selected"],
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/patterns/hero-type-only",
+    "tags": ["hero", "marketing", "typography", "landing", "p0"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0",
+    "@quoin/pattern-button-system": "^1.0.0"
+  }
+}

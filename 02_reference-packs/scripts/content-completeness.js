@@ -105,6 +105,12 @@ const ENROLLMENT = {
     composesSiblings: ['pattern-button-system', 'vocab-app-shell', 'pattern-nav-app-chrome'],
     markers: ['Galley', 'aria-current', 'avatar-stack'],
   },
+  'hero-type-only': {
+    requireGalley: true,
+    requireLineage: true,
+    composesSiblings: ['pattern-button-system'],
+    markers: ['Galley', 'Five tools', 'aria-labelledby', 'text-wrap: balance'],
+  },
   // Pre-GALLEY P0 patterns (button-system, testimonial, feature-grid, form-fields)
   // intentionally not enrolled. They predate the GALLEY narrative.
 };

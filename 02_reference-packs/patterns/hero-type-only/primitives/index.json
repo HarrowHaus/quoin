@@ -1,0 +1,276 @@
+[
+  {
+    "name": "hero-section",
+    "category": "marketing",
+    "role": "Top-level <section> wrapper for the typography-only hero. The simplest of the 5 hero variants — no media, no illustration, no animation; just typography and CTAs. Used as the flagship marketing hero where the headline is the main visual element. Four alignment registers (centered / left-aligned / right-aligned / split-anchor). Three sizes (compact / default / oversized). Five backgrounds (surface / surface-elevated / surface-recessed / accent-recede / dark).",
+    "attributes": {
+      "register": {
+        "values": ["centered", "left-aligned", "right-aligned", "split-anchor"],
+        "default": "centered",
+        "specific": true
+      },
+      "size": {
+        "values": ["compact", "default", "oversized"],
+        "default": "default",
+        "specific": true
+      },
+      "background": {
+        "values": ["surface", "surface-elevated", "surface-recessed", "accent-recede", "dark"],
+        "default": "surface",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "var(--surface)",
+      "backgroundElevated": "var(--surface-elevated)",
+      "backgroundRecessed": "var(--surface-recessed)",
+      "backgroundAccent": "var(--accent-recede)",
+      "backgroundDark": "var(--accent)",
+      "color": "var(--text)",
+      "colorOnDark": "var(--text-on-accent)",
+      "padding": "var(--space-section) var(--space-panel)",
+      "paddingCompact": "var(--space-card) var(--space-panel)",
+      "paddingOversized": "calc(var(--space-section) * 1.5) var(--space-panel)",
+      "gap": "var(--space-card)",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "section",
+      "attributes": {
+        "aria-labelledby": "hero-headline"
+      }
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<section data-pattern='hero-section' data-register='centered' aria-labelledby='hero-headline-id'>",
+        "  <div class='inner'>",
+        "    (optional) <hero-eyebrow> — small uppercase pre-heading",
+        "    <hero-headline id='hero-headline-id'> — h1, the big display type",
+        "    (optional) <hero-subhead> — supporting subtitle",
+        "    (optional) <hero-actions> — CTA cluster",
+        "    (optional) <hero-meta> — small print / social proof / disclaimer"
+      ],
+      "registers": {
+        "centered": "Everything center-aligned. The canonical marketing hero — Stripe, Linear, Vercel home pages.",
+        "left-aligned": "Everything left-aligned. Used in editorial / blog-style heroes, docs landings, B2B SaaS where content density matters.",
+        "right-aligned": "Less common; used in art-direction-heavy marketing where the right edge anchors against a media element (which would arrive in hero-brand-photo or hero-video patterns).",
+        "split-anchor": "Headline + subhead on the left; action cluster on the right. Used on dense flagship pages where the CTA needs to be visually balanced against the headline."
+      },
+      "sizes": {
+        "compact": "Lower padding-y. Used as page-internal heros (e.g., feature subpages, blog category landings).",
+        "default": "The 80% choice. Padding section / panel.",
+        "oversized": "Hero takes ~80% of viewport height. Used on flagship marketing home pages with no fold cut-off."
+      },
+      "backgrounds": {
+        "surface": "Default — same as page surface, no distinction.",
+        "surface-elevated": "Subtle distinction from page surface.",
+        "surface-recessed": "Subtle recession from page surface.",
+        "accent-recede": "Tinted accent background. Used to colour-anchor the hero.",
+        "dark": "Inverted — accent-coloured ground with text-on-accent foreground. Used for high-impact marketing."
+      },
+      "ariaPatterns": {
+        "ariaLabelledby": "<section aria-labelledby> points to the hero-headline's id. Gives the section a programmatic name.",
+        "h1Discipline": "hero-headline uses <h1>. Per page convention, only ONE <h1> per page; hero-section IS the h1 anchor for marketing pages."
+      }
+    }
+  },
+  {
+    "name": "hero-eyebrow",
+    "category": "marketing",
+    "role": "Small uppercase pre-heading above the main headline. Used to categorise ('PRODUCT LAUNCH') or signal context ('NEW IN GALLEY'). Renders as a small text strip in --text-recede with tracking-wide letter-spacing.",
+    "attributes": {
+      "tone": {
+        "values": ["neutral", "accent", "success"],
+        "default": "neutral",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "var(--text-recede)",
+      "colorAccent": "var(--accent)",
+      "colorSuccess": "var(--success)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-sm)",
+      "fontWeight": "var(--font-weight-semibold)",
+      "letterSpacing": "var(--tracking-wide)",
+      "textTransform": "uppercase",
+      "lineHeight": "var(--leading-tight)",
+      "margin": "0 0 var(--space-3)",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "p"
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "ariaPatterns": {
+        "notHeading": "Eyebrow is NOT a heading element (not h1/h2/etc) — it's just <p>. The h1 is the hero-headline below. Marking the eyebrow as a heading would break the page outline."
+      }
+    }
+  },
+  {
+    "name": "hero-headline",
+    "category": "marketing",
+    "role": "The big display-type headline. The visual centrepiece of the typography-only hero. h1 by default — and per convention, the ONE h1 per marketing page. Uses --font-display + balance text-wrap. Sizes: 3xl (compact), 4xl (default), 5xl-and-up (oversized).",
+    "attributes": {
+      "size": {
+        "values": ["compact", "default", "oversized"],
+        "default": "default",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "var(--text-emphasis)",
+      "colorOnDark": "var(--text-on-accent)",
+      "fontFamily": "var(--font-display)",
+      "fontSizeCompact": "var(--type-size-2xl)",
+      "fontSizeDefault": "var(--type-size-3xl)",
+      "fontSizeOversized": "var(--type-size-4xl)",
+      "fontWeight": "var(--font-weight-semibold)",
+      "lineHeight": "var(--leading-display)",
+      "letterSpacing": "var(--tracking-tight)",
+      "margin": "0",
+      "maxWidth": "20ch",
+      "maxWidthCenter": "30ch",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "h1"
+    },
+    "children": "phrasing-content",
+    "scope": "block",
+    "meta": {
+      "textWrapBalance": "Apply text-wrap: balance — critical for hero headlines where line breaks are aesthetic.",
+      "maxWidthChoices": "Headlines have max-width in ch units. 20ch for left/right-aligned (encourages 2-3 line headlines); 30ch for centered (allows wider single-line treatment).",
+      "copyGuidelines": [
+        "Lead with verb or noun, not adjective. 'Track every charge.' beats 'Comprehensive subscription tracking.'",
+        "Two-line headlines are stronger than one-liners — they create rhythm and let the second line punch.",
+        "Avoid stacked clauses. 'Five tools that compose.' is one breath; 'Five tools that compose, with one subscription' is two."
+      ]
+    }
+  },
+  {
+    "name": "hero-subhead",
+    "category": "marketing",
+    "role": "Supporting subtitle below the headline. 1-2 sentences max. Used to clarify or elaborate on the headline — the headline is the punch; the subhead is the proof. max 60ch line length via inline max-width.",
+    "attributes": {
+      "size": {
+        "values": ["compact", "default", "oversized"],
+        "default": "default",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "var(--text-recede)",
+      "colorOnDark": "oklch(80% 0 0)",
+      "fontFamily": "var(--font-sans)",
+      "fontSizeCompact": "var(--type-size-md)",
+      "fontSizeDefault": "var(--type-size-lg)",
+      "fontSizeOversized": "var(--type-size-xl)",
+      "fontWeight": "var(--font-weight-medium)",
+      "lineHeight": "var(--leading-prose)",
+      "margin": "var(--space-3) 0 0",
+      "maxWidth": "60ch",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "p"
+    },
+    "children": "phrasing-content",
+    "scope": "block",
+    "meta": {
+      "textWrapPretty": "Apply text-wrap: pretty for orphan-avoidance.",
+      "copyGuidelines": [
+        "Be specific. 'Five tools, one subscription, one sign-in' beats 'A modern productivity suite.'",
+        "Reference the proof or mechanism. 'Built on Quoin so every tool feels at home in whatever aesthetic you choose.'",
+        "Don't repeat the headline. Subhead extends; it doesn't restate."
+      ]
+    }
+  },
+  {
+    "name": "hero-actions",
+    "category": "marketing",
+    "role": "CTA cluster below the headline / subhead. Composes <action-button> from pattern-button-system. Typical pattern: 1 primary action ('Start free trial') + 1 secondary or ghost action ('View pricing'). Up to 3 CTAs for extended; more than that and the hero gets diluted.",
+    "attributes": {
+      "register": {
+        "values": ["primary-only", "primary-plus-secondary", "extended"],
+        "default": "primary-plus-secondary",
+        "specific": true
+      },
+      "size": {
+        "values": ["md", "lg"],
+        "default": "md",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "gap": "var(--space-3)",
+      "margin": "var(--space-card) 0 0",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "role": "group",
+        "aria-label": "Hero actions"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "registers": {
+        "primary-only": "Single CTA. Used when there's only one conversion path or when the hero is unusually focused.",
+        "primary-plus-secondary": "Primary + ghost or secondary. The 80% recommendation. 'Start free trial' (primary) + 'View pricing' (ghost). Reading flow: highest intent right-most in LTR.",
+        "extended": "Up to 3 CTAs (e.g., 'Start trial' + 'Watch demo' + 'Talk to sales'). Used on flagship marketing where multiple personas need a clear entry point."
+      },
+      "composesFrom": "@quoin/pattern-button-system (every CTA is an action-button)",
+      "buttonSizing": "Hero CTAs default to size='md' from button-system. Use size='lg' for oversized hero size. Don't mix sizes within a single cluster.",
+      "ariaPatterns": {
+        "groupRole": "<div role='group' aria-label='Hero actions'> wraps the cluster.",
+        "ariaLabelOverride": "If the hero is themed around a specific concept (e.g., 'Free trial'), the aria-label can be more specific: aria-label='Sign up actions'."
+      }
+    }
+  },
+  {
+    "name": "hero-meta",
+    "category": "marketing",
+    "role": "Optional small-print row below the CTAs. Used for social proof ('Trusted by 14,000 teams'), disclaimers ('No credit card required'), or compliance notes ('SOC 2 Type II'). Small typography, --text-recede colour. May include inline icons (security badge, customer logos).",
+    "attributes": {
+      "register": {
+        "values": ["disclaimer", "social-proof", "trust-badges"],
+        "default": "disclaimer",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "var(--text-recede)",
+      "colorOnDark": "oklch(70% 0 0)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-xs)",
+      "fontWeight": "var(--font-weight-medium)",
+      "lineHeight": "var(--leading-prose)",
+      "gap": "var(--space-3)",
+      "margin": "var(--space-3) 0 0",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "p"
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "registers": {
+        "disclaimer": "Single-line legal / compliance note ('No credit card required · 14-day trial · Cancel anytime').",
+        "social-proof": "Brief social-proof phrasing ('Trusted by 14,000 teams · Featured in TechCrunch').",
+        "trust-badges": "Inline row of small logos or compliance icons (SOC 2 / GDPR / ISO 27001). May render as a flex row of <img> elements with explicit alt-text."
+      },
+      "ariaPatterns": {
+        "trustBadgeAltText": "Trust-badge images must carry alt-text naming the certification ('SOC 2 Type II compliant'). Don't use aria-hidden — these are meaningful credentials.",
+        "social-proofMetric": "Social-proof claims should be verifiable (the number should be real). If approximate, indicate ('over 14,000' not '14,000')."
+      }
+    }
+  }
+]

@@ -1,0 +1,24 @@
+{
+  "name": "@quoin/pattern-hero-type-only",
+  "version": "1.0.0",
+  "description": "P0 typography-only marketing hero for Quoin — eyebrow + headline + subhead + CTAs + meta. 4 alignment registers, 3 sizes, 5 backgrounds. Opens the hero category.",
+  "license": "MIT",
+  "main": "./quoin.pack.json",
+  "files": [
+    "quoin.pack.json",
+    "primitives/",
+    "examples/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "pattern", "hero", "marketing", "typography", "landing", "p0"],
+  "peerDependencies": {
+    "@quoin/tokens-baseline": "^0.1.0",
+    "@quoin/pattern-button-system": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "02_reference-packs/patterns/hero-type-only"
+  }
+}
