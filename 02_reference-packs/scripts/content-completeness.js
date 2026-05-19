@@ -141,9 +141,17 @@ const ENROLLMENT = {
     composesSiblings: ['pattern-button-system'],
     markers: ['Quoin', 'WCAG 2.4.1', 'aria-current', 'Cmd+K'],
   },
+  'nav-editorial': {
+    requireGalley: false,
+    requireLineage: true,
+    composesSiblings: ['pattern-button-system'],
+    markers: ['Broadsheet', 'aria-current', 'role="banner"', 'role="search"'],
+  },
   // Pre-GALLEY P0 patterns (button-system, testimonial, feature-grid, form-fields)
   // intentionally not enrolled. They predate the GALLEY narrative.
-  // nav-docs intentionally NOT requireGalley — it's the Quoin Docs nav, not a Galley product surface.
+  // nav-docs and nav-editorial intentionally NOT requireGalley — they're standalone
+  // surfaces, not Galley product surfaces. nav-editorial markers reference the
+  // fictional "The Broadsheet" publication used in the specimen.
 };
 
 function startServer() {

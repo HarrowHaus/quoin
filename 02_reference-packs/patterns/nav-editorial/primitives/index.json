@@ -1,0 +1,349 @@
+[
+  {
+    "name": "nav-editorial-section",
+    "category": "marketing",
+    "role": "Magazine / editorial-style top navigation. Distinct from marketing nav (heavily CTA-driven, dropdown-rich) and docs nav (sidebar tree); the editorial convention foregrounds the masthead, presents categories as a strong horizontal rule, and keeps utility actions (sign in, subscribe) in a clearly-separated row. Three registers — stacked (masthead row + nav row + utility row, the canonical newspaper layout), single-row (everything compressed into one line, for narrow viewports or condensed-aesthetic publications), centered-masthead (logo center-anchored, categories distributed left-and-right around it).",
+    "attributes": {
+      "register": {
+        "values": ["stacked", "single-row", "centered-masthead"],
+        "default": "stacked",
+        "specific": true
+      },
+      "weight": {
+        "values": ["standard", "heavy"],
+        "default": "standard",
+        "specific": true
+      },
+      "show-edition-date": {
+        "values": ["true", "false"],
+        "default": "true",
+        "specific": true
+      },
+      "state": {
+        "values": ["default", "search-expanded", "mobile-drawer-open"],
+        "default": "default",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "var(--surface)",
+      "color": "var(--text)",
+      "borderColor": "var(--border-emphasis)",
+      "borderWidth": "var(--border-width-sm)",
+      "borderWidthHeavy": "var(--border-width-md)",
+      "padding": "var(--space-3) var(--space-card)",
+      "gap": "var(--space-3)",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "header",
+      "attributes": {
+        "role": "banner"
+      }
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<header role='banner' data-pattern='nav-editorial-section'>",
+        "  <nav-editorial-utility> — top utility row (sign in, subscribe, search, date)",
+        "  <nav-editorial-masthead> — central wordmark row",
+        "  <nav aria-label='Sections'>",
+        "    <nav-editorial-categories> — horizontal list of section links",
+        "  </nav>",
+        "</header>"
+      ],
+      "registers": {
+        "stacked": "Three rows top-to-bottom: utility row (small, top) → masthead (large, centered) → categories (medium, below). The classic newspaper masthead layout. Used by NYT, The Guardian, FT, Atlantic.",
+        "single-row": "Everything compressed: small logo + categories + utility in one horizontal row. Used at narrow viewports OR for condensed publications.",
+        "centered-masthead": "Wordmark centered, categories distributed left and right around it. Used by editorial brands with strong central-mark identity (some legacy newspaper styles)."
+      },
+      "weights": {
+        "standard": "Border-width-sm dividers, type-size-lg masthead.",
+        "heavy": "Border-width-md dividers (thicker), type-size-xl masthead. Newspaper-classic feel."
+      },
+      "ariaPatterns": {
+        "bannerLandmark": "<header role='banner'> — only one per page.",
+        "navLandmark": "<nav aria-label='Sections'> wraps the categories list. Distinguishes from utility nav.",
+        "utilityRole": "Utility row uses <div role='group' aria-label='Account and search'> for the cluster of utility actions, OR a separate <nav aria-label='Utility'> if it contains primary nav links."
+      }
+    }
+  },
+  {
+    "name": "nav-editorial-masthead",
+    "category": "marketing",
+    "role": "Wordmark / brand row. Renders as <div> containing the wordmark <a> + optional edition date. Wordmark uses --font-display at type-size-2xl by default (oversized for editorial impact). Edition date is small uppercase tracking-wide. Centered in stacked register; left-anchored in single-row.",
+    "attributes": {
+      "align": {
+        "values": ["center", "left"],
+        "default": "center",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "var(--text-emphasis)",
+      "fontFamily": "var(--font-display)",
+      "fontSizeStandard": "var(--type-size-2xl)",
+      "fontSizeHeavy": "var(--type-size-3xl)",
+      "fontWeight": "var(--font-weight-semibold)",
+      "letterSpacing": "var(--tracking-tight)",
+      "padding": "var(--space-card) var(--space-card)",
+      "borderColor": "var(--border-emphasis)",
+      "borderWidth": "var(--border-width-sm)",
+      "editionColor": "var(--text-recede)",
+      "editionFontSize": "var(--type-size-xs)",
+      "editionLetterSpacing": "var(--tracking-wide)"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<div data-pattern='nav-editorial-masthead' data-align='center'>",
+        "  <a href='/' aria-label='Quoin home' class='wordmark'>Quoin</a>",
+        "  (optional) <p class='edition-date'>Saturday, Dec 14, 2026 · Late Edition</p>"
+      ],
+      "wordmarkSemantics": "The wordmark is wrapped in <a href='/' aria-label='...'> — the masthead is the primary link to home. Don't wrap it in <h1> — the editorial page's <h1> belongs to the article headline, not the brand name.",
+      "editionDateOptional": "Edition date adds editorial gravitas. Newspapers traditionally show 'Saturday, December 14, 2026'. Web publications might show 'Issue 247 · December 2026'."
+    }
+  },
+  {
+    "name": "nav-editorial-categories",
+    "category": "marketing",
+    "role": "Horizontal list of section category links. The editorial equivalent of nav-marketing's primary nav, but visually heavier and with strong active-category indicator. Renders as <ul> inside <nav aria-label='Sections'>. Each <li><a> is a category. Active category gets a heavy underline indicator + emphasized weight.",
+    "attributes": {
+      "spacing": {
+        "values": ["dense", "default", "spaced"],
+        "default": "default",
+        "specific": true
+      },
+      "uppercase": {
+        "values": ["true", "false"],
+        "default": "true",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "var(--text)",
+      "colorHover": "var(--accent-hover)",
+      "colorActive": "var(--text-emphasis)",
+      "indicatorColor": "var(--accent)",
+      "indicatorWidth": "3px",
+      "gap": "var(--space-card)",
+      "gapDense": "var(--space-3)",
+      "gapSpaced": "var(--space-panel)",
+      "padding": "var(--space-3) 0",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-sm)",
+      "fontWeight": "var(--font-weight-semibold)",
+      "fontWeightActive": "var(--font-weight-bold)",
+      "letterSpacing": "var(--tracking-wide)",
+      "borderColor": "var(--border-emphasis)",
+      "borderWidth": "var(--border-width-sm)",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "ul"
+    },
+    "children": "flow-content",
+    "scope": "inline",
+    "meta": {
+      "semanticStructure": [
+        "<ul data-pattern='nav-editorial-categories'>",
+        "  <li><a href='/news' aria-current='page'>News</a></li>",
+        "  <li><a href='/opinion'>Opinion</a></li>",
+        "  <li><a href='/business'>Business</a></li>",
+        "  ...",
+        "</ul>"
+      ],
+      "ariaPatterns": {
+        "currentPageMarker": "Active category link gets aria-current='page'. Visible 3px underline indicator in --accent + emphasized weight.",
+        "uppercaseTreatment": "uppercase='true' applies text-transform: uppercase + tracking-wide. Classic newspaper section-heading aesthetic. Set uppercase='false' for sentence-case treatment (some modern editorial brands prefer this)."
+      },
+      "spacingRationale": "dense for ≥8 categories; default for 5-7; spaced for 3-4 categories. Wide spacing makes few categories feel deliberate; tight spacing makes many categories scannable."
+    }
+  },
+  {
+    "name": "nav-editorial-utility",
+    "category": "marketing",
+    "role": "Top utility row containing account actions (sign in / account avatar), subscribe pill (composes button-system), inline search trigger, optional edition date or weather/locale info. Small typography. Sits ABOVE the masthead in stacked register; inline with masthead in single-row.",
+    "attributes": {
+      "register": {
+        "values": ["standard", "extended"],
+        "default": "standard",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "var(--surface-recessed)",
+      "backgroundExtended": "var(--surface)",
+      "color": "var(--text-recede)",
+      "borderColor": "var(--border)",
+      "borderWidth": "var(--border-width-sm)",
+      "padding": "var(--space-2) var(--space-card)",
+      "gap": "var(--space-3)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-xs)",
+      "fontWeight": "var(--font-weight-medium)",
+      "letterSpacing": "var(--tracking-wide)",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "role": "group",
+        "aria-label": "Utility actions"
+      }
+    },
+    "children": "flow-content",
+    "scope": "inline",
+    "meta": {
+      "registers": {
+        "standard": "Sign in link + subscribe pill + search trigger. The 80% choice.",
+        "extended": "Adds edition date + weather/locale + saved-articles count. Used by full-feature editorial brands."
+      },
+      "composesFrom": "@quoin/pattern-button-system for subscribe pill",
+      "ariaPatterns": {
+        "groupRole": "<div role='group' aria-label='Utility actions'> wraps the cluster.",
+        "subscribePillAccentIntent": "Subscribe button uses intent='primary' for visual priority — it's the editorial brand's primary conversion."
+      }
+    }
+  },
+  {
+    "name": "nav-editorial-search-inline",
+    "category": "marketing",
+    "role": "Inline expandable search. Initially renders as just a magnifier icon button; on click, expands into a horizontal input field with submit button. Distinct from nav-marketing's Cmd+K palette — editorial convention favors visible inline search over keyboard-shortcut palette.",
+    "attributes": {
+      "expanded": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true
+      },
+      "position": {
+        "values": ["inline", "absolute"],
+        "default": "inline",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "var(--surface-elevated)",
+      "color": "var(--text)",
+      "borderColor": "var(--border)",
+      "borderWidth": "var(--border-width-sm)",
+      "borderRadius": "var(--radius-sm)",
+      "padding": "var(--space-2) var(--space-3)",
+      "gap": "var(--space-2)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-sm)",
+      "iconSize": "16px",
+      "transition": "width var(--motion-normal) var(--ease-standard)"
+    },
+    "structure": {
+      "element": "form",
+      "attributes": {
+        "role": "search",
+        "aria-label": "Search articles"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "semanticStructure": [
+        "<form role='search' aria-label='Search articles' data-expanded='false'>",
+        "  <button type='button' aria-label='Expand search' aria-expanded='false' aria-controls='editorial-search-input'>",
+        "    <svg aria-hidden='true' /> magnifier",
+        "  </button>",
+        "  (when expanded) <label for='editorial-search-input' class='sr-only'>Search articles</label>",
+        "  (when expanded) <input id='editorial-search-input' type='search' name='q' placeholder='Search articles…' />",
+        "</form>"
+      ],
+      "expandBehaviour": "Collapsed: just the icon button. On click, input animates from width 0 to 240px (200ms ease-standard). Input gets autofocus when expanded.",
+      "ariaPatterns": {
+        "searchRole": "<form role='search'> identifies this as the search landmark.",
+        "expandToggle": "Icon button has aria-expanded + aria-controls pointing to the input's id. State-paired aria-label ('Expand search' / 'Close search').",
+        "labelRequired": "Input must have a <label> (visually hidden via class='sr-only' is fine) — never aria-label only on the input itself if a visible label can be provided."
+      }
+    }
+  },
+  {
+    "name": "nav-editorial-subscribe-cta",
+    "category": "marketing",
+    "role": "Subscribe pill — the primary conversion CTA in the editorial nav. Composes <action-button intent='primary' size='sm'> from pattern-button-system, styled as a pill (full border-radius). Often the only prominently-colored element in the entire nav.",
+    "attributes": {
+      "register": {
+        "values": ["pill", "outline"],
+        "default": "pill",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "var(--accent)",
+      "backgroundOutline": "transparent",
+      "color": "var(--text-on-accent)",
+      "colorOutline": "var(--accent)",
+      "borderColor": "var(--accent)",
+      "borderWidth": "var(--border-width-sm)",
+      "borderRadius": "var(--radius-pill)",
+      "padding": "var(--space-2) var(--space-card)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-xs)",
+      "fontWeight": "var(--font-weight-semibold)",
+      "letterSpacing": "var(--tracking-wide)",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "a",
+      "attributes": {
+        "href": "/subscribe",
+        "data-pattern": "nav-editorial-subscribe-cta"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "registers": {
+        "pill": "Filled --accent ground, --text-on-accent text. The standard.",
+        "outline": "Transparent ground with --accent border + text. Used in heavier-weight publications where the pill ground would compete with the masthead."
+      },
+      "composesFrom": "@quoin/pattern-button-system (visually equivalent to action-button intent='primary' size='sm' with radius=pill override)",
+      "copyDiscipline": "Label is imperative verb-first: 'Subscribe' / 'Subscribe now' / 'Get the newsletter'. Not 'Click here' / 'Sign up'."
+    }
+  },
+  {
+    "name": "nav-editorial-mobile-toggle",
+    "category": "marketing",
+    "role": "Hamburger button for mobile drawer. Toggles full-screen overlay containing the categories list, utility actions, and subscribe pill. Same WAI-ARIA pattern as nav-marketing's nav-mobile-toggle: aria-expanded + aria-controls + state-paired aria-label.",
+    "attributes": {
+      "open": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "var(--text)",
+      "backgroundHover": "var(--surface-elevated)",
+      "padding": "var(--space-2)",
+      "borderRadius": "var(--radius-sm)"
+    },
+    "structure": {
+      "element": "button",
+      "attributes": {
+        "type": "button",
+        "aria-expanded": "false",
+        "aria-controls": "editorial-mobile-drawer",
+        "aria-label": "Open menu"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "ariaLabelStatePair": "aria-label switches between 'Open menu' (closed) and 'Close menu' (open).",
+      "visibilityBreakpoint": "Hidden at min-width:961px. Visible at max-width:960px.",
+      "drawerContents": "The mobile drawer contains: subscribe pill (at top), categories list (vertically stacked), utility actions, search expanded inline.",
+      "focusManagement": "On open, focus moves to first focusable inside drawer. On close, focus returns to the toggle. Escape closes."
+    }
+  }
+]

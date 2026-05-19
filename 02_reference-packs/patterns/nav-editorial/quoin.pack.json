@@ -1,0 +1,25 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/pattern-nav-editorial",
+  "version": "1.0.0",
+  "type": "pattern",
+  "quoinVersion": "^0.1.0",
+  "description": "Magazine / editorial-style nav. Masthead + categories + utility row. 3 registers (stacked / single-row / centered-masthead). Strong typography. Composes button-system.",
+  "category": "marketing",
+  "variant": "system",
+  "exports": {
+    "primitives": "./primitives/index.json"
+  },
+  "states": ["default", "search-expanded", "mobile-drawer-open"],
+  "microStates": ["default", "hover", "active", "focus", "focus-visible", "disabled", "loading", "selected"],
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/patterns/nav-editorial",
+    "tags": ["nav", "editorial", "magazine", "newspaper", "p1"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0",
+    "@quoin/pattern-button-system": "^1.0.0"
+  }
+}
