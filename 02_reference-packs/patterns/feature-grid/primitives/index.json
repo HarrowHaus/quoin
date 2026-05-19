@@ -1,0 +1,143 @@
+[
+  {
+    "name": "feature-cell",
+    "category": "content",
+    "role": "Single feature primitive — icon (or numeral, or glyph) above a heading above a short body paragraph, optionally with a trailing link or chip. The atomic unit composed into feature-grid. Four variants — compact (chip-sized), default (3-up grid cell), wide (2-up rich cell with longer body), feature (bento centerpiece with display headline). Designed for marketing surfaces but reused on docs landing pages, pricing-tier feature lists, and onboarding.",
+    "attributes": {
+      "variant": {
+        "values": ["compact", "default", "wide", "feature"],
+        "default": "default",
+        "specific": true
+      },
+      "density": {
+        "values": ["normal", "dense"],
+        "default": "normal"
+      },
+      "weight": {
+        "values": ["normal", "emphasize"],
+        "default": "normal"
+      },
+      "leading": {
+        "values": ["icon", "numeral", "glyph", "none"],
+        "default": "icon",
+        "specific": true
+      },
+      "interactive": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true
+      },
+      "state": {
+        "values": ["default", "loading", "selected"],
+        "default": "default",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "--surface-elevated",
+      "color": "--text",
+      "headingColor": "--text-emphasis",
+      "bodyColor": "--text",
+      "leadingColor": "--accent",
+      "borderColor": "--border",
+      "borderWidth": "--border-width-sm",
+      "borderRadius": "--radius-card",
+      "padding": "--space-card",
+      "fontFamilyHeading": "--font-display",
+      "fontFamilyBody": "--font-sans",
+      "fontSizeHeading": "--type-size-lg",
+      "fontSizeBody": "--type-size-sm",
+      "lineHeightHeading": "--leading-tight",
+      "lineHeightBody": "--leading-prose",
+      "letterSpacingHeading": "--tracking-tight",
+      "transition": "--transition-default"
+    },
+    "structure": {
+      "element": "article"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticChildren": [
+        "<h3> or <h4> — feature heading (heading-level determined by surrounding context; the grid usually sits inside a <section> with its own <h2>)",
+        "<p> — feature body (2–3 sentences max; bento variant allows up to 4)",
+        "<a> — optional trailing 'Learn more →' link",
+        "<svg|icon|figure> — optional leading icon / numeral / glyph (decorative; aria-hidden=true unless functional)"
+      ],
+      "variants": {
+        "compact": "icon + 1-line label only; used in 6-up trust-bar-style strips. Type-size-xs/sm. No body paragraph.",
+        "default": "icon + heading + 2-3 sentence body. Type-size-md heading. Used in 3-up marketing rows.",
+        "wide": "icon + heading + 3-4 sentence body + optional small chip cluster. Used in 2-up rich cells.",
+        "feature": "display-tier heading + 4-5 sentence body + optional CTA + optional embedded media. Used as bento centerpiece (single full-width or 2-row tall cell)."
+      },
+      "leadingPattern": {
+        "icon": "leading SVG via <icon> primitive at size-md or size-lg; coloured by --leading-color (defaults to --accent)",
+        "numeral": "monospaced numeral (01, 02, 03 …) at type-size-lg; used in 'three-step' feature rows",
+        "glyph": "single character glyph (▲ ◆ ○) at type-size-xl; used in editorial-register marketing",
+        "none": "skip leading element entirely; used when feature heading itself carries the visual weight"
+      },
+      "interactiveBehavior": "when interactive=true the entire <article> becomes tabbable + Enter/Space activates as if the trailing link were clicked. Mouse hover lifts shadow + translates 1px. Used on linkable feature cards (e.g. /features/<slug> destinations).",
+      "loadingPattern": "skeleton lines: 1 line for heading, 2-3 lines for body; matches the variant's expected line count. Leading icon becomes a skeleton circle.",
+      "selectedPattern": "border-color: --accent + ring-shadow 0 0 0 1px --accent; used when the cell represents a selected option in a comparison-grid context",
+      "ariaPatterns": {
+        "decorativeIcon": "aria-hidden='true' on the leading SVG when it's purely decorative; if the icon is the only thing conveying meaning, provide an aria-label on the article or visible text equivalent",
+        "interactiveCard": "if interactive=true and the entire card is clickable, set role='link' (or use <a> wrapping the contents); preserve text-content focus order"
+      }
+    }
+  },
+  {
+    "name": "feature-grid",
+    "category": "marketing",
+    "role": "Composition primitive for laying out multiple feature-cells. Renders responsive grid — 1-col mobile / 2-col tablet / 3-col desktop by default. Five canonical layout modes — three-up (3 default cells), four-tile (2×2 dense), six-tile (2×3 dense compact cells), bento (irregular spans where one feature cell takes 2×2 and others fill around it), steps (numbered horizontal flow on desktop, vertical on mobile). Handles empty / sparse / dense / loading / error states at the grid level.",
+    "attributes": {
+      "layout": {
+        "values": ["three-up", "four-tile", "six-tile", "bento", "steps"],
+        "default": "three-up",
+        "specific": true
+      },
+      "density": {
+        "values": ["sparse", "normal", "dense"],
+        "default": "normal"
+      },
+      "state": {
+        "values": ["default", "empty", "loading", "error"],
+        "default": "default",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "gap": "--space-card",
+      "background": "--surface",
+      "color": "--text",
+      "padding": "--space-panel"
+    },
+    "structure": {
+      "element": "section",
+      "attributes": {
+        "aria-label": "Features"
+      }
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "layouts": {
+        "three-up": "grid-template-columns: repeat(3, 1fr) at ≥768px; repeat(2, 1fr) at 480–767px; 1fr below 480px. Used for: 3 marketing benefits, 3 pricing-tier feature lists, 3 product pillars.",
+        "four-tile": "grid-template-columns: repeat(2, 1fr); 2×2 layout at ≥640px; stacks at <640px. Used for: 4 product features, 4 use cases.",
+        "six-tile": "grid-template-columns: repeat(3, 1fr) at ≥1024px; repeat(2, 1fr) at 640–1023px; 1fr below 640px. Used for: 6 capabilities, 6 integrations, 6 services.",
+        "bento": "irregular grid using grid-template-areas. One 'hero' cell spans 2 columns × 2 rows; remaining cells fill the surrounding L-shape. Used for: marketing hero-with-supporting-features, dashboard summary widgets.",
+        "steps": "horizontal flex at ≥768px with numbered connectors between cells; vertical stack at <768px. Used for: 3-step onboarding, how-it-works sequences."
+      },
+      "stateBehavior": {
+        "empty": "render empty-state element with optional CTA; 1-column layout with dashed border",
+        "sparse": "single cell centred at 60ch max-width",
+        "loading": "render N skeleton feature-cells matching expected count at layout's expected density",
+        "error": "render error-state with critical-tinted surface + retry action"
+      },
+      "responsiveBreakpoints": {
+        "mobile": "<480px — single column for all layouts except 'steps' (which stays vertical)",
+        "tablet": "480px–1023px — 2 columns for most layouts; bento collapses to 2-column linear",
+        "desktop": "≥1024px — full layout as documented per layout type"
+      }
+    }
+  }
+]
