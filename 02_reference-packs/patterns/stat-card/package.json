@@ -1,0 +1,24 @@
+{
+  "name": "@quoin/pattern-stat-card",
+  "version": "1.0.0",
+  "description": "P0 KPI tile for Quoin — pairs with data-table for dashboards. Label + value + delta + sparkline + context. 6 primitives, 3 variants, 3 sizes, 4 states.",
+  "license": "MIT",
+  "main": "./quoin.pack.json",
+  "files": [
+    "quoin.pack.json",
+    "primitives/",
+    "examples/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "pattern", "stat-card", "kpi", "dashboard", "metric", "p0"],
+  "peerDependencies": {
+    "@quoin/tokens-baseline": "^0.1.0",
+    "@quoin/pattern-button-system": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "02_reference-packs/patterns/stat-card"
+  }
+}

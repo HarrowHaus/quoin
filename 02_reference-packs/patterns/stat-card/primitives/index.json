@@ -1,0 +1,279 @@
+[
+  {
+    "name": "stat-card",
+    "category": "product",
+    "role": "KPI tile primitive. The companion to data-table in dashboard surfaces — a row of 3-6 stat-cards typically sits above the table to surface the high-level numbers (total monthly spend, active subscriptions, average tenure, etc.). Composes label + value + optional delta + optional sparkline + optional context caption. Three variants — bordered (default; border, no fill), flat (no border, no fill — used when stacked tightly), elevated (filled surface with shadow). Three sizes — sm (in a tight row of 5-6), md (default), lg (hero metric). Four states — default / loading (skeleton) / error / no-data.",
+    "attributes": {
+      "variant": {
+        "values": ["bordered", "flat", "elevated"],
+        "default": "bordered",
+        "specific": true
+      },
+      "size": {
+        "values": ["sm", "md", "lg"],
+        "default": "md",
+        "specific": true
+      },
+      "state": {
+        "values": ["default", "loading", "error", "no-data"],
+        "default": "default",
+        "specific": true
+      },
+      "interactive": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "var(--surface)",
+      "backgroundElevated": "var(--surface-elevated)",
+      "color": "var(--text)",
+      "borderColor": "var(--border)",
+      "borderWidth": "var(--border-width-sm)",
+      "borderRadius": "var(--radius-card)",
+      "paddingSm": "var(--space-3)",
+      "paddingMd": "var(--space-card)",
+      "paddingLg": "var(--space-panel)",
+      "gap": "var(--space-2)",
+      "shadow": "0 0 transparent",
+      "shadowElevated": "var(--shadow-sm)",
+      "shadowHover": "var(--shadow-md)",
+      "transition": "var(--transition-default)",
+      "focusRing": "var(--focus-ring)"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<div data-pattern='stat-card' data-variant='bordered' data-size='md'>",
+        "  <stat-label> — small caption (e.g., 'Monthly recurring')",
+        "  <stat-value> — large numeric value with tabular-nums",
+        "  (optional) <stat-delta> — change indicator (+$24/mo)",
+        "  (optional) <stat-trendline> — inline sparkline",
+        "  (optional) <stat-context> — caption below (period range, source note)"
+      ],
+      "interactivity": "When interactive='true', the entire card becomes a focusable <button> or <a> that navigates to the metric's detail view. Hover applies shadow; focus-visible applies outline.",
+      "compositionDecision_validationStatusIcon": "stat-card does NOT compose pattern-form-validation's validation-status-icon for delta indicators despite some semantic overlap (success/critical tones). The icon vocabularies are different — validation icons are check/x/warning/spinner; delta indicators are up-arrow/down-arrow/flat. Visual literacy is clearer when these vocabularies stay separate. stat-card ships its own delta-indicator inside stat-delta.",
+      "ariaPatterns": {
+        "interactiveCard": "Interactive cards use <a href> or <button type='button'> as the outer element OR carry tabindex='0' + role='link' / 'button' with explicit handlers. Whole-card clickability requires the inner content's links to NOT be tab stops (use aria-hidden on duplicate links).",
+        "loadingAriaLive": "When state='loading' transitions to state='default' with fresh data, the value should be announced via aria-live='polite' on the stat-value element.",
+        "noDataMessage": "no-data state renders the value as '—' (em dash) and adds an aria-label naming the absence ('Monthly recurring: no data available')."
+      }
+    }
+  },
+  {
+    "name": "stat-label",
+    "category": "product",
+    "role": "Small uppercase caption that names the metric. Always sits above the value. Uppercase + letter-spacing-wide treatment. Optional info-tip trigger to the right for a tooltip explaining the metric's definition.",
+    "attributes": {
+      "show-tooltip": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "var(--text-recede)",
+      "colorHover": "var(--text-emphasis)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-xs)",
+      "fontWeight": "var(--font-weight-semibold)",
+      "letterSpacing": "var(--tracking-wide)",
+      "textTransform": "uppercase",
+      "lineHeight": "var(--leading-tight)",
+      "gap": "var(--space-1)",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "ariaPatterns": {
+        "tooltipTrigger": "If show-tooltip=true, an info button (?) sits next to the label with aria-label naming the metric ('What is &lt;metric-name&gt;?') and aria-haspopup='dialog' or 'tooltip'."
+      }
+    }
+  },
+  {
+    "name": "stat-value",
+    "category": "product",
+    "role": "The large numeric value at the centre of the card. Uses tabular-nums for column-aligned digits when multiple stat-cards stack. Sizes via parent's data-size. Optionally accompanied by a unit-prefix or unit-suffix (currency symbol, percent sign, 'GB', etc.). The unit pieces are visually de-emphasised but accessible.",
+    "attributes": {
+      "size": {
+        "values": ["sm", "md", "lg"],
+        "default": "md",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "var(--text-emphasis)",
+      "fontFamily": "var(--font-display)",
+      "fontSizeSm": "var(--type-size-xl)",
+      "fontSizeMd": "var(--type-size-2xl)",
+      "fontSizeLg": "var(--type-size-3xl)",
+      "fontWeight": "var(--font-weight-semibold)",
+      "fontVariantNumeric": "tabular-nums",
+      "lineHeight": "var(--leading-display)",
+      "letterSpacing": "var(--tracking-tight)",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "semanticStructure": [
+        "<div data-pattern='stat-value'>",
+        "  <span class='unit-prefix' aria-hidden='true'>$</span>",
+        "  <span class='value'>310.18</span>",
+        "  <span class='unit-suffix' aria-hidden='true'>/mo</span>",
+        "  <span class='sr-only'>$310.18 per month</span>",
+        "</div>"
+      ],
+      "unitHandling": "Visual unit symbols ($ / % / GB / /mo) are aria-hidden because they're glyph-decoration. A visually-hidden span announces the full value with units spelled out for AT.",
+      "tabularNums": "font-variant-numeric: tabular-nums ensures digits align column-wise when multiple stat-cards stack — critical for visual scanning across a row of KPIs."
+    }
+  },
+  {
+    "name": "stat-delta",
+    "category": "product",
+    "role": "Change indicator below the value. Shows direction (up / down / flat) + magnitude + optional period reference. Tone-coloured — positive (success green up-arrow), negative (critical red down-arrow), neutral (text-recede flat dash). The semantic of positive vs negative is INVERSE for some metrics — e.g., monthly recurring spend going UP is bad — so the tone attribute is explicit, not auto-derived from direction.",
+    "attributes": {
+      "tone": {
+        "values": ["positive", "negative", "neutral"],
+        "default": "neutral",
+        "specific": true
+      },
+      "direction": {
+        "values": ["up", "down", "flat"],
+        "default": "flat",
+        "specific": true
+      },
+      "show-period": {
+        "values": ["true", "false"],
+        "default": "true",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "colorPositive": "var(--success)",
+      "colorNegative": "var(--critical)",
+      "colorNeutral": "var(--text-recede)",
+      "backgroundPositive": "var(--success-recede)",
+      "backgroundNegative": "var(--critical-recede)",
+      "backgroundNeutral": "var(--surface-recessed)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-xs)",
+      "fontWeight": "var(--font-weight-semibold)",
+      "fontVariantNumeric": "tabular-nums",
+      "gap": "var(--space-1)",
+      "padding": "2px var(--space-2)",
+      "borderRadius": "var(--radius-pill)",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "semanticStructure": [
+        "<div data-pattern='stat-delta' data-tone='positive' data-direction='up' data-period='month'>",
+        "  <svg class='arrow' aria-hidden='true'>",
+        "    <!-- up / down / flat arrow per direction attribute -->",
+        "  </svg>",
+        "  <span class='magnitude'>+$24</span>",
+        "  <span class='period'>this month</span>",
+        "</div>"
+      ],
+      "toneVsDirectionPolicy": "tone (positive / negative / neutral) is EXPLICIT, not derived from direction. For most metrics 'up = positive', but for spend / cost / latency, 'up = negative'. The host sets tone based on the metric's semantic; this primitive only renders the visual treatment.",
+      "ariaPatterns": {
+        "deltaAccessibleName": "The element should have an accessible name that includes the direction in plain language. Use sr-only spans: '<span class=\"sr-only\">up</span>' or '<span class=\"sr-only\">down</span>' alongside the arrow svg. Or aria-label on the container: aria-label='+$24 this month, increased'.",
+        "arrowAriaHidden": "Arrow SVGs are aria-hidden='true' — magnitude text + period text carry the meaning."
+      }
+    }
+  },
+  {
+    "name": "stat-trendline",
+    "category": "product",
+    "role": "Inline sparkline visualizing the metric's trend over a short period (last 7 / 14 / 30 days). Renders as an inline SVG <path> with no axes, no labels. Tone-coloured to match the stat-delta's tone or neutral.",
+    "attributes": {
+      "tone": {
+        "values": ["positive", "negative", "neutral"],
+        "default": "neutral",
+        "specific": true
+      },
+      "fill": {
+        "values": ["none", "subtle"],
+        "default": "none",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "strokeColorPositive": "var(--success)",
+      "strokeColorNegative": "var(--critical)",
+      "strokeColorNeutral": "var(--text-recede)",
+      "fillColorPositive": "var(--success-recede)",
+      "fillColorNegative": "var(--critical-recede)",
+      "fillColorNeutral": "var(--surface-recessed)",
+      "strokeWidth": "1.5",
+      "height": "32px",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "svg",
+      "attributes": {
+        "role": "img"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "semanticStructure": [
+        "<svg role='img' aria-labelledby='<id>-title <id>-desc' class='stat-trendline'>",
+        "  <title id='<id>-title>30-day trend</title>",
+        "  <desc id='<id>-desc>Monthly recurring spend trended from $286 to $310, generally rising.</desc>",
+        "  <path d='M0 24 L8 22 ...' />",
+        "</svg>"
+      ],
+      "dataDensity": "Sparklines should show at least 7 data points (one per day for a week) and at most ~30 (one per day for a month). Fewer than 7 isn't a trend; more than 30 is noise.",
+      "ariaPatterns": {
+        "roleImg": "<svg role='img'> + aria-labelledby pointing to inline <title> + <desc> elements gives AT a textual description of what the sparkline shows.",
+        "noOnHover": "Hover tooltips on individual data points are out of scope for this primitive (use a full chart pattern in P1)."
+      }
+    }
+  },
+  {
+    "name": "stat-context",
+    "category": "product",
+    "role": "Small caption below the value or delta. Used for period notes ('Last 30 days'), data source ('From bank feeds'), or update timestamps ('Updated 2 min ago'). One line max.",
+    "attributes": {},
+    "tokens": {
+      "color": "var(--text-recede)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-xs)",
+      "fontWeight": "var(--font-weight-medium)",
+      "lineHeight": "var(--leading-tight)",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "p"
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "copyGuidelines": [
+        "Period ('Last 30 days' / 'This week' / 'Since signup')",
+        "Source ('From bank feeds' / 'Computed daily')",
+        "Freshness ('Updated 2 min ago' / 'Live')",
+        "Disclaimer ('Excludes refunds' / 'USD only')"
+      ]
+    }
+  }
+]
