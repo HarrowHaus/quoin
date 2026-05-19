@@ -1,0 +1,327 @@
+[
+  {
+    "name": "footer-section",
+    "category": "marketing",
+    "role": "Top-level scope for the marketing footer. Polymorphic <footer role='contentinfo'>. Hosts brand block, link grid, optional newsletter, and legal row. Four canonical variants — minimal (just legal row + brand wordmark), compact (brand + 2-column link grid + legal), default (brand + 4-column link grid + legal), mega (brand + 5-6 column link grid + newsletter + locale picker + legal row, used on flagship marketing sites and docs landings).",
+    "attributes": {
+      "variant": {
+        "values": ["minimal", "compact", "default", "mega"],
+        "default": "default",
+        "specific": true
+      },
+      "columns": {
+        "values": ["2", "3", "4", "5", "6"],
+        "default": "4",
+        "specific": true
+      },
+      "newsletter": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true
+      },
+      "locale-picker": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true
+      },
+      "state": {
+        "values": ["default", "newsletter-submitting", "newsletter-success", "newsletter-error"],
+        "default": "default",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "--surface-recessed",
+      "backgroundDark": "--surface-recessed",
+      "color": "--text",
+      "colorMuted": "--text-recede",
+      "borderColor": "--border",
+      "borderWidth": "--border-width-sm",
+      "padding": "--space-panel",
+      "paddingY": "--space-section",
+      "gapColumn": "--space-card",
+      "gapRow": "--space-section",
+      "linkColor": "--text",
+      "linkHoverColor": "--accent-hover",
+      "linkVisitedColor": "--text-recede",
+      "transition": "--transition-default"
+    },
+    "structure": {
+      "element": "footer",
+      "attributes": {
+        "role": "contentinfo"
+      }
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<footer role='contentinfo'> — the landmark; only one per page",
+        "<div class='footer-top'> — host for brand block + link grid + newsletter (in mega) at desktop, stacked at mobile",
+        "<div class='footer-bottom'> — host for legal row + locale picker + back-to-top link",
+        "<nav aria-label='Footer'> — link grid is a navigation landmark; each <footer-link-group> is a <ul> under this nav"
+      ],
+      "variants": {
+        "minimal": "Wordmark + 1-line tagline + legal row. No link grid. Used on auth pages, in-app modals, and minimal product surfaces where the footer should not steal focus.",
+        "compact": "Brand block (logo + tagline + social) + 2-column link grid + legal row. Used on signup flows, secondary marketing pages, blog post layouts.",
+        "default": "Brand block + 4-column link grid + legal row. Canonical marketing footer. Used on most marketing pages, docs landings, product launch pages.",
+        "mega": "Brand block + 5-6 column link grid + newsletter signup + locale picker + extended legal row. Used on the flagship marketing home, /pricing, and high-conversion landing pages where the footer absorbs as much SEO + sub-navigation surface as possible."
+      },
+      "newsletterFlow": {
+        "submitting": "data-state='newsletter-submitting' on footer-section. The newsletter button's [aria-busy] microstate engages via action-button. Email input is [readonly].",
+        "success": "data-state='newsletter-success'. Newsletter form is replaced with a success message anchored to the same DOM node. aria-live='polite' announces 'Subscribed — check your inbox to confirm.'",
+        "error": "data-state='newsletter-error'. The form-control type='email' enters its invalid state. Error message rendered below input. aria-live='assertive' announces the error."
+      },
+      "ariaPatterns": {
+        "landmarkSemantics": "<footer> with role='contentinfo' is the canonical Page Footer landmark. Only one per page.",
+        "navLandmark": "Link grid is wrapped in <nav aria-label='Footer'>. Each column gets a heading (h3 or h4 depending on host page heading hierarchy).",
+        "backToTopLink": "If present, <a href='#top' aria-label='Back to top'> with optional ↑ glyph. Focus management: clicking it focuses the first focusable element on the page.",
+        "currentPageMarker": "If a footer link points to the current page, render with aria-current='page' + visual underline."
+      }
+    }
+  },
+  {
+    "name": "footer-link-group",
+    "category": "marketing",
+    "role": "Single column of footer links with a category heading. The atomic unit of the footer link grid. Renders as <div> containing <h3> (or h4 / h5 depending on context) + <ul> + <li> + <a>. Multiple footer-link-group instances stack horizontally in the parent footer-section's grid.",
+    "attributes": {
+      "weight": {
+        "values": ["normal", "emphasize"],
+        "default": "normal"
+      },
+      "density": {
+        "values": ["normal", "dense"],
+        "default": "normal"
+      }
+    },
+    "tokens": {
+      "color": "--text",
+      "headingColor": "--text-emphasis",
+      "linkColor": "--text-recede",
+      "linkHoverColor": "--accent-hover",
+      "linkVisitedColor": "--text-recede",
+      "gap": "--space-3",
+      "fontFamilyHeading": "--font-sans",
+      "fontFamilyLink": "--font-sans",
+      "fontSizeHeading": "--type-size-xs",
+      "fontSizeLink": "--type-size-sm",
+      "fontWeightHeading": "--font-weight-semibold",
+      "fontWeightLink": "--font-weight-medium",
+      "letterSpacingHeading": "--tracking-wide",
+      "lineHeightLink": "--leading-prose",
+      "transition": "--transition-default"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<div> — wrapper (or nav if standalone; but inside footer-section it's a div under the parent <nav>)",
+        "<h3> (or h4) — category label, rendered uppercase tracking-wide at type-size-xs (caps-with-letter-spacing aesthetic)",
+        "<ul> — flat list of links; no nested sublists (footer copy depth is always 1)",
+        "<li> — single link row",
+        "<a> — the link; aria-current='page' if it matches the current URL"
+      ],
+      "linkCount": "3-7 links per column is the canonical range. Below 3 looks sparse; above 7 wraps awkwardly at narrow widths.",
+      "headingHierarchy": "Default to <h3>. If the host page's <main> uses h2 for section headings, downshift footer headings to h4 so screen-reader outline stays sensible.",
+      "ariaPatterns": {
+        "currentPageMarker": "<a aria-current='page'> when the link's href matches the current page. Visual treatment: underline + --text-emphasis colour.",
+        "externalLinks": "External links (different origin) get rel='noopener noreferrer' and an optional aria-label='Opens in new tab' if target='_blank'.",
+        "iconOnlyLinks": "Social icon links must have aria-label naming the destination (e.g. 'Quoin on GitHub')."
+      }
+    }
+  },
+  {
+    "name": "footer-brand-block",
+    "category": "marketing",
+    "role": "Brand identity area in the footer. Hosts logo / wordmark + tagline + social icon row + optional language/region picker. Renders as <div> containing brand identity, value-proposition tagline, and social/auxiliary controls. Sits as the leftmost column (desktop) or top stack (mobile) in the footer-section's main grid.",
+    "attributes": {
+      "show-tagline": {
+        "values": ["true", "false"],
+        "default": "true",
+        "specific": true
+      },
+      "show-social": {
+        "values": ["true", "false"],
+        "default": "true",
+        "specific": true
+      },
+      "show-locale": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true
+      },
+      "logo-size": {
+        "values": ["sm", "md", "lg"],
+        "default": "md",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "--text",
+      "taglineColor": "--text-recede",
+      "socialIconColor": "--text-recede",
+      "socialIconHoverColor": "--accent-hover",
+      "padding": "0",
+      "gap": "--space-4",
+      "fontFamilyTagline": "--font-sans",
+      "fontSizeTagline": "--type-size-sm",
+      "fontWeightTagline": "--font-weight-medium",
+      "lineHeightTagline": "--leading-prose",
+      "transition": "--transition-default"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<div> — wrapper",
+        "<a href='/' aria-label='Quoin home'> — logo link; SVG wordmark or icon-mark inside",
+        "<p class='tagline'> — short value proposition (1-2 sentences, max ~120 chars)",
+        "<ul class='social' aria-label='Social media'> — flat list of icon-only links to social profiles (GitHub, X, Mastodon, RSS, LinkedIn, Bluesky as relevant)",
+        "<button class='locale-picker'> — if show-locale=true, opens a popover with language/region options. Composes <action-button> from button-system with intent=ghost; popover content via separate primitive (out of scope for v1)."
+      ],
+      "socialIconList": "Each <a> in the social list is icon-only — must have aria-label naming the destination platform. Icon ref via icon pack (e.g. icon name='social-github'). Default visible set: GitHub + X + Mastodon + RSS. Override per host.",
+      "ariaPatterns": {
+        "logoLink": "<a href='/' aria-label='Quoin home'> wires the wordmark/logo to the home destination. Screen readers announce 'Quoin home, link' rather than 'image, link'.",
+        "socialNav": "<ul aria-label='Social media'> on the social list gives the sublist a label distinguishing it from the main footer navigation."
+      }
+    }
+  },
+  {
+    "name": "footer-newsletter",
+    "category": "marketing",
+    "role": "Inline newsletter signup form in the footer. Composes <form-control type='email'> from @quoin/pattern-form-fields + <action-button intent='primary'> from @quoin/pattern-button-system. Used in the mega footer variant primarily. Renders as a <form> with inline label + email input + submit button + helper text. Handles three submission states (submitting / success / error) via [aria-busy] + aria-live regions.",
+    "attributes": {
+      "register": {
+        "values": ["stacked", "inline"],
+        "default": "inline",
+        "specific": true
+      },
+      "size": {
+        "values": ["sm", "md", "lg"],
+        "default": "md",
+        "specific": true
+      },
+      "state": {
+        "values": ["default", "submitting", "success", "error"],
+        "default": "default",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "--surface-elevated",
+      "color": "--text",
+      "labelColor": "--text-emphasis",
+      "helperColor": "--text-recede",
+      "errorColor": "--critical",
+      "successColor": "--success",
+      "padding": "--space-4",
+      "gap": "--space-3",
+      "borderRadius": "--radius-card",
+      "borderColor": "--border",
+      "borderWidth": "--border-width-sm",
+      "fontFamily": "--font-sans",
+      "fontSizeLabel": "--type-size-sm",
+      "fontSizeHelper": "--type-size-xs",
+      "fontWeightLabel": "--font-weight-medium",
+      "transition": "--transition-default"
+    },
+    "structure": {
+      "element": "form",
+      "attributes": {
+        "aria-label": "Newsletter signup"
+      }
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<form aria-label='Newsletter signup' method='POST' action='/subscribe'> — outer form; aria-label distinguishes it from other forms on the page",
+        "<label for='footer-email'> — visible label; 'Get the Quoin newsletter' or similar",
+        "<form-control type='email' id='footer-email' name='email' required> — email input from pattern-form-fields; inherits 33 tokens + leading/trailing slot system + all 8 microstates",
+        "<action-button intent='primary' size='md' type='submit'> — submit button from pattern-button-system; receives loading state via [aria-busy] during submission",
+        "<p class='helper'> — small print: 'One email per week. Unsubscribe anytime.' Below the form.",
+        "<div role='status' aria-live='polite'> — success/error message region. Empty by default; populated on form response."
+      ],
+      "registers": {
+        "stacked": "label / input / button arranged vertically. Used in 6-col mega footers where horizontal space is tight, or in mobile breakpoint regardless of desktop register.",
+        "inline": "label above; input + button on one row with input flex-growing. Used in 4-col mega footers and on wider variants."
+      },
+      "submissionFlow": {
+        "submitting": "On form submit: data-state='submitting'. Set [aria-busy=true] on form. Input becomes [readonly]. Button shows loading microstate (delegate to action-button's loading state).",
+        "success": "data-state='success'. Form contents replaced (or hidden) with success message in --success colour: 'Subscribed — check your inbox.' aria-live region announces the same.",
+        "error": "data-state='error'. Form-control enters [aria-invalid=true] state. Error message rendered in --critical colour. aria-live='assertive' announces 'Subscription failed — [reason].'"
+      },
+      "ariaPatterns": {
+        "formLabel": "<form aria-label='Newsletter signup'> distinguishes from other site forms.",
+        "liveRegion": "<div role='status' aria-live='polite'> for non-critical success; aria-live='assertive' for errors. Live regions are present in DOM at all states (empty when no message).",
+        "inputErrorLink": "If validation fails server-side, the error message links back to the input via aria-describedby pointing to the error <p>."
+      }
+    }
+  },
+  {
+    "name": "footer-legal-row",
+    "category": "marketing",
+    "role": "Bottom strip of the footer. Hosts copyright notice, legal-page links (privacy / terms / cookies / accessibility / DPA / security), locale picker (if not in brand block), and optional back-to-top link. Renders as a <div> with horizontal flex layout (desktop) or stacked (mobile). Smaller typography than the main footer body; muted colour.",
+    "attributes": {
+      "register": {
+        "values": ["compact", "default", "extended"],
+        "default": "default",
+        "specific": true
+      },
+      "show-back-to-top": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true
+      },
+      "show-locale": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "--text-recede",
+      "linkColor": "--text-recede",
+      "linkHoverColor": "--accent-hover",
+      "borderColor": "--border",
+      "borderWidth": "--border-width-sm",
+      "paddingY": "--space-4",
+      "gap": "--space-4",
+      "fontFamily": "--font-sans",
+      "fontSize": "--type-size-xs",
+      "fontWeight": "--font-weight-medium",
+      "lineHeight": "--leading-prose",
+      "transition": "--transition-default"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "phrasing-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<div class='legal-row'> — wrapper with top border",
+        "<p class='copyright'> — '© 2026 Quoin. All rights reserved.' or similar; year should be dynamic",
+        "<ul class='legal-links' aria-label='Legal'> — flat list of legal-page links: Privacy / Terms / Cookies / Accessibility / DPA / Security. Inline-flex layout.",
+        "<a href='#top' class='back-to-top' aria-label='Back to top'> — if show-back-to-top=true; rendered as text + ↑ glyph",
+        "<button class='locale-picker'> — if show-locale=true and not in brand block"
+      ],
+      "registers": {
+        "compact": "Copyright + 2-3 essential legal links (privacy / terms) on one line.",
+        "default": "Copyright + 4-5 legal links (privacy / terms / cookies / accessibility) on one line.",
+        "extended": "Copyright + full legal suite (privacy / terms / cookies / accessibility / DPA / security) + locale picker + back-to-top, possibly across 2 visual lines."
+      },
+      "ariaPatterns": {
+        "legalNav": "<ul aria-label='Legal'> distinguishes the legal nav from the main footer nav.",
+        "backToTopLink": "<a href='#top' aria-label='Back to top'>; on click, focuses the page's <header> or first focusable element to maintain keyboard context.",
+        "dynamicYear": "Copyright year should be rendered from a JS-set value or server-side template variable; never hardcode."
+      }
+    }
+  }
+]

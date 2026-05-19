@@ -1,0 +1,26 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/pattern-footer-mega",
+  "version": "1.0.0",
+  "type": "pattern",
+  "quoinVersion": "^0.1.0",
+  "description": "Universal marketing footer — brand block + multi-column link grid + newsletter + legal row. 4 variants (minimal/default/mega/compact). Composes form-fields + button-system siblings.",
+  "category": "marketing",
+  "variant": "system",
+  "exports": {
+    "primitives": "./primitives/index.json"
+  },
+  "states": ["default", "newsletter-submitting", "newsletter-success", "newsletter-error"],
+  "microStates": ["default", "hover", "active", "focus", "focus-visible", "disabled", "loading", "visited"],
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/patterns/footer-mega",
+    "tags": ["footer", "marketing", "newsletter", "legal", "p0"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0",
+    "@quoin/pattern-button-system": "^1.0.0",
+    "@quoin/pattern-form-fields": "^1.0.0"
+  }
+}

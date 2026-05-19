@@ -1,0 +1,25 @@
+{
+  "name": "@quoin/pattern-footer-mega",
+  "version": "1.0.0",
+  "description": "P0 universal marketing footer for Quoin — 5 primitives, 4 variants, newsletter signup with 4 states. Composes form-fields + button-system siblings.",
+  "license": "MIT",
+  "main": "./quoin.pack.json",
+  "files": [
+    "quoin.pack.json",
+    "primitives/",
+    "examples/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "pattern", "footer", "marketing", "newsletter", "p0"],
+  "peerDependencies": {
+    "@quoin/tokens-baseline": "^0.1.0",
+    "@quoin/pattern-button-system": "^1.0.0",
+    "@quoin/pattern-form-fields": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "02_reference-packs/patterns/footer-mega"
+  }
+}
