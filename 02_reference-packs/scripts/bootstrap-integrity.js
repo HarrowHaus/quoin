@@ -130,23 +130,31 @@ function auditSpecimen(pack, { status, body }) {
     );
   }
 
-  // 2. Reference-definition correctness — every var(--X) referenced in inline
-  //    styles must have --X defined in the same inline styles. This is the exact
-  //    condition the dad252a/fc3f89d/ba17db2 regression violated.
-  const referencedTokens = new Set();
-  for (const m of allStyles.matchAll(/var\(\s*(--[a-zA-Z0-9_-]+)/g)) {
-    referencedTokens.add(m[1]);
+  // 2. Reference-definition correctness — every var(--X) referenced WITHOUT
+  //    a fallback in inline styles must have --X defined in the same inline
+  //    styles. var(--X, fallback) references are safe — the fallback IS the
+  //    safety net (CSS-spec behaviour). This is the exact condition the
+  //    dad252a/fc3f89d/ba17db2 regression violated; the inline-style "local
+  //    custom property" pattern (e.g., toast-notifier's --toast-duration
+  //    set per-toast via inline style with a CSS fallback) is intentionally
+  //    NOT a failure.
+  const referencedWithoutFallback = new Set();
+  // Greedy match var(--X[, optional-fallback]) — distinguishing presence/absence of comma
+  for (const m of allStyles.matchAll(/var\(\s*(--[a-zA-Z0-9_-]+)\s*(,?)/g)) {
+    const name = m[1];
+    const hasFallback = m[2] === ',';
+    if (!hasFallback) referencedWithoutFallback.add(name);
   }
   const definedTokens = new Set();
   for (const m of allStyles.matchAll(/(--[a-zA-Z0-9_-]+)\s*:/g)) {
     definedTokens.add(m[1]);
   }
-  const undefinedReferences = [...referencedTokens].filter(
+  const undefinedReferences = [...referencedWithoutFallback].filter(
     (t) => !definedTokens.has(t) && !TOKEN_REFERENCE_IGNORE.has(t),
   );
   if (undefinedReferences.length > 0) {
     failures.push(
-      `var(--X) references with no inline definition: ${undefinedReferences.join(', ')}`,
+      `var(--X) references with no inline definition AND no fallback: ${undefinedReferences.join(', ')}`,
     );
   }
 

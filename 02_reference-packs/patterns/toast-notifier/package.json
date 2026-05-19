@@ -1,0 +1,24 @@
+{
+  "name": "@quoin/pattern-toast-notifier",
+  "version": "1.0.0",
+  "description": "P0 toast-notifier for Quoin — aria-live region with 4 tones + 6 positions + auto-dismiss with WCAG 2.2.1 hover/focus pause. Composes button-system.",
+  "license": "MIT",
+  "main": "./quoin.pack.json",
+  "files": [
+    "quoin.pack.json",
+    "primitives/",
+    "examples/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "pattern", "toast", "notification", "aria-live", "p0"],
+  "peerDependencies": {
+    "@quoin/tokens-baseline": "^0.1.0",
+    "@quoin/pattern-button-system": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "02_reference-packs/patterns/toast-notifier"
+  }
+}

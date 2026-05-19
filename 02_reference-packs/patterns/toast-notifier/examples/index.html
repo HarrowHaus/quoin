@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>@quoin/pattern-toast-notifier — specimen</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=JetBrains+Mono:wght@100..800&display=swap">
+
+  <style>
+    :root {
+      color-scheme: light dark;
+
+      --surface: oklch(98% 0 0);
+      --surface-elevated: oklch(100% 0 0);
+      --surface-recessed: oklch(96% 0 0);
+      --text: oklch(30% 0 0);
+      --text-emphasis: oklch(15% 0 0);
+      --text-recede: oklch(50% 0 0);
+      --text-disabled: oklch(72% 0 0);
+      --text-on-accent: oklch(100% 0 0);
+      --accent: oklch(20% 0 0);
+      --accent-hover: oklch(28% 0 0);
+      --accent-active: oklch(12% 0 0);
+      --accent-recede: oklch(94% 0 0);
+      --critical: oklch(55% 0.22 25);
+      --critical-recede: oklch(95% 0.05 25);
+      --success: oklch(50% 0.18 155);
+      --success-recede: oklch(95% 0.05 155);
+      --warning: oklch(75% 0.18 80);
+      --warning-recede: oklch(95% 0.05 80);
+
+      --border: oklch(88% 0 0);
+      --border-emphasis: oklch(20% 0 0);
+      --border-recede: oklch(94% 0 0);
+      --border-width-sm: 1px;
+      --border-width-md: 2px;
+
+      --focus-ring: oklch(55% 0.22 260);
+      --focus-ring-width: 2px;
+      --focus-ring-offset: 2px;
+
+      --space-1: 4px;
+      --space-2: 6px;
+      --space-3: 8px;
+      --space-4: 12px;
+      --space-5: 16px;
+      --space-6: 20px;
+      --space-8: 32px;
+      --space-card: 24px;
+      --space-panel: 32px;
+      --space-section: 64px;
+
+      --radius-sm: 4px;
+      --radius-md: 6px;
+      --radius-card: 12px;
+      --radius-pill: 999px;
+
+      --font-sans: 'Inter Variable', 'Inter', system-ui, sans-serif;
+      --font-display: 'Inter Variable', 'Inter', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+      --type-size-xs: 0.75rem;
+      --type-size-sm: 0.875rem;
+      --type-size-md: 1rem;
+      --type-size-lg: 1.125rem;
+      --type-size-xl: 1.5rem;
+      --type-size-2xl: 2rem;
+      --type-size-3xl: 2.5rem;
+      --font-weight-regular: 400;
+      --font-weight-medium: 500;
+      --font-weight-semibold: 600;
+      --font-weight-bold: 700;
+      --leading-tight: 1.15;
+      --leading-prose: 1.55;
+      --leading-display: 1.05;
+      --tracking-tight: -0.01em;
+      --tracking-normal: 0;
+      --tracking-wide: 0.08em;
+
+      --motion-fast: 120ms;
+      --motion-normal: 160ms;
+      --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+      --transition-default: all var(--motion-normal) var(--ease-standard);
+
+      --shadow-tint: oklch(0% 0 0 / 0.06);
+      --shadow-sm: 0 1px 2px 0 var(--shadow-tint);
+      --shadow-md: 0 4px 6px -1px var(--shadow-tint), 0 2px 4px -1px var(--shadow-tint);
+      --shadow-lg: 0 10px 25px -5px var(--shadow-tint), 0 6px 12px -3px var(--shadow-tint);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --surface: oklch(10% 0 0);
+        --surface-elevated: oklch(15% 0 0);
+        --surface-recessed: oklch(8% 0 0);
+        --text: oklch(85% 0 0);
+        --text-emphasis: oklch(98% 0 0);
+        --text-recede: oklch(60% 0 0);
+        --text-disabled: oklch(35% 0 0);
+        --text-on-accent: oklch(10% 0 0);
+        --accent: oklch(95% 0 0);
+        --accent-recede: oklch(20% 0 0);
+        --success-recede: oklch(18% 0.06 155);
+        --warning-recede: oklch(18% 0.06 80);
+        --critical-recede: oklch(18% 0.05 25);
+        --border: oklch(20% 0 0);
+        --shadow-tint: oklch(0% 0 0 / 0.4);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      :root { --motion-fast: 0ms; --motion-normal: 0ms; --transition-default: none; }
+      * { animation: none !important; }
+    }
+
+    * { box-sizing: border-box; }
+  </style>
+
+  <style>
+    html, body {
+      margin: 0; padding: 0;
+      background: var(--surface);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-md);
+      line-height: var(--leading-prose);
+      -webkit-font-smoothing: antialiased;
+    }
+    main { max-width: 1024px; margin: 0 auto; padding: var(--space-section) var(--space-panel); }
+    h1 {
+      font-family: var(--font-display); font-size: var(--type-size-3xl); font-weight: var(--font-weight-semibold);
+      line-height: var(--leading-display); letter-spacing: var(--tracking-tight);
+      margin: 0 0 var(--space-4); text-wrap: balance;
+    }
+    h2 {
+      font-family: var(--font-display); font-size: var(--type-size-2xl); font-weight: var(--font-weight-semibold);
+      line-height: var(--leading-tight); letter-spacing: var(--tracking-tight);
+      margin: var(--space-section) 0 var(--space-4); text-wrap: balance;
+    }
+    .lede {
+      font-size: var(--type-size-lg); line-height: var(--leading-prose);
+      color: var(--text-recede); max-width: 70ch; margin: 0 0 var(--space-section);
+    }
+    .meta {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--space-4); padding: var(--space-4);
+      background: var(--surface-elevated); border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-card); margin-bottom: var(--space-section);
+      font-size: var(--type-size-sm);
+    }
+    .meta dt { font-weight: var(--font-weight-semibold); color: var(--text-emphasis); margin-bottom: var(--space-1); }
+    .meta dd { margin: 0; color: var(--text-recede); }
+    .specimen-divider {
+      margin: var(--space-section) 0 var(--space-card);
+      padding-bottom: var(--space-2); border-bottom: var(--border-width-sm) solid var(--border);
+    }
+    .specimen-divider h2 { margin: 0; }
+    .specimen-divider p { margin: var(--space-2) 0 0; color: var(--text-recede); font-size: var(--type-size-sm); }
+
+    /* Preview stage */
+    .stage {
+      position: relative;
+      background: var(--surface-recessed);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      min-height: 340px;
+      padding: var(--space-card);
+      margin-bottom: var(--space-card);
+    }
+    .stage .page-content {
+      color: var(--text-recede);
+      font-size: var(--type-size-sm);
+    }
+    .stage .page-content h3 {
+      font-family: var(--font-display);
+      font-size: var(--type-size-md);
+      color: var(--text-emphasis);
+      margin: 0 0 var(--space-2);
+    }
+
+    /* ===== TOAST REGION ===== */
+    [data-pattern="toast-region"] {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      max-width: 420px;
+      min-width: 320px;
+      z-index: 10;
+      padding: var(--space-card);
+      pointer-events: none;
+    }
+    [data-pattern="toast-region"] > * { pointer-events: auto; }
+    [data-pattern="toast-region"][data-position="top-left"] { top: 0; left: 0; }
+    [data-pattern="toast-region"][data-position="top-right"] { top: 0; right: 0; }
+    [data-pattern="toast-region"][data-position="top-center"] { top: 0; left: 50%; transform: translateX(-50%); }
+    [data-pattern="toast-region"][data-position="bottom-left"] { bottom: 0; left: 0; flex-direction: column-reverse; }
+    [data-pattern="toast-region"][data-position="bottom-right"] { bottom: 0; right: 0; flex-direction: column-reverse; }
+    [data-pattern="toast-region"][data-position="bottom-center"] { bottom: 0; left: 50%; transform: translateX(-50%); flex-direction: column-reverse; }
+
+    /* ===== TOAST ===== */
+    [data-pattern="toast"] {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      background: var(--surface-elevated);
+      color: var(--text);
+      border: var(--border-width-md) solid var(--border);
+      border-radius: var(--radius-card);
+      padding: var(--space-3) var(--space-4);
+      box-shadow: var(--shadow-md);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-sm);
+      line-height: var(--leading-prose);
+      min-width: 320px;
+      max-width: 420px;
+      transition: opacity var(--motion-normal) var(--ease-standard), transform var(--motion-normal) var(--ease-standard);
+    }
+    [data-pattern="toast"][data-tone="info"] { border-color: var(--accent); }
+    [data-pattern="toast"][data-tone="success"] { border-color: var(--success); }
+    [data-pattern="toast"][data-tone="warning"] { border-color: var(--warning); }
+    [data-pattern="toast"][data-tone="critical"] { border-color: var(--critical); }
+
+    [data-pattern="toast"] .tone-icon {
+      width: 20px; height: 20px;
+      flex: 0 0 auto;
+      margin-top: 1px;
+      stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+    [data-pattern="toast"][data-tone="info"] .tone-icon { color: var(--accent); }
+    [data-pattern="toast"][data-tone="success"] .tone-icon { color: var(--success); }
+    [data-pattern="toast"][data-tone="warning"] .tone-icon { color: var(--warning); }
+    [data-pattern="toast"][data-tone="critical"] .tone-icon { color: var(--critical); }
+
+    [data-pattern="toast"] .content { flex: 1; min-width: 0; }
+    [data-pattern="toast"] .title {
+      display: block;
+      font-family: var(--font-sans);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-emphasis);
+    }
+    [data-pattern="toast"] .body {
+      display: block;
+      color: var(--text-recede);
+      font-size: var(--type-size-xs);
+      margin-top: 2px;
+    }
+
+    [data-pattern="toast-action"] {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      background: transparent;
+      border: 0;
+      padding: var(--space-1) var(--space-2);
+      border-radius: var(--radius-sm);
+      color: var(--accent);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-sm);
+      font-weight: var(--font-weight-semibold);
+      cursor: pointer;
+      flex: 0 0 auto;
+      transition: var(--transition-default);
+    }
+    [data-pattern="toast-action"]:hover { background: var(--surface-recessed); }
+    [data-pattern="toast-action"]:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+    [data-pattern="toast-action"][data-intent="critical"] { color: var(--critical); }
+
+    [data-pattern="toast-close"] {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px; height: 24px;
+      background: transparent;
+      border: 0;
+      border-radius: var(--radius-sm);
+      color: var(--text-recede);
+      cursor: pointer;
+      flex: 0 0 auto;
+      transition: var(--transition-default);
+    }
+    [data-pattern="toast-close"]:hover { background: var(--surface-recessed); color: var(--text-emphasis); }
+    [data-pattern="toast-close"]:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+    [data-pattern="toast-close"] svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* Dismiss-timer indicator (progress bar at bottom of auto-dismiss toast) */
+    [data-pattern="toast"][data-persistence="auto-dismiss"] {
+      position: relative;
+      overflow: hidden;
+    }
+    [data-pattern="toast"][data-persistence="auto-dismiss"]::after {
+      content: "";
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: currentColor;
+      opacity: 0.3;
+      transform-origin: left;
+      animation: dismiss-progress var(--toast-duration, 5000ms) linear forwards;
+    }
+    [data-pattern="toast"][data-tone="info"][data-persistence="auto-dismiss"]::after { background: var(--accent); }
+    [data-pattern="toast"][data-tone="success"][data-persistence="auto-dismiss"]::after { background: var(--success); }
+    [data-pattern="toast"][data-tone="warning"][data-persistence="auto-dismiss"]::after { background: var(--warning); }
+    [data-pattern="toast"][data-tone="critical"][data-persistence="auto-dismiss"]::after { background: var(--critical); }
+    [data-pattern="toast"][data-state="paused"]::after { animation-play-state: paused; }
+    @keyframes dismiss-progress {
+      from { transform: scaleX(1); }
+      to { transform: scaleX(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      [data-pattern="toast"][data-persistence="auto-dismiss"]::after { animation: none; }
+    }
+
+    /* Hover pauses */
+    [data-pattern="toast"]:hover { box-shadow: var(--shadow-lg); }
+    [data-pattern="toast"]:hover::after { animation-play-state: paused !important; }
+    [data-pattern="toast"]:focus-within::after { animation-play-state: paused !important; }
+
+    /* Lifecycle */
+    [data-pattern="toast"][data-state="entering"] {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    [data-pattern="toast"][data-state="exiting"] {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    [data-pattern="toast-region"][data-position^="top-"] [data-pattern="toast"][data-state="entering"] {
+      transform: translateY(-8px);
+    }
+
+    /* Composition lineage */
+    .lineage { width: 100%; border-collapse: collapse; font-size: var(--type-size-sm); }
+    .lineage th, .lineage td {
+      text-align: left; padding: var(--space-2) var(--space-3);
+      border-bottom: var(--border-width-sm) solid var(--border); vertical-align: top;
+    }
+    .lineage th {
+      background: var(--surface-elevated); color: var(--text-emphasis);
+      font-weight: var(--font-weight-semibold); font-size: var(--type-size-xs);
+      letter-spacing: var(--tracking-wide); text-transform: uppercase;
+    }
+    .lineage code {
+      font-family: var(--font-mono); font-size: var(--type-size-xs);
+      background: var(--surface-recessed); padding: 0 4px; border-radius: 3px; color: var(--text-emphasis);
+    }
+    .a11y-list { font-size: var(--type-size-sm); line-height: var(--leading-prose); color: var(--text-recede); padding-left: var(--space-card); }
+    .a11y-list code {
+      font-family: var(--font-mono); font-size: 0.85em;
+      background: var(--surface-recessed); padding: 0 4px; border-radius: 3px; color: var(--text-emphasis);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>pattern-toast-notifier — specimen</h1>
+      <p class="lede">Toast notifications for transient app status. Four tones (info / success / warning / critical), six positions, auto-dismiss with hover-and-focus pause (WCAG 2.2.1 Timing Adjustable), persistent variant for critical errors. Composes <code>@quoin/pattern-button-system</code> for action and close buttons.</p>
+      <dl class="meta">
+        <div><dt>Pack</dt><dd>@quoin/pattern-toast-notifier@1.0.0</dd></div>
+        <div><dt>Primitives</dt><dd>4 (toast-region, toast, toast-action, toast-close)</dd></div>
+        <div><dt>Tones</dt><dd>info / success / warning / critical</dd></div>
+        <div><dt>Positions</dt><dd>top-left / top-right / top-center / bottom-left / bottom-right / bottom-center</dd></div>
+        <div><dt>States</dt><dd>default / entering / visible / paused / exiting</dd></div>
+        <div><dt>Composes</dt><dd>button-system</dd></div>
+        <div><dt>WCAG</dt><dd>2.2.1 (Timing Adjustable), 4.1.3 (Status Messages)</dd></div>
+      </dl>
+    </header>
+
+    <!-- =================== 4 TONES STACKED =================== -->
+    <section class="specimen-divider">
+      <h2>Four tones — Galley app notifications</h2>
+      <p>Realistic toasts from across the Galley tool suite. Info (sync update), success (subscription added with Undo action), warning (storage usage), critical (sync failure with Retry action). Each carries a tone-coloured 2px border + matching tone icon.</p>
+    </section>
+    <div class="stage" style="min-height: 320px;">
+      <div class="page-content">
+        <h3>Galley · in-app surface</h3>
+        <p>The toast-region is fixed to the bottom-right corner of the viewport. Toasts stack vertically; newest closest to the bottom-right edge.</p>
+      </div>
+      <div data-pattern="toast-region" data-position="bottom-right" role="status" aria-live="polite" aria-atomic="false" aria-label="Notifications">
+        <div data-pattern="toast" data-tone="info" data-persistence="auto-dismiss" data-state="visible" style="--toast-duration: 5000ms;">
+          <svg class="tone-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          <div class="content">
+            <span class="title">Galley Notes synced</span>
+            <span class="body">3 documents updated across 2 devices.</span>
+          </div>
+        </div>
+        <div data-pattern="toast" data-tone="success" data-persistence="auto-dismiss" data-state="visible" style="--toast-duration: 5000ms;">
+          <svg class="tone-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="16 10 11 15 8 12"/></svg>
+          <div class="content">
+            <span class="title">Subscription added</span>
+            <span class="body">Linear · $16/mo · Productivity. Added to your Galley Dues ledger.</span>
+          </div>
+          <button data-pattern="toast-action" type="button">Undo</button>
+        </div>
+        <div data-pattern="toast" data-tone="warning" data-persistence="auto-dismiss" data-state="paused" style="--toast-duration: 8000ms;">
+          <svg class="tone-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+          <div class="content">
+            <span class="title">Easel storage at 85%</span>
+            <span class="body">2.7 GB free of 18 GB. Upgrade to Pro for unlimited exports.</span>
+          </div>
+          <button data-pattern="toast-action" type="button">Upgrade</button>
+        </div>
+        <div data-pattern="toast" data-tone="critical" data-persistence="persistent" data-state="visible">
+          <svg class="tone-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+          <div class="content">
+            <span class="title">Keys vault failed to sync</span>
+            <span class="body">Couldn't reach galley.harrow.haus. Your local edits are saved.</span>
+          </div>
+          <button data-pattern="toast-action" type="button" data-intent="critical">Retry</button>
+          <button data-pattern="toast-close" type="button" aria-label="Dismiss notification">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================== POSITIONS =================== -->
+    <section class="specimen-divider">
+      <h2>Six positions</h2>
+      <p>Same single success toast rendered at each of the six anchor positions. <code>bottom-right</code> is the most common; <code>top-right</code> common in Linear / Slack; <code>top-center</code> + <code>bottom-center</code> typical at mobile breakpoints.</p>
+    </section>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-card);">
+      <div class="stage" style="min-height: 200px;">
+        <p style="font-size: var(--type-size-xs); color: var(--text-recede); font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-wide); text-transform: uppercase; margin: 0;">top-left</p>
+        <div data-pattern="toast-region" data-position="top-left" role="status" aria-live="polite" aria-label="Notifications">
+          <div data-pattern="toast" data-tone="success" data-persistence="auto-dismiss" data-state="visible" style="--toast-duration: 5000ms;">
+            <svg class="tone-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="16 10 11 15 8 12"/></svg>
+            <div class="content"><span class="title">PDF merged</span><span class="body">3-document_brief.pdf is ready.</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="stage" style="min-height: 200px;">
+        <p style="font-size: var(--type-size-xs); color: var(--text-recede); font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-wide); text-transform: uppercase; margin: 0;">top-right</p>
+        <div data-pattern="toast-region" data-position="top-right" role="status" aria-live="polite" aria-label="Notifications">
+          <div data-pattern="toast" data-tone="success" data-persistence="auto-dismiss" data-state="visible" style="--toast-duration: 5000ms;">
+            <svg class="tone-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="16 10 11 15 8 12"/></svg>
+            <div class="content"><span class="title">PDF merged</span><span class="body">3-document_brief.pdf is ready.</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="stage" style="min-height: 200px;">
+        <p style="font-size: var(--type-size-xs); color: var(--text-recede); font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-wide); text-transform: uppercase; margin: 0;">top-center</p>
+        <div data-pattern="toast-region" data-position="top-center" role="status" aria-live="polite" aria-label="Notifications">
+          <div data-pattern="toast" data-tone="success" data-persistence="auto-dismiss" data-state="visible" style="--toast-duration: 5000ms;">
+            <svg class="tone-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="16 10 11 15 8 12"/></svg>
+            <div class="content"><span class="title">PDF merged</span><span class="body">3-document_brief.pdf is ready.</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="stage" style="min-height: 200px;">
+        <p style="font-size: var(--type-size-xs); color: var(--text-recede); font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-wide); text-transform: uppercase; margin: 0;">bottom-left</p>
+        <div data-pattern="toast-region" data-position="bottom-left" role="status" aria-live="polite" aria-label="Notifications">
+          <div data-pattern="toast" data-tone="success" data-persistence="auto-dismiss" data-state="visible" style="--toast-duration: 5000ms;">
+            <svg class="tone-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="16 10 11 15 8 12"/></svg>
+            <div class="content"><span class="title">PDF merged</span><span class="body">3-document_brief.pdf is ready.</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="stage" style="min-height: 200px;">
+        <p style="font-size: var(--type-size-xs); color: var(--text-recede); font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-wide); text-transform: uppercase; margin: 0;">bottom-right</p>
+        <div data-pattern="toast-region" data-position="bottom-right" role="status" aria-live="polite" aria-label="Notifications">
+          <div data-pattern="toast" data-tone="success" data-persistence="auto-dismiss" data-state="visible" style="--toast-duration: 5000ms;">
+            <svg class="tone-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="16 10 11 15 8 12"/></svg>
+            <div class="content"><span class="title">PDF merged</span><span class="body">3-document_brief.pdf is ready.</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="stage" style="min-height: 200px;">
+        <p style="font-size: var(--type-size-xs); color: var(--text-recede); font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-wide); text-transform: uppercase; margin: 0;">bottom-center</p>
+        <div data-pattern="toast-region" data-position="bottom-center" role="status" aria-live="polite" aria-label="Notifications">
+          <div data-pattern="toast" data-tone="success" data-persistence="auto-dismiss" data-state="visible" style="--toast-duration: 5000ms;">
+            <svg class="tone-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="16 10 11 15 8 12"/></svg>
+            <div class="content"><span class="title">PDF merged</span><span class="body">3-document_brief.pdf is ready.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================== LIFECYCLE STATES =================== -->
+    <section class="specimen-divider">
+      <h2>Lifecycle — entering / visible / paused / exiting</h2>
+      <p>Four lifecycle states a single toast moves through. <code>entering</code>: slide-in animation. <code>visible</code>: steady state with dismiss timer running (orange progress bar at bottom). <code>paused</code>: timer paused (hover or focus inside the toast). <code>exiting</code>: slide-out animation before DOM removal.</p>
+    </section>
+    <div style="display: grid; gap: var(--space-3); max-width: 480px;">
+      <div data-pattern="toast" data-tone="success" data-persistence="auto-dismiss" data-state="entering" style="--toast-duration: 5000ms; opacity: 0.5; transform: translateY(8px);">
+        <svg class="tone-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="16 10 11 15 8 12"/></svg>
+        <div class="content">
+          <span class="title">data-state="entering"</span>
+          <span class="body">Slide-in from edge, opacity 0 → 1.</span>
+        </div>
+      </div>
+      <div data-pattern="toast" data-tone="success" data-persistence="auto-dismiss" data-state="visible" style="--toast-duration: 5000ms;">
+        <svg class="tone-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="16 10 11 15 8 12"/></svg>
+        <div class="content">
+          <span class="title">data-state="visible"</span>
+          <span class="body">Steady — dismiss timer running (5s default).</span>
+        </div>
+      </div>
+      <div data-pattern="toast" data-tone="success" data-persistence="auto-dismiss" data-state="paused" style="--toast-duration: 5000ms;">
+        <svg class="tone-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="16 10 11 15 8 12"/></svg>
+        <div class="content">
+          <span class="title">data-state="paused"</span>
+          <span class="body">Hover or focus inside pauses timer (WCAG 2.2.1).</span>
+        </div>
+      </div>
+      <div data-pattern="toast" data-tone="success" data-persistence="auto-dismiss" data-state="exiting" style="--toast-duration: 5000ms; opacity: 0.4; transform: translateX(20px);">
+        <svg class="tone-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="16 10 11 15 8 12"/></svg>
+        <div class="content">
+          <span class="title">data-state="exiting"</span>
+          <span class="body">Slide-out, opacity 1 → 0, then DOM removal.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================== PERSISTENCE =================== -->
+    <section class="specimen-divider">
+      <h2>auto-dismiss vs persistent</h2>
+      <p>Auto-dismiss toasts (info / success / warning, default 5s) carry a thin timer bar at the bottom that scaleX from 1 → 0 over the duration. Persistent toasts (critical errors) carry no timer + always show a close button.</p>
+    </section>
+    <div style="display: grid; gap: var(--space-3); max-width: 480px;">
+      <div data-pattern="toast" data-tone="info" data-persistence="auto-dismiss" data-state="visible" style="--toast-duration: 5000ms;">
+        <svg class="tone-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <div class="content">
+          <span class="title">auto-dismiss · 5s</span>
+          <span class="body">Default for info / success / warning. Visible timer at bottom.</span>
+        </div>
+      </div>
+      <div data-pattern="toast" data-tone="success" data-persistence="auto-dismiss" data-state="visible" style="--toast-duration: 8000ms;">
+        <svg class="tone-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="16 10 11 15 8 12"/></svg>
+        <div class="content">
+          <span class="title">auto-dismiss · 8s (longer)</span>
+          <span class="body">Custom duration via duration-ms attribute. Longer for toasts with an action button.</span>
+        </div>
+        <button data-pattern="toast-action" type="button">View</button>
+      </div>
+      <div data-pattern="toast" data-tone="critical" data-persistence="persistent" data-state="visible">
+        <svg class="tone-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+        <div class="content">
+          <span class="title">persistent · no timer</span>
+          <span class="body">Default for critical. User must dismiss explicitly.</span>
+        </div>
+        <button data-pattern="toast-action" type="button" data-intent="critical">Retry</button>
+        <button data-pattern="toast-close" type="button" aria-label="Dismiss notification">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- =================== ACTION VARIATIONS =================== -->
+    <section class="specimen-divider">
+      <h2>Toast action variations</h2>
+      <p>A toast has at most ONE action button. Multiple-action cases use modal-dialog instead. Action labels are imperative verbs (Undo / Retry / View / Open), never OK/Cancel.</p>
+    </section>
+    <div style="display: grid; gap: var(--space-3); max-width: 480px;">
+      <div data-pattern="toast" data-tone="success" data-persistence="auto-dismiss" data-state="visible" style="--toast-duration: 7000ms;">
+        <svg class="tone-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="16 10 11 15 8 12"/></svg>
+        <div class="content">
+          <span class="title">5 subscriptions removed</span>
+          <span class="body">From Galley Dues ledger.</span>
+        </div>
+        <button data-pattern="toast-action" type="button">Undo</button>
+      </div>
+      <div data-pattern="toast" data-tone="info" data-persistence="auto-dismiss" data-state="visible" style="--toast-duration: 6000ms;">
+        <svg class="tone-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <div class="content">
+          <span class="title">Easel export ready</span>
+          <span class="body">mockup_v3.png · 2.3 MB</span>
+        </div>
+        <button data-pattern="toast-action" type="button">View</button>
+      </div>
+      <div data-pattern="toast" data-tone="warning" data-persistence="auto-dismiss" data-state="visible" style="--toast-duration: 8000ms;">
+        <svg class="tone-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+        <div class="content">
+          <span class="title">Slow sync to galley.harrow.haus</span>
+          <span class="body">Avg latency 1.4s. Local edits are saved.</span>
+        </div>
+        <button data-pattern="toast-action" type="button">Status →</button>
+      </div>
+      <div data-pattern="toast" data-tone="critical" data-persistence="persistent" data-state="visible">
+        <svg class="tone-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+        <div class="content">
+          <span class="title">Subscription removal failed</span>
+          <span class="body">Linear API returned 502. Local state reverted.</span>
+        </div>
+        <button data-pattern="toast-action" type="button" data-intent="critical">Retry</button>
+        <button data-pattern="toast-close" type="button" aria-label="Dismiss notification">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- =================== COMPOSITION LINEAGE =================== -->
+    <section class="specimen-divider">
+      <h2>Composition lineage — what toast-notifier consumes</h2>
+    </section>
+    <table class="lineage">
+      <thead>
+        <tr><th>Consumed primitive</th><th>Source pack</th><th>Used in</th><th>How this pattern uses it</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>&lt;action-button intent="ghost" size="sm"&gt;</code></td>
+          <td>@quoin/pattern-button-system</td>
+          <td>toast-action · toast-close</td>
+          <td>Inline action button and close button. Inherits all 8 microstates including <code>aria-busy</code> for actions that trigger async work (e.g. Retry).</td>
+        </tr>
+        <tr>
+          <td><code>&lt;action-button intent="critical" size="sm"&gt;</code></td>
+          <td>@quoin/pattern-button-system</td>
+          <td>toast-action on critical-tone toasts</td>
+          <td>Destructive or recovery actions (Retry on a failed-sync toast). Same contract as inline critical buttons elsewhere.</td>
+        </tr>
+        <tr>
+          <td>canonical tokens</td>
+          <td>@quoin/tokens-baseline</td>
+          <td>every CSS value</td>
+          <td>Tone families (--accent / --success / --warning / --critical) drive the four tones. Motion tokens drive enter/exit transitions; collapse under prefers-reduced-motion.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <section class="specimen-divider">
+      <h2>Accessibility checklist</h2>
+    </section>
+    <ul class="a11y-list">
+      <li><strong>Region semantics:</strong> <code>&lt;div role="status" aria-live="polite" aria-atomic="false" aria-label="Notifications"&gt;</code>. <code>aria-atomic="false"</code> tells AT to announce only the changed (newly added) content, not the whole region on every change.</li>
+      <li><strong>Live levels:</strong> <code>aria-live="polite"</code> default. For critical-only regions, use <code>aria-live="assertive"</code>. Consider TWO regions when mixing criticality — keep polite from being upgraded.</li>
+      <li><strong>WCAG 2.2.1 Timing Adjustable:</strong> Hover AND focus PAUSE the dismiss timer. Not "add more time" — pause. Resume original duration on mouseleave + focus-out. Allows users with motor or cognitive impairments to read at their own pace.</li>
+      <li><strong>Persistent variant for critical errors:</strong> Critical toasts default to persistent (no timer). User must dismiss explicitly via close button or action.</li>
+      <li><strong>Toast itself has no specific role:</strong> The parent toast-region's <code>aria-live</code> handles announcement. Adding <code>role="alert"</code> on each toast can cause duplicate announcements.</li>
+      <li><strong>Tone icon aria-hidden:</strong> Icon is aria-hidden='true'; text content carries meaning. WCAG 1.4.1 — colour and icon alone are not sufficient.</li>
+      <li><strong>Action button labels:</strong> Imperative verb-first ('Undo' / 'Retry' / 'View' / 'Open'). Not 'OK' / 'Cancel'. The toast title carries context; the action names the verb.</li>
+      <li><strong>Single action per toast:</strong> At most ONE action button per toast. Multiple-action cases use <code>pattern-modal-dialog</code> instead.</li>
+      <li><strong>Close button labelling:</strong> <code>aria-label="Dismiss notification"</code> (or "Dismiss &lt;toast-title&gt;"). The ✕ glyph is aria-hidden.</li>
+      <li><strong>Focus pauses timer:</strong> Focusing the action button or close button pauses the dismiss timer. Tab order: visible toasts → action → close → next toast.</li>
+      <li><strong>Focus restoration:</strong> On dismiss-by-close, return focus to the previous focusable. If the user just hovered, no focus change needed.</li>
+      <li><strong>Stack limit:</strong> Cap visible toasts at 5 (max-visible attribute). When exceeded, oldest auto-dismisses to make room.</li>
+      <li><strong>Reduced motion:</strong> Slide-in / slide-out transitions + timer-bar animation collapse to instant under <code>prefers-reduced-motion: reduce</code>. No popping motion for sensitive users.</li>
+    </ul>
+  </main>
+</body>
+</html>

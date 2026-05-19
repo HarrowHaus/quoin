@@ -1,0 +1,248 @@
+[
+  {
+    "name": "toast-region",
+    "category": "product",
+    "role": "Top-level container for stacked toast notifications. Renders as a viewport-fixed <div> with role='status' (or 'alert' for critical-only regions) + aria-live='polite' (or 'assertive'). Toasts inside stack vertically. Six position presets — top-left / top-right / top-center / bottom-left / bottom-right / bottom-center. The region itself is non-interactive; toasts within it are individually focusable.",
+    "attributes": {
+      "position": {
+        "values": ["top-left", "top-right", "top-center", "bottom-left", "bottom-right", "bottom-center"],
+        "default": "bottom-right",
+        "specific": true
+      },
+      "live": {
+        "values": ["polite", "assertive"],
+        "default": "polite",
+        "specific": true
+      },
+      "max-visible": {
+        "values": [],
+        "default": "5",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "padding": "var(--space-card)",
+      "gap": "var(--space-3)",
+      "maxWidth": "420px",
+      "minWidth": "320px",
+      "zIndex": "600",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "role": "status",
+        "aria-live": "polite",
+        "aria-atomic": "false",
+        "aria-label": "Notifications"
+      }
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<div role='status' aria-live='polite' aria-atomic='false' aria-label='Notifications' class='toast-region'>",
+        "  <toast> — each toast is announced individually as it appears",
+        "  <toast>",
+        "  <toast>"
+      ],
+      "liveLevels": {
+        "polite": "aria-live='polite'. Default. AT announces when current speech finishes. Used for info / success / warning toasts.",
+        "assertive": "aria-live='assertive'. Interrupts current speech. Used for critical errors. Consider a separate critical-only region with assertive live so non-critical toasts don't interrupt."
+      },
+      "positionRecommendations": {
+        "bottom-right": "Most common. Non-blocking, predictable, low-attention.",
+        "top-right": "Used in Linear, Slack. Higher attention; closer to the global app actions.",
+        "top-center": "Used for full-width banners on mobile.",
+        "bottom-center": "Mobile-style snackbar. Used in Material Design.",
+        "top-left / bottom-left": "Less common; usually for left-handed-user preference or RTL layouts."
+      },
+      "stackBehaviour": {
+        "newToastsAppend": "New toasts append to the bottom of the stack (top-anchored positions) or top of the stack (bottom-anchored positions) so the newest is closest to the viewport edge.",
+        "maxVisibleLimit": "When max-visible is reached, the oldest toast is auto-dismissed (or moved to a +N indicator).",
+        "stackDirection": "Vertical only. Don't stack horizontally — that's a different pattern (e.g., chip cluster)."
+      },
+      "ariaPatterns": {
+        "regionRole": "<div role='status' aria-live='polite' aria-atomic='false' aria-label='Notifications'> on the region container. aria-atomic='false' tells AT to announce only the changed (newly added) content, not the entire region on every change.",
+        "twoRegions": "For mixed criticality, render TWO toast-regions — one with aria-live='polite' for info/success/warning, one with aria-live='assertive' for critical. This way critical toasts get assertive announcement without polite toasts being upgraded.",
+        "noTabStopOnRegion": "The region itself is not focusable. Individual toasts may be focusable if they contain action buttons."
+      }
+    }
+  },
+  {
+    "name": "toast",
+    "category": "product",
+    "role": "Single toast notification. Hosts an icon, title text, optional body text, optional action button, optional close button. Four tones (info / success / warning / critical). Auto-dismiss with timer (default 5s) OR persistent. Hover and focus PAUSE the dismiss timer per WCAG 2.2.1 (Timing Adjustable). Toast entry/exit uses slide animations that collapse under prefers-reduced-motion.",
+    "attributes": {
+      "tone": {
+        "values": ["info", "success", "warning", "critical"],
+        "default": "info",
+        "specific": true
+      },
+      "persistence": {
+        "values": ["auto-dismiss", "persistent"],
+        "default": "auto-dismiss",
+        "specific": true
+      },
+      "duration-ms": {
+        "values": [],
+        "default": "5000",
+        "specific": true
+      },
+      "state": {
+        "values": ["entering", "visible", "paused", "exiting"],
+        "default": "visible",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "var(--surface-elevated)",
+      "color": "var(--text)",
+      "borderColor": "var(--border)",
+      "borderColorInfo": "var(--accent)",
+      "borderColorSuccess": "var(--success)",
+      "borderColorWarning": "var(--warning)",
+      "borderColorCritical": "var(--critical)",
+      "borderWidth": "var(--border-width-md)",
+      "borderRadius": "var(--radius-card)",
+      "padding": "var(--space-3) var(--space-4)",
+      "gap": "var(--space-3)",
+      "iconColor": "currentColor",
+      "iconColorInfo": "var(--accent)",
+      "iconColorSuccess": "var(--success)",
+      "iconColorWarning": "var(--warning)",
+      "iconColorCritical": "var(--critical)",
+      "shadow": "var(--shadow-md)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-sm)",
+      "fontWeight": "var(--font-weight-medium)",
+      "fontWeightTitle": "var(--font-weight-semibold)",
+      "lineHeight": "var(--leading-prose)",
+      "transition": "var(--transition-default)",
+      "transitionEnter": "transform var(--motion-normal) var(--ease-standard), opacity var(--motion-normal) var(--ease-standard)",
+      "minWidth": "320px",
+      "maxWidth": "420px"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<div data-tone='success' data-state='visible' class='toast'>",
+        "  <svg class='icon' aria-hidden='true'> — tone-appropriate icon (✓ / ⓘ / ⚠ / ✕)",
+        "  <div class='content'>",
+        "    <strong class='title'>Toast title</strong>",
+        "    (optional) <span class='body'>Supporting detail text</span>",
+        "  </div>",
+        "  (optional) <toast-action> — action button (Undo, Retry, View)",
+        "  (optional) <toast-close> — dismiss button (always shown on persistent; optional on auto-dismiss)"
+      ],
+      "tones": {
+        "info": "Neutral / informational. Used for non-actionable updates ('Syncing complete', 'New feature unlocked')",
+        "success": "Positive confirmation ('PDF merged', 'Subscription added', 'Saved'). The most common tone.",
+        "warning": "Soft warning that doesn't block ('Sync slower than usual', 'Storage at 85%')",
+        "critical": "Error or failure ('Failed to save — retry?', 'Connection lost'). Should have an action button (Retry) to be useful."
+      },
+      "lifecycle": {
+        "entering": "Toast slides in from the edge. translateY (top/bottom positions) or translateX (left/right positions) animates from offscreen to position. Opacity 0 → 1.",
+        "visible": "Steady state. Dismiss timer running for auto-dismiss toasts. Hover/focus on toast pauses timer.",
+        "paused": "Dismiss timer paused. Triggered by mouseenter on toast OR focus on any focusable inside (action button, close button).",
+        "exiting": "Toast slides out. After transition completes, toast is removed from DOM."
+      },
+      "wcag221": {
+        "rule": "WCAG 2.2.1 (Timing Adjustable): users must be able to extend / pause / disable time limits.",
+        "implementation": "Hover and focus PAUSE the auto-dismiss timer (not just delay it). Resume the original duration on mouseleave + focus-out. Don't simply 'add more time' — pause properly so users with motor impairment can read at their own pace.",
+        "noTimeLimit": "Persistent toasts have no time limit. Used for critical errors that require user action."
+      },
+      "ariaPatterns": {
+        "noToastRole": "Toast itself has no specific role — the parent toast-region's role + aria-live handles announcement. Adding role='alert' on each toast can cause duplicate announcements.",
+        "iconAriaHidden": "Tone-icon is aria-hidden='true' — text content carries meaning per WCAG 1.4.1.",
+        "focusable": "Toast itself is NOT focusable. Action buttons + close buttons inside ARE focusable. Tab order: visible toasts → first action → close → next toast → …",
+        "dismissAnnouncement": "When a toast is dismissed, AT announces nothing by default (the live region only fires on additions, not removals). For long-lived critical toasts you may inject a 'Notification dismissed' announcement, but this is rarely needed."
+      }
+    }
+  },
+  {
+    "name": "toast-action",
+    "category": "product",
+    "role": "Optional action button inside a toast. Single primary action — Undo, Retry, View, Open. Composes <action-button intent='ghost' size='sm'> from pattern-button-system. Visually a text button with optional leading icon. The action's onClick handler must explicitly dismiss the toast after invocation (toasts don't auto-dismiss on action click).",
+    "attributes": {
+      "intent": {
+        "values": ["primary", "ghost", "critical"],
+        "default": "ghost",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "var(--accent)",
+      "colorCritical": "var(--critical)",
+      "backgroundHover": "var(--surface-recessed)",
+      "padding": "var(--space-2) var(--space-3)",
+      "borderRadius": "var(--radius-sm)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-sm)",
+      "fontWeight": "var(--font-weight-semibold)",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "button",
+      "attributes": {
+        "type": "button"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "actionLabelGuidelines": {
+        "single": "Toasts have at most ONE action. Multiple actions = use a modal-dialog instead.",
+        "imperative": "Use imperative verb-first labels: 'Undo' / 'Retry' / 'View' / 'Open'. NOT 'OK' / 'Cancel'.",
+        "shortAndSpecific": "Keep to 1-2 words. The toast title carries context; the action button names the verb.",
+        "destructiveActions": "If the action is destructive (e.g., 'Discard'), use critical intent + confirm via a follow-up modal-dialog. Don't make a single click destroy data."
+      },
+      "composesFrom": "@quoin/pattern-button-system (the action is an <action-button intent='ghost' size='sm'> visually; the button-system contract handles all microstates)",
+      "ariaPatterns": {
+        "ariaLabelDefault": "If the button text is self-explanatory ('Undo'), no aria-label needed. If ambiguous, add aria-label naming the consequence ('Undo subscription removal').",
+        "keyboardActivation": "Enter and Space activate. Focusing the action pauses the dismiss timer."
+      }
+    }
+  },
+  {
+    "name": "toast-close",
+    "category": "product",
+    "role": "Dismiss button on a toast. Always present on persistent toasts; optional on auto-dismiss toasts (recommended for users who want to dismiss before the timer ends). Composes <action-button intent='ghost' size='sm'> with icon-only content. The button label is 'Dismiss notification' (or 'Dismiss <toast-title>') — never just 'Close' since the ✕ glyph is aria-hidden.",
+    "attributes": {
+      "size": {
+        "values": ["sm", "md"],
+        "default": "sm",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "var(--text-recede)",
+      "colorHover": "var(--text-emphasis)",
+      "backgroundHover": "var(--surface-recessed)",
+      "padding": "var(--space-1)",
+      "borderRadius": "var(--radius-sm)",
+      "size": "24px",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "button",
+      "attributes": {
+        "type": "button",
+        "aria-label": "Dismiss notification"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "ariaPatterns": {
+        "ariaLabel": "aria-label='Dismiss notification' (or 'Dismiss <toast-title>') — required because the ✕ glyph is aria-hidden.",
+        "keyboardActivation": "Enter and Space activate. Focusing the close button pauses the dismiss timer.",
+        "focusReturnPolicy": "On dismiss, return focus to wherever it came from before the toast received focus. If the user navigated TO the toast (via Tab), return focus to the previous focusable. If the user just hovered, no focus change needed."
+      }
+    }
+  }
+]
