@@ -1,0 +1,23 @@
+{
+  "name": "@quoin/pattern-form-fields",
+  "version": "1.0.0",
+  "description": "P0 foundational form pattern for Quoin — 9 widget types × 8 microstates + form-row + form-section composition + form-level state machine.",
+  "license": "MIT",
+  "main": "./quoin.pack.json",
+  "files": [
+    "quoin.pack.json",
+    "primitives/",
+    "examples/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "pattern", "form", "input", "field", "p0", "foundational"],
+  "peerDependencies": {
+    "@quoin/vocab-forms": "^0.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "02_reference-packs/patterns/form-fields"
+  }
+}

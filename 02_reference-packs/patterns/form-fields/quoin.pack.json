@@ -1,0 +1,25 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/pattern-form-fields",
+  "version": "1.0.0",
+  "type": "pattern",
+  "quoinVersion": "^0.1.0",
+  "description": "Form-fields pattern — 9 widget types (text / textarea / select / combobox / checkbox / radio / switch / file / date) × 8 microstates + form-row + form-section composition. P0 foundational.",
+  "category": "form",
+  "variant": "system",
+  "exports": {
+    "primitives": "./primitives/index.json"
+  },
+  "states": ["default", "validating", "error", "success", "loading", "submitting"],
+  "microStates": ["default", "hover", "active", "focus", "focus-visible", "disabled", "loading", "read-only"],
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/patterns/form-fields",
+    "tags": ["form", "input", "field", "p0", "foundational"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0",
+    "@quoin/vocab-forms": "^0.1.0"
+  }
+}

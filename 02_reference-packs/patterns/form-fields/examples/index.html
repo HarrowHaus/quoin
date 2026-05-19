@@ -1,0 +1,1346 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>@quoin/pattern-form-fields — specimen</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=JetBrains+Mono:wght@100..800&display=swap">
+
+  <style>
+    :root {
+      --surface: oklch(98% 0 0);
+      --surface-elevated: oklch(100% 0 0);
+      --surface-recessed: oklch(96% 0 0);
+      --text: oklch(30% 0 0);
+      --text-emphasis: oklch(15% 0 0);
+      --text-recede: oklch(50% 0 0);
+      --text-disabled: oklch(72% 0 0);
+      --text-on-accent: oklch(100% 0 0);
+      --text-on-critical: oklch(100% 0 0);
+
+      --accent: oklch(20% 0 0);
+      --accent-recede: oklch(94% 0 0);
+      --accent-hover: oklch(28% 0 0);
+      --accent-active: oklch(12% 0 0);
+      --critical: oklch(55% 0.22 25);
+      --critical-soft: oklch(96% 0.04 25);
+      --success: oklch(58% 0.18 155);
+      --success-soft: oklch(96% 0.05 155);
+      --warning: oklch(75% 0.18 80);
+
+      --border: oklch(88% 0 0);
+      --border-emphasis: oklch(20% 0 0);
+      --border-recede: oklch(94% 0 0);
+      --border-width-sm: 1px;
+      --border-width-md: 2px;
+
+      --focus-ring: oklch(55% 0.22 260);
+      --focus-ring-width: 2px;
+      --focus-ring-offset: 2px;
+      --shadow-focus: 0 0 0 var(--focus-ring-offset) var(--surface-elevated), 0 0 0 calc(var(--focus-ring-offset) + var(--focus-ring-width)) var(--focus-ring);
+
+      --space-1: 4px;
+      --space-2: 6px;
+      --space-3: 8px;
+      --space-4: 12px;
+      --space-5: 16px;
+      --space-6: 20px;
+      --space-8: 32px;
+      --space-card: 20px;
+      --space-panel: 32px;
+
+      --radius-sm: 4px;
+      --radius-md: 6px;
+      --radius-card: 12px;
+      --radius-pill: 999px;
+
+      --font-sans: 'Inter Variable', 'Inter', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+      --type-size-xs: 0.75rem;
+      --type-size-sm: 0.875rem;
+      --type-size-md: 1rem;
+      --type-size-lg: 1.125rem;
+      --type-size-xl: 1.5rem;
+      --type-size-2xl: 2rem;
+      --type-size-3xl: 2.5rem;
+      --font-weight-regular: 400;
+      --font-weight-medium: 500;
+      --font-weight-semibold: 600;
+      --leading-tight: 1.15;
+      --leading-prose: 1.55;
+      --tracking-tight: -0.01em;
+      --tracking-normal: 0;
+      --tracking-wide: 0.04em;
+
+      --motion-fast: 120ms;
+      --motion-normal: 160ms;
+      --motion-slow: 200ms;
+      --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+      --transition-default: all var(--motion-normal) var(--ease-standard);
+
+      --shadow-tint: oklch(0% 0 0 / 0.08);
+      --shadow-sm: 0 1px 2px 0 var(--shadow-tint);
+      --shadow-inset: inset 0 0 0 1px var(--border);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --surface: oklch(10% 0 0);
+        --surface-elevated: oklch(15% 0 0);
+        --surface-recessed: oklch(8% 0 0);
+        --text: oklch(85% 0 0);
+        --text-emphasis: oklch(98% 0 0);
+        --text-recede: oklch(60% 0 0);
+        --text-disabled: oklch(35% 0 0);
+        --text-on-accent: oklch(10% 0 0);
+        --accent: oklch(95% 0 0);
+        --accent-recede: oklch(20% 0 0);
+        --border: oklch(20% 0 0);
+        --border-recede: oklch(15% 0 0);
+        --border-emphasis: oklch(85% 0 0);
+        --critical-soft: oklch(18% 0.05 25);
+        --success-soft: oklch(18% 0.06 155);
+        --shadow-tint: oklch(0% 0 0 / 0.4);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      :root { --motion-fast: 0ms; --motion-normal: 0ms; --motion-slow: 0ms; --transition-default: none; }
+      * { animation: none !important; }
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: var(--space-panel);
+      background: var(--surface);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-md);
+      line-height: var(--leading-prose);
+      font-feature-settings: 'kern', 'liga', 'calt';
+    }
+
+    .page-header { max-width: 1080px; margin: 0 auto var(--space-8); }
+    h1 { margin: 0 0 var(--space-3); font-size: var(--type-size-3xl); font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-tight); line-height: var(--leading-tight); color: var(--text-emphasis); }
+    h2 { margin: var(--space-8) 0 var(--space-4); font-size: var(--type-size-xl); font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-tight); line-height: var(--leading-tight); color: var(--text-emphasis); }
+    h3 { margin: var(--space-6) 0 var(--space-3); font-size: var(--type-size-md); font-weight: var(--font-weight-medium); color: var(--text-emphasis); }
+    p { margin: 0 0 var(--space-4); max-width: 64ch; }
+    .lede { color: var(--text-recede); }
+    main { max-width: 1080px; margin: 0 auto; }
+
+    section.demo {
+      margin-bottom: var(--space-8);
+      padding: var(--space-panel);
+      background: var(--surface-elevated);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-card);
+    }
+
+    .specimen-note { font-family: var(--font-mono); font-size: var(--type-size-xs); color: var(--text-recede); margin-top: var(--space-3); letter-spacing: var(--tracking-wide); }
+
+    /* ────────────────────────────────────────────────────────────────
+       form-control primitive
+       ──────────────────────────────────────────────────────────────── */
+
+    .form-control {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      min-width: 0;
+      font-family: var(--font-sans);
+    }
+
+    .form-control > label {
+      font-family: var(--font-sans);
+      font-size: var(--type-size-sm);
+      font-weight: var(--font-weight-medium);
+      color: var(--text-emphasis);
+      letter-spacing: var(--tracking-normal);
+      line-height: var(--leading-tight);
+    }
+    .form-control > label .required {
+      color: var(--critical);
+      margin-left: var(--space-1);
+    }
+    .form-control > label .optional {
+      color: var(--text-recede);
+      font-weight: var(--font-weight-regular);
+      margin-left: var(--space-1);
+    }
+
+    .form-control .help {
+      font-family: var(--font-sans);
+      font-size: var(--type-size-xs);
+      color: var(--text-recede);
+      line-height: var(--leading-prose);
+    }
+
+    .form-control .error {
+      font-family: var(--font-sans);
+      font-size: var(--type-size-xs);
+      color: var(--critical);
+      line-height: var(--leading-prose);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+    .form-control .error::before {
+      content: '';
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      background: currentColor;
+      -webkit-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='black' d='M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM8 7l.5 4h-1L7 7h1zm0 5a.75.75 0 110 1.5.75.75 0 010-1.5z'/%3E%3C/svg%3E") center/contain no-repeat;
+      mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='black' d='M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM8 7l.5 4h-1L7 7h1zm0 5a.75.75 0 110 1.5.75.75 0 010-1.5z'/%3E%3C/svg%3E") center/contain no-repeat;
+      flex: 0 0 14px;
+    }
+
+    /* ─── widget base (input/textarea/select) ─── */
+    .form-control input[type="text"],
+    .form-control input[type="email"],
+    .form-control input[type="password"],
+    .form-control input[type="search"],
+    .form-control input[type="number"],
+    .form-control input[type="url"],
+    .form-control input[type="tel"],
+    .form-control input[type="date"],
+    .form-control input[type="file"],
+    .form-control textarea,
+    .form-control select {
+      font: inherit;
+      font-family: var(--font-sans);
+      font-size: var(--type-size-sm);
+      line-height: var(--leading-tight);
+      color: var(--text-emphasis);
+      background: var(--surface-elevated);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--space-3) var(--space-4);
+      min-height: 40px;
+      width: 100%;
+      transition: var(--transition-default);
+      font-variant-numeric: tabular-nums;
+    }
+    .form-control input::placeholder,
+    .form-control textarea::placeholder {
+      color: var(--text-disabled);
+    }
+    .form-control input:hover:not(:disabled):not([readonly]),
+    .form-control textarea:hover:not(:disabled):not([readonly]),
+    .form-control select:hover:not(:disabled),
+    .form-control[data-mockstate~="hover"] input,
+    .form-control[data-mockstate~="hover"] textarea,
+    .form-control[data-mockstate~="hover"] select {
+      border-color: var(--border-emphasis);
+    }
+    .form-control input:focus,
+    .form-control textarea:focus,
+    .form-control select:focus,
+    .form-control[data-mockstate~="focus"] input,
+    .form-control[data-mockstate~="focus"] textarea,
+    .form-control[data-mockstate~="focus"] select {
+      outline: none;
+      border-color: var(--focus-ring);
+    }
+    .form-control input:focus-visible,
+    .form-control textarea:focus-visible,
+    .form-control select:focus-visible,
+    .form-control[data-mockstate~="focus-visible"] input,
+    .form-control[data-mockstate~="focus-visible"] textarea,
+    .form-control[data-mockstate~="focus-visible"] select {
+      box-shadow: var(--shadow-focus);
+      border-color: var(--focus-ring);
+    }
+
+    /* ─── states ─── */
+    .form-control[data-state="error"] input,
+    .form-control[data-state="error"] textarea,
+    .form-control[data-state="error"] select {
+      border-color: var(--critical);
+    }
+    .form-control[data-state="error"] label {
+      color: var(--critical);
+    }
+    .form-control[data-state="success"] input,
+    .form-control[data-state="success"] textarea,
+    .form-control[data-state="success"] select {
+      border-color: var(--success);
+    }
+    .form-control[data-state="validating"] input,
+    .form-control[data-state="validating"] textarea {
+      padding-right: 36px;
+      background-image: radial-gradient(circle, var(--text-recede) 1.5px, transparent 1.5px);
+      background-size: 4px 4px;
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      animation: spin 600ms linear infinite;
+    }
+
+    /* ─── microstates: disabled, read-only, loading ─── */
+    .form-control input:disabled,
+    .form-control textarea:disabled,
+    .form-control select:disabled,
+    .form-control[data-mockstate~="disabled"] input,
+    .form-control[data-mockstate~="disabled"] textarea,
+    .form-control[data-mockstate~="disabled"] select {
+      opacity: 0.5;
+      cursor: not-allowed;
+      background: var(--surface-recessed);
+    }
+    .form-control input[readonly],
+    .form-control textarea[readonly],
+    .form-control[data-mockstate~="read-only"] input,
+    .form-control[data-mockstate~="read-only"] textarea {
+      background: var(--surface-recessed);
+      cursor: default;
+    }
+    .form-control[data-mockstate~="loading"] input,
+    .form-control[data-mockstate~="loading"] textarea {
+      cursor: progress;
+      opacity: 0.7;
+    }
+
+    /* ─── sizes ─── */
+    .form-control[data-size="sm"] input,
+    .form-control[data-size="sm"] textarea,
+    .form-control[data-size="sm"] select {
+      min-height: 32px;
+      padding: var(--space-2) var(--space-3);
+      font-size: var(--type-size-xs);
+    }
+    .form-control[data-size="lg"] input,
+    .form-control[data-size="lg"] textarea,
+    .form-control[data-size="lg"] select {
+      min-height: 48px;
+      padding: var(--space-4) var(--space-6);
+      font-size: var(--type-size-md);
+    }
+
+    /* ─── leading/trailing icons + addons ─── */
+    .form-control .widget-wrapper {
+      position: relative;
+      display: flex;
+      align-items: stretch;
+    }
+    .form-control .widget-wrapper input,
+    .form-control .widget-wrapper select,
+    .form-control .widget-wrapper textarea {
+      flex: 1;
+      min-width: 0;
+    }
+    .form-control .widget-wrapper.has-leading-icon input,
+    .form-control .widget-wrapper.has-leading-icon select { padding-left: 38px; }
+    .form-control .widget-wrapper.has-trailing-icon input,
+    .form-control .widget-wrapper.has-trailing-icon select { padding-right: 38px; }
+    .form-control .widget-wrapper .leading-icon,
+    .form-control .widget-wrapper .trailing-icon {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      color: var(--text-recede);
+    }
+    .form-control .widget-wrapper .leading-icon { left: var(--space-3); }
+    .form-control .widget-wrapper .trailing-icon { right: var(--space-3); }
+    .form-control .widget-wrapper .leading-icon svg,
+    .form-control .widget-wrapper .trailing-icon svg { width: 16px; height: 16px; }
+
+    .form-control .widget-wrapper.has-trailing-button input { padding-right: 80px; }
+    .form-control .widget-wrapper .trailing-button {
+      position: absolute;
+      right: var(--space-2);
+      top: 50%;
+      transform: translateY(-50%);
+      padding: var(--space-1) var(--space-3);
+      font-family: var(--font-mono);
+      font-size: var(--type-size-xs);
+      background: transparent;
+      color: var(--text-recede);
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      pointer-events: auto;
+      transition: var(--transition-default);
+    }
+    .form-control .widget-wrapper .trailing-button:hover { color: var(--text-emphasis); background: var(--surface-recessed); }
+
+    .form-control .addon-leading,
+    .form-control .addon-trailing {
+      display: inline-flex;
+      align-items: center;
+      padding: 0 var(--space-4);
+      font-family: var(--font-mono);
+      font-size: var(--type-size-sm);
+      color: var(--text-recede);
+      background: var(--surface-recessed);
+      border: var(--border-width-sm) solid var(--border);
+    }
+    .form-control .addon-leading {
+      border-right: none;
+      border-radius: var(--radius-md) 0 0 var(--radius-md);
+    }
+    .form-control .addon-trailing {
+      border-left: none;
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    }
+    .form-control .widget-wrapper.has-addon input:first-child:not(:last-child) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    .form-control .widget-wrapper.has-addon input:last-child:not(:first-child) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    /* ─── textarea ─── */
+    .form-control textarea {
+      resize: vertical;
+      min-height: 84px;
+      padding: var(--space-3) var(--space-4);
+    }
+
+    /* ─── select (custom arrow indicator) ─── */
+    .form-control select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23666' fill='none' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M3 4.5l3 3 3-3'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px;
+    }
+
+    /* ─── checkbox / radio / switch ─── */
+    .form-control.choice {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: var(--space-3);
+    }
+    .form-control.choice > input {
+      flex: 0 0 auto;
+    }
+    .form-control.choice > .choice-content {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+    .form-control.choice label {
+      cursor: pointer;
+      font-weight: var(--font-weight-regular);
+      color: var(--text);
+    }
+    .form-control.choice .help {
+      margin: 0;
+    }
+
+    .form-control input[type="checkbox"]:not([role="switch"]),
+    .form-control input[type="radio"] {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      margin: 1px 0 0;
+      background: var(--surface-elevated);
+      border: var(--border-width-sm) solid var(--border-emphasis);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      flex: 0 0 18px;
+      position: relative;
+      transition: var(--transition-default);
+    }
+    .form-control input[type="radio"] { border-radius: 50%; }
+
+    .form-control input[type="checkbox"]:hover,
+    .form-control input[type="radio"]:hover {
+      border-color: var(--accent);
+    }
+    .form-control input[type="checkbox"]:focus-visible,
+    .form-control input[type="radio"]:focus-visible {
+      box-shadow: var(--shadow-focus);
+    }
+
+    .form-control input[type="checkbox"]:checked,
+    .form-control input[type="radio"]:checked {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    .form-control input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      inset: 2px;
+      background: var(--text-on-accent);
+      -webkit-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' d='M3 8.5l3 3 7-7'/%3E%3C/svg%3E") center/contain no-repeat;
+      mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' d='M3 8.5l3 3 7-7'/%3E%3C/svg%3E") center/contain no-repeat;
+    }
+    .form-control input[type="radio"]:checked::after {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      background: var(--text-on-accent);
+      border-radius: 50%;
+    }
+    .form-control input[type="checkbox"]:indeterminate {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    .form-control input[type="checkbox"]:indeterminate::after {
+      content: '';
+      position: absolute;
+      left: 3px;
+      right: 3px;
+      top: 50%;
+      height: 2px;
+      background: var(--text-on-accent);
+      transform: translateY(-50%);
+      border-radius: 1px;
+    }
+    .form-control input[type="checkbox"]:disabled,
+    .form-control input[type="radio"]:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    /* ─── switch (role=switch checkbox) ─── */
+    .form-control input[type="checkbox"][role="switch"] {
+      appearance: none;
+      width: 36px;
+      height: 20px;
+      border-radius: 999px;
+      background: var(--border);
+      border: none;
+      cursor: pointer;
+      position: relative;
+      transition: var(--transition-default);
+      flex: 0 0 36px;
+    }
+    .form-control input[type="checkbox"][role="switch"]::before {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 16px;
+      height: 16px;
+      background: var(--surface-elevated);
+      border-radius: 50%;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-default);
+    }
+    .form-control input[type="checkbox"][role="switch"]:checked {
+      background: var(--accent);
+    }
+    .form-control input[type="checkbox"][role="switch"]:checked::before {
+      transform: translateX(16px);
+    }
+    .form-control input[type="checkbox"][role="switch"]:focus-visible {
+      box-shadow: var(--shadow-focus);
+    }
+
+    /* ─── file input (custom-styled wrapper) ─── */
+    .form-control .file-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-4);
+      background: var(--surface-recessed);
+      border: var(--border-width-sm) dashed var(--border-emphasis);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: var(--transition-default);
+    }
+    .form-control .file-wrapper:hover {
+      background: var(--surface-elevated);
+      border-color: var(--accent);
+    }
+    .form-control .file-wrapper input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+    .form-control .file-wrapper .file-icon {
+      width: 24px;
+      height: 24px;
+      color: var(--text-recede);
+      flex: 0 0 24px;
+    }
+    .form-control .file-wrapper .file-text {
+      flex: 1;
+      min-width: 0;
+      font-size: var(--type-size-sm);
+    }
+    .form-control .file-wrapper .file-text strong {
+      color: var(--text-emphasis);
+      font-weight: var(--font-weight-medium);
+    }
+    .form-control .file-wrapper .file-text small {
+      display: block;
+      color: var(--text-recede);
+      font-size: var(--type-size-xs);
+      margin-top: 2px;
+    }
+
+    /* ─── radio group via fieldset ─── */
+    fieldset.form-radio-group {
+      margin: 0;
+      padding: 0;
+      border: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+    fieldset.form-radio-group legend {
+      padding: 0;
+      margin-bottom: var(--space-3);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-sm);
+      font-weight: var(--font-weight-medium);
+      color: var(--text-emphasis);
+    }
+
+    /* ─── combobox listbox ─── */
+    .form-control .combobox-wrapper { position: relative; }
+    .form-control .combobox-wrapper .listbox {
+      position: absolute;
+      top: calc(100% + 2px);
+      left: 0;
+      right: 0;
+      background: var(--surface-elevated);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: 0 8px 24px -8px var(--shadow-tint);
+      max-height: 200px;
+      overflow-y: auto;
+      z-index: 10;
+      margin: 0;
+      padding: var(--space-1);
+      list-style: none;
+    }
+    .form-control .combobox-wrapper .listbox li {
+      padding: var(--space-2) var(--space-3);
+      font-size: var(--type-size-sm);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      color: var(--text);
+    }
+    .form-control .combobox-wrapper .listbox li[aria-selected="true"],
+    .form-control .combobox-wrapper .listbox li:hover {
+      background: var(--surface-recessed);
+      color: var(--text-emphasis);
+    }
+    .form-control .combobox-wrapper .listbox li mark {
+      background: transparent;
+      color: var(--text-emphasis);
+      font-weight: var(--font-weight-semibold);
+    }
+
+    /* ────────────────────────────────────────────────────────────────
+       form-row composition
+       ──────────────────────────────────────────────────────────────── */
+    .form-row {
+      display: grid;
+      gap: var(--space-4);
+    }
+    .form-row[data-columns="2"] { grid-template-columns: repeat(2, 1fr); }
+    .form-row[data-columns="3"] { grid-template-columns: repeat(3, 1fr); }
+    .form-row[data-columns="auto"] { grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); }
+    @media (max-width: 639px) {
+      .form-row { grid-template-columns: 1fr !important; }
+    }
+    .form-row[data-register="inline"] {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: var(--space-3);
+    }
+
+    /* ────────────────────────────────────────────────────────────────
+       form-section
+       ──────────────────────────────────────────────────────────────── */
+    form.form-section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+      padding: var(--space-panel);
+      background: var(--surface);
+      border: var(--border-width-sm) solid var(--border-recede);
+      border-radius: var(--radius-card);
+      max-width: 720px;
+    }
+    form.form-section header {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    form.form-section header h3 {
+      margin: 0;
+      font-size: var(--type-size-lg);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-emphasis);
+    }
+    form.form-section header p {
+      margin: 0;
+      color: var(--text-recede);
+      font-size: var(--type-size-sm);
+      max-width: 56ch;
+    }
+    form.form-section footer.submit-row {
+      display: flex;
+      gap: var(--space-3);
+      align-items: center;
+      justify-content: flex-end;
+      padding-top: var(--space-3);
+      border-top: var(--border-width-sm) solid var(--border-recede);
+    }
+
+    /* form-level error summary */
+    .error-summary {
+      padding: var(--space-4);
+      background: var(--critical-soft);
+      color: var(--critical);
+      border: var(--border-width-sm) solid var(--critical);
+      border-radius: var(--radius-md);
+      font-size: var(--type-size-sm);
+    }
+    .error-summary strong { display: block; margin-bottom: var(--space-2); }
+    .error-summary ul { margin: 0; padding-left: var(--space-5); }
+    .error-summary a { color: var(--critical); text-decoration: underline; }
+
+    /* form-level success */
+    .success-banner {
+      padding: var(--space-4);
+      background: var(--success-soft);
+      color: var(--success);
+      border: var(--border-width-sm) solid var(--success);
+      border-radius: var(--radius-md);
+      font-size: var(--type-size-sm);
+    }
+    .success-banner strong { display: block; margin-bottom: var(--space-2); }
+
+    /* form-level submit button (reuses pattern-button-system tokens inline) */
+    .submit-button, .cancel-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      min-height: 44px;
+      padding: var(--space-3) var(--space-6);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-sm);
+      font-weight: var(--font-weight-medium);
+      border: var(--border-width-sm) solid transparent;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: var(--transition-default);
+      font-variant-numeric: tabular-nums;
+    }
+    .submit-button {
+      background: var(--accent);
+      color: var(--text-on-accent);
+      border-color: var(--accent);
+    }
+    .submit-button:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+    .submit-button:disabled { opacity: 0.4; cursor: not-allowed; }
+    .cancel-button {
+      background: transparent;
+      color: var(--text-emphasis);
+      border-color: var(--border);
+    }
+    .cancel-button:hover { background: var(--surface-recessed); border-color: var(--border-emphasis); }
+
+    .submitting-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-family: var(--font-mono);
+      font-size: var(--type-size-xs);
+      color: var(--text-recede);
+      margin-right: auto;
+    }
+    .submitting-indicator::before {
+      content: '';
+      width: 12px;
+      height: 12px;
+      border: 2px solid currentColor;
+      border-top-color: transparent;
+      border-radius: 999px;
+      animation: spin 600ms linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* layout matrix */
+    .microstate-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-5);
+    }
+    @media (max-width: 720px) {
+      .microstate-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <h1>@quoin/pattern-form-fields — specimen</h1>
+    <p class="lede">Nine widget types (text / email / password / search / number / textarea / select / combobox / checkbox / radio / switch / file / date) × eight microstates per widget + form-row + form-section composition. Six pattern-level form states (default / validating / error / success / loading / submitting). Token-grounded throughout.</p>
+  </header>
+
+  <main>
+    <!-- ────────── Text inputs (all subtypes) ────────── -->
+    <section class="demo">
+      <h2>Text input subtypes</h2>
+      <p>Seven HTML5 input subtypes — text, email, password, search, number, url, tel — share the same form-control wrapping. Each renders with native browser validation hints and the appropriate virtual keyboard on mobile.</p>
+
+      <div class="microstate-grid">
+        <div class="form-control" data-size="md">
+          <label for="fc-text">Display name <span class="required" aria-label="required">*</span></label>
+          <input id="fc-text" type="text" name="display_name" placeholder="e.g. Elena Mendez" required value="Elena Mendez">
+          <small class="help">How your name appears on shared resources.</small>
+        </div>
+
+        <div class="form-control" data-size="md">
+          <label for="fc-email">Work email <span class="required" aria-label="required">*</span></label>
+          <div class="widget-wrapper has-leading-icon">
+            <span class="leading-icon" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="12" height="10" rx="1"/><path d="M2 4l6 5 6-5"/></svg>
+            </span>
+            <input id="fc-email" type="email" name="email" placeholder="you@company.dev" required value="elena@sourcegrid.dev" autocomplete="email">
+          </div>
+        </div>
+
+        <div class="form-control" data-size="md">
+          <label for="fc-password">Password <span class="required" aria-label="required">*</span></label>
+          <div class="widget-wrapper has-trailing-button">
+            <input id="fc-password" type="password" name="password" placeholder="At least 12 characters" required autocomplete="new-password" value="••••••••••••">
+            <button type="button" class="trailing-button" aria-label="Show password" aria-pressed="false">SHOW</button>
+          </div>
+          <small class="help">12+ characters, mix of upper / lower / number / symbol.</small>
+        </div>
+
+        <div class="form-control" data-size="md">
+          <label for="fc-search">Search packs</label>
+          <div class="widget-wrapper has-leading-icon">
+            <span class="leading-icon" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5L14 14"/></svg>
+            </span>
+            <input id="fc-search" type="search" name="q" placeholder="Search aesthetic packs, vocab primitives, tokens…">
+          </div>
+        </div>
+
+        <div class="form-control" data-size="md">
+          <label for="fc-number">Seats <span class="optional">(optional)</span></label>
+          <input id="fc-number" type="number" name="seats" min="1" max="500" step="1" placeholder="1" value="24">
+          <small class="help">Up to 500. Volume discount applies above 50 seats.</small>
+        </div>
+
+        <div class="form-control" data-size="md">
+          <label for="fc-url">Site URL</label>
+          <div class="widget-wrapper has-addon">
+            <span class="addon-leading">https://</span>
+            <input id="fc-url" type="url" name="site" placeholder="harrow.haus" value="harrow.haus">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ────────── Textarea + select + combobox + file + date ────────── -->
+    <section class="demo">
+      <h2>Other widget types</h2>
+      <p>Textarea (multi-line), select (native dropdown), combobox (typeahead per WAI-ARIA 1.3), file (custom-styled wrapper proxying native picker), date (native date picker with text fallback).</p>
+
+      <div class="microstate-grid">
+        <div class="form-control" data-size="md">
+          <label for="fc-textarea">Project description</label>
+          <textarea id="fc-textarea" name="description" rows="4" placeholder="What does your project do?">A multi-tenant analytics dashboard that consumes Quoin's pattern packs and renders them through the Carbon backend for the IBM-platform tenants and through the plain-CSS backend for self-hosted tenants.</textarea>
+          <small class="help">Markdown supported. 2,000 character limit.</small>
+        </div>
+
+        <div class="form-control" data-size="md">
+          <label for="fc-select">Active aesthetic pack</label>
+          <select id="fc-select" name="aesthetic">
+            <option>vellum (Calm Ivory Editorial)</option>
+            <option>graphite (Geist Precision)</option>
+            <option selected>aurora (Warm Liquid Linear)</option>
+            <option>letterpress (Tactile Warmth)</option>
+            <option>terminal (Honest Brutalism)</option>
+            <option>broadsheet (Big Editorial Headline)</option>
+            <option>bloom (Organic Anti-Grid)</option>
+            <option>arcade (Dopamine Saturation)</option>
+            <option>prism (Liquid Glass — opt-in)</option>
+            <option>vapor (Atmospheric Layered Mesh)</option>
+          </select>
+        </div>
+
+        <div class="form-control" data-size="md">
+          <label for="fc-combobox">Compose-from vocab pack</label>
+          <div class="combobox-wrapper">
+            <div class="widget-wrapper has-leading-icon">
+              <span class="leading-icon" aria-hidden="true">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5L14 14"/></svg>
+              </span>
+              <input id="fc-combobox" type="text"
+                role="combobox" aria-expanded="true" aria-autocomplete="list" aria-controls="combobox-listbox" aria-activedescendant="opt-2"
+                value="vocab-form">
+            </div>
+            <ul id="combobox-listbox" class="listbox" role="listbox">
+              <li id="opt-1" role="option">vocab-<mark>form</mark>s — 10 form primitives</li>
+              <li id="opt-2" role="option" aria-selected="true">vocab-<mark>form</mark>s-advanced — combobox + date-range + multi-select</li>
+              <li id="opt-3" role="option">vocab-<mark>form</mark>s-payments — Stripe-style payment field primitives</li>
+            </ul>
+          </div>
+          <small class="help">Type to filter; ↑↓ to navigate; Enter to select.</small>
+        </div>
+
+        <div class="form-control" data-size="md">
+          <label for="fc-date">Launch date</label>
+          <input id="fc-date" type="date" name="launch_date" value="2026-09-15">
+          <small class="help">Site goes live on this date. Affects checkout flow availability.</small>
+        </div>
+
+        <div class="form-control" data-size="md" style="grid-column: 1 / -1;">
+          <label for="fc-file">Brand assets</label>
+          <label class="file-wrapper" for="fc-file">
+            <svg class="file-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 12V4m0 0l-4 4m4-4l4 4"/></svg>
+            <span class="file-text">
+              <strong>Drop a .zip or click to upload</strong>
+              <small>Logo SVG + brand-color tokens + 1-2 photography references · 25 MB max</small>
+            </span>
+            <input id="fc-file" type="file" name="assets" accept=".zip,.svg,.json,image/*" multiple>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- ────────── Checkbox / radio / switch ────────── -->
+    <section class="demo">
+      <h2>Choice widgets — checkbox, radio, switch</h2>
+      <p>Checkbox (binary or indeterminate), radio (single-select within group via <code>&lt;fieldset&gt;</code>), switch (role=switch checkbox per WAI-ARIA 1.3). All three render with custom visuals over native HTML semantics.</p>
+
+      <h3>Checkbox</h3>
+      <div class="microstate-grid">
+        <div class="form-control choice">
+          <input type="checkbox" id="fc-cb-1" checked>
+          <div class="choice-content">
+            <label for="fc-cb-1">Email me weekly Quoin pack updates</label>
+            <small class="help">Aesthetic pack additions, vocab pack releases, breaking changes. Roughly two emails per month.</small>
+          </div>
+        </div>
+        <div class="form-control choice">
+          <input type="checkbox" id="fc-cb-2">
+          <div class="choice-content">
+            <label for="fc-cb-2">Opt into anonymous usage analytics</label>
+            <small class="help">Which packs you load, how often the compiler runs. No source code or token values transmitted.</small>
+          </div>
+        </div>
+        <div class="form-control choice">
+          <input type="checkbox" id="fc-cb-3" disabled>
+          <div class="choice-content">
+            <label for="fc-cb-3">Enable beta backend packs</label>
+            <small class="help">Available once you've upgraded to a paid plan.</small>
+          </div>
+        </div>
+        <div class="form-control choice">
+          <input type="checkbox" id="fc-cb-4" aria-checked="mixed">
+          <div class="choice-content">
+            <label for="fc-cb-4">Select all 12 vocab packs in this category</label>
+            <small class="help">Indeterminate state — 7 of 12 currently selected.</small>
+          </div>
+        </div>
+      </div>
+      <p class="specimen-note">Indeterminate checkbox uses aria-checked="mixed" + indeterminate property. Common pattern: select-all checkbox above a list where some-but-not-all items are checked.</p>
+
+      <h3>Radio group</h3>
+      <fieldset class="form-radio-group">
+        <legend>Active backend pack</legend>
+        <div class="form-control choice">
+          <input type="radio" id="fc-r-1" name="backend" value="css" checked>
+          <div class="choice-content">
+            <label for="fc-r-1">Plain CSS (default)</label>
+            <small class="help">Zero runtime. Browser sees pure HTML + CSS. Lightest first-load.</small>
+          </div>
+        </div>
+        <div class="form-control choice">
+          <input type="radio" id="fc-r-2" name="backend" value="material-web">
+          <div class="choice-content">
+            <label for="fc-r-2">Material Web</label>
+            <small class="help">Routes emission through @material/web. Real Material ripples + elevation. Adds ~30 KB gzipped JS.</small>
+          </div>
+        </div>
+        <div class="form-control choice">
+          <input type="radio" id="fc-r-3" name="backend" value="carbon-web">
+          <div class="choice-content">
+            <label for="fc-r-3">Carbon Web Components</label>
+            <small class="help">Routes emission through @carbon/web-components. IBM Carbon accessibility tree.</small>
+          </div>
+        </div>
+        <div class="form-control choice">
+          <input type="radio" id="fc-r-4" name="backend" value="polaris" disabled>
+          <div class="choice-content">
+            <label for="fc-r-4">Polaris (Shopify)</label>
+            <small class="help">Available on the Shopify-integrated plans.</small>
+          </div>
+        </div>
+      </fieldset>
+
+      <h3>Switch</h3>
+      <div class="microstate-grid">
+        <div class="form-control choice">
+          <input type="checkbox" role="switch" id="fc-sw-1" checked aria-checked="true">
+          <div class="choice-content">
+            <label for="fc-sw-1">Auto-respect prefers-color-scheme</label>
+            <small class="help">When on, the active aesthetic pack swaps light/dark variants based on the user's OS preference.</small>
+          </div>
+        </div>
+        <div class="form-control choice">
+          <input type="checkbox" role="switch" id="fc-sw-2" aria-checked="false">
+          <div class="choice-content">
+            <label for="fc-sw-2">Emit experimental P3 wide-gamut variants</label>
+            <small class="help">Outputs display-p3 color values for monitors that support them. Falls back to sRGB elsewhere.</small>
+          </div>
+        </div>
+        <div class="form-control choice">
+          <input type="checkbox" role="switch" id="fc-sw-3" disabled aria-checked="false">
+          <div class="choice-content">
+            <label for="fc-sw-3">Enable competitive-mode benchmarking</label>
+            <small class="help">Requires CI integration. Configure under Settings → Integrations.</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ────────── Microstates per widget ────────── -->
+    <section class="demo">
+      <h2>Microstate matrix — text input</h2>
+      <p>Eight microstates rendered with <code>data-mockstate</code> for static rendering. In production these resolve via <code>:hover</code>, <code>:focus-visible</code>, <code>:disabled</code>, <code>:read-only</code>, <code>[aria-busy]</code>.</p>
+
+      <div class="microstate-grid">
+        <div class="form-control">
+          <label>default</label>
+          <input type="text" value="Resting interactive state">
+        </div>
+        <div class="form-control" data-mockstate="hover">
+          <label>hover</label>
+          <input type="text" value="Border emphasises on pointer hover">
+        </div>
+        <div class="form-control" data-mockstate="active">
+          <label>active</label>
+          <input type="text" value="During click / mousedown">
+        </div>
+        <div class="form-control" data-mockstate="focus">
+          <label>focus</label>
+          <input type="text" value="Mouse-click focus — no ring">
+        </div>
+        <div class="form-control" data-mockstate="focus-visible">
+          <label>focus-visible</label>
+          <input type="text" value="Keyboard focus — visible ring">
+        </div>
+        <div class="form-control" data-mockstate="disabled">
+          <label>disabled</label>
+          <input type="text" value="Not editable, skip-focus" disabled>
+        </div>
+        <div class="form-control" data-mockstate="read-only">
+          <label>read-only</label>
+          <input type="text" value="Visible but not editable" readonly>
+        </div>
+        <div class="form-control" data-mockstate="loading">
+          <label>loading</label>
+          <input type="text" value="Awaiting server response" aria-busy="true">
+        </div>
+      </div>
+    </section>
+
+    <!-- ────────── State matrix — validating / error / success ────────── -->
+    <section class="demo">
+      <h2>Pattern-level states — validating / error / success</h2>
+      <p>Three field-level pattern states beyond default. Each maps to ARIA + visual treatment.</p>
+
+      <div class="microstate-grid">
+        <div class="form-control" data-state="validating">
+          <label for="fc-validating">Checking availability…</label>
+          <input id="fc-validating" type="text" value="quoin.harrow.haus" aria-busy="true" aria-live="polite">
+          <small class="help">Async check in progress.</small>
+        </div>
+        <div class="form-control" data-state="error">
+          <label for="fc-error">Subdomain</label>
+          <input id="fc-error" type="text" value="QU OIN" aria-invalid="true" aria-describedby="fc-error-msg">
+          <span id="fc-error-msg" class="error" role="alert">Subdomain may only contain lowercase letters, numbers, and hyphens. No spaces.</span>
+        </div>
+        <div class="form-control" data-state="success">
+          <label for="fc-success">Subdomain</label>
+          <input id="fc-success" type="text" value="galley" aria-describedby="fc-success-msg">
+          <small id="fc-success-msg" class="help" style="color: var(--success);">✓ Available — reserve before deploying.</small>
+        </div>
+        <div class="form-control" data-state="error">
+          <label for="fc-error-2">Password <span class="required">*</span></label>
+          <div class="widget-wrapper has-trailing-button">
+            <input id="fc-error-2" type="password" value="••••••" aria-invalid="true" aria-describedby="fc-err-2-msg">
+            <button type="button" class="trailing-button">SHOW</button>
+          </div>
+          <span id="fc-err-2-msg" class="error" role="alert">Password must be at least 12 characters. Currently 6.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ────────── form-row composition ────────── -->
+    <section class="demo">
+      <h2>form-row composition</h2>
+      <p>Two registers: <code>grid</code> (fr-based columns for multi-field rows) and <code>inline</code> (flex-row for compact prompt + input + button rows).</p>
+
+      <h3>register: grid · columns: 2</h3>
+      <div class="form-row" data-register="grid" data-columns="2">
+        <div class="form-control">
+          <label for="fc-row-1">First name</label>
+          <input id="fc-row-1" type="text" autocomplete="given-name" value="Donald">
+        </div>
+        <div class="form-control">
+          <label for="fc-row-2">Last name</label>
+          <input id="fc-row-2" type="text" autocomplete="family-name" value="Pilger">
+        </div>
+      </div>
+
+      <h3 style="margin-top: var(--space-6);">register: grid · columns: 3</h3>
+      <div class="form-row" data-register="grid" data-columns="3">
+        <div class="form-control">
+          <label for="fc-row-3">City</label>
+          <input id="fc-row-3" type="text" autocomplete="address-level2" value="Berlin">
+        </div>
+        <div class="form-control">
+          <label for="fc-row-4">Postal code</label>
+          <input id="fc-row-4" type="text" autocomplete="postal-code" inputmode="numeric" value="10115">
+        </div>
+        <div class="form-control">
+          <label for="fc-row-5">Country</label>
+          <select id="fc-row-5" autocomplete="country">
+            <option>Germany</option><option>Austria</option><option>Switzerland</option><option>Netherlands</option>
+          </select>
+        </div>
+      </div>
+
+      <h3 style="margin-top: var(--space-6);">register: inline (newsletter signup row)</h3>
+      <div class="form-row" data-register="inline">
+        <div class="form-control" style="flex: 1; min-width: 240px;">
+          <label for="fc-inline-1">Newsletter signup</label>
+          <input id="fc-inline-1" type="email" placeholder="you@company.dev" autocomplete="email">
+        </div>
+        <button type="button" class="submit-button">Subscribe</button>
+      </div>
+    </section>
+
+    <!-- ────────── Worked example — full form-section in default state ────────── -->
+    <section class="demo">
+      <h2>Worked example — form-section, default state</h2>
+      <p>End-to-end composition. <code>&lt;form&gt;</code> with header, three field rows, submit-row footer. No client-side JS required for the markup to function (the form POSTs natively). Async validation + optimistic UI is an enhancement layer.</p>
+
+      <form class="form-section" aria-labelledby="form-heading-1" novalidate>
+        <header>
+          <h3 id="form-heading-1">Reserve your Quoin subdomain</h3>
+          <p>Three fields, takes ~30 seconds. We won't email you twice this week.</p>
+        </header>
+
+        <div class="form-row" data-register="grid" data-columns="auto">
+          <div class="form-control">
+            <label for="form-1-email">Work email <span class="required">*</span></label>
+            <div class="widget-wrapper has-leading-icon">
+              <span class="leading-icon" aria-hidden="true">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="12" height="10" rx="1"/><path d="M2 4l6 5 6-5"/></svg>
+              </span>
+              <input id="form-1-email" type="email" required autocomplete="email" placeholder="you@company.dev">
+            </div>
+          </div>
+          <div class="form-control">
+            <label for="form-1-subdomain">Subdomain <span class="required">*</span></label>
+            <div class="widget-wrapper has-addon">
+              <input id="form-1-subdomain" type="text" required placeholder="my-project" pattern="[a-z0-9-]+">
+              <span class="addon-trailing">.harrow.haus</span>
+            </div>
+            <small class="help">Lowercase letters, numbers, and hyphens.</small>
+          </div>
+        </div>
+
+        <fieldset class="form-radio-group">
+          <legend>Primary use case</legend>
+          <div class="form-control choice">
+            <input type="radio" id="form-1-use-1" name="usecase" value="marketing" checked>
+            <div class="choice-content">
+              <label for="form-1-use-1">Marketing site</label>
+              <small class="help">Hero, features, pricing, footer. Uses the marketing template pack.</small>
+            </div>
+          </div>
+          <div class="form-control choice">
+            <input type="radio" id="form-1-use-2" name="usecase" value="app">
+            <div class="choice-content">
+              <label for="form-1-use-2">SaaS application</label>
+              <small class="help">Dashboard shell, sidebar nav, data table. Uses the app-shell template pack.</small>
+            </div>
+          </div>
+          <div class="form-control choice">
+            <input type="radio" id="form-1-use-3" name="usecase" value="docs">
+            <div class="choice-content">
+              <label for="form-1-use-3">Documentation</label>
+              <small class="help">Sidebar TOC, code blocks, search, version switcher.</small>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="form-control choice">
+          <input type="checkbox" id="form-1-newsletter" checked>
+          <div class="choice-content">
+            <label for="form-1-newsletter">Email me when new aesthetic + backend packs ship</label>
+            <small class="help">Roughly two emails per month. Unsubscribe with one click.</small>
+          </div>
+        </div>
+
+        <footer class="submit-row">
+          <button type="button" class="cancel-button">Cancel</button>
+          <button type="submit" class="submit-button">Reserve subdomain</button>
+        </footer>
+      </form>
+    </section>
+
+    <!-- ────────── form-section state: error ────────── -->
+    <section class="demo">
+      <h2>form-section state: error</h2>
+      <p>Two fields failed validation. Single error summary at the top with anchor links to the failed fields (WCAG 2.4.6 + 3.3.1 + 3.3.3). Submit button remains enabled so retry is one click.</p>
+
+      <form class="form-section" aria-labelledby="form-heading-err" novalidate>
+        <header>
+          <h3 id="form-heading-err">Reserve your Quoin subdomain</h3>
+        </header>
+
+        <div class="error-summary" role="alert">
+          <strong>2 fields need attention before we can continue:</strong>
+          <ul>
+            <li><a href="#form-err-email">Work email</a> isn't in a valid format.</li>
+            <li><a href="#form-err-subdomain">Subdomain</a> contains characters outside [a-z 0-9 -].</li>
+          </ul>
+        </div>
+
+        <div class="form-row" data-register="grid" data-columns="auto">
+          <div class="form-control" data-state="error">
+            <label for="form-err-email">Work email <span class="required">*</span></label>
+            <input id="form-err-email" type="email" value="elena at sourcegrid" aria-invalid="true" aria-describedby="form-err-email-msg">
+            <span id="form-err-email-msg" class="error" role="alert">Looks like a space instead of an @. Did you mean elena@sourcegrid.dev?</span>
+          </div>
+          <div class="form-control" data-state="error">
+            <label for="form-err-subdomain">Subdomain <span class="required">*</span></label>
+            <div class="widget-wrapper has-addon">
+              <input id="form-err-subdomain" type="text" value="My Project!" aria-invalid="true" aria-describedby="form-err-subdomain-msg">
+              <span class="addon-trailing">.harrow.haus</span>
+            </div>
+            <span id="form-err-subdomain-msg" class="error" role="alert">Subdomains may only contain lowercase letters, numbers, and hyphens.</span>
+          </div>
+        </div>
+
+        <footer class="submit-row">
+          <button type="button" class="cancel-button">Cancel</button>
+          <button type="submit" class="submit-button">Reserve subdomain</button>
+        </footer>
+      </form>
+    </section>
+
+    <!-- ────────── form-section state: submitting ────────── -->
+    <section class="demo">
+      <h2>form-section state: submitting</h2>
+      <p>POST in flight. All controls disabled (preserving values for the user's mental model), submit button shows loading state, aria-live region announces submission status.</p>
+
+      <form class="form-section" aria-labelledby="form-heading-submit" aria-busy="true">
+        <header>
+          <h3 id="form-heading-submit">Reserve your Quoin subdomain</h3>
+        </header>
+
+        <div class="form-row" data-register="grid" data-columns="auto">
+          <div class="form-control" data-mockstate="disabled">
+            <label for="form-sub-email">Work email <span class="required">*</span></label>
+            <input id="form-sub-email" type="email" value="elena@sourcegrid.dev" disabled>
+          </div>
+          <div class="form-control" data-mockstate="disabled">
+            <label for="form-sub-subdomain">Subdomain <span class="required">*</span></label>
+            <div class="widget-wrapper has-addon">
+              <input id="form-sub-subdomain" type="text" value="elenas-galley" disabled>
+              <span class="addon-trailing">.harrow.haus</span>
+            </div>
+          </div>
+        </div>
+
+        <footer class="submit-row">
+          <span class="submitting-indicator" aria-live="polite">Reserving subdomain…</span>
+          <button type="button" class="cancel-button" disabled>Cancel</button>
+          <button type="submit" class="submit-button" disabled aria-busy="true">Working…</button>
+        </footer>
+      </form>
+    </section>
+
+    <!-- ────────── form-section state: success ────────── -->
+    <section class="demo">
+      <h2>form-section state: success</h2>
+      <p>Post-submission confirmation. Controls become read-only (so the user can verify what was submitted), success banner appears, primary CTA changes to "Continue" or "Submit another."</p>
+
+      <form class="form-section" aria-labelledby="form-heading-success">
+        <header>
+          <h3 id="form-heading-success">Subdomain reserved</h3>
+          <p>You'll receive a confirmation email at the address below within 60 seconds.</p>
+        </header>
+
+        <div class="success-banner" role="status" aria-live="polite">
+          <strong>✓ elenas-galley.harrow.haus is reserved for 30 days.</strong>
+          We'll send setup instructions to your work email. The first build typically takes under 2 minutes.
+        </div>
+
+        <div class="form-row" data-register="grid" data-columns="auto">
+          <div class="form-control" data-mockstate="read-only">
+            <label for="form-success-email">Work email</label>
+            <input id="form-success-email" type="email" value="elena@sourcegrid.dev" readonly>
+          </div>
+          <div class="form-control" data-mockstate="read-only">
+            <label for="form-success-subdomain">Subdomain</label>
+            <div class="widget-wrapper has-addon">
+              <input id="form-success-subdomain" type="text" value="elenas-galley" readonly>
+              <span class="addon-trailing">.harrow.haus</span>
+            </div>
+          </div>
+        </div>
+
+        <footer class="submit-row">
+          <button type="button" class="cancel-button">Reserve another</button>
+          <button type="submit" class="submit-button">Continue to setup →</button>
+        </footer>
+      </form>
+    </section>
+
+    <section class="demo">
+      <h2>Accessibility checklist</h2>
+      <ul>
+        <li>Every <code>&lt;input&gt;</code> / <code>&lt;textarea&gt;</code> / <code>&lt;select&gt;</code> has a wired <code>&lt;label for&gt;</code>. No floating labels without proper <code>aria-labelledby</code>.</li>
+        <li>Help text linked via <code>aria-describedby</code>. Error messages additionally carry <code>role="alert"</code> + <code>aria-live="polite"</code> so screen readers announce dynamically.</li>
+        <li>Required fields marked with <code>required</code> attribute (native) AND visible <code>*</code> labelled with <code>aria-label="required"</code>.</li>
+        <li>Field-level errors set <code>aria-invalid="true"</code> on the input. Form-level summary appears in <code>role="alert"</code> with anchor links to failed fields per WCAG 2.4.6 + 3.3.1 + 3.3.3.</li>
+        <li>Validating state uses <code>aria-busy="true"</code> + <code>aria-live="polite"</code> for async feedback.</li>
+        <li>Radio groups wrap in <code>&lt;fieldset&gt;</code> with <code>&lt;legend&gt;</code>. Don't use a generic <code>&lt;div&gt;</code> + label for groups.</li>
+        <li>Switch uses <code>role="switch"</code> + <code>aria-checked</code>. Not <code>aria-pressed</code> (that's for toggle buttons).</li>
+        <li>Indeterminate checkbox sets <code>aria-checked="mixed"</code> AND <code>indeterminate</code> property.</li>
+        <li>File input: the custom-styled wrapper is the visual surface; the native <code>&lt;input type="file"&gt;</code> is absolutely-positioned over it with <code>opacity: 0</code> so it receives clicks + retains focus order. The wrapper itself is a <code>&lt;label&gt;</code> linked to the input so a click anywhere opens the picker.</li>
+        <li>Combobox follows WAI-ARIA 1.3 combobox pattern: <code>role="combobox"</code> + <code>aria-expanded</code> + <code>aria-controls</code> + <code>aria-activedescendant</code> + <code>aria-autocomplete="list"</code>. Listbox has <code>role="listbox"</code>; options have <code>role="option"</code> + <code>aria-selected</code>.</li>
+        <li>Submit button shows <code>aria-busy="true"</code> during submission; live region announces state transitions.</li>
+        <li>44×44 hit target on md + lg sizes (40px input height + 4px space-1 padding above/below brings it to ≥44px). Sm size is reserved for chrome / table-row contexts.</li>
+        <li>Focus rings use <code>--focus-ring</code> tokens, visible only via <code>:focus-visible</code> (mouse-clicks don't trigger the ring).</li>
+        <li>Reduced-motion: spinner stops, focus transitions become instant. <code>@media (prefers-reduced-motion: reduce)</code> handled globally.</li>
+      </ul>
+    </section>
+
+    <section class="demo">
+      <h2>Typography precision</h2>
+      <p>Curly apostrophes throughout ("you'll", not "you'll"). Em dashes for in-line clarifications. Tabular numerics on every <code>input</code> + <code>select</code> + button label so digit-bearing values (postal codes, prices, seat counts, dates) don't shift mid-render. Mono font for addons (<code>https://</code>, <code>.harrow.haus</code>) and reveal-button labels (<code>SHOW</code> / <code>HIDE</code>) keeps them visually distinct from prose-tone labels.</p>
+      <p class="specimen-note">Token-grounded throughout. Every CSS value reads from a <code>--var</code>. The <code>:root</code> seed at the top of this file is what a real consumer's tokens-baseline + active aesthetic pack supplies via the compiler pipeline. Zero hardcoded values past that seed.</p>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,224 @@
+[
+  {
+    "name": "form-control",
+    "category": "interactive",
+    "role": "Polymorphic form field primitive — composes label + widget + help text + error message into a single accessible unit. The `type` attribute determines the widget rendered: text, email, password, search, number, url, tel (single-line inputs); textarea (multi-line); select (native dropdown); combobox (typeahead / autocomplete); checkbox; radio; switch; file; date. All 8 microstates supported across every widget type. Composes from vocab-forms primitives (form-field, field-label, field-help, field-error, checkbox-cell, radio-cell, select-cell, textarea-cell).",
+    "attributes": {
+      "type": {
+        "values": ["text", "email", "password", "search", "number", "url", "tel", "textarea", "select", "combobox", "checkbox", "radio", "switch", "file", "date"],
+        "default": "text",
+        "specific": true
+      },
+      "size": {
+        "values": ["sm", "md", "lg"],
+        "default": "md",
+        "specific": true
+      },
+      "density": {
+        "values": ["normal", "dense"],
+        "default": "normal"
+      },
+      "weight": {
+        "values": ["normal", "emphasize"],
+        "default": "normal"
+      },
+      "state": {
+        "values": ["default", "validating", "error", "success"],
+        "default": "default",
+        "specific": true
+      },
+      "leading": {
+        "values": ["none", "icon", "addon"],
+        "default": "none",
+        "specific": true
+      },
+      "trailing": {
+        "values": ["none", "icon", "addon", "clear", "reveal"],
+        "default": "none",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "--surface-elevated",
+      "color": "--text-emphasis",
+      "labelColor": "--text",
+      "helpColor": "--text-recede",
+      "errorColor": "--critical",
+      "successColor": "--success",
+      "placeholderColor": "--text-disabled",
+      "borderColor": "--border",
+      "borderColorHover": "--border-emphasis",
+      "borderColorFocus": "--focus-ring",
+      "borderColorError": "--critical",
+      "borderColorSuccess": "--success",
+      "borderWidth": "--border-width-sm",
+      "borderRadius": "--radius-md",
+      "padding": "--space-3",
+      "fontFamilyInput": "--font-sans",
+      "fontFamilyLabel": "--font-sans",
+      "fontFamilyHelp": "--font-sans",
+      "fontFamilyValue": "--font-sans",
+      "fontFamilyMono": "--font-mono",
+      "fontSizeInput": "--type-size-sm",
+      "fontSizeLabel": "--type-size-sm",
+      "fontSizeHelp": "--type-size-xs",
+      "fontSizeError": "--type-size-xs",
+      "fontWeightLabel": "--font-weight-medium",
+      "lineHeightInput": "--leading-tight",
+      "lineHeightHelp": "--leading-prose",
+      "focusRingWidth": "--focus-ring-width",
+      "focusRingOffset": "--focus-ring-offset",
+      "transition": "--transition-default"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<label for=\"<input-id>\"> — required for every form-control (visible label OR aria-label/aria-labelledby)",
+        "<input|select|textarea> — the actual widget; native HTML element, not a div-pretending-to-be-an-input",
+        "<small> or <span class=\"help\"> — optional help text below the widget; aria-describedby links input to it",
+        "<span role=\"alert\" class=\"error\"> — optional error message; appears when state=error; aria-describedby links input to it"
+      ],
+      "widgetMapping": {
+        "text|email|password|search|number|url|tel": "renders <input type=\"<type>\"> with native browser validation hints",
+        "textarea": "renders <textarea> with rows=4 default; resize: vertical",
+        "select": "renders native <select> (not a custom div-dropdown); for searchable use type=combobox instead",
+        "combobox": "renders <input role=\"combobox\" aria-autocomplete=\"list\" aria-controls=\"<listbox-id>\"> + a <ul role=\"listbox\"> popover; supports keyboard nav, Enter/Tab to select, Esc to close. ARIA-conformant per WAI-ARIA Authoring Practices 1.3 combobox pattern.",
+        "checkbox": "renders <input type=\"checkbox\"> with custom visual styling but native semantics; supports indeterminate via aria-checked=\"mixed\"",
+        "radio": "renders <input type=\"radio\"> inside a <fieldset> if multiple options; legend provides group label",
+        "switch": "renders <input type=\"checkbox\" role=\"switch\" aria-checked=\"…\"> with switch visual treatment; per WAI-ARIA 1.3 the underlying control is still a checkbox semantically",
+        "file": "renders <input type=\"file\"> with custom visual wrapper that triggers the native file picker (clicking the wrapper proxies to the hidden input); preserves drag-and-drop semantics",
+        "date": "renders <input type=\"date\"> with native browser date picker; fallback to text input on browsers without date picker support"
+      },
+      "sizing": {
+        "sm": { "minHeight": "32px", "padding": "var(--space-2) var(--space-3)", "fontSize": "var(--type-size-xs)" },
+        "md": { "minHeight": "40px", "padding": "var(--space-3) var(--space-4)", "fontSize": "var(--type-size-sm)" },
+        "lg": { "minHeight": "48px", "padding": "var(--space-4) var(--space-6)", "fontSize": "var(--type-size-md)" }
+      },
+      "minHitTarget": "44x44 CSS pixels for md and lg sizes; sm reserved for inline / dense table-row contexts where parent row provides hit area",
+      "leadingTrailingPattern": {
+        "icon": "16px SVG positioned inside the input padding zone; non-interactive; aria-hidden=true unless functional",
+        "addon": "static text or short label (e.g. 'https://' prefix, '.com' suffix, '$' currency); rendered as a separate <span> inside the input border",
+        "clear": "trailing X button to clear the input; appears only when input has value; aria-label='Clear <field-name>'",
+        "reveal": "trailing eye-icon button for password fields; toggles input type between password and text; aria-pressed indicates current state"
+      },
+      "states": {
+        "default": "no visible validation state; resting interactive",
+        "validating": "spinner replaces trailing icon; aria-busy='true' on input; aria-live='polite' for async validation feedback",
+        "error": "border-color: --critical; error message visible; input aria-invalid='true'; aria-describedby points to error message",
+        "success": "border-color: --success; optional checkmark trailing icon; aria-describedby points to success message"
+      },
+      "microStates": {
+        "default": "no modifier",
+        "hover": ":hover — border-color shifts to --border-emphasis",
+        "active": ":active — same as focus visually",
+        "focus": ":focus — focus ring + border-color: --focus-ring",
+        "focus-visible": ":focus-visible — keyboard-only focus ring",
+        "disabled": "[disabled] — opacity 0.5, pointer-events: none, native disabled attribute on input",
+        "loading": "[aria-busy=true] — spinner overlay; preserves visible width; preserves value visibility",
+        "read-only": "[readonly] — value visible but not editable; background --surface-recessed; cursor: default"
+      },
+      "ariaPatterns": {
+        "labelLinking": "<input id> + <label for> + aria-describedby (help+error) is the canonical wiring. Generate stable IDs (uuid or content-hash) so SSR is stable.",
+        "errorAnnouncement": "Error message has role='alert' so screen readers announce when it appears. Also aria-live='polite' so dynamic validation announces.",
+        "comboboxKeyboard": "ArrowDown opens listbox + focuses first option; ArrowUp/Down navigate; Enter selects + closes; Esc closes; Tab confirms current + advances focus; Home/End jump to first/last.",
+        "switchAria": "role='switch' + aria-checked='true|false'. NOT aria-pressed (that's for toggle buttons).",
+        "fileInputCustomTrigger": "The visual wrapper is button-like but clicking it proxies to the hidden <input type=file>. The native input retains focus order; visual wrapper has tabindex='-1' to avoid double-tab.",
+        "indeterminateCheckbox": "Setting checkbox.indeterminate=true via JS reflects to aria-checked='mixed'. Common pattern: select-all checkbox above a list."
+      },
+      "reducedMotion": "spinner animation collapses to non-animated 'Loading…' label when prefers-reduced-motion: reduce; focus transitions become instant"
+    }
+  },
+  {
+    "name": "form-row",
+    "category": "interactive",
+    "role": "Composition primitive for laying out multiple form-controls horizontally. Two registers — grid (CSS Grid with fr-based columns, useful for fixed-width labels OR multi-column form layouts) and inline (flex-row, useful for compact prompt + input + button rows). Handles responsive collapse to single-column at <640px viewport. Inherits density from parent form-section.",
+    "attributes": {
+      "register": {
+        "values": ["grid", "inline"],
+        "default": "grid",
+        "specific": true
+      },
+      "columns": {
+        "values": ["1", "2", "3", "auto"],
+        "default": "auto",
+        "specific": true
+      },
+      "density": {
+        "values": ["normal", "dense"],
+        "default": "normal"
+      }
+    },
+    "tokens": {
+      "gap": "--space-4",
+      "color": "--text"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "registers": {
+        "grid": "grid-template-columns: repeat(<columns>, 1fr) at ≥640px; collapses to 1fr below. columns=auto uses minmax(min(280px, 100%), 1fr) for adaptive fill.",
+        "inline": "flex-direction: row; flex-wrap: wrap; align-items: end (so labels at varying heights align by their input baseline); gap: --space-3."
+      },
+      "responsiveBreakpoints": {
+        "mobile": "<640px: all rows collapse to single column regardless of declared columns count",
+        "tablet+": "≥640px: declared columns honored"
+      }
+    }
+  },
+  {
+    "name": "form-section",
+    "category": "interactive",
+    "role": "Top-level form wrapper grouping related form-controls under a section heading. Provides the form-level state machine (default / validating / error / success / submitting), the submit-row at the bottom, and the surrounding ARIA contract (aria-label or aria-labelledby on the <form>). Pattern-pack-level state attribute is read here, not on individual form-controls.",
+    "attributes": {
+      "state": {
+        "values": ["default", "validating", "error", "success", "loading", "submitting"],
+        "default": "default",
+        "specific": true
+      },
+      "density": {
+        "values": ["sparse", "normal", "dense"],
+        "default": "normal"
+      },
+      "weight": {
+        "values": ["normal", "emphasize"],
+        "default": "normal"
+      }
+    },
+    "tokens": {
+      "background": "--surface",
+      "color": "--text",
+      "borderColor": "--border-recede",
+      "padding": "--space-panel",
+      "gap": "--space-6"
+    },
+    "structure": {
+      "element": "form"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "stateBehavior": {
+        "default": "normal interactive state; controls respond to input",
+        "validating": "async validation in progress on at least one field; submit button disabled; controls themselves remain editable so the user can correct in-flight",
+        "error": "at least one field has state=error; submit button enabled (so retry is one click) but emits aria-describedby to the form-level error summary",
+        "success": "form submitted successfully; controls become read-only; success message + 'Continue' or 'Submit another' action",
+        "loading": "form data fetching (e.g. edit-mode populating from server); skeleton placeholders for each control; submit button hidden",
+        "submitting": "POST in flight; all controls disabled; submit button shows loading state; aria-busy='true' on form"
+      },
+      "ariaPatterns": {
+        "formLabel": "<form aria-labelledby='<section-heading-id>'> — section heading is the form label",
+        "errorSummary": "When form is in error state, render a single error summary at the top with role='alert'. Summary lists which fields have errors and links to them via in-page anchors. WCAG 2.4.6 + 3.3.1 + 3.3.3 compliant.",
+        "submittingLiveRegion": "aria-live='polite' region announces 'Submitting…' / 'Saved' / 'Error: …' as the form state transitions"
+      },
+      "noscriptFallback": "form-section is a real <form> so it submits via POST even without JS. JS enhancement adds async validation + optimistic UI; the no-JS path is functional baseline.",
+      "deepLinkability": "form fields' values should be deep-linkable when appropriate (e.g. search-filter forms preserve filter state in URL hash or query params). Implementation is consumer responsibility; the pattern provides the wrapper."
+    }
+  }
+]
