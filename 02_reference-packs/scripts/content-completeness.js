@@ -123,6 +123,12 @@ const ENROLLMENT = {
     composesSiblings: ['pattern-button-system'],
     markers: ['Galley', 'oklch(', 'WCAG 1.4.3', '@supports'],
   },
+  'hero-brand-photo': {
+    requireGalley: true,
+    requireLineage: true,
+    composesSiblings: ['pattern-button-system'],
+    markers: ['Galley', 'fetchpriority', 'WCAG 1.1.1', 'PLACEHOLDER FIXTURE'],
+  },
   // Pre-GALLEY P0 patterns (button-system, testimonial, feature-grid, form-fields)
   // intentionally not enrolled. They predate the GALLEY narrative.
 };

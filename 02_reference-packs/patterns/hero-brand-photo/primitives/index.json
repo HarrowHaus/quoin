@@ -1,0 +1,327 @@
+[
+  {
+    "name": "hero-photo-section",
+    "category": "marketing",
+    "role": "Photo-led marketing hero. Hero category 4 of 5. Anchors the canonical hero anatomy (eyebrow + headline + subhead + actions + meta) against a brand photographic image. Four layouts — image-right (50/50 split, default), image-left (mirrored), image-full-bleed (image fills hero, text overlays), image-overlay (text on dark/light tinted image). Responsive image handling via <picture> with srcset + media queries for art direction. Production-grade LCP optimization via fetchpriority='high' on the hero image.",
+    "attributes": {
+      "layout": {
+        "values": ["image-right", "image-left", "image-full-bleed", "image-overlay"],
+        "default": "image-right",
+        "specific": true
+      },
+      "size": {
+        "values": ["default", "oversized"],
+        "default": "default",
+        "specific": true
+      },
+      "state": {
+        "values": ["default", "loading", "image-error"],
+        "default": "default",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "var(--surface)",
+      "color": "var(--text)",
+      "padding": "var(--space-section) var(--space-panel)",
+      "paddingFullBleed": "0",
+      "gap": "var(--space-section)",
+      "minHeight": "480px",
+      "minHeightFullBleed": "560px",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "section",
+      "attributes": {
+        "aria-labelledby": "hero-photo-headline"
+      }
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<section data-pattern='hero-photo-section' data-layout='image-right' aria-labelledby='hero-headline-id'>",
+        "  <div class='inner'>",
+        "    <div class='content-column'>",
+        "      <hero-photo-eyebrow>",
+        "      <hero-photo-headline id='hero-headline-id'>",
+        "      <hero-photo-subhead>",
+        "      <hero-photo-actions>",
+        "      <hero-photo-meta>",
+        "    </div>",
+        "    <hero-photo-media> — <picture> with responsive sources + image",
+        "      (optional) <hero-photo-overlay> — gradient/tint overlay for text-on-image contrast",
+        "  </div>"
+      ],
+      "layouts": {
+        "image-right": "50/50 split — text on left column, image on right column. The 80% choice. Mobile breakpoint collapses to image-below.",
+        "image-left": "Mirrored — image on left, text on right. Used for art-direction variety.",
+        "image-full-bleed": "Image fills the hero section corner-to-corner. Text overlays in a positioned content column (typically left-anchored). Used on flagship marketing home.",
+        "image-overlay": "Same as full-bleed but with a deliberate overlay (gradient or tint) applied to image for guaranteed text contrast. Used when text must stay legible against unpredictable image content."
+      },
+      "lcpOptimization": {
+        "rule": "The hero image is the LCP (Largest Contentful Paint) candidate for marketing pages. Optimize aggressively.",
+        "fetchpriority": "<img fetchpriority='high'> on the hero image. Tells the browser to prioritize this resource over other images.",
+        "lazyLoadingDisabled": "Do NOT set loading='lazy' on the hero image — that's the opposite of what you want. Hero is above-fold.",
+        "responsiveSizes": "Use <picture> with <source media='...' srcset='...'> for art direction at different breakpoints. Different crops for mobile vs desktop.",
+        "modernFormats": "Prefer AVIF + WebP source sets with JPEG/PNG fallback. <source type='image/avif'> first, <source type='image/webp'> next, <img src='...jpg'> fallback."
+      },
+      "licenseNote": "Photographic images are host-provided. This pattern does NOT bundle any photography — pattern ships only the layout + responsive contract. Hosts must source their own licensed brand photography. The specimen uses CSS-generated gradient placeholders labelled as fixtures to avoid licensing entanglement; production swaps in real <img> sources.",
+      "ariaPatterns": {
+        "ariaLabelledby": "<section aria-labelledby='...'> points to the h1's id.",
+        "h1Discipline": "hero-photo-headline uses <h1>. Same single-h1 discipline.",
+        "decorativeVsInformative": "If the photo carries information (product shot, named team member, identifiable place), <img alt='descriptive-alt'>. If purely decorative (abstract texture, mood photography), <img alt=''> (empty alt — NOT aria-hidden, alt='' tells AT to skip)."
+      }
+    }
+  },
+  {
+    "name": "hero-photo-media",
+    "category": "marketing",
+    "role": "Wrapper for the responsive <picture> + image. Hosts the responsive sources, the LCP-optimized <img>, and an optional overlay layer for text-on-image contrast. Manages object-fit, object-position, and aspect-ratio.",
+    "attributes": {
+      "crop": {
+        "values": ["cover", "contain"],
+        "default": "cover",
+        "specific": true
+      },
+      "aspect": {
+        "values": ["16:9", "4:3", "1:1", "3:4", "free"],
+        "default": "free",
+        "specific": true
+      },
+      "focal-point": {
+        "values": ["center", "top", "bottom", "left", "right", "top-left", "top-right", "bottom-left", "bottom-right"],
+        "default": "center",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "var(--surface-recessed)",
+      "borderRadius": "var(--radius-card)",
+      "borderRadiusFullBleed": "0",
+      "minHeight": "320px",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "picture"
+    },
+    "children": "phrasing-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<picture data-pattern='hero-photo-media' data-crop='cover' data-focal-point='center'>",
+        "  <source type='image/avif' media='(min-width: 800px)' srcset='hero-desktop.avif 1x, hero-desktop@2x.avif 2x'>",
+        "  <source type='image/avif' srcset='hero-mobile.avif'>",
+        "  <source type='image/webp' media='(min-width: 800px)' srcset='hero-desktop.webp 1x, hero-desktop@2x.webp 2x'>",
+        "  <source type='image/webp' srcset='hero-mobile.webp'>",
+        "  <img src='hero-desktop.jpg' alt='descriptive-or-empty-string' fetchpriority='high' decoding='async' />",
+        "</picture>"
+      ],
+      "objectFitPolicy": "cover = fill the container, crop overflow. The default; ensures no awkward letter-boxing. contain = fit inside container, may letterbox.",
+      "focalPointPolicy": "object-position controls which part of the image is preserved when cropping. focal-point='top' = preserve top of image; 'bottom-left' = preserve bottom-left. Critical for portraits where the face must stay in frame.",
+      "ariaPatterns": {
+        "imgAltDiscipline": "alt='' for purely decorative photography. alt='descriptive-text' for informative photography. Never aria-hidden on <img> (use alt='' instead — alt='' is the correct way to mark a decorative image)."
+      }
+    }
+  },
+  {
+    "name": "hero-photo-overlay",
+    "category": "marketing",
+    "role": "Optional overlay layer applied to the image for text-on-image contrast. Four registers — none (no overlay), gradient-from-bottom (dark fade from bottom), gradient-from-side (dark fade from text-anchored side), solid-tint (full coverage tint at low opacity). Always aria-hidden — purely decorative contrast aid.",
+    "attributes": {
+      "register": {
+        "values": ["none", "gradient-from-bottom", "gradient-from-side", "solid-tint"],
+        "default": "none",
+        "specific": true
+      },
+      "tone": {
+        "values": ["dark", "light", "accent"],
+        "default": "dark",
+        "specific": true
+      },
+      "strength": {
+        "values": ["subtle", "default", "strong"],
+        "default": "default",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "colorDark": "oklch(0% 0 0)",
+      "colorLight": "oklch(100% 0 0)",
+      "colorAccent": "var(--accent)",
+      "opacitySubtle": "0.2",
+      "opacityDefault": "0.4",
+      "opacityStrong": "0.6",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "aria-hidden": "true"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "block",
+    "meta": {
+      "registers": {
+        "none": "No overlay. Used when image natively has enough contrast — light-on-dark or dark-on-light scenes.",
+        "gradient-from-bottom": "Linear gradient from transparent (top) to dark (bottom). Used when text sits at the bottom of the image (image-full-bleed layout).",
+        "gradient-from-side": "Linear gradient from transparent (image side) to dark (text side). Used for image-right/image-left layouts when text needs extra contrast at the image-text boundary.",
+        "solid-tint": "Full-coverage tint at low opacity. Used as a fallback when the image is too busy for a directional gradient."
+      },
+      "tones": {
+        "dark": "oklch(0% 0 0) — pure black. Default. Text on top reads as --text-on-accent (white).",
+        "light": "oklch(100% 0 0) — pure white. Used on dark photography. Text on top reads as --text-emphasis (near-black).",
+        "accent": "Theme accent. Used to color-anchor the hero to the brand identity."
+      },
+      "alwaysAriaHidden": "Always aria-hidden='true'. The overlay is decorative contrast aid; the photo's semantic meaning lives in the <img alt>."
+    }
+  },
+  {
+    "name": "hero-photo-eyebrow",
+    "category": "marketing",
+    "role": "Small uppercase pre-heading above the headline. Same anatomy as hero-type-only's hero-eyebrow. On image-overlay / image-full-bleed layouts, color shifts to --text-on-accent (light) for legibility against the photographed background.",
+    "attributes": {
+      "tone": {
+        "values": ["neutral", "accent", "on-image"],
+        "default": "neutral",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "var(--text-recede)",
+      "colorAccent": "var(--accent)",
+      "colorOnImage": "var(--text-on-accent)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-sm)",
+      "fontWeight": "var(--font-weight-semibold)",
+      "letterSpacing": "var(--tracking-wide)",
+      "textTransform": "uppercase",
+      "lineHeight": "var(--leading-tight)",
+      "margin": "0 0 var(--space-3)"
+    },
+    "structure": {
+      "element": "p"
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "toneOnImage": "On image-overlay / image-full-bleed layouts, prefer tone='on-image' (light against dark overlay)."
+    }
+  },
+  {
+    "name": "hero-photo-headline",
+    "category": "marketing",
+    "role": "The display headline. h1 by default. Color shifts to --text-on-accent on image-overlay layouts.",
+    "attributes": {
+      "size": {
+        "values": ["default", "oversized"],
+        "default": "default",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "var(--text-emphasis)",
+      "colorOnImage": "var(--text-on-accent)",
+      "fontFamily": "var(--font-display)",
+      "fontSizeDefault": "var(--type-size-3xl)",
+      "fontSizeOversized": "var(--type-size-4xl)",
+      "fontWeight": "var(--font-weight-semibold)",
+      "lineHeight": "var(--leading-display)",
+      "letterSpacing": "var(--tracking-tight)",
+      "margin": "0",
+      "maxWidth": "22ch"
+    },
+    "structure": {
+      "element": "h1"
+    },
+    "children": "phrasing-content",
+    "scope": "block",
+    "meta": {
+      "textWrapBalance": "text-wrap: balance applies.",
+      "textShadowOnImage": "On image-overlay without a full-coverage tint, an optional text-shadow can guarantee contrast: text-shadow: 0 1px 2px oklch(0% 0 0 / 0.4). Used sparingly — prefer overlay or tint."
+    }
+  },
+  {
+    "name": "hero-photo-subhead",
+    "category": "marketing",
+    "role": "Supporting subtitle. Same contract as hero-type-only's hero-subhead. Color shifts on image-overlay layouts to maintain contrast.",
+    "attributes": {},
+    "tokens": {
+      "color": "var(--text-recede)",
+      "colorOnImage": "color-mix(in oklch, var(--text-on-accent) 90%, transparent)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-lg)",
+      "fontWeight": "var(--font-weight-medium)",
+      "lineHeight": "var(--leading-prose)",
+      "margin": "var(--space-3) 0 0",
+      "maxWidth": "60ch"
+    },
+    "structure": {
+      "element": "p"
+    },
+    "children": "phrasing-content",
+    "scope": "block",
+    "meta": {
+      "textWrapPretty": "text-wrap: pretty for orphan-avoidance."
+    }
+  },
+  {
+    "name": "hero-photo-actions",
+    "category": "marketing",
+    "role": "CTA cluster composing button-system. On image-overlay layouts, ghost-intent CTAs receive a soft semi-transparent surface + backdrop-blur for legibility against unpredictable image content (same technique as hero-gradient-mesh).",
+    "attributes": {
+      "register": {
+        "values": ["primary-only", "primary-plus-secondary", "extended"],
+        "default": "primary-plus-secondary",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "gap": "var(--space-3)",
+      "margin": "var(--space-card) 0 0"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "role": "group",
+        "aria-label": "Hero actions"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "composesFrom": "@quoin/pattern-button-system",
+      "ghostOnImage": "On image-overlay, ghost CTA gets backdrop-filter: blur(8px) + color-mix surface for legibility."
+    }
+  },
+  {
+    "name": "hero-photo-meta",
+    "category": "marketing",
+    "role": "Optional small-print row. Same 3 registers as hero-type-only (disclaimer / social-proof / trust-badges). Color shifts on image-overlay layouts.",
+    "attributes": {
+      "register": {
+        "values": ["disclaimer", "social-proof", "trust-badges"],
+        "default": "disclaimer",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "var(--text-recede)",
+      "colorOnImage": "color-mix(in oklch, var(--text-on-accent) 75%, transparent)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-xs)",
+      "fontWeight": "var(--font-weight-medium)",
+      "lineHeight": "var(--leading-prose)",
+      "margin": "var(--space-3) 0 0"
+    },
+    "structure": {
+      "element": "p"
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "trustBadgeAltText": "Trust-badge images carry alt-text naming the certification (per hero-type-only contract)."
+    }
+  }
+]
