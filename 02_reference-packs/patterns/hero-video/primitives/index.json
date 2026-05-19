@@ -1,0 +1,374 @@
+[
+  {
+    "name": "hero-video-section",
+    "category": "marketing",
+    "role": "Background-video marketing hero. Hero category 5 of 5 — the highest-bandwidth, highest-attention-cost variant. Auto-playing muted looping video behind the canonical hero anatomy. WCAG 2.2.2 (Pause, Stop, Hide) requires user controls for any motion over 5 seconds; the hero-video-controls primitive provides the required pause/play affordance. Reduced-motion: video pauses on initial render and shows poster image instead (host JS handles the toggle).",
+    "attributes": {
+      "register": {
+        "values": ["background-loop", "embed-with-controls"],
+        "default": "background-loop",
+        "specific": true
+      },
+      "size": {
+        "values": ["default", "oversized"],
+        "default": "default",
+        "specific": true
+      },
+      "state": {
+        "values": ["default", "playing", "paused", "video-error", "reduced-motion"],
+        "default": "default",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "var(--surface)",
+      "color": "var(--text)",
+      "padding": "0",
+      "minHeight": "560px",
+      "minHeightOversized": "720px",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "section",
+      "attributes": {
+        "aria-labelledby": "hero-video-headline"
+      }
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<section data-pattern='hero-video-section' data-register='background-loop' data-state='playing' aria-labelledby='hero-headline-id'>",
+        "  <hero-video-media> — <video> with multiple <source> + poster fallback",
+        "  (optional) <hero-video-overlay aria-hidden='true'> — gradient/tint for text contrast",
+        "  <hero-video-controls> — pause/play button (WCAG 2.2.2 required)",
+        "  <div class='inner'>",
+        "    <hero-video-eyebrow>",
+        "    <hero-video-headline id='hero-headline-id'>",
+        "    <hero-video-subhead>",
+        "    <hero-video-actions>",
+        "    <hero-video-meta>"
+      ],
+      "registers": {
+        "background-loop": "Video fills the hero corner-to-corner. Muted, autoplay, loop, playsinline. The 80% choice for marketing flagship video heroes.",
+        "embed-with-controls": "Video rendered inline with native browser controls. Used when the video is the content (e.g., product demo embedded in hero). Controls are always visible; user starts playback explicitly."
+      },
+      "wcag222": {
+        "rule": "WCAG 2.2.2 (Pause, Stop, Hide) — any moving content that starts automatically AND lasts more than 5 seconds AND is presented in parallel with other content MUST have a user-controllable pause mechanism.",
+        "implementation": "hero-video-controls primitive renders a visible pause button. Default state shows pause icon (video is playing); after click, switches to play icon. The button has explicit aria-label naming the action ('Pause hero video' / 'Play hero video'). Focus-visible outline guaranteed.",
+        "nonNegotiable": "This is NOT optional. Auto-playing background video without a pause control is a WCAG 2.2.2 violation. The hero-video-controls primitive is part of the pattern's hard contract — host cannot omit it."
+      },
+      "reducedMotionPolicy": {
+        "rule": "Under prefers-reduced-motion: reduce, the video should NOT auto-play. Initial render shows the poster image; user must explicitly press play to start the video.",
+        "implementation": "Host JS detects window.matchMedia('(prefers-reduced-motion: reduce)').matches on mount and sets data-state='reduced-motion' on the section. CSS hides the playing-state animations; the video element gets paused=true. Poster image fills the video bounds.",
+        "noOpacityHacks": "Don't 'reduce' the video to 50% opacity or similar — pause it. Reduced motion means stop the motion entirely, not soften it."
+      },
+      "audioPolicy": "Background-loop register MUST be muted (browser autoplay requires it). If audio is meaningful to the content, use the embed-with-controls register instead, with native browser audio controls.",
+      "licenseNote": "Video files are host-provided. The specimen uses CSS-animated placeholder fixtures to avoid licensing entanglement. Production hosts supply their own licensed video via <source src='...'>.",
+      "ariaPatterns": {
+        "ariaLabelledby": "<section aria-labelledby='...'> points to the h1's id.",
+        "h1Discipline": "hero-video-headline uses <h1>. Same single-h1 discipline.",
+        "videoAriaLabel": "<video aria-label='...'> describes what the video shows (e.g., 'Time-lapse of designers using Galley Easel'). Used by AT to announce the video's content."
+      }
+    }
+  },
+  {
+    "name": "hero-video-media",
+    "category": "marketing",
+    "role": "Wrapper for the <video> element + its <source>s + poster fallback. Manages object-fit, object-position, and the loading lifecycle. Renders as <video> with autoplay+muted+loop+playsinline attributes for background-loop register; with native controls for embed-with-controls register.",
+    "attributes": {
+      "register": {
+        "values": ["background-loop", "embed-with-controls"],
+        "default": "background-loop",
+        "specific": true
+      },
+      "crop": {
+        "values": ["cover", "contain"],
+        "default": "cover",
+        "specific": true
+      },
+      "focal-point": {
+        "values": ["center", "top", "bottom"],
+        "default": "center",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "var(--surface-recessed)",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "video",
+      "attributes": {
+        "autoplay": "",
+        "muted": "",
+        "loop": "",
+        "playsinline": "",
+        "preload": "metadata"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<video data-pattern='hero-video-media' data-register='background-loop'",
+        "       autoplay muted loop playsinline preload='metadata'",
+        "       poster='hero-poster.jpg'",
+        "       aria-label='Time-lapse of designers using Galley Easel'>",
+        "  <source src='hero.webm' type='video/webm' />",
+        "  <source src='hero.mp4' type='video/mp4' />",
+        "  <!-- Fallback for browsers with no <video> support — poster image still renders -->",
+        "  <img src='hero-poster.jpg' alt='Time-lapse of designers using Galley Easel' />",
+        "</video>"
+      ],
+      "muteIsRequired": "muted attribute is REQUIRED for autoplay. Browsers block auto-playing video with audio unless the user explicitly grants permission. This pattern's contract assumes muted background loops.",
+      "playsinlineIsRequired": "playsinline attribute is REQUIRED on iOS to prevent the video from going fullscreen on play. Without it, mobile Safari shows the video in fullscreen mode.",
+      "preloadMetadataNotAuto": "preload='metadata' (not 'auto') — fetches dimensions + duration but not the full video data on initial load. The autoplay trigger then fetches the rest. Avoids LCP-blocking on slow connections.",
+      "posterImage": "Always provide a poster. The poster is what users see during video load AND when reduced-motion pauses playback AND when the video errors out. The poster IS the LCP candidate for this hero variant — apply <picture>+fetchpriority='high' logic to it (load the poster eagerly).",
+      "videoFormats": "WebM (vp9 codec) as primary; MP4 (h.264) as fallback. WebM is significantly smaller for the same quality. Most modern browsers support WebM; MP4 is universal."
+    }
+  },
+  {
+    "name": "hero-video-overlay",
+    "category": "marketing",
+    "role": "Optional gradient/tint overlay layered over the video for text-on-video contrast. Same 4 registers × 3 tones × 3 strengths as hero-brand-photo's hero-photo-overlay. Always aria-hidden — purely decorative contrast aid.",
+    "attributes": {
+      "register": {
+        "values": ["none", "gradient-from-bottom", "gradient-from-side", "solid-tint"],
+        "default": "gradient-from-bottom",
+        "specific": true
+      },
+      "tone": {
+        "values": ["dark", "light", "accent"],
+        "default": "dark",
+        "specific": true
+      },
+      "strength": {
+        "values": ["subtle", "default", "strong"],
+        "default": "default",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "colorDark": "oklch(0% 0 0)",
+      "colorLight": "oklch(100% 0 0)",
+      "colorAccent": "var(--accent)",
+      "opacitySubtle": "0.2",
+      "opacityDefault": "0.4",
+      "opacityStrong": "0.6"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "aria-hidden": "true"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "block",
+    "meta": {
+      "sameAsBrandPhotoOverlay": "Identical contract to hero-brand-photo's hero-photo-overlay. Implemented independently to keep hero packs self-contained (no cross-hero composition)."
+    }
+  },
+  {
+    "name": "hero-video-controls",
+    "category": "marketing",
+    "role": "REQUIRED WCAG 2.2.2 pause control for auto-playing background-loop video. Renders as a small button positioned in a corner of the hero (default: bottom-right). Shows pause icon when video is playing, play icon when paused. Optional secondary mute toggle (for when audio is also enabled in the embed-with-controls register, though background-loop is always muted).",
+    "attributes": {
+      "position": {
+        "values": ["bottom-right", "bottom-left", "top-right", "top-left"],
+        "default": "bottom-right",
+        "specific": true
+      },
+      "show-mute-toggle": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "color-mix(in oklch, var(--surface-elevated) 70%, transparent)",
+      "color": "var(--text-emphasis)",
+      "borderColor": "color-mix(in oklch, var(--border) 60%, transparent)",
+      "borderWidth": "var(--border-width-sm)",
+      "padding": "var(--space-2) var(--space-3)",
+      "borderRadius": "var(--radius-pill)",
+      "fontSize": "var(--type-size-xs)",
+      "fontWeight": "var(--font-weight-semibold)",
+      "gap": "var(--space-1)",
+      "backdropFilter": "blur(8px)",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "button",
+      "attributes": {
+        "type": "button",
+        "aria-label": "Pause hero video"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "ariaLabelStateAware": "aria-label switches based on video state: 'Pause hero video' when playing, 'Play hero video' when paused. Update on toggle.",
+      "iconStateAware": "The icon inside also switches — pause glyph when playing, play glyph when paused. Both icons are aria-hidden (label carries meaning).",
+      "alwaysVisible": "The control is ALWAYS visible (not on-hover-only). WCAG 2.2.2 requires the control be discoverable without hover; non-discoverable controls fail the criterion.",
+      "positioning": "Fixed within the hero-section's coordinate space, not the viewport. Default bottom-right at 24px inset.",
+      "keyboardActivation": "Enter and Space activate. focus-visible outline visible.",
+      "ariaPatterns": {
+        "wcag222Compliance": "This primitive is the WCAG 2.2.2 pause/stop control. Pattern-level non-negotiable.",
+        "iconAriaHidden": "Icon SVGs are aria-hidden; aria-label on the button carries meaning."
+      }
+    }
+  },
+  {
+    "name": "hero-video-eyebrow",
+    "category": "marketing",
+    "role": "Pre-heading above the headline. Same anatomy as hero-type-only's hero-eyebrow. Color shifts to --text-on-accent on video backgrounds.",
+    "attributes": {
+      "tone": {
+        "values": ["neutral", "accent", "on-video"],
+        "default": "on-video",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "var(--text-recede)",
+      "colorAccent": "var(--accent)",
+      "colorOnVideo": "var(--text-on-accent)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-sm)",
+      "fontWeight": "var(--font-weight-semibold)",
+      "letterSpacing": "var(--tracking-wide)",
+      "textTransform": "uppercase",
+      "lineHeight": "var(--leading-tight)",
+      "margin": "0 0 var(--space-3)"
+    },
+    "structure": {
+      "element": "p"
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "defaultOnVideo": "Default tone for hero-video is 'on-video' (--text-on-accent) since the video is the background. Switch to 'neutral' only if the overlay is light-toned."
+    }
+  },
+  {
+    "name": "hero-video-headline",
+    "category": "marketing",
+    "role": "Display headline. h1 by default. Color defaults to --text-on-accent (white) for visibility against video backgrounds. Optional text-shadow for guaranteed contrast on busy video frames.",
+    "attributes": {
+      "size": {
+        "values": ["default", "oversized"],
+        "default": "default",
+        "specific": true
+      },
+      "shadow": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "var(--text-on-accent)",
+      "fontFamily": "var(--font-display)",
+      "fontSizeDefault": "var(--type-size-3xl)",
+      "fontSizeOversized": "var(--type-size-4xl)",
+      "fontWeight": "var(--font-weight-semibold)",
+      "lineHeight": "var(--leading-display)",
+      "letterSpacing": "var(--tracking-tight)",
+      "margin": "0",
+      "maxWidth": "22ch",
+      "textShadow": "none",
+      "textShadowSubtle": "0 1px 2px oklch(0% 0 0 / 0.4)",
+      "textShadowStrong": "0 2px 8px oklch(0% 0 0 / 0.6)"
+    },
+    "structure": {
+      "element": "h1"
+    },
+    "children": "phrasing-content",
+    "scope": "block",
+    "meta": {
+      "textWrapBalance": "text-wrap: balance applies.",
+      "textShadowPolicy": "Default shadow=false relies on the overlay primitive for contrast. shadow=true adds a subtle text-shadow for guaranteed contrast on overlay='none' video heroes. Use sparingly — prefer overlay."
+    }
+  },
+  {
+    "name": "hero-video-subhead",
+    "category": "marketing",
+    "role": "Supporting subtitle. Color defaults to a softened --text-on-accent (90% opacity). Same contract as hero-photo-subhead.",
+    "attributes": {},
+    "tokens": {
+      "color": "color-mix(in oklch, var(--text-on-accent) 90%, transparent)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-lg)",
+      "fontWeight": "var(--font-weight-medium)",
+      "lineHeight": "var(--leading-prose)",
+      "margin": "var(--space-3) 0 0",
+      "maxWidth": "60ch"
+    },
+    "structure": {
+      "element": "p"
+    },
+    "children": "phrasing-content",
+    "scope": "block",
+    "meta": {
+      "textWrapPretty": "text-wrap: pretty for orphan-avoidance."
+    }
+  },
+  {
+    "name": "hero-video-actions",
+    "category": "marketing",
+    "role": "CTA cluster composing button-system. Ghost-intent gets backdrop-blur + semi-transparent surface against video. Same technique as hero-gradient-mesh and hero-brand-photo.",
+    "attributes": {
+      "register": {
+        "values": ["primary-only", "primary-plus-secondary", "extended"],
+        "default": "primary-plus-secondary",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "gap": "var(--space-3)",
+      "margin": "var(--space-card) 0 0"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "role": "group",
+        "aria-label": "Hero actions"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "composesFrom": "@quoin/pattern-button-system",
+      "ghostOnVideo": "Ghost CTA gets backdrop-filter: blur(8px) + color-mix(in oklch, --surface-elevated 30%, transparent) for legibility against motion."
+    }
+  },
+  {
+    "name": "hero-video-meta",
+    "category": "marketing",
+    "role": "Optional small-print row. Same 3 registers as hero-type-only's hero-meta. Color softened against video background.",
+    "attributes": {
+      "register": {
+        "values": ["disclaimer", "social-proof", "trust-badges"],
+        "default": "disclaimer",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "color-mix(in oklch, var(--text-on-accent) 75%, transparent)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-xs)",
+      "fontWeight": "var(--font-weight-medium)",
+      "lineHeight": "var(--leading-prose)",
+      "margin": "var(--space-3) 0 0"
+    },
+    "structure": {
+      "element": "p"
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "trustBadgeAltText": "Trust-badge images carry alt-text naming the certification (per hero-type-only contract)."
+    }
+  }
+]

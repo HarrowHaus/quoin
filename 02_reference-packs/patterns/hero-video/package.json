@@ -1,0 +1,24 @@
+{
+  "name": "@quoin/pattern-hero-video",
+  "version": "1.0.0",
+  "description": "P1 background-video hero. Autoplay muted loop + WCAG 2.2.2 pause control. Hero category 5 of 5. Composes button-system. Reduced-motion default-paused.",
+  "license": "MIT",
+  "main": "./quoin.pack.json",
+  "files": [
+    "quoin.pack.json",
+    "primitives/",
+    "examples/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "pattern", "hero", "marketing", "video", "p1"],
+  "peerDependencies": {
+    "@quoin/tokens-baseline": "^0.1.0",
+    "@quoin/pattern-button-system": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "02_reference-packs/patterns/hero-video"
+  }
+}
