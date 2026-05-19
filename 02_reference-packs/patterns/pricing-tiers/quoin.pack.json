@@ -1,0 +1,27 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/pattern-pricing-tiers",
+  "version": "1.0.0",
+  "type": "pattern",
+  "quoinVersion": "^0.1.0",
+  "description": "Pricing-tiers pattern — 4 tier variants × 3 grid layouts + billing toggle + comparison matrix. First pattern to compose sibling packs (button-system + form-fields + feature-grid).",
+  "category": "marketing",
+  "variant": "system",
+  "exports": {
+    "primitives": "./primitives/index.json"
+  },
+  "states": ["default", "empty", "loading", "comparison-mode", "checkout-initiated"],
+  "microStates": ["default", "hover", "active", "focus", "focus-visible", "disabled", "loading", "selected"],
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/patterns/pricing-tiers",
+    "tags": ["pricing", "marketing", "tier", "billing", "p0"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0",
+    "@quoin/pattern-button-system": "^1.0.0",
+    "@quoin/pattern-form-fields": "^1.0.0",
+    "@quoin/pattern-feature-grid": "^1.0.0"
+  }
+}

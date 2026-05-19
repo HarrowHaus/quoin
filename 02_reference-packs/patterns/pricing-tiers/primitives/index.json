@@ -1,0 +1,191 @@
+[
+  {
+    "name": "pricing-tier",
+    "category": "marketing",
+    "role": "Single pricing-tier card. Composes from sibling pattern packs: <action-button> from @quoin/pattern-button-system for the tier CTA; <form-control type='switch'> from @quoin/pattern-form-fields for in-card option toggles when present. Four canonical variants — starter (free, low-commitment), default (paid baseline), featured (highlighted 'most popular' tier with accent border + 1px ring), enterprise (custom CTA, 'Talk to sales' instead of price). All 6 states + 8 microstates.",
+    "attributes": {
+      "variant": {
+        "values": ["starter", "default", "featured", "enterprise"],
+        "default": "default",
+        "specific": true
+      },
+      "billing": {
+        "values": ["monthly", "annual"],
+        "default": "monthly",
+        "specific": true
+      },
+      "state": {
+        "values": ["default", "loading", "selected", "checkout-initiated"],
+        "default": "default",
+        "specific": true
+      },
+      "density": {
+        "values": ["normal", "dense"],
+        "default": "normal"
+      },
+      "weight": {
+        "values": ["normal", "emphasize"],
+        "default": "normal"
+      }
+    },
+    "tokens": {
+      "background": "--surface-elevated",
+      "backgroundFeatured": "--surface",
+      "color": "--text",
+      "tierNameColor": "--text-emphasis",
+      "priceColor": "--text-emphasis",
+      "priceUnitColor": "--text-recede",
+      "borderColor": "--border",
+      "borderColorFeatured": "--accent",
+      "borderWidth": "--border-width-sm",
+      "borderWidthFeatured": "--border-width-md",
+      "borderRadius": "--radius-card",
+      "padding": "--space-panel",
+      "gap": "--space-5",
+      "fontFamilyTierName": "--font-sans",
+      "fontFamilyPrice": "--font-display",
+      "fontFamilyBody": "--font-sans",
+      "fontFamilyFeature": "--font-sans",
+      "fontSizeTierName": "--type-size-sm",
+      "fontSizePrice": "--type-size-3xl",
+      "fontSizeUnit": "--type-size-sm",
+      "fontSizeBody": "--type-size-sm",
+      "fontSizeFeature": "--type-size-sm",
+      "fontWeightTierName": "--font-weight-medium",
+      "fontWeightPrice": "--font-weight-semibold",
+      "lineHeightPrice": "--leading-tight",
+      "lineHeightBody": "--leading-prose",
+      "letterSpacingTierName": "--tracking-wide",
+      "tabularNumerics": "tabular-nums",
+      "transition": "--transition-default",
+      "shadow": "--shadow-sm",
+      "shadowFeatured": "--shadow-md"
+    },
+    "structure": {
+      "element": "article"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<article> — the tier card; aria-labelledby points to the tier-name <h3>",
+        "<header> — tier name + tagline + optional 'most popular' badge",
+        "<h3> — tier name (e.g. 'Pro', 'Team', 'Enterprise'); rendered tracking-wide uppercase at type-size-sm",
+        "<div class='price'> — the price block; <span class='amount'> + <span class='unit'> + <span class='cadence'>. Tabular numerics enforced.",
+        "<p class='tagline'> — short value-proposition sentence below the price",
+        "<ul class='features'> — bullet list of included features; each <li> opens with a checkmark or X icon (X for excluded features in a comparison view)",
+        "<footer> — the CTA. Composes <action-button> from @quoin/pattern-button-system with intent=primary for featured tier, intent=secondary for others, intent=link for enterprise 'Talk to sales'."
+      ],
+      "variants": {
+        "starter": "Free / $0 tier. CTA is 'Get started' (intent=secondary). No featured highlight. Minimal feature list. Tagline emphasises 'no card required'.",
+        "default": "Paid baseline tier. CTA is 'Start free trial' (intent=secondary). Standard card chrome. Full feature list.",
+        "featured": "Highlighted 'most popular' tier. CTA is 'Start free trial' (intent=primary). Accent-coloured border at --border-width-md plus 1px outer ring via box-shadow. Optional 'MOST POPULAR' badge in header.",
+        "enterprise": "Custom pricing tier. No numeric price; replace amount block with 'Custom' or 'Let's talk'. CTA is 'Talk to sales' (intent=link or intent=primary depending on conversion strategy). Tagline emphasises white-glove onboarding + SLA + dedicated CSM."
+      },
+      "billingCadence": "When billing=monthly the price block shows '$X / mo' with tabular numerics. When billing=annual the price block shows '$X / mo' with a subscript-style '$Y billed annually' caption below. Annual usually shows 17-20% savings vs monthly; surface as 'Save 17% · billed annually' note when toggling.",
+      "comparisonMode": "When the parent pricing-grid has state='comparison-mode', tiers render in a comparison-table layout instead of card-grid. Each tier becomes a column; features become rows. Tier card chrome (border, padding, shadow) recedes; the row structure carries the visual weight.",
+      "loadingPattern": "skeleton lines: 1 short line for tier name, 1 long line for price, 3-5 lines for features, 1 line for CTA. data-state=loading + aria-busy=true.",
+      "checkoutInitiatedPattern": "After tier CTA click. The CTA shows loading state (delegates to action-button's [aria-busy] microstate). Other tier CTAs disable to prevent double-submission. aria-live='polite' region announces 'Redirecting to checkout…'.",
+      "ariaPatterns": {
+        "tierLabelledby": "<article aria-labelledby='<tier-name-id>'> wires the entire tier to its name heading",
+        "mostPopularBadge": "If present, badge has aria-label='Most popular plan' — text content is the visual treatment ('MOST POPULAR'), aria-label is what screen readers announce in context",
+        "comparisonTableSemantics": "In comparison-mode, render as semantic <table> with <thead> tiers + <tbody> feature rows. Don't fake table structure with divs.",
+        "annualMonthlyToggle": "The billing toggle uses <form-control type='switch'> from pattern-form-fields. role='switch' + aria-checked. Toggle change announces price changes via aria-live region."
+      }
+    }
+  },
+  {
+    "name": "pricing-grid",
+    "category": "marketing",
+    "role": "Composition primitive arranging multiple pricing-tier cards. Three layout modes: 3-tier (canonical starter+pro+enterprise; the highlighted middle tier is featured), 4-tier (starter+pro+team+enterprise; second-from-left or second-from-right is featured), table (comparison matrix with tiers as columns + features as rows). Inherits density from parent.",
+    "attributes": {
+      "layout": {
+        "values": ["3-tier", "4-tier", "table"],
+        "default": "3-tier",
+        "specific": true
+      },
+      "billing": {
+        "values": ["monthly", "annual"],
+        "default": "monthly",
+        "specific": true
+      },
+      "density": {
+        "values": ["normal", "dense"],
+        "default": "normal"
+      },
+      "state": {
+        "values": ["default", "comparison-mode", "loading"],
+        "default": "default",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "gap": "--space-card",
+      "background": "--surface",
+      "color": "--text",
+      "padding": "--space-panel"
+    },
+    "structure": {
+      "element": "section",
+      "attributes": {
+        "aria-label": "Pricing plans"
+      }
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "layouts": {
+        "3-tier": "grid-template-columns: repeat(3, 1fr) at ≥1024px; 1fr below 1024px (vertical stack). Featured tier visually elevated via translateY(-8px) at ≥1024px, returning to flat on mobile.",
+        "4-tier": "grid-template-columns: repeat(4, 1fr) at ≥1280px; repeat(2, 1fr) at 768–1279px; 1fr below 768px.",
+        "table": "rendered as <table> with thead (tier headers) + tbody (feature rows). Sticky thead during scroll. Features grouped by category via <tbody> + caption rows."
+      },
+      "billingToggleHost": "pricing-grid hosts the billing toggle in its <header> region. The toggle is a <form-control type='switch'> from @quoin/pattern-form-fields. When toggled, all child pricing-tier cards' billing attribute changes synchronously; aria-live announces the cadence change."
+    }
+  },
+  {
+    "name": "billing-toggle",
+    "category": "marketing",
+    "role": "Annual/monthly billing cadence switcher. Composition wrapper around the form-fields pattern's <form-control type='switch'> primitive. Two visual treatments — switch (toggle UI per WAI-ARIA 1.3) and segmented (button-group from button-system pattern in connected register). The segmented variant uses radio semantics; the switch variant uses checkbox-with-role-switch semantics.",
+    "attributes": {
+      "variant": {
+        "values": ["switch", "segmented"],
+        "default": "switch",
+        "specific": true
+      },
+      "current": {
+        "values": ["monthly", "annual"],
+        "default": "monthly",
+        "specific": true
+      },
+      "save-label": {
+        "values": [],
+        "default": "Save 17%",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "--surface-elevated",
+      "color": "--text",
+      "savingsColor": "--success",
+      "padding": "--space-3",
+      "gap": "--space-3"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "role": "group",
+        "aria-label": "Billing cadence"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "composesFrom": "@quoin/pattern-form-fields (switch widget) OR @quoin/pattern-button-system (button-group connected register)",
+      "savingsBadge": "When current=annual, render a small 'Save 17%' badge next to the toggle in --success colour. The savings figure should be calculated from the actual tier pricing, not hardcoded.",
+      "ariaPatterns": {
+        "switchVariant": "role='switch' + aria-checked='true|false' on the inner <input>. Change announced via aria-live='polite'.",
+        "segmentedVariant": "role='radiogroup' on the wrapper; role='radio' + aria-checked on each button. Use the button-group connected register from pattern-button-system."
+      }
+    }
+  }
+]

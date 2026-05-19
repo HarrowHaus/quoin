@@ -1,0 +1,1198 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>@quoin/pattern-pricing-tiers — specimen</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=JetBrains+Mono:wght@100..800&display=swap">
+
+  <style>
+    :root {
+      --surface: oklch(98% 0 0);
+      --surface-elevated: oklch(100% 0 0);
+      --surface-recessed: oklch(96% 0 0);
+      --text: oklch(30% 0 0);
+      --text-emphasis: oklch(15% 0 0);
+      --text-recede: oklch(50% 0 0);
+      --text-disabled: oklch(72% 0 0);
+      --text-on-accent: oklch(100% 0 0);
+      --accent: oklch(20% 0 0);
+      --accent-hover: oklch(28% 0 0);
+      --accent-active: oklch(12% 0 0);
+      --accent-recede: oklch(94% 0 0);
+      --critical: oklch(55% 0.22 25);
+      --success: oklch(50% 0.18 155);
+      --success-soft: oklch(95% 0.05 155);
+      --warning: oklch(75% 0.18 80);
+
+      --border: oklch(88% 0 0);
+      --border-emphasis: oklch(20% 0 0);
+      --border-recede: oklch(94% 0 0);
+      --border-width-sm: 1px;
+      --border-width-md: 2px;
+
+      --focus-ring: oklch(55% 0.22 260);
+      --focus-ring-width: 2px;
+      --focus-ring-offset: 2px;
+      --shadow-focus: 0 0 0 var(--focus-ring-offset) var(--surface-elevated), 0 0 0 calc(var(--focus-ring-offset) + var(--focus-ring-width)) var(--focus-ring);
+
+      --space-1: 4px;
+      --space-2: 6px;
+      --space-3: 8px;
+      --space-4: 12px;
+      --space-5: 16px;
+      --space-6: 20px;
+      --space-8: 32px;
+      --space-card: 24px;
+      --space-panel: 32px;
+
+      --radius-sm: 4px;
+      --radius-md: 6px;
+      --radius-card: 12px;
+      --radius-pill: 999px;
+
+      --font-sans: 'Inter Variable', 'Inter', system-ui, sans-serif;
+      --font-display: 'Inter Variable', 'Inter', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+      --type-size-xs: 0.75rem;
+      --type-size-sm: 0.875rem;
+      --type-size-md: 1rem;
+      --type-size-lg: 1.125rem;
+      --type-size-xl: 1.5rem;
+      --type-size-2xl: 2rem;
+      --type-size-3xl: 2.5rem;
+      --type-size-4xl: 3.5rem;
+      --font-weight-regular: 400;
+      --font-weight-medium: 500;
+      --font-weight-semibold: 600;
+      --leading-tight: 1.15;
+      --leading-prose: 1.55;
+      --leading-display: 1.05;
+      --tracking-tight: -0.01em;
+      --tracking-normal: 0;
+      --tracking-wide: 0.08em;
+
+      --motion-fast: 120ms;
+      --motion-normal: 160ms;
+      --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+      --transition-default: all var(--motion-normal) var(--ease-standard);
+
+      --shadow-tint: oklch(0% 0 0 / 0.06);
+      --shadow-sm: 0 1px 2px 0 var(--shadow-tint);
+      --shadow-md: 0 4px 6px -1px var(--shadow-tint), 0 2px 4px -1px var(--shadow-tint);
+      --shadow-lg: 0 10px 25px -5px var(--shadow-tint), 0 6px 12px -3px var(--shadow-tint);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --surface: oklch(10% 0 0);
+        --surface-elevated: oklch(15% 0 0);
+        --surface-recessed: oklch(8% 0 0);
+        --text: oklch(85% 0 0);
+        --text-emphasis: oklch(98% 0 0);
+        --text-recede: oklch(60% 0 0);
+        --text-disabled: oklch(35% 0 0);
+        --text-on-accent: oklch(10% 0 0);
+        --accent: oklch(95% 0 0);
+        --accent-recede: oklch(20% 0 0);
+        --success-soft: oklch(18% 0.06 155);
+        --border: oklch(20% 0 0);
+        --shadow-tint: oklch(0% 0 0 / 0.4);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      :root { --motion-fast: 0ms; --motion-normal: 0ms; --transition-default: none; }
+      * { animation: none !important; }
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: var(--space-panel);
+      background: var(--surface);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-md);
+      line-height: var(--leading-prose);
+      font-feature-settings: 'kern', 'liga', 'calt';
+    }
+
+    .page-header { max-width: 1280px; margin: 0 auto var(--space-8); }
+    h1 { margin: 0 0 var(--space-3); font-size: var(--type-size-3xl); font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-tight); line-height: var(--leading-tight); color: var(--text-emphasis); }
+    h2 { margin: var(--space-8) 0 var(--space-4); font-size: var(--type-size-xl); font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-tight); line-height: var(--leading-tight); color: var(--text-emphasis); }
+    h3 { margin: 0; }
+    p { margin: 0; }
+    .lede { color: var(--text-recede); max-width: 64ch; }
+    main { max-width: 1280px; margin: 0 auto; }
+    section.demo { margin-bottom: var(--space-8); padding: var(--space-panel); background: var(--surface-elevated); border: var(--border-width-sm) solid var(--border); border-radius: var(--radius-card); }
+    .demo-header { display: flex; flex-direction: column; gap: var(--space-2); margin-bottom: var(--space-6); }
+    .demo-header h2 { margin: 0; }
+    .specimen-note { font-family: var(--font-mono); font-size: var(--type-size-xs); color: var(--text-recede); margin-top: var(--space-4); letter-spacing: 0.04em; }
+
+    /* ──────────────────────────────────────────────────────────────────
+       action-button — composed from @quoin/pattern-button-system
+       Inlined here for the static specimen; in a real consumer the
+       pattern pack ships its own CSS.
+       ────────────────────────────────────────────────────────────────── */
+    .action-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      min-height: 44px;
+      min-width: 44px;
+      width: 100%;
+      padding: var(--space-3) var(--space-4);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-sm);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--leading-tight);
+      border: var(--border-width-sm) solid transparent;
+      border-radius: var(--radius-md);
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
+      transition: var(--transition-default);
+      text-decoration: none;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+    .action-button[data-intent="primary"] {
+      background: var(--accent);
+      color: var(--text-on-accent);
+      border-color: var(--accent);
+    }
+    .action-button[data-intent="primary"]:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+    .action-button[data-intent="secondary"] {
+      background: var(--surface-elevated);
+      color: var(--text-emphasis);
+      border-color: var(--border);
+    }
+    .action-button[data-intent="secondary"]:hover { background: var(--surface-recessed); border-color: var(--border-emphasis); }
+    .action-button[data-intent="link"] {
+      background: transparent;
+      color: var(--accent);
+      padding: var(--space-2) 0;
+      min-height: 36px;
+      min-width: auto;
+      border-radius: 0;
+    }
+    .action-button[data-intent="link"]:hover { text-decoration: underline; text-underline-offset: 3px; }
+    .action-button:focus-visible { outline: none; box-shadow: var(--shadow-focus); }
+    .action-button:disabled,
+    .action-button[aria-disabled="true"] { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+    .action-button[aria-busy="true"] {
+      cursor: progress;
+      color: transparent;
+      position: relative;
+    }
+    .action-button[aria-busy="true"]::after {
+      content: '';
+      position: absolute;
+      inset: 50% auto auto 50%;
+      width: 14px;
+      height: 14px;
+      margin: -7px 0 0 -7px;
+      border: 2px solid currentColor;
+      border-top-color: transparent;
+      border-radius: 999px;
+      animation: spin 600ms linear infinite;
+      color: var(--text-on-accent);
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ─── button-group (connected register) — for segmented billing toggle ─── */
+    .button-group {
+      display: inline-flex;
+      gap: 0;
+      padding: var(--space-1);
+      background: var(--surface-recessed);
+      border-radius: var(--radius-md);
+    }
+    .button-group .action-button {
+      width: auto;
+      min-width: 0;
+      min-height: 36px;
+      padding: var(--space-2) var(--space-4);
+      border-radius: var(--radius-sm);
+      background: transparent;
+      color: var(--text-recede);
+      border: none;
+    }
+    .button-group .action-button[aria-pressed="true"] {
+      background: var(--surface-elevated);
+      color: var(--text-emphasis);
+      box-shadow: var(--shadow-sm);
+    }
+    .button-group .action-button:hover {
+      color: var(--text-emphasis);
+    }
+
+    /* ──────────────────────────────────────────────────────────────────
+       form-control type="switch" — composed from @quoin/pattern-form-fields
+       Used for the switch-variant billing toggle.
+       ────────────────────────────────────────────────────────────────── */
+    .switch-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-sm);
+      color: var(--text);
+    }
+    .switch-toggle input[type="checkbox"][role="switch"] {
+      appearance: none;
+      width: 36px;
+      height: 20px;
+      border-radius: 999px;
+      background: var(--border);
+      border: none;
+      cursor: pointer;
+      position: relative;
+      transition: var(--transition-default);
+      flex: 0 0 36px;
+    }
+    .switch-toggle input[type="checkbox"][role="switch"]::before {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 16px;
+      height: 16px;
+      background: var(--surface-elevated);
+      border-radius: 50%;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-default);
+    }
+    .switch-toggle input[type="checkbox"][role="switch"]:checked { background: var(--accent); }
+    .switch-toggle input[type="checkbox"][role="switch"]:checked::before { transform: translateX(16px); }
+    .switch-toggle input[type="checkbox"][role="switch"]:focus-visible { box-shadow: var(--shadow-focus); }
+    .switch-toggle .toggle-label { font-weight: var(--font-weight-medium); color: var(--text-emphasis); }
+    .switch-toggle .savings-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: var(--space-1) var(--space-2);
+      background: var(--success-soft);
+      color: var(--success);
+      font-size: var(--type-size-xs);
+      font-weight: var(--font-weight-medium);
+      border-radius: var(--radius-pill);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ──────────────────────────────────────────────────────────────────
+       billing-toggle (this pattern's own primitive — wraps the switch
+       or button-group from siblings)
+       ────────────────────────────────────────────────────────────────── */
+    .billing-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-4);
+      margin-bottom: var(--space-6);
+      flex-wrap: wrap;
+    }
+
+    /* ──────────────────────────────────────────────────────────────────
+       pricing-tier primitive
+       ────────────────────────────────────────────────────────────────── */
+    .pricing-tier {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+      margin: 0;
+      padding: var(--space-panel);
+      background: var(--surface-elevated);
+      color: var(--text);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-default);
+      font-variant-numeric: tabular-nums;
+      position: relative;
+    }
+    .pricing-tier:hover { box-shadow: var(--shadow-md); }
+    .pricing-tier > header {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .pricing-tier h3 {
+      font-family: var(--font-sans);
+      font-size: var(--type-size-sm);
+      font-weight: var(--font-weight-medium);
+      color: var(--text-emphasis);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      line-height: 1;
+    }
+    .pricing-tier .badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: var(--space-1) var(--space-3);
+      background: var(--accent);
+      color: var(--text-on-accent);
+      font-family: var(--font-mono);
+      font-size: var(--type-size-xs);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      border-radius: var(--radius-pill);
+      white-space: nowrap;
+    }
+    .pricing-tier .price {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-1);
+      font-family: var(--font-display);
+    }
+    .pricing-tier .price .amount {
+      font-size: var(--type-size-4xl);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-emphasis);
+      letter-spacing: var(--tracking-tight);
+      line-height: 1;
+    }
+    .pricing-tier .price .unit {
+      font-size: var(--type-size-sm);
+      color: var(--text-recede);
+      font-weight: var(--font-weight-regular);
+      font-family: var(--font-sans);
+    }
+    .pricing-tier .billing-note {
+      font-family: var(--font-mono);
+      font-size: var(--type-size-xs);
+      color: var(--text-recede);
+      letter-spacing: 0.02em;
+      min-height: 1.2em;
+    }
+    .pricing-tier .tagline {
+      font-size: var(--type-size-sm);
+      color: var(--text);
+      line-height: var(--leading-prose);
+      max-width: none;
+    }
+    .pricing-tier .features {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      flex: 1;
+    }
+    .pricing-tier .features li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      font-size: var(--type-size-sm);
+      line-height: var(--leading-prose);
+      color: var(--text);
+    }
+    .pricing-tier .features li .check,
+    .pricing-tier .features li .x {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      flex: 0 0 18px;
+      margin-top: 2px;
+      border-radius: 50%;
+    }
+    .pricing-tier .features li .check {
+      background: var(--success-soft);
+      color: var(--success);
+    }
+    .pricing-tier .features li .x {
+      background: var(--surface-recessed);
+      color: var(--text-disabled);
+    }
+    .pricing-tier .features li .check svg,
+    .pricing-tier .features li .x svg { width: 12px; height: 12px; }
+    .pricing-tier .features li.excluded { color: var(--text-recede); }
+    .pricing-tier .features li small {
+      display: block;
+      color: var(--text-recede);
+      font-size: var(--type-size-xs);
+      margin-top: 2px;
+    }
+
+    /* ─── variants ─── */
+    .pricing-tier[data-variant="featured"] {
+      border-width: var(--border-width-md);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent), var(--shadow-md);
+      background: var(--surface);
+      transform: translateY(0);
+    }
+    @media (min-width: 1024px) {
+      .pricing-tier[data-variant="featured"] {
+        transform: translateY(-8px);
+        box-shadow: 0 0 0 1px var(--accent), var(--shadow-lg);
+      }
+    }
+    .pricing-tier[data-variant="starter"] .price .amount { font-size: var(--type-size-3xl); }
+    .pricing-tier[data-variant="enterprise"] .price {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+    }
+    .pricing-tier[data-variant="enterprise"] .price .amount {
+      font-size: var(--type-size-2xl);
+      font-family: var(--font-sans);
+      font-weight: var(--font-weight-semibold);
+    }
+
+    /* ─── microstates ─── */
+    .pricing-tier[data-mockstate~="hover"] { box-shadow: var(--shadow-md); }
+    .pricing-tier[data-mockstate~="selected"],
+    .pricing-tier[aria-selected="true"] {
+      border-color: var(--accent);
+      border-width: var(--border-width-md);
+      box-shadow: 0 0 0 1px var(--accent), var(--shadow-md);
+    }
+    .pricing-tier[data-mockstate~="disabled"],
+    .pricing-tier[aria-disabled="true"] {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .pricing-tier[data-mockstate~="loading"],
+    .pricing-tier[aria-busy="true"] {
+      cursor: progress;
+    }
+    .pricing-tier .skeleton {
+      display: block;
+      height: 14px;
+      background: linear-gradient(90deg, var(--surface-recessed), var(--border-recede), var(--surface-recessed));
+      background-size: 200% 100%;
+      border-radius: var(--radius-sm);
+      animation: skel 1400ms ease-in-out infinite;
+    }
+    .pricing-tier .skeleton + .skeleton { margin-top: var(--space-2); }
+    .pricing-tier .skeleton.price { height: 48px; width: 50%; margin: var(--space-3) 0; }
+    .pricing-tier .skeleton.feature { width: 80%; }
+    .pricing-tier .skeleton.feature:nth-of-type(odd) { width: 70%; }
+    @keyframes skel {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* ──────────────────────────────────────────────────────────────────
+       pricing-grid layouts
+       ────────────────────────────────────────────────────────────────── */
+    .pricing-grid {
+      display: grid;
+      gap: var(--space-card);
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      padding-top: var(--space-3);
+    }
+    .pricing-grid[data-layout="3-tier"] { grid-template-columns: repeat(3, 1fr); }
+    .pricing-grid[data-layout="4-tier"] { grid-template-columns: repeat(4, 1fr); }
+    @media (max-width: 1279px) {
+      .pricing-grid[data-layout="4-tier"] { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 1023px) {
+      .pricing-grid[data-layout="3-tier"],
+      .pricing-grid[data-layout="4-tier"] { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+    }
+
+    /* ─── table layout (comparison matrix) ─── */
+    .pricing-grid[data-layout="table"] {
+      display: block;
+      overflow-x: auto;
+      padding-top: 0;
+    }
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--type-size-sm);
+    }
+    .comparison-table th,
+    .comparison-table td {
+      padding: var(--space-3) var(--space-4);
+      text-align: left;
+      border-bottom: var(--border-width-sm) solid var(--border-recede);
+      font-variant-numeric: tabular-nums;
+    }
+    .comparison-table thead th {
+      vertical-align: top;
+      background: var(--surface);
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+    .comparison-table thead .tier-header {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      padding-bottom: var(--space-3);
+    }
+    .comparison-table thead .tier-header h3 {
+      font-size: var(--type-size-sm);
+      font-weight: var(--font-weight-medium);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--text-emphasis);
+    }
+    .comparison-table thead .tier-header .price-mini {
+      font-family: var(--font-display);
+      font-size: var(--type-size-xl);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-emphasis);
+    }
+    .comparison-table thead .tier-header .featured-mark {
+      align-self: flex-start;
+      padding: 2px var(--space-2);
+      background: var(--accent);
+      color: var(--text-on-accent);
+      font-size: var(--type-size-xs);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      border-radius: var(--radius-pill);
+    }
+    .comparison-table tbody .category-row {
+      background: var(--surface-recessed);
+      font-family: var(--font-mono);
+      font-size: var(--type-size-xs);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--text-emphasis);
+      font-weight: var(--font-weight-semibold);
+    }
+    .comparison-table tbody td.feature-name { color: var(--text); font-weight: var(--font-weight-medium); }
+    .comparison-table tbody td.included { color: var(--success); text-align: center; }
+    .comparison-table tbody td.excluded { color: var(--text-disabled); text-align: center; }
+    .comparison-table tbody td.value { text-align: center; }
+
+    /* ──────────────────────────────────────────────────────────────────
+       page-level layout
+       ────────────────────────────────────────────────────────────────── */
+    .pricing-intro {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-4);
+      text-align: center;
+      margin-bottom: var(--space-8);
+    }
+    .pricing-intro h2 {
+      margin: 0;
+      font-size: var(--type-size-2xl);
+      letter-spacing: var(--tracking-tight);
+    }
+    .pricing-intro p {
+      max-width: 56ch;
+      color: var(--text-recede);
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <h1>@quoin/pattern-pricing-tiers — specimen</h1>
+    <p class="lede">Four tier variants (starter / default / featured / enterprise) × three grid layouts (3-tier / 4-tier / table) + billing-toggle (switch + segmented variants). <strong>First pattern in the catalog to compose from sibling pattern packs</strong> — <code>action-button</code> from <code>@quoin/pattern-button-system</code> for tier CTAs and segmented billing toggle; <code>form-control type="switch"</code> from <code>@quoin/pattern-form-fields</code> for the switch billing toggle. The umbrella product across all examples is <strong>Galley</strong> — the operator's locked Site 3 fictional multi-tool SaaS.</p>
+  </header>
+
+  <main>
+
+    <!-- ────────── 3-tier canonical layout, monthly ────────── -->
+    <section class="demo">
+      <header class="demo-header">
+        <h2>Layout: 3-tier · canonical marketing pricing row</h2>
+        <p class="lede">Starter (free) + Pro (featured) + Enterprise. The featured middle tier lifts 8px on desktop, returns to flat on mobile. Composes <code>action-button</code> from <code>pattern-button-system</code> for tier CTAs.</p>
+      </header>
+
+      <div class="pricing-intro">
+        <h2>Choose your Galley plan</h2>
+        <p>Five tools, one subscription. Start free; upgrade when your team or your storage grows.</p>
+
+        <div class="billing-toggle" role="group" aria-label="Billing cadence">
+          <span class="switch-toggle">
+            <span class="toggle-label" id="billing-label-monthly">Monthly</span>
+            <input type="checkbox" role="switch" id="billing-switch-1" aria-checked="false" aria-labelledby="billing-label-monthly billing-label-annual">
+            <span class="toggle-label" id="billing-label-annual">Annual</span>
+            <span class="savings-badge">Save 17%</span>
+          </span>
+        </div>
+      </div>
+
+      <ul class="pricing-grid" data-layout="3-tier">
+        <li>
+          <article class="pricing-tier" data-variant="starter" aria-labelledby="tier-starter-1">
+            <header>
+              <h3 id="tier-starter-1">Starter</h3>
+              <div class="price">
+                <span class="amount">$0</span>
+                <span class="unit">/ forever</span>
+              </div>
+              <small class="billing-note">No card required</small>
+            </header>
+            <p class="tagline">Try Galley for personal projects. The PDF converter, cloud notes, and subscription tracker on one workspace.</p>
+            <ul class="features">
+              <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3 3 7-7"/></svg></span>3 tools — PDF / notes / subscriptions</li>
+              <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3 3 7-7"/></svg></span>1 GB cloud storage</li>
+              <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3 3 7-7"/></svg></span>Personal use, 1 device</li>
+              <li class="excluded"><span class="x" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l8 8M12 4l-8 8"/></svg></span>Team collaboration</li>
+              <li class="excluded"><span class="x" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l8 8M12 4l-8 8"/></svg></span>Password manager</li>
+            </ul>
+            <button class="action-button" data-intent="secondary" type="button">Get started free</button>
+          </article>
+        </li>
+
+        <li>
+          <article class="pricing-tier" data-variant="featured" aria-labelledby="tier-pro-1">
+            <span class="badge" aria-label="Most popular plan">Most popular</span>
+            <header>
+              <h3 id="tier-pro-1">Pro</h3>
+              <div class="price">
+                <span class="amount">$12</span>
+                <span class="unit">/ user / mo</span>
+              </div>
+              <small class="billing-note">Billed monthly · cancel anytime</small>
+            </header>
+            <p class="tagline">For individual professionals. All five tools — PDF, notes, subscriptions, passwords, image editor — with generous storage and unlimited devices.</p>
+            <ul class="features">
+              <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3 3 7-7"/></svg></span><strong>All 5 tools</strong> — PDF / notes / subscriptions / passwords / image editor</li>
+              <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3 3 7-7"/></svg></span>100 GB cloud storage</li>
+              <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3 3 7-7"/></svg></span>Unlimited devices</li>
+              <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3 3 7-7"/></svg></span>End-to-end encryption</li>
+              <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3 3 7-7"/></svg></span>Priority support<small>Avg. response under 4 hours, business days.</small></li>
+            </ul>
+            <button class="action-button" data-intent="primary" type="button">Start 14-day trial</button>
+          </article>
+        </li>
+
+        <li>
+          <article class="pricing-tier" data-variant="enterprise" aria-labelledby="tier-ent-1">
+            <header>
+              <h3 id="tier-ent-1">Enterprise</h3>
+              <div class="price">
+                <span class="amount">Let's talk</span>
+              </div>
+              <small class="billing-note">Custom annual contract</small>
+            </header>
+            <p class="tagline">For teams over 50. White-glove onboarding, dedicated CSM, SLA-backed uptime, SSO, audit logging, and BYOK encryption.</p>
+            <ul class="features">
+              <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3 3 7-7"/></svg></span>Everything in Pro, plus:</li>
+              <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3 3 7-7"/></svg></span>SSO (SAML / OIDC / Okta)</li>
+              <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3 3 7-7"/></svg></span>SCIM provisioning</li>
+              <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3 3 7-7"/></svg></span>Bring your own encryption keys</li>
+              <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3 3 7-7"/></svg></span>99.99% uptime SLA<small>Service credits for breach. EU + US + APAC regions.</small></li>
+              <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3 3 7-7"/></svg></span>Dedicated customer success manager</li>
+            </ul>
+            <button class="action-button" data-intent="secondary" type="button">Talk to sales →</button>
+          </article>
+        </li>
+      </ul>
+      <p class="specimen-note">composition: pricing-tier · action-button (intent=secondary | primary | secondary) · switch-toggle from pattern-form-fields · pricing-grid[data-layout=3-tier] · GALLEY umbrella product naming throughout</p>
+    </section>
+
+    <!-- ────────── 4-tier layout, annual billing, segmented toggle ────────── -->
+    <section class="demo">
+      <header class="demo-header">
+        <h2>Layout: 4-tier · annual billing · segmented toggle</h2>
+        <p class="lede">Four tiers (Starter / Pro / Team / Enterprise) with the segmented variant of <code>billing-toggle</code> composing <code>button-group</code> from <code>pattern-button-system</code> in connected register. Annual pricing shows monthly-equivalent + "billed annually" caption.</p>
+      </header>
+
+      <div class="pricing-intro">
+        <h2>Galley · scale to teams</h2>
+        <p>The same five tools, now for shared workspaces. Per-seat pricing with volume tiers.</p>
+
+        <div class="billing-toggle" role="radiogroup" aria-label="Billing cadence">
+          <div class="button-group">
+            <button class="action-button" data-intent="secondary" role="radio" aria-checked="false" type="button">Monthly</button>
+            <button class="action-button" data-intent="secondary" role="radio" aria-checked="true" aria-pressed="true" type="button">Annual <span class="savings-badge" style="margin-left: 6px;">Save 17%</span></button>
+          </div>
+        </div>
+      </div>
+
+      <ul class="pricing-grid" data-layout="4-tier">
+        <li>
+          <article class="pricing-tier" data-variant="starter">
+            <header>
+              <h3>Starter</h3>
+              <div class="price">
+                <span class="amount">$0</span>
+                <span class="unit">/ forever</span>
+              </div>
+              <small class="billing-note">No card required</small>
+            </header>
+            <p class="tagline">Personal use, single seat, three tools.</p>
+            <ul class="features">
+              <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3 3 7-7"/></svg></span>3 tools, 1 GB</li>
+              <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3 3 7-7"/></svg></span>1 seat, 1 device</li>
+              <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3 3 7-7"/></svg></span>Community support</li>
+            </ul>
+            <button class="action-button" data-intent="secondary" type="button">Get started</button>
+          </article>
+        </li>
+
+        <li>
+          <article class="pricing-tier">
+            <header>
+              <h3>Pro</h3>
+              <div class="price">
+                <span class="amount">$10</span>
+                <span class="unit">/ user / mo</span>
+              </div>
+              <small class="billing-note">$120 billed annually · save $24/yr vs monthly</small>
+            </header>
+            <p class="tagline">Individual professionals. All 5 tools, generous storage.</p>
+            <ul class="features">
+              <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3 3 7-7"/></svg></span>All 5 tools, 100 GB</li>
+              <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3 3 7-7"/></svg></span>Unlimited devices</li>
+              <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3 3 7-7"/></svg></span>Priority email support</li>
+            </ul>
+            <button class="action-button" data-intent="secondary" type="button">Start 14-day trial</button>
+          </article>
+        </li>
+
+        <li>
+          <article class="pricing-tier" data-variant="featured">
+            <span class="badge" aria-label="Most popular for teams">Best for teams</span>
+            <header>
+              <h3>Team</h3>
+              <div class="price">
+                <span class="amount">$18</span>
+                <span class="unit">/ user / mo</span>
+              </div>
+              <small class="billing-note">$216 billed annually · save $43/yr vs monthly</small>
+            </header>
+            <p class="tagline">Shared workspaces, admin controls, audit log access. 3+ seats minimum.</p>
+            <ul class="features">
+              <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3 3 7-7"/></svg></span>Everything in Pro, plus:</li>
+              <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3 3 7-7"/></svg></span>Shared cloud notes + assets</li>
+              <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3 3 7-7"/></svg></span>500 GB pooled storage</li>
+              <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3 3 7-7"/></svg></span>Admin console + audit logs</li>
+              <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3 3 7-7"/></svg></span>Slack + Linear integrations</li>
+            </ul>
+            <button class="action-button" data-intent="primary" type="button">Start 14-day trial</button>
+          </article>
+        </li>
+
+        <li>
+          <article class="pricing-tier" data-variant="enterprise">
+            <header>
+              <h3>Enterprise</h3>
+              <div class="price">
+                <span class="amount">Let's talk</span>
+              </div>
+              <small class="billing-note">50+ seats · annual contract</small>
+            </header>
+            <p class="tagline">SSO, SCIM, BYOK encryption, dedicated CSM, 99.99% SLA. EU + US + APAC.</p>
+            <ul class="features">
+              <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3 3 7-7"/></svg></span>Everything in Team</li>
+              <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3 3 7-7"/></svg></span>SSO + SCIM + BYOK</li>
+              <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3 3 7-7"/></svg></span>Dedicated CSM</li>
+              <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3 3 7-7"/></svg></span>99.99% uptime SLA</li>
+              <li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3 3 7-7"/></svg></span>HIPAA + SOC 2 Type II</li>
+            </ul>
+            <button class="action-button" data-intent="link" type="button">Talk to sales →</button>
+          </article>
+        </li>
+      </ul>
+      <p class="specimen-note">composition: pricing-grid[data-layout=4-tier] · billing-toggle[variant=segmented] composing button-group from pattern-button-system · 4 tier-variants spanning the full range · annual-billing UI shows monthly-equivalent + "billed annually" caption + savings figure</p>
+    </section>
+
+    <!-- ────────── Comparison table layout ────────── -->
+    <section class="demo">
+      <header class="demo-header">
+        <h2>Layout: table · feature comparison matrix</h2>
+        <p class="lede">Tiers become columns; features become rows. Categories group features. Used below the card-grid as a "compare all plans" surface. Semantic <code>&lt;table&gt;</code> with <code>&lt;thead&gt;</code> + <code>&lt;tbody&gt;</code> + category subheaders.</p>
+      </header>
+
+      <div class="pricing-grid" data-layout="table" data-state="comparison-mode">
+        <table class="comparison-table">
+          <caption class="visually-hidden">Compare features across Galley plans</caption>
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">
+                <div class="tier-header">
+                  <h3>Starter</h3>
+                  <span class="price-mini">$0</span>
+                </div>
+              </th>
+              <th scope="col">
+                <div class="tier-header">
+                  <h3>Pro</h3>
+                  <span class="price-mini">$12/mo</span>
+                </div>
+              </th>
+              <th scope="col">
+                <div class="tier-header">
+                  <span class="featured-mark">Best for teams</span>
+                  <h3>Team</h3>
+                  <span class="price-mini">$22/mo</span>
+                </div>
+              </th>
+              <th scope="col">
+                <div class="tier-header">
+                  <h3>Enterprise</h3>
+                  <span class="price-mini">Custom</span>
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="category-row"><td colspan="5">Tools</td></tr>
+            <tr>
+              <td class="feature-name">PDF converter</td>
+              <td class="included">✓</td>
+              <td class="included">✓</td>
+              <td class="included">✓</td>
+              <td class="included">✓</td>
+            </tr>
+            <tr>
+              <td class="feature-name">Cloud notes</td>
+              <td class="included">✓</td>
+              <td class="included">✓</td>
+              <td class="included">✓</td>
+              <td class="included">✓</td>
+            </tr>
+            <tr>
+              <td class="feature-name">Subscription tracker</td>
+              <td class="included">✓</td>
+              <td class="included">✓</td>
+              <td class="included">✓</td>
+              <td class="included">✓</td>
+            </tr>
+            <tr>
+              <td class="feature-name">Password manager</td>
+              <td class="excluded">—</td>
+              <td class="included">✓</td>
+              <td class="included">✓</td>
+              <td class="included">✓</td>
+            </tr>
+            <tr>
+              <td class="feature-name">Image editor / asset library</td>
+              <td class="excluded">—</td>
+              <td class="included">✓</td>
+              <td class="included">✓</td>
+              <td class="included">✓</td>
+            </tr>
+
+            <tr class="category-row"><td colspan="5">Storage & devices</td></tr>
+            <tr>
+              <td class="feature-name">Cloud storage per seat</td>
+              <td class="value">1 GB</td>
+              <td class="value">100 GB</td>
+              <td class="value">200 GB</td>
+              <td class="value">Custom</td>
+            </tr>
+            <tr>
+              <td class="feature-name">Devices per seat</td>
+              <td class="value">1</td>
+              <td class="value">Unlimited</td>
+              <td class="value">Unlimited</td>
+              <td class="value">Unlimited</td>
+            </tr>
+            <tr>
+              <td class="feature-name">File version history</td>
+              <td class="value">7 days</td>
+              <td class="value">90 days</td>
+              <td class="value">365 days</td>
+              <td class="value">Custom retention</td>
+            </tr>
+
+            <tr class="category-row"><td colspan="5">Collaboration</td></tr>
+            <tr>
+              <td class="feature-name">Shared workspaces</td>
+              <td class="excluded">—</td>
+              <td class="excluded">—</td>
+              <td class="included">✓</td>
+              <td class="included">✓</td>
+            </tr>
+            <tr>
+              <td class="feature-name">Admin console</td>
+              <td class="excluded">—</td>
+              <td class="excluded">—</td>
+              <td class="included">✓</td>
+              <td class="included">✓</td>
+            </tr>
+            <tr>
+              <td class="feature-name">Audit logs</td>
+              <td class="excluded">—</td>
+              <td class="excluded">—</td>
+              <td class="value">90 days</td>
+              <td class="value">Indefinite</td>
+            </tr>
+            <tr>
+              <td class="feature-name">Integrations</td>
+              <td class="excluded">—</td>
+              <td class="value">5 (Slack, Zapier, …)</td>
+              <td class="value">All 20</td>
+              <td class="value">All + custom API</td>
+            </tr>
+
+            <tr class="category-row"><td colspan="5">Security & compliance</td></tr>
+            <tr>
+              <td class="feature-name">End-to-end encryption</td>
+              <td class="included">✓</td>
+              <td class="included">✓</td>
+              <td class="included">✓</td>
+              <td class="included">✓</td>
+            </tr>
+            <tr>
+              <td class="feature-name">SSO (SAML / OIDC)</td>
+              <td class="excluded">—</td>
+              <td class="excluded">—</td>
+              <td class="excluded">—</td>
+              <td class="included">✓</td>
+            </tr>
+            <tr>
+              <td class="feature-name">SCIM provisioning</td>
+              <td class="excluded">—</td>
+              <td class="excluded">—</td>
+              <td class="excluded">—</td>
+              <td class="included">✓</td>
+            </tr>
+            <tr>
+              <td class="feature-name">Bring your own keys</td>
+              <td class="excluded">—</td>
+              <td class="excluded">—</td>
+              <td class="excluded">—</td>
+              <td class="included">✓</td>
+            </tr>
+            <tr>
+              <td class="feature-name">SOC 2 Type II + HIPAA</td>
+              <td class="excluded">—</td>
+              <td class="excluded">—</td>
+              <td class="included">✓</td>
+              <td class="included">✓</td>
+            </tr>
+
+            <tr class="category-row"><td colspan="5">Support</td></tr>
+            <tr>
+              <td class="feature-name">Community forum</td>
+              <td class="included">✓</td>
+              <td class="included">✓</td>
+              <td class="included">✓</td>
+              <td class="included">✓</td>
+            </tr>
+            <tr>
+              <td class="feature-name">Email support</td>
+              <td class="excluded">—</td>
+              <td class="value">48 hr response</td>
+              <td class="value">12 hr response</td>
+              <td class="value">2 hr response</td>
+            </tr>
+            <tr>
+              <td class="feature-name">Dedicated CSM</td>
+              <td class="excluded">—</td>
+              <td class="excluded">—</td>
+              <td class="excluded">—</td>
+              <td class="included">✓</td>
+            </tr>
+            <tr>
+              <td class="feature-name">Uptime SLA</td>
+              <td class="value">Best effort</td>
+              <td class="value">99.5%</td>
+              <td class="value">99.9%</td>
+              <td class="value">99.99%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="specimen-note">layout=table renders comparison matrix with semantic &lt;table&gt; element; thead sticky during scroll; category rows group features; check / em-dash / value cells convey state by character not just colour</p>
+    </section>
+
+    <!-- ────────── pricing-tier microstates ────────── -->
+    <section class="demo">
+      <header class="demo-header">
+        <h2>Tier-card microstates</h2>
+        <p class="lede">Eight microstates demonstrated via <code>data-mockstate</code>. In production these resolve via <code>:hover</code>, <code>:focus-visible</code>, <code>[aria-selected]</code>, <code>[aria-disabled]</code>, <code>[aria-busy]</code>.</p>
+      </header>
+
+      <ul class="pricing-grid" data-layout="4-tier">
+        <li>
+          <article class="pricing-tier">
+            <header>
+              <h3>Default</h3>
+              <div class="price"><span class="amount">$12</span><span class="unit">/ mo</span></div>
+              <small class="billing-note">Resting state</small>
+            </header>
+            <p class="tagline">No modifier — interactive card at rest.</p>
+            <ul class="features"><li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8.5l3 3 7-7"/></svg></span>Feature one</li><li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8.5l3 3 7-7"/></svg></span>Feature two</li></ul>
+            <button class="action-button" data-intent="primary" type="button">Choose plan</button>
+          </article>
+        </li>
+
+        <li>
+          <article class="pricing-tier" data-mockstate="hover">
+            <header>
+              <h3>Hover</h3>
+              <div class="price"><span class="amount">$12</span><span class="unit">/ mo</span></div>
+              <small class="billing-note">Shadow elevates</small>
+            </header>
+            <p class="tagline">Box-shadow becomes shadow-md on pointer hover.</p>
+            <ul class="features"><li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8.5l3 3 7-7"/></svg></span>Feature one</li><li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8.5l3 3 7-7"/></svg></span>Feature two</li></ul>
+            <button class="action-button" data-intent="primary" type="button">Choose plan</button>
+          </article>
+        </li>
+
+        <li>
+          <article class="pricing-tier" data-mockstate="selected" aria-selected="true">
+            <header>
+              <h3>Selected</h3>
+              <div class="price"><span class="amount">$12</span><span class="unit">/ mo</span></div>
+              <small class="billing-note">User picked this tier</small>
+            </header>
+            <p class="tagline">Accent border + 1px ring. Used in multi-step checkout where the picked tier persists across the flow.</p>
+            <ul class="features"><li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8.5l3 3 7-7"/></svg></span>Feature one</li><li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8.5l3 3 7-7"/></svg></span>Feature two</li></ul>
+            <button class="action-button" data-intent="primary" type="button" disabled>Selected</button>
+          </article>
+        </li>
+
+        <li>
+          <article class="pricing-tier" data-mockstate="loading" aria-busy="true" aria-label="Loading pricing tier">
+            <header>
+              <span class="skeleton" style="width: 30%; height: 12px;"></span>
+              <span class="skeleton price"></span>
+              <span class="skeleton" style="width: 50%; height: 10px;"></span>
+            </header>
+            <span class="skeleton" style="width: 90%; height: 14px;"></span>
+            <span class="skeleton" style="width: 75%; height: 14px;"></span>
+            <ul class="features">
+              <li style="gap: 0;"><span class="skeleton feature"></span></li>
+              <li style="gap: 0;"><span class="skeleton feature"></span></li>
+              <li style="gap: 0;"><span class="skeleton feature"></span></li>
+            </ul>
+            <span class="skeleton" style="height: 44px; width: 100%;"></span>
+          </article>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ────────── checkout-initiated state ────────── -->
+    <section class="demo">
+      <header class="demo-header">
+        <h2>Pattern-level state: checkout-initiated</h2>
+        <p class="lede">After a tier CTA is clicked. The active tier's button shows loading state (delegates to <code>action-button</code>'s <code>[aria-busy]</code> microstate). Other tiers' buttons disable to prevent double-submission. <code>aria-live="polite"</code> region announces "Redirecting to checkout…"</p>
+      </header>
+
+      <ul class="pricing-grid" data-layout="3-tier">
+        <li>
+          <article class="pricing-tier" data-variant="starter">
+            <header>
+              <h3>Starter</h3>
+              <div class="price"><span class="amount">$0</span><span class="unit">/ forever</span></div>
+              <small class="billing-note">No card required</small>
+            </header>
+            <p class="tagline">Personal projects. 3 tools.</p>
+            <ul class="features"><li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8.5l3 3 7-7"/></svg></span>3 tools, 1 GB</li><li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8.5l3 3 7-7"/></svg></span>1 device</li></ul>
+            <button class="action-button" data-intent="secondary" type="button" disabled>Get started</button>
+          </article>
+        </li>
+
+        <li>
+          <article class="pricing-tier" data-variant="featured">
+            <span class="badge" aria-label="Most popular plan">Most popular</span>
+            <header>
+              <h3>Pro</h3>
+              <div class="price"><span class="amount">$12</span><span class="unit">/ user / mo</span></div>
+              <small class="billing-note">Billed monthly</small>
+            </header>
+            <p class="tagline">All 5 tools.</p>
+            <ul class="features"><li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8.5l3 3 7-7"/></svg></span>All 5 tools, 100 GB</li><li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8.5l3 3 7-7"/></svg></span>Unlimited devices</li></ul>
+            <button class="action-button" data-intent="primary" type="button" aria-busy="true">Redirecting to checkout…</button>
+          </article>
+        </li>
+
+        <li>
+          <article class="pricing-tier" data-variant="enterprise">
+            <header>
+              <h3>Enterprise</h3>
+              <div class="price"><span class="amount">Let's talk</span></div>
+              <small class="billing-note">Custom contract</small>
+            </header>
+            <p class="tagline">SSO, SCIM, BYOK, SLA.</p>
+            <ul class="features"><li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8.5l3 3 7-7"/></svg></span>Everything in Pro</li><li><span class="check" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8.5l3 3 7-7"/></svg></span>SSO + SCIM</li></ul>
+            <button class="action-button" data-intent="link" type="button" disabled>Talk to sales →</button>
+          </article>
+        </li>
+      </ul>
+
+      <div role="status" aria-live="polite" style="margin-top: var(--space-4); text-align: center; font-family: var(--font-mono); font-size: var(--type-size-xs); color: var(--text-recede); letter-spacing: 0.04em;">
+        Redirecting to checkout… (status announced via aria-live="polite")
+      </div>
+    </section>
+
+    <section class="demo">
+      <header class="demo-header">
+        <h2>Accessibility checklist</h2>
+      </header>
+      <ul>
+        <li>Each <code>&lt;article class="pricing-tier"&gt;</code> uses <code>aria-labelledby</code> pointing to its tier-name heading so screen readers announce "Pro tier: $12 per user per month…" as a single coherent unit.</li>
+        <li>"Most popular" badge is decorative text in the visual; <code>aria-label="Most popular plan"</code> on the badge provides the screen-reader announcement.</li>
+        <li>Featured tier's visual elevation (translateY(-8px) on desktop) collapses on mobile to preserve tap-order rhythm.</li>
+        <li>Excluded features still appear in the bullet list as <code>&lt;li class="excluded"&gt;</code> with an X icon — text conveys exclusion, not just colour (the X icon is in <code>--text-disabled</code>, the list item itself is text-recede).</li>
+        <li>Comparison table uses semantic <code>&lt;table&gt;</code> with <code>&lt;thead&gt;</code> + <code>&lt;tbody&gt;</code>. Sticky <code>thead</code> during vertical scroll. Category subheaders are inside <code>&lt;tbody&gt;</code> using <code>td colspan="5"</code> with monospace label styling.</li>
+        <li>Em-dash (—) used in excluded cells, not "N/A" or empty string — explicit "this is not included" signal at the visual + screen-reader level.</li>
+        <li>Tabular numerics enforced on every price + price-mini + savings figure so digit-bearing values align mid-card-render.</li>
+        <li>Billing toggle is a real <code>role="switch"</code> + <code>aria-checked</code> (delegated to <code>pattern-form-fields</code>) OR <code>role="radiogroup"</code> + <code>role="radio"</code> (delegated to <code>pattern-button-system</code>'s connected button-group register). Toggle change announces price update via <code>aria-live="polite"</code>.</li>
+        <li>Checkout-initiated state: active tier's button uses <code>aria-busy="true"</code> + transparent label + spinner overlay (delegated to <code>action-button</code>'s loading microstate). Other tier buttons disable to prevent double-submission. Live region announces redirect.</li>
+        <li>Selected state: <code>aria-selected="true"</code> on the article; the picked tier persists across multi-step checkout via this attribute.</li>
+        <li>44×44 hit target on every tier CTA (delegated to <code>action-button</code>'s min-height=44 floor at md size).</li>
+        <li>Reduced-motion: skeleton animation stops; featured-tier desktop-only translateY remains (it's a layout offset, not a transition).</li>
+      </ul>
+    </section>
+
+    <section class="demo">
+      <header class="demo-header">
+        <h2>Composition lineage — what this pattern consumes</h2>
+        <p class="lede">First pattern in the catalog to compose from sibling pattern packs. Documenting the consumption chain explicitly here sets the convention for future sibling-composition patterns.</p>
+      </header>
+
+      <table style="width: 100%; border-collapse: collapse; font-size: var(--type-size-sm);">
+        <thead>
+          <tr style="border-bottom: var(--border-width-md) solid var(--border-emphasis);">
+            <th style="padding: var(--space-3) var(--space-4); text-align: left; font-weight: var(--font-weight-semibold); color: var(--text-emphasis);">Consumed primitive</th>
+            <th style="padding: var(--space-3) var(--space-4); text-align: left; font-weight: var(--font-weight-semibold); color: var(--text-emphasis);">From pack</th>
+            <th style="padding: var(--space-3) var(--space-4); text-align: left; font-weight: var(--font-weight-semibold); color: var(--text-emphasis);">Used by this pattern as</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom: var(--border-width-sm) solid var(--border-recede);">
+            <td style="padding: var(--space-3) var(--space-4); font-family: var(--font-mono); font-size: var(--type-size-xs);">&lt;action-button&gt;</td>
+            <td style="padding: var(--space-3) var(--space-4);">@quoin/pattern-button-system</td>
+            <td style="padding: var(--space-3) var(--space-4);">Every tier CTA — intent=primary on featured tier; intent=secondary on default + starter; intent=link on enterprise "Talk to sales"</td>
+          </tr>
+          <tr style="border-bottom: var(--border-width-sm) solid var(--border-recede);">
+            <td style="padding: var(--space-3) var(--space-4); font-family: var(--font-mono); font-size: var(--type-size-xs);">&lt;button-group&gt;</td>
+            <td style="padding: var(--space-3) var(--space-4);">@quoin/pattern-button-system</td>
+            <td style="padding: var(--space-3) var(--space-4);">Segmented variant of billing-toggle (connected register, role=radiogroup)</td>
+          </tr>
+          <tr style="border-bottom: var(--border-width-sm) solid var(--border-recede);">
+            <td style="padding: var(--space-3) var(--space-4); font-family: var(--font-mono); font-size: var(--type-size-xs);">&lt;form-control type="switch"&gt;</td>
+            <td style="padding: var(--space-3) var(--space-4);">@quoin/pattern-form-fields</td>
+            <td style="padding: var(--space-3) var(--space-4);">Switch variant of billing-toggle (role=switch + aria-checked)</td>
+          </tr>
+          <tr style="border-bottom: var(--border-width-sm) solid var(--border-recede);">
+            <td style="padding: var(--space-3) var(--space-4); font-family: var(--font-mono); font-size: var(--type-size-xs);">&lt;feature-cell&gt;<br/>(optional)</td>
+            <td style="padding: var(--space-3) var(--space-4);">@quoin/pattern-feature-grid</td>
+            <td style="padding: var(--space-3) var(--space-4);">Available below the tier-card grid for "compare all features" callout cells. Not consumed in default tier-card chrome (which uses plain <code>&lt;ul&gt;</code> + checkmarks for visual clarity).</td>
+          </tr>
+          <tr>
+            <td style="padding: var(--space-3) var(--space-4); font-family: var(--font-mono); font-size: var(--type-size-xs);">canonical tokens</td>
+            <td style="padding: var(--space-3) var(--space-4);">@quoin/tokens-baseline</td>
+            <td style="padding: var(--space-3) var(--space-4);">Every CSS value reads from a canonical <code>--var</code>; zero hardcoded values past the <code>:root</code> seed.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="specimen-note">The convention: pattern packs CAN compose from other pattern packs. When they do, the README documents the consumption chain explicitly so the composition is legible (this section is the prototype for that documentation pattern). Vocabulary primitives can also be consumed directly — pattern-form-fields composes from vocab-forms — but inter-pattern composition is the higher-leverage relationship at the catalog level.</p>
+    </section>
+  </main>
+</body>
+</html>

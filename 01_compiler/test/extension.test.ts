@@ -41,7 +41,12 @@ beforeAll(async () => {
 
 describe("loadThemePack", () => {
   it("loads light/dark/p3 override maps", () => {
-    expect(themePack.manifest.type).toBe("theme");
+    // Per D.52 (2026-05-18) the canonical type is "aesthetic"; "theme" is
+    // a deprecated alias kept for backward compatibility. The
+    // theme-baseline-reference pack was renamed type:"theme" → type:"aesthetic"
+    // in the D.52 rename. The deprecated loader alias loadThemePack still
+    // returns a usable pack — it just reports the canonical type now.
+    expect(themePack.manifest.type).toBe("aesthetic");
     expect(Object.keys(themePack.lightModeOverrides).length).toBeGreaterThan(0);
     expect(themePack.darkModeOverrides).toBeDefined();
     expect(themePack.p3WideGamutOverrides).toBeDefined();
