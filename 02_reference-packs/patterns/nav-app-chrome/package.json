@@ -1,0 +1,24 @@
+{
+  "name": "@quoin/pattern-nav-app-chrome",
+  "version": "1.0.0",
+  "description": "P0 in-app shell nav for Quoin — workspace switcher + breadcrumb + Cmd+K + actions + notifications + user menu + page tabs + status banner. Composes button-system.",
+  "license": "MIT",
+  "main": "./quoin.pack.json",
+  "files": [
+    "quoin.pack.json",
+    "primitives/",
+    "examples/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "pattern", "nav", "app-shell", "header", "command-k", "p0"],
+  "peerDependencies": {
+    "@quoin/tokens-baseline": "^0.1.0",
+    "@quoin/pattern-button-system": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "02_reference-packs/patterns/nav-app-chrome"
+  }
+}

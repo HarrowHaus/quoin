@@ -1,0 +1,487 @@
+[
+  {
+    "name": "nav-app-chrome",
+    "category": "product",
+    "role": "Top-level scope for an in-app shell header. Polymorphic <header role='banner'> always-sticky, with three rows of optional content: workspace switcher + breadcrumb + action cluster + user menu (main row); optional page-tabs row (secondary nav within the current page); optional offline / status banner (when connection drops). Three variants — standard (full set), with-subnav (main + page-tabs), condensed (no breadcrumb, minimal action cluster, used in fullscreen-editor modes).",
+    "attributes": {
+      "variant": {
+        "values": ["standard", "with-subnav", "condensed"],
+        "default": "standard",
+        "specific": true
+      },
+      "state": {
+        "values": ["default", "search-open", "menu-open", "notifications-open", "offline"],
+        "default": "default",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "--surface",
+      "color": "--text",
+      "borderColor": "--border",
+      "borderWidth": "--border-width-sm",
+      "padding": "--space-3 --space-card",
+      "paddingY": "--space-3",
+      "gap": "--space-3",
+      "height": "auto",
+      "transition": "--transition-default",
+      "zIndex": "100"
+    },
+    "structure": {
+      "element": "header",
+      "attributes": {
+        "role": "banner"
+      }
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<header role='banner'> — page banner landmark; always-sticky at top: 0",
+        "(optional) <div data-pattern='app-status-banner'> — offline / degraded-service banner",
+        "<nav aria-label='App shell'> — main nav landmark with workspace switcher + breadcrumb + actions",
+        "  <app-workspace-switcher> — left-anchored",
+        "  <app-breadcrumb> — middle path",
+        "  <div class='spacer'> — pushes right cluster",
+        "  <app-global-search> — Cmd+K trigger",
+        "  <app-action-cluster> — share, new, etc.",
+        "  <app-notification-bell> — bell with badge",
+        "  <app-user-menu> — avatar dropdown",
+        "(optional) <nav aria-label='Page tabs'> — page-level secondary nav row"
+      ],
+      "variants": {
+        "standard": "Full main row. Used on most workspace pages, project pages, document lists.",
+        "with-subnav": "Main row + page-tabs subnav row. Used on document pages, project pages, settings (where page-tabs surface 'Overview / Activity / Settings').",
+        "condensed": "Main row only with no breadcrumb. Workspace switcher + minimal action cluster + user menu. Used in fullscreen-editor modes (e.g. focus-mode in a notes editor) where the chrome should recede."
+      },
+      "states": {
+        "default": "Idle.",
+        "search-open": "Cmd+K palette is open. Body scroll locked. nav-app-chrome retains visual state but its global-search trigger gets [aria-expanded='true'].",
+        "menu-open": "Any popover menu (workspace switcher, user menu, notifications) is open. nav-app-chrome stays put; the trigger element carries [aria-expanded='true'].",
+        "notifications-open": "Notifications popover specifically is open.",
+        "offline": "Connection lost. <app-status-banner> renders at the top with --critical tone. All sync-dependent actions become loading or disabled."
+      },
+      "ariaPatterns": {
+        "bannerLandmark": "<header role='banner'>; only one per page.",
+        "appNavLabel": "<nav aria-label='App shell'> distinguishes from any in-page <nav>.",
+        "stickyBehaviour": "position: sticky; top: 0. Border-bottom and z-index ensure it sits above scrolled content.",
+        "globalShortcutKeyboard": "Cmd+K (Mac) / Ctrl+K (Windows) opens the global search. The trigger has aria-keyshortcuts='Meta+K' to advertise the binding to AT.",
+        "offlineLiveRegion": "Offline status banner uses role='status' aria-live='polite'."
+      }
+    }
+  },
+  {
+    "name": "app-workspace-switcher",
+    "category": "product",
+    "role": "Left-anchored workspace identity + switcher dropdown. Renders as a button that displays the current workspace logo + name; clicking opens a popover listing all workspaces the user belongs to + 'Create workspace' action. The popover is positioned absolutely below the trigger.",
+    "attributes": {
+      "open": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true
+      },
+      "show-plan-badge": {
+        "values": ["true", "false"],
+        "default": "true",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "--text-emphasis",
+      "backgroundHover": "--surface-elevated",
+      "borderRadius": "--radius-sm",
+      "padding": "--space-2 --space-3",
+      "gap": "--space-2",
+      "fontFamily": "--font-sans",
+      "fontSize": "--type-size-sm",
+      "fontWeight": "--font-weight-semibold",
+      "iconSize": "20px",
+      "transition": "--transition-default"
+    },
+    "structure": {
+      "element": "button",
+      "attributes": {
+        "type": "button",
+        "aria-haspopup": "true",
+        "aria-expanded": "false"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "semanticStructure": [
+        "<button aria-haspopup='true' aria-expanded='false' aria-controls='workspace-popover'>",
+        "  <span class='logo'> — workspace logo (SVG or initial letter on accent ground)",
+        "  <span class='name'> — workspace name",
+        "  <span class='plan-badge'> — optional plan tier ('Free' / 'Pro' / 'Team')",
+        "  <svg class='chevron'> — dropdown indicator",
+        "<div role='menu' id='workspace-popover'> — popover content; not part of the trigger primitive but anchored to it"
+      ],
+      "popoverContent": "List of workspaces (each with logo + name + plan badge + current-workspace ✓ marker) + divider + 'Create workspace' action + 'Workspace settings' link. Composes button-system action-button intent='ghost' for each row.",
+      "ariaPatterns": {
+        "ariaExpanded": "Trigger carries aria-expanded='true|false' and aria-controls='workspace-popover'.",
+        "currentWorkspaceMarker": "The current workspace in the popover gets aria-current='true' + visible ✓ indicator.",
+        "popoverDismiss": "Escape closes + returns focus to trigger. Click outside closes."
+      }
+    }
+  },
+  {
+    "name": "app-breadcrumb",
+    "category": "product",
+    "role": "Middle path indicator showing the user's location within the workspace hierarchy. Renders as <nav aria-label='Breadcrumb'> containing <ol> of breadcrumb segments separated by visual chevrons. Each segment is a link except the last (current page, no link). Truncates middle segments with '…' when path is too deep.",
+    "attributes": {
+      "max-segments": {
+        "values": ["2", "3", "4", "5"],
+        "default": "4",
+        "specific": true
+      },
+      "show-icons": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "--text-recede",
+      "colorCurrent": "--text-emphasis",
+      "colorHover": "--accent-hover",
+      "separatorColor": "--border-emphasis",
+      "fontFamily": "--font-sans",
+      "fontSize": "--type-size-sm",
+      "fontWeight": "--font-weight-medium",
+      "fontWeightCurrent": "--font-weight-semibold",
+      "gap": "--space-2",
+      "transition": "--transition-default"
+    },
+    "structure": {
+      "element": "nav",
+      "attributes": {
+        "aria-label": "Breadcrumb"
+      }
+    },
+    "children": "flow-content",
+    "scope": "inline",
+    "meta": {
+      "semanticStructure": [
+        "<nav aria-label='Breadcrumb'>",
+        "  <ol>",
+        "    <li><a href='/path/segment'>Segment name</a></li>",
+        "    <li aria-hidden='true' class='separator'>/</li>",
+        "    <li><span aria-current='page'>Current page</span></li>"
+      ],
+      "truncation": "When path exceeds max-segments, render first + … + last 2 segments. The … is a clickable button that expands the full path in a popover.",
+      "ariaPatterns": {
+        "navLabel": "<nav aria-label='Breadcrumb'>",
+        "currentPageMarker": "Last segment uses <span aria-current='page'> (not <a>) so it's not a link.",
+        "separatorAria": "Visual separators are aria-hidden='true'."
+      }
+    }
+  },
+  {
+    "name": "app-global-search",
+    "category": "product",
+    "role": "Cmd+K / Ctrl+K command palette trigger. Renders as a search-input-shaped button with placeholder 'Search…' + Cmd+K keyboard hint pill. Clicking or pressing Cmd+K opens the full command palette (out of scope for v1 — host page provides). Trigger maintains aria-keyshortcuts + aria-expanded.",
+    "attributes": {
+      "size": {
+        "values": ["sm", "md", "lg"],
+        "default": "md",
+        "specific": true
+      },
+      "expanded": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "--surface-elevated",
+      "color": "--text-recede",
+      "colorHover": "--text",
+      "borderColor": "--border",
+      "borderColorHover": "--border-emphasis",
+      "borderWidth": "--border-width-sm",
+      "borderRadius": "--radius-sm",
+      "padding": "--space-2 --space-3",
+      "gap": "--space-2",
+      "fontFamily": "--font-sans",
+      "fontSize": "--type-size-sm",
+      "fontWeight": "--font-weight-medium",
+      "minWidth": "240px",
+      "kbdBackground": "--surface-recessed",
+      "kbdColor": "--text-recede",
+      "kbdBorderColor": "--border",
+      "kbdFontFamily": "--font-mono",
+      "kbdFontSize": "--type-size-xs",
+      "transition": "--transition-default"
+    },
+    "structure": {
+      "element": "button",
+      "attributes": {
+        "type": "button",
+        "aria-keyshortcuts": "Meta+K Control+K",
+        "aria-expanded": "false",
+        "aria-haspopup": "dialog"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "semanticStructure": [
+        "<button aria-keyshortcuts='Meta+K Control+K' aria-expanded='false' aria-haspopup='dialog'>",
+        "  <svg class='search-icon' aria-hidden='true'> — magnifier",
+        "  <span class='placeholder'>Search…</span>",
+        "  <kbd class='shortcut'>⌘K</kbd>"
+      ],
+      "platformAwareness": "Render '⌘K' on Mac, 'Ctrl+K' on Windows / Linux via JS user-agent detection or CSS-only with prefers-platform queries (not yet standardised; default to ⌘K with Ctrl+K visible on Windows via JS).",
+      "ariaPatterns": {
+        "ariaKeyshortcuts": "aria-keyshortcuts='Meta+K Control+K' advertises both bindings.",
+        "popupRole": "aria-haspopup='dialog' because the command palette is a modal dialog, not a menu.",
+        "ariaExpanded": "Set aria-expanded='true' when the palette is open."
+      }
+    }
+  },
+  {
+    "name": "app-action-cluster",
+    "category": "product",
+    "role": "Right-of-search action buttons. Hosts page-specific actions (e.g. 'Share', 'New document', 'Filter', 'Export'). Composes <action-button> from pattern-button-system. Variable content per-page — this primitive defines the layout container, not the contents.",
+    "attributes": {
+      "register": {
+        "values": ["compact", "default", "extended"],
+        "default": "default",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "gap": "--space-2",
+      "color": "--text",
+      "transition": "--transition-default"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "role": "group",
+        "aria-label": "Page actions"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "registers": {
+        "compact": "Up to 2 action buttons. Used in condensed chrome and on narrow viewports.",
+        "default": "2-4 action buttons + optional 1 primary CTA at the rightmost slot.",
+        "extended": "4-6 buttons; common on power-user pages (admin dashboards, large editor surfaces)."
+      },
+      "composesFrom": "@quoin/pattern-button-system — every action button is an <action-button> with appropriate intent (ghost for de-escalated actions, secondary for medium, primary for the highest-intent action like 'Share' or 'Publish').",
+      "ariaPatterns": {
+        "groupLabel": "<div role='group' aria-label='Page actions'> wraps the cluster.",
+        "iconOnlyActions": "Icon-only buttons must have aria-label naming the action (e.g. aria-label='Filter results')."
+      }
+    }
+  },
+  {
+    "name": "app-notification-bell",
+    "category": "product",
+    "role": "Bell-icon button showing unread notification count via badge. Click opens a popover listing recent notifications. Composes <action-button intent='ghost' size='md'> from pattern-button-system for the trigger; popover content is host-provided in v1.",
+    "attributes": {
+      "unread-count": {
+        "values": [],
+        "default": "0",
+        "specific": true
+      },
+      "open": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "--text-recede",
+      "colorHover": "--text-emphasis",
+      "backgroundHover": "--surface-elevated",
+      "badgeBackground": "--critical",
+      "badgeColor": "var(--text-on-accent, white)",
+      "padding": "--space-2",
+      "borderRadius": "--radius-sm",
+      "transition": "--transition-default"
+    },
+    "structure": {
+      "element": "button",
+      "attributes": {
+        "type": "button",
+        "aria-haspopup": "true",
+        "aria-expanded": "false"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "semanticStructure": [
+        "<button aria-haspopup='true' aria-expanded='false' aria-controls='notifications-popover' aria-label='Notifications, 3 unread'>",
+        "  <svg class='bell' aria-hidden='true'>",
+        "  (if unread > 0) <span class='badge' aria-hidden='true'>3</span>"
+      ],
+      "badgeDisplay": "Show '99+' when unread > 99. Hide badge entirely when unread = 0.",
+      "ariaPatterns": {
+        "ariaLabelCountAware": "aria-label MUST include the unread count: 'Notifications, 3 unread' or 'Notifications, no unread'. The number in the visual badge is aria-hidden because the aria-label says it.",
+        "popoverPattern": "Same as workspace-switcher and user-menu — popover dismiss via Escape + click-outside; focus returns to trigger."
+      }
+    }
+  },
+  {
+    "name": "app-user-menu",
+    "category": "product",
+    "role": "Rightmost avatar button that opens a user-account popover. The avatar can render initials, profile photo, or default silhouette. Popover hosts: profile link, account settings, theme toggle, keyboard-shortcuts cheatsheet, logout. Composes button-system for popover rows.",
+    "attributes": {
+      "open": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true
+      },
+      "show-status-dot": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "avatarBackground": "--accent-recede",
+      "avatarColor": "--text-emphasis",
+      "avatarBorderColor": "--surface",
+      "avatarBorderWidth": "--border-width-sm",
+      "statusDotColor": "--success",
+      "statusDotOfflineColor": "--text-disabled",
+      "borderRadius": "999px",
+      "padding": "0",
+      "transition": "--transition-default"
+    },
+    "structure": {
+      "element": "button",
+      "attributes": {
+        "type": "button",
+        "aria-haspopup": "true",
+        "aria-expanded": "false"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "semanticStructure": [
+        "<button aria-haspopup='true' aria-expanded='false' aria-controls='user-popover' aria-label='Account menu — <user-name>'>",
+        "  <span class='avatar'> — initials, photo, or silhouette",
+        "  (if show-status-dot) <span class='status-dot' aria-hidden='true'>"
+      ],
+      "avatarRendering": "Priority: profile photo → initials (first letter of first + last name on --accent-recede ground) → silhouette icon. Photo / initials are square but rendered with border-radius: 999px (circle).",
+      "popoverContent": "Profile name + email header; ‘View profile’ / ‘Account settings’ / ‘Workspace settings’ / ‘Theme’ submenu / ‘Keyboard shortcuts’ / divider / ‘Log out’. Each row is a button-system action-button intent='ghost'.",
+      "ariaPatterns": {
+        "ariaLabelIncludeName": "aria-label MUST include the user's name so AT announces the account context.",
+        "statusDotSemantics": "Status dot is aria-hidden; if presence is meaningful, expose it via a separate <span class='sr-only'>Online</span>."
+      }
+    }
+  },
+  {
+    "name": "app-page-tabs",
+    "category": "product",
+    "role": "Secondary nav row below the main chrome. Hosts page-level tabs (Overview / Activity / Settings / Members). Rendered as <nav aria-label='Page sections'> with <ul> of tab links/buttons. Each tab maintains aria-current='page' for the active section.",
+    "attributes": {
+      "register": {
+        "values": ["underline", "pill", "boxed"],
+        "default": "underline",
+        "specific": true
+      },
+      "density": {
+        "values": ["normal", "dense"],
+        "default": "normal"
+      }
+    },
+    "tokens": {
+      "color": "--text-recede",
+      "colorCurrent": "--text-emphasis",
+      "colorHover": "--accent-hover",
+      "indicatorColor": "--accent",
+      "background": "--surface",
+      "backgroundCurrent": "--surface-elevated",
+      "padding": "0 --space-card",
+      "paddingTab": "--space-3 --space-3",
+      "gap": "--space-1",
+      "borderColor": "--border",
+      "borderWidth": "--border-width-sm",
+      "fontFamily": "--font-sans",
+      "fontSize": "--type-size-sm",
+      "fontWeight": "--font-weight-medium",
+      "fontWeightCurrent": "--font-weight-semibold",
+      "transition": "--transition-default"
+    },
+    "structure": {
+      "element": "nav",
+      "attributes": {
+        "aria-label": "Page sections"
+      }
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<nav aria-label='Page sections'>",
+        "  <ul>",
+        "    <li><a href='/page' aria-current='page'>Overview</a></li>",
+        "    <li><a href='/page/activity'>Activity</a></li>",
+        "    <li><a href='/page/settings'>Settings</a></li>"
+      ],
+      "registers": {
+        "underline": "Active tab has a 2px underline in --accent. The canonical Linear / GitHub / Notion register.",
+        "pill": "Active tab is a filled pill with --surface-elevated background. Used when underline conflicts with adjacent UI.",
+        "boxed": "Active tab is a connected box on top of the page content. Used for tabs that switch the entire page content (true 'tab panels')."
+      },
+      "ariaPatterns": {
+        "navLabel": "<nav aria-label='Page sections'> distinguishes from main nav-app-chrome navigation.",
+        "currentPageMarker": "Active tab uses aria-current='page' (since each tab is a separate route, not a panel switcher within the same page)."
+      }
+    }
+  },
+  {
+    "name": "app-status-banner",
+    "category": "product",
+    "role": "Top-anchored status banner. Renders above the main chrome row when the app is in a degraded state (offline, syncing-paused, maintenance-pending). Three tones — info (sync paused), warning (degraded service), critical (offline / data-loss risk).",
+    "attributes": {
+      "tone": {
+        "values": ["info", "warning", "critical"],
+        "default": "warning",
+        "specific": true
+      },
+      "dismissible": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "--accent-recede",
+      "backgroundWarning": "--warning",
+      "backgroundCritical": "--critical",
+      "color": "--text-emphasis",
+      "colorOnAccent": "var(--text-on-accent, white)",
+      "padding": "--space-2 --space-card",
+      "gap": "--space-3",
+      "fontFamily": "--font-sans",
+      "fontSize": "--type-size-sm",
+      "fontWeight": "--font-weight-medium",
+      "transition": "--transition-default"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "role": "status",
+        "aria-live": "polite",
+        "aria-label": "App status"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "block",
+    "meta": {
+      "ariaPatterns": {
+        "liveRegion": "<div role='status' aria-live='polite'> for info + warning. <div role='alert' aria-live='assertive'> for critical (offline, data-loss).",
+        "dismissPolicy": "Info banners are dismissible (one-time announcements). Warning + critical are NOT dismissible — they reflect a live state that changes when the underlying condition clears."
+      }
+    }
+  }
+]
