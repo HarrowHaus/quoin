@@ -1,0 +1,24 @@
+{
+  "name": "@quoin/pattern-nav-marketing",
+  "version": "1.0.0",
+  "description": "P0 marketing-site top nav for Quoin — 9 primitives, 4 variants, simple + mega dropdowns, mobile drawer, announcement bar. Composes button-system.",
+  "license": "MIT",
+  "main": "./quoin.pack.json",
+  "files": [
+    "quoin.pack.json",
+    "primitives/",
+    "examples/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "pattern", "nav", "header", "marketing", "dropdown", "p0"],
+  "peerDependencies": {
+    "@quoin/tokens-baseline": "^0.1.0",
+    "@quoin/pattern-button-system": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "02_reference-packs/patterns/nav-marketing"
+  }
+}
