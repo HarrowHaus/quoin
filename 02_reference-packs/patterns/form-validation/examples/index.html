@@ -1,0 +1,899 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>@quoin/pattern-form-validation — specimen</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=JetBrains+Mono:wght@100..800&display=swap">
+
+  <style>
+    :root {
+      color-scheme: light dark;
+
+      --surface: oklch(98% 0 0);
+      --surface-elevated: oklch(100% 0 0);
+      --surface-recessed: oklch(96% 0 0);
+      --text: oklch(30% 0 0);
+      --text-emphasis: oklch(15% 0 0);
+      --text-recede: oklch(50% 0 0);
+      --text-disabled: oklch(72% 0 0);
+      --text-on-accent: oklch(100% 0 0);
+      --accent: oklch(20% 0 0);
+      --accent-hover: oklch(28% 0 0);
+      --accent-active: oklch(12% 0 0);
+      --accent-recede: oklch(94% 0 0);
+      --critical: oklch(55% 0.22 25);
+      --critical-recede: oklch(95% 0.05 25);
+      --success: oklch(50% 0.18 155);
+      --success-recede: oklch(95% 0.05 155);
+      --warning: oklch(75% 0.18 80);
+      --warning-recede: oklch(95% 0.05 80);
+
+      --border: oklch(88% 0 0);
+      --border-emphasis: oklch(20% 0 0);
+      --border-recede: oklch(94% 0 0);
+      --border-width-sm: 1px;
+      --border-width-md: 2px;
+
+      --focus-ring: oklch(55% 0.22 260);
+      --focus-ring-width: 2px;
+      --focus-ring-offset: 2px;
+
+      --space-1: 4px;
+      --space-2: 6px;
+      --space-3: 8px;
+      --space-4: 12px;
+      --space-5: 16px;
+      --space-6: 20px;
+      --space-8: 32px;
+      --space-card: 24px;
+      --space-panel: 32px;
+      --space-section: 64px;
+
+      --radius-sm: 4px;
+      --radius-md: 6px;
+      --radius-card: 12px;
+      --radius-pill: 999px;
+
+      --font-sans: 'Inter Variable', 'Inter', system-ui, sans-serif;
+      --font-display: 'Inter Variable', 'Inter', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+      --type-size-xs: 0.75rem;
+      --type-size-sm: 0.875rem;
+      --type-size-md: 1rem;
+      --type-size-lg: 1.125rem;
+      --type-size-xl: 1.5rem;
+      --type-size-2xl: 2rem;
+      --type-size-3xl: 2.5rem;
+      --font-weight-regular: 400;
+      --font-weight-medium: 500;
+      --font-weight-semibold: 600;
+      --font-weight-bold: 700;
+      --leading-tight: 1.15;
+      --leading-prose: 1.55;
+      --leading-display: 1.05;
+      --tracking-tight: -0.01em;
+      --tracking-normal: 0;
+      --tracking-wide: 0.08em;
+
+      --motion-fast: 120ms;
+      --motion-normal: 160ms;
+      --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+      --transition-default: all var(--motion-normal) var(--ease-standard);
+
+      --shadow-tint: oklch(0% 0 0 / 0.06);
+      --shadow-sm: 0 1px 2px 0 var(--shadow-tint);
+      --shadow-md: 0 4px 6px -1px var(--shadow-tint), 0 2px 4px -1px var(--shadow-tint);
+      --shadow-lg: 0 10px 25px -5px var(--shadow-tint), 0 6px 12px -3px var(--shadow-tint);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --surface: oklch(10% 0 0);
+        --surface-elevated: oklch(15% 0 0);
+        --surface-recessed: oklch(8% 0 0);
+        --text: oklch(85% 0 0);
+        --text-emphasis: oklch(98% 0 0);
+        --text-recede: oklch(60% 0 0);
+        --text-disabled: oklch(35% 0 0);
+        --text-on-accent: oklch(10% 0 0);
+        --accent: oklch(95% 0 0);
+        --accent-recede: oklch(20% 0 0);
+        --success-recede: oklch(18% 0.06 155);
+        --warning-recede: oklch(18% 0.06 80);
+        --critical-recede: oklch(18% 0.05 25);
+        --border: oklch(20% 0 0);
+        --shadow-tint: oklch(0% 0 0 / 0.4);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      :root { --motion-fast: 0ms; --motion-normal: 0ms; --transition-default: none; }
+      * { animation: none !important; }
+    }
+
+    * { box-sizing: border-box; }
+  </style>
+
+  <style>
+    html, body {
+      margin: 0; padding: 0;
+      background: var(--surface);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-md);
+      line-height: var(--leading-prose);
+      -webkit-font-smoothing: antialiased;
+    }
+    main { max-width: 1024px; margin: 0 auto; padding: var(--space-section) var(--space-panel); }
+    h1 {
+      font-family: var(--font-display); font-size: var(--type-size-3xl); font-weight: var(--font-weight-semibold);
+      line-height: var(--leading-display); letter-spacing: var(--tracking-tight);
+      margin: 0 0 var(--space-4); text-wrap: balance;
+    }
+    h2 {
+      font-family: var(--font-display); font-size: var(--type-size-2xl); font-weight: var(--font-weight-semibold);
+      line-height: var(--leading-tight); letter-spacing: var(--tracking-tight);
+      margin: var(--space-section) 0 var(--space-4); text-wrap: balance;
+    }
+    .lede {
+      font-size: var(--type-size-lg); line-height: var(--leading-prose);
+      color: var(--text-recede); max-width: 70ch; margin: 0 0 var(--space-section);
+    }
+    .meta {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--space-4); padding: var(--space-4);
+      background: var(--surface-elevated); border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-card); margin-bottom: var(--space-section);
+      font-size: var(--type-size-sm);
+    }
+    .meta dt { font-weight: var(--font-weight-semibold); color: var(--text-emphasis); margin-bottom: var(--space-1); }
+    .meta dd { margin: 0; color: var(--text-recede); }
+    .specimen-divider {
+      margin: var(--space-section) 0 var(--space-card);
+      padding-bottom: var(--space-2);
+      border-bottom: var(--border-width-sm) solid var(--border);
+    }
+    .specimen-divider h2 { margin: 0; }
+    .specimen-divider p { margin: var(--space-2) 0 0; color: var(--text-recede); font-size: var(--type-size-sm); }
+
+    /* ===== FORM SHELL (lightweight; full form-control styling is at form-fields) ===== */
+    .form-shell {
+      background: var(--surface-elevated);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-card);
+      padding: var(--space-card);
+      margin-bottom: var(--space-card);
+      max-width: 560px;
+    }
+    .form-shell legend {
+      font-family: var(--font-display);
+      font-size: var(--type-size-xl);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-emphasis);
+      margin-bottom: var(--space-3);
+      letter-spacing: var(--tracking-tight);
+    }
+    .form-shell .help-lede {
+      color: var(--text-recede);
+      font-size: var(--type-size-sm);
+      margin: 0 0 var(--space-card);
+    }
+    .field { display: flex; flex-direction: column; gap: var(--space-1); margin-bottom: var(--space-4); }
+    .field label {
+      font-size: var(--type-size-sm); font-weight: var(--font-weight-semibold);
+      color: var(--text-emphasis);
+    }
+    .field label .required { color: var(--critical); margin-left: 2px; }
+    .field .input-wrapper {
+      display: flex; align-items: center; gap: var(--space-2);
+      background: var(--surface);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0 var(--space-3);
+      transition: var(--transition-default);
+    }
+    .field .input-wrapper:focus-within {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 var(--focus-ring-offset) var(--surface-elevated), 0 0 0 calc(var(--focus-ring-offset) + var(--focus-ring-width)) var(--focus-ring);
+    }
+    .field .input-wrapper[data-invalid="true"] {
+      border-color: var(--critical);
+      background: oklch(98% 0.02 25);
+    }
+    .field .input-wrapper[data-invalid="true"]:focus-within {
+      box-shadow: 0 0 0 var(--focus-ring-offset) var(--surface-elevated), 0 0 0 calc(var(--focus-ring-offset) + var(--focus-ring-width)) var(--critical);
+    }
+    .field .input-wrapper[data-valid="true"] { border-color: var(--success); }
+    .field .input-wrapper input,
+    .field .input-wrapper select,
+    .field .input-wrapper textarea {
+      flex: 1;
+      background: transparent;
+      border: 0;
+      padding: var(--space-3) 0;
+      font-family: var(--font-sans); font-size: var(--type-size-sm); color: var(--text);
+    }
+    .field .input-wrapper input:focus,
+    .field .input-wrapper select:focus,
+    .field .input-wrapper textarea:focus { outline: none; }
+    .field .input-wrapper textarea { resize: vertical; min-height: 80px; }
+    .field .help-text {
+      color: var(--text-recede);
+      font-size: var(--type-size-xs);
+      margin: 2px 0 0;
+    }
+
+    /* ===== VALIDATION MESSAGE PRODUCTION STYLES ===== */
+    [data-pattern="validation-message"] {
+      display: inline-flex;
+      align-items: flex-start;
+      gap: var(--space-1);
+      margin: var(--space-1) 0 0;
+      font-family: var(--font-sans);
+      font-size: var(--type-size-xs);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--leading-prose);
+    }
+    [data-pattern="validation-message"][data-variant="error"] { color: var(--critical); }
+    [data-pattern="validation-message"][data-variant="help"] { color: var(--text-recede); font-weight: var(--font-weight-regular); }
+    [data-pattern="validation-message"][data-variant="success"] { color: var(--success); }
+    [data-pattern="validation-message"][data-variant="warning"] { color: oklch(45% 0.15 70); }
+    [data-pattern="validation-message"] svg {
+      width: 14px; height: 14px;
+      stroke: currentColor; fill: none; stroke-width: 2;
+      stroke-linecap: round; stroke-linejoin: round;
+      flex: 0 0 auto;
+      margin-top: 1px;
+    }
+
+    /* ===== VALIDATION SUMMARY PRODUCTION STYLES ===== */
+    [data-pattern="validation-summary"] {
+      background: var(--critical-recede);
+      color: var(--text-emphasis);
+      border: var(--border-width-md) solid var(--critical);
+      border-radius: var(--radius-card);
+      padding: var(--space-4);
+      margin-bottom: var(--space-card);
+      transition: var(--transition-default);
+    }
+    [data-pattern="validation-summary"][data-tone="warning"] { background: var(--warning-recede); border-color: var(--warning); }
+    [data-pattern="validation-summary"][data-tone="info"] { background: var(--accent-recede); border-color: var(--accent); }
+    [data-pattern="validation-summary"][data-tone="success"] { background: var(--success-recede); border-color: var(--success); }
+    [data-pattern="validation-summary"]:focus { outline: none; }
+    [data-pattern="validation-summary"]:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+    [data-pattern="validation-summary"] header {
+      display: flex; align-items: center; gap: var(--space-2);
+      margin-bottom: var(--space-3);
+    }
+    [data-pattern="validation-summary"] header svg {
+      width: 20px; height: 20px;
+      stroke: currentColor; fill: none; stroke-width: 2;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+    [data-pattern="validation-summary"][data-tone="error"] header svg { color: var(--critical); }
+    [data-pattern="validation-summary"][data-tone="warning"] header svg { color: var(--warning); }
+    [data-pattern="validation-summary"][data-tone="info"] header svg { color: var(--accent); }
+    [data-pattern="validation-summary"][data-tone="success"] header svg { color: var(--success); }
+    [data-pattern="validation-summary"] header h3 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: var(--type-size-md);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-emphasis);
+      letter-spacing: var(--tracking-tight);
+    }
+    [data-pattern="validation-summary"] ol {
+      margin: 0 0 0 var(--space-card);
+      padding: 0;
+      list-style: decimal;
+    }
+    [data-pattern="validation-summary"] ol li {
+      font-size: var(--type-size-sm);
+      line-height: var(--leading-prose);
+      padding: 2px 0;
+    }
+    [data-pattern="validation-summary"][data-tone="error"] ol a { color: var(--critical); font-weight: var(--font-weight-medium); text-decoration: underline; text-underline-offset: 3px; }
+    [data-pattern="validation-summary"][data-tone="success"] ol a { color: var(--success); font-weight: var(--font-weight-medium); text-decoration: underline; text-underline-offset: 3px; }
+    [data-pattern="validation-summary"] ol a:hover { text-decoration-thickness: 2px; }
+    [data-pattern="validation-summary"] ol a:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+      border-radius: 2px;
+    }
+    [data-pattern="validation-summary"] .summary-body {
+      margin: 0;
+      color: var(--text-recede);
+      font-size: var(--type-size-sm);
+      line-height: var(--leading-prose);
+    }
+
+    /* ===== STATUS ICON ===== */
+    [data-pattern="validation-status-icon"] {
+      width: 16px; height: 16px;
+      stroke: currentColor; fill: none; stroke-width: 2;
+      stroke-linecap: round; stroke-linejoin: round;
+      flex: 0 0 auto;
+    }
+    [data-pattern="validation-status-icon"][data-status="error"] { color: var(--critical); }
+    [data-pattern="validation-status-icon"][data-status="valid"] { color: var(--success); }
+    [data-pattern="validation-status-icon"][data-status="warning"] { color: var(--warning); }
+    [data-pattern="validation-status-icon"][data-status="validating"] {
+      color: var(--text-recede);
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      [data-pattern="validation-status-icon"][data-status="validating"] { animation: none; }
+    }
+
+    /* Password strength meter */
+    .password-strength {
+      display: flex; align-items: center; gap: var(--space-2);
+      font-size: var(--type-size-xs);
+      color: var(--text-recede);
+      margin: var(--space-1) 0 0;
+    }
+    .password-strength .bar {
+      flex: 1; height: 4px;
+      background: var(--surface-recessed);
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+    .password-strength .bar::after {
+      content: "";
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: var(--strength, 0%);
+      background: var(--strength-color, var(--critical));
+      border-radius: 999px;
+      transition: width var(--motion-normal) var(--ease-standard), background var(--motion-normal);
+    }
+    .password-strength[data-strength="weak"] { --strength: 25%; --strength-color: var(--critical); }
+    .password-strength[data-strength="medium"] { --strength: 50%; --strength-color: var(--warning); }
+    .password-strength[data-strength="strong"] { --strength: 80%; --strength-color: var(--success); }
+    .password-strength[data-strength="excellent"] { --strength: 100%; --strength-color: var(--success); }
+    .password-strength .label { font-weight: var(--font-weight-semibold); }
+    .password-strength[data-strength="weak"] .label { color: var(--critical); }
+    .password-strength[data-strength="medium"] .label { color: oklch(45% 0.15 70); }
+    .password-strength[data-strength="strong"] .label { color: var(--success); }
+    .password-strength[data-strength="excellent"] .label { color: var(--success); }
+
+    /* Submit button */
+    .submit-row { display: flex; gap: var(--space-3); align-items: center; padding-top: var(--space-3); border-top: var(--border-width-sm) solid var(--border); margin-top: var(--space-card); }
+    .submit {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: var(--space-2);
+      background: var(--accent); color: var(--text-on-accent);
+      border: 0; border-radius: var(--radius-sm);
+      padding: var(--space-3) var(--space-card);
+      font-family: var(--font-sans); font-size: var(--type-size-sm); font-weight: var(--font-weight-semibold);
+      cursor: pointer;
+      transition: var(--transition-default);
+    }
+    .submit:hover { background: var(--accent-hover); }
+    .submit:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+    .submit[aria-busy="true"] { opacity: 0.7; cursor: wait; }
+    .submit[aria-disabled="true"] { opacity: 0.55; cursor: not-allowed; }
+    .submit .spinner {
+      width: 14px; height: 14px;
+      border: 2px solid currentColor;
+      border-right-color: transparent;
+      border-radius: 999px;
+      animation: spin 0.7s linear infinite;
+    }
+    @media (prefers-reduced-motion: reduce) { .submit .spinner { animation: none; } }
+
+    /* Microstate matrix */
+    .microstate-grid {
+      display: grid;
+      grid-template-columns: 160px repeat(4, 1fr);
+      gap: var(--space-2);
+      background: var(--surface);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-card);
+      padding: var(--space-4);
+      margin-bottom: var(--space-card);
+    }
+    .microstate-grid > .label {
+      font-size: var(--type-size-xs); font-weight: var(--font-weight-semibold);
+      color: var(--text-emphasis); letter-spacing: var(--tracking-wide); text-transform: uppercase;
+      align-self: center;
+    }
+    .microstate-grid > .cell {
+      background: var(--surface-recessed);
+      border-radius: var(--radius-sm);
+      padding: var(--space-3);
+      font-size: var(--type-size-xs);
+    }
+    .microstate-grid .ms-label { color: var(--text-recede); margin-bottom: var(--space-1); }
+
+    /* Composition lineage */
+    .lineage { width: 100%; border-collapse: collapse; font-size: var(--type-size-sm); }
+    .lineage th, .lineage td {
+      text-align: left; padding: var(--space-2) var(--space-3);
+      border-bottom: var(--border-width-sm) solid var(--border);
+      vertical-align: top;
+    }
+    .lineage th {
+      background: var(--surface-elevated); color: var(--text-emphasis);
+      font-weight: var(--font-weight-semibold); font-size: var(--type-size-xs);
+      letter-spacing: var(--tracking-wide); text-transform: uppercase;
+    }
+    .lineage code {
+      font-family: var(--font-mono); font-size: var(--type-size-xs);
+      background: var(--surface-recessed); padding: 0 4px; border-radius: 3px; color: var(--text-emphasis);
+    }
+
+    .a11y-list { font-size: var(--type-size-sm); line-height: var(--leading-prose); color: var(--text-recede); padding-left: var(--space-card); }
+    .a11y-list code {
+      font-family: var(--font-mono); font-size: 0.85em;
+      background: var(--surface-recessed); padding: 0 4px; border-radius: 3px; color: var(--text-emphasis);
+    }
+
+    .state-label {
+      display: inline-block;
+      background: var(--accent-recede); color: var(--text-emphasis);
+      padding: 2px var(--space-2); border-radius: var(--radius-pill);
+      font-size: var(--type-size-xs); font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--tracking-wide); text-transform: uppercase;
+      margin-left: var(--space-2);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>pattern-form-validation — specimen</h1>
+      <p class="lede">Error-summary panel + field-level validation messages + status icons. WCAG 2.4.6 (Headings and Labels), 3.3.1 (Error Identification), 3.3.3 (Error Suggestion). Seven pattern states from <code>pristine</code> to <code>submit-failed</code>. Composes <code>@quoin/pattern-form-fields</code> for the underlying fields and <code>@quoin/pattern-button-system</code> for submit buttons.</p>
+      <dl class="meta">
+        <div><dt>Pack</dt><dd>@quoin/pattern-form-validation@1.0.0</dd></div>
+        <div><dt>Primitives</dt><dd>4 (validation-summary, validation-message, validation-status-icon, validation-orchestrator)</dd></div>
+        <div><dt>States</dt><dd>default (pristine) / touched / validating / valid / invalid / submitted / submit-failed</dd></div>
+        <div><dt>Validate-on</dt><dd>submit / blur / input / submit-then-blur</dd></div>
+        <div><dt>Composes</dt><dd>form-fields + button-system</dd></div>
+        <div><dt>WCAG</dt><dd>2.4.6, 3.3.1, 3.3.2, 3.3.3, 4.1.3</dd></div>
+      </dl>
+    </header>
+
+    <!-- =================== STATE: PRISTINE =================== -->
+    <section class="specimen-divider">
+      <h2>State: pristine <span class="state-label">no validation shown</span></h2>
+      <p>Form has never been interacted with. No validation messages, no status icons. Submit button is fully enabled — clicking will trigger validation. This is "Sign up for Galley" before any input.</p>
+    </section>
+    <form data-pattern="validation-orchestrator" data-state="default" data-validate-on="submit-then-blur" novalidate aria-labelledby="signup-legend-pristine">
+      <fieldset class="form-shell" style="border: 0; padding: var(--space-card); margin: 0 0 var(--space-card); background: var(--surface-elevated); border-radius: var(--radius-card);">
+        <legend id="signup-legend-pristine">Create your Galley account</legend>
+        <p class="help-lede">Five tools. One subscription. One sign-in. Start with the free tier — upgrade any time.</p>
+        <div class="field">
+          <label for="signup-email-pristine">Email <span class="required" aria-hidden="true">*</span></label>
+          <div class="input-wrapper">
+            <input type="email" id="signup-email-pristine" name="email" autocomplete="email" aria-required="true" aria-describedby="signup-email-pristine-help">
+          </div>
+          <p data-pattern="validation-message" data-variant="help" id="signup-email-pristine-help">
+            <svg aria-hidden="true"><circle cx="7" cy="7" r="6"/><path d="M7 4v3M7 10h.01"/></svg>
+            We send a confirmation link. Single sign-in works across all Galley tools.
+          </p>
+        </div>
+        <div class="field">
+          <label for="signup-password-pristine">Password <span class="required" aria-hidden="true">*</span></label>
+          <div class="input-wrapper">
+            <input type="password" id="signup-password-pristine" name="password" autocomplete="new-password" aria-required="true" aria-describedby="signup-password-pristine-help">
+          </div>
+          <p data-pattern="validation-message" data-variant="help" id="signup-password-pristine-help">At least 8 characters. Mix of letters, numbers, and symbols recommended.</p>
+        </div>
+        <div class="field">
+          <label for="signup-name-pristine">Display name</label>
+          <div class="input-wrapper">
+            <input type="text" id="signup-name-pristine" name="name" autocomplete="name" aria-describedby="signup-name-pristine-help">
+          </div>
+          <p data-pattern="validation-message" data-variant="help" id="signup-name-pristine-help">Shown on shared docs and Galley Notes you publish.</p>
+        </div>
+        <div class="submit-row">
+          <button class="submit" type="submit">Create account</button>
+          <span style="font-size: var(--type-size-xs); color: var(--text-recede);">No card required for free tier.</span>
+        </div>
+      </fieldset>
+    </form>
+
+    <!-- =================== STATE: INVALID (with summary) =================== -->
+    <section class="specimen-divider">
+      <h2>State: submit-failed <span class="state-label">summary + field errors</span></h2>
+      <p>User clicked Submit on an empty + invalid form. The <code>validation-summary</code> renders with <code>role="alert"</code>, receives programmatic focus, and lists 3 errors as anchor links to their fields. Each invalid field gets <code>aria-invalid="true"</code> + a <code>validation-message</code> referenced via <code>aria-describedby</code>.</p>
+    </section>
+    <form data-pattern="validation-orchestrator" data-state="submit-failed" novalidate aria-labelledby="signup-legend-failed">
+      <fieldset class="form-shell" style="border: 0; padding: var(--space-card); margin: 0 0 var(--space-card); background: var(--surface-elevated); border-radius: var(--radius-card);">
+        <legend id="signup-legend-failed">Create your Galley account</legend>
+        <section data-pattern="validation-summary" data-tone="error" role="alert" aria-labelledby="summary-heading-failed" tabindex="-1" id="form-error-summary-failed">
+          <header>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <h3 id="summary-heading-failed">There are 3 errors in this form</h3>
+          </header>
+          <ol>
+            <li><a href="#signup-email-failed">Enter your email address</a></li>
+            <li><a href="#signup-password-failed">Password must be at least 8 characters</a></li>
+            <li><a href="#signup-terms-failed">Agree to the terms to continue</a></li>
+          </ol>
+        </section>
+        <div class="field">
+          <label for="signup-email-failed">Email <span class="required" aria-hidden="true">*</span></label>
+          <div class="input-wrapper" data-invalid="true">
+            <input type="email" id="signup-email-failed" name="email" autocomplete="email" aria-required="true" aria-invalid="true" aria-describedby="signup-email-failed-error" value="">
+            <svg data-pattern="validation-status-icon" data-status="error" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+          </div>
+          <p data-pattern="validation-message" data-variant="error" id="signup-email-failed-error" role="alert">
+            <svg aria-hidden="true" viewBox="0 0 14 14"><circle cx="7" cy="7" r="6"/><path d="M7 4v3M7 10h.01"/></svg>
+            Enter your email address.
+          </p>
+        </div>
+        <div class="field">
+          <label for="signup-password-failed">Password <span class="required" aria-hidden="true">*</span></label>
+          <div class="input-wrapper" data-invalid="true">
+            <input type="password" id="signup-password-failed" name="password" autocomplete="new-password" aria-required="true" aria-invalid="true" aria-describedby="signup-password-failed-error signup-password-failed-help" value="pass">
+            <svg data-pattern="validation-status-icon" data-status="error" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+          </div>
+          <p data-pattern="validation-message" data-variant="error" id="signup-password-failed-error" role="alert">
+            <svg aria-hidden="true" viewBox="0 0 14 14"><circle cx="7" cy="7" r="6"/><path d="M7 4v3M7 10h.01"/></svg>
+            Password must be at least 8 characters.
+          </p>
+          <p data-pattern="validation-message" data-variant="help" id="signup-password-failed-help">At least 8 characters. Mix of letters, numbers, and symbols recommended.</p>
+        </div>
+        <div class="field">
+          <label for="signup-name-failed">Display name</label>
+          <div class="input-wrapper">
+            <input type="text" id="signup-name-failed" name="name" autocomplete="name" value="Elena Park">
+            <svg data-pattern="validation-status-icon" data-status="valid" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+        </div>
+        <div class="field" style="flex-direction: row; align-items: flex-start; gap: var(--space-2);">
+          <input type="checkbox" id="signup-terms-failed" name="terms" aria-required="true" aria-invalid="true" aria-describedby="signup-terms-failed-error" style="margin-top: 2px; accent-color: var(--critical);">
+          <div style="flex: 1;">
+            <label for="signup-terms-failed" style="font-weight: var(--font-weight-regular); display: inline;">I agree to the <a href="/terms" style="color: var(--accent);">Terms of Service</a> and <a href="/privacy" style="color: var(--accent);">Privacy Policy</a></label>
+            <p data-pattern="validation-message" data-variant="error" id="signup-terms-failed-error" role="alert" style="margin-top: var(--space-1);">
+              <svg aria-hidden="true" viewBox="0 0 14 14"><circle cx="7" cy="7" r="6"/><path d="M7 4v3M7 10h.01"/></svg>
+              Agree to the terms to continue.
+            </p>
+          </div>
+        </div>
+        <div class="submit-row">
+          <button class="submit" type="submit">Create account</button>
+          <span style="font-size: var(--type-size-xs); color: var(--text-recede);">3 fields need attention.</span>
+        </div>
+      </fieldset>
+    </form>
+
+    <!-- =================== STATE: VALIDATING + LIVE FEEDBACK =================== -->
+    <section class="specimen-divider">
+      <h2>State: validating <span class="state-label">async username check + live password strength</span></h2>
+      <p>Live validation during input: spinning status icon while async check is in flight (e.g., "Is this username available?"), password-strength meter animating live. Validating fields are NOT marked invalid — they're in a third state. Submit is <code>aria-busy</code>.</p>
+    </section>
+    <form data-pattern="validation-orchestrator" data-state="validating" novalidate aria-labelledby="signup-legend-validating">
+      <fieldset class="form-shell" style="border: 0; padding: var(--space-card); margin: 0 0 var(--space-card); background: var(--surface-elevated); border-radius: var(--radius-card);">
+        <legend id="signup-legend-validating">Create your Galley account</legend>
+        <div class="field">
+          <label for="signup-email-validating">Email <span class="required" aria-hidden="true">*</span></label>
+          <div class="input-wrapper">
+            <input type="email" id="signup-email-validating" name="email" autocomplete="email" aria-required="true" value="elena@studio.example">
+            <svg data-pattern="validation-status-icon" data-status="valid" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <p data-pattern="validation-message" data-variant="success">
+            <svg aria-hidden="true" viewBox="0 0 14 14"><polyline points="12 4 5.5 10.5 2 7"/></svg>
+            Email looks good.
+          </p>
+        </div>
+        <div class="field">
+          <label for="signup-username-validating">Username <span class="required" aria-hidden="true">*</span></label>
+          <div class="input-wrapper">
+            <span style="color: var(--text-recede); font-size: var(--type-size-sm);">galley.harrow.haus/</span>
+            <input type="text" id="signup-username-validating" name="username" aria-required="true" aria-describedby="signup-username-validating-status" value="elenas-galley">
+            <svg data-pattern="validation-status-icon" data-status="validating" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+          </div>
+          <p data-pattern="validation-message" data-variant="help" id="signup-username-validating-status" aria-live="polite">
+            <svg aria-hidden="true" viewBox="0 0 14 14"><circle cx="7" cy="7" r="3"/></svg>
+            Checking availability…
+          </p>
+        </div>
+        <div class="field">
+          <label for="signup-password-validating">Password <span class="required" aria-hidden="true">*</span></label>
+          <div class="input-wrapper">
+            <input type="password" id="signup-password-validating" name="password" autocomplete="new-password" aria-required="true" aria-describedby="signup-password-validating-strength" value="quoin-typesetter-1854">
+          </div>
+          <div class="password-strength" data-strength="excellent" id="signup-password-validating-strength" aria-live="polite">
+            <div class="bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" aria-label="Password strength: excellent"></div>
+            <span class="label">Excellent</span>
+          </div>
+        </div>
+        <div class="submit-row">
+          <button class="submit" type="submit" aria-busy="true">
+            <span class="spinner" aria-hidden="true"></span>
+            Validating…
+          </button>
+        </div>
+      </fieldset>
+    </form>
+
+    <!-- =================== STATE: VALID + SUBMITTED =================== -->
+    <section class="specimen-divider">
+      <h2>State: submitted <span class="state-label">success summary</span></h2>
+      <p>All fields validated, submit succeeded. The form is replaced with a success summary (tone="success") that uses <code>role="status"</code> + <code>aria-live="polite"</code> rather than <code>role="alert"</code> — success is non-interrupting good news.</p>
+    </section>
+    <form data-pattern="validation-orchestrator" data-state="submitted" novalidate>
+      <fieldset class="form-shell" style="border: 0; padding: var(--space-card); margin: 0 0 var(--space-card); background: var(--surface-elevated); border-radius: var(--radius-card);">
+        <section data-pattern="validation-summary" data-tone="success" role="status" aria-live="polite" aria-labelledby="summary-heading-success">
+          <header>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="16 9 11 14 8 11"/></svg>
+            <h3 id="summary-heading-success">Account created — welcome to Galley</h3>
+          </header>
+          <p class="summary-body">We've sent a confirmation link to <strong style="color: var(--text-emphasis);">elena@studio.example</strong>. Click it to activate your account. The reserved subdomain <strong style="color: var(--text-emphasis);">elenas-galley.harrow.haus</strong> is held for 30 days.</p>
+        </section>
+        <div class="submit-row" style="border-top: 0; padding-top: 0;">
+          <a class="submit" href="#" style="text-decoration: none;">Open inbox →</a>
+          <button class="submit" type="button" style="background: transparent; color: var(--text); border: var(--border-width-sm) solid var(--border);">Resend email</button>
+        </div>
+      </fieldset>
+    </form>
+
+    <!-- =================== STATE: SUBMIT-FAILED (SERVER ERROR) =================== -->
+    <section class="specimen-divider">
+      <h2>State: submit-failed <span class="state-label">server error, not field-specific</span></h2>
+      <p>Form passed client-side validation but server rejected it (auth issue, rate limit, or service unavailable). The <code>validation-summary</code> announces the server response. No field-level <code>aria-invalid</code> changes — the issue isn't with the data, it's with submission.</p>
+    </section>
+    <form data-pattern="validation-orchestrator" data-state="submit-failed" novalidate>
+      <fieldset class="form-shell" style="border: 0; padding: var(--space-card); margin: 0 0 var(--space-card); background: var(--surface-elevated); border-radius: var(--radius-card);">
+        <section data-pattern="validation-summary" data-tone="error" role="alert" aria-labelledby="summary-heading-server" tabindex="-1">
+          <header>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+            <h3 id="summary-heading-server">Couldn't create account</h3>
+          </header>
+          <p class="summary-body">Galley signup service is temporarily unavailable. Your inputs were validated — try again in a moment, or check <a href="https://status.galley.harrow.haus" style="color: var(--critical);">status.galley.harrow.haus</a>.</p>
+        </section>
+        <div class="field">
+          <label for="signup-email-server">Email</label>
+          <div class="input-wrapper">
+            <input type="email" id="signup-email-server" value="elena@studio.example" readonly aria-readonly="true">
+            <svg data-pattern="validation-status-icon" data-status="valid" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+        </div>
+        <div class="submit-row">
+          <button class="submit" type="submit"><svg style="width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2;" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 109-9 9.75 9.75 0 00-6.74 2.74L3 8M3 3v5h5"/></svg> Retry submission</button>
+          <span style="font-size: var(--type-size-xs); color: var(--text-recede);">Auto-retry in 30 seconds.</span>
+        </div>
+      </fieldset>
+    </form>
+
+    <!-- =================== SUMMARY TONES =================== -->
+    <section class="specimen-divider">
+      <h2>validation-summary — 4 tones</h2>
+      <p>Error (role="alert"), warning (role="status"), info (role="status"), success (role="status" + aria-live="polite"). Each tone gets a distinct icon + colour but the same structural footprint.</p>
+    </section>
+    <div style="display: grid; gap: var(--space-3); max-width: 560px;">
+      <section data-pattern="validation-summary" data-tone="error" role="alert" aria-labelledby="tone-error">
+        <header>
+          <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+          <h3 id="tone-error">2 errors prevent saving</h3>
+        </header>
+        <ol>
+          <li><a href="#">Email format is invalid</a></li>
+          <li><a href="#">Password and confirmation don't match</a></li>
+        </ol>
+      </section>
+      <section data-pattern="validation-summary" data-tone="warning" role="status">
+        <header>
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+          <h3>Some fields have soft warnings</h3>
+        </header>
+        <p class="summary-body">Your password meets the minimum but is shorter than recommended. You can continue, or update it now.</p>
+      </section>
+      <section data-pattern="validation-summary" data-tone="info" role="status">
+        <header>
+          <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          <h3>Fields marked * are required</h3>
+        </header>
+        <p class="summary-body">We collect the minimum needed to provision your Galley workspace. Display name, avatar, and bio can be added later from settings.</p>
+      </section>
+      <section data-pattern="validation-summary" data-tone="success" role="status" aria-live="polite">
+        <header>
+          <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="16 9 11 14 8 11"/></svg>
+          <h3>All changes saved</h3>
+        </header>
+        <p class="summary-body">Settings synced to all 5 Galley tools.</p>
+      </section>
+    </div>
+
+    <!-- =================== MESSAGE VARIANTS =================== -->
+    <section class="specimen-divider">
+      <h2>validation-message — 4 variants</h2>
+      <p>Help (always shown, instructional), error (aria-invalid=true), success (live positive feedback), warning (soft warning, doesn't block).</p>
+    </section>
+    <div class="form-shell" style="background: var(--surface-elevated);">
+      <div class="field">
+        <label>Help</label>
+        <div class="input-wrapper"><input type="text" value="" placeholder="username"></div>
+        <p data-pattern="validation-message" data-variant="help">
+          <svg aria-hidden="true" viewBox="0 0 14 14"><circle cx="7" cy="7" r="6"/><path d="M7 4v3M7 10h.01"/></svg>
+          3-30 characters, letters and dashes only.
+        </p>
+      </div>
+      <div class="field">
+        <label>Error</label>
+        <div class="input-wrapper" data-invalid="true"><input type="text" value="bad@@" aria-invalid="true"></div>
+        <p data-pattern="validation-message" data-variant="error" role="alert">
+          <svg aria-hidden="true" viewBox="0 0 14 14"><circle cx="7" cy="7" r="6"/><path d="M7 4v3M7 10h.01"/></svg>
+          Email must be of the form name@host.
+        </p>
+      </div>
+      <div class="field">
+        <label>Success</label>
+        <div class="input-wrapper" data-valid="true"><input type="text" value="elenas-galley"></div>
+        <p data-pattern="validation-message" data-variant="success">
+          <svg aria-hidden="true" viewBox="0 0 14 14"><polyline points="12 4 5.5 10.5 2 7"/></svg>
+          Username available.
+        </p>
+      </div>
+      <div class="field">
+        <label>Warning</label>
+        <div class="input-wrapper"><input type="password" value="short99"></div>
+        <p data-pattern="validation-message" data-variant="warning">
+          <svg aria-hidden="true" viewBox="0 0 14 14"><path d="M7 1l6 12H1z"/><path d="M7 6v3M7 11h.01"/></svg>
+          Allowed, but short. 12+ characters recommended.
+        </p>
+      </div>
+    </div>
+
+    <!-- =================== STATUS ICONS =================== -->
+    <section class="specimen-divider">
+      <h2>validation-status-icon — 4 statuses</h2>
+      <p>Error / valid / warning / validating. Always <code>aria-hidden="true"</code> — visual reinforcement only. AT receives validation state via the field's <code>aria-invalid</code> + <code>aria-describedby</code>.</p>
+    </section>
+    <div style="display: flex; gap: var(--space-card); padding: var(--space-card); background: var(--surface-elevated); border: var(--border-width-sm) solid var(--border); border-radius: var(--radius-card); max-width: 560px;">
+      <div style="text-align: center;">
+        <svg data-pattern="validation-status-icon" data-status="error" viewBox="0 0 24 24" aria-hidden="true" focusable="false" style="width: 24px; height: 24px;"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+        <div style="font-size: var(--type-size-xs); color: var(--text-recede); margin-top: var(--space-2);">error</div>
+      </div>
+      <div style="text-align: center;">
+        <svg data-pattern="validation-status-icon" data-status="valid" viewBox="0 0 24 24" aria-hidden="true" focusable="false" style="width: 24px; height: 24px;"><polyline points="20 6 9 17 4 12"/></svg>
+        <div style="font-size: var(--type-size-xs); color: var(--text-recede); margin-top: var(--space-2);">valid</div>
+      </div>
+      <div style="text-align: center;">
+        <svg data-pattern="validation-status-icon" data-status="warning" viewBox="0 0 24 24" aria-hidden="true" focusable="false" style="width: 24px; height: 24px;"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+        <div style="font-size: var(--type-size-xs); color: var(--text-recede); margin-top: var(--space-2);">warning</div>
+      </div>
+      <div style="text-align: center;">
+        <svg data-pattern="validation-status-icon" data-status="validating" viewBox="0 0 24 24" aria-hidden="true" focusable="false" style="width: 24px; height: 24px;"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        <div style="font-size: var(--type-size-xs); color: var(--text-recede); margin-top: var(--space-2);">validating</div>
+      </div>
+    </div>
+
+    <!-- =================== MICROSTATES =================== -->
+    <section class="specimen-divider">
+      <h2>Microstate matrix</h2>
+      <p>Validation-specific microstates beyond the canonical 8: <code>validating</code> (async check in flight), <code>aria-invalid</code> (failed validation), and the field-state visual register (default / invalid-data / valid-data / readonly-after-success).</p>
+    </section>
+    <div class="microstate-grid">
+      <div class="label">message</div>
+      <div class="cell">
+        <div class="ms-label">help (default)</div>
+        <p data-pattern="validation-message" data-variant="help" style="margin: 0;">
+          <svg aria-hidden="true" viewBox="0 0 14 14"><circle cx="7" cy="7" r="6"/><path d="M7 4v3M7 10h.01"/></svg>
+          Use 8+ chars.
+        </p>
+      </div>
+      <div class="cell">
+        <div class="ms-label">error</div>
+        <p data-pattern="validation-message" data-variant="error" style="margin: 0;">
+          <svg aria-hidden="true" viewBox="0 0 14 14"><circle cx="7" cy="7" r="6"/><path d="M7 4v3M7 10h.01"/></svg>
+          Email required.
+        </p>
+      </div>
+      <div class="cell">
+        <div class="ms-label">success</div>
+        <p data-pattern="validation-message" data-variant="success" style="margin: 0;">
+          <svg aria-hidden="true" viewBox="0 0 14 14"><polyline points="12 4 5.5 10.5 2 7"/></svg>
+          Available.
+        </p>
+      </div>
+      <div class="cell">
+        <div class="ms-label">warning</div>
+        <p data-pattern="validation-message" data-variant="warning" style="margin: 0;">
+          <svg aria-hidden="true" viewBox="0 0 14 14"><path d="M7 1l6 12H1z"/><path d="M7 6v3M7 11h.01"/></svg>
+          Short but ok.
+        </p>
+      </div>
+
+      <div class="label">submit button</div>
+      <div class="cell">
+        <div class="ms-label">default</div>
+        <button class="submit" type="button" style="font-size: var(--type-size-xs); padding: var(--space-2) var(--space-3);">Submit</button>
+      </div>
+      <div class="cell">
+        <div class="ms-label">aria-busy="true"</div>
+        <button class="submit" type="button" aria-busy="true" style="font-size: var(--type-size-xs); padding: var(--space-2) var(--space-3);">
+          <span class="spinner" aria-hidden="true"></span>
+          Submitting…
+        </button>
+      </div>
+      <div class="cell">
+        <div class="ms-label">aria-disabled (validating)</div>
+        <button class="submit" type="button" aria-disabled="true" style="font-size: var(--type-size-xs); padding: var(--space-2) var(--space-3);">Submit</button>
+      </div>
+      <div class="cell">
+        <div class="ms-label">focus-visible</div>
+        <button class="submit" type="button" style="font-size: var(--type-size-xs); padding: var(--space-2) var(--space-3); outline: var(--focus-ring-width) solid var(--focus-ring); outline-offset: var(--focus-ring-offset);">Submit</button>
+      </div>
+    </div>
+
+    <!-- =================== COMPOSITION LINEAGE =================== -->
+    <section class="specimen-divider">
+      <h2>Composition lineage — what form-validation consumes</h2>
+    </section>
+    <table class="lineage">
+      <thead>
+        <tr><th>Consumed primitive</th><th>Source pack</th><th>Used in</th><th>How this pattern uses it</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>&lt;form-control&gt;</code> (all types)</td>
+          <td>@quoin/pattern-form-fields</td>
+          <td>Every form field</td>
+          <td>This pattern adds validation on top of form-fields. <code>aria-invalid</code>, <code>aria-required</code>, <code>aria-describedby</code> all live on the form-control. The validation pattern only manages the orchestration + message rendering.</td>
+        </tr>
+        <tr>
+          <td><code>&lt;form-section&gt;</code> + <code>&lt;form-row&gt;</code></td>
+          <td>@quoin/pattern-form-fields</td>
+          <td>Form scaffold</td>
+          <td>The form-section's error-summary slot is where <code>&lt;validation-summary&gt;</code> mounts. The form-section's submit-button slot composes button-system.</td>
+        </tr>
+        <tr>
+          <td><code>&lt;action-button intent="primary"&gt;</code></td>
+          <td>@quoin/pattern-button-system</td>
+          <td>Submit button (every form)</td>
+          <td>Inherits 8 microstates. <code>aria-busy="true"</code> while form is validating or submitting. <code>aria-disabled="true"</code> while async validation completes pre-submit.</td>
+        </tr>
+        <tr>
+          <td><code>&lt;action-button intent="secondary"&gt;</code> or <code>intent="ghost"</code></td>
+          <td>@quoin/pattern-button-system</td>
+          <td>Secondary actions in success/error states (Resend, Retry, Cancel)</td>
+          <td>De-escalated CTAs alongside the primary action in submit-failed and submitted states.</td>
+        </tr>
+        <tr>
+          <td>canonical tokens</td>
+          <td>@quoin/tokens-baseline</td>
+          <td>every CSS value</td>
+          <td>Critical / warning / success colour families drive the four summary tones. <code>role</code> + <code>aria-live</code> + <code>tabindex</code> drive the semantic behaviour.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <section class="specimen-divider">
+      <h2>Accessibility checklist</h2>
+    </section>
+    <ul class="a11y-list">
+      <li><strong>Error summary as landmark:</strong> <code>&lt;section role="alert" aria-labelledby="..." tabindex="-1"&gt;</code> — programmatically focusable after a failed submit so screen readers immediately announce the count + contents.</li>
+      <li><strong>Skip-to-error links:</strong> Each <code>&lt;li&gt;&lt;a href="#field-id"&gt;</code> in the summary anchors to its field. Per WCAG 2.4.6 (Headings and Labels) + 3.3.1 (Error Identification).</li>
+      <li><strong>Field-level error connection:</strong> Invalid field has <code>aria-invalid="true"</code> + <code>aria-describedby="field-id-error [field-id-help]"</code> pointing to the validation-message(s) by id.</li>
+      <li><strong>role="alert" vs role="status":</strong> Error tone uses <code>role="alert"</code> (assertive, interrupts). Warning / info / success use <code>role="status"</code> + <code>aria-live="polite"</code> (non-interrupting).</li>
+      <li><strong>Required field marker:</strong> Visible <code>*</code> next to label is <code>aria-hidden="true"</code>; the actual requirement is communicated via <code>aria-required="true"</code> on the field.</li>
+      <li><strong>Live-validation announcements:</strong> Use <code>aria-live="polite"</code> on the message container so AT announces async results (e.g., "Checking username…" → "Available") without stealing focus.</li>
+      <li><strong>Async validation status:</strong> Validating state is a third state (not invalid). Status icon uses status="validating"; field aria-invalid stays "false" or unset. <code>aria-busy="true"</code> on the field OR on the form.</li>
+      <li><strong>Password strength meter:</strong> Uses <code>role="progressbar"</code> with <code>aria-valuenow / aria-valuemin / aria-valuemax</code> + a textual label. The label changes live in an <code>aria-live="polite"</code> region.</li>
+      <li><strong>Constructive error messages:</strong> "Enter your email address" beats "Email is required" — the imperative form tells the user what to do, not what they failed at.</li>
+      <li><strong>Focus management on failed submit:</strong> JS calls <code>summary.focus()</code> after preventDefault. Don't auto-focus the first invalid field — that skips the user past the summary they might want to read.</li>
+      <li><strong>Submit button states:</strong> <code>aria-busy="true"</code> during async validation + submission. <code>aria-disabled="true"</code> when form is in validating state and user-initiated submit should not retrigger.</li>
+      <li><strong>novalidate on form:</strong> Disables browser-native validation so this pattern owns all messaging. Required for cross-browser consistency.</li>
+      <li><strong>Reduced motion:</strong> Spinner animations + strength-bar fill transition collapse to none under <code>prefers-reduced-motion: reduce</code>.</li>
+    </ul>
+  </main>
+</body>
+</html>

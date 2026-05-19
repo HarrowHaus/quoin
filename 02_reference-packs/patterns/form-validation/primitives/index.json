@@ -1,0 +1,245 @@
+[
+  {
+    "name": "validation-summary",
+    "category": "product",
+    "role": "Error-summary panel rendered at the top of an invalid form. Lists each field-level error as an anchor link pointing to its field. WCAG 2.4.6 (Headings and Labels), 3.3.1 (Error Identification), 3.3.3 (Error Suggestion). Becomes the focus target after a failed submit so screen readers immediately announce the count and contents. Renders as a <section role='alert' aria-labelledby='<id>'> with a heading + count + ordered list of links.",
+    "attributes": {
+      "tone": {
+        "values": ["error", "warning", "info", "success"],
+        "default": "error",
+        "specific": true
+      },
+      "show-count": {
+        "values": ["true", "false"],
+        "default": "true",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "--critical-recede",
+      "backgroundWarning": "--warning-recede",
+      "backgroundInfo": "--accent-recede",
+      "backgroundSuccess": "--success-recede",
+      "color": "--text-emphasis",
+      "iconColor": "--critical",
+      "iconColorWarning": "--warning",
+      "iconColorInfo": "--accent",
+      "iconColorSuccess": "--success",
+      "linkColor": "--critical",
+      "linkColorHover": "--critical",
+      "borderColor": "--critical",
+      "borderColorWarning": "--warning",
+      "borderColorInfo": "--accent",
+      "borderColorSuccess": "--success",
+      "borderWidth": "--border-width-md",
+      "borderRadius": "--radius-card",
+      "padding": "--space-4",
+      "gap": "--space-3",
+      "fontFamily": "--font-sans",
+      "fontSize": "--type-size-sm",
+      "fontWeight": "--font-weight-medium",
+      "headingFontWeight": "--font-weight-semibold",
+      "lineHeight": "--leading-prose",
+      "transition": "--transition-default",
+      "focusRing": "--focus-ring"
+    },
+    "structure": {
+      "element": "section",
+      "attributes": {
+        "role": "alert",
+        "tabindex": "-1"
+      }
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<section role='alert' aria-labelledby='<heading-id>' tabindex='-1' id='form-error-summary'>",
+        "  <header>",
+        "    <svg aria-hidden='true'> — tone-appropriate icon (✕ / ⚠ / ℹ / ✓)",
+        "    <h3 id='<heading-id>'>There are 3 errors in this form</h3>",
+        "  </header>",
+        "  <ol>",
+        "    <li><a href='#<field-id>'>Email is required</a></li>",
+        "    <li><a href='#<field-id-2>'>Password must be at least 8 characters</a></li>",
+        "    <li><a href='#<field-id-3>'>You must agree to the terms</a></li>",
+        "  </ol>"
+      ],
+      "tones": {
+        "error": "Default tone. role='alert' for assertive announcement. Used when submit failed validation.",
+        "warning": "role='status' instead of 'alert'. Used when form has soft warnings (e.g., 'password is short but allowed').",
+        "info": "role='status'. Used for help text at top of form ('Fields marked * are required').",
+        "success": "role='status'. Used after successful submit ('Saved — your changes are live')."
+      },
+      "focusManagement": {
+        "afterFailedSubmit": "On submit-failed: programmatically focus the validation-summary via .focus() (which works because tabindex='-1' makes it programmatically focusable). Screen readers will then announce the entire summary as the user's reading context — heading + count + first link.",
+        "skipToError": "Each <li><a> in the summary anchors to its field via href='#<field-id>'. Clicking jumps focus to the field. Use scroll-margin-top on the field to offset for sticky headers.",
+        "dontStealFocus": "Only steal focus on submit-failed, NOT on every keystroke validation. Live validation should announce via the field's aria-describedby, not by moving focus."
+      },
+      "ariaPatterns": {
+        "roleAlert": "<section role='alert'> for error tone — assertive announcement so users immediately know submit failed.",
+        "ariaLabelledby": "aria-labelledby points to the heading inside, giving the section a programmatic name.",
+        "tabindexMinusOne": "tabindex='-1' makes the section focusable via JS but not in the natural tab order.",
+        "ariaLive": "role='alert' implies aria-live='assertive'. Don't set aria-live='polite' here — error feedback should interrupt."
+      }
+    }
+  },
+  {
+    "name": "validation-message",
+    "category": "product",
+    "role": "Single inline message below a form-control. Three variants — error (validation failed), help (instructional hint always shown), success (positive confirmation, e.g., 'Username available'). Connected to the field via aria-describedby. Optional leading icon + descriptive text. Used for both pre-submit live validation AND post-submit error display.",
+    "attributes": {
+      "variant": {
+        "values": ["error", "help", "success", "warning"],
+        "default": "error",
+        "specific": true
+      },
+      "icon": {
+        "values": ["true", "false"],
+        "default": "true",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "--critical",
+      "colorHelp": "--text-recede",
+      "colorSuccess": "--success",
+      "colorWarning": "--warning",
+      "iconColor": "currentColor",
+      "fontFamily": "--font-sans",
+      "fontSize": "--type-size-xs",
+      "fontWeight": "--font-weight-medium",
+      "lineHeight": "--leading-prose",
+      "marginTop": "--space-1",
+      "gap": "--space-1",
+      "transition": "--transition-default"
+    },
+    "structure": {
+      "element": "p"
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "semanticStructure": [
+        "<p id='<field-id>-error' class='validation-message' data-variant='error'>",
+        "  <svg aria-hidden='true' class='icon'> — variant-appropriate icon",
+        "  <span>Email is required</span>",
+        "</p>"
+      ],
+      "variants": {
+        "error": "Used when the field's aria-invalid='true'. role='alert' on the message when shown post-submit; no role on live-validation messages (the field's aria-describedby handles announcement).",
+        "help": "Always shown. Instructional hint ('Use at least 8 characters'). Not announced as an alert — just connected via aria-describedby.",
+        "success": "Positive feedback ('Username available' / 'Password strong'). Shown live during input.",
+        "warning": "Soft warning that doesn't block submit ('Password is short but allowed')."
+      },
+      "ariaPatterns": {
+        "ariaDescribedby": "The field's aria-describedby must reference the message's id. Multiple aria-describedby targets are space-separated: aria-describedby='email-help email-error'.",
+        "messageOnSubmit": "Post-submit error messages get role='alert' temporarily so AT announces them. Once user starts editing the field, the message reverts to plain text (aria-describedby still connects it).",
+        "iconAriaHidden": "Icons inside validation-messages are decorative (aria-hidden='true'). The text content carries the meaning."
+      },
+      "errorMessageGuidelines": [
+        "Be specific. 'Email is required' beats 'Field is required'.",
+        "Be constructive. 'Use at least 8 characters' beats 'Password too short'.",
+        "Don't repeat the field label. The label says 'Email'; the error says 'Email is required' (not 'Email — Email is required').",
+        "Phrase as instruction or fact, not blame. 'Choose a different username — that one is taken' beats 'Username invalid'.",
+        "Match the input language. If field accepts dates as 'MM/DD/YYYY', error should mirror that format."
+      ]
+    }
+  },
+  {
+    "name": "validation-status-icon",
+    "category": "product",
+    "role": "Small inline status icon used inside form-control trailing slot or beside field labels in the validation-summary. Indicates validation status — error (✕) / valid (✓) / warning (⚠) / validating (spinner). Always aria-hidden because the field's aria-invalid + aria-describedby handle AT communication.",
+    "attributes": {
+      "status": {
+        "values": ["error", "valid", "warning", "validating"],
+        "default": "error",
+        "specific": true
+      },
+      "size": {
+        "values": ["sm", "md"],
+        "default": "sm",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "--critical",
+      "colorValid": "--success",
+      "colorWarning": "--warning",
+      "colorValidating": "--text-recede",
+      "size": "16px",
+      "transition": "--transition-default"
+    },
+    "structure": {
+      "element": "svg",
+      "attributes": {
+        "aria-hidden": "true",
+        "focusable": "false"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "statuses": {
+        "error": "✕ in --critical. Shown when field's aria-invalid='true'.",
+        "valid": "✓ in --success. Shown when field passed live validation (e.g., 'Username available').",
+        "warning": "⚠ in --warning. Soft warning.",
+        "validating": "Spinning ⟳ in --text-recede. Shown during async validation (e.g., 'Checking username…')."
+      },
+      "ariaPatterns": {
+        "alwaysAriaHidden": "Always aria-hidden='true' + focusable='false'. The icon reinforces visually; the field's ARIA state communicates to AT.",
+        "validatingSpinner": "When status='validating', the spin animation should collapse to none under prefers-reduced-motion: reduce."
+      }
+    }
+  },
+  {
+    "name": "validation-orchestrator",
+    "category": "product",
+    "role": "Invisible wrapper primitive that coordinates form-level validation state across child form-controls. Renders as <form data-state='<pattern-state>' novalidate>. Sets data-state on itself based on field-level state aggregation. JS-side: tracks pristine/touched/validating/valid/invalid; on submit, runs validation, prevents default if invalid, focuses the validation-summary if added. The DOM contract is documented here; the JS implementation is host-provided in v1 (a reference JS implementation arrives in a P1 utility pack).",
+    "attributes": {
+      "state": {
+        "values": ["default", "touched", "validating", "valid", "invalid", "submitted", "submit-failed"],
+        "default": "default",
+        "specific": true
+      },
+      "validate-on": {
+        "values": ["submit", "blur", "input", "submit-then-blur"],
+        "default": "submit-then-blur",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "transition": "--transition-default"
+    },
+    "structure": {
+      "element": "form",
+      "attributes": {
+        "novalidate": ""
+      }
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "states": {
+        "default": "Pristine — form has never been interacted with. No validation messages shown. Submit button enabled (clicking it will trigger validation). 'default' is the canonical state name per the catalog convention; 'pristine' is the descriptive term used in the docs.",
+        "touched": "User has focused-and-blurred at least one field, but not submitted. Field-level live validation may be running per validate-on policy.",
+        "validating": "Async validation in flight on at least one field. Affected fields show validating status icon. Submit is aria-busy.",
+        "valid": "All fields pass validation. Submit button is fully enabled.",
+        "invalid": "One or more fields fail validation. Field-level messages visible on touched-and-failed fields. Submit attempt would scroll-and-focus the summary.",
+        "submitted": "Form successfully submitted. Often replaced with a success view; validation-summary may render in tone='success'.",
+        "submit-failed": "Server rejected the submission (validation failed server-side OR network/auth error). validation-summary renders with role='alert' and is focused programmatically."
+      },
+      "validateOnPolicies": {
+        "submit": "Only validate on submit. No live feedback. Used for short forms.",
+        "blur": "Validate each field as it blurs. Used for forms where users want immediate feedback per field.",
+        "input": "Validate continuously as user types. Aggressive; mostly used for password strength meters.",
+        "submit-then-blur": "Don't validate until first submit attempt. After that, validate each field on blur. The 80% recommendation (per Nielsen Norman + WAI-ARIA APG)."
+      },
+      "ariaPatterns": {
+        "novalidate": "<form novalidate> — disables browser-native validation so this pattern's JS owns all messaging. Required for consistent cross-browser behaviour.",
+        "preventDefaultOnInvalid": "On submit, JS calls e.preventDefault() if any field's aria-invalid='true'. Then focus is moved to the validation-summary.",
+        "afterServerError": "Server-side errors map to field-level aria-invalid + aria-describedby pointing to a fresh validation-message. Plus a top-level validation-summary listing all server errors."
+      }
+    }
+  }
+]
