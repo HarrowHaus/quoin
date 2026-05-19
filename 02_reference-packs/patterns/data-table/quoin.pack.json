@@ -1,0 +1,26 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/pattern-data-table",
+  "version": "1.0.0",
+  "type": "pattern",
+  "quoinVersion": "^0.1.0",
+  "description": "Sortable / filterable / selectable data table — 8 primitives, 3 densities, 7 states. Composes form-fields (search, filters, row selection) + button-system (sort, pagination, bulk).",
+  "category": "product",
+  "variant": "system",
+  "exports": {
+    "primitives": "./primitives/index.json"
+  },
+  "states": ["default", "loading", "empty", "filtered-empty", "error", "selected", "sorted"],
+  "microStates": ["default", "hover", "active", "focus", "focus-visible", "disabled", "loading", "selected"],
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/patterns/data-table",
+    "tags": ["table", "data-grid", "admin", "dashboard", "sortable", "p0"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0",
+    "@quoin/pattern-button-system": "^1.0.0",
+    "@quoin/pattern-form-fields": "^1.0.0"
+  }
+}

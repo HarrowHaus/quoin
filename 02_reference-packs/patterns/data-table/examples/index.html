@@ -1,0 +1,1489 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>@quoin/pattern-data-table — specimen</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=JetBrains+Mono:wght@100..800&display=swap">
+
+  <style>
+    :root {
+      color-scheme: light dark;
+
+      --surface: oklch(98% 0 0);
+      --surface-elevated: oklch(100% 0 0);
+      --surface-recessed: oklch(96% 0 0);
+      --text: oklch(30% 0 0);
+      --text-emphasis: oklch(15% 0 0);
+      --text-recede: oklch(50% 0 0);
+      --text-disabled: oklch(72% 0 0);
+      --text-on-accent: oklch(100% 0 0);
+      --accent: oklch(20% 0 0);
+      --accent-hover: oklch(28% 0 0);
+      --accent-active: oklch(12% 0 0);
+      --accent-recede: oklch(94% 0 0);
+      --critical: oklch(55% 0.22 25);
+      --critical-recede: oklch(95% 0.05 25);
+      --success: oklch(50% 0.18 155);
+      --success-recede: oklch(95% 0.05 155);
+      --warning: oklch(75% 0.18 80);
+      --warning-recede: oklch(95% 0.05 80);
+
+      --border: oklch(88% 0 0);
+      --border-emphasis: oklch(20% 0 0);
+      --border-recede: oklch(94% 0 0);
+      --border-width-sm: 1px;
+      --border-width-md: 2px;
+
+      --focus-ring: oklch(55% 0.22 260);
+      --focus-ring-width: 2px;
+      --focus-ring-offset: 2px;
+
+      --space-1: 4px;
+      --space-2: 6px;
+      --space-3: 8px;
+      --space-4: 12px;
+      --space-5: 16px;
+      --space-6: 20px;
+      --space-8: 32px;
+      --space-card: 24px;
+      --space-panel: 32px;
+      --space-section: 64px;
+
+      --radius-sm: 4px;
+      --radius-md: 6px;
+      --radius-card: 12px;
+      --radius-pill: 999px;
+
+      --font-sans: 'Inter Variable', 'Inter', system-ui, sans-serif;
+      --font-display: 'Inter Variable', 'Inter', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+      --type-size-xs: 0.75rem;
+      --type-size-sm: 0.875rem;
+      --type-size-md: 1rem;
+      --type-size-lg: 1.125rem;
+      --type-size-xl: 1.5rem;
+      --type-size-2xl: 2rem;
+      --type-size-3xl: 2.5rem;
+      --type-size-4xl: 3.5rem;
+      --font-weight-regular: 400;
+      --font-weight-medium: 500;
+      --font-weight-semibold: 600;
+      --font-weight-bold: 700;
+      --leading-tight: 1.15;
+      --leading-prose: 1.55;
+      --leading-display: 1.05;
+      --tracking-tight: -0.01em;
+      --tracking-normal: 0;
+      --tracking-wide: 0.08em;
+
+      --motion-fast: 120ms;
+      --motion-normal: 160ms;
+      --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+      --transition-default: all var(--motion-normal) var(--ease-standard);
+
+      --shadow-tint: oklch(0% 0 0 / 0.06);
+      --shadow-sm: 0 1px 2px 0 var(--shadow-tint);
+      --shadow-md: 0 4px 6px -1px var(--shadow-tint), 0 2px 4px -1px var(--shadow-tint);
+      --shadow-lg: 0 10px 25px -5px var(--shadow-tint), 0 6px 12px -3px var(--shadow-tint);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --surface: oklch(10% 0 0);
+        --surface-elevated: oklch(15% 0 0);
+        --surface-recessed: oklch(8% 0 0);
+        --text: oklch(85% 0 0);
+        --text-emphasis: oklch(98% 0 0);
+        --text-recede: oklch(60% 0 0);
+        --text-disabled: oklch(35% 0 0);
+        --text-on-accent: oklch(10% 0 0);
+        --accent: oklch(95% 0 0);
+        --accent-recede: oklch(20% 0 0);
+        --success-recede: oklch(18% 0.06 155);
+        --warning-recede: oklch(18% 0.06 80);
+        --critical-recede: oklch(18% 0.05 25);
+        --border: oklch(20% 0 0);
+        --shadow-tint: oklch(0% 0 0 / 0.4);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      :root { --motion-fast: 0ms; --motion-normal: 0ms; --transition-default: none; }
+      * { animation: none !important; }
+    }
+
+    * { box-sizing: border-box; }
+  </style>
+
+  <style>
+    html, body {
+      margin: 0; padding: 0;
+      background: var(--surface);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-md);
+      line-height: var(--leading-prose);
+      -webkit-font-smoothing: antialiased;
+    }
+    main { max-width: 1280px; margin: 0 auto; padding: var(--space-section) var(--space-panel); }
+    h1 {
+      font-family: var(--font-display);
+      font-size: var(--type-size-3xl);
+      font-weight: var(--font-weight-semibold);
+      line-height: var(--leading-display);
+      letter-spacing: var(--tracking-tight);
+      margin: 0 0 var(--space-4);
+      text-wrap: balance;
+    }
+    h2 {
+      font-family: var(--font-display);
+      font-size: var(--type-size-2xl);
+      font-weight: var(--font-weight-semibold);
+      line-height: var(--leading-tight);
+      letter-spacing: var(--tracking-tight);
+      margin: var(--space-section) 0 var(--space-4);
+      text-wrap: balance;
+    }
+    .lede {
+      font-size: var(--type-size-lg);
+      line-height: var(--leading-prose);
+      color: var(--text-recede);
+      max-width: 70ch;
+      margin: 0 0 var(--space-section);
+    }
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--space-4);
+      padding: var(--space-4);
+      background: var(--surface-elevated);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-card);
+      margin-bottom: var(--space-section);
+      font-size: var(--type-size-sm);
+    }
+    .meta dt { font-weight: var(--font-weight-semibold); color: var(--text-emphasis); margin-bottom: var(--space-1); }
+    .meta dd { margin: 0; color: var(--text-recede); }
+    .specimen-divider {
+      margin: var(--space-section) 0 var(--space-card);
+      padding-bottom: var(--space-2);
+      border-bottom: var(--border-width-sm) solid var(--border);
+    }
+    .specimen-divider h2 { margin: 0; }
+    .specimen-divider p { margin: var(--space-2) 0 0; color: var(--text-recede); font-size: var(--type-size-sm); }
+
+    /* ===== DATA-TABLE PRODUCTION STYLES ===== */
+
+    [data-pattern="data-table"] {
+      background: var(--surface);
+      color: var(--text);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      font-family: var(--font-sans);
+      transition: var(--transition-default);
+    }
+    [data-pattern="data-table"] table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--type-size-sm);
+      line-height: var(--leading-prose);
+    }
+    [data-pattern="data-table"] caption {
+      caption-side: top;
+      padding: var(--space-3) var(--space-card);
+      text-align: left;
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-emphasis);
+      border-bottom: var(--border-width-sm) solid var(--border);
+    }
+    [data-pattern="data-table"] thead { background: var(--surface-recessed); }
+    [data-pattern="data-table"] thead th {
+      position: sticky; top: 0;
+      background: var(--surface-recessed);
+      color: var(--text-emphasis);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-xs);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      text-align: left;
+      padding: var(--space-3) var(--space-card);
+      border-bottom: var(--border-width-md) solid var(--border-emphasis);
+      vertical-align: bottom;
+      white-space: nowrap;
+      transition: var(--transition-default);
+    }
+    [data-pattern="data-table"] thead th[data-align="right"] { text-align: right; }
+    [data-pattern="data-table"] thead th[data-align="center"] { text-align: center; }
+    [data-pattern="data-table"] thead th button.sort-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: transparent;
+      border: 0;
+      padding: 0;
+      color: inherit;
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: inherit;
+      letter-spacing: inherit;
+      text-transform: inherit;
+      cursor: pointer;
+      transition: var(--transition-default);
+    }
+    [data-pattern="data-table"] thead th button.sort-trigger:hover { color: var(--accent-hover); }
+    [data-pattern="data-table"] thead th button.sort-trigger:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+      border-radius: var(--radius-sm);
+    }
+    [data-pattern="data-table"] thead th .sort-indicator {
+      width: 12px; height: 12px;
+      color: var(--text-recede);
+      transition: var(--transition-default);
+    }
+    [data-pattern="data-table"] thead th[aria-sort="ascending"] .sort-indicator,
+    [data-pattern="data-table"] thead th[aria-sort="descending"] .sort-indicator {
+      color: var(--accent);
+    }
+    [data-pattern="data-table"] thead th[aria-sort="ascending"] .sort-indicator { transform: none; }
+    [data-pattern="data-table"] thead th[aria-sort="descending"] .sort-indicator { transform: rotate(180deg); }
+
+    [data-pattern="data-table"] tbody tr {
+      border-bottom: var(--border-width-sm) solid var(--border);
+      transition: var(--transition-default);
+    }
+    [data-pattern="data-table"] tbody tr:last-child { border-bottom: 0; }
+    [data-pattern="data-table"] tbody tr:hover { background: var(--surface-elevated); }
+    [data-pattern="data-table"] tbody tr[aria-selected="true"] { background: var(--accent-recede); }
+    [data-pattern="data-table"] tbody tr[aria-selected="true"]:hover { background: var(--accent-recede); }
+    [data-pattern="data-table"] tbody tr[aria-disabled="true"] { color: var(--text-disabled); }
+    [data-pattern="data-table"] tbody tr[aria-disabled="true"]:hover { background: var(--surface); }
+    [data-pattern="data-table"] tbody td {
+      padding: var(--space-3) var(--space-card);
+      vertical-align: middle;
+      color: var(--text);
+    }
+    [data-pattern="data-table"] tbody td[data-align="right"] { text-align: right; }
+    [data-pattern="data-table"] tbody td[data-align="center"] { text-align: center; }
+    [data-pattern="data-table"] tbody td[data-content-type="number"] {
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+      color: var(--text-emphasis);
+    }
+    [data-pattern="data-table"] tbody td .row-title {
+      color: var(--text-emphasis);
+      font-weight: var(--font-weight-medium);
+    }
+    [data-pattern="data-table"] tbody td .row-subtitle {
+      color: var(--text-recede);
+      font-size: var(--type-size-xs);
+      display: block;
+      margin-top: 2px;
+    }
+
+    /* Densities */
+    [data-pattern="data-table"][data-density="compact"] tbody td,
+    [data-pattern="data-table"][data-density="compact"] thead th { padding: var(--space-2) var(--space-3); }
+    [data-pattern="data-table"][data-density="comfortable"] tbody td,
+    [data-pattern="data-table"][data-density="comfortable"] thead th { padding: var(--space-4) var(--space-card); }
+
+    /* Registers */
+    [data-pattern="data-table"][data-register="striped"] tbody tr:nth-child(even):not([aria-selected="true"]):not(:hover) {
+      background: var(--surface-recessed);
+    }
+    [data-pattern="data-table"][data-register="bordered"] td,
+    [data-pattern="data-table"][data-register="bordered"] th {
+      border-right: var(--border-width-sm) solid var(--border);
+    }
+    [data-pattern="data-table"][data-register="bordered"] td:last-child,
+    [data-pattern="data-table"][data-register="bordered"] th:last-child {
+      border-right: 0;
+    }
+
+    /* Status badge */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      padding: 2px var(--space-2);
+      border-radius: var(--radius-pill);
+      font-size: var(--type-size-xs);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      border: var(--border-width-sm) solid transparent;
+    }
+    .status-badge::before {
+      content: "";
+      width: 6px; height: 6px;
+      border-radius: 999px;
+      background: currentColor;
+    }
+    .status-badge[data-tone="success"] { background: var(--success-recede); color: var(--success); border-color: var(--success); }
+    .status-badge[data-tone="warning"] { background: var(--warning-recede); color: oklch(45% 0.15 70); border-color: var(--warning); }
+    .status-badge[data-tone="critical"] { background: var(--critical-recede); color: var(--critical); border-color: var(--critical); }
+    .status-badge[data-tone="neutral"] { background: var(--surface-recessed); color: var(--text-recede); border-color: var(--border); }
+    .status-badge[data-tone="accent"] { background: var(--accent-recede); color: var(--accent); border-color: var(--accent); }
+
+    /* Selection checkbox column */
+    .select-col { width: 36px; padding-right: 0 !important; }
+    .select-col input[type="checkbox"] {
+      width: 16px; height: 16px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    /* Toolbar */
+    [data-pattern="data-table-toolbar"] {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-3) var(--space-card);
+      background: var(--surface);
+      border-bottom: var(--border-width-sm) solid var(--border);
+    }
+    [data-pattern="data-table-toolbar"] .search-input {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      flex: 0 0 320px;
+      max-width: 320px;
+      background: var(--surface-elevated);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0 var(--space-3);
+      color: var(--text);
+      transition: var(--transition-default);
+    }
+    [data-pattern="data-table-toolbar"] .search-input:focus-within {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 var(--focus-ring-offset) var(--surface), 0 0 0 calc(var(--focus-ring-offset) + var(--focus-ring-width)) var(--focus-ring);
+    }
+    [data-pattern="data-table-toolbar"] .search-input svg { width: 16px; height: 16px; color: var(--text-recede); flex: 0 0 auto; }
+    [data-pattern="data-table-toolbar"] .search-input input {
+      flex: 1;
+      background: transparent;
+      border: 0;
+      padding: var(--space-2) 0;
+      color: inherit;
+      font-family: var(--font-sans);
+      font-size: var(--type-size-sm);
+      min-width: 0;
+    }
+    [data-pattern="data-table-toolbar"] .search-input input:focus { outline: none; }
+    [data-pattern="data-table-toolbar"] .filter-cluster {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+    }
+    [data-pattern="data-table-toolbar"] .filter-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      padding: var(--space-2) var(--space-3);
+      background: var(--surface-elevated);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-xs);
+      font-weight: var(--font-weight-medium);
+      cursor: pointer;
+      transition: var(--transition-default);
+    }
+    [data-pattern="data-table-toolbar"] .filter-chip:hover { color: var(--accent-hover); border-color: var(--border-emphasis); }
+    [data-pattern="data-table-toolbar"] .filter-chip:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+    [data-pattern="data-table-toolbar"] .filter-chip[aria-pressed="true"] {
+      background: var(--accent-recede);
+      color: var(--text-emphasis);
+      border-color: var(--accent);
+    }
+    [data-pattern="data-table-toolbar"] .spacer { flex: 1; }
+    [data-pattern="data-table-toolbar"] .meta-action {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      background: transparent;
+      border: 0;
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-sm);
+      color: var(--text-recede);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-xs);
+      font-weight: var(--font-weight-medium);
+      cursor: pointer;
+      transition: var(--transition-default);
+    }
+    [data-pattern="data-table-toolbar"] .meta-action:hover { background: var(--surface-elevated); color: var(--accent-hover); }
+    [data-pattern="data-table-toolbar"] .meta-action:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+
+    /* Bulk actions bar */
+    [data-pattern="data-table-bulk-actions"] {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-3) var(--space-card);
+      background: var(--accent-recede);
+      color: var(--text-emphasis);
+      border-bottom: var(--border-width-md) solid var(--accent);
+      font-size: var(--type-size-sm);
+      font-weight: var(--font-weight-medium);
+    }
+    [data-pattern="data-table-bulk-actions"] .count strong { color: var(--accent); font-weight: var(--font-weight-bold); }
+    [data-pattern="data-table-bulk-actions"] .divider {
+      width: 1px; height: 16px;
+      background: var(--border-emphasis);
+      opacity: 0.3;
+    }
+    [data-pattern="data-table-bulk-actions"] .action {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      background: transparent;
+      border: 0;
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-sm);
+      color: var(--text-emphasis);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-sm);
+      font-weight: var(--font-weight-medium);
+      cursor: pointer;
+      transition: var(--transition-default);
+    }
+    [data-pattern="data-table-bulk-actions"] .action:hover { background: var(--surface-elevated); }
+    [data-pattern="data-table-bulk-actions"] .action:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+    [data-pattern="data-table-bulk-actions"] .action[data-intent="critical"] { color: var(--critical); }
+    [data-pattern="data-table-bulk-actions"] .action[data-intent="critical"]:hover { background: var(--critical-recede); }
+
+    /* Pagination */
+    [data-pattern="data-table-pagination"] {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-3) var(--space-card);
+      background: var(--surface);
+      border-top: var(--border-width-sm) solid var(--border);
+      font-size: var(--type-size-sm);
+      color: var(--text-recede);
+    }
+    [data-pattern="data-table-pagination"] .count strong { color: var(--text-emphasis); font-weight: var(--font-weight-medium); }
+    [data-pattern="data-table-pagination"] .spacer { flex: 1; }
+    [data-pattern="data-table-pagination"] .page-controls {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+    }
+    [data-pattern="data-table-pagination"] .page-controls button,
+    [data-pattern="data-table-pagination"] .page-controls .page-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 32px; height: 32px;
+      padding: 0 var(--space-2);
+      background: transparent;
+      border: var(--border-width-sm) solid transparent;
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-sm);
+      font-weight: var(--font-weight-medium);
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition-default);
+    }
+    [data-pattern="data-table-pagination"] .page-controls button:hover,
+    [data-pattern="data-table-pagination"] .page-controls .page-link:hover {
+      background: var(--surface-elevated);
+      color: var(--accent-hover);
+    }
+    [data-pattern="data-table-pagination"] .page-controls button:focus-visible,
+    [data-pattern="data-table-pagination"] .page-controls .page-link:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+    [data-pattern="data-table-pagination"] .page-controls button[aria-disabled="true"] {
+      color: var(--text-disabled);
+      cursor: not-allowed;
+    }
+    [data-pattern="data-table-pagination"] .page-controls .page-link[aria-current="page"] {
+      background: var(--accent);
+      color: var(--text-on-accent);
+      border-color: var(--accent);
+    }
+    [data-pattern="data-table-pagination"] .ellipsis {
+      color: var(--text-recede);
+      padding: 0 var(--space-1);
+    }
+    [data-pattern="data-table-pagination"] .page-size {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+    [data-pattern="data-table-pagination"] .page-size select {
+      background: var(--surface-elevated);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: var(--space-1) var(--space-2);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-sm);
+    }
+
+    /* Empty state */
+    [data-pattern="data-table-empty-state"] td {
+      padding: var(--space-section) var(--space-card) !important;
+      text-align: center;
+    }
+    [data-pattern="data-table-empty-state"] .icon {
+      width: 48px; height: 48px;
+      color: var(--text-disabled);
+      margin: 0 auto var(--space-3);
+      display: block;
+    }
+    [data-pattern="data-table-empty-state"][data-variant="error"] .icon { color: var(--critical); }
+    [data-pattern="data-table-empty-state"] h3 {
+      font-family: var(--font-display);
+      font-size: var(--type-size-lg);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-emphasis);
+      margin: 0 0 var(--space-2);
+    }
+    [data-pattern="data-table-empty-state"] p {
+      color: var(--text-recede);
+      font-size: var(--type-size-sm);
+      max-width: 48ch;
+      margin: 0 auto var(--space-card);
+      line-height: var(--leading-prose);
+    }
+    [data-pattern="data-table-empty-state"] .actions {
+      display: inline-flex;
+      gap: var(--space-2);
+      justify-content: center;
+    }
+    [data-pattern="data-table-empty-state"] .actions .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      padding: var(--space-2) var(--space-4);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-sm);
+      font-weight: var(--font-weight-semibold);
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition-default);
+      border: var(--border-width-sm) solid transparent;
+    }
+    [data-pattern="data-table-empty-state"] .actions .cta[data-intent="primary"] {
+      background: var(--accent); color: var(--text-on-accent);
+    }
+    [data-pattern="data-table-empty-state"] .actions .cta[data-intent="primary"]:hover { background: var(--accent-hover); }
+    [data-pattern="data-table-empty-state"] .actions .cta[data-intent="ghost"] {
+      background: transparent; color: var(--text); border-color: var(--border);
+    }
+    [data-pattern="data-table-empty-state"] .actions .cta[data-intent="ghost"]:hover { background: var(--surface-elevated); }
+
+    /* Skeleton loading */
+    .skeleton {
+      display: inline-block;
+      height: 14px;
+      width: 100%;
+      max-width: 200px;
+      background: linear-gradient(90deg, var(--surface-recessed), var(--surface-elevated), var(--surface-recessed));
+      background-size: 200% 100%;
+      border-radius: var(--radius-sm);
+      animation: shimmer 1.4s ease-in-out infinite;
+    }
+    .skeleton[data-w="sm"] { max-width: 80px; }
+    .skeleton[data-w="md"] { max-width: 140px; }
+    .skeleton[data-w="lg"] { max-width: 220px; }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    @media (prefers-reduced-motion: reduce) { .skeleton { animation: none; } }
+
+    /* Avatar */
+    .avatar {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 24px; height: 24px;
+      border-radius: 999px;
+      background: var(--accent-recede);
+      color: var(--text-emphasis);
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      font-weight: var(--font-weight-semibold);
+      border: var(--border-width-sm) solid var(--surface);
+    }
+    .avatar-stack {
+      display: inline-flex; align-items: center;
+    }
+    .avatar-stack > .avatar:not(:first-child) { margin-left: -6px; }
+    .avatar-stack > .more {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 24px; height: 24px;
+      border-radius: 999px;
+      background: var(--surface-recessed);
+      color: var(--text-recede);
+      font-size: 0.65rem;
+      font-weight: var(--font-weight-semibold);
+      border: var(--border-width-sm) solid var(--surface);
+      margin-left: -6px;
+    }
+
+    /* Row actions */
+    .row-action-cluster {
+      display: inline-flex;
+      gap: 2px;
+      visibility: hidden;
+    }
+    [data-pattern="data-table"] tbody tr:hover .row-action-cluster,
+    [data-pattern="data-table"] tbody tr:focus-within .row-action-cluster {
+      visibility: visible;
+    }
+    .row-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px; height: 28px;
+      background: transparent;
+      border: 0;
+      border-radius: var(--radius-sm);
+      color: var(--text-recede);
+      cursor: pointer;
+      transition: var(--transition-default);
+    }
+    .row-action:hover { background: var(--surface-recessed); color: var(--accent-hover); }
+    .row-action:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+      visibility: visible;
+    }
+
+    /* Icons */
+    .icon-12 { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .icon-14 { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .icon-16 { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .icon-48 { width: 48px; height: 48px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* Microstate matrix */
+    .microstate-grid {
+      display: grid;
+      grid-template-columns: 160px repeat(4, 1fr);
+      gap: var(--space-2);
+      background: var(--surface);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-card);
+      padding: var(--space-4);
+      margin-bottom: var(--space-card);
+    }
+    .microstate-grid > .label {
+      font-size: var(--type-size-xs);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-emphasis);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      align-self: center;
+    }
+    .microstate-grid > .cell {
+      background: var(--surface-recessed);
+      border-radius: var(--radius-sm);
+      padding: var(--space-3);
+      font-size: var(--type-size-xs);
+    }
+    .microstate-grid .ms-label {
+      color: var(--text-recede);
+      margin-bottom: var(--space-1);
+    }
+
+    /* Composition lineage */
+    .lineage { width: 100%; border-collapse: collapse; font-size: var(--type-size-sm); }
+    .lineage th, .lineage td {
+      text-align: left;
+      padding: var(--space-2) var(--space-3);
+      border-bottom: var(--border-width-sm) solid var(--border);
+      vertical-align: top;
+    }
+    .lineage th {
+      background: var(--surface-elevated);
+      color: var(--text-emphasis);
+      font-weight: var(--font-weight-semibold);
+      font-size: var(--type-size-xs);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+    }
+    .lineage code {
+      font-family: var(--font-mono);
+      font-size: var(--type-size-xs);
+      background: var(--surface-recessed);
+      padding: 0 4px;
+      border-radius: 3px;
+      color: var(--text-emphasis);
+    }
+
+    .a11y-list {
+      font-size: var(--type-size-sm);
+      line-height: var(--leading-prose);
+      color: var(--text-recede);
+      padding-left: var(--space-card);
+    }
+    .a11y-list code {
+      font-family: var(--font-mono);
+      font-size: 0.85em;
+      background: var(--surface-recessed);
+      padding: 0 4px;
+      border-radius: 3px;
+      color: var(--text-emphasis);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>pattern-data-table — specimen</h1>
+      <p class="lede">Sortable, filterable, selectable data table. The universal admin / dashboard / list primitive. Eight primitives, three densities, three visual registers, seven pattern states. Composes <code>@quoin/pattern-form-fields</code> for search + filters + selection checkboxes and <code>@quoin/pattern-button-system</code> for sort triggers + pagination + bulk actions.</p>
+      <dl class="meta">
+        <div><dt>Pack</dt><dd>@quoin/pattern-data-table@1.0.0</dd></div>
+        <div><dt>Primitives</dt><dd>8</dd></div>
+        <div><dt>Densities</dt><dd>compact / default / comfortable</dd></div>
+        <div><dt>Registers</dt><dd>striped / bordered / minimal</dd></div>
+        <div><dt>States</dt><dd>default / loading / empty / filtered-empty / error / selected / sorted</dd></div>
+        <div><dt>Composes</dt><dd>form-fields + button-system</dd></div>
+        <div><dt>WCAG</dt><dd>1.3.1, 2.1.1, 2.4.3, 4.1.2 (table semantics, aria-sort, aria-selected)</dd></div>
+      </dl>
+    </header>
+
+    <!-- =================== FULL STANDARD TABLE =================== -->
+    <section class="specimen-divider">
+      <h2>Standard table — Galley Dues subscriptions ledger</h2>
+      <p>The canonical view: toolbar with search + filter chips, sticky sortable headers, 10 rows with mixed content types (text / number / status-badge / avatar-stack / actions), pagination at the bottom. Density: default. Register: minimal.</p>
+    </section>
+    <div data-pattern="data-table" data-density="default" data-register="minimal" data-selection="multi" data-state="default" role="region" aria-label="Subscriptions table">
+      <div data-pattern="data-table-toolbar" role="toolbar" aria-label="Table controls">
+        <label class="search-input">
+          <svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <input type="search" placeholder="Search subscriptions…" aria-label="Search subscriptions">
+        </label>
+        <div class="filter-cluster">
+          <button class="filter-chip" type="button" aria-pressed="true">Status: Active <svg class="icon-12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></button>
+          <button class="filter-chip" type="button" aria-pressed="false">Category: All <svg class="icon-12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></button>
+          <button class="filter-chip" type="button" aria-pressed="false">Renews this month <svg class="icon-12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></button>
+        </div>
+        <div class="spacer"></div>
+        <button class="meta-action" type="button" aria-label="Export rows">
+          <svg class="icon-14" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          Export
+        </button>
+      </div>
+      <table>
+        <caption class="sr-only" style="position: absolute; left: -9999px;">Subscriptions in Galley Dues — 12 active services tracked</caption>
+        <thead>
+          <tr>
+            <th class="select-col" scope="col"><input type="checkbox" aria-label="Select all rows"></th>
+            <th scope="col" aria-sort="none">
+              <button class="sort-trigger" type="button" aria-label="Service, not sorted. Activate to sort ascending.">
+                Service
+                <svg class="sort-indicator" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5L6 1.5L9 4.5M3 7.5L6 10.5L9 7.5"/></svg>
+              </button>
+            </th>
+            <th scope="col" data-align="right" aria-sort="descending">
+              <button class="sort-trigger" type="button" aria-label="Monthly cost, sorted descending. Activate to sort ascending.">
+                Monthly cost
+                <svg class="sort-indicator" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 7.5L6 10.5L9 7.5"/></svg>
+              </button>
+            </th>
+            <th scope="col">Category</th>
+            <th scope="col" aria-sort="none">
+              <button class="sort-trigger" type="button" aria-label="Next charge, not sorted. Activate to sort ascending.">
+                Next charge
+                <svg class="sort-indicator" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5L6 1.5L9 4.5M3 7.5L6 10.5L9 7.5"/></svg>
+              </button>
+            </th>
+            <th scope="col">Status</th>
+            <th scope="col">Shared with</th>
+            <th scope="col" data-align="right" style="width: 60px;"><span class="sr-only" style="position: absolute; left: -9999px;">Row actions</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr aria-selected="false">
+            <td class="select-col"><input type="checkbox" aria-label="Select AWS row"></td>
+            <td>
+              <span class="row-title">AWS</span>
+              <span class="row-subtitle">aws.amazon.com</span>
+            </td>
+            <td data-content-type="number">$142.18</td>
+            <td><span class="status-badge" data-tone="neutral">Infrastructure</span></td>
+            <td>Dec 14, 2026</td>
+            <td><span class="status-badge" data-tone="success">Active</span></td>
+            <td>
+              <div class="avatar-stack" aria-label="Shared with 3 people">
+                <span class="avatar" aria-hidden="true">EP</span>
+                <span class="avatar" aria-hidden="true" style="background: oklch(85% 0.08 200);">AV</span>
+                <span class="avatar" aria-hidden="true" style="background: oklch(85% 0.08 30);">RM</span>
+              </div>
+            </td>
+            <td data-align="right">
+              <div class="row-action-cluster">
+                <button class="row-action" type="button" aria-label="Edit AWS subscription"><svg class="icon-14" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                <button class="row-action" type="button" aria-label="More actions for AWS"><svg class="icon-14" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+              </div>
+            </td>
+          </tr>
+          <tr aria-selected="true">
+            <td class="select-col"><input type="checkbox" checked aria-label="Select Linear row"></td>
+            <td>
+              <span class="row-title">Linear</span>
+              <span class="row-subtitle">linear.app</span>
+            </td>
+            <td data-content-type="number">$16.00</td>
+            <td><span class="status-badge" data-tone="accent">Productivity</span></td>
+            <td>Dec 03, 2026</td>
+            <td><span class="status-badge" data-tone="success">Active</span></td>
+            <td>
+              <div class="avatar-stack" aria-label="Shared with 5 people">
+                <span class="avatar" aria-hidden="true">EP</span>
+                <span class="avatar" aria-hidden="true" style="background: oklch(85% 0.08 280);">JT</span>
+                <span class="avatar" aria-hidden="true" style="background: oklch(85% 0.08 130);">DK</span>
+                <span class="more" aria-hidden="true">+2</span>
+              </div>
+            </td>
+            <td data-align="right">
+              <div class="row-action-cluster">
+                <button class="row-action" type="button" aria-label="Edit Linear subscription"><svg class="icon-14" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                <button class="row-action" type="button" aria-label="More actions for Linear"><svg class="icon-14" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+              </div>
+            </td>
+          </tr>
+          <tr aria-selected="false">
+            <td class="select-col"><input type="checkbox" aria-label="Select Notion row"></td>
+            <td>
+              <span class="row-title">Notion</span>
+              <span class="row-subtitle">notion.so</span>
+            </td>
+            <td data-content-type="number">$8.00</td>
+            <td><span class="status-badge" data-tone="accent">Productivity</span></td>
+            <td>Nov 22, 2026</td>
+            <td><span class="status-badge" data-tone="warning">Renews soon</span></td>
+            <td>
+              <div class="avatar-stack" aria-label="Shared with 2 people">
+                <span class="avatar" aria-hidden="true">EP</span>
+                <span class="avatar" aria-hidden="true" style="background: oklch(85% 0.08 300);">AV</span>
+              </div>
+            </td>
+            <td data-align="right">
+              <div class="row-action-cluster">
+                <button class="row-action" type="button" aria-label="Edit Notion subscription"><svg class="icon-14" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                <button class="row-action" type="button" aria-label="More actions for Notion"><svg class="icon-14" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+              </div>
+            </td>
+          </tr>
+          <tr aria-selected="true">
+            <td class="select-col"><input type="checkbox" checked aria-label="Select Figma row"></td>
+            <td>
+              <span class="row-title">Figma</span>
+              <span class="row-subtitle">figma.com</span>
+            </td>
+            <td data-content-type="number">$15.00</td>
+            <td><span class="status-badge" data-tone="accent">Productivity</span></td>
+            <td>Dec 09, 2026</td>
+            <td><span class="status-badge" data-tone="success">Active</span></td>
+            <td>
+              <div class="avatar-stack" aria-label="Shared with 4 people">
+                <span class="avatar" aria-hidden="true">EP</span>
+                <span class="avatar" aria-hidden="true" style="background: oklch(85% 0.08 200);">JT</span>
+                <span class="avatar" aria-hidden="true" style="background: oklch(85% 0.08 60);">DK</span>
+                <span class="more" aria-hidden="true">+1</span>
+              </div>
+            </td>
+            <td data-align="right">
+              <div class="row-action-cluster">
+                <button class="row-action" type="button" aria-label="Edit Figma subscription"><svg class="icon-14" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                <button class="row-action" type="button" aria-label="More actions for Figma"><svg class="icon-14" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+              </div>
+            </td>
+          </tr>
+          <tr aria-selected="false">
+            <td class="select-col"><input type="checkbox" aria-label="Select GitHub Pro row"></td>
+            <td>
+              <span class="row-title">GitHub Pro</span>
+              <span class="row-subtitle">github.com</span>
+            </td>
+            <td data-content-type="number">$4.00</td>
+            <td><span class="status-badge" data-tone="neutral">Developer tools</span></td>
+            <td>Dec 20, 2026</td>
+            <td><span class="status-badge" data-tone="success">Active</span></td>
+            <td>
+              <div class="avatar-stack" aria-label="Shared with 1 person">
+                <span class="avatar" aria-hidden="true">EP</span>
+              </div>
+            </td>
+            <td data-align="right">
+              <div class="row-action-cluster">
+                <button class="row-action" type="button" aria-label="Edit GitHub Pro subscription"><svg class="icon-14" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                <button class="row-action" type="button" aria-label="More actions for GitHub Pro"><svg class="icon-14" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+              </div>
+            </td>
+          </tr>
+          <tr aria-selected="false">
+            <td class="select-col"><input type="checkbox" aria-label="Select 1Password row"></td>
+            <td>
+              <span class="row-title">1Password</span>
+              <span class="row-subtitle">1password.com</span>
+            </td>
+            <td data-content-type="number">$2.99</td>
+            <td><span class="status-badge" data-tone="neutral">Security</span></td>
+            <td>Jan 04, 2027</td>
+            <td><span class="status-badge" data-tone="success">Active</span></td>
+            <td>
+              <div class="avatar-stack" aria-label="Shared with 1 person">
+                <span class="avatar" aria-hidden="true">EP</span>
+              </div>
+            </td>
+            <td data-align="right">
+              <div class="row-action-cluster">
+                <button class="row-action" type="button" aria-label="Edit 1Password subscription"><svg class="icon-14" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                <button class="row-action" type="button" aria-label="More actions for 1Password"><svg class="icon-14" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+              </div>
+            </td>
+          </tr>
+          <tr aria-selected="false" aria-disabled="true">
+            <td class="select-col"><input type="checkbox" disabled aria-label="Cannot select archived Adobe CC row"></td>
+            <td>
+              <span class="row-title">Adobe Creative Cloud</span>
+              <span class="row-subtitle">adobe.com</span>
+            </td>
+            <td data-content-type="number">$54.99</td>
+            <td><span class="status-badge" data-tone="neutral">Creative</span></td>
+            <td>—</td>
+            <td><span class="status-badge" data-tone="neutral">Cancelled</span></td>
+            <td>
+              <div class="avatar-stack" aria-label="Shared with 1 person">
+                <span class="avatar" aria-hidden="true">EP</span>
+              </div>
+            </td>
+            <td data-align="right"></td>
+          </tr>
+          <tr aria-selected="false">
+            <td class="select-col"><input type="checkbox" aria-label="Select Stripe row"></td>
+            <td>
+              <span class="row-title">Stripe</span>
+              <span class="row-subtitle">stripe.com</span>
+            </td>
+            <td data-content-type="number">$0.00</td>
+            <td><span class="status-badge" data-tone="neutral">Infrastructure</span></td>
+            <td>Usage-billed</td>
+            <td><span class="status-badge" data-tone="success">Active</span></td>
+            <td>
+              <div class="avatar-stack" aria-label="Shared with 2 people">
+                <span class="avatar" aria-hidden="true">EP</span>
+                <span class="avatar" aria-hidden="true" style="background: oklch(85% 0.08 280);">JT</span>
+              </div>
+            </td>
+            <td data-align="right">
+              <div class="row-action-cluster">
+                <button class="row-action" type="button" aria-label="Edit Stripe subscription"><svg class="icon-14" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                <button class="row-action" type="button" aria-label="More actions for Stripe"><svg class="icon-14" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+              </div>
+            </td>
+          </tr>
+          <tr aria-selected="false">
+            <td class="select-col"><input type="checkbox" aria-label="Select Anthropic row"></td>
+            <td>
+              <span class="row-title">Anthropic</span>
+              <span class="row-subtitle">anthropic.com</span>
+            </td>
+            <td data-content-type="number">$20.00</td>
+            <td><span class="status-badge" data-tone="neutral">AI tools</span></td>
+            <td>Dec 11, 2026</td>
+            <td><span class="status-badge" data-tone="success">Active</span></td>
+            <td>
+              <div class="avatar-stack" aria-label="Shared with 1 person">
+                <span class="avatar" aria-hidden="true">EP</span>
+              </div>
+            </td>
+            <td data-align="right">
+              <div class="row-action-cluster">
+                <button class="row-action" type="button" aria-label="Edit Anthropic subscription"><svg class="icon-14" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                <button class="row-action" type="button" aria-label="More actions for Anthropic"><svg class="icon-14" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+              </div>
+            </td>
+          </tr>
+          <tr aria-selected="false">
+            <td class="select-col"><input type="checkbox" aria-label="Select Vercel row"></td>
+            <td>
+              <span class="row-title">Vercel</span>
+              <span class="row-subtitle">vercel.com</span>
+            </td>
+            <td data-content-type="number">$20.00</td>
+            <td><span class="status-badge" data-tone="neutral">Infrastructure</span></td>
+            <td>Dec 16, 2026</td>
+            <td><span class="status-badge" data-tone="critical">Payment failed</span></td>
+            <td>
+              <div class="avatar-stack" aria-label="Shared with 3 people">
+                <span class="avatar" aria-hidden="true">EP</span>
+                <span class="avatar" aria-hidden="true" style="background: oklch(85% 0.08 230);">JT</span>
+                <span class="avatar" aria-hidden="true" style="background: oklch(85% 0.08 130);">DK</span>
+              </div>
+            </td>
+            <td data-align="right">
+              <div class="row-action-cluster">
+                <button class="row-action" type="button" aria-label="Edit Vercel subscription"><svg class="icon-14" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                <button class="row-action" type="button" aria-label="More actions for Vercel"><svg class="icon-14" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <nav data-pattern="data-table-pagination" aria-label="Pagination">
+        <p class="count" aria-live="polite">Showing <strong>1–10</strong> of <strong>12</strong></p>
+        <div class="spacer"></div>
+        <div class="page-controls">
+          <button type="button" aria-label="Previous page" aria-disabled="true"><svg class="icon-14" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <a class="page-link" href="#" aria-current="page" aria-label="Page 1">1</a>
+          <a class="page-link" href="#" aria-label="Page 2">2</a>
+          <button type="button" aria-label="Next page"><svg class="icon-14" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button>
+        </div>
+      </nav>
+    </div>
+
+    <!-- =================== WITH BULK ACTIONS =================== -->
+    <section class="specimen-divider">
+      <h2>With bulk-actions bar — 2 rows selected</h2>
+      <p>When one or more rows are selected, the bulk-actions bar replaces or overlays the filter cluster. Count is announced via <code>aria-live="polite"</code>. Critical actions (Delete) open a confirmation modal — never execute on first click.</p>
+    </section>
+    <div data-pattern="data-table" data-density="default" data-register="minimal" data-selection="multi" data-state="selected" role="region" aria-label="Subscriptions table with selection">
+      <div data-pattern="data-table-bulk-actions" role="group" aria-label="Bulk actions for 2 selected rows">
+        <p class="count" aria-live="polite"><strong>2</strong> of 12 selected</p>
+        <button class="action" type="button">Deselect all</button>
+        <div class="divider" aria-hidden="true"></div>
+        <button class="action" type="button">
+          <svg class="icon-14" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          Export selected
+        </button>
+        <button class="action" type="button">
+          <svg class="icon-14" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          Change renewal date…
+        </button>
+        <button class="action" type="button" data-intent="critical">
+          <svg class="icon-14" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>
+          Cancel subscriptions
+        </button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th class="select-col" scope="col"><input type="checkbox" aria-label="Select all rows" checked></th>
+            <th scope="col">Service</th>
+            <th scope="col" data-align="right">Monthly cost</th>
+            <th scope="col">Category</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr aria-selected="true">
+            <td class="select-col"><input type="checkbox" checked aria-label="Select Linear row"></td>
+            <td><span class="row-title">Linear</span></td>
+            <td data-content-type="number">$16.00</td>
+            <td><span class="status-badge" data-tone="accent">Productivity</span></td>
+            <td><span class="status-badge" data-tone="success">Active</span></td>
+          </tr>
+          <tr aria-selected="true">
+            <td class="select-col"><input type="checkbox" checked aria-label="Select Figma row"></td>
+            <td><span class="row-title">Figma</span></td>
+            <td data-content-type="number">$15.00</td>
+            <td><span class="status-badge" data-tone="accent">Productivity</span></td>
+            <td><span class="status-badge" data-tone="success">Active</span></td>
+          </tr>
+          <tr aria-selected="false">
+            <td class="select-col"><input type="checkbox" aria-label="Select Notion row"></td>
+            <td><span class="row-title">Notion</span></td>
+            <td data-content-type="number">$8.00</td>
+            <td><span class="status-badge" data-tone="accent">Productivity</span></td>
+            <td><span class="status-badge" data-tone="warning">Renews soon</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- =================== DENSITIES =================== -->
+    <section class="specimen-divider">
+      <h2>Three densities</h2>
+      <p>Compact (admin dashboards with 50+ visible rows), default (the 80% choice), comfortable (settings pages, customer records).</p>
+    </section>
+    <div style="display: grid; gap: var(--space-card);">
+      <div>
+        <p style="font-size: var(--type-size-xs); color: var(--text-recede); margin: 0 0 var(--space-2); font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-wide); text-transform: uppercase;">compact</p>
+        <div data-pattern="data-table" data-density="compact" data-register="minimal" role="region" aria-label="Subscriptions table (compact density)">
+          <table>
+            <thead><tr><th scope="col">Service</th><th scope="col" data-align="right">Cost</th><th scope="col">Status</th></tr></thead>
+            <tbody>
+              <tr><td><span class="row-title">Linear</span></td><td data-content-type="number">$16.00</td><td><span class="status-badge" data-tone="success">Active</span></td></tr>
+              <tr><td><span class="row-title">Notion</span></td><td data-content-type="number">$8.00</td><td><span class="status-badge" data-tone="warning">Renews soon</span></td></tr>
+              <tr><td><span class="row-title">Figma</span></td><td data-content-type="number">$15.00</td><td><span class="status-badge" data-tone="success">Active</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <p style="font-size: var(--type-size-xs); color: var(--text-recede); margin: 0 0 var(--space-2); font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-wide); text-transform: uppercase;">default</p>
+        <div data-pattern="data-table" data-density="default" data-register="minimal" role="region" aria-label="Subscriptions table (default density)">
+          <table>
+            <thead><tr><th scope="col">Service</th><th scope="col" data-align="right">Cost</th><th scope="col">Status</th></tr></thead>
+            <tbody>
+              <tr><td><span class="row-title">Linear</span></td><td data-content-type="number">$16.00</td><td><span class="status-badge" data-tone="success">Active</span></td></tr>
+              <tr><td><span class="row-title">Notion</span></td><td data-content-type="number">$8.00</td><td><span class="status-badge" data-tone="warning">Renews soon</span></td></tr>
+              <tr><td><span class="row-title">Figma</span></td><td data-content-type="number">$15.00</td><td><span class="status-badge" data-tone="success">Active</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <p style="font-size: var(--type-size-xs); color: var(--text-recede); margin: 0 0 var(--space-2); font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-wide); text-transform: uppercase;">comfortable</p>
+        <div data-pattern="data-table" data-density="comfortable" data-register="minimal" role="region" aria-label="Subscriptions table (comfortable density)">
+          <table>
+            <thead><tr><th scope="col">Service</th><th scope="col" data-align="right">Cost</th><th scope="col">Status</th></tr></thead>
+            <tbody>
+              <tr><td><span class="row-title">Linear</span></td><td data-content-type="number">$16.00</td><td><span class="status-badge" data-tone="success">Active</span></td></tr>
+              <tr><td><span class="row-title">Notion</span></td><td data-content-type="number">$8.00</td><td><span class="status-badge" data-tone="warning">Renews soon</span></td></tr>
+              <tr><td><span class="row-title">Figma</span></td><td data-content-type="number">$15.00</td><td><span class="status-badge" data-tone="success">Active</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================== REGISTERS =================== -->
+    <section class="specimen-divider">
+      <h2>Three visual registers</h2>
+      <p>Minimal (canonical Linear/Stripe/Notion register — row separators only), striped (alternating row backgrounds — high-scan-density admin tables), bordered (full grid — financial / accounting / contexts where column alignment matters precisely).</p>
+    </section>
+    <div style="display: grid; gap: var(--space-card);">
+      <div>
+        <p style="font-size: var(--type-size-xs); color: var(--text-recede); margin: 0 0 var(--space-2); font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-wide); text-transform: uppercase;">striped</p>
+        <div data-pattern="data-table" data-density="default" data-register="striped" role="region" aria-label="Subscriptions table (striped)">
+          <table>
+            <thead><tr><th scope="col">Service</th><th scope="col" data-align="right">Cost</th><th scope="col">Status</th></tr></thead>
+            <tbody>
+              <tr><td><span class="row-title">Linear</span></td><td data-content-type="number">$16.00</td><td><span class="status-badge" data-tone="success">Active</span></td></tr>
+              <tr><td><span class="row-title">Notion</span></td><td data-content-type="number">$8.00</td><td><span class="status-badge" data-tone="warning">Renews soon</span></td></tr>
+              <tr><td><span class="row-title">Figma</span></td><td data-content-type="number">$15.00</td><td><span class="status-badge" data-tone="success">Active</span></td></tr>
+              <tr><td><span class="row-title">1Password</span></td><td data-content-type="number">$2.99</td><td><span class="status-badge" data-tone="success">Active</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <p style="font-size: var(--type-size-xs); color: var(--text-recede); margin: 0 0 var(--space-2); font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-wide); text-transform: uppercase;">bordered</p>
+        <div data-pattern="data-table" data-density="default" data-register="bordered" role="region" aria-label="Subscriptions table (bordered)">
+          <table>
+            <thead><tr><th scope="col">Service</th><th scope="col" data-align="right">Cost</th><th scope="col">Status</th></tr></thead>
+            <tbody>
+              <tr><td><span class="row-title">Linear</span></td><td data-content-type="number">$16.00</td><td><span class="status-badge" data-tone="success">Active</span></td></tr>
+              <tr><td><span class="row-title">Notion</span></td><td data-content-type="number">$8.00</td><td><span class="status-badge" data-tone="warning">Renews soon</span></td></tr>
+              <tr><td><span class="row-title">Figma</span></td><td data-content-type="number">$15.00</td><td><span class="status-badge" data-tone="success">Active</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================== EMPTY STATES =================== -->
+    <section class="specimen-divider">
+      <h2>Three empty states</h2>
+      <p>Empty (first run), filtered-empty (filter yields nothing), error (load failed). Each surfaces context-appropriate CTAs.</p>
+    </section>
+    <div style="display: grid; gap: var(--space-card);">
+      <div data-pattern="data-table" data-density="default" data-register="minimal" data-state="empty" role="region" aria-label="Subscriptions table (empty state)">
+        <table>
+          <thead><tr><th scope="col">Service</th><th scope="col">Cost</th><th scope="col">Status</th></tr></thead>
+          <tbody>
+            <tr data-pattern="data-table-empty-state" data-variant="empty">
+              <td colspan="3">
+                <svg class="icon icon-48" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+                <h3>No subscriptions yet</h3>
+                <p>Galley Dues tracks every recurring charge in one ledger — automatically detected from your bank feeds or added manually.</p>
+                <div class="actions">
+                  <a class="cta" data-intent="primary" href="#"><svg class="icon-14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg> Add first subscription</a>
+                  <a class="cta" data-intent="ghost" href="#">Connect bank account</a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div data-pattern="data-table" data-density="default" data-register="minimal" data-state="filtered-empty" role="region" aria-label="Subscriptions table (filtered-empty state)">
+        <div data-pattern="data-table-toolbar" role="toolbar" aria-label="Table controls">
+          <label class="search-input">
+            <svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            <input type="search" value="hypothetical-co" aria-label="Search subscriptions">
+          </label>
+          <div class="filter-cluster">
+            <button class="filter-chip" type="button" aria-pressed="true">Status: Cancelled</button>
+          </div>
+        </div>
+        <table>
+          <thead><tr><th scope="col">Service</th><th scope="col">Cost</th><th scope="col">Status</th></tr></thead>
+          <tbody>
+            <tr data-pattern="data-table-empty-state" data-variant="filtered-empty">
+              <td colspan="3">
+                <svg class="icon icon-48" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+                <h3 aria-live="polite">No matches</h3>
+                <p>12 subscriptions total — try a different search term or clear the active filters.</p>
+                <div class="actions">
+                  <a class="cta" data-intent="ghost" href="#">Clear filters</a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div data-pattern="data-table" data-density="default" data-register="minimal" data-state="error" role="region" aria-label="Subscriptions table (error state)">
+        <table>
+          <thead><tr><th scope="col">Service</th><th scope="col">Cost</th><th scope="col">Status</th></tr></thead>
+          <tbody>
+            <tr data-pattern="data-table-empty-state" data-variant="error">
+              <td colspan="3">
+                <svg class="icon icon-48" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+                <h3 role="alert">Couldn't load subscriptions</h3>
+                <p>The Galley Dues sync service is temporarily unreachable. Your data is safe — try again in a moment.</p>
+                <div class="actions">
+                  <a class="cta" data-intent="primary" href="#"><svg class="icon-14" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 109-9 9.75 9.75 0 00-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg> Retry</a>
+                  <a class="cta" data-intent="ghost" href="#">View status page</a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- =================== LOADING =================== -->
+    <section class="specimen-divider">
+      <h2>Loading state — skeleton rows</h2>
+      <p>Shimmer animation on skeleton bars sized to anticipate content shape. Animation collapses to none under <code>prefers-reduced-motion: reduce</code>.</p>
+    </section>
+    <div data-pattern="data-table" data-density="default" data-register="minimal" data-state="loading" role="region" aria-label="Subscriptions table (loading)" aria-busy="true">
+      <table>
+        <thead><tr><th scope="col">Service</th><th scope="col" data-align="right">Cost</th><th scope="col">Category</th><th scope="col">Status</th></tr></thead>
+        <tbody aria-live="polite" aria-label="Loading subscriptions">
+          <tr><td><span class="skeleton" data-w="lg"></span></td><td><span class="skeleton" data-w="sm"></span></td><td><span class="skeleton" data-w="md"></span></td><td><span class="skeleton" data-w="sm"></span></td></tr>
+          <tr><td><span class="skeleton" data-w="md"></span></td><td><span class="skeleton" data-w="sm"></span></td><td><span class="skeleton" data-w="md"></span></td><td><span class="skeleton" data-w="sm"></span></td></tr>
+          <tr><td><span class="skeleton" data-w="lg"></span></td><td><span class="skeleton" data-w="sm"></span></td><td><span class="skeleton" data-w="md"></span></td><td><span class="skeleton" data-w="sm"></span></td></tr>
+          <tr><td><span class="skeleton" data-w="md"></span></td><td><span class="skeleton" data-w="sm"></span></td><td><span class="skeleton" data-w="md"></span></td><td><span class="skeleton" data-w="sm"></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- =================== PAGINATION REGISTERS =================== -->
+    <section class="specimen-divider">
+      <h2>Pagination — three registers</h2>
+      <p>Compact (prev/next + count), default (prev/next + page numbers + count), extended (everything + page-size selector).</p>
+    </section>
+    <div style="display: grid; gap: var(--space-card); background: var(--surface-recessed); padding: var(--space-card); border-radius: var(--radius-card);">
+      <nav data-pattern="data-table-pagination" data-register="compact" aria-label="Pagination (compact)" style="background: var(--surface); border-radius: var(--radius-card); border: var(--border-width-sm) solid var(--border); border-top: var(--border-width-sm) solid var(--border);">
+        <p class="count">Showing <strong>1–10</strong> of <strong>312</strong></p>
+        <div class="spacer"></div>
+        <div class="page-controls">
+          <button type="button" aria-label="Previous page" aria-disabled="true"><svg class="icon-14" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button type="button" aria-label="Next page"><svg class="icon-14" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button>
+        </div>
+      </nav>
+      <nav data-pattern="data-table-pagination" data-register="default" aria-label="Pagination (default)" style="background: var(--surface); border-radius: var(--radius-card); border: var(--border-width-sm) solid var(--border);">
+        <p class="count">Showing <strong>31–40</strong> of <strong>312</strong></p>
+        <div class="spacer"></div>
+        <div class="page-controls">
+          <button type="button" aria-label="Previous page"><svg class="icon-14" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <a class="page-link" href="#" aria-label="Page 1">1</a>
+          <a class="page-link" href="#" aria-label="Page 2">2</a>
+          <a class="page-link" href="#" aria-label="Page 3">3</a>
+          <a class="page-link" href="#" aria-current="page" aria-label="Page 4">4</a>
+          <a class="page-link" href="#" aria-label="Page 5">5</a>
+          <span class="ellipsis" aria-hidden="true">…</span>
+          <a class="page-link" href="#" aria-label="Page 32">32</a>
+          <button type="button" aria-label="Next page"><svg class="icon-14" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button>
+        </div>
+      </nav>
+      <nav data-pattern="data-table-pagination" data-register="extended" aria-label="Pagination (extended)" style="background: var(--surface); border-radius: var(--radius-card); border: var(--border-width-sm) solid var(--border);">
+        <p class="count">Showing <strong>31–40</strong> of <strong>312</strong></p>
+        <div class="page-size">
+          <label for="page-size-select">Rows per page:</label>
+          <select id="page-size-select" aria-label="Rows per page">
+            <option>10</option>
+            <option selected>20</option>
+            <option>50</option>
+            <option>100</option>
+          </select>
+        </div>
+        <div class="spacer"></div>
+        <div class="page-controls">
+          <button type="button" aria-label="Previous page"><svg class="icon-14" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <a class="page-link" href="#" aria-label="Page 1">1</a>
+          <a class="page-link" href="#" aria-current="page" aria-label="Page 2">2</a>
+          <a class="page-link" href="#" aria-label="Page 3">3</a>
+          <span class="ellipsis" aria-hidden="true">…</span>
+          <a class="page-link" href="#" aria-label="Page 16">16</a>
+          <button type="button" aria-label="Next page"><svg class="icon-14" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button>
+        </div>
+      </nav>
+    </div>
+
+    <!-- =================== MICROSTATES =================== -->
+    <section class="specimen-divider">
+      <h2>Microstate matrix — sort header & row</h2>
+      <p>Three states beyond the canonical 8: <code>aria-sort="ascending|descending"</code> on the header button, <code>aria-selected="true"</code> on the row, <code>aria-disabled="true"</code> on cancelled rows.</p>
+    </section>
+    <div class="microstate-grid">
+      <div class="label">sort header</div>
+      <div class="cell">
+        <div class="ms-label">aria-sort="none"</div>
+        <button class="sort-trigger" style="display: inline-flex; align-items: center; gap: var(--space-1); background: transparent; border: 0; color: var(--text-emphasis); font-size: var(--type-size-xs); font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-wide); text-transform: uppercase;">
+          Service
+          <svg class="icon-12" viewBox="0 0 12 12" aria-hidden="true" style="color: var(--text-recede);"><path d="M3 4.5L6 1.5L9 4.5M3 7.5L6 10.5L9 7.5"/></svg>
+        </button>
+      </div>
+      <div class="cell">
+        <div class="ms-label">aria-sort="ascending"</div>
+        <button class="sort-trigger" style="display: inline-flex; align-items: center; gap: var(--space-1); background: transparent; border: 0; color: var(--accent); font-size: var(--type-size-xs); font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-wide); text-transform: uppercase;">
+          Service
+          <svg class="icon-12" viewBox="0 0 12 12" aria-hidden="true" style="color: var(--accent);"><path d="M3 7.5L6 4.5L9 7.5"/></svg>
+        </button>
+      </div>
+      <div class="cell">
+        <div class="ms-label">aria-sort="descending"</div>
+        <button class="sort-trigger" style="display: inline-flex; align-items: center; gap: var(--space-1); background: transparent; border: 0; color: var(--accent); font-size: var(--type-size-xs); font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-wide); text-transform: uppercase;">
+          Cost
+          <svg class="icon-12" viewBox="0 0 12 12" aria-hidden="true" style="color: var(--accent);"><path d="M3 4.5L6 7.5L9 4.5"/></svg>
+        </button>
+      </div>
+      <div class="cell">
+        <div class="ms-label">focus-visible</div>
+        <button class="sort-trigger" style="display: inline-flex; align-items: center; gap: var(--space-1); background: transparent; border: 0; color: var(--text-emphasis); font-size: var(--type-size-xs); font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-wide); text-transform: uppercase; outline: var(--focus-ring-width) solid var(--focus-ring); outline-offset: var(--focus-ring-offset); border-radius: var(--radius-sm);">
+          Service
+          <svg class="icon-12" viewBox="0 0 12 12" aria-hidden="true" style="color: var(--text-recede);"><path d="M3 4.5L6 1.5L9 4.5M3 7.5L6 10.5L9 7.5"/></svg>
+        </button>
+      </div>
+
+      <div class="label">row</div>
+      <div class="cell">
+        <div class="ms-label">default</div>
+        <span style="font-weight: var(--font-weight-medium); color: var(--text-emphasis);">Linear</span>
+      </div>
+      <div class="cell" style="background: var(--surface-elevated);">
+        <div class="ms-label">hover</div>
+        <span style="font-weight: var(--font-weight-medium); color: var(--text-emphasis);">Linear</span>
+      </div>
+      <div class="cell" style="background: var(--accent-recede);">
+        <div class="ms-label">aria-selected="true"</div>
+        <span style="font-weight: var(--font-weight-medium); color: var(--text-emphasis);">Linear</span>
+      </div>
+      <div class="cell">
+        <div class="ms-label">aria-disabled="true"</div>
+        <span style="color: var(--text-disabled); font-weight: var(--font-weight-medium);">Linear</span>
+      </div>
+    </div>
+
+    <!-- =================== COMPOSITION LINEAGE =================== -->
+    <section class="specimen-divider">
+      <h2>Composition lineage — what data-table consumes</h2>
+    </section>
+    <table class="lineage">
+      <thead>
+        <tr>
+          <th>Consumed primitive</th>
+          <th>Source pack</th>
+          <th>Used in</th>
+          <th>How this pattern uses it</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>&lt;form-control type="search"&gt;</code></td>
+          <td>@quoin/pattern-form-fields</td>
+          <td>data-table-toolbar</td>
+          <td>Search input with leading magnifier icon. Inherits 33 tokens + leading/trailing slot system. Debounced input fires filter; row count change announced via aria-live region.</td>
+        </tr>
+        <tr>
+          <td><code>&lt;form-control type="checkbox"&gt;</code></td>
+          <td>@quoin/pattern-form-fields</td>
+          <td>data-table-row · header master checkbox</td>
+          <td>Selection checkbox per row plus a master checkbox in the header that supports indeterminate state when some-but-not-all rows are selected.</td>
+        </tr>
+        <tr>
+          <td><code>&lt;form-control type="select"&gt;</code></td>
+          <td>@quoin/pattern-form-fields</td>
+          <td>data-table-pagination (extended register)</td>
+          <td>Rows-per-page selector. Inherits select-input styling + ARIA.</td>
+        </tr>
+        <tr>
+          <td><code>&lt;action-button intent="ghost"&gt;</code></td>
+          <td>@quoin/pattern-button-system</td>
+          <td>sort triggers · pagination prev/next · row actions · bulk actions (most)</td>
+          <td>The dominant button intent for in-table actions. Inherits all 8 microstates including aria-busy for loading and aria-disabled for unreachable pages.</td>
+        </tr>
+        <tr>
+          <td><code>&lt;action-button intent="critical"&gt;</code></td>
+          <td>@quoin/pattern-button-system</td>
+          <td>data-table-bulk-actions (Delete) · data-table-empty-state error variant Retry</td>
+          <td>Destructive bulk operations. Must open a modal-dialog confirmation; never executes on first click (delegated to pattern-modal-dialog).</td>
+        </tr>
+        <tr>
+          <td><code>&lt;action-button intent="primary"&gt;</code></td>
+          <td>@quoin/pattern-button-system</td>
+          <td>data-table-empty-state empty variant CTA</td>
+          <td>Primary CTA for the first-run empty state.</td>
+        </tr>
+        <tr>
+          <td><code>&lt;avatar-stack&gt;</code> primitive</td>
+          <td>@quoin/vocab-app-shell 0.2.0</td>
+          <td>data-table-cell content-type="avatar-stack"</td>
+          <td>For "Shared with" / "Members" columns. 3-5 avatars with +N overflow indicator.</td>
+        </tr>
+        <tr>
+          <td>canonical tokens</td>
+          <td>@quoin/tokens-baseline</td>
+          <td>every CSS value</td>
+          <td>Surfaces / typography / borders / motion / shadows / focus-ring. Table aesthetic flips with aesthetic-pack swaps; structure is invariant.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <section class="specimen-divider">
+      <h2>Accessibility checklist</h2>
+    </section>
+    <ul class="a11y-list">
+      <li><strong>Region landmark:</strong> <code>&lt;div role="region" aria-label="&lt;table-name&gt; table"&gt;</code> gives the table surface a named landmark.</li>
+      <li><strong>True table semantics:</strong> Always <code>&lt;table&gt;</code> + <code>&lt;thead&gt;</code> / <code>&lt;tbody&gt;</code> / <code>&lt;tfoot&gt;</code>. WCAG 1.3.1 (Info &amp; Relationships) requires real table elements for tabular data — never divs.</li>
+      <li><strong>Column headers:</strong> Every <code>&lt;th&gt;</code> in <code>&lt;thead&gt;</code> has <code>scope="col"</code>.</li>
+      <li><strong>Sort semantics:</strong> Sortable <code>&lt;th&gt;</code> carries <code>aria-sort="none|ascending|descending"</code>; the sort affordance is a <code>&lt;button&gt;</code> with an aria-label that names current state and next action ("Service, sorted ascending. Activate to sort descending.").</li>
+      <li><strong>Selection state:</strong> <code>aria-selected="true|false"</code> on <code>&lt;tr&gt;</code> for multi-select. The selection checkbox is the activation surface; aria-selected is the state.</li>
+      <li><strong>Master checkbox indeterminate:</strong> When some-but-not-all rows are selected, the master checkbox shows the indeterminate state via the <code>indeterminate</code> property (set via JS, not an HTML attribute).</li>
+      <li><strong>Pagination nav:</strong> <code>&lt;nav aria-label="Pagination"&gt;</code>; active page button is <code>aria-current="page"</code>; disabled prev/next on edge pages get <code>aria-disabled="true"</code> (kept in DOM for stable layout).</li>
+      <li><strong>Live-region announcements:</strong> Pagination "Showing X–Y of Z" is in <code>aria-live="polite"</code>; bulk-actions selection count is also in <code>aria-live="polite"</code>; row-count change from filter updates is announced.</li>
+      <li><strong>Empty-state error:</strong> The error-variant heading wraps in <code>role="alert"</code> so AT announces immediately on load failure.</li>
+      <li><strong>Toolbar role:</strong> <code>&lt;div role="toolbar" aria-label="Table controls"&gt;</code> — tells AT this is a related-controls cluster.</li>
+      <li><strong>Bulk-actions group:</strong> <code>&lt;div role="group" aria-label="Bulk actions for &lt;n&gt; selected rows"&gt;</code> — the count in the label gives context.</li>
+      <li><strong>Destructive confirmation:</strong> Critical-intent bulk actions (Delete, Cancel subscriptions) must open a modal-dialog confirmation — never execute on first click.</li>
+      <li><strong>Tabular numerics:</strong> Number cells use <code>font-variant-numeric: tabular-nums</code> for column-aligned digits. Right-aligned by default.</li>
+      <li><strong>Status badges:</strong> Always carry readable text content; colour is reinforcement, not the only signal (WCAG 1.4.1).</li>
+      <li><strong>Focus styles:</strong> Every interactive element receives visible <code>:focus-visible</code> outline via <code>--focus-ring</code> tokens.</li>
+      <li><strong>Reduced motion:</strong> Skeleton shimmer animation collapses to none under <code>prefers-reduced-motion: reduce</code>.</li>
+    </ul>
+  </main>
+</body>
+</html>

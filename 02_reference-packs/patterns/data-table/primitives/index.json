@@ -1,0 +1,470 @@
+[
+  {
+    "name": "data-table",
+    "category": "product",
+    "role": "Top-level scope for a data table surface. Polymorphic <div role='region' aria-label='<table-name> table'> containing optional toolbar, semantic <table>, optional empty-state, and optional pagination. Three densities (compact / default / comfortable), three visual registers (striped / bordered / minimal), three selection modes (none / single / multi). All seven pattern states (default / loading / empty / filtered-empty / error / selected / sorted) signal via [data-state] for CSS targeting; ARIA state on the inner <table> or <tr> elements per WAI-ARIA Grid + Table specs.",
+    "attributes": {
+      "density": {
+        "values": ["compact", "default", "comfortable"],
+        "default": "default",
+        "specific": true
+      },
+      "register": {
+        "values": ["striped", "bordered", "minimal"],
+        "default": "minimal",
+        "specific": true
+      },
+      "selection": {
+        "values": ["none", "single", "multi"],
+        "default": "none",
+        "specific": true
+      },
+      "state": {
+        "values": ["default", "loading", "empty", "filtered-empty", "error", "selected", "sorted"],
+        "default": "default",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "--surface",
+      "color": "--text",
+      "borderColor": "--border",
+      "borderColorEmphasis": "--border-emphasis",
+      "borderWidth": "--border-width-sm",
+      "borderRadius": "--radius-card",
+      "rowHoverBackground": "--surface-elevated",
+      "rowSelectedBackground": "--accent-recede",
+      "rowStripedBackground": "--surface-recessed",
+      "headerBackground": "--surface-recessed",
+      "headerColor": "--text-emphasis",
+      "headerBorderColor": "--border-emphasis",
+      "padding": "0",
+      "paddingCellCompact": "--space-2 --space-3",
+      "paddingCellDefault": "--space-3 --space-card",
+      "paddingCellComfortable": "--space-4 --space-card",
+      "gap": "0",
+      "fontFamily": "--font-sans",
+      "fontFamilyNumeric": "--font-sans",
+      "fontSize": "--type-size-sm",
+      "fontSizeHeader": "--type-size-xs",
+      "fontWeightHeader": "--font-weight-semibold",
+      "lineHeight": "--leading-prose",
+      "letterSpacingHeader": "--tracking-wide",
+      "transition": "--transition-default",
+      "focusRing": "--focus-ring"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "role": "region"
+      }
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<div role='region' aria-label='<table-name> table'> — wraps everything; the region landmark gives screen readers a clear handle for skip-to-content",
+        "(optional) <data-table-toolbar> — search + filters + bulk-actions surface",
+        "<table> — true semantic <table> with <thead> / <tbody> / <tfoot>. NEVER use <div> grid for tabular data — WCAG 1.3.1 (Info & Relationships) requires real table semantics.",
+        "  <thead><tr> — <data-table-header> with one <th> per column",
+        "  <tbody> — <data-table-row> elements, each with <td> children = <data-table-cell>",
+        "  (optional) <tfoot> — column summaries / totals",
+        "(optional) <data-table-empty-state> — only renders when state ∈ {empty, filtered-empty, error}",
+        "(optional) <data-table-pagination> — bottom-anchored pagination nav"
+      ],
+      "densityScale": {
+        "compact": "Cell padding --space-2 --space-3. Used in admin dashboards with high row count (50+ visible rows), audit logs, financial transaction lists.",
+        "default": "Cell padding --space-3 --space-card. The 80% choice — readable, scannable, not cramped.",
+        "comfortable": "Cell padding --space-4 --space-card. Used on settings pages, customer record lists, anywhere row count is low and each row has weight."
+      },
+      "registers": {
+        "striped": "Alternating row backgrounds via tbody tr:nth-child(even) { background: --surface-recessed }. Used when row count is high and scanning across is the primary interaction.",
+        "bordered": "Full grid lines via border on every <td>. Used in financial / accounting contexts and anywhere precise column alignment matters.",
+        "minimal": "Row separators only (border-bottom on tbody tr). The canonical Linear / Notion / Stripe register. Default for most modern admin surfaces."
+      },
+      "selectionModes": {
+        "none": "No selection checkboxes. Read-only table. The default.",
+        "single": "Radio-style selection — choosing a row deselects all others. Used when a single row maps to a detail-view destination.",
+        "multi": "Checkbox selection on each row + a master checkbox in the header. Selecting rows reveals <data-table-bulk-actions>. The most common selection mode for admin surfaces (bulk delete, bulk export, bulk assign)."
+      },
+      "ariaPatterns": {
+        "regionLandmark": "<div role='region' aria-label='<table-name> table'> — gives the table surface a named landmark for skip-to-content + AT navigation.",
+        "tableSemantics": "Always use <table> for tabular data. Adding ARIA role='grid' is only appropriate when implementing keyboard-grid navigation (arrow keys move cell-to-cell, like a spreadsheet). For simple sortable/filterable tables, plain <table> + sort affordances on <th> is preferred — simpler keyboard model, better default AT support.",
+        "ariaRowcount": "When virtualizing rows (only rendering visible window of a 10000-row dataset), set aria-rowcount on <table> and aria-rowindex on each visible <tr>. NOT required for non-virtualized tables.",
+        "captionVsAriaLabel": "<table><caption>Customer records</caption> is preferred over aria-label when the caption text should be visible. Use aria-label only for landmarks where the caption would be redundant with a visible heading above the table."
+      }
+    }
+  },
+  {
+    "name": "data-table-toolbar",
+    "category": "product",
+    "role": "Toolbar row above the <table> hosting search input, filter chips/dropdowns, and (when rows are selected) bulk-action group. Three registers — search-only, search-plus-filter, full. Composes <form-control type='search'> from pattern-form-fields and <action-button> from pattern-button-system.",
+    "attributes": {
+      "register": {
+        "values": ["search-only", "search-plus-filter", "full"],
+        "default": "search-plus-filter",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "--surface",
+      "color": "--text",
+      "borderColor": "--border",
+      "borderWidth": "--border-width-sm",
+      "padding": "--space-3 --space-card",
+      "gap": "--space-3",
+      "fontFamily": "--font-sans",
+      "fontSize": "--type-size-sm",
+      "transition": "--transition-default"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "role": "toolbar",
+        "aria-label": "Table controls"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<div role='toolbar' aria-label='Table controls'>",
+        "  <form-control type='search' placeholder='Search…'> — composes from form-fields with leading-slot magnifier icon and trailing-slot clear button",
+        "  <div class='filter-cluster'> — filter chips / dropdowns; each filter is itself an <action-button> or <form-control type='select'>",
+        "  <div role='group' aria-label='Bulk actions' hidden> — only visible when rows are selected; data-table-bulk-actions content"
+      ],
+      "registers": {
+        "search-only": "Just the search input. Used on simple lookup tables.",
+        "search-plus-filter": "Search input + filter chip cluster (typically 2-4 chips for status / role / date range). The 80% solution.",
+        "full": "Search + filter chips + sort selector + density toggle + export button. Used on dense admin surfaces."
+      },
+      "composesFrom": "@quoin/pattern-form-fields (search + select inputs) + @quoin/pattern-button-system (filter chip toggles, density toggle, export button)",
+      "ariaPatterns": {
+        "toolbarRole": "<div role='toolbar' aria-label='Table controls'> wraps the cluster. role='toolbar' tells AT this is a collection of related controls.",
+        "filterChipState": "Active filter chips carry aria-pressed='true'. The chip's aria-label includes the filter dimension ('Filter: Status — Active').",
+        "searchSubmission": "Search input fires on input (debounced) — no Submit button. aria-live='polite' announces row count change ('Showing 47 of 312 customers')."
+      }
+    }
+  },
+  {
+    "name": "data-table-header",
+    "category": "product",
+    "role": "<thead><tr> row containing <th> elements per column. Sortable columns wrap their label in a <button> that toggles sort state and carries aria-sort. Non-sortable columns just contain plain text. Header is sticky-on-scroll by default within the table's scroll container.",
+    "attributes": {
+      "sticky": {
+        "values": ["true", "false"],
+        "default": "true",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "--surface-recessed",
+      "color": "--text-emphasis",
+      "borderColor": "--border-emphasis",
+      "borderWidth": "--border-width-sm",
+      "padding": "--space-3 --space-card",
+      "fontFamily": "--font-sans",
+      "fontSize": "--type-size-xs",
+      "fontWeight": "--font-weight-semibold",
+      "letterSpacing": "--tracking-wide",
+      "iconColor": "--text-recede",
+      "iconColorActive": "--accent",
+      "transition": "--transition-default"
+    },
+    "structure": {
+      "element": "tr"
+    },
+    "children": "flow-content",
+    "scope": "inline",
+    "meta": {
+      "semanticStructure": [
+        "<thead> position-sticky to viewport top within the table scroll container",
+        "<tr>",
+        "  <th scope='col' aria-sort='none|ascending|descending'>",
+        "    <button type='button'> — only inside sortable headers; the entire header label is the button's text",
+        "      <span class='label'>Column name</span>",
+        "      <span class='sort-indicator' aria-hidden='true'>↕ / ↑ / ↓</span>",
+        "  <th scope='col'> — non-sortable header (just plain text)"
+      ],
+      "ariaPatterns": {
+        "ariaSortValues": "aria-sort='none' (default), 'ascending' (sorted A→Z / 1→9), 'descending' (sorted Z→A / 9→1). Exactly one column may have a non-'none' value at a time (single-column sort) or multiple may (composite sort — show numerical priority in the indicator).",
+        "scopeCol": "Every <th> in <thead> gets scope='col'. This associates the header semantically with the column data below it.",
+        "sortKeyboardActivation": "Sortable <th> contains a <button type='button'>; Enter and Space activate the sort. Tab moves between sortable columns; Tab DOES NOT skip non-sortable headers entirely (they're just not focusable themselves).",
+        "ariaLabelOnSortButton": "The sort button's accessible name should include current state: '<Column>, sorted ascending. Activate to sort descending.' Update aria-label dynamically on sort change."
+      }
+    }
+  },
+  {
+    "name": "data-table-row",
+    "category": "product",
+    "role": "<tr> in <tbody>. Hosts <td> cells. Supports four states — default / hover / selected / disabled. With selection enabled, the first cell is a selection checkbox (multi) or radio (single). Multi-select rows respect Shift+Click for range selection. Optional row-level action affordance: rightmost cell with kebab menu or inline buttons.",
+    "attributes": {
+      "selectable": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true
+      },
+      "selected": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true
+      },
+      "disabled": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "--surface",
+      "backgroundHover": "--surface-elevated",
+      "backgroundSelected": "--accent-recede",
+      "backgroundStriped": "--surface-recessed",
+      "borderColor": "--border",
+      "borderWidth": "--border-width-sm",
+      "fontFamily": "--font-sans",
+      "fontSize": "--type-size-sm",
+      "lineHeight": "--leading-prose",
+      "transition": "--transition-default",
+      "focusRingColor": "--focus-ring"
+    },
+    "structure": {
+      "element": "tr"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<tr aria-selected='true|false' aria-disabled='true|false'>",
+        "  (if selectable) <td> — selection checkbox or radio composing form-fields",
+        "  <td> — data cells via <data-table-cell>",
+        "  (optional) <td> — row action affordance (kebab menu, inline buttons)"
+      ],
+      "selectionInteraction": {
+        "click": "Clicking the selection checkbox toggles that row's selection.",
+        "shiftClick": "Shift+Click selects the range from the last-selected row through the clicked row.",
+        "masterCheckbox": "Clicking the master checkbox in the header selects/deselects ALL visible rows. The master checkbox shows indeterminate state when some-but-not-all rows are selected.",
+        "keyboardNav": "Selection checkbox is focusable via Tab; Space toggles."
+      },
+      "ariaPatterns": {
+        "ariaSelected": "aria-selected on <tr> for multi-select. The selection checkbox is the activation surface; aria-selected is the state.",
+        "ariaDisabled": "aria-disabled='true' on disabled rows. The row's checkbox is also disabled. Row is not focusable.",
+        "rowClickability": "Whole-row click to navigate is OPTIONAL — when enabled, the <tr> needs role='link' OR the first cell's content is a link spanning the row. Don't make <tr> itself clickable without proper ARIA — that breaks AT row navigation."
+      }
+    }
+  },
+  {
+    "name": "data-table-cell",
+    "category": "product",
+    "role": "<td> with content-type-aware rendering. Six canonical content types — text (default), number (tabular-nums + right-align), status-badge (coloured pill for state values), avatar-stack (composed via vocab-app-shell), actions (button cluster), and link (anchor leading to detail view). Width is fluid; alignment depends on type.",
+    "attributes": {
+      "content-type": {
+        "values": ["text", "number", "status-badge", "avatar-stack", "actions", "link"],
+        "default": "text",
+        "specific": true
+      },
+      "align": {
+        "values": ["left", "right", "center"],
+        "default": "left",
+        "specific": true
+      },
+      "truncate": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "--text",
+      "colorRecede": "--text-recede",
+      "colorEmphasis": "--text-emphasis",
+      "fontFamily": "--font-sans",
+      "fontVariantNumeric": "tabular-nums",
+      "fontSize": "--type-size-sm",
+      "lineHeight": "--leading-prose",
+      "padding": "--space-3 --space-card",
+      "transition": "--transition-default"
+    },
+    "structure": {
+      "element": "td"
+    },
+    "children": "flow-content",
+    "scope": "inline",
+    "meta": {
+      "contentTypes": {
+        "text": "Plain text. Default left-aligned. Truncates with ellipsis when truncate='true' and width exceeded.",
+        "number": "Numeric values. font-variant-numeric: tabular-nums for column-aligned digits. Right-aligned by default (numbers compare best when right-aligned with consistent decimal positions).",
+        "status-badge": "Pill-shaped badge in semantic colour. Tones: --success / --warning / --critical / --accent / --text-recede. Used for status enums (Active / Pending / Suspended / Archived).",
+        "avatar-stack": "Composes <avatar-stack> from @quoin/vocab-app-shell. Used for 'Assigned to' or 'Members' columns. 3-5 avatars with +N overflow.",
+        "actions": "Cluster of inline buttons or a kebab menu. Composes <action-button intent='ghost' size='sm'> from pattern-button-system. Typically rightmost column.",
+        "link": "Anchor to row detail view. Underlined on hover; entire cell is the click target."
+      },
+      "truncation": "When truncate='true' + the content overflows, the cell shows ellipsis + a tooltip on hover/focus revealing the full value. Tooltip is the browser's title attribute by default; can be promoted to a styled popover at the host page level.",
+      "ariaPatterns": {
+        "scopeRow": "First <td> in each row gets scope='row' if it's the row's identifying value (e.g. customer name) — gives AT a row-header to navigate by.",
+        "numberAriaLabel": "Numeric cells with units should include the unit in an aria-label or hidden span: '<span aria-hidden=\"true\">$1,234.56</span><span class=\"sr-only\">1234 dollars and 56 cents</span>'.",
+        "statusBadgeText": "Status badges must have readable text content — colour alone is not sufficient per WCAG 1.4.1."
+      }
+    }
+  },
+  {
+    "name": "data-table-empty-state",
+    "category": "product",
+    "role": "Empty / no-results / error message rendered inside <tbody><tr><td colspan='all'> when the table has no rows OR the filter yielded nothing. Three variants — empty (never had data, prompt to create), filtered-empty (filter yields nothing, prompt to clear), error (load failed, prompt to retry).",
+    "attributes": {
+      "variant": {
+        "values": ["empty", "filtered-empty", "error"],
+        "default": "empty",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "--text-recede",
+      "headingColor": "--text-emphasis",
+      "iconColor": "--text-disabled",
+      "iconColorError": "--critical",
+      "background": "--surface",
+      "padding": "--space-section --space-card",
+      "gap": "--space-3",
+      "fontFamily": "--font-sans",
+      "fontSize": "--type-size-md",
+      "fontSizeHeading": "--type-size-lg",
+      "fontWeightHeading": "--font-weight-semibold",
+      "transition": "--transition-default"
+    },
+    "structure": {
+      "element": "tr"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<tr> inside <tbody>",
+        "<td colspan='<column-count>'> — spans every visible column",
+        "<div class='empty-state-content'>",
+        "  <svg class='icon' aria-hidden='true'> — icon (inbox / search / alert)",
+        "  <h3>No results / Nothing to show / Couldn't load</h3>",
+        "  <p>Helpful context message — what's missing and what to do next</p>",
+        "  <div class='actions'> — composing button-system: 'Create first record' / 'Clear filters' / 'Retry'"
+      ],
+      "variants": {
+        "empty": "First-run / never-had-data. Heading: 'No <noun> yet'. Body: brief value-prop + primary CTA 'Create your first <noun>'.",
+        "filtered-empty": "Filter yielded nothing. Heading: 'No matches'. Body: '<n> <noun> total — try a different filter.' Secondary CTA 'Clear filters' (ghost intent).",
+        "error": "Load failed. Heading: 'Couldn't load <noun>'. Body: error context. Secondary CTA 'Retry' (secondary intent). Optional 'Contact support' link."
+      },
+      "ariaPatterns": {
+        "liveRegion": "When the table transitions from default → filtered-empty (filter applied yields zero rows), the empty-state's heading should be inside an aria-live='polite' region so AT announces 'No matches'.",
+        "iconAriaHidden": "Decorative icons are aria-hidden='true'.",
+        "errorRoleAlert": "For the error variant specifically, wrap the heading in role='alert' so AT announces immediately."
+      }
+    }
+  },
+  {
+    "name": "data-table-pagination",
+    "category": "product",
+    "role": "Bottom-anchored pagination controls. Hosts prev/next buttons, page-size selector, and 'Showing 1-20 of 312' count text. Renders as <nav aria-label='Pagination'>. Three registers — compact (just prev/next + count), default (prev/next + page numbers + count), extended (everything plus page-size selector + jump-to-page input).",
+    "attributes": {
+      "register": {
+        "values": ["compact", "default", "extended"],
+        "default": "default",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "--surface",
+      "color": "--text",
+      "colorRecede": "--text-recede",
+      "borderColor": "--border",
+      "borderWidth": "--border-width-sm",
+      "padding": "--space-3 --space-card",
+      "gap": "--space-3",
+      "fontFamily": "--font-sans",
+      "fontSize": "--type-size-sm",
+      "transition": "--transition-default"
+    },
+    "structure": {
+      "element": "nav",
+      "attributes": {
+        "aria-label": "Pagination"
+      }
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<nav aria-label='Pagination'>",
+        "  <p class='count'><span aria-live='polite'>Showing 1–20 of 312</span></p>",
+        "  <action-button intent='ghost' size='sm' aria-label='Previous page'> ← </action-button>",
+        "  (if register=default|extended) <ul class='pages'> <li><button aria-current='page'>1</button></li> ...",
+        "  <action-button intent='ghost' size='sm' aria-label='Next page'> → </action-button>",
+        "  (if register=extended) <form-control type='select'> Rows per page: 10/20/50/100"
+      ],
+      "composesFrom": "@quoin/pattern-button-system (every nav button) + @quoin/pattern-form-fields (page-size selector + jump-to-page input)",
+      "ariaPatterns": {
+        "navLabel": "<nav aria-label='Pagination'> distinguishes from main nav.",
+        "ariaCurrentPage": "The active page button gets aria-current='page'. Visible underline + emphasized colour.",
+        "countLiveRegion": "The 'Showing X-Y of Z' span has aria-live='polite' so AT announces page changes.",
+        "disabledPrevNext": "Prev button is aria-disabled on page 1; Next is aria-disabled on the final page. Don't remove them from DOM — keeping them present with disabled state keeps the layout stable.",
+        "keyboardModel": "Tab through controls left-to-right. Enter / Space activate. Arrow keys NOT used (would conflict with horizontal scroll). Home/End jump to first/last page on the visible page-number cluster."
+      }
+    }
+  },
+  {
+    "name": "data-table-bulk-actions",
+    "category": "product",
+    "role": "Contextual action bar that appears (slides down from below the toolbar OR replaces the toolbar contents) when one or more rows are selected. Hosts bulk operations — delete, export, change-status, assign, archive. Composes <action-button> from pattern-button-system. ARIA: role='group' aria-label='Bulk actions for <n> selected rows'.",
+    "attributes": {
+      "count": {
+        "values": [],
+        "default": "0",
+        "specific": true
+      },
+      "register": {
+        "values": ["inline", "banner"],
+        "default": "inline",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "--accent-recede",
+      "color": "--text-emphasis",
+      "borderColor": "--accent",
+      "borderWidth": "--border-width-md",
+      "padding": "--space-3 --space-card",
+      "gap": "--space-3",
+      "fontFamily": "--font-sans",
+      "fontSize": "--type-size-sm",
+      "fontWeight": "--font-weight-medium",
+      "transition": "--transition-default"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "role": "group",
+        "aria-label": "Bulk actions"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "semanticStructure": [
+        "<div role='group' aria-label='Bulk actions for <n> selected rows'>",
+        "  <p class='count' aria-live='polite'><strong><n></strong> selected</p>",
+        "  <action-button intent='ghost' size='sm'>Deselect all</action-button>",
+        "  <div class='divider' aria-hidden='true'></div>",
+        "  <action-button intent='ghost' size='sm'>Export…</action-button>",
+        "  <action-button intent='ghost' size='sm'>Change status…</action-button>",
+        "  <action-button intent='critical' size='sm'>Delete</action-button>"
+      ],
+      "registers": {
+        "inline": "Replaces the toolbar's filter cluster while rows are selected. Search remains visible.",
+        "banner": "Slides in as a separate row above the toolbar. Both filter cluster and bulk-actions are visible simultaneously."
+      },
+      "ariaPatterns": {
+        "groupRole": "<div role='group' aria-label='Bulk actions for 3 selected rows'> — aria-label includes the count for context.",
+        "countLiveRegion": "Selection count in aria-live='polite' so AT announces count changes.",
+        "destructiveConfirmation": "Critical-intent bulk actions (Delete, Archive) must open a confirmation modal — they should NEVER execute on the first click. This is delegated to pattern-modal-dialog."
+      }
+    }
+  }
+]

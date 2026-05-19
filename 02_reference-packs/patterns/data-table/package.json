@@ -1,0 +1,25 @@
+{
+  "name": "@quoin/pattern-data-table",
+  "version": "1.0.0",
+  "description": "P0 data table for Quoin — 8 primitives, sortable / filterable / selectable with bulk actions, 3 densities, 3 registers, 7 states. Composes form-fields + button-system + avatar-stack.",
+  "license": "MIT",
+  "main": "./quoin.pack.json",
+  "files": [
+    "quoin.pack.json",
+    "primitives/",
+    "examples/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "pattern", "data-table", "admin", "dashboard", "sortable", "p0"],
+  "peerDependencies": {
+    "@quoin/tokens-baseline": "^0.1.0",
+    "@quoin/pattern-button-system": "^1.0.0",
+    "@quoin/pattern-form-fields": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "02_reference-packs/patterns/data-table"
+  }
+}
