@@ -18,7 +18,11 @@
  *      spacing token defined inline matches the canonical value from
  *      tokens-baseline. Closes the Category-A drift gap that allowed 22
  *      specimens to silently fork the spacing scale.
- *   5. Stylesheet allowlist: every <link rel="stylesheet"> resolves to a host
+ *   5. Type-scale value contract (Phase 22 / Consolidation 2, 2026-05-20):
+ *      every type-size / leading token covered by the contract and defined
+ *      inline matches the canonical value from tokens-baseline. Parallel to
+ *      check 4; covers the Cons. 2 auto-resolved tokens.
+ *   6. Stylesheet allowlist: every <link rel="stylesheet"> resolves to a host
  *      in STYLESHEET_ALLOWLIST. Today: Google Fonts only.
  *
  * Exit status: 0 if every specimen passes; 1 if any specimen fails.
@@ -92,6 +96,46 @@ const SPACING_VALUE_CONTRACT = {
   '--space-card':    '1.5rem',
   '--space-panel':   '2rem',
   '--space-section': '4rem',
+};
+
+/**
+ * Type-scale value contract — Phase 22 / Consolidation 2 / 2026-05-20.
+ *
+ * Parallel to SPACING_VALUE_CONTRACT. Each entry maps a type-scale or leading
+ * token name to its canonical value in tokens-baseline. If a specimen defines
+ * one of these tokens inline, its value MUST match canonical. Tokens not in
+ * the map are unconstrained.
+ *
+ * Scope covers the Cons. 2 auto-resolved tokens (xl/2xl/3xl/4xl + leading-prose
+ * + leading-display) plus the unchanged-but-universal small steps (xs/sm/md).
+ *
+ * --type-size-lg is intentionally EXCLUDED: one specimen (feature-grid) carries
+ * historical drift (1.25rem vs baseline 1.125rem) that pre-dates Cons. 2 and
+ * was not in the audit scope. Adding lg to the contract would require an extra
+ * specimen fix outside the consolidation's locked scope. Future consolidation
+ * can address.
+ *
+ * --leading-tight, --leading-normal, --leading-loose are intentionally EXCLUDED:
+ * Cons. 2 did not establish these as canonical (button-system carries leading-
+ * tight: 1.1 drift; other specimens drift in either direction). Future
+ * consolidation can address.
+ *
+ * --tracking-tight, --tracking-normal, --tracking-wide are intentionally
+ * EXCLUDED: Cons. 2 flagged tracking-tight (15/7 split) and tracking-wide
+ * (16/22 below threshold) for operator review; both default to baseline per
+ * Q4 Option α. Specimens explicitly override these — preserving specimen-side
+ * stylistic latitude is part of the architecture.
+ */
+const TYPE_SCALE_VALUE_CONTRACT = {
+  '--type-size-xs':    '0.75rem',
+  '--type-size-sm':    '0.875rem',
+  '--type-size-md':    '1rem',
+  '--type-size-xl':    '1.5rem',
+  '--type-size-2xl':   '2rem',
+  '--type-size-3xl':   '2.5rem',
+  '--type-size-4xl':   '3.5rem',
+  '--leading-prose':   '1.55',
+  '--leading-display': '1.05',
 };
 
 function listPatterns() {
@@ -212,6 +256,18 @@ function auditSpecimen(pack, { status, body }) {
   }
   if (spacingDrifts.length > 0) {
     failures.push(`spacing-token value drift vs tokens-baseline: ${spacingDrifts.join('; ')}`);
+  }
+
+  // 3b. Type-scale value contract — same approach as spacing.
+  //     Phase 22 / Consolidation 2 extension.
+  const typeScaleDrifts = [];
+  for (const [name, canonical] of Object.entries(TYPE_SCALE_VALUE_CONTRACT)) {
+    if (name in firstDefinedValue && firstDefinedValue[name] !== canonical) {
+      typeScaleDrifts.push(`${name} declared "${firstDefinedValue[name]}"; canonical is "${canonical}"`);
+    }
+  }
+  if (typeScaleDrifts.length > 0) {
+    failures.push(`type-scale value drift vs tokens-baseline: ${typeScaleDrifts.join('; ')}`);
   }
 
   // 4. Stylesheet allowlist — every <link rel="stylesheet"> must point to a host

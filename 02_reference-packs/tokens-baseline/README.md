@@ -10,10 +10,22 @@ from when building a project-specific token pack.
   perceptual uniformity across the lightness range and renders
   consistently on wide-gamut displays. No baked-in chroma — the only
   saturated entries are the status colours.
-- **System font stack.** `ui-sans-serif, system-ui, -apple-system, …`
-  for sans, the platform serif for prose, and `ui-monospace` for code.
-  No webfont fetch, no FOIT, no licensing cost. Override via project
-  tokens or a downstream pack when you want a specific typeface.
+- **System font stack — vocabulary, not aesthetic.** Baseline declares
+  font tokens with system-stack fallbacks: `ui-sans-serif, system-ui,
+  -apple-system, …` for sans; the platform serif for prose; `ui-monospace`
+  for code. No webfont fetch, no FOIT, no licensing cost. Specific brand
+  fonts (Junicode 2, Ranade, Monaspace, IBM Plex, Inter, etc.) belong in
+  **aesthetic packs** — when you want a specific typographic identity,
+  install or author an aesthetic pack that overrides these tokens with
+  specific faces. The 5 `--font-mono-*` typographic variants are named
+  slots in the canonical namespace: baseline points all five at the same
+  generic mono stack; aesthetic packs differentiate them with specific
+  faces (Monaspace Argon for warm, Xenon for slab, etc.). The reference-
+  pack specimens demonstrate patterns using Inter + JetBrains Mono via
+  Google Fonts as a neutral substrate so pattern anatomy is foregrounded
+  over typography choice. _Phase 22 / Consolidation 2 architectural lock,
+  2026-05-20: brand fonts are scoped to future aesthetic-pack work, not
+  to baseline._
 - **Conservative type scale.** Eight steps from `xs` (0.75rem) to
   `display` (4.5rem), with a sensible default of 1rem. Larger ratios
   between steps as the scale climbs — `lg`/`xl`/`2xl` close together

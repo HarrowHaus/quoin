@@ -201,15 +201,29 @@
   --leading-display: 1.05;     /* Cons. 2: new (specimen-orphan promoted) */
 
   /* ──────────── §3.20 fontFamily (9 — handoff additive) ──────────── */
-  --font-sans:    'Ranade Variable', 'Ranade', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-serif:   'Junicode 2', 'Junicode', ui-serif, Georgia, 'Times New Roman', serif;
-  --font-mono:    'Monaspace Neon Var', 'Monaspace Neon', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  --font-display: 'Junicode 2', 'Junicode', ui-serif, Georgia, 'Times New Roman', serif;
-  --font-mono-warm:       'Monaspace Argon Var', 'Monaspace Argon', ui-monospace, SFMono-Regular, Menlo, monospace;
-  --font-mono-slab:       'Monaspace Xenon Var', 'Monaspace Xenon', ui-monospace, SFMono-Regular, Menlo, monospace;
-  --font-mono-script:     'Monaspace Radon Var', 'Monaspace Radon', ui-monospace, SFMono-Regular, Menlo, monospace;
-  --font-mono-mechanical: 'Monaspace Krypton Var', 'Monaspace Krypton', ui-monospace, SFMono-Regular, Menlo, monospace;
-  --font-mono-pixel:      'Departure Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
+  /* Per Consolidation 2 (Phase 22, 2026-05-20): system-stack fallbacks only.
+     tokens-baseline is the canonical VOCABULARY layer — it declares token names
+     and value shapes, not aesthetic choices. Specific brand fonts (Junicode 2,
+     Ranade, Monaspace, IBM Plex, etc.) belong in AESTHETIC PACKS; consumers opt
+     in by installing an aesthetic pack that overrides these tokens with specific
+     faces. Specimens demonstrate patterns using a neutral substrate (Inter +
+     JetBrains Mono via Google Fonts) so pattern anatomy is foregrounded over
+     typographic choice — specimens explicitly override these baseline defaults. */
+  --font-sans:    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif:   ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-mono:    ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+  --font-display: var(--font-sans);
+  /* The 5 mono variants (warm/slab/script/mechanical/pixel) are NAMED SLOTS —
+     they share the generic mono stack in baseline because the OS can't
+     differentiate at the font-face level. Aesthetic packs override each with
+     a specific face (e.g., Monaspace Argon for warm, Monaspace Xenon for slab)
+     to express the typographic flavor. The slots stay in the canonical
+     namespace so any pack can rely on them without breaking. */
+  --font-mono-warm:       var(--font-mono);
+  --font-mono-slab:       var(--font-mono);
+  --font-mono-script:     var(--font-mono);
+  --font-mono-mechanical: var(--font-mono);
+  --font-mono-pixel:      var(--font-mono);
 
   /* ──────────── §3.21 fontWeight ──────────── */
   --font-weight-light:    300;
