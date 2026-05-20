@@ -9,12 +9,17 @@
  * What it asserts, for every pattern specimen under 02_reference-packs/patterns/*\/examples/index.html:
  *
  *   1. HTTP 200 when served from 02_reference-packs as document root.
- *   2. Every canonical token in REQUIRED_TOKENS is defined ("--token-name:") in
- *      a served <style> block (i.e. tokens are inline, not gated behind an
- *      external stylesheet that may 404).
- *   3. Every <link rel="stylesheet"> in the served HTML resolves to a host
- *      in STYLESHEET_ALLOWLIST. Today: Google Fonts (fonts.googleapis.com +
- *      fonts.gstatic.com) only.
+ *   2. Sentinel: at least one foundation token (--surface / --text / --accent)
+ *      is defined inline. Catches "no :root block at all" failure mode.
+ *   3. Reference-definition correctness: every var(--X) used WITHOUT a fallback
+ *      has --X defined in the same served <style> blocks. var(--X, fallback)
+ *      references are safe (the fallback IS the safety net per CSS spec).
+ *   4. Spacing value contract (Phase 22 / Consolidation 1, 2026-05-19): every
+ *      spacing token defined inline matches the canonical value from
+ *      tokens-baseline. Closes the Category-A drift gap that allowed 22
+ *      specimens to silently fork the spacing scale.
+ *   5. Stylesheet allowlist: every <link rel="stylesheet"> resolves to a host
+ *      in STYLESHEET_ALLOWLIST. Today: Google Fonts only.
  *
  * Exit status: 0 if every specimen passes; 1 if any specimen fails.
  *
@@ -56,6 +61,38 @@ const STYLESHEET_ALLOWLIST = [
   'fonts.googleapis.com',
   'fonts.gstatic.com',
 ];
+
+/**
+ * Spacing value contract — Phase 22 / Consolidation 1 / 2026-05-19.
+ *
+ * Each entry maps a spacing-token name to its canonical value in tokens-baseline.
+ * If a specimen defines one of these tokens inline (the bootstrap pattern), its
+ * value MUST match canonical. Otherwise the specimen has forked the scale.
+ *
+ * Tokens NOT in this map are unconstrained (specimens may add their own).
+ * Spacing tokens that exist in tokens-baseline but aren't typically inlined by
+ * specimens (e.g. --space-10 / 12 / 16 / 20 / 24 / 32, --space-stack-*,
+ * --space-inline-*) are intentionally omitted — checking them here would
+ * over-constrain specimens that don't need them. Adding to this map is an
+ * operator decision (per the per-turn cadence of Phase 22).
+ *
+ * This contract closes the bootstrap-integrity gap surfaced by Consolidation 1:
+ * the prior gate only checked PRESENCE of definitions, not VALUE correctness.
+ */
+const SPACING_VALUE_CONTRACT = {
+  '--space-half-1':  '0.125rem',
+  '--space-half-2':  '0.375rem',
+  '--space-1':       '0.25rem',
+  '--space-2':       '0.5rem',
+  '--space-3':       '0.75rem',
+  '--space-4':       '1rem',
+  '--space-5':       '1.25rem',
+  '--space-6':       '1.5rem',
+  '--space-8':       '2rem',
+  '--space-card':    '1.5rem',
+  '--space-panel':   '2rem',
+  '--space-section': '4rem',
+};
 
 function listPatterns() {
   const patternsDir = path.join(REF_PACKS_ROOT, 'patterns');
@@ -158,7 +195,26 @@ function auditSpecimen(pack, { status, body }) {
     );
   }
 
-  // 3. Stylesheet allowlist — every <link rel="stylesheet"> must point to a host
+  // 3. Spacing value contract — every spacing token defined inline must match
+  //    the canonical value from tokens-baseline. First-occurrence wins (the
+  //    :root default; subsequent @media-scoped overrides are ignored).
+  //    Phase 22 / Consolidation 1 extension.
+  const firstDefinedValue = {};
+  for (const m of allStyles.matchAll(/(--[a-zA-Z0-9_-]+)\s*:\s*([^;]+?)\s*;/g)) {
+    const name = m[1];
+    if (!(name in firstDefinedValue)) firstDefinedValue[name] = m[2].trim();
+  }
+  const spacingDrifts = [];
+  for (const [name, canonical] of Object.entries(SPACING_VALUE_CONTRACT)) {
+    if (name in firstDefinedValue && firstDefinedValue[name] !== canonical) {
+      spacingDrifts.push(`${name} declared "${firstDefinedValue[name]}"; canonical is "${canonical}"`);
+    }
+  }
+  if (spacingDrifts.length > 0) {
+    failures.push(`spacing-token value drift vs tokens-baseline: ${spacingDrifts.join('; ')}`);
+  }
+
+  // 4. Stylesheet allowlist — every <link rel="stylesheet"> must point to a host
   //    in STYLESHEET_ALLOWLIST. Inline-token approach + Google Fonts is the spec.
   const linkMatches = body.match(/<link\b[^>]*\brel\s*=\s*["']stylesheet["'][^>]*>/gi) || [];
   for (const tag of linkMatches) {
