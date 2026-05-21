@@ -24,7 +24,8 @@
     "@quoin/pattern-modal-dialog": "^1.0.0"
   },
   "optionalPeerPacks": {
-    "@quoin/prim-label": "^1.0.0 (consumed by docs + app-chrome variants for notification counts + release-stage indicators; not required by marketing + editorial variants)"
+    "@quoin/prim-label": "^1.0.0 (consumed by docs + app-chrome variants for notification counts + release-stage indicators; not required by marketing + editorial variants)",
+    "@quoin/prim-sequence": "^1.0.0 (consumed by app-chrome variant for nav-breadcrumb; consumed by docs variant for nav-sidebar-section; not required by marketing + editorial variants)"
   },
   "consolidates": [
     "@quoin/pattern-nav-marketing",

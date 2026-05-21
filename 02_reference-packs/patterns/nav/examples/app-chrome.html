@@ -256,11 +256,11 @@
     [data-pattern="nav-workspace-switcher"][aria-expanded="true"] .chevron { transform: rotate(180deg); }
 
     /* breadcrumb */
-    [data-pattern="nav-breadcrumb"] {
+    [class="sequence" data-role="breadcrumb" data-pattern="nav-breadcrumb"] {
       display: inline-flex;
       align-items: center;
     }
-    [data-pattern="nav-breadcrumb"] ol {
+    [class="sequence" data-role="breadcrumb" data-pattern="nav-breadcrumb"] ol {
       list-style: none; padding: 0; margin: 0;
       display: inline-flex;
       align-items: center;
@@ -268,7 +268,7 @@
       font-family: var(--font-sans);
       font-size: var(--type-size-sm);
     }
-    [data-pattern="nav-breadcrumb"] a {
+    [class="sequence" data-role="breadcrumb" data-pattern="nav-breadcrumb"] a {
       color: var(--text-recede);
       text-decoration: none;
       font-weight: var(--font-weight-medium);
@@ -276,16 +276,16 @@
       border-radius: var(--radius-sm);
       transition: var(--transition-default);
     }
-    [data-pattern="nav-breadcrumb"] a:hover { background: var(--surface-elevated); color: var(--accent-hover); }
-    [data-pattern="nav-breadcrumb"] a:focus-visible {
+    [class="sequence" data-role="breadcrumb" data-pattern="nav-breadcrumb"] a:hover { background: var(--surface-elevated); color: var(--accent-hover); }
+    [class="sequence" data-role="breadcrumb" data-pattern="nav-breadcrumb"] a:focus-visible {
       outline: var(--focus-ring-width) solid var(--focus-ring);
       outline-offset: var(--focus-ring-offset);
     }
-    [data-pattern="nav-breadcrumb"] [aria-current="page"] {
+    [class="sequence" data-role="breadcrumb" data-pattern="nav-breadcrumb"] [aria-current="page"] {
       color: var(--text-emphasis);
       font-weight: var(--font-weight-semibold);
     }
-    [data-pattern="nav-breadcrumb"] .separator {
+    [class="sequence" data-role="breadcrumb" data-pattern="nav-breadcrumb"] .separator {
       color: var(--border-emphasis, var(--border));
       font-size: var(--type-size-xs);
       user-select: none;
@@ -719,7 +719,7 @@
             <span class="plan-badge">Pro</span>
             <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" /></svg>
           </button>
-          <nav data-pattern="nav-breadcrumb" aria-label="Breadcrumb">
+          <nav class="sequence" data-role="breadcrumb" data-pattern="nav-breadcrumb" aria-label="Breadcrumb">
             <ol>
               <li><a href="/notes">Notes</a></li>
               <li class="separator" aria-hidden="true">/</li>
@@ -764,7 +764,7 @@
             <span class="plan-badge">Pro</span>
             <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" /></svg>
           </button>
-          <nav data-pattern="nav-breadcrumb" aria-label="Breadcrumb">
+          <nav class="sequence" data-role="breadcrumb" data-pattern="nav-breadcrumb" aria-label="Breadcrumb">
             <ol>
               <li><a href="/projects">Projects</a></li>
               <li class="separator" aria-hidden="true">/</li>
@@ -840,7 +840,7 @@
             <span class="plan-badge">Pro</span>
             <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" /></svg>
           </button>
-          <nav data-pattern="nav-breadcrumb" aria-label="Breadcrumb">
+          <nav class="sequence" data-role="breadcrumb" data-pattern="nav-breadcrumb" aria-label="Breadcrumb">
             <ol>
               <li><a href="/notes">Notes</a></li>
               <li class="separator" aria-hidden="true">/</li>
@@ -910,7 +910,7 @@
               </button>
             </div>
           </div>
-          <nav data-pattern="nav-breadcrumb" aria-label="Breadcrumb">
+          <nav class="sequence" data-role="breadcrumb" data-pattern="nav-breadcrumb" aria-label="Breadcrumb">
             <ol>
               <li><a href="/notes">Notes</a></li>
               <li class="separator" aria-hidden="true">/</li>

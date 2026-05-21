@@ -7,7 +7,7 @@
 *A semantic vocabulary for the patterns every website needs — meaning over markup, anatomy over aesthetic.*
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Patterns](https://img.shields.io/badge/patterns-15-2ea44f.svg)](#pattern-catalog)
+[![Patterns](https://img.shields.io/badge/patterns-15%20%2B%204%20primitives-2ea44f.svg)](#pattern-catalog)
 [![Version](https://img.shields.io/badge/version-0.1.0-e8a33d.svg)](CHANGELOG.md)
 [![Stars](https://img.shields.io/github/stars/harrowhaus/quoin?style=social)](https://github.com/harrowhaus/quoin)
 

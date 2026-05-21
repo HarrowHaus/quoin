@@ -1,0 +1,29 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/prim-searchable-list",
+  "version": "1.0.0",
+  "type": "primitive",
+  "quoinVersion": "^0.1.0",
+  "description": "Searchable list primitive — search input + filtered result list with combobox/listbox ARIA pattern. 3 variants (command-palette / autocomplete-results / filter-dropdown). Composes form-fields (input) + prim-label (optional result categories). Phase 22 Cons. 8.",
+  "category": "foundation",
+  "variant": "primitive",
+  "variants": ["command-palette", "autocomplete-results", "filter-dropdown"],
+  "exports": { "primitives": "./primitives/index.json" },
+  "states": ["default", "empty", "loading", "error"],
+  "microStates": ["default", "hover", "active", "focus", "focus-visible", "selected"],
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/primitives/searchable-list",
+    "tags": ["primitive", "searchable-list", "command-palette", "autocomplete", "combobox", "listbox"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0",
+    "@quoin/pattern-form-fields": "^1.0.0"
+  },
+  "optionalPeerPacks": {
+    "@quoin/prim-label": "^1.0.0 (consumed for result-category badges in command-palette + autocomplete-results variants; not required for filter-dropdown if categories aren't displayed)"
+  },
+  "consolidates": ["anticipated command-palette-content (consumed by modal-dialog command variant)", "anticipated list-with-search (consumed by nav search overlay + data-table column-filter)"],
+  "deprecates": "phase-22-cons-8"
+}

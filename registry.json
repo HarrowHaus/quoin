@@ -273,6 +273,49 @@
       ]
     },
     {
+      "name": "prim-sequence",
+      "type": "registry:component",
+      "title": "Sequence (primitive)",
+      "description": "Sequence primitive — ordered/contextual list of items with separator + position-semantic state. 4 variants (breadcrumb / ordered-list / unordered-list / sidebar-vertical). Consolidated from inlined breadcrumb + sidebar-list contracts in nav per Phase 22 Cons. 6.",
+      "categories": ["foundation", "primitive"],
+      "files": [
+        {
+          "path": "02_reference-packs/primitives/sequence/quoin.pack.json",
+          "type": "registry:file",
+          "target": "components/quoin/primitives/sequence.json"
+        }
+      ]
+    },
+    {
+      "name": "prim-decoration-overlay",
+      "type": "registry:component",
+      "title": "Decoration overlay (primitive)",
+      "description": "Decoration overlay primitive — positioned-absolute decorative layer. 4 variants (grain / texture / pattern / gradient). Forward-looking infrastructure per Phase 22 Cons. 7; ready for Boeing Watch and other aesthetic packs.",
+      "categories": ["foundation", "primitive"],
+      "files": [
+        {
+          "path": "02_reference-packs/primitives/decoration-overlay/quoin.pack.json",
+          "type": "registry:file",
+          "target": "components/quoin/primitives/decoration-overlay.json"
+        }
+      ]
+    },
+    {
+      "name": "prim-searchable-list",
+      "type": "registry:component",
+      "title": "Searchable list (primitive)",
+      "description": "Searchable list primitive — search input + filtered result list. Combobox/listbox ARIA pattern. 3 variants (command-palette / autocomplete-results / filter-dropdown). Composes form-fields (required) + prim-label (optional). Phase 22 Cons. 8.",
+      "categories": ["foundation", "primitive"],
+      "registryDependencies": ["form-fields"],
+      "files": [
+        {
+          "path": "02_reference-packs/primitives/searchable-list/quoin.pack.json",
+          "type": "registry:file",
+          "target": "components/quoin/primitives/searchable-list.json"
+        }
+      ]
+    },
+    {
       "name": "tokens-baseline",
       "type": "registry:file",
       "title": "Tokens (Baseline)",

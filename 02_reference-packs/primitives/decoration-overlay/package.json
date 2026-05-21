@@ -1,0 +1,11 @@
+{
+  "name": "@quoin/prim-decoration-overlay",
+  "version": "1.0.0",
+  "description": "Decoration overlay primitive — 4 variants (grain / texture / pattern / gradient). Forward-looking infrastructure per Phase 22 Cons. 7.",
+  "license": "MIT",
+  "main": "./quoin.pack.json",
+  "files": ["quoin.pack.json", "primitives/", "README.md", "LICENSE"],
+  "keywords": ["quoin", "primitive", "decoration", "overlay"],
+  "peerDependencies": { "@quoin/tokens-baseline": "^0.1.0" },
+  "repository": { "type": "git", "url": "https://github.com/harrowhaus/quoin.git", "directory": "02_reference-packs/primitives/decoration-overlay" }
+}

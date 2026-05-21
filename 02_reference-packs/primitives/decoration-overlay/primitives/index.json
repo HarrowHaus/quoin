@@ -1,0 +1,51 @@
+[
+  {
+    "name": "decoration-overlay",
+    "category": "foundation",
+    "gating": "mandatory",
+    "role": "Positioned-absolute decorative layer over a container. CSS-generated grain / texture / pattern / gradient. Forward-looking primitive shipped Phase 22 Cons. 7 for future aesthetic-pack consumption (Boeing Watch, paper-grain hero variants, etc.).",
+    "attributes": {
+      "role": {
+        "values": ["grain", "texture", "pattern", "gradient"],
+        "default": "grain",
+        "specific": true,
+        "note": "Grain = fine noise (SVG turbulence or CSS-generated). Texture = larger-pattern repeating fill. Pattern = geometric repeat (chevron / dots / stripes). Gradient = color blend (often radial)."
+      },
+      "intensity": {
+        "values": ["subtle", "default", "dramatic"],
+        "default": "default",
+        "specific": true
+      },
+      "blend": {
+        "values": ["normal", "overlay", "multiply", "screen", "soft-light"],
+        "default": "overlay",
+        "specific": true,
+        "note": "CSS mix-blend-mode for the decoration layer over its container."
+      }
+    },
+    "tokens": {
+      "color": "var(--text-emphasis)",
+      "opacity": "var(--opacity-recede)",
+      "filterBlur": "var(--blur-sm)"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "aria-hidden": "true"
+      }
+    },
+    "children": "empty",
+    "scope": "block",
+    "meta": {
+      "performanceBudget": "5% LCP impact maximum (v3.G.14). Overlays must paint AFTER critical content; consumers MUST use will-change sparingly and prefer CSS-generated decoration over SVG/image references where possible.",
+      "ariaPatterns": {
+        "decorative": "Always aria-hidden=\"true\". Decoration must NEVER carry meaning required by the page; consumers verify meaning is in text content."
+      },
+      "anticipated-consumers": [
+        "@quoin/aesthetic-boeing-watch (D.65) — texture and grain overlays on dashboard surfaces",
+        "@quoin/aesthetic-manuscript-future — paper-grain on prose surfaces",
+        "future hero variants — paper-grain composed alongside gradient-mesh"
+      ]
+    }
+  }
+]

@@ -97,7 +97,8 @@ Every pack MUST contain a `quoin.pack.json` at its root.
 | `metadata.homepage` | URL. |
 | `metadata.tags` | Free-form discovery tags. |
 | `attribution` | REQUIRED for harvested packs (§7). |
-| `peerPacks` | Explicit compatibility declarations with other packs. |
+| `peerPacks` | Explicit compatibility declarations with other packs. Every pack listed here is REQUIRED for the pattern to render correctly; v3.G.17 (composition reality) enforcement fires per-specimen for packs in this map. |
+| `optionalPeerPacks` | Peer packs the pattern *may* compose under certain variants/states but does not require for all renderings. Introduced Phase 22 Cons. 5 (2026-05-20). Used when v3.G.17 enforcement would produce false positives because the pattern legitimately doesn't consume the peer pack in all variant specimens. Example: `@quoin/pattern-nav` declares `@quoin/prim-label` as optional because nav-editorial doesn't render labels but nav-docs + nav-app-chrome do. Distinguishes from `peerPacks` (always required) and from no declaration (never composed). |
 | `capabilities` | Optional capability flags (e.g. `"elevation"`) consumed during compiler capability negotiation (`spec.md` §4.4). |
 
 ### 3.4 JSON Schema
@@ -155,6 +156,11 @@ The authoritative schema, served at `https://harrow.haus/quoin/schema/pack.json`
     "peerPacks": {
       "type": "object",
       "additionalProperties": { "type": "string" }
+    },
+    "optionalPeerPacks": {
+      "type": "object",
+      "additionalProperties": { "type": "string" },
+      "description": "Peer packs composed only in some variants. Pack names must follow the same naming pattern as peerPacks; the string value documents which variants consume the peer and is informational rather than a version constraint."
     },
     "capabilities": {
       "type": "array",

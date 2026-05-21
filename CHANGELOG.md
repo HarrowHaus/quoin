@@ -6,6 +6,30 @@ versioning follows pre-1.0 conventions until v1.0.0 publication.
 
 ## [Unreleased]
 
+### Phase 22 — CLOSED (2026-05-20)
+
+All 9 structural consolidations complete. Catalog architecture stable. v3.G.1 through v3.G.21 in force. Phase 23 (Compiler IR) unblocked.
+
+### Phase 22 / optionalPeerPacks formalization (2026-05-20)
+
+New manifest field `optionalPeerPacks` formalized for peer packs consumed by only some variants of a multi-variant pack. Distinguishes per-file v3.G.17 enforcement (`peerPacks`) from informational declaration (`optionalPeerPacks`). Documented in `00_spec/pack-format.md` + JSON Schema; mirrored in `01_compiler/src/schema/pack-manifest.json`. Architectural lock added as v3.G.21 in `PHASE_GATES.md`.
+
+### Phase 22 / Consolidation 6 — Sequence primitive (2026-05-20)
+
+`@quoin/prim-sequence` shipped (4 variants: breadcrumb / ordered-list / unordered-list / sidebar-vertical). Consumer migrations via dual-class approach: nav-app-chrome's nav-breadcrumb and nav-docs's nav-sidebar-section gain `class="sequence"` as canonical secondary class. Gate extension; manifest updates; CONSOLIDATION-6-{AUDIT,REPORT}.md.
+
+### Phase 22 / Consolidation 7 — Decoration overlay primitive (2026-05-20)
+
+`@quoin/prim-decoration-overlay` shipped (4 variants: grain / texture / pattern / gradient). Forward-looking; no existing consumers to migrate. 5% LCP impact maximum performance budget documented per v3.G.14. Anticipated consumers: Boeing Watch aesthetic pack, manuscript-future aesthetic pack, future hero variants.
+
+### Phase 22 / Consolidation 8 — Searchable-list primitive (2026-05-20)
+
+`@quoin/prim-searchable-list` shipped (3 variants: command-palette / autocomplete-results / filter-dropdown). Real composition with form-fields (required) + prim-label (optional via optionalPeerPacks). Combobox / listbox ARIA pattern per WAI-ARIA Authoring Practices 1.2. Forward-looking; future consumers: modal-dialog command variant, nav search overlay, data-table column filter.
+
+### Phase 22 / Consolidation 9 — Boeing Watch boundary audit (2026-05-20)
+
+No-op closure. Audit confirmed no Boeing Watch tokens have fanned out into pattern definitions. The boundary is intact by virtue of the Boeing Watch aesthetic pack not yet existing. Cons. 5/6/7 primitives explicitly anticipate Boeing Watch as a consumer; infrastructure ready for when the aesthetic pack ships under the Aesthetic Packs (beyond v1.0) ongoing workstream.
+
 ### Phase 22 / Consolidation 5 — Label primitive (2026-05-20)
 
 First foundational primitive (`prim-*`) in the catalog. Inlined badge / status-pill contracts across 5 consumers promoted to `@quoin/prim-label`.

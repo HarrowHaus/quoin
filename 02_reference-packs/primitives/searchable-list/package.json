@@ -1,0 +1,14 @@
+{
+  "name": "@quoin/prim-searchable-list",
+  "version": "1.0.0",
+  "description": "Searchable list primitive — combobox + listbox pattern. 3 variants (command-palette / autocomplete-results / filter-dropdown). Composes form-fields + (optional) prim-label.",
+  "license": "MIT",
+  "main": "./quoin.pack.json",
+  "files": ["quoin.pack.json", "primitives/", "README.md", "LICENSE"],
+  "keywords": ["quoin", "primitive", "searchable-list", "command-palette"],
+  "peerDependencies": {
+    "@quoin/tokens-baseline": "^0.1.0",
+    "@quoin/pattern-form-fields": "^1.0.0"
+  },
+  "repository": { "type": "git", "url": "https://github.com/harrowhaus/quoin.git", "directory": "02_reference-packs/primitives/searchable-list" }
+}

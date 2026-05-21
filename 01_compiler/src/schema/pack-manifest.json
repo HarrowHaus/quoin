@@ -63,6 +63,11 @@
       "type": "object",
       "additionalProperties": { "type": "string" }
     },
+    "optionalPeerPacks": {
+      "type": "object",
+      "additionalProperties": { "type": "string" },
+      "description": "Peer packs the pattern may compose under certain variants/states but does not require for all renderings. v3.G.17 enforcement reads peerPacks only; optionalPeerPacks is informational. Introduced Phase 22 Cons. 5 + formalized v3.G.21 (2026-05-20)."
+    },
     "capabilities": {
       "type": "array",
       "items": { "type": "string" }

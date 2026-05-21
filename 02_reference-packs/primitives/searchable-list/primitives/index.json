@@ -1,0 +1,106 @@
+[
+  {
+    "name": "searchable-list",
+    "category": "foundation",
+    "gating": "mandatory",
+    "role": "Container for a search input + filtered result list with combobox/listbox ARIA pattern. Variants: command-palette (full-overlay Cmd-K), autocomplete-results (inline below an input), filter-dropdown (column filter for tables).",
+    "attributes": {
+      "role": {
+        "values": ["command-palette", "autocomplete-results", "filter-dropdown"],
+        "default": "command-palette",
+        "specific": true
+      },
+      "state": {
+        "values": ["default", "empty", "loading", "error"],
+        "default": "default",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "var(--surface-elevated)",
+      "borderColor": "var(--border)",
+      "borderRadius": "var(--radius-card)",
+      "shadow": "var(--shadow-lg)"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "role": "combobox",
+        "aria-haspopup": "listbox",
+        "aria-expanded": "true"
+      }
+    },
+    "scope": "block"
+  },
+  {
+    "name": "searchable-list-input",
+    "category": "foundation",
+    "gating": "mandatory",
+    "role": "Search input slot. Composes form-fields' text input (real composition per v3.G.17).",
+    "attributes": {},
+    "structure": {
+      "element": "input",
+      "attributes": {
+        "type": "search",
+        "role": "searchbox",
+        "aria-autocomplete": "list",
+        "aria-controls": "(id of searchable-list-results)"
+      }
+    },
+    "scope": "inline",
+    "meta": { "composesFrom": "@quoin/pattern-form-fields" }
+  },
+  {
+    "name": "searchable-list-results",
+    "category": "foundation",
+    "gating": "mandatory",
+    "role": "Filtered result list. Listbox semantics.",
+    "structure": {
+      "element": "ul",
+      "attributes": {
+        "role": "listbox"
+      }
+    },
+    "scope": "block"
+  },
+  {
+    "name": "searchable-list-item",
+    "category": "foundation",
+    "gating": "mandatory",
+    "role": "Single result item. Optionally composes prim-label for category badges (e.g., NEW, beta).",
+    "attributes": {
+      "selected": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true,
+        "note": "aria-selected for keyboard-focused item"
+      }
+    },
+    "structure": {
+      "element": "li",
+      "attributes": {
+        "role": "option"
+      }
+    },
+    "scope": "block",
+    "meta": { "composesFrom": "@quoin/prim-label (optional, for category badges)" }
+  },
+  {
+    "name": "searchable-list-empty",
+    "category": "foundation",
+    "gating": "conditional",
+    "gatedBy": "state=\"empty\"",
+    "role": "Empty state when no results match the query. Shown in place of searchable-list-results.",
+    "structure": { "element": "div", "attributes": { "role": "status" } },
+    "scope": "block"
+  },
+  {
+    "name": "searchable-list-loading",
+    "category": "foundation",
+    "gating": "conditional",
+    "gatedBy": "state=\"loading\"",
+    "role": "Loading indicator while results fetch.",
+    "structure": { "element": "div", "attributes": { "role": "status", "aria-busy": "true" } },
+    "scope": "block"
+  }
+]

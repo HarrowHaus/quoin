@@ -1,0 +1,54 @@
+[
+  {
+    "name": "sequence",
+    "category": "foundation",
+    "gating": "mandatory",
+    "role": "Ordered/contextual sequence of items with separator + position-semantic state. The foundational primitive for breadcrumb / numbered-list / unordered-list / sidebar-vertical affordances. Variants drive visual presentation through tokens.",
+    "attributes": {
+      "role": {
+        "values": ["breadcrumb", "ordered-list", "unordered-list", "sidebar-vertical"],
+        "default": "unordered-list",
+        "specific": true,
+        "note": "Selects the semantic role. Breadcrumb = trail of ancestors with chevron separators + aria-current=\"page\" on terminal item. Ordered-list = <ol> with numeric position indicators. Unordered-list = <ul> with bullet/dot separators. Sidebar-vertical = collapsible vertical list with section headers + aria-current=\"page\" on active item."
+      },
+      "separator": {
+        "values": ["chevron", "slash", "dot", "pipe", "number", "none"],
+        "default": "chevron",
+        "specific": true,
+        "note": "Separator glyph between items. Defaults per role: breadcrumb=chevron, ordered-list=number, unordered-list=dot, sidebar-vertical=none."
+      },
+      "size": {
+        "values": ["sm", "md"],
+        "default": "md",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "var(--text-recede)",
+      "colorActive": "var(--text-emphasis)",
+      "colorHover": "var(--accent-hover)",
+      "fontSize": "var(--type-size-sm)",
+      "fontWeight": "var(--font-weight-medium)",
+      "gap": "var(--space-2)"
+    },
+    "structure": {
+      "element": "ol-OR-ul-OR-nav",
+      "attributes": {
+        "aria-label": "(role-dependent: \"Breadcrumb\", \"Sidebar\", \"Steps\")"
+      }
+    },
+    "children": "li elements",
+    "scope": "block",
+    "meta": {
+      "deprecated-from": [
+        "inlined nav-breadcrumb contract (in nav-app-chrome)",
+        "inlined nav-sidebar-section contract (in nav-docs)"
+      ],
+      "ariaPatterns": {
+        "breadcrumb": "Wrap in <nav aria-label=\"Breadcrumb\">. Terminal item uses aria-current=\"page\" and is NOT a link (just a span).",
+        "sidebar": "Wrap in <nav aria-label=\"...\">. Active item uses aria-current=\"page\".",
+        "steps": "If sequence represents an ordered process, wrap in <nav aria-label=\"Steps\"> and use aria-current=\"step\" on the active step."
+      }
+    }
+  }
+]

@@ -454,6 +454,60 @@ Designed to be JSON-extractable for the future formal contract. Schema iterates 
 
 ---
 
+## Phase 22 — Consolidation 5/6/7/8 follow-on lock (v3.G.21)
+
+**Shipped:** 2026-05-20 with `@quoin/prim-label` (Cons. 5) and formalized in Session 4 per the Cons. 5 closing report flag-and-continue.
+
+### v3.G.21 — optionalPeerPacks convention (documented + programmatic)
+
+**Lock:** when a pattern pack consumes a peer pack only in some variants (not all variant specimens render the peer's primitives), declare the peer under a new `optionalPeerPacks` manifest field rather than `peerPacks`. The gate's v3.G.17 (composition reality) enforcement reads from `peerPacks` only — packs in `optionalPeerPacks` are informational and do not fire per-file enforcement.
+
+**Rationale:** v3.G.17 enforces per-file. A multi-variant pack like `@quoin/pattern-hero` may use `prim-label` only in the `type-only` variant; declaring it as `peerPacks` would fire v3.G.17 on every other variant's specimen (false positives). `optionalPeerPacks` lets the manifest accurately document compositional intent without triggering enforcement on non-consuming variants.
+
+**Convention:**
+- `peerPacks` — every variant's specimen consumes the peer pack. v3.G.17 enforces per-file.
+- `optionalPeerPacks` — some variants compose the peer pack; others don't. Informational. v3.G.17 does NOT fire for missing composition.
+- No declaration — pattern does not compose the peer pack in any variant.
+
+**Justification requirement:** any pattern declaring `optionalPeerPacks` must document the per-variant breakdown in its README anatomy tables — which variants consume which optional peer packs and why. The string value of each `optionalPeerPacks` entry serves as inline documentation; the README's composition lineage section provides the long-form explanation.
+
+**Enforced by:**
+- Manifest schema (`00_spec/pack-format.md` §3.4) — recognizes the field; validates pack-name pattern + version-string structure.
+- `bootstrap-integrity.js` — v3.G.17 enforcement explicitly reads from `peerPacks` only, ignoring `optionalPeerPacks`.
+- Convention — packs using the field document the per-variant breakdown in README.
+
+**Current consumers (as of Phase 22 closure):**
+- `@quoin/pattern-hero` — declares `@quoin/prim-label` as optional (type-only variant only)
+- `@quoin/pattern-nav` — declares `@quoin/prim-label` as optional (docs + app-chrome variants only)
+
+Future packs that compose peers conditionally use this same convention.
+
+---
+
+## Phase 22 — closure (2026-05-20)
+
+**Phase 22 (Unification Audit) is complete.** All 9 structural consolidations shipped:
+
+| Cons. | Resolution | Closing report |
+|---|---|---|
+| 1 | Spacing tokens single source | `02_reference-packs/CONSOLIDATION-1-AUDIT.md` + closing-commit message (no standalone REPORT) |
+| 2 | Type-scale tokens single source (Option D — system-stack font fallbacks in baseline) | `02_reference-packs/CONSOLIDATION-2-REPORT.md` |
+| 3 | Hero anatomy unified (5 packs → 1) | `02_reference-packs/CONSOLIDATION-3-REPORT.md` |
+| 4 | Nav anatomy unified (4 packs → 1) | `02_reference-packs/CONSOLIDATION-4-REPORT.md` |
+| 5 | Label primitive (`@quoin/prim-label`) | `02_reference-packs/CONSOLIDATION-5-REPORT.md` |
+| 6 | Sequence primitive (`@quoin/prim-sequence`) | `02_reference-packs/CONSOLIDATION-6-REPORT.md` |
+| 7 | Decoration overlay primitive (`@quoin/prim-decoration-overlay`) | `02_reference-packs/CONSOLIDATION-7-REPORT.md` |
+| 8 | Searchable-list primitive (`@quoin/prim-searchable-list`) | `02_reference-packs/CONSOLIDATION-8-REPORT.md` |
+| 9 | Boeing Watch boundary audit (no-op closure; integrity intact) | `02_reference-packs/CONSOLIDATION-9-REPORT.md` |
+
+**Architectural locks in force:** v3.G.1 through v3.G.21.
+
+**Catalog architecture:** stable. 15 patterns + 4 foundational primitives + 10 v1.0 aesthetic packs + 30 harvested token packs. Pack code lives once; examples demonstrate variants; composition is real; aesthetic concerns separated from anatomy.
+
+**Phase 23 (Compiler IR) is now unblocked.** See PHASES.md for next-phase dependency graph.
+
+---
+
 ## What "operator review completed" means
 
 The operator has read the phase's output, run any provided demos or tests themselves, and explicitly approved advancement. A phase is not complete simply because an agent reports completion. The operator's sign-off is the final criterion at every gate.

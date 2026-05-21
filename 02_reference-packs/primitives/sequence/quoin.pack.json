@@ -1,0 +1,25 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/prim-sequence",
+  "version": "1.0.0",
+  "type": "primitive",
+  "quoinVersion": "^0.1.0",
+  "description": "Sequence primitive — ordered/contextual list of items with separator + position-semantic state. Variants represent sequence semantics (breadcrumb / ordered-list / unordered-list / sidebar-vertical). Consolidated from inlined breadcrumb + sidebar-section contracts per Phase 22 Cons. 6.",
+  "category": "foundation",
+  "variant": "primitive",
+  "variants": ["breadcrumb", "ordered-list", "unordered-list", "sidebar-vertical"],
+  "exports": { "primitives": "./primitives/index.json" },
+  "states": ["default"],
+  "microStates": ["default", "hover", "focus", "focus-visible", "selected"],
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/primitives/sequence",
+    "tags": ["primitive", "sequence", "breadcrumb", "list", "sidebar"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0"
+  },
+  "consolidates": ["inlined breadcrumb contract (in nav-app-chrome)", "inlined sidebar-list contract (in nav-docs as nav-sidebar-section)"],
+  "deprecates": "phase-22-cons-6"
+}

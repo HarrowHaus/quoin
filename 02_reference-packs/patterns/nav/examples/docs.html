@@ -245,14 +245,14 @@
     [data-pattern="nav-section"][data-variant="docs"][data-mode="topbar-only"] [data-pattern="nav-sidebar"] { display: none; }
 
     /* nav-sidebar-section */
-    [data-pattern="nav-sidebar-section"] {
+    [class="sequence" data-role="sidebar-vertical" data-pattern="nav-sidebar-section"] {
       margin-bottom: var(--space-3);
     }
-    [data-pattern="nav-sidebar-section"] h3 {
+    [class="sequence" data-role="sidebar-vertical" data-pattern="nav-sidebar-section"] h3 {
       margin: var(--space-3) 0 var(--space-1);
       padding: 0;
     }
-    [data-pattern="nav-sidebar-section"] h3 button {
+    [class="sequence" data-role="sidebar-vertical" data-pattern="nav-sidebar-section"] h3 button {
       display: inline-flex; align-items: center; gap: var(--space-1);
       width: 100%;
       background: transparent;
@@ -269,21 +269,21 @@
       border-radius: var(--radius-sm);
       transition: var(--transition-default);
     }
-    [data-pattern="nav-sidebar-section"] h3 button:hover { background: var(--surface-elevated); }
-    [data-pattern="nav-sidebar-section"] h3 button:focus-visible {
+    [class="sequence" data-role="sidebar-vertical" data-pattern="nav-sidebar-section"] h3 button:hover { background: var(--surface-elevated); }
+    [class="sequence" data-role="sidebar-vertical" data-pattern="nav-sidebar-section"] h3 button:focus-visible {
       outline: var(--focus-ring-width) solid var(--focus-ring);
       outline-offset: var(--focus-ring-offset);
     }
-    [data-pattern="nav-sidebar-section"] h3 button .chevron {
+    [class="sequence" data-role="sidebar-vertical" data-pattern="nav-sidebar-section"] h3 button .chevron {
       width: 12px; height: 12px;
       stroke: currentColor; fill: none; stroke-width: 2;
       stroke-linecap: round; stroke-linejoin: round;
       margin-left: auto;
       transition: transform var(--motion-fast) var(--ease-standard);
     }
-    [data-pattern="nav-sidebar-section"][data-expanded="false"] h3 button .chevron { transform: rotate(-90deg); }
-    [data-pattern="nav-sidebar-section"][data-expanded="false"] ul { display: none; }
-    [data-pattern="nav-sidebar-section"] ul {
+    [class="sequence" data-role="sidebar-vertical" data-pattern="nav-sidebar-section"][data-expanded="false"] h3 button .chevron { transform: rotate(-90deg); }
+    [class="sequence" data-role="sidebar-vertical" data-pattern="nav-sidebar-section"][data-expanded="false"] ul { display: none; }
+    [class="sequence" data-role="sidebar-vertical" data-pattern="nav-sidebar-section"] ul {
       list-style: none;
       padding: 0;
       margin: 0;
@@ -450,7 +450,7 @@
           </div>
         </nav>
         <nav data-pattern="nav-sidebar" id="docs-sidebar" role="navigation" aria-label="Documentation">
-          <div data-pattern="nav-sidebar-section" data-expanded="true">
+          <div class="sequence" data-role="sidebar-vertical" data-pattern="nav-sidebar-section" data-expanded="true">
             <h3 id="sec-getting-started"><button aria-expanded="true" aria-controls="sec-getting-started-list">Getting started <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5"/></svg></button></h3>
             <ul id="sec-getting-started-list">
               <li><a data-pattern="nav-sidebar-link" href="/docs" data-depth="1">Introduction</a></li>
@@ -460,7 +460,7 @@
             </ul>
           </div>
 
-          <div data-pattern="nav-sidebar-section" data-expanded="true">
+          <div class="sequence" data-role="sidebar-vertical" data-pattern="nav-sidebar-section" data-expanded="true">
             <h3 id="sec-concepts"><button aria-expanded="true" aria-controls="sec-concepts-list">Concepts <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5"/></svg></button></h3>
             <ul id="sec-concepts-list">
               <li><a data-pattern="nav-sidebar-link" href="/docs/packs" data-depth="1">Pack types</a></li>
@@ -473,7 +473,7 @@
             </ul>
           </div>
 
-          <div data-pattern="nav-sidebar-section" data-expanded="false">
+          <div class="sequence" data-role="sidebar-vertical" data-pattern="nav-sidebar-section" data-expanded="false">
             <h3 id="sec-reference"><button aria-expanded="false" aria-controls="sec-reference-list">Reference <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5"/></svg></button></h3>
             <ul id="sec-reference-list">
               <li><a data-pattern="nav-sidebar-link" href="/docs/api/compile" data-depth="1">compile()</a></li>
@@ -482,7 +482,7 @@
             </ul>
           </div>
 
-          <div data-pattern="nav-sidebar-section" data-expanded="false">
+          <div class="sequence" data-role="sidebar-vertical" data-pattern="nav-sidebar-section" data-expanded="false">
             <h3 id="sec-recipes"><button aria-expanded="false" aria-controls="sec-recipes-list">Recipes <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5"/></svg></button></h3>
             <ul id="sec-recipes-list">
               <li><a data-pattern="nav-sidebar-link" href="/docs/recipes/multi-theme" data-depth="1">Multi-theme site</a></li>

@@ -14,11 +14,14 @@ For AI coding tools generating Quoin markup at scale: this file is the index. Re
 - **Composition.** Patterns that need buttons consume `class="action-button"` from `@quoin/pattern-button-system` directly; they do not re-inline button CSS under a different class name. The composition reality is enforced by the gate (v3.G.17).
 - **Tokens.** Every CSS value comes from `@quoin/tokens-baseline` (175 canonical tokens across 11 DTCG 2025.10 types). Patterns do not declare raw color, spacing, type-size, or motion values — they reference token names. The token namespace is frozen at v1.0.
 
-## Pattern catalog (15 patterns + 1 primitive)
+## Pattern catalog (15 patterns + 4 primitives)
 
-### Foundation primitive (1)
+### Foundation primitives (4)
 
-- [prim-label](https://github.com/harrowhaus/quoin/blob/main/02_reference-packs/primitives/label/README.md): label primitive consolidating badge / status-pill / tag / chip / dismissible contracts. `class="label" data-role="badge | status | tag | chip | dismissible" data-tone="neutral | accent | success | warning | critical | info | new | beta"`. First `prim-*` primitive in the catalog (Phase 22 Cons. 5).
+- [prim-label](https://github.com/harrowhaus/quoin/blob/main/02_reference-packs/primitives/label/README.md): label primitive consolidating badge / status-pill / tag / chip / dismissible contracts. `class="label" data-role="badge | status | tag | chip | dismissible" data-tone="neutral | accent | success | warning | critical | info | new | beta"`. Phase 22 Cons. 5.
+- [prim-sequence](https://github.com/harrowhaus/quoin/blob/main/02_reference-packs/primitives/sequence/README.md): sequence primitive (breadcrumb / ordered-list / unordered-list / sidebar-vertical). `class="sequence" data-role="..." data-separator="chevron | slash | dot | pipe | number | none"`. Phase 22 Cons. 6.
+- [prim-decoration-overlay](https://github.com/harrowhaus/quoin/blob/main/02_reference-packs/primitives/decoration-overlay/README.md): positioned-absolute decorative layer (grain / texture / pattern / gradient). 5% LCP impact maximum (v3.G.14). Forward-looking for Boeing Watch + future aesthetic packs. Phase 22 Cons. 7.
+- [prim-searchable-list](https://github.com/harrowhaus/quoin/blob/main/02_reference-packs/primitives/searchable-list/README.md): combobox + listbox search-and-filter primitive. 3 variants (command-palette / autocomplete-results / filter-dropdown). Composes form-fields (required) + prim-label (optional). Phase 22 Cons. 8.
 
 ### Patterns (15)
 
