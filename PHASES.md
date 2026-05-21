@@ -166,11 +166,12 @@ This file is the single source of truth for phase status across the Quoin projec
 - `/llms.txt` — new "Layout primitives (6, Phase 22.6)" section between content primitives and patterns. Architectural-locks list extended to include v3.G.21.
 - `/llms-full.txt` — new "Layout primitives (Phase 22.6)" section with full anatomy for each of the six packs inserted before the token reference.
 - `/README.md` — catalog grid restructured: "Layout primitives (6, Phase 22.6)" subgrid added above the production-patterns grid; AI-tools section updated to enumerate counts correctly (15 + 4 + 6 + tokens-baseline).
-**Closure ref:** _this commit_ (2026-05-21).
+**Closure ref:** commit `c9379f85dcb6b7892a69de95f98ded644e34b91c` (2026-05-21).
 **What unblocks:** Session 6's editorial pattern batch (Track B from the prior conversation) — `prose-body`, `code-block`, `pull-quote`, `figure-with-caption` — can author on top of layout primitives. The aesthetic-swap demo (Session 6 Track A) can use prim-grid or prim-stack as its composition shell.
 **Scope boundary:** This phase owns `patterns/prim-{stack,cluster,center,grid,sidebar,switcher}/` plus the discoverability files explicitly enumerated above. No existing patterns are refactored — that's deferred to Phase 22.7 (Layout Composition Consolidation, queued).
 **Halts encountered:** none. Container-query convention (v3.G.11) handled cleanly for prim-sidebar + prim-switcher with documented graceful-degradation behavior for browsers earlier than Baseline 2024.
 **Naming clarification:** the brief stated "quoin.toml … per v3.G.21" but v3.G.21 is the `optionalPeerPacks` lock. The quoin.toml Cargo-style mirror is a separate D.85 emerging convention (first appeared in `patterns/hero/quoin.toml` + `patterns/nav/quoin.toml`); all six new primitive packs adopt the same format, advancing the convention from 2 → 8 packs. Format is still draft.
+**Closure ref filled:** commit `c9379f85dcb6b7892a69de95f98ded644e34b91c` (2026-05-21).
 
 ### Phase 22.5.B — Editorial Patterns Batch 1 (Track B)
 
