@@ -2,7 +2,7 @@
 
 This file is the single source of truth for phase status across the Quoin project. It supersedes scattered references in CONSOLIDATION reports, DECISIONS_UPDATES, and session-closing reports. Every future session that opens, closes, or modifies a phase updates this file in its closing batch.
 
-**Last updated:** Phase 22.6 closing — Layout Primitive Layer complete (2026-05-21)
+**Last updated:** Phase 22.7 closing — Pattern Translation Skill + Specification-Framing Documentation complete (2026-05-21)
 
 ---
 
@@ -221,12 +221,71 @@ This file is the single source of truth for phase status across the Quoin projec
 **What unblocks:** the aesthetic-pack architecture is now production-proven. Future aesthetic packs follow this template (`overrides/{light,dark}.json` + `tokens.css` + `specimen/`). The Aesthetic Packs (beyond v1.0) ongoing workstream is now live with three reference packs to model against. Track E (catalog discoverability sweep — `/llms.txt`, `/llms-full.txt`, `/registry.json`, `README.md`) is unblocked.
 **Scope boundary:** This phase owns `aesthetics/{boeing-watch,harrow-haus,default}/`, `demos/aesthetic-swap/`, and this PHASES.md entry only. The discoverability surface (`/llms.txt`, `/llms-full.txt`, `/registry.json`, `README.md`) is owned by Track E and not touched in this phase.
 
-### Phase 23 — Compiler IR Architecture
+### Phase 22.7 — Pattern Translation Skill + License/Quality Curation Framework + Specification-Framing Documentation
 
-**Status:** 🟡 Queued
-**Goal:** Refactor compiler with HIR (High-level Intermediate Representation) inspired by React Compiler (Oct 2025) — `BuildQHIR → EnterSSA → InferTokenTypes → InferVariantScopes → ReactiveAesthetic → BackendCodegen` pipeline.
-**Closure dependency:** Phase 22 must close first (catalog architecture must be stable before compiler IR can target it cleanly).
-**Reference:** unification dossier `compass_artifact_wf-7fef8f90-73e7-412a-90b7-9bd9f5d55ef2_text_markdown.md` § 3.1.
+**Status:** ✅ Complete (Phase 22.7 — 2026-05-21)
+**Goal:** ship the transitional infrastructure for ingesting external design systems plus the specification-framing documentation that establishes Quoin's strategic position. Three reference translations from ARIA APG demonstrate the framework end-to-end.
+**Output:**
+- **`THESIS.md`** at repo root — the specification-framing positioning document. Leads with "Quoin is a specification for UI semantics, with a reference implementation in HTML and CSS that demonstrates the specification works in practice." Establishes the standards-track ambition, the adoption modes, the architectural commitments, and the honest current state.
+- **`skills/quoin-pattern-translator.md`** — the master skill for converting external source patterns into Quoin packs. Twelve sections covering invocation conditions, input formats, output deliverables, naming convention application, composition rule extraction, license clearance, quality gates, batch workflow, README template, and **specification-framing** language for translated patterns. Skill is explicitly framed as **transitional infrastructure — obsolete-by-design** as the specification gains native publication adoption.
+- **`docs/sources/SOURCES.md`** — curated source registry: 5 public-domain sources (ARIA APG · Open UI CG · USWDS · GOV.UK · AGDS) + 9 permissive-licensed sources (Material Web · Carbon Web · Polaris · shadcn · Radix · Pico · Every Layout · daisyUI · Flowbite) + 3 incompatible-licensed sources documented (Tailwind UI · Material Design language · Semantic UI). Includes a "Future state — sources that may publish Quoin IR natively" tracker section and a yield-rate retrospective table.
+- **`docs/translation/anatomy-extraction-rules.md`** — per-format extraction procedures (D.1 HTML+CSS · D.2 web component · D.3 JSX/TSX · D.4 design spec · D.5 wireframe image · D.6 cross-format normalization · D.7 future native IR ingest).
+- **`docs/translation/quality-gates.md`** — 20 acceptance criteria gates (G.QA-1 through G.QA-20) covering anatomy, variants, composition, accessibility, performance, licensing, naming, and documentation. Opens with the "Quality gates exist because Quoin's specification is publishable" framing paragraph.
+- **Three reference translations** at `patterns/disclosure/` + `patterns/combobox/` + `patterns/tabs/`. Each is a complete Quoin pack with `quoin.pack.json` (including `metadata.source` attribution block) + `primitives/index.json` + `examples/index.html` (working specimen with companion JS) + `README.md` (anatomy tables + Source attribution paragraph at top + Translation notes + "What this pattern is NOT" section) + `LICENSE` (MIT with W3C-Document-License attribution) + `package.json`.
+- **Phase 23 reframe** documented in this PHASES.md (see new section below) — Phase 23 elevated from "the engine that powers multi-backend emission" to "the published specification draft for UI semantics."
+**Closure ref:** _this commit_ (2026-05-21).
+**What unblocks:**
+- **Harvest sessions** can execute against the source registry under the quality-gates framework. ARIA APG yield ramp continues from the 3 reference translations; other approved sources (Radix, shadcn, Material Web, Carbon, Polaris, USWDS) become tractable.
+- **Phase 22.5.B (queued editorial batch)** is unblocked when scheduled; the translation skill is one of the tools that session may use.
+- **Phase 23 (IR architecture + specification draft publication)** is now framed and prepared. The translation work in this phase informed the IR data model design by surfacing real composition + variant patterns that must round-trip through the IR.
+- **Phase 26 (Standards engagement)** — no longer indefinitely deferred. Activated by Phase 23.5 closure (specification draft publication). THESIS.md is the document standards-body reviewers will read.
+**Scope boundary:** Phase 22.7 owns `THESIS.md`, `skills/quoin-pattern-translator.md`, `docs/sources/SOURCES.md`, `docs/translation/anatomy-extraction-rules.md`, `docs/translation/quality-gates.md`, `patterns/{disclosure,combobox,tabs}/`, `docs/sessions/SESSION-6-REPORT.md`, plus the discoverability-surface updates explicitly enumerated in the closing-batch brief (PHASES.md, README.md, /llms.txt, /llms-full.txt, /registry.json).
+**Halts encountered:** none.
+**Reconciliation note (verification check):** The pre-drafted THESIS content described Phase 22.8 as "First aesthetic packs + live aesthetic-swap demo + editorial pattern category" — work that actually shipped in Phase 22.5.A + 22.5.C + 22.5.D under the existing PHASES.md numbering. THESIS was reconciled to reflect the existing 22.5.A/C/D numbering rather than retroactively renumbering PHASES.md, per "Use full commit hashes for closure references" maintenance protocol and the principle that historical commits should not be retroactively renumbered. Catalog count in THESIS also updated from "15 patterns + 4 primitives" to actual current "22 patterns + 4 content primitives + 6 layout primitives" reflecting Phase 22.5.C + 22.6 additions plus the three Phase 22.7 translations.
+
+---
+
+## Phase 23 Reframe — Specification-Track Elevation
+
+(Documented per the savant-level reframe of May 2026 that elevated Phase 23 from "the engine that powers multi-backend emission" to "the published specification draft for UI semantics." This section is the authoritative reference for the specification-framing pivot.)
+
+Phase 23 (Quoin IR Architecture) was originally framed as the internal architectural work that produces the IR engine for cross-backend pattern emission. The savant-level reframe elevates Phase 23 to the strategic centerpiece of the project: **the IR specification IS Quoin's product.** The pattern catalog, aesthetic packs, and plain-CSS backend are the reference implementation that proves the specification works.
+
+This reframe changes Phase 23's deliverables in scope but not in technical substance:
+
+- **Original Phase 23 deliverable:** an IR engine that emits the pattern catalog to multiple backends.
+- **Reframed Phase 23 deliverable:** a publishable specification draft of the IR (the canonical anatomy contract format, the variant tokenization rules, the composition rules, the aesthetic-pack interface, the backend emission contracts, the AI consumption format) accompanied by the reference IR engine that demonstrates the specification works.
+
+Phase 23 sub-phases adjust accordingly:
+
+- **23.1:** IR data model design → **IR specification data model** (publishable schema)
+- **23.2:** Source adapter interface → **IR ingest interface** (with future native-publication path documented per D.7 in anatomy-extraction-rules.md)
+- **23.3:** Backend emission interface → **IR emission interface** (with publishable backend contracts)
+- **23.4:** First reference source adapter (ARIA APG) → **First reference IR ingest implementation**
+- **23.5:** First reference backend (plain CSS) → **First reference IR emission implementation; SPECIFICATION DRAFT PUBLISHED at repository root as `Quoin-IR-Specification.md`**
+
+The specification draft becomes the deliverable that future standards-body engagement (Phase 26, now activated by 23.5 closure) submits.
+
+Phase 23.5 closing produces: a complete IR specification draft, a working IR engine reference implementation, a documented extension interface (aesthetic packs, source adapters, backend emitters), and the first live translation demo proving the specification's coherence.
+
+After Phase 23.5 closes, the community contribution model opens at the extension layer (aesthetic packs, source adapters, backend emitters) while the IR specification core remains curated by the core team. This decouples ecosystem growth from core-team bandwidth.
+
+Phase 24 (Build Pipeline Integration + AI Tool Distribution) continues to ship distribution and AI tool surfaces, but those surfaces are now explicitly framed as consumers of the published specification rather than as independent workstreams.
+
+Phase 25 (Multi-Source Harvest) becomes explicitly transitional. Each harvested source is a candidate for retiring once the source publishes Quoin IR natively. Harvest is in service of immediate adoption; native publication is the strategic goal.
+
+Phase 26 (Standards Engagement) is no longer deferred indefinitely. It is queued for activation at Phase 23.5 closure. The specification draft is the deliverable that activates Phase 26. Targets include W3C (Web Components Community Group, Open UI Community Group), DTCG (Design Tokens Community Group), and direct engagement with major design system maintainers about publishing Quoin IR natively.
+
+The reframe does not retroactively change Phases 22.6 (Layout Primitives) or 22.7 (Translation Skill). The work in those phases proceeds as previously planned. What changes is what they're in service of: the specification, not the design system.
+
+---
+
+### Phase 23 — Quoin IR Architecture (reframed: specification draft + reference engine)
+
+**Status:** 🟡 Queued (reframed per Phase 23 Reframe section above)
+**Goal:** ship the canonical IR specification draft (`Quoin-IR-Specification.md`) accompanied by the reference IR engine that demonstrates the specification works. Sub-phases 23.1–23.5 per the reframe.
+**Closure dependency:** Phase 22 closure satisfied (the catalog architecture is stable; layout primitives and translation framework demonstrate the surfaces the IR must address).
+**Reference:** unification dossier `compass_artifact_wf-7fef8f90-73e7-412a-90b7-9bd9f5d55ef2_text_markdown.md` § 3.1 (the original IR architecture proposal, now reframed as the engine half of the deliverable; specification draft is the product half).
 
 ### Phase 24 — Build Pipeline Integrations
 
@@ -242,9 +301,10 @@ This file is the single source of truth for phase status across the Quoin projec
 
 ### Phase 26 — Standards Engagement
 
-**Status:** ⏳ Deferred
-**Goal:** DTCG working group participation, W3C-track standardization of relevant Quoin innovations.
-**Operator note:** No timing dependency; operator-deferred until project gains adoption traction.
+**Status:** 🟡 Queued for activation at Phase 23.5 closure (was: ⏳ Deferred; reframed per Phase 23 Reframe section above)
+**Goal:** Submit the Quoin IR specification draft (published in Phase 23.5) to standards bodies. Targets include W3C (Web Components Community Group, Open UI Community Group), DTCG (Design Tokens Community Group), and direct engagement with major design system maintainers (Material, Carbon, Polaris, shadcn, Radix) about publishing Quoin IR natively.
+**Closure dependency:** Phase 23.5 closure (specification draft must exist before it can be submitted).
+**Operator note:** No longer indefinitely deferred. The activation trigger is concrete: the published specification draft.
 
 ---
 
@@ -277,6 +337,53 @@ This file is the single source of truth for phase status across the Quoin projec
 - `aesthetics/default/` — tasteful neutral baseline
 **Next candidates (queued):** Manuscript Future (Junicode 2 + Ranade + Monaspace per Cons. 2 Option D), terminal-monochrome, expressive-motion-heavy.
 **Closure dependency:** none — three reference packs now exist; future packs follow the v1.0 template (`tokens.css` + `overrides/{light,dark}.json` + `specimen/`).
+
+---
+
+## Phase 22.7 outcome (2026-05-21) — Pattern Translation Skill + Specification-Framing Documentation
+
+Brief: ship the transitional infrastructure for ingesting external design systems plus the specification-framing documentation that establishes Quoin's strategic position. Three reference translations from ARIA APG demonstrate the framework end-to-end. The session also documents the **Phase 23 reframe** that elevates Phase 23 from "the engine that powers multi-backend emission" to "the published specification draft for UI semantics."
+
+**Architectural framing.** Quoin is a specification for UI semantics with a reference implementation in HTML and CSS. The pattern translation skill is **transitional infrastructure** — it exists to bridge the period before major design systems publish their anatomy in Quoin IR format natively. As adoption grows and systems implement the specification directly, the translation skill becomes obsolete by design. The work in this session is the same as previously specified for "harvest tooling," but the meaning is sharper: every translation is preparation for the day when sources publish Quoin IR natively, and Quoin's translations retire.
+
+**Shipped:**
+
+- **`THESIS.md`** at repo root. The specification-framing positioning document. Leads with the specification framing, establishes the standards-track ambition, documents the adoption modes, captures the honest current state. ~180 lines. External observers (adopters, contributors, standards body reviewers, AI tool builders) read this first.
+- **`skills/quoin-pattern-translator.md`** — 12-section translation skill with explicit transitional framing. Sections cover invocation conditions / non-invocation conditions / inputs (5 format classes) / outputs / per-format extraction summary / naming convention application (v3.G.15-G.16) / composition rule extraction / license clearance / quality gates / batch workflow / README template / specification framing for translated patterns. Every translated pattern's README references the specification as the canonical contract; the source is documented as "the design system that contributed this pattern's anatomy"; the translation as "the specification-conformant expression of that anatomy."
+- **`docs/sources/SOURCES.md`** — curated registry. 5 public-domain sources, 9 permissive-licensed sources, 3 incompatible-licensed sources documented. Each entry: URL, license, license SPDX, source format, quality assessment, yield estimate, pattern count, harvest priority, translated-patterns tracker, rejected-patterns tracker, notes. Includes a "Future state — sources that may publish Quoin IR natively" anticipation section + a yield-rate retrospective table (Phase 22.7 yield: ARIA APG 3/3 = 100%).
+- **`docs/translation/anatomy-extraction-rules.md`** — per-format procedures D.1 through D.7. D.1 HTML+CSS (highest fidelity, worked example using disclosure); D.2 web component; D.3 JSX/TSX; D.4 design spec; D.5 wireframe image (with `confidence: visual-only` flag); D.6 cross-format normalization (naming, tokens, composition, ARIA, microstates); **D.7 Quoin IR native ingest** (the future-state procedure documenting how sources that publish Quoin IR natively are accepted directly without translation).
+- **`docs/translation/quality-gates.md`** — 20 acceptance gates (G.QA-1 through G.QA-20) covering anatomy minimum/maximum, conditional-slot gating, variant tokenization, composition reality (v3.G.17), conditional peers (v3.G.21), reverse-lineage (D.82), ARIA conformance, keyboard navigation, reduced motion, performance budgets, license compatibility, attribution recording, naming derivation + collision, README completeness, examples completeness, translation notes. Opens with "Quality gates exist because Quoin's specification is publishable" framing.
+- **Three reference translations** (`patterns/disclosure/`, `patterns/combobox/`, `patterns/tabs/`). Each ships a complete Quoin pack: `quoin.pack.json` with `metadata.source` attribution block + `primitives/index.json` per v3.G.18 + working specimen with companion JS + README with Source attribution paragraph + Translation notes + "What this pattern is NOT" + LICENSE with W3C-Document-License attribution + package.json. Specification framing language in every README: "expresses [ARIA APG]'s anatomy in Quoin's specification format. As ARIA APG and W3C standards bodies adopt or align with the Quoin specification — a path Quoin actively pursues — this translation will be retired in favor of native specification publication."
+- **Phase 23 reframe section** in PHASES.md — the authoritative reference for the specification-framing pivot. Sub-phases 23.1-23.5 adjusted. Phase 26 activation queued on 23.5 closure instead of indefinitely deferred.
+- **Discoverability surface updated** — README.md (THESIS.md link + 22-pattern catalog + new translation section), /llms.txt (translation-skill pointer + updated catalog), /llms-full.txt (full anatomy for disclosure, combobox, tabs + specification framing summary), /registry.json (3 new entries).
+
+**Verification status:**
+
+- All 9 new JSON files (3 packs × 3 JSON files each) parse cleanly.
+- Existing patterns and primitives untouched.
+- THESIS.md cross-references verified against actual PHASES.md state. Reconciled: catalog count, phase enumeration (Phase 22.5.A/C/D + 22.6 shipped; 22.7 this session; 22.5.B and harvest sessions queued next).
+- Each translation README contains: source attribution paragraph, four anatomy tables per v3.G.18, Translation notes section, "What this pattern is NOT" section, keyboard contract, ARIA contract.
+- Each translation's specimen renders working interaction with minimal companion JS (≤50 lines per pattern).
+- ARIA contracts match ARIA APG references for all three patterns.
+
+**Specification framing implications for downstream work:**
+
+- **Harvest is transitional.** Phase 25 (Multi-Source Harvest) is now explicitly transitional. Each translated source is a candidate for retirement when the source publishes Quoin IR natively. Native publication is the strategic goal; translation is tactical bridge.
+- **Phase 23's deliverable is the specification draft, not just the engine.** The IR specification (`Quoin-IR-Specification.md`) is what's published at Phase 23.5 closure. The engine is the reference implementation that proves the specification works.
+- **Phase 26 has a concrete activation trigger.** Standards engagement (W3C Web Components CG, W3C Open UI CG, DTCG, direct outreach) activates at Phase 23.5 closure. The specification draft is what's submitted.
+- **Translation pack format prepares for retirement.** Every translation README includes the "this translation will be retired in favor of native specification publication" language. When a source publishes Quoin IR for a pattern, the corresponding Quoin pack becomes a thin re-export rather than a maintained translation.
+
+**Out of scope (handled in subsequent sessions):**
+
+- Additional translations beyond the 3 reference translations. The framework is shipped; harvest sessions execute against it.
+- The Phase 22.5.B editorial pattern batch (`prose-body`, `code-block`, `pull-quote`, `figure-with-caption`) — still queued.
+- The Phase 22.7-Composition-Consolidation work (refactoring existing patterns to compose layout primitives from Phase 22.6) — still queued; renamed in dependency graph to avoid collision with this session's Phase 22.7 naming.
+
+**Halts encountered:** none.
+
+**Reconciliation noted in closing report:** the pre-drafted THESIS described "Phase 22.8 (Aesthetic Packs + Editorial Harvest + Templates + Demo)" which is work already shipped under Phase 22.5.A/C/D. THESIS was reconciled to match existing PHASES.md numbering rather than retroactively renumbering. Documented in the Phase 22.7 PHASES.md entry above and in `docs/sessions/SESSION-6-REPORT.md`.
+
+**Next-session recommendation:** Phase 22.5.B (the first half of the editorial pattern batch — prose-body, code-block, pull-quote, figure-with-caption) is the most-leveraged next ship, since it unblocks full composition of templates D.2 + D.3. Alternative: Phase 23.1 (IR specification data model design) if the operator wants to start the standards-track work. Both are tractable.
 
 ---
 
@@ -499,13 +606,18 @@ Phase 0 (spec)
                 → Templates layer beyond v1.0 [UNBLOCKED, ongoing]
               → Phase 22.6 (Layout Primitive Layer — ✅)
                 → Session 6 editorial pattern batch [UNBLOCKED to compose on layout primitives]
-                → Phase 22.7 (Layout Composition Consolidation — refactor existing patterns to compose layout primitives) [QUEUED]
-              → Phase 23 (Compiler IR) [BLOCKED on Phase 22 closure]
-                → Phase 24 (Build Pipeline) [BLOCKED on Phase 23]
-                → Phase 25 (MCP + Distribution) [BLOCKED on Phase 23]
+                → Phase 22.7-Composition-Consolidation (refactor existing patterns to compose layout primitives) [QUEUED — renamed from prior Phase 22.7 alias to avoid collision with this session's Phase 22.7]
+              → Phase 22.7 (Pattern Translation Skill + Specification-Framing — ✅)
+                → Harvest sessions [UNBLOCKED — operate against curated SOURCES.md registry under quality-gates framework]
+                → Phase 23 reframed (IR architecture → IR specification draft + reference engine)
+                → Phase 26 activation [QUEUED on Phase 23.5 closure — no longer indefinitely deferred]
+              → Phase 23 (Quoin IR Architecture — specification draft + reference engine)
+                → Phase 23.5 (specification publication + first translation demo)
+                  → Phase 26 (Standards Engagement) [ACTIVATED]
+                → Phase 24 (Build Pipeline + AI Tool Distribution) [BLOCKED on Phase 23]
+                → Phase 25 (Multi-Source Harvest) [BLOCKED on Phase 23]
               → Templates layer [BLOCKED on Cons. 4 nav unification]
             → Phase 5e (Launch) [BLOCKED on Phase 23 closure]
-            → Phase 26 (Standards) [DEFERRED]
             → Catalog Extension [UNBLOCKED, ongoing]
 ```
 

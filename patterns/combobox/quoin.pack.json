@@ -1,0 +1,37 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/pattern-combobox",
+  "version": "1.0.0",
+  "type": "pattern",
+  "quoinVersion": "^0.1.0",
+  "description": "Combobox pattern. A single-line text input paired with a popup listbox of suggestions. The text input is editable; the listbox provides selectable options that filter as the user types (or remain static, depending on variant). Translation from W3C ARIA Authoring Practices Guide. Phase 22.7.",
+  "category": "application",
+  "variant": "system",
+  "exports": {
+    "primitives": "./primitives/index.json"
+  },
+  "states": ["default", "open", "loading", "error"],
+  "microStates": ["default", "hover", "active", "focus", "focus-visible", "disabled"],
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/patterns/combobox",
+    "tags": ["combobox", "autocomplete", "form-control", "translation", "aria-apg"],
+    "source": {
+      "system": "W3C ARIA Authoring Practices Guide",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/",
+      "license": "W3C-Document-License",
+      "sourcePatternSlug": "combobox",
+      "captureDate": "2026-05-21",
+      "translationFraming": "transitional — to be retired in favor of native specification publication if ARIA APG publishes Quoin IR for this pattern"
+    }
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0",
+    "@quoin/pattern-form-fields": "^1.0.0"
+  },
+  "optionalPeerPacks": {
+    "@quoin/prim-searchable-list": "^1.0.0",
+    "@quoin/prim-label": "^1.0.0"
+  }
+}

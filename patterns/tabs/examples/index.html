@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en" data-aesthetic="default">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>@quoin/pattern-tabs — examples</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/harrowhaus/quoin@main/02_reference-packs/tokens-baseline/tokens.css">
+  <style>
+    body { max-width: 48rem; margin: 4rem auto; padding: 0 var(--space-card); background: var(--surface); color: var(--text); font-family: var(--font-sans); line-height: var(--leading-prose); }
+    h2 { font-family: var(--font-sans); font-size: var(--type-size-lg); margin: var(--space-section) 0 var(--space-3); color: var(--text-emphasis); }
+    p { color: var(--text-recede); font-size: var(--type-size-sm); }
+
+    /* PATTERN: tabs ──────────────────────────────────────── */
+
+    [data-pattern="tabs-container"] {
+      display: block;
+      margin: var(--space-3) 0;
+    }
+    [data-pattern="tabs-container"][data-orientation="vertical"] {
+      display: flex;
+      gap: var(--space-card);
+    }
+
+    [data-pattern="tabs-tablist"] {
+      display: flex;
+      gap: var(--space-1);
+      border-bottom: var(--border-width-sm) solid var(--border);
+      margin: 0 0 var(--space-card);
+      padding: 0;
+    }
+    [data-pattern="tabs-container"][data-orientation="vertical"] > [data-pattern="tabs-tablist"] {
+      flex-direction: column;
+      border-bottom: 0;
+      border-inline-end: var(--border-width-sm) solid var(--border);
+      margin: 0 var(--space-card) 0 0;
+      padding-inline-end: var(--space-1);
+      min-width: 10rem;
+    }
+
+    [data-pattern="tabs-tab"] {
+      appearance: none;
+      background: transparent;
+      color: var(--text-recede);
+      padding: var(--space-2) var(--space-card);
+      border: 0;
+      border-radius: var(--radius-md) var(--radius-md) 0 0;
+      border-bottom: var(--border-width-md) solid transparent;
+      font-family: var(--font-sans);
+      font-size: var(--type-size-sm);
+      font-weight: var(--font-weight-medium);
+      cursor: pointer;
+      transition: var(--transition-default);
+    }
+    [data-pattern="tabs-tab"]:hover { color: var(--text-emphasis); background: var(--surface-elevated); }
+    [data-pattern="tabs-tab"]:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+    [data-pattern="tabs-tab"][aria-selected="true"] {
+      color: var(--text-emphasis);
+      border-bottom-color: var(--accent);
+    }
+    [data-pattern="tabs-tab"][aria-disabled="true"] {
+      opacity: 0.5; cursor: not-allowed; color: var(--text-disabled);
+    }
+    [data-pattern="tabs-container"][data-orientation="vertical"] [data-pattern="tabs-tab"] {
+      border-radius: var(--radius-md) 0 0 var(--radius-md);
+      border-bottom: 0;
+      border-inline-end: var(--border-width-md) solid transparent;
+      text-align: start;
+    }
+    [data-pattern="tabs-container"][data-orientation="vertical"] [data-pattern="tabs-tab"][aria-selected="true"] {
+      border-inline-end-color: var(--accent);
+    }
+
+    [data-pattern="tabs-tabpanel"] {
+      padding: var(--space-card) 0;
+      color: var(--text);
+      transition: var(--transition-default);
+    }
+    [data-pattern="tabs-tabpanel"]:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+      border-radius: var(--radius-md);
+    }
+    [data-pattern="tabs-container"][data-orientation="vertical"] > [data-pattern="tabs-tabpanel"] {
+      flex: 1;
+      min-inline-size: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Horizontal · automatic activation (default)</h2>
+  <p>Arrow keys move and activate. Home/End jump to ends.</p>
+
+  <div data-pattern="tabs-container" data-orientation="horizontal" data-activation="automatic">
+    <div data-pattern="tabs-tablist" role="tablist" aria-label="Account settings">
+      <button data-pattern="tabs-tab" role="tab" id="acc-tab-1" aria-selected="true"  aria-controls="acc-panel-1" tabindex="0" type="button">Profile</button>
+      <button data-pattern="tabs-tab" role="tab" id="acc-tab-2" aria-selected="false" aria-controls="acc-panel-2" tabindex="-1" type="button">Notifications</button>
+      <button data-pattern="tabs-tab" role="tab" id="acc-tab-3" aria-selected="false" aria-controls="acc-panel-3" tabindex="-1" type="button">Billing</button>
+    </div>
+    <div data-pattern="tabs-tabpanel" role="tabpanel" id="acc-panel-1" aria-labelledby="acc-tab-1" tabindex="0">
+      <p style="color: var(--text);">Profile content. The tabpanel itself takes tabindex="0" so Tab from the active tab enters this panel.</p>
+    </div>
+    <div data-pattern="tabs-tabpanel" role="tabpanel" id="acc-panel-2" aria-labelledby="acc-tab-2" tabindex="0" hidden>
+      <p style="color: var(--text);">Notifications settings.</p>
+    </div>
+    <div data-pattern="tabs-tabpanel" role="tabpanel" id="acc-panel-3" aria-labelledby="acc-tab-3" tabindex="0" hidden>
+      <p style="color: var(--text);">Billing &amp; payment.</p>
+    </div>
+  </div>
+
+  <h2>Vertical · manual activation</h2>
+  <p>Arrow keys move focus only. Enter or Space activates.</p>
+
+  <div data-pattern="tabs-container" data-orientation="vertical" data-activation="manual">
+    <div data-pattern="tabs-tablist" role="tablist" aria-label="Documentation sections" aria-orientation="vertical">
+      <button data-pattern="tabs-tab" role="tab" id="docs-tab-1" aria-selected="true"  aria-controls="docs-panel-1" tabindex="0" type="button">Getting started</button>
+      <button data-pattern="tabs-tab" role="tab" id="docs-tab-2" aria-selected="false" aria-controls="docs-panel-2" tabindex="-1" type="button">Concepts</button>
+      <button data-pattern="tabs-tab" role="tab" id="docs-tab-3" aria-selected="false" aria-controls="docs-panel-3" tabindex="-1" type="button">API reference</button>
+      <button data-pattern="tabs-tab" role="tab" id="docs-tab-4" aria-selected="false" aria-controls="docs-panel-4" tabindex="-1" aria-disabled="true" type="button">Advanced (disabled)</button>
+    </div>
+    <div data-pattern="tabs-tabpanel" role="tabpanel" id="docs-panel-1" aria-labelledby="docs-tab-1" tabindex="0">
+      <p style="color: var(--text);">Getting-started content.</p>
+    </div>
+    <div data-pattern="tabs-tabpanel" role="tabpanel" id="docs-panel-2" aria-labelledby="docs-tab-2" tabindex="0" hidden>
+      <p style="color: var(--text);">Concepts.</p>
+    </div>
+    <div data-pattern="tabs-tabpanel" role="tabpanel" id="docs-panel-3" aria-labelledby="docs-tab-3" tabindex="0" hidden>
+      <p style="color: var(--text);">API reference.</p>
+    </div>
+    <div data-pattern="tabs-tabpanel" role="tabpanel" id="docs-panel-4" aria-labelledby="docs-tab-4" tabindex="0" hidden>
+      <p style="color: var(--text);">Advanced.</p>
+    </div>
+  </div>
+
+  <script>
+    // Companion JS — ARIA APG tabs pattern with both activation modes.
+    document.querySelectorAll('[data-pattern="tabs-container"]').forEach(container => {
+      const activation = container.getAttribute('data-activation') || 'automatic';
+      const orientation = container.getAttribute('data-orientation') || 'horizontal';
+      const tablist = container.querySelector('[data-pattern="tabs-tablist"]');
+      const tabs = Array.from(tablist.querySelectorAll('[data-pattern="tabs-tab"]'));
+      const panels = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
+
+      function isEnabled(tab) { return tab.getAttribute('aria-disabled') !== 'true'; }
+
+      function activate(idx) {
+        const tab = tabs[idx];
+        if (!tab || !isEnabled(tab)) return;
+        tabs.forEach((t, i) => {
+          const sel = i === idx;
+          t.setAttribute('aria-selected', sel ? 'true' : 'false');
+          t.setAttribute('tabindex', sel ? '0' : '-1');
+          panels[i].hidden = !sel;
+        });
+      }
+
+      function focusTab(idx, withActivation) {
+        // Skip disabled tabs in either direction
+        const step = (i) => ((i % tabs.length) + tabs.length) % tabs.length;
+        let i = step(idx);
+        let guard = 0;
+        while (!isEnabled(tabs[i]) && guard < tabs.length) {
+          i = step(i + 1);
+          guard++;
+        }
+        tabs[i].focus();
+        if (withActivation) activate(i);
+      }
+
+      tabs.forEach((tab, i) => {
+        tab.addEventListener('click', () => { if (isEnabled(tab)) activate(i); });
+        tab.addEventListener('keydown', (e) => {
+          const horizontal = orientation === 'horizontal';
+          const next = horizontal ? 'ArrowRight' : 'ArrowDown';
+          const prev = horizontal ? 'ArrowLeft' : 'ArrowUp';
+          if (e.key === next) { e.preventDefault(); focusTab(i + 1, activation === 'automatic'); }
+          else if (e.key === prev) { e.preventDefault(); focusTab(i - 1, activation === 'automatic'); }
+          else if (e.key === 'Home') { e.preventDefault(); focusTab(0, activation === 'automatic'); }
+          else if (e.key === 'End') { e.preventDefault(); focusTab(tabs.length - 1, activation === 'automatic'); }
+          else if (activation === 'manual' && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); activate(i); }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

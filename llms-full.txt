@@ -1,6 +1,14 @@
 # Quoin — full pattern anatomy reference
 
-This file is the long-form anatomy reference for AI coding tools generating Quoin markup at scale. For the short index, read `/llms.txt` first.
+This file is the long-form anatomy reference for AI coding tools generating Quoin markup at scale. For the short index, read `/llms.txt` first. For the strategic framing (Quoin as a specification with a reference implementation), read [`THESIS.md`](THESIS.md).
+
+## Specification framing (one-paragraph summary)
+
+Quoin is a specification for UI semantics, with a reference implementation in HTML and CSS that demonstrates the specification works in practice. The specification covers: **anatomy contracts** (the structural definition of every UI pattern as a slot graph), **variant tokenization rules** (every visual choice expressed as a token-typed variant axis), **composition rules** (peer-pack consumption declared, never inlined), the **aesthetic-pack interface** (typed bundles of token-value overrides), **backend emission contracts** (the IR engine that powers cross-backend output), and **AI consumption surfaces** (the /llms.txt, /llms-full.txt, /registry.json, MCP server endpoints — all serialization views of the canonical IR). The specification draft publishes at Phase 23.5 closure as `Quoin-IR-Specification.md`. Until then, this document plus PHASES.md plus the pack-format spec are the authoritative working reference. The current implementation ships **22 patterns + 4 content primitives + 6 layout primitives + 3 aesthetic packs + 3 page templates + a translation skill** as the reference implementation. As source design systems adopt the specification (Phase 26 standards-track engagement, activated by Phase 23.5 closure), translations of those sources retire in favor of native publication.
+
+## Translation skill workflow (for AI consumption)
+
+When generating Quoin markup, you may encounter patterns whose anatomy was translated from an external source (W3C ARIA APG, Radix UI, Material Web Components, etc.). These patterns are functionally identical to natively-authored Quoin patterns from your consumption perspective — same anatomy tables, same composition rules, same ARIA contracts. The difference is in attribution: translated patterns' READMEs document the source and the planned retirement when the source publishes Quoin IR natively. You do not need to handle translated patterns differently when generating markup; the skill framework is operator-side maintenance work, not a consumer contract.
 
 Every pattern is documented in the same format:
 
@@ -749,6 +757,178 @@ Toast notification system with stacking, auto-dismiss, action affordance, live-r
 - Critical: `role="alert"` + `aria-live="assertive"`.
 - Dismiss button: `aria-label="Dismiss notification"`.
 - Action button (when present): `<button class="action-button" data-intent="primary" data-size="sm">`.
+
+---
+
+# Translated patterns (Phase 22.7, from W3C ARIA APG)
+
+Three patterns translated from the W3C ARIA Authoring Practices Guide. Each pack's README carries a source-attribution paragraph and the standard transitional-framing language ("this translation will be retired in favor of native specification publication"). The anatomy below is identical in shape to native-authored patterns — translation is a maintenance distinction, not a consumption distinction.
+
+## disclosure
+
+**Pack:** `@quoin/pattern-disclosure@1.0.0`
+**Folder:** `patterns/disclosure/`
+**Source:** [ARIA APG Disclosure](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/) (W3C Document License)
+
+Button that toggles the visibility of an associated content region. Foundational expand/collapse anatomy.
+
+### Anatomy
+
+| Slot | Element | Role |
+|---|---|---|
+| `disclosure-container` | `<div>` | Wrapper with `data-state="expanded\|collapsed"` |
+| `disclosure-trigger` | `<button>` | `aria-expanded` + `aria-controls` |
+| `disclosure-content` | `<div>` | `id` referenced by trigger; uses HTML `hidden` when closed |
+
+### Attributes
+
+| Attribute | Values | Default |
+|---|---|---|
+| `data-state` (on container) | `expanded` / `collapsed` | `collapsed` |
+| `aria-expanded` (on trigger) | `true` / `false` | `false` |
+
+### Composition
+
+- Optional: `@quoin/prim-stack` inside `disclosure-content` for stacked children.
+
+### ARIA contract
+
+- Trigger: `<button type="button">` with `aria-expanded` + `aria-controls` (required).
+- Content: `id` matching trigger's `aria-controls`; HTML `hidden` attribute for closed state.
+
+### Minimal markup
+
+```html
+<div data-pattern="disclosure-container" data-state="collapsed">
+  <button data-pattern="disclosure-trigger" type="button" aria-expanded="false" aria-controls="d1">Toggle</button>
+  <div data-pattern="disclosure-content" id="d1" hidden>Content.</div>
+</div>
+```
+
+---
+
+## combobox
+
+**Pack:** `@quoin/pattern-combobox@1.0.0`
+**Folder:** `patterns/combobox/`
+**Source:** [ARIA APG Combobox](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) (W3C Document License, ARIA 1.2 pattern)
+
+Text input + popup listbox. Four autocomplete variants per ARIA APG.
+
+### Anatomy
+
+| Slot | Element | Role |
+|---|---|---|
+| `combobox-container` | `<div>` | Sets `data-variant` + `data-state` |
+| `combobox-label` | `<label for="<input-id>">` | Accessible label |
+| `combobox-input` | `<input role="combobox">` | `aria-expanded`, `aria-controls`, `aria-autocomplete`, `aria-activedescendant` |
+| `combobox-listbox` | `<ul role="listbox">` | `id` referenced by input; `hidden` when closed |
+| `combobox-option` | `<li role="option">` | unique `id`, `aria-selected` |
+| `combobox-empty-state` (conditional) | `<div>` | Rendered on zero filter matches |
+
+### Attributes
+
+| Attribute | Values | Default |
+|---|---|---|
+| `data-variant` (container) | `autocomplete-list` / `autocomplete-inline` / `autocomplete-both` / `no-autocomplete` | `autocomplete-list` |
+| `data-state` (container) | `default` / `open` / `loading` / `error` | `default` |
+
+### Composition
+
+- Required: `@quoin/pattern-form-fields` (label + input token conventions).
+- Optional: `@quoin/prim-searchable-list` (large-option-set delegation), `@quoin/prim-label` (option category chips).
+
+### ARIA contract
+
+- ARIA 1.2 pattern. `role="combobox"` is on the input directly (not a wrapping div).
+- Input always carries `aria-controls` (listbox id), `aria-autocomplete` (variant value), `aria-expanded`, `aria-activedescendant` (option id during keyboard nav).
+- Listbox always has `role="listbox"`; options have `role="option"` + unique id.
+
+### Keyboard contract
+
+| Key | Behavior |
+|---|---|
+| ArrowDown/Up | Move active descendant (open listbox if closed) |
+| Home/End | Jump to first/last visible option |
+| Enter | Select active option |
+| Escape | Close listbox; second press clears input |
+| Tab | Close listbox; exit |
+
+### Minimal markup
+
+```html
+<div data-pattern="combobox-container" data-variant="autocomplete-list">
+  <label data-pattern="combobox-label" for="cb1">Choose</label>
+  <input data-pattern="combobox-input" id="cb1" type="text" role="combobox"
+         aria-expanded="false" aria-controls="lb1" aria-autocomplete="list" aria-activedescendant="">
+  <ul data-pattern="combobox-listbox" id="lb1" role="listbox" hidden>
+    <li data-pattern="combobox-option" role="option" id="o1">Option one</li>
+    <li data-pattern="combobox-option" role="option" id="o2">Option two</li>
+  </ul>
+</div>
+```
+
+---
+
+## tabs
+
+**Pack:** `@quoin/pattern-tabs@1.0.0`
+**Folder:** `patterns/tabs/`
+**Source:** [ARIA APG Tabs](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) (W3C Document License)
+
+Tablist + tabs + tabpanels. Horizontal/vertical orientation × automatic/manual activation.
+
+### Anatomy
+
+| Slot | Element | Role |
+|---|---|---|
+| `tabs-container` | `<div>` | Sets `data-orientation` + `data-activation` |
+| `tabs-tablist` | `<div role="tablist">` | `aria-label` for the tab set |
+| `tabs-tab` | `<button role="tab">` | `aria-selected`, `aria-controls`, roving `tabindex` |
+| `tabs-tabpanel` | `<div role="tabpanel">` | `id` referenced by tab; `aria-labelledby`; `tabindex="0"`; `hidden` when inactive |
+
+### Attributes
+
+| Attribute | Values | Default |
+|---|---|---|
+| `data-orientation` (container) | `horizontal` / `vertical` | `horizontal` |
+| `data-activation` (container) | `automatic` / `manual` | `automatic` |
+| `aria-selected` (tab) | `true` / `false` | `false` (one tab `true`) |
+| `aria-disabled` (tab) | `true` / `false` | `false` |
+| `tabindex` (tab) | roving — `0` on active, `-1` on others | varies |
+
+### Composition
+
+- None. Self-contained.
+
+### ARIA contract
+
+- Tablist: `role="tablist"` + `aria-label` (required when not contextually obvious) + `aria-orientation="vertical"` (when applicable).
+- Tab: `role="tab"` + `aria-selected` (exactly one true) + `aria-controls` (panel id) + roving `tabindex`.
+- Tabpanel: `role="tabpanel"` + `aria-labelledby` (tab id) + `tabindex="0"` (required) + `hidden` when inactive.
+
+### Keyboard contract
+
+| Key (horizontal / vertical) | Behavior |
+|---|---|
+| ArrowRight / ArrowDown | Next tab (wrap); auto mode activates |
+| ArrowLeft / ArrowUp | Previous tab (wrap); auto mode activates |
+| Home / End | First / last tab; auto mode activates |
+| Enter or Space | Activate (manual mode only) |
+| Tab | Exit tablist; one stop inside via roving tabindex |
+
+### Minimal markup
+
+```html
+<div data-pattern="tabs-container" data-orientation="horizontal" data-activation="automatic">
+  <div data-pattern="tabs-tablist" role="tablist" aria-label="Settings">
+    <button data-pattern="tabs-tab" role="tab" id="t1" aria-selected="true"  aria-controls="p1" tabindex="0"  type="button">A</button>
+    <button data-pattern="tabs-tab" role="tab" id="t2" aria-selected="false" aria-controls="p2" tabindex="-1" type="button">B</button>
+  </div>
+  <div data-pattern="tabs-tabpanel" role="tabpanel" id="p1" aria-labelledby="t1" tabindex="0">A content</div>
+  <div data-pattern="tabs-tabpanel" role="tabpanel" id="p2" aria-labelledby="t2" tabindex="0" hidden>B content</div>
+</div>
+```
 
 ---
 

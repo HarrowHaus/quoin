@@ -316,6 +316,49 @@
       ]
     },
     {
+      "name": "disclosure",
+      "type": "registry:component",
+      "title": "Disclosure (translated from ARIA APG)",
+      "description": "Disclosure pattern. Button + toggled content region. Foundational expand/collapse anatomy. Translation from W3C ARIA Authoring Practices Guide (W3C Document License). Phase 22.7.",
+      "categories": ["application", "translation", "aria-apg"],
+      "files": [
+        {
+          "path": "patterns/disclosure/quoin.pack.json",
+          "type": "registry:file",
+          "target": "components/quoin/disclosure.json"
+        }
+      ]
+    },
+    {
+      "name": "combobox",
+      "type": "registry:component",
+      "title": "Combobox (translated from ARIA APG)",
+      "description": "Combobox pattern. Text input + popup listbox. Four ARIA APG 1.2 variants (autocomplete-list / inline / both / none). Composes form-fields (required) + prim-searchable-list + prim-label (optional). Translation from W3C ARIA Authoring Practices Guide. Phase 22.7.",
+      "categories": ["application", "form-control", "translation", "aria-apg"],
+      "registryDependencies": ["form-fields"],
+      "files": [
+        {
+          "path": "patterns/combobox/quoin.pack.json",
+          "type": "registry:file",
+          "target": "components/quoin/combobox.json"
+        }
+      ]
+    },
+    {
+      "name": "tabs",
+      "type": "registry:component",
+      "title": "Tabs (translated from ARIA APG)",
+      "description": "Tabs pattern. Tablist + tabs + tabpanels. Horizontal/vertical × automatic/manual activation. Roving tabindex. Translation from W3C ARIA Authoring Practices Guide. Phase 22.7.",
+      "categories": ["application", "translation", "aria-apg"],
+      "files": [
+        {
+          "path": "patterns/tabs/quoin.pack.json",
+          "type": "registry:file",
+          "target": "components/quoin/tabs.json"
+        }
+      ]
+    },
+    {
       "name": "prim-stack",
       "type": "registry:component",
       "title": "Stack (layout primitive)",

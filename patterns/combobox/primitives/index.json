@@ -1,0 +1,231 @@
+[
+  {
+    "name": "combobox-container",
+    "category": "application",
+    "gating": "mandatory",
+    "role": "Outer container that groups the text input with its popup listbox. Carries data-state reflecting the popup's open/closed status and (when filtering) the current match count.",
+    "attributes": {
+      "variant": {
+        "values": ["autocomplete-list", "autocomplete-inline", "autocomplete-both", "no-autocomplete"],
+        "default": "autocomplete-list",
+        "specific": true,
+        "note": "ARIA APG's four combobox variants. autocomplete-list = list filters as user types (most common). autocomplete-inline = first match is selected inside the input. autocomplete-both = filter + inline. no-autocomplete = listbox shows full list, never filters."
+      },
+      "state": {
+        "values": ["default", "open", "loading", "error"],
+        "default": "default",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<div data-pattern='combobox-container' data-variant='autocomplete-list' data-state='default'>",
+        "  <label data-pattern='combobox-label' for='combobox-1-input'>Choose a fruit</label>",
+        "  <input data-pattern='combobox-input' id='combobox-1-input' type='text'",
+        "         role='combobox' aria-expanded='false' aria-controls='combobox-1-listbox'",
+        "         aria-autocomplete='list' aria-activedescendant=''>",
+        "  <ul data-pattern='combobox-listbox' id='combobox-1-listbox' role='listbox' hidden>",
+        "    <li data-pattern='combobox-option' role='option' id='combobox-1-opt-1'>Apple</li>",
+        "    <li data-pattern='combobox-option' role='option' id='combobox-1-opt-2'>Banana</li>",
+        "  </ul>",
+        "  (optional) <div data-pattern='combobox-empty-state' hidden>No results</div>",
+        "</div>"
+      ],
+      "ariaPatternsContract": "The container is structural — no role. The semantic affordance lives on the input + listbox pair per ARIA APG's combobox 1.2 pattern.",
+      "variantContracts": {
+        "autocomplete-list": "Input has aria-autocomplete='list'. The listbox filters as the user types. Selected option (if any) does NOT auto-fill the input.",
+        "autocomplete-inline": "Input has aria-autocomplete='inline'. As the user types, the first matching option's full text is auto-completed inside the input (with the auto-filled portion typically selected so subsequent typing replaces it). Listbox not shown.",
+        "autocomplete-both": "Input has aria-autocomplete='both'. Both behaviors: listbox filters, AND first match auto-completes inline.",
+        "no-autocomplete": "Input has aria-autocomplete='none' (or omits the attribute). Listbox shows the full option list; the input is for show-the-list-on-focus and free-text entry."
+      }
+    }
+  },
+  {
+    "name": "combobox-label",
+    "category": "application",
+    "gating": "mandatory",
+    "role": "Accessible label for the combobox input. Always a <label> with `for` referencing the input's id. NEVER use placeholder text as a label.",
+    "attributes": {},
+    "tokens": {
+      "color": "var(--text)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-sm)",
+      "fontWeight": "var(--font-weight-medium)",
+      "marginBlockEnd": "var(--space-2)"
+    },
+    "structure": {
+      "element": "label"
+    },
+    "children": "phrasing-content",
+    "scope": "block",
+    "meta": {
+      "ariaPatterns": {
+        "forAttribute": "Required. for='<input-id>' associates the label with the input. Without it, screen readers do not announce the label when the input is focused.",
+        "noPlaceholderAsLabel": "Placeholder text is NOT a substitute for a label. WCAG 3.3.2 + 4.1.2."
+      }
+    }
+  },
+  {
+    "name": "combobox-input",
+    "category": "application",
+    "gating": "mandatory",
+    "role": "The single-line text input. Carries role='combobox' (in ARIA 1.2 pattern; legacy ARIA 1.1 used different markup). Operates standard text-input behavior plus combobox-specific keyboard handling for the popup listbox.",
+    "attributes": {
+      "expanded": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true,
+        "note": "Mirrors the listbox's visibility. aria-expanded='true' when listbox is open."
+      },
+      "autocomplete": {
+        "values": ["list", "inline", "both", "none"],
+        "default": "list",
+        "specific": true,
+        "note": "ARIA aria-autocomplete value. Mirrors the container's data-variant."
+      }
+    },
+    "tokens": {
+      "color": "var(--text)",
+      "background": "var(--surface)",
+      "padding": "var(--space-2) var(--space-3)",
+      "borderRadius": "var(--radius-md)",
+      "borderColor": "var(--border)",
+      "borderWidth": "var(--border-width-sm)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-md)",
+      "transition": "var(--transition-default)",
+      "focusBorderColor": "var(--accent)",
+      "focusRing": "var(--focus-ring-width) solid var(--focus-ring)",
+      "focusRingOffset": "var(--focus-ring-offset)"
+    },
+    "structure": {
+      "element": "input"
+    },
+    "children": "none",
+    "scope": "inline",
+    "meta": {
+      "semanticStructure": [
+        "<input data-pattern='combobox-input'",
+        "       id='combobox-1-input' type='text'",
+        "       role='combobox'",
+        "       aria-expanded='false'",
+        "       aria-controls='combobox-1-listbox'",
+        "       aria-autocomplete='list'",
+        "       aria-activedescendant=''>"
+      ],
+      "ariaPatterns": {
+        "roleCombobox": "ARIA 1.2 pattern: role='combobox' lives on the input directly. (ARIA 1.1 used a wrapping div with role='combobox' and the input inside; that pattern is now deprecated.)",
+        "ariaExpanded": "Required. true when listbox open, false when closed.",
+        "ariaControls": "Required. References the listbox's id.",
+        "ariaAutocomplete": "Required. Values: 'list', 'inline', 'both', 'none'. Mirrors the container's data-variant.",
+        "ariaActivedescendant": "References the id of the currently-highlighted option in the listbox during keyboard navigation. Set to empty string when no option is active. Allows the input to retain DOM focus while a listbox option is 'virtually' focused via aria-activedescendant."
+      },
+      "keyboardContract": {
+        "ArrowDown": "If listbox closed, open it. If open, move active descendant to the next option (or to the first if none active).",
+        "ArrowUp": "If listbox closed, open it (active descendant = last option). If open, move active descendant up (wrapping to last if at top).",
+        "Enter": "If listbox open and an option is active, select that option (close listbox, fill input with option text). If listbox closed and value is in suggestion set, accept. If listbox closed and value is free text (no-autocomplete or autocomplete-list permits free), submit/blur.",
+        "Escape": "If listbox open, close it (return focus to input, retain input value). If listbox closed, clear input value (per ARIA APG suggestion — operators may disable this).",
+        "Home/End": "If listbox open, jump active descendant to first/last option. If listbox closed, default text-cursor behavior.",
+        "Tab": "Standard tab order; if listbox open, closes it without selecting (per ARIA APG 1.2 — selecting requires Enter)."
+      }
+    }
+  },
+  {
+    "name": "combobox-listbox",
+    "category": "application",
+    "gating": "mandatory",
+    "role": "The popup listbox of options. role='listbox' on the element. id referenced by combobox-input's aria-controls. Uses HTML `hidden` attribute when closed.",
+    "attributes": {},
+    "tokens": {
+      "background": "var(--surface-elevated)",
+      "borderColor": "var(--border)",
+      "borderWidth": "var(--border-width-sm)",
+      "borderRadius": "var(--radius-md)",
+      "padding": "var(--space-1)",
+      "marginBlockStart": "var(--space-1)",
+      "maxBlockSize": "16rem",
+      "overflowY": "auto",
+      "boxShadow": "var(--shadow-md)",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "ul"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "ariaPatterns": {
+        "roleListbox": "Required. role='listbox' on the element. The <ul> tag carries implicit list semantics; the role override makes it interactable per ARIA combobox spec.",
+        "listboxIdReferenced": "The listbox's id is referenced by the input's aria-controls."
+      },
+      "compositionWithPrimSearchableList": "When the listbox is doing live-filter search (autocomplete-list variant), the operator may compose @quoin/prim-searchable-list inside the listbox slot. The primitive handles the result-rendering contract; the combobox pattern owns the input + popup interaction loop."
+    }
+  },
+  {
+    "name": "combobox-option",
+    "category": "application",
+    "gating": "mandatory",
+    "role": "One option in the listbox. role='option' with id referenced by aria-activedescendant when active. Operates as a virtually-focusable item — DOM focus stays on the input.",
+    "attributes": {
+      "selected": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true,
+        "note": "aria-selected reflects whether this option is the currently-selected (committed) value. Distinct from active-descendant (which is the highlighted-but-not-yet-committed option during keyboard navigation)."
+      }
+    },
+    "tokens": {
+      "color": "var(--text)",
+      "padding": "var(--space-2) var(--space-3)",
+      "borderRadius": "var(--radius-sm)",
+      "transition": "var(--transition-default)",
+      "hoverBackground": "var(--surface-recessed)",
+      "activeBackground": "var(--accent-recede)",
+      "activeColor": "var(--text-emphasis)"
+    },
+    "structure": {
+      "element": "li"
+    },
+    "children": "phrasing-content",
+    "scope": "block",
+    "meta": {
+      "ariaPatterns": {
+        "roleOption": "Required. role='option' on the element.",
+        "ariaSelected": "Optional, but recommended when the combobox tracks a 'selected' option separately from the current keyboard-active option.",
+        "id": "Required. Each option needs a unique id so aria-activedescendant on the input can reference it."
+      }
+    }
+  },
+  {
+    "name": "combobox-empty-state",
+    "category": "application",
+    "gating": "conditional",
+    "role": "Conditional slot rendered inside the listbox when the user's filter produces zero matches. Composes the empty-state pattern.",
+    "attributes": {},
+    "tokens": {
+      "color": "var(--text-recede)",
+      "padding": "var(--space-3) var(--space-card)",
+      "textAlign": "center",
+      "fontSize": "var(--type-size-sm)"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "phrasing-content",
+    "scope": "block",
+    "meta": {
+      "ariaPatterns": {
+        "ariaLiveOptional": "When the listbox is open and an empty-state appears, an aria-live='polite' region on the listbox or container may announce 'No results' to AT users. Operator opt-in."
+      },
+      "gatingNote": "Gated by data-state='loading' (showing loader) or zero filter results (showing empty message)."
+    }
+  }
+]

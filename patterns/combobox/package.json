@@ -1,0 +1,11 @@
+{
+  "name": "@quoin/pattern-combobox",
+  "version": "1.0.0",
+  "description": "Combobox pattern. Text input + popup listbox with four ARIA APG variants. Translation from W3C ARIA Authoring Practices Guide.",
+  "main": "quoin.pack.json",
+  "files": ["quoin.pack.json", "primitives/", "examples/", "README.md", "LICENSE"],
+  "keywords": ["quoin", "pattern", "combobox", "autocomplete", "form-control", "translation", "aria-apg"],
+  "license": "MIT",
+  "homepage": "https://harrow.haus/quoin/patterns/combobox",
+  "repository": { "type": "git", "url": "https://github.com/harrowhaus/quoin.git", "directory": "patterns/combobox" }
+}

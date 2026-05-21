@@ -1,0 +1,11 @@
+{
+  "name": "@quoin/pattern-disclosure",
+  "version": "1.0.0",
+  "description": "Disclosure pattern (button + toggled content region). Translation from W3C ARIA Authoring Practices Guide.",
+  "main": "quoin.pack.json",
+  "files": ["quoin.pack.json", "primitives/", "examples/", "README.md", "LICENSE"],
+  "keywords": ["quoin", "pattern", "disclosure", "expand-collapse", "translation", "aria-apg"],
+  "license": "MIT",
+  "homepage": "https://harrow.haus/quoin/patterns/disclosure",
+  "repository": { "type": "git", "url": "https://github.com/harrowhaus/quoin.git", "directory": "patterns/disclosure" }
+}

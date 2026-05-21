@@ -1,0 +1,35 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/pattern-disclosure",
+  "version": "1.0.0",
+  "type": "pattern",
+  "quoinVersion": "^0.1.0",
+  "description": "Disclosure pattern. A button that toggles the visibility of an associated content region. Foundational expand/collapse anatomy used by accordions, FAQs, settings panels, expand-for-detail surfaces. Translation from W3C ARIA Authoring Practices Guide. Phase 22.7.",
+  "category": "application",
+  "variant": "system",
+  "exports": {
+    "primitives": "./primitives/index.json"
+  },
+  "states": ["expanded", "collapsed"],
+  "microStates": ["default", "hover", "active", "focus", "focus-visible", "disabled"],
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/patterns/disclosure",
+    "tags": ["disclosure", "expand-collapse", "accordion-base", "translation", "aria-apg"],
+    "source": {
+      "system": "W3C ARIA Authoring Practices Guide",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/",
+      "license": "W3C-Document-License",
+      "sourcePatternSlug": "disclosure",
+      "captureDate": "2026-05-21",
+      "translationFraming": "transitional — to be retired in favor of native specification publication if ARIA APG publishes Quoin IR for this pattern"
+    }
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0"
+  },
+  "optionalPeerPacks": {
+    "@quoin/prim-stack": "^1.0.0"
+  }
+}

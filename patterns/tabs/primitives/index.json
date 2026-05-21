@@ -1,0 +1,170 @@
+[
+  {
+    "name": "tabs-container",
+    "category": "application",
+    "gating": "mandatory",
+    "role": "Outer container that groups the tablist with its tabpanels. Carries data-orientation and data-activation variant axes.",
+    "attributes": {
+      "orientation": {
+        "values": ["horizontal", "vertical"],
+        "default": "horizontal",
+        "specific": true,
+        "note": "Tab strip layout. Horizontal: tabs render in a row above the panel. Vertical: tabs render in a column beside the panel."
+      },
+      "activation": {
+        "values": ["automatic", "manual"],
+        "default": "automatic",
+        "specific": true,
+        "note": "Automatic activation: arrow-key navigation immediately activates the focused tab (panel content swaps as the user navigates). Manual activation: arrow keys move focus only; Enter or Space activates. Per ARIA APG, automatic is appropriate when panel content is lightweight; manual when activation has cost (network fetch, heavy render)."
+      }
+    },
+    "tokens": {
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<div data-pattern='tabs-container' data-orientation='horizontal' data-activation='automatic'>",
+        "  <div data-pattern='tabs-tablist' role='tablist' aria-label='Account settings'>",
+        "    <button data-pattern='tabs-tab' role='tab' id='tab-1' aria-selected='true'  aria-controls='panel-1' tabindex='0'>Profile</button>",
+        "    <button data-pattern='tabs-tab' role='tab' id='tab-2' aria-selected='false' aria-controls='panel-2' tabindex='-1'>Notifications</button>",
+        "    <button data-pattern='tabs-tab' role='tab' id='tab-3' aria-selected='false' aria-controls='panel-3' tabindex='-1'>Billing</button>",
+        "  </div>",
+        "  <div data-pattern='tabs-tabpanel' role='tabpanel' id='panel-1' aria-labelledby='tab-1' tabindex='0'>",
+        "    Profile content.",
+        "  </div>",
+        "  <div data-pattern='tabs-tabpanel' role='tabpanel' id='panel-2' aria-labelledby='tab-2' tabindex='0' hidden>...</div>",
+        "  <div data-pattern='tabs-tabpanel' role='tabpanel' id='panel-3' aria-labelledby='tab-3' tabindex='0' hidden>...</div>",
+        "</div>"
+      ],
+      "ariaPatternsContract": "Per ARIA APG tabs pattern. Each tab has role='tab' + aria-selected + aria-controls. Each tabpanel has role='tabpanel' + aria-labelledby. Roving tabindex on tabs (only the active tab has tabindex='0'; others have tabindex='-1')."
+    }
+  },
+  {
+    "name": "tabs-tablist",
+    "category": "application",
+    "gating": "mandatory",
+    "role": "The tab strip. role='tablist'. Carries aria-label describing what the tab set governs (e.g., 'Account settings').",
+    "attributes": {},
+    "tokens": {
+      "display": "flex",
+      "gap": "var(--space-1)",
+      "borderBottom": "var(--border-width-sm) solid var(--border)",
+      "marginBlockEnd": "var(--space-card)",
+      "padding": "0",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<div data-pattern='tabs-tablist' role='tablist' aria-label='Account settings'>",
+        "  <!-- tab children -->",
+        "</div>"
+      ],
+      "ariaPatterns": {
+        "roleTablist": "Required.",
+        "ariaLabel": "Required when the tab set is not obvious from surrounding context. Names the tab group (e.g., 'Account settings', 'Documentation sections')."
+      },
+      "verticalLayout": "When parent data-orientation='vertical', the tablist switches to flex-direction: column and the border-block-end becomes border-inline-end."
+    }
+  },
+  {
+    "name": "tabs-tab",
+    "category": "application",
+    "gating": "mandatory",
+    "role": "One tab in the tablist. role='tab'. Carries aria-selected, aria-controls (referencing the panel id), and participates in roving tabindex.",
+    "attributes": {
+      "selected": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true,
+        "note": "aria-selected mirrors the active state. Exactly one tab in a tablist has aria-selected='true'."
+      },
+      "disabled": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true,
+        "note": "Disabled tabs do not receive keyboard focus and cannot be activated. aria-disabled='true' on the element."
+      }
+    },
+    "tokens": {
+      "color": "var(--text-recede)",
+      "background": "transparent",
+      "padding": "var(--space-2) var(--space-card)",
+      "borderRadius": "var(--radius-md) var(--radius-md) 0 0",
+      "borderBottomColor": "transparent",
+      "borderBottomWidth": "var(--border-width-md)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-sm)",
+      "fontWeight": "var(--font-weight-medium)",
+      "transition": "var(--transition-default)",
+      "hoverColor": "var(--text-emphasis)",
+      "hoverBackground": "var(--surface-elevated)",
+      "selectedColor": "var(--text-emphasis)",
+      "selectedBorderBottomColor": "var(--accent)",
+      "selectedBackground": "transparent",
+      "focusRing": "var(--focus-ring-width) solid var(--focus-ring)",
+      "focusRingOffset": "var(--focus-ring-offset)",
+      "disabledColor": "var(--text-disabled)",
+      "disabledOpacity": "0.5"
+    },
+    "structure": {
+      "element": "button"
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "ariaPatterns": {
+        "roleTab": "Required.",
+        "ariaSelected": "Required. true on the active tab; false on inactive tabs.",
+        "ariaControls": "Required. References the id of the controlled tabpanel.",
+        "tabindex": "Roving — active tab has tabindex='0'; inactive tabs have tabindex='-1'. This is what enables Tab to enter/exit the tablist as a single stop, with arrow keys moving between tabs.",
+        "ariaDisabled": "For disabled tabs. Disabled tabs are still in the DOM and arrow-key navigation skips them per ARIA APG."
+      },
+      "keyboardContract": {
+        "ArrowRight (horizontal) or ArrowDown (vertical)": "Move focus to next tab. If end, wrap to first. In automatic mode, also activates the newly-focused tab.",
+        "ArrowLeft (horizontal) or ArrowUp (vertical)": "Move focus to previous tab. Wrap to last at start.",
+        "Home": "Move focus to first tab; activate (auto mode).",
+        "End": "Move focus to last tab; activate (auto mode).",
+        "Enter or Space (manual mode only)": "Activate the focused tab.",
+        "Tab": "Exit the tablist. Standard tab order; tabindex roving means only one stop inside the tablist."
+      }
+    }
+  },
+  {
+    "name": "tabs-tabpanel",
+    "category": "application",
+    "gating": "mandatory",
+    "role": "One tabpanel. role='tabpanel'. id referenced by the controlling tab's aria-controls. aria-labelledby points back to the controlling tab. Inactive panels use HTML hidden attribute.",
+    "attributes": {},
+    "tokens": {
+      "color": "var(--text)",
+      "padding": "var(--space-card) 0",
+      "transition": "var(--transition-default)",
+      "focusRing": "var(--focus-ring-width) solid var(--focus-ring)",
+      "focusRingOffset": "var(--focus-ring-offset)"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "ariaPatterns": {
+        "roleTabpanel": "Required.",
+        "ariaLabelledby": "Required. References the controlling tab's id.",
+        "tabindex0": "Required. Each tabpanel takes tabindex='0' so that the panel itself is focusable. This is what enables Tab (from the active tab) to move INTO the panel content. The panel then loses focus when its content is Tabbed past.",
+        "hidden": "Inactive panels carry the HTML hidden attribute, removing them from layout AND the accessibility tree."
+      },
+      "interactiveContentNote": "If a panel contains its own focusable elements (form fields, links), tabindex='0' on the panel is still required per ARIA APG — the panel receives focus first, then Tab moves through the panel's own focusable contents in DOM order."
+    }
+  }
+]

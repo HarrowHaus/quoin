@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en" data-aesthetic="default">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>@quoin/pattern-disclosure — examples</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/harrowhaus/quoin@main/02_reference-packs/tokens-baseline/tokens.css">
+  <style>
+    body { max-width: 42rem; margin: 4rem auto; padding: 0 var(--space-card); background: var(--surface); color: var(--text); font-family: var(--font-sans); line-height: var(--leading-prose); }
+    h2 { font-family: var(--font-sans); font-size: var(--type-size-lg); margin: var(--space-section) 0 var(--space-3); color: var(--text-emphasis); }
+
+    /* PATTERN: disclosure ───────────────────────────────── */
+
+    [data-pattern="disclosure-container"] {
+      display: block;
+      margin: var(--space-3) 0;
+    }
+
+    [data-pattern="disclosure-trigger"] {
+      appearance: none;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      width: 100%;
+      justify-content: space-between;
+      padding: var(--space-3) var(--space-card);
+      background: transparent;
+      color: var(--text);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-md);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-md);
+      font-weight: var(--font-weight-medium);
+      cursor: pointer;
+      text-align: start;
+      transition: var(--transition-default);
+    }
+    [data-pattern="disclosure-trigger"]:hover { background: var(--surface-elevated); }
+    [data-pattern="disclosure-trigger"]:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+    [data-pattern="disclosure-trigger"] .caret {
+      display: inline-block;
+      transition: transform var(--motion-normal) var(--ease-standard);
+      color: var(--text-recede);
+    }
+    [data-pattern="disclosure-trigger"][aria-expanded="true"] .caret {
+      transform: rotate(180deg);
+    }
+
+    [data-pattern="disclosure-content"] {
+      padding: var(--space-card);
+      color: var(--text);
+      background: var(--surface-elevated);
+      border: var(--border-width-sm) solid var(--border);
+      border-top: 0;
+      border-radius: 0 0 var(--radius-md) var(--radius-md);
+    }
+    /* When trigger is collapsed, hidden attribute handles visibility — no extra CSS needed */
+
+    @media (prefers-reduced-motion: reduce) {
+      [data-pattern="disclosure-trigger"] .caret { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Single disclosure</h2>
+  <div data-pattern="disclosure-container" data-state="collapsed">
+    <button data-pattern="disclosure-trigger" type="button" aria-expanded="false" aria-controls="disclosure-1-content">
+      <span>What does this pattern do?</span>
+      <span class="caret" aria-hidden="true">▾</span>
+    </button>
+    <div data-pattern="disclosure-content" id="disclosure-1-content" hidden>
+      <p>The disclosure pattern toggles the visibility of a content region via a button. It's the foundational anatomy for accordions, FAQ sections, and "show more" affordances. The trigger's <code>aria-expanded</code> state mirrors the content's visibility; the trigger's <code>aria-controls</code> attribute references the content's id.</p>
+    </div>
+  </div>
+
+  <h2>Multiple disclosures (manual accordion behavior)</h2>
+  <p style="color: var(--text-recede); font-size: var(--type-size-sm);">Each disclosure operates independently. For "only-one-open" semantics, the operator's JS coordinates the group.</p>
+
+  <div data-pattern="disclosure-container" data-state="collapsed">
+    <button data-pattern="disclosure-trigger" type="button" aria-expanded="false" aria-controls="disc-2-content">
+      <span>How does it differ from <code>&lt;details&gt;</code>?</span>
+      <span class="caret" aria-hidden="true">▾</span>
+    </button>
+    <div data-pattern="disclosure-content" id="disc-2-content" hidden>
+      <p>The native <code>&lt;details&gt;</code> element implements similar semantics but with a fixed disclosure-widget visual register. Quoin's disclosure pattern exposes the anatomy explicitly so aesthetic packs can fully style it. Use <code>&lt;details&gt;</code> when the native register is acceptable; use this pattern when you need full aesthetic control.</p>
+    </div>
+  </div>
+
+  <div data-pattern="disclosure-container" data-state="collapsed">
+    <button data-pattern="disclosure-trigger" type="button" aria-expanded="false" aria-controls="disc-3-content">
+      <span>Is JavaScript required?</span>
+      <span class="caret" aria-hidden="true">▾</span>
+    </button>
+    <div data-pattern="disclosure-content" id="disc-3-content" hidden>
+      <p>Yes — the toggle behavior itself is interactive and requires a small JS handler to update <code>aria-expanded</code> on the trigger and toggle the <code>hidden</code> attribute on the content. The script below is the minimal companion JS shipped with this pattern's specimen; it handles any number of disclosures on the page through event delegation.</p>
+    </div>
+  </div>
+
+  <script>
+    // Companion JS — minimal disclosure toggle via event delegation.
+    document.addEventListener('click', (e) => {
+      const trigger = e.target.closest('[data-pattern="disclosure-trigger"]');
+      if (!trigger) return;
+      const expanded = trigger.getAttribute('aria-expanded') === 'true';
+      const contentId = trigger.getAttribute('aria-controls');
+      const content = contentId && document.getElementById(contentId);
+      const container = trigger.closest('[data-pattern="disclosure-container"]');
+      trigger.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      if (content) {
+        if (expanded) content.setAttribute('hidden', '');
+        else content.removeAttribute('hidden');
+      }
+      if (container) container.setAttribute('data-state', expanded ? 'collapsed' : 'expanded');
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,128 @@
+[
+  {
+    "name": "disclosure-container",
+    "category": "application",
+    "gating": "mandatory",
+    "role": "Outer container that groups the trigger with its controlled content. Carries the data-state attribute reflecting expanded vs collapsed. Optional element — when omitted, the trigger and content can sit as siblings in any parent.",
+    "attributes": {
+      "state": {
+        "values": ["expanded", "collapsed"],
+        "default": "collapsed",
+        "specific": true,
+        "note": "Mirrors aria-expanded on the trigger. Operators wire data-state and aria-expanded together via JS so CSS selectors can target either."
+      }
+    },
+    "tokens": {
+      "padding": "0",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<div data-pattern='disclosure-container' data-state='collapsed'>",
+        "  <button data-pattern='disclosure-trigger' aria-expanded='false' aria-controls='disclosure-content-1'>Show more</button>",
+        "  <div data-pattern='disclosure-content' id='disclosure-content-1' hidden>",
+        "    Hidden body content.",
+        "  </div>",
+        "</div>"
+      ],
+      "ariaPatterns": {
+        "noRole": "disclosure-container has no role of its own. The semantic affordance lives on the trigger + content pair.",
+        "noLandmark": "Containers in a list of related disclosures (accordions) typically sit inside a <ul> or <div role='region'>; the disclosure-container itself stays semantic-neutral."
+      }
+    }
+  },
+  {
+    "name": "disclosure-trigger",
+    "category": "application",
+    "gating": "mandatory",
+    "role": "The button that toggles content visibility. Always a <button type='button'> (never a link or div). Carries aria-expanded reflecting current state and aria-controls referencing the content's id.",
+    "attributes": {
+      "expanded": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true,
+        "note": "Mirrors the actual content visibility. Updated programmatically when the operator toggles. CSS [aria-expanded='true'] selectors style the open state."
+      }
+    },
+    "tokens": {
+      "color": "var(--text)",
+      "background": "transparent",
+      "padding": "var(--space-2) var(--space-3)",
+      "borderRadius": "var(--radius-md)",
+      "borderColor": "var(--border)",
+      "borderWidth": "var(--border-width-sm)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-md)",
+      "fontWeight": "var(--font-weight-medium)",
+      "lineHeight": "var(--leading-tight)",
+      "transition": "var(--transition-default)",
+      "hoverBackground": "var(--surface-elevated)",
+      "focusRing": "var(--focus-ring-width) solid var(--focus-ring)",
+      "focusRingOffset": "var(--focus-ring-offset)",
+      "iconRotateClosed": "0deg",
+      "iconRotateOpen": "180deg",
+      "iconTransition": "transform var(--motion-normal) var(--ease-standard)"
+    },
+    "structure": {
+      "element": "button"
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "semanticStructure": [
+        "<button data-pattern='disclosure-trigger' type='button'",
+        "        aria-expanded='false' aria-controls='disclosure-content-1'>",
+        "  <span>Trigger label</span>",
+        "  <span aria-hidden='true' class='caret'>▾</span>",
+        "</button>"
+      ],
+      "ariaPatterns": {
+        "expanded": "Required. aria-expanded='true' when content is visible; aria-expanded='false' when collapsed. AT users hear the state with the label.",
+        "controls": "Required. aria-controls='<content-id>' associates the trigger with the content it toggles.",
+        "noToggleRole": "role='button' is implicit on <button>. Do NOT add role='button'; do NOT use a non-button element."
+      },
+      "keyboardContract": {
+        "EnterAndSpace": "Activate the toggle. Native <button> handles this without JS; the operator's JS need only flip the state.",
+        "Tab": "Standard tab order; the trigger sits in DOM order."
+      }
+    }
+  },
+  {
+    "name": "disclosure-content",
+    "category": "application",
+    "gating": "mandatory",
+    "role": "The content region toggled by the trigger. Uses the HTML `hidden` attribute (or `[hidden] { display: none }`) for the collapsed state. The `id` is referenced by the trigger's aria-controls.",
+    "attributes": {},
+    "tokens": {
+      "padding": "var(--space-3) var(--space-card)",
+      "color": "var(--text)",
+      "background": "transparent",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<div data-pattern='disclosure-content' id='disclosure-content-1' hidden>",
+        "  <!-- any flow content -->",
+        "</div>"
+      ],
+      "hiddenAttributeContract": "The HTML `hidden` attribute (alone) removes the element from layout AND accessibility tree. Use `hidden='until-found'` for find-in-page reveals where appropriate (Baseline 2024).",
+      "compositionExamples": [
+        "Stacked items inside: <disclosure-content><prim-stack data-gap='sm'>...</prim-stack></disclosure-content>",
+        "Form field inside: <disclosure-content><form-fields>...</form-fields></disclosure-content>"
+      ],
+      "ariaPatterns": {
+        "noRoleRegion": "role='region' is sometimes added to large content panels (full-page collapsible sections); avoid for small disclosures because region-flood is its own AT problem."
+      }
+    }
+  }
+]

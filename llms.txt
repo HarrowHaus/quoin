@@ -1,6 +1,6 @@
 # Quoin
 
-> A semantic vocabulary for the patterns every website needs. Quoin is a CSS-replacement design language: write `<section data-pattern="hero-section" data-variant="type-only">` instead of a 12-class utility soup. 15 patterns + 4 content primitives + 6 layout primitives, declared anatomy, ARIA contracts and microstates baked in, aesthetic swappable.
+> Quoin is a **specification for UI semantics, with a reference implementation in HTML and CSS** that demonstrates the specification works in practice. Write `<section data-pattern="hero-section" data-variant="type-only">` instead of a 12-class utility soup. 22 patterns + 4 content primitives + 6 layout primitives, declared anatomy, ARIA contracts and microstates baked in, aesthetic swappable. Read [`THESIS.md`](THESIS.md) for the strategic framing.
 
 Quoin treats markup like type. Each pattern is a slot-and-variant contract — `hero-section` has 6 mandatory slots (`eyebrow / headline / subhead / actions / meta` + the section itself) plus 5 conditional slots gated by `data-variant`. The visual identity lives in a separable aesthetic layer; the same markup renders correctly across vellum, terminal, broadsheet, arcade, or any 2026-era aesthetic pack.
 
@@ -14,7 +14,7 @@ For AI coding tools generating Quoin markup at scale: this file is the index. Re
 - **Composition.** Patterns that need buttons consume `class="action-button"` from `@quoin/pattern-button-system` directly; they do not re-inline button CSS under a different class name. The composition reality is enforced by the gate (v3.G.17).
 - **Tokens.** Every CSS value comes from `@quoin/tokens-baseline` (175 canonical tokens across 11 DTCG 2025.10 types). Patterns do not declare raw color, spacing, type-size, or motion values — they reference token names. The token namespace is frozen at v1.0.
 
-## Pattern catalog (15 patterns + 4 content primitives + 6 layout primitives)
+## Pattern catalog (22 patterns + 4 content primitives + 6 layout primitives)
 
 ### Content primitives (4)
 
@@ -34,7 +34,22 @@ Spatial-logic primitives that govern composition. Pure layout — no aesthetic c
 - [prim-sidebar](https://raw.githack.com/harrowhaus/quoin/main/patterns/prim-sidebar/examples/index.html): sidebar + main, container-query responsive (Baseline 2024). `<div data-pattern="sidebar-container" data-side="left | right" data-width data-threshold>` containing `<aside data-pattern="sidebar-aside">` + `<main data-pattern="sidebar-main">`. Above threshold: side-by-side. Below: stacked.
 - [prim-switcher](https://raw.githack.com/harrowhaus/quoin/main/patterns/prim-switcher/examples/index.html): row that flips to column below container threshold. `<div data-pattern="switcher-container" data-threshold="narrow (30em) | standard (40em) | wide (60em)" data-gap data-align>`. For two-column blocks that stack on narrow containers.
 
-### Patterns (15)
+### Editorial patterns (4, Phase 22.5.C)
+
+- [footnote](https://raw.githack.com/harrowhaus/quoin/main/patterns/footnote/examples/index.html): four position variants (sidenote-margin / footnote-bottom / popup-on-hover / popup-on-click). CSS Anchor Positioning (Baseline Jan 2026); polyfill documented.
+- [table-of-contents](https://raw.githack.com/harrowhaus/quoin/main/patterns/table-of-contents/examples/index.html): three positions × three depth registers. IntersectionObserver active-section detection. Composes `prim-sequence`.
+- [article-meta](https://raw.githack.com/harrowhaus/quoin/main/patterns/article-meta/examples/index.html): author + date + reading-time + conditional category/tag-list/share-actions. Reading time computed at build time, never runtime. Composes `prim-label` (optionalPeerPacks, tag-list only).
+- [prose-aside](https://raw.githack.com/harrowhaus/quoin/main/patterns/prose-aside/examples/index.html): six semantic registers (note / tip / warning / danger / success / info) × three visual registers. Token-driven colour mapping; `aria-label` per role.
+
+### Translated patterns (3, Phase 22.7)
+
+Translated from W3C ARIA Authoring Practices Guide as the first exemplars of the translation framework. Each pack's README includes source attribution and transitional framing: "this translation will be retired in favor of native specification publication" as ARIA APG and W3C standards bodies adopt or align with the Quoin specification.
+
+- [disclosure](https://raw.githack.com/harrowhaus/quoin/main/patterns/disclosure/examples/index.html): button + toggled content region. Foundational expand/collapse anatomy. ARIA: `aria-expanded` + `aria-controls` + HTML `hidden`.
+- [combobox](https://raw.githack.com/harrowhaus/quoin/main/patterns/combobox/examples/index.html): text input + popup listbox. Four ARIA APG 1.2 variants (autocomplete-list / inline / both / none). ARIA: `role="combobox"` on input + `aria-activedescendant` for virtual focus. Composes `pattern-form-fields` (required) + `prim-searchable-list` + `prim-label` (optional).
+- [tabs](https://raw.githack.com/harrowhaus/quoin/main/patterns/tabs/examples/index.html): tablist + tabs + tabpanels. Horizontal/vertical × automatic/manual activation. Roving tabindex.
+
+### Production patterns (15)
 
 Each link below opens the canonical specimen rendered live (raw.githack.com). The specimen is the source of truth for the pattern's anatomy.
 
@@ -118,8 +133,18 @@ Seven locks in force as of Phase 22 closure — see [`PHASE_GATES.md`](PHASE_GAT
 - v3.G.20 — variants in pattern packs; values in aesthetic packs (documented)
 - v3.G.21 — optionalPeerPacks convention for variant-conditional composition (documented + programmatic)
 
+## Translation skill + source registry
+
+When a pattern's anatomy is sourced from an external design system, Quoin uses the pattern-translation skill (transitional infrastructure, obsolete-by-design as sources publish Quoin IR natively):
+
+- [`/skills/quoin-pattern-translator.md`](https://github.com/harrowhaus/quoin/blob/main/skills/quoin-pattern-translator.md) — master skill: invocation conditions, inputs, outputs, naming, composition, license clearance, quality gates, README template, specification framing.
+- [`/docs/sources/SOURCES.md`](https://github.com/harrowhaus/quoin/blob/main/docs/sources/SOURCES.md) — curated source registry. Approved (public-domain + permissive-licensed); incompatible (commercial / brand-restricted); future-state (sources tracked for eventual native Quoin IR publication).
+- [`/docs/translation/anatomy-extraction-rules.md`](https://github.com/harrowhaus/quoin/blob/main/docs/translation/anatomy-extraction-rules.md) — per-format procedures (HTML+CSS, web component, JSX/TSX, design spec, wireframe image, native IR ingest).
+- [`/docs/translation/quality-gates.md`](https://github.com/harrowhaus/quoin/blob/main/docs/translation/quality-gates.md) — 20 acceptance gates ensuring specification-conformant signal.
+
 ## Documentation depth
 
+- [`/THESIS.md`](https://github.com/harrowhaus/quoin/blob/main/THESIS.md) — strategic positioning. Quoin as a specification with a reference implementation. Read this for the framing.
 - `/llms-full.txt` — full anatomy reference for every pattern. Slot-by-slot, attribute-by-attribute. Use this when generating markup at scale.
 - `/registry.json` — shadcn-registry-compatible enumeration.
 - [Spec](https://github.com/harrowhaus/quoin/tree/main/00_spec) — tokens, primitives, pack format, pack types.

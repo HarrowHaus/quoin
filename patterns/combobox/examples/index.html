@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en" data-aesthetic="default">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>@quoin/pattern-combobox — examples</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/harrowhaus/quoin@main/02_reference-packs/tokens-baseline/tokens.css">
+  <style>
+    body { max-width: 38rem; margin: 4rem auto; padding: 0 var(--space-card); background: var(--surface); color: var(--text); font-family: var(--font-sans); line-height: var(--leading-prose); }
+    h2 { font-family: var(--font-sans); font-size: var(--type-size-lg); margin: var(--space-section) 0 var(--space-3); color: var(--text-emphasis); }
+    p { color: var(--text-recede); font-size: var(--type-size-sm); }
+
+    /* PATTERN: combobox ─────────────────────────────────── */
+    [data-pattern="combobox-container"] {
+      position: relative;
+      margin: var(--space-3) 0 var(--space-section);
+    }
+    [data-pattern="combobox-label"] {
+      display: block;
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-sm);
+      font-weight: var(--font-weight-medium);
+      margin: 0 0 var(--space-2);
+    }
+    [data-pattern="combobox-input"] {
+      width: 100%;
+      padding: var(--space-2) var(--space-3);
+      background: var(--surface);
+      color: var(--text);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-md);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-md);
+      transition: var(--transition-default);
+    }
+    [data-pattern="combobox-input"]:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+      border-color: var(--accent);
+    }
+    [data-pattern="combobox-listbox"] {
+      position: absolute;
+      inset-block-start: calc(100% + var(--space-1));
+      inset-inline-start: 0;
+      inline-size: 100%;
+      max-block-size: 16rem;
+      overflow-y: auto;
+      list-style: none;
+      margin: 0;
+      padding: var(--space-1);
+      background: var(--surface-elevated);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      z-index: 10;
+    }
+    [data-pattern="combobox-option"] {
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: var(--transition-default);
+      color: var(--text);
+    }
+    [data-pattern="combobox-option"]:hover {
+      background: var(--surface-recessed);
+    }
+    [data-pattern="combobox-option"].active {
+      background: var(--accent-recede);
+      color: var(--text-emphasis);
+    }
+    [data-pattern="combobox-option"][aria-selected="true"]::before {
+      content: "✓ ";
+      color: var(--accent);
+    }
+    [data-pattern="combobox-empty-state"] {
+      padding: var(--space-3);
+      color: var(--text-recede);
+      font-size: var(--type-size-sm);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>autocomplete-list variant (default)</h2>
+  <p>Type to filter the list. Use ↑/↓ to navigate, Enter to select, Esc to close.</p>
+
+  <div data-pattern="combobox-container" data-variant="autocomplete-list" data-state="default">
+    <label data-pattern="combobox-label" for="combo-fruit-input">Choose a fruit</label>
+    <input data-pattern="combobox-input"
+           id="combo-fruit-input"
+           type="text"
+           role="combobox"
+           aria-expanded="false"
+           aria-controls="combo-fruit-listbox"
+           aria-autocomplete="list"
+           aria-activedescendant=""
+           autocomplete="off">
+    <ul data-pattern="combobox-listbox" id="combo-fruit-listbox" role="listbox" hidden>
+      <li data-pattern="combobox-option" role="option" id="combo-fruit-opt-1">Apple</li>
+      <li data-pattern="combobox-option" role="option" id="combo-fruit-opt-2">Banana</li>
+      <li data-pattern="combobox-option" role="option" id="combo-fruit-opt-3">Blackberry</li>
+      <li data-pattern="combobox-option" role="option" id="combo-fruit-opt-4">Cherry</li>
+      <li data-pattern="combobox-option" role="option" id="combo-fruit-opt-5">Date</li>
+      <li data-pattern="combobox-option" role="option" id="combo-fruit-opt-6">Elderberry</li>
+      <li data-pattern="combobox-option" role="option" id="combo-fruit-opt-7">Fig</li>
+      <li data-pattern="combobox-option" role="option" id="combo-fruit-opt-8">Grape</li>
+    </ul>
+    <div data-pattern="combobox-empty-state" id="combo-fruit-empty" hidden>No fruits match.</div>
+  </div>
+
+  <script>
+    // Companion JS — ARIA APG 1.2 combobox interaction loop (autocomplete-list variant).
+    (function () {
+      const container = document.querySelector('[data-pattern="combobox-container"][data-variant="autocomplete-list"]');
+      if (!container) return;
+      const input = container.querySelector('[data-pattern="combobox-input"]');
+      const listbox = container.querySelector('[data-pattern="combobox-listbox"]');
+      const empty = container.querySelector('[data-pattern="combobox-empty-state"]');
+      const allOptions = Array.from(listbox.querySelectorAll('[data-pattern="combobox-option"]'));
+      let activeIndex = -1;
+
+      function visibleOptions() {
+        return allOptions.filter(o => !o.hidden);
+      }
+      function open() {
+        listbox.hidden = false;
+        input.setAttribute('aria-expanded', 'true');
+        container.setAttribute('data-state', 'open');
+      }
+      function close() {
+        listbox.hidden = true;
+        input.setAttribute('aria-expanded', 'false');
+        input.setAttribute('aria-activedescendant', '');
+        container.setAttribute('data-state', 'default');
+        activeIndex = -1;
+        allOptions.forEach(o => o.classList.remove('active'));
+      }
+      function filter(query) {
+        const q = query.trim().toLowerCase();
+        let anyVisible = false;
+        allOptions.forEach(o => {
+          const match = q === '' || o.textContent.toLowerCase().includes(q);
+          o.hidden = !match;
+          if (match) anyVisible = true;
+        });
+        empty.hidden = anyVisible;
+      }
+      function setActive(idx) {
+        const opts = visibleOptions();
+        if (opts.length === 0) {
+          activeIndex = -1;
+          input.setAttribute('aria-activedescendant', '');
+          allOptions.forEach(o => o.classList.remove('active'));
+          return;
+        }
+        activeIndex = ((idx % opts.length) + opts.length) % opts.length;
+        allOptions.forEach(o => o.classList.remove('active'));
+        const active = opts[activeIndex];
+        active.classList.add('active');
+        input.setAttribute('aria-activedescendant', active.id);
+        active.scrollIntoView({ block: 'nearest' });
+      }
+      function selectActive() {
+        const opts = visibleOptions();
+        if (activeIndex < 0 || activeIndex >= opts.length) return;
+        const active = opts[activeIndex];
+        allOptions.forEach(o => o.setAttribute('aria-selected', 'false'));
+        active.setAttribute('aria-selected', 'true');
+        input.value = active.textContent;
+        close();
+      }
+
+      input.addEventListener('input', (e) => {
+        filter(e.target.value);
+        if (!listbox.hidden) setActive(0);
+        else open();
+      });
+      input.addEventListener('focus', () => { filter(input.value); open(); setActive(activeIndex < 0 ? 0 : activeIndex); });
+      input.addEventListener('keydown', (e) => {
+        switch (e.key) {
+          case 'ArrowDown': e.preventDefault(); if (listbox.hidden) open(); setActive(activeIndex + 1); break;
+          case 'ArrowUp':   e.preventDefault(); if (listbox.hidden) open(); setActive(activeIndex - 1); break;
+          case 'Enter':     e.preventDefault(); selectActive(); break;
+          case 'Escape':    e.preventDefault(); close(); break;
+          case 'Tab':       close(); break;
+        }
+      });
+      listbox.addEventListener('click', (e) => {
+        const opt = e.target.closest('[data-pattern="combobox-option"]');
+        if (!opt) return;
+        const visIdx = visibleOptions().indexOf(opt);
+        if (visIdx >= 0) { activeIndex = visIdx; selectActive(); }
+      });
+      // Outside click closes
+      document.addEventListener('click', (e) => {
+        if (!container.contains(e.target)) close();
+      });
+    })();
+  </script>
+
+</body>
+</html>
