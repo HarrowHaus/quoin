@@ -2,7 +2,7 @@
 
 This file is the single source of truth for phase status across the Quoin project. It supersedes scattered references in CONSOLIDATION reports, DECISIONS_UPDATES, and session-closing reports. Every future session that opens, closes, or modifies a phase updates this file in its closing batch.
 
-**Last updated:** Session 2 (2026-05-20)
+**Last updated:** Session 2 closing (2026-05-20)
 
 ---
 
@@ -125,7 +125,7 @@ This file is the single source of truth for phase status across the Quoin projec
 | 1 | Spacing tokens single source | ✅ Complete | `111a240` (5 batches) | (inline closing-commit message; no standalone REPORT.md) |
 | 2 | Type-scale tokens single source (Option D — font-family architecture) | ✅ Complete | `c724d95` | `02_reference-packs/CONSOLIDATION-2-REPORT.md` |
 | 3 | Hero anatomy variants (5 packs → 1 unified) | ✅ Complete | `f94a662` | `02_reference-packs/CONSOLIDATION-3-REPORT.md` |
-| 4 | Nav variants (4 packs → 1 unified) | 🟡 Queued | — | — |
+| 4 | Nav variants (4 packs → 1 unified) | ⏸️ Paused (Session 2 partial) | `bfb9ff7` (partial — scaffolding + 1 of 4 specimens) | `02_reference-packs/CONSOLIDATION-4-{AUDIT,PROPOSAL}.md` shipped; REPORT.md pending |
 | 5 | Label primitive (badge / tag / status-pill / chip → prim-label) | 🟡 Queued | — | — |
 | 6 | Sequence primitive (breadcrumb / numbered-list / sidebar-list → prim-sequence) | 🟡 Queued | — | — |
 | 7 | Decoration overlay (paper-grain-overlay + surface-decoration → prim-decoration-overlay) | 🟡 Queued | — | — |
@@ -133,6 +133,14 @@ This file is the single source of truth for phase status across the Quoin projec
 | 9 | Boeing Watch boundary audit | 🟡 Queued | — | — |
 
 **Architectural locks shipped with Cons. 3 (v3.G.15–v3.G.20):** `PHASE_GATES.md` § Phase 22 — Consolidation 3 architectural locks.
+
+**Cons. 4 partial-execution notes (Session 2):**
+- Audit + Proposal landed; all 4 hard-halt conditions cleared
+- Pack scaffolding shipped (`02_reference-packs/patterns/nav/`): manifest, primitives JSON (21 entries: 2 mandatory + 17 conditional + nav-item + nav-subnav), README anatomy tables, package.json, LICENSE
+- 1 of 4 variant examples migrated (`examples/editorial.html`)
+- 3 of 4 variant examples copied but not yet migrated (marketing.html, app-chrome.html, docs.html) — each requires `data-variant` collision resolution (existing per-pack `data-variant` values rename to `data-mode` per Cons. 3 Q3 cascade)
+- Gate state: 26 specimens green (no regressions). New nav/* files pass v3.G.15-G.17 trivially because 'nav' not yet in enforced sets (deferred to closing batch).
+- Next-session resume point: complete the 3 remaining specimen migrations, then closing batch (deprecated dir removal + gate enforcement extension + reports + discoverability updates).
 
 ### Phase 22.5 — Discoverability Infrastructure
 
@@ -189,6 +197,29 @@ This file is the single source of truth for phase status across the Quoin projec
 **Status:** 🔄 Ongoing
 **Goal:** Ship aesthetic packs that target the variant axes declared by pattern packs (per v3.G.20). First such pack queued: `@quoin/aesthetic-manuscript-future` covering Junicode 2 + Ranade + Monaspace per the Cons. 2 Option D architecture.
 **Closure dependency:** Phase 22 closure (variants in pattern packs need to be stable before aesthetic packs target them).
+
+---
+
+## Session 2 outcome (2026-05-20)
+
+Session 2's brief was enormous (6 consolidations + 8 editorial patterns + 3 templates + discoverability + ledger). Execution was bounded by context-budget hard halt #6.
+
+**Shipped:**
+- `PHASES.md` (this file) — single-source phase ledger; commit `c8d6c8d`
+- Cons. 4 audit + proposal + pack scaffolding + 1 of 4 specimen migrations — commit `bfb9ff7`
+
+**Deferred to Session 3:**
+- Cons. 4 — finish 3 remaining specimen migrations + closing batch (deprecation, gate enforcement, discoverability, REPORT.md)
+- Cons. 5 (label primitive) — audit + execution
+- Cons. 6 (sequence primitive) — audit + execution
+- Cons. 7 (decoration overlay primitive) — audit + execution
+- Cons. 8 (searchable-list primitive) — audit + execution
+- Cons. 9 (Boeing Watch boundary audit) — audit + closure
+- Block B — 8 editorial patterns (none started)
+- Block C — 3 page templates (none started)
+- Block D — discoverability updates reflecting A + B + C output
+
+**Halt rationale:** context-budget hard halt #6. Cons. 4's marketing/app-chrome migrations involve coordinated `data-variant` collision-resolution renamings (existing per-pack `data-variant` for sticky/transparent/compact/standard/with-subnav/condensed must rename to `data-mode` per Cons. 3 Q3 cascade). Each file's migration is mechanical but substantial (~10-20 Edit operations per file). Halting at clean sub-boundary preserves Session 3 resume point cleanly.
 
 ---
 
