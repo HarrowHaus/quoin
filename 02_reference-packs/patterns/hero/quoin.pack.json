@@ -1,0 +1,34 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/pattern-hero",
+  "version": "1.0.0",
+  "type": "pattern",
+  "quoinVersion": "^0.1.0",
+  "description": "Unified hero pattern. Six mandatory slots (section / eyebrow / headline / subhead / actions / meta) + five conditional slots (accent / background / media / overlay / controls) gated by five variants (type-only / animated / gradient-mesh / brand-photo / video). Consolidates the five parallel hero packs that shipped pre-Cons.3.",
+  "category": "marketing",
+  "variant": "system",
+  "variants": ["type-only", "animated", "gradient-mesh", "brand-photo", "video"],
+  "exports": {
+    "primitives": "./primitives/index.json"
+  },
+  "states": ["default", "entering", "settled", "playing", "paused", "video-error", "reduced-motion"],
+  "microStates": ["default", "hover", "active", "focus", "focus-visible", "disabled", "loading", "selected"],
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/patterns/hero",
+    "tags": ["hero", "marketing", "landing", "p0", "consolidated"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0",
+    "@quoin/pattern-button-system": "^1.0.0"
+  },
+  "consolidates": [
+    "@quoin/pattern-hero-type-only",
+    "@quoin/pattern-hero-animated",
+    "@quoin/pattern-hero-gradient-mesh",
+    "@quoin/pattern-hero-brand-photo",
+    "@quoin/pattern-hero-video"
+  ],
+  "deprecates": "phase-22-cons-3"
+}

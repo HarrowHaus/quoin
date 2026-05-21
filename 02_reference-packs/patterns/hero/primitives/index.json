@@ -1,0 +1,407 @@
+[
+  {
+    "name": "hero-section",
+    "category": "marketing",
+    "gating": "mandatory",
+    "role": "Top-level <section> wrapper for the unified hero pattern. Carries the universal attributes (data-variant, data-alignment, data-size, data-background) that select variant + alignment + scale + surface. Consolidated from the 5 prior per-variant section primitives (hero-section / hero-animated-section / hero-mesh-section / hero-photo-section / hero-video-section) per Phase 22 Consolidation 3.",
+    "attributes": {
+      "variant": {
+        "values": ["type-only", "animated", "gradient-mesh", "brand-photo", "video"],
+        "default": "type-only",
+        "specific": true,
+        "note": "Selects which conditional slots are activated and which variant-specific attributes apply."
+      },
+      "alignment": {
+        "values": ["centered", "left", "right", "split-anchor"],
+        "default": "centered",
+        "specific": true,
+        "note": "Universal content-alignment attribute. Replaces deprecated data-register (Cons. 3 Q2)."
+      },
+      "size": {
+        "values": ["compact", "default", "oversized"],
+        "default": "default",
+        "specific": true
+      },
+      "background": {
+        "values": ["surface", "surface-elevated", "surface-recessed", "accent-recede", "dark"],
+        "default": "surface",
+        "specific": true,
+        "note": "Surface treatment. Effective for type-only variant primarily; image-led variants (brand-photo, video) use media + overlay instead."
+      }
+    },
+    "tokens": {
+      "background": "var(--surface)",
+      "backgroundElevated": "var(--surface-elevated)",
+      "backgroundRecessed": "var(--surface-recessed)",
+      "backgroundAccent": "var(--accent-recede)",
+      "backgroundDark": "oklch(15% 0 0)",
+      "color": "var(--text)",
+      "padding": "var(--space-section) var(--space-panel)",
+      "paddingCompact": "var(--space-card) var(--space-panel)",
+      "paddingOversized": "calc(var(--space-section) * 1.5) var(--space-panel)",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "section",
+      "attributes": {
+        "aria-labelledby": "(consumer-supplied id pointing to hero-headline)"
+      }
+    },
+    "containerType": "inline-size",
+    "containerName": "hero",
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "deprecated-from": [
+        "@quoin/pattern-hero-type-only#hero-section",
+        "@quoin/pattern-hero-animated#hero-animated-section",
+        "@quoin/pattern-hero-gradient-mesh#hero-mesh-section",
+        "@quoin/pattern-hero-brand-photo#hero-photo-section",
+        "@quoin/pattern-hero-video#hero-video-section"
+      ],
+      "consolidationNote": "All 5 prior section primitives collapse to this single hero-section. Variants are selected via data-variant attribute."
+    }
+  },
+  {
+    "name": "hero-eyebrow",
+    "category": "marketing",
+    "gating": "mandatory",
+    "role": "Small uppercase pre-heading above the main headline. Used to categorise ('PRODUCT LAUNCH') or signal context ('NEW IN GALLEY').",
+    "attributes": {
+      "tone": {
+        "values": ["neutral", "accent", "success", "on-image", "on-mesh", "on-video"],
+        "default": "neutral",
+        "specific": true,
+        "note": "on-image / on-mesh / on-video adjust contrast for variants where eyebrow sits over media/mesh rather than surface."
+      }
+    },
+    "tokens": {
+      "color": "var(--text-recede)",
+      "colorAccent": "var(--accent)",
+      "colorSuccess": "var(--success)",
+      "colorOnImage": "var(--text-on-accent)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-sm)",
+      "fontWeight": "var(--font-weight-semibold)",
+      "letterSpacing": "var(--tracking-wide)",
+      "textTransform": "uppercase",
+      "lineHeight": "var(--leading-tight)",
+      "margin": "0 0 var(--space-3)"
+    },
+    "structure": { "element": "p" },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "ariaPatterns": {
+        "notHeading": "Eyebrow is NOT a heading element — it's <p>. The h1 is hero-headline below."
+      }
+    }
+  },
+  {
+    "name": "hero-headline",
+    "category": "marketing",
+    "gating": "mandatory",
+    "role": "Display-tier headline. The h1 anchor for marketing pages. Token-sized by data-size on the parent hero-section.",
+    "attributes": {
+      "shadow": {
+        "values": ["false", "true"],
+        "default": "false",
+        "specific": true,
+        "note": "True only for video variant (text-shadow for legibility against motion). Applied via [data-variant=video][data-shadow=true] selector."
+      }
+    },
+    "tokens": {
+      "color": "var(--text-emphasis)",
+      "colorOnMedia": "var(--text-on-accent)",
+      "fontFamily": "var(--font-display)",
+      "fontSizeCompact": "var(--type-size-2xl)",
+      "fontSizeDefault": "var(--type-size-3xl)",
+      "fontSizeOversized": "var(--type-size-4xl)",
+      "fontWeight": "var(--font-weight-semibold)",
+      "lineHeight": "var(--leading-display)",
+      "letterSpacing": "var(--tracking-tight)",
+      "margin": "0",
+      "maxWidth": "22ch",
+      "textShadow": "0 1px 2px oklch(0% 0 0 / 0.4)"
+    },
+    "structure": { "element": "h1" },
+    "children": "phrasing-content",
+    "scope": "block",
+    "meta": {
+      "textWrapBalance": "Apply text-wrap: balance.",
+      "h1Discipline": "Hero-headline is the page's single h1. Don't add h1 elsewhere on the page."
+    }
+  },
+  {
+    "name": "hero-subhead",
+    "category": "marketing",
+    "gating": "mandatory",
+    "role": "Supporting subtitle paragraph below the headline. 1-2 sentences max.",
+    "attributes": {
+      "background-tint": {
+        "values": ["none", "subtle"],
+        "default": "none",
+        "specific": true,
+        "note": "Subtle inline backdrop tint used in gradient-mesh dramatic intensity to preserve WCAG AA contrast over bright mesh."
+      }
+    },
+    "tokens": {
+      "color": "var(--text-recede)",
+      "colorOnMedia": "color-mix(in oklch, var(--text-on-accent) 90%, transparent)",
+      "fontFamily": "var(--font-sans)",
+      "fontSizeCompact": "var(--type-size-md)",
+      "fontSizeDefault": "var(--type-size-lg)",
+      "fontSizeOversized": "var(--type-size-xl)",
+      "fontWeight": "var(--font-weight-medium)",
+      "lineHeight": "var(--leading-prose)",
+      "margin": "var(--space-3) 0 0",
+      "maxWidth": "60ch"
+    },
+    "structure": { "element": "p" },
+    "children": "phrasing-content",
+    "scope": "block",
+    "meta": {
+      "textWrapPretty": "Apply text-wrap: pretty for orphan-avoidance."
+    }
+  },
+  {
+    "name": "hero-actions",
+    "category": "marketing",
+    "gating": "mandatory",
+    "role": "CTA cluster. **Composes <action-button> from @quoin/pattern-button-system** (Cons. 3 Q5). Hero adds context-scoped backdrop-blur overrides on ghost buttons when sitting over media (image-full-bleed / image-overlay layouts; video variant).",
+    "attributes": {
+      "cluster": {
+        "values": ["primary-only", "primary-plus-secondary", "extended"],
+        "default": "primary-plus-secondary",
+        "specific": true,
+        "note": "Renamed from prior 'data-register' for clarity (Cons. 3 Q2)."
+      }
+    },
+    "tokens": {
+      "gap": "var(--space-3)",
+      "margin": "var(--space-card) 0 0"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "role": "group",
+        "aria-label": "Hero actions"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "composesFrom": "@quoin/pattern-button-system",
+      "composedAs": "<button class='action-button' data-intent='...'> OR <a class='action-button' data-intent='...' href='...'> (polymorphic; the action-button primitive renders as anchor when href provided)",
+      "noInlinedCta": "The prior 5 hero packs each declared their own .cta CSS class duplicating button-system. Cons. 3 removes that duplication. Hero CSS does not declare .cta; the action-button class lives in button-system. Hero only adds context-scoped overrides for the backdrop-blur ghost variant on media backgrounds."
+    }
+  },
+  {
+    "name": "hero-meta",
+    "category": "marketing",
+    "gating": "mandatory",
+    "role": "Optional trust line below the CTAs. Disclaimers / social-proof / trust-badges.",
+    "attributes": {
+      "kind": {
+        "values": ["disclaimer", "social-proof", "trust-badges"],
+        "default": "disclaimer",
+        "specific": true,
+        "note": "Renamed from prior 'data-register' for clarity (Cons. 3 Q2)."
+      }
+    },
+    "tokens": {
+      "color": "var(--text-recede)",
+      "colorOnMedia": "color-mix(in oklch, var(--text-on-accent) 75%, transparent)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-xs)",
+      "fontWeight": "var(--font-weight-medium)",
+      "lineHeight": "var(--leading-prose)",
+      "gap": "var(--space-3)",
+      "margin": "var(--space-3) 0 0"
+    },
+    "structure": { "element": "p" },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "ariaPatterns": {
+        "trustBadgeAltText": "Trust-badge images must carry alt-text naming the certification — not aria-hidden."
+      }
+    }
+  },
+  {
+    "name": "hero-accent",
+    "category": "marketing",
+    "gating": "conditional",
+    "gatedBy": "data-variant=\"animated\"",
+    "role": "Ambient decorative motion behind the hero content (pulse / drift). Hidden under prefers-reduced-motion.",
+    "attributes": {
+      "kind": {
+        "values": ["pulse", "drift"],
+        "default": "pulse",
+        "specific": true,
+        "note": "Renamed from prior 'data-register' for clarity (Cons. 3 Q2)."
+      }
+    },
+    "tokens": {
+      "background": "var(--accent)",
+      "backgroundDrift": "radial-gradient(circle, var(--accent-recede), transparent 70%)"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "aria-hidden": "true"
+      }
+    },
+    "children": "empty",
+    "scope": "block",
+    "meta": {
+      "reducedMotion": "display: none under prefers-reduced-motion: reduce. Not slowed — stopped entirely."
+    }
+  },
+  {
+    "name": "hero-background",
+    "category": "marketing",
+    "gating": "conditional",
+    "gatedBy": "data-variant=\"gradient-mesh\"",
+    "role": "Procedural OKLCH radial-gradient mesh background. CSS Color Module Level 4. @supports falls back to solid var(--accent-recede) on unsupported browsers.",
+    "attributes": {},
+    "tokens": {
+      "backgroundFallback": "var(--accent-recede)",
+      "transitionBackgroundPosition": "background-position var(--motion-normal) var(--ease-standard)"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "aria-hidden": "true"
+      }
+    },
+    "children": "empty",
+    "scope": "block",
+    "meta": {
+      "cssFeatureRequires": ["oklch", "color-mix-oklch"],
+      "supportsFallback": "@supports not (color: oklch(0% 0 0)) → background: var(--accent-recede)"
+    }
+  },
+  {
+    "name": "hero-media",
+    "category": "marketing",
+    "gating": "conditional",
+    "gatedBy": "data-variant in [\"brand-photo\", \"video\"]",
+    "role": "Visual asset slot. <picture> for brand-photo (responsive AVIF/WebP/JPEG srcset). <video autoplay muted loop playsinline> for video.",
+    "attributes": {
+      "aspect": {
+        "values": ["16:9", "4:3", "1:1", "3:4"],
+        "default": "16:9",
+        "specific": true,
+        "note": "Used in brand-photo's image-right / image-left layouts."
+      },
+      "crop": {
+        "values": ["cover", "contain"],
+        "default": "cover",
+        "specific": true
+      },
+      "focal-point": {
+        "values": ["center", "top", "bottom", "left", "right"],
+        "default": "center",
+        "specific": true,
+        "note": "Object-position. Used in brand-photo for art direction; video uses center."
+      }
+    },
+    "tokens": {
+      "borderRadius": "var(--radius-card)",
+      "borderRadiusFullBleed": "0"
+    },
+    "structure": {
+      "element": "picture-OR-video",
+      "attributes": {
+        "fetchpriority": "high",
+        "decoding": "async"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "block",
+    "meta": {
+      "altRequirements": "Brand-photo's <img> must carry descriptive alt-text. Video's <video> must carry aria-label describing the content.",
+      "lcpOptimization": "fetchpriority='high' + decoding='async' for the largest contentful paint candidate."
+    }
+  },
+  {
+    "name": "hero-overlay",
+    "category": "marketing",
+    "gating": "conditional",
+    "gatedBy": "data-variant in [\"brand-photo\", \"video\"]",
+    "role": "Scrim for text-legibility over media. Three styles × two tones × three strengths = 18 overlay variants.",
+    "attributes": {
+      "kind": {
+        "values": ["gradient-from-bottom", "gradient-from-side", "solid-tint"],
+        "default": "gradient-from-bottom",
+        "specific": true,
+        "note": "Renamed from prior 'data-register' for clarity (Cons. 3 Q2)."
+      },
+      "tone": {
+        "values": ["dark", "accent"],
+        "default": "dark",
+        "specific": true
+      },
+      "strength": {
+        "values": ["subtle", "default", "strong"],
+        "default": "default",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "strengthSubtle": "0.2",
+      "strengthDefault": "0.4",
+      "strengthStrong": "0.6"
+    },
+    "structure": {
+      "element": "div",
+      "attributes": {
+        "aria-hidden": "true"
+      }
+    },
+    "children": "empty",
+    "scope": "block",
+    "meta": {
+      "localToken": "--overlay-strength scoped to the variant via [data-variant=brand-photo] / [data-variant=video] selector."
+    }
+  },
+  {
+    "name": "hero-controls",
+    "category": "marketing",
+    "gating": "conditional-mandatory",
+    "gatedBy": "data-variant=\"video\"",
+    "role": "WCAG 2.2.2 (Pause, Stop, Hide) mandatory pause control for background-video variant. Renders as <button>. Positioned in one of 4 corners.",
+    "attributes": {
+      "position": {
+        "values": ["bottom-right", "bottom-left", "top-right", "top-left"],
+        "default": "bottom-right",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "color-mix(in oklch, var(--surface-elevated) 70%, transparent)",
+      "color": "var(--text-emphasis)",
+      "borderColor": "color-mix(in oklch, var(--border) 60%, transparent)",
+      "borderRadius": "var(--radius-pill)",
+      "backdropFilter": "blur(8px)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-xs)",
+      "fontWeight": "var(--font-weight-semibold)",
+      "padding": "var(--space-2) var(--space-3)"
+    },
+    "structure": {
+      "element": "button",
+      "attributes": {
+        "type": "button",
+        "aria-label": "(dynamic: 'Pause hero video' OR 'Play hero video')"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "wcag": "2.2.2 Pause, Stop, Hide — non-optional for data-variant=video. Auto-playing background video without a visible pause control violates 2.2.2.",
+      "stateBinding": "Parent hero-section's data-state toggles between 'playing' and 'paused'. The control's aria-label and visible glyph respond to that state. State transition triggered by user click on the control."
+    }
+  }
+]

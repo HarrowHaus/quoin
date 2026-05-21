@@ -1,0 +1,99 @@
+# @quoin/pattern-hero — Cargo-style manifest (D.85, draft format)
+#
+# Mirrors quoin.pack.json for dependency-resolution-friendly tooling.
+# Format ratification deferred per Cons. 3 §12-1; this file ships as
+# the first quoin.toml in the catalog. The schema will be iterated
+# after 2-3 packs adopt it.
+
+[package]
+name = "@quoin/pattern-hero"
+version = "1.0.0"
+type = "pattern"
+quoin-version = "^0.1.0"
+description = "Unified hero pattern. See quoin.pack.json for canonical schema."
+
+[dependencies]
+"@quoin/tokens-baseline" = "^0.1.0"
+"@quoin/pattern-button-system" = "^1.0.0"
+
+[anatomy]
+mandatory-slots = ["section", "eyebrow", "headline", "subhead", "actions", "meta"]
+data-pattern-prefix = "hero"
+
+# Universal attributes — apply to hero-section regardless of variant.
+[anatomy.attributes-universal.data-alignment]
+values = ["centered", "left", "right", "split-anchor"]
+default = "centered"
+note = "Replaces deprecated data-register per Cons. 3 Q2."
+
+[anatomy.attributes-universal.data-variant]
+values = ["type-only", "animated", "gradient-mesh", "brand-photo", "video"]
+default = "type-only"
+
+[anatomy.attributes-universal.data-size]
+values = ["compact", "default", "oversized"]
+default = "default"
+
+[anatomy.attributes-universal.data-background]
+values = ["surface", "surface-elevated", "surface-recessed", "accent-recede", "dark"]
+default = "surface"
+
+# ────────────────────────────────────────────────────────────────────
+# Variant: type-only
+# ────────────────────────────────────────────────────────────────────
+[variants.type-only]
+conditional-slots = []
+description = "Typography-only marketing hero. No media, no animation. The flagship marketing-hero pattern."
+
+# ────────────────────────────────────────────────────────────────────
+# Variant: animated
+# ────────────────────────────────────────────────────────────────────
+[variants.animated]
+conditional-slots = ["accent"]
+description = "Motion-led hero. Entrance choreography with stagger across slots. Honors prefers-reduced-motion."
+local-tokens = ["--ease-overshoot", "--stagger-step", "--duration-entrance", "--entrance-distance"]
+
+[variants.animated.attributes]
+data-motion-mode = { values = ["fade-up", "spring-overshoot", "word-stagger", "type-in", "scroll-parallax"], default = "fade-up" }
+data-intensity = { values = ["subtle", "default", "dramatic"], default = "default" }
+data-state = { values = ["default", "entering", "settled", "paused"], default = "default" }
+
+# ────────────────────────────────────────────────────────────────────
+# Variant: gradient-mesh
+# ────────────────────────────────────────────────────────────────────
+[variants.gradient-mesh]
+conditional-slots = ["background"]
+description = "OKLCH procedural radial-gradient background. CSS Color Module Level 4."
+css-feature-requires = ["oklch", "color-mix-oklch"]
+css-feature-fallback = "var(--accent-recede) solid"
+
+[variants.gradient-mesh.attributes]
+data-palette = { values = ["cool", "warm", "monochrome", "accent", "playful"], default = "accent" }
+data-intensity = { values = ["subtle", "default", "dramatic"], default = "default" }
+data-texture = { values = ["smooth", "grained"], default = "smooth" }
+data-shift-on-hover = { values = ["true", "false"], default = "false" }
+
+# ────────────────────────────────────────────────────────────────────
+# Variant: brand-photo
+# ────────────────────────────────────────────────────────────────────
+[variants.brand-photo]
+conditional-slots = ["media", "overlay"]
+description = "Photographic image-led hero. Responsive <picture> with AVIF/WebP/JPEG srcset. fetchpriority=high for LCP."
+local-tokens = ["--overlay-strength"]
+
+[variants.brand-photo.attributes]
+data-layout = { values = ["image-right", "image-left", "image-full-bleed", "image-overlay"], default = "image-right", note = "Orthogonal axis to data-alignment per Cons. 3 Q3." }
+
+# ────────────────────────────────────────────────────────────────────
+# Variant: video
+# ────────────────────────────────────────────────────────────────────
+[variants.video]
+conditional-slots = ["media", "overlay", "controls"]
+description = "Background-video hero. WCAG 2.2.2 (Pause/Stop/Hide) mandates the controls slot."
+local-tokens = ["--overlay-strength"]
+wcag-mandatory = ["2.2.2"]
+controls-slot-required = true
+
+[variants.video.attributes]
+data-video-mode = { values = ["background-loop", "embed-with-controls"], default = "background-loop", note = "Replaces deprecated data-register per Cons. 3 Q2." }
+data-state = { values = ["default", "playing", "paused", "video-error", "reduced-motion"], default = "playing" }
