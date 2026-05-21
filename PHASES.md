@@ -165,7 +165,7 @@ This file is the single source of truth for phase status across the Quoin projec
 - `patterns/table-of-contents/` — three position variants (`sticky-side` · `inline-top` · `floating-overlay`) × three depth registers (`h1-h2` · `h1-h3` · `h1-h6`). IntersectionObserver active-section detection (rootMargin `0px 0px -70% 0px`). Composes `prim-sequence` for list rendering (declared in `peerPacks`).
 - `patterns/article-meta/` — author + date + reading-time + conditional category, tag-list, share-actions. Three density variants × three position variants. Reading time computed at **build time**, never runtime. `prim-label` declared in `optionalPeerPacks` (required only when tag-list renders).
 - `patterns/prose-aside/` — six semantic registers (`note` · `tip` · `warning` · `danger` · `success` · `info`); three visual registers (`inline` · `bordered` · `filled`). Token-driven colour mapping; `aria-label` per role.
-**Closure ref:** _this commit_ (2026-05-21).
+**Closure ref:** commit `4c5161da36a790c25364a4a8cdf01a063a4b797d` (2026-05-21).
 **Scope boundary:** Track C owns `patterns/{footnote,table-of-contents,article-meta,prose-aside}/` only. Discoverability surface untouched (Track E).
 **Halts encountered:** none. CSS Anchor Positioning anatomy in footnote was scoped to static anchoring (no scroll-tracking semantics); flagged as out-of-scope in pack notes.
 
@@ -178,7 +178,7 @@ This file is the single source of truth for phase status across the Quoin projec
 - `templates/docs-site/` (✅ scaffolded, v0.1.0-scaffold). Two-column sticky-TOC layout. Stand-ins for `prose-body` + `code-block` (pending Track B); real `table-of-contents` and `prose-aside` rendered from Track C.
 - `templates/blog-with-prose/` (✅ scaffolded, v0.1.0-scaffold). Long-form layout. Stand-ins for `prose-body` + `pull-quote` + `figure-with-caption` (pending Track B); real `article-meta` and `footnote` rendered from Track C.
 **Template format (new this phase):** `quoin.template.json` separate from `quoin.pack.json`. Declares: `composition.order` (array of `{ slot, pack, variant, status }`), `dependencies` (shipped), `pendingDependencies` (when scaffold), `recommendedAesthetics`, `customizationPoints`. Schema URL: `https://harrow.haus/quoin/schema/template.json` (TBD; placeholder per the brief).
-**Closure ref:** _this commit_ (2026-05-21).
+**Closure ref:** commit `4c5161da36a790c25364a4a8cdf01a063a4b797d` (2026-05-21).
 **What unblocks:** Track E discoverability surface can announce 1 complete + 2 scaffolded templates. Track B remains the blocker for full D.2 + D.3 composition.
 **Scope boundary:** Track D owns `templates/{landing-saas,docs-site,blog-with-prose}/` and this PHASES.md entry only. Discoverability surface untouched (Track E).
 **Halts encountered:** none. Template format introduced inline; no architectural questions surfaced.
