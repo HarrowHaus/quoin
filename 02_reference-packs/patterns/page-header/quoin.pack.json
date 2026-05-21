@@ -21,6 +21,7 @@
   "peerPacks": {
     "@quoin/tokens-baseline": "^0.1.0",
     "@quoin/pattern-button-system": "^1.0.0",
-    "@quoin/vocab-app-shell": "^0.2.0"
+    "@quoin/vocab-app-shell": "^0.2.0",
+    "@quoin/prim-label": "^1.0.0"
   }
 }

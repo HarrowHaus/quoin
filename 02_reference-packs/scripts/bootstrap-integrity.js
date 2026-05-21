@@ -195,6 +195,7 @@ const DATA_REGISTER_DEPRECATED_IN = {
 const COMPOSITION_REALITY_ENFORCED_FOR = new Set(['hero', 'nav']);
 const COMPOSITION_PRIMITIVES = {
   '@quoin/pattern-button-system': ['action-button'],
+  '@quoin/prim-label': ['label'],
 };
 
 /**

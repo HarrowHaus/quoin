@@ -23,6 +23,9 @@
     "@quoin/tokens-baseline": "^0.1.0",
     "@quoin/pattern-button-system": "^1.0.0"
   },
+  "optionalPeerPacks": {
+    "@quoin/prim-label": "^1.0.0 (consumed by type-only variant's hero-meta for trust badges; not required by animated/gradient-mesh/brand-photo/video variants)"
+  },
   "consolidates": [
     "@quoin/pattern-hero-type-only",
     "@quoin/pattern-hero-animated",

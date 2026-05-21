@@ -2,7 +2,7 @@
 
 This file is the single source of truth for phase status across the Quoin project. It supersedes scattered references in CONSOLIDATION reports, DECISIONS_UPDATES, and session-closing reports. Every future session that opens, closes, or modifies a phase updates this file in its closing batch.
 
-**Last updated:** Session 2 closing (2026-05-20)
+**Last updated:** Session 3 closing (2026-05-20)
 
 ---
 
@@ -125,8 +125,8 @@ This file is the single source of truth for phase status across the Quoin projec
 | 1 | Spacing tokens single source | ✅ Complete | `111a240` (5 batches) | (inline closing-commit message; no standalone REPORT.md) |
 | 2 | Type-scale tokens single source (Option D — font-family architecture) | ✅ Complete | `c724d95` | `02_reference-packs/CONSOLIDATION-2-REPORT.md` |
 | 3 | Hero anatomy variants (5 packs → 1 unified) | ✅ Complete | `f94a662` | `02_reference-packs/CONSOLIDATION-3-REPORT.md` |
-| 4 | Nav variants (4 packs → 1 unified) | ⏸️ Paused (Session 2 partial) | `bfb9ff7` (partial — scaffolding + 1 of 4 specimens) | `02_reference-packs/CONSOLIDATION-4-{AUDIT,PROPOSAL}.md` shipped; REPORT.md pending |
-| 5 | Label primitive (badge / tag / status-pill / chip → prim-label) | 🟡 Queued | — | — |
+| 4 | Nav variants (4 packs → 1 unified) | ✅ Complete (Session 3) | `0e41738` | `02_reference-packs/CONSOLIDATION-4-REPORT.md` |
+| 5 | Label primitive (badge / tag / status-pill / chip → prim-label) | ✅ Complete (Session 3) | _this commit_ | `02_reference-packs/CONSOLIDATION-5-REPORT.md` |
 | 6 | Sequence primitive (breadcrumb / numbered-list / sidebar-list → prim-sequence) | 🟡 Queued | — | — |
 | 7 | Decoration overlay (paper-grain-overlay + surface-decoration → prim-decoration-overlay) | 🟡 Queued | — | — |
 | 8 | Searchable-list (command-palette-content + list-with-search → prim-searchable-list) | 🟡 Queued | — | — |
@@ -197,6 +197,28 @@ This file is the single source of truth for phase status across the Quoin projec
 **Status:** 🔄 Ongoing
 **Goal:** Ship aesthetic packs that target the variant axes declared by pattern packs (per v3.G.20). First such pack queued: `@quoin/aesthetic-manuscript-future` covering Junicode 2 + Ranade + Monaspace per the Cons. 2 Option D architecture.
 **Closure dependency:** Phase 22 closure (variants in pattern packs need to be stable before aesthetic packs target them).
+
+---
+
+## Session 3 outcome (2026-05-20)
+
+Brief: Cons. 4 closure + Cons. 5 (label primitive). Scope right-sized to single context window per Session 2's lessons learned.
+
+**Shipped:**
+- Cons. 4 CLOSED — 3 remaining nav specimen migrations (marketing / app-chrome / docs) + closing batch (deprecated dir removal, gate enforcement of nav in v3.G.16+G.17, reverse-lineage updates in button-system / modal-dialog / form-fields, discoverability surface, REPORT). Commit `0e41738`.
+- Cons. 5 CLOSED — new `@quoin/prim-label` foundational primitive (first `prim-*` primitive); 5 consumer migrations (hero, pricing-tiers, nav-docs, nav-app-chrome, page-header) via dual-class approach; gate extension recognizing prim-label primitive; REPORT. Commit: _this commit_.
+- PHASES.md updated.
+
+**New conventions established:**
+- `optionalPeerPacks` field in pack manifests — for peer packs consumed by only SOME variants of a multi-variant pack. Distinguishes "this pack uses X across all variants" (peerPacks, triggers v3.G.17 per-file enforcement) from "X may be used in some variants" (optionalPeerPacks, informational only). Will need formalization in `00_spec/pack-format.md` and the manifest schema.
+
+**Deferred to Session 4:**
+- Cons. 6 (sequence primitive — breadcrumb/numbered-list/sidebar-list → prim-sequence)
+- Cons. 7 (decoration overlay — paper-grain-overlay/surface-decoration → prim-decoration-overlay)
+- Cons. 8 (searchable-list — command-palette-content/list-with-search → prim-searchable-list)
+- Cons. 9 (Boeing Watch boundary audit)
+- Block B (8 editorial patterns — see Session 2 brief)
+- Block C (3 templates — see Session 2 brief)
 
 ---
 

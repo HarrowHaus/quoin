@@ -1,0 +1,25 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/prim-label",
+  "version": "1.0.0",
+  "type": "primitive",
+  "quoinVersion": "^0.1.0",
+  "description": "Label primitive — single bounded text with optional icon and optional dismiss affordance. Variants represent semantic role (badge / status / tag / chip / dismissible). Promoted from inlined badge / status-pill contracts across hero, pricing-tiers, nav, page-header per Phase 22 Cons. 5.",
+  "category": "foundation",
+  "variant": "primitive",
+  "variants": ["badge", "status", "tag", "chip", "dismissible"],
+  "exports": { "primitives": "./primitives/index.json" },
+  "states": ["default"],
+  "microStates": ["default", "hover", "focus", "focus-visible", "disabled"],
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/primitives/label",
+    "tags": ["primitive", "label", "badge", "tag", "status-pill", "chip", "consolidated"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0"
+  },
+  "consolidates": ["inlined .badge contract", "inlined .status-pill contract", "inlined .tag contract (anticipated, none existed)", "inlined .chip contract (anticipated, none existed)"],
+  "deprecates": "phase-22-cons-5"
+}

@@ -23,6 +23,9 @@
     "@quoin/pattern-form-fields": "^1.0.0",
     "@quoin/pattern-modal-dialog": "^1.0.0"
   },
+  "optionalPeerPacks": {
+    "@quoin/prim-label": "^1.0.0 (consumed by docs + app-chrome variants for notification counts + release-stage indicators; not required by marketing + editorial variants)"
+  },
   "consolidates": [
     "@quoin/pattern-nav-marketing",
     "@quoin/pattern-nav-app-chrome",

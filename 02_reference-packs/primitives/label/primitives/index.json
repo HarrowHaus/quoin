@@ -1,0 +1,58 @@
+[
+  {
+    "name": "label",
+    "category": "foundation",
+    "gating": "mandatory",
+    "role": "Single bounded text label. The foundational primitive for badge / status-pill / tag / chip / dismissible affordances. Variants drive visual presentation through tokens. The element is <span> (default) or <button> (dismissible variant).",
+    "attributes": {
+      "role": {
+        "values": ["badge", "status", "tag", "chip", "dismissible"],
+        "default": "badge",
+        "specific": true,
+        "note": "Selects the semantic role. Affects shape, padding, and aria pattern. Badge = small bounded text (often numeric or short label). Status = state indicator (Live / Pending / Failed). Tag = categorical label (often inline with prose). Chip = removable label (often in input forms). Dismissible = chip with explicit dismiss affordance."
+      },
+      "tone": {
+        "values": ["neutral", "accent", "success", "warning", "critical", "info", "new", "beta"],
+        "default": "neutral",
+        "specific": true,
+        "note": "Color tone. Maps to status tokens (--success, --warning, --critical, --info, --accent) plus 'new' / 'beta' for release-stage labels."
+      },
+      "size": {
+        "values": ["sm", "md"],
+        "default": "md",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "var(--surface-elevated)",
+      "color": "var(--text-emphasis)",
+      "borderColor": "var(--border)",
+      "borderWidth": "var(--border-width-sm)",
+      "borderRadius": "var(--radius-pill)",
+      "padding": "var(--space-1) var(--space-2)",
+      "fontSize": "var(--type-size-xs)",
+      "fontWeight": "var(--font-weight-medium)",
+      "letterSpacing": "var(--tracking-wide)"
+    },
+    "structure": {
+      "element": "span-OR-button",
+      "attributes": {
+        "aria-label": "(when standalone meaning — e.g., notification count)"
+      }
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "deprecated-from": [
+        "inlined .badge contract (in hero, pricing-tiers, nav, page-header)",
+        "inlined .status-pill contract (in page-header)"
+      ],
+      "consolidationNote": "Cons. 5 promotes the inlined contracts; consumers update their HTML to use class=\"label\" and their CSS rules to reference .label[data-role=\"X\"] selectors.",
+      "ariaPatterns": {
+        "iconOnlyBadge": "Numeric notification badges (e.g., \"3\" on a notification bell) must carry aria-label naming what they count.",
+        "statusRole": "When data-role=\"status\", the label is a state indicator — host page can wrap it in <span aria-live=\"polite\"> if state changes dynamically.",
+        "dismissible": "When data-role=\"dismissible\", the element is <button type=\"button\"> with an aria-label for the dismiss action (e.g., aria-label=\"Remove tag: Marketing\")."
+      }
+    }
+  }
+]

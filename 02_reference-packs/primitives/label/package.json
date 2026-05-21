@@ -1,0 +1,15 @@
+{
+  "name": "@quoin/prim-label",
+  "version": "1.0.0",
+  "description": "Label primitive — single bounded text with optional icon and optional dismiss. 5 variants (badge / status / tag / chip / dismissible). Consolidated from inlined contracts per Phase 22 Cons. 5.",
+  "license": "MIT",
+  "main": "./quoin.pack.json",
+  "files": ["quoin.pack.json", "primitives/", "examples/", "README.md", "LICENSE"],
+  "keywords": ["quoin", "primitive", "label", "badge", "tag", "status-pill", "chip"],
+  "peerDependencies": { "@quoin/tokens-baseline": "^0.1.0" },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "02_reference-packs/primitives/label"
+  }
+}

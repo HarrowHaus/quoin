@@ -6,6 +6,21 @@ versioning follows pre-1.0 conventions until v1.0.0 publication.
 
 ## [Unreleased]
 
+### Phase 22 / Consolidation 5 — Label primitive (2026-05-20)
+
+First foundational primitive (`prim-*`) in the catalog. Inlined badge / status-pill contracts across 5 consumers promoted to `@quoin/prim-label`.
+
+- **NEW** `02_reference-packs/primitives/label/` — `@quoin/prim-label` pack (5 variants: badge / status / tag / chip / dismissible; 8 tones; 2 sizes)
+- **GATE EXTENSION** `bootstrap-integrity.js`: `prim-label` added to `COMPOSITION_PRIMITIVES` mapping (class `label`)
+- **CONSUMER MIGRATIONS** (dual-class approach — adds `class="label"` as canonical secondary class alongside existing `.badge` / `.status-pill`; no CSS migration required, no visual regression):
+  - `hero/examples/type-only.html` (6 trust badges)
+  - `pricing-tiers/examples/index.html` (3 featured-tier badges)
+  - `nav/examples/docs.html` (2 release-stage labels)
+  - `nav/examples/app-chrome.html` (2 notification-count badges)
+  - `page-header/examples/index.html` (status-pill + 3 project tags)
+- **NEW MANIFEST CONVENTION** `optionalPeerPacks` field — for peer packs consumed by only some variants of a multi-variant pack. Distinguishes per-file v3.G.17 enforcement (`peerPacks`) from informational declaration (`optionalPeerPacks`). Introduced for hero + nav which consume prim-label in only some variants.
+- Report: `02_reference-packs/CONSOLIDATION-5-REPORT.md`.
+
 ### Phase 22 / Consolidation 4 — Nav anatomy unification (2026-05-20)
 
 Four parallel nav packs collapsed to a single `@quoin/pattern-nav` with 4 variants (`marketing` / `app-chrome` / `docs` / `editorial`). 2 mandatory slots (section + brand) + 17 conditional slots gated by `data-variant`. Mechanical application of Cons. 3's Q1-Q8 cascade; no novel architectural questions.

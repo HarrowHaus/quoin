@@ -259,6 +259,20 @@
       ]
     },
     {
+      "name": "prim-label",
+      "type": "registry:component",
+      "title": "Label (primitive)",
+      "description": "Label primitive — single bounded text with optional icon and optional dismiss. 5 variants (badge / status / tag / chip / dismissible) × 8 tones × 2 sizes. Consolidated from inlined badge / status-pill contracts across hero, pricing-tiers, nav, page-header per Phase 22 Cons. 5.",
+      "categories": ["foundation", "primitive"],
+      "files": [
+        {
+          "path": "02_reference-packs/primitives/label/quoin.pack.json",
+          "type": "registry:file",
+          "target": "components/quoin/primitives/label.json"
+        }
+      ]
+    },
+    {
       "name": "tokens-baseline",
       "type": "registry:file",
       "title": "Tokens (Baseline)",

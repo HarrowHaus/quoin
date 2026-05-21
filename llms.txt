@@ -14,7 +14,13 @@ For AI coding tools generating Quoin markup at scale: this file is the index. Re
 - **Composition.** Patterns that need buttons consume `class="action-button"` from `@quoin/pattern-button-system` directly; they do not re-inline button CSS under a different class name. The composition reality is enforced by the gate (v3.G.17).
 - **Tokens.** Every CSS value comes from `@quoin/tokens-baseline` (175 canonical tokens across 11 DTCG 2025.10 types). Patterns do not declare raw color, spacing, type-size, or motion values — they reference token names. The token namespace is frozen at v1.0.
 
-## Pattern catalog (15 patterns)
+## Pattern catalog (15 patterns + 1 primitive)
+
+### Foundation primitive (1)
+
+- [prim-label](https://github.com/harrowhaus/quoin/blob/main/02_reference-packs/primitives/label/README.md): label primitive consolidating badge / status-pill / tag / chip / dismissible contracts. `class="label" data-role="badge | status | tag | chip | dismissible" data-tone="neutral | accent | success | warning | critical | info | new | beta"`. First `prim-*` primitive in the catalog (Phase 22 Cons. 5).
+
+### Patterns (15)
 
 Each link below opens the canonical specimen rendered live (raw.githack.com). The specimen is the source of truth for the pattern's anatomy.
 
