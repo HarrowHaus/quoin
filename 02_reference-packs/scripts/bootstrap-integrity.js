@@ -22,7 +22,21 @@
  *      every type-size / leading token covered by the contract and defined
  *      inline matches the canonical value from tokens-baseline. Parallel to
  *      check 4; covers the Cons. 2 auto-resolved tokens.
- *   6. Stylesheet allowlist: every <link rel="stylesheet"> resolves to a host
+ *   6. v3.G.15 — data-pattern naming convention (Phase 22 / Consolidation 3,
+ *      2026-05-20): every data-pattern="..." value uses short form
+ *      <pattern-name>-<slot>; long-form "pattern-<name>-<slot>" prefix is
+ *      forbidden; double-dash separator is forbidden.
+ *   7. v3.G.16 — data-register deprecation (Phase 22 / Consolidation 3,
+ *      2026-05-20): for packs in DATA_REGISTER_DEPRECATED_IN, no
+ *      data-register= attributes are tolerated; replacements documented per
+ *      pack (e.g. data-alignment / data-video-mode / data-kind / data-cluster
+ *      for hero).
+ *   8. v3.G.17 — composition reality (Phase 22 / Consolidation 3, 2026-05-20):
+ *      for packs in COMPOSITION_REALITY_ENFORCED_FOR, every peer pack declared
+ *      in quoin.pack.json's peerPacks must have its canonical primitive class
+ *      actually present in at least one example file (catches "claims to
+ *      consume X" but inlines X's contract under a different class name).
+ *   9. Stylesheet allowlist: every <link rel="stylesheet"> resolves to a host
  *      in STYLESHEET_ALLOWLIST. Today: Google Fonts only.
  *
  * Exit status: 0 if every specimen passes; 1 if any specimen fails.
@@ -138,12 +152,78 @@ const TYPE_SCALE_VALUE_CONTRACT = {
   '--leading-display': '1.05',
 };
 
+/**
+ * v3.G.15 — data-pattern naming convention.
+ *
+ * Canonical form: <pattern-name>-<slot> (e.g. "hero-section", "button-system").
+ * Phase 22 Cons. 3 / 2026-05-20 lock — operator Q1.
+ */
+const DATA_PATTERN_NAMING_RULES = {
+  // Forbidden prefixes — old long-form like "pattern-hero-section".
+  forbiddenPrefixes: ['pattern-'],
+  // Forbidden separators — single dash only; "--" was a brief experiment.
+  forbiddenSeparators: ['--'],
+};
+
+/**
+ * v3.G.16 — data-register deprecation per consolidation.
+ *
+ * Each entry maps a pack-name to its replacement attribute(s). The gate
+ * flags any data-register= usage in specimens of these packs. Other packs
+ * keep data-register until their own consolidation lands.
+ *
+ * Phase 22 Cons. 3 / 2026-05-20 lock — operator Q2.
+ */
+const DATA_REGISTER_DEPRECATED_IN = {
+  'hero': 'data-alignment (universal) / data-video-mode (video variant) / data-kind (sub-slot kind) / data-cluster (actions cluster) / data-layout (brand-photo)',
+};
+
+/**
+ * v3.G.17 — composition reality.
+ *
+ * For each pack in the enforced set, the gate verifies that peer-pack
+ * primitives declared in quoin.pack.json's peerPacks field are actually
+ * consumed in at least one example file. Inlined re-implementations
+ * (e.g. .cta class duplicating button-system's .action-button) fail.
+ *
+ * COMPOSITION_PRIMITIVES maps peer-pack name → list of canonical class
+ * names that must appear in HTML for the consumption to count as real.
+ *
+ * Phase 22 Cons. 3 / 2026-05-20 lock — operator Q5.
+ */
+const COMPOSITION_REALITY_ENFORCED_FOR = new Set(['hero']);
+const COMPOSITION_PRIMITIVES = {
+  '@quoin/pattern-button-system': ['action-button'],
+};
+
+/**
+ * Returns the peerPacks block from a pattern pack's manifest, or {} if the
+ * manifest doesn't exist (covers deprecated packs mid-removal).
+ */
+function getPeerPacks(packName) {
+  const manifestPath = path.join(REF_PACKS_ROOT, 'patterns', packName, 'quoin.pack.json');
+  if (!fs.existsSync(manifestPath)) return {};
+  try {
+    const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+    return manifest.peerPacks || {};
+  } catch {
+    return {};
+  }
+}
+
 function listPatterns() {
   const patternsDir = path.join(REF_PACKS_ROOT, 'patterns');
   return fs.readdirSync(patternsDir).filter((name) => {
-    const examplePath = path.join(patternsDir, name, 'examples', 'index.html');
-    return fs.existsSync(examplePath);
+    const examplesDir = path.join(patternsDir, name, 'examples');
+    if (!fs.existsSync(examplesDir)) return false;
+    return fs.readdirSync(examplesDir).some((f) => f.endsWith('.html'));
   });
+}
+
+function getExampleFiles(pack) {
+  const dir = path.join(REF_PACKS_ROOT, 'patterns', pack, 'examples');
+  if (!fs.existsSync(dir)) return [];
+  return fs.readdirSync(dir).filter((f) => f.endsWith('.html')).sort();
 }
 
 function startServer() {
@@ -270,6 +350,54 @@ function auditSpecimen(pack, { status, body }) {
     failures.push(`type-scale value drift vs tokens-baseline: ${typeScaleDrifts.join('; ')}`);
   }
 
+  // 3c. v3.G.15 — data-pattern naming convention (Cons. 3 Q1).
+  const dataPatternRegex = /\bdata-pattern\s*=\s*["']([^"']+)["']/g;
+  const namingFailures = [];
+  for (const m of body.matchAll(dataPatternRegex)) {
+    const value = m[1];
+    for (const prefix of DATA_PATTERN_NAMING_RULES.forbiddenPrefixes) {
+      if (value.startsWith(prefix)) {
+        namingFailures.push(`data-pattern="${value}" uses forbidden prefix "${prefix}"`);
+      }
+    }
+    for (const sep of DATA_PATTERN_NAMING_RULES.forbiddenSeparators) {
+      if (value.includes(sep)) {
+        namingFailures.push(`data-pattern="${value}" contains forbidden separator "${sep}"`);
+      }
+    }
+  }
+  if (namingFailures.length > 0) {
+    failures.push(`v3.G.15 data-pattern naming violations: ${namingFailures.join('; ')}`);
+  }
+
+  // 3d. v3.G.16 — data-register deprecation per consolidation (Cons. 3 Q2).
+  if (pack in DATA_REGISTER_DEPRECATED_IN) {
+    const dataRegisterCount = (body.match(/\bdata-register\s*=/g) || []).length;
+    if (dataRegisterCount > 0) {
+      failures.push(
+        `v3.G.16 data-register deprecated in ${pack} pack (${dataRegisterCount} occurrence${dataRegisterCount === 1 ? '' : 's'}); use ${DATA_REGISTER_DEPRECATED_IN[pack]}`,
+      );
+    }
+  }
+
+  // 3e. v3.G.17 — composition reality (Cons. 3 Q5).
+  if (COMPOSITION_REALITY_ENFORCED_FOR.has(pack)) {
+    const peerPacks = getPeerPacks(pack);
+    for (const peerPack of Object.keys(peerPacks)) {
+      const primitives = COMPOSITION_PRIMITIVES[peerPack];
+      if (!primitives) continue;
+      for (const primClass of primitives) {
+        // Look for class="primClass" or class='primClass' (with optional other classes via word-boundary)
+        const classRegex = new RegExp(`\\bclass\\s*=\\s*["'][^"']*\\b${primClass}\\b[^"']*["']`);
+        if (!classRegex.test(body)) {
+          failures.push(
+            `v3.G.17 composition lineage drift: ${pack} declares ${peerPack} as peerPack but no <element class="${primClass}"> usage found (composes-but-inlines-contract failure)`,
+          );
+        }
+      }
+    }
+  }
+
   // 4. Stylesheet allowlist — every <link rel="stylesheet"> must point to a host
   //    in STYLESHEET_ALLOWLIST. Inline-token approach + Google Fonts is the spec.
   const linkMatches = body.match(/<link\b[^>]*\brel\s*=\s*["']stylesheet["'][^>]*>/gi) || [];
@@ -301,30 +429,41 @@ function auditSpecimen(pack, { status, body }) {
 
   const lines = [];
   let anyFail = false;
+  let specimenCount = 0;
 
   for (const pack of packs) {
-    let response;
-    try {
-      response = await fetchPath(port, `/patterns/${pack}/examples/index.html`);
-    } catch (e) {
-      anyFail = true;
-      lines.push(`FAIL  ${pack}  (fetch error: ${e.message})`);
-      continue;
-    }
+    const files = getExampleFiles(pack);
+    for (const file of files) {
+      specimenCount++;
+      // Label: just the pack name when the conventional single-file form;
+      // pack/variant when multi-file (Cons. 3 unified packs).
+      const variant = path.basename(file, '.html');
+      const label = (files.length === 1 && file === 'index.html') ? pack : `${pack}/${variant}`;
+      const urlPath = `/patterns/${pack}/examples/${file}`;
 
-    const failures = auditSpecimen(pack, response);
-    if (failures.length === 0) {
-      lines.push(`PASS  ${pack}`);
-    } else {
-      anyFail = true;
-      lines.push(`FAIL  ${pack}`);
-      for (const f of failures) lines.push(`        ${f}`);
+      let response;
+      try {
+        response = await fetchPath(port, urlPath);
+      } catch (e) {
+        anyFail = true;
+        lines.push(`FAIL  ${label}  (fetch error: ${e.message})`);
+        continue;
+      }
+
+      const failures = auditSpecimen(pack, response);
+      if (failures.length === 0) {
+        lines.push(`PASS  ${label}`);
+      } else {
+        anyFail = true;
+        lines.push(`FAIL  ${label}`);
+        for (const f of failures) lines.push(`        ${f}`);
+      }
     }
   }
 
   server.close();
   console.log(lines.join('\n'));
-  console.log(`\n${packs.length} specimens audited; ${anyFail ? 'FAILURES present — gate red' : 'all green'}.`);
+  console.log(`\n${specimenCount} specimens audited; ${anyFail ? 'FAILURES present — gate red' : 'all green'}.`);
   process.exit(anyFail ? 1 : 0);
 })().catch((err) => {
   console.error('bootstrap-integrity.js crashed:', err);

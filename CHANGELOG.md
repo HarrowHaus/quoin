@@ -6,6 +6,84 @@ versioning follows pre-1.0 conventions until v1.0.0 publication.
 
 ## [Unreleased]
 
+### Phase 22 / Consolidation 3 — Hero anatomy unification (2026-05-20)
+
+Five parallel hero packs collapsed to a single `@quoin/pattern-hero` with
+variant tokens. Removes the duplication tax (5 different `data-pattern`
+prefixes that aesthetic packs had to style 5×) and fixes the
+composition-lineage drift (5 specimens each re-inlined button-system's
+`.cta` class instead of consuming it).
+
+#### Pattern catalog
+
+- **NEW:** `02_reference-packs/patterns/hero/` — unified pack manifest
+  (`quoin.pack.json` + new `quoin.toml` per D.85), 11 primitives (6
+  mandatory `section/eyebrow/headline/subhead/actions/meta` + 5 conditional
+  `accent/background/media/overlay/controls`), 5 example files demonstrating
+  each variant.
+- **REMOVED:** `02_reference-packs/patterns/hero-{type-only, animated,
+  gradient-mesh, brand-photo, video}/` — 5 deprecated parallel pack
+  directories. Their content lives in the unified hero pack now.
+
+#### Naming + attribute migrations
+
+- `data-pattern="hero-{variant}-X"` → `data-pattern="hero-X"` with
+  `data-variant="..."` selecting which variant is active.
+- `data-register="..."` → typed replacements per Cons. 3 Q2: `data-alignment`
+  (universal), `data-video-mode` (video variant), `data-kind` (sub-slot
+  kind: pulse / drift / disclaimer / gradient-from-bottom / etc.),
+  `data-cluster` (actions cluster), `data-layout` (brand-photo, orthogonal
+  axis per Cons. 3 Q3).
+- `class="cta"` (locally re-inlined button-system contract) → `class="action-button"`
+  (canonical from `@quoin/pattern-button-system`) — real composition per
+  Cons. 3 Q5. Button-system pack unchanged; ghost-on-media backdrop-blur
+  ships as a context-scoped override in hero's CSS.
+
+#### Architectural gates (v3.G.15 through v3.G.20)
+
+Six new locks documented in `PHASE_GATES.md`:
+
+- **v3.G.15** (programmatic) — `data-pattern` naming convention: short form
+  `<pattern>-<slot>`. Long `pattern-` prefix forbidden.
+- **v3.G.16** (programmatic) — `data-register` deprecation per consolidation.
+  Cons. 3 entry: hero pack.
+- **v3.G.17** (programmatic) — composition reality. Peer-pack declarations
+  must match real consumption in specimens.
+- **v3.G.18** (documented) — anatomy documentation convention: 4
+  structured-markdown tables in pack README. Formal JSON contract deferred.
+- **v3.G.19** (documented) — pack code lives once; examples demonstrate
+  variants. No parallel packs for stylistic variants.
+- **v3.G.20** (documented) — variants in pattern packs; token values in
+  aesthetic packs.
+
+Smoke-tested with synthetic bad inputs per Cons. 1 / Cons. 2 convention;
+gate correctly catches forbidden prefix, data-register usage, and missing
+peer-pack class references; returns green after revert.
+
+#### Files changed
+
+- `02_reference-packs/patterns/hero/` (new, ~3100 lines)
+- `02_reference-packs/patterns/hero-{type-only,animated,gradient-mesh,brand-photo,video}/` (removed, ~3135 lines)
+- `02_reference-packs/scripts/bootstrap-integrity.js` (extended with v3.G.15-17 + multi-file iteration)
+- `02_reference-packs/scripts/content-completeness.js` (5 hero-X enrollments re-routed to hero/examples/{variant}.html)
+- `02_reference-packs/patterns/button-system/README.md` (added "Consumed by" reverse-lineage section listing hero)
+- `PHASE_GATES.md` (appended Phase 22 / Cons. 3 section)
+- `CHANGELOG.md` (this entry)
+- `02_reference-packs/CONSOLIDATION-3-{AUDIT,PROPOSAL,REPORT}.md` (audit, proposal, final report)
+
+#### Verification
+
+- bootstrap-integrity: 22/22 specimens green (hero contributes 5 variant
+  example files; deprecated dirs removed)
+- validate.js: 80/80 PASS
+- validate-extension.js: all Phase 0.5-extension checks PASS
+- content-completeness: 18/18 enrolled patterns OK, no drift
+- npm test (compiler): 96/96 PASS
+
+Net line count: approximately -35 lines (the unified pack absorbs the
+surface area the 5 specimens previously held). The real win is eliminating
+the 5-prefix duplication tax: future hero work touches one pack, not five.
+
 ### D.52 — Pack type rename: theme → aesthetic (2026-05-18)
 
 Per the v2 handoff `DECISIONS_UPDATES.md` D.52 plus the operator's

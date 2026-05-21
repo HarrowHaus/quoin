@@ -98,6 +98,19 @@ Every P0+P1 template depends on `pattern-button-system`. Specifically:
 - `template-portfolio-developer` — RSS subscribe, project link
 - `template-longform` — RSS subscribe, prev/next page nav
 
+## Consumed by (reverse lineage)
+
+Per Phase 22 Consolidation 3 (Q5 — composition reality), this pack tracks
+its declared consumers. The first explicit consumer:
+
+| Consumer pack | Used as | Phase |
+|---|---|---|
+| `@quoin/pattern-hero` (all 5 variants: type-only, animated, gradient-mesh, brand-photo, video) | `<a class="action-button" data-intent="primary"&#124;ghost&#124;secondary" href="...">` in the `hero-actions` slot. The hero pack adds context-scoped backdrop-blur overrides on ghost CTAs when sitting over media (brand-photo's image-full-bleed / image-overlay layouts, and the video variant) — button-system stays unchanged; the overrides ride on cascade specificity. | Phase 22 Cons. 3 / 2026-05-20 |
+
+This list grows as more patterns formally declare button-system as a peer
+pack and consume `<action-button>` directly (v3.G.17 gate enforces the
+reality for enrolled consumers).
+
 ## Specimen
 
 Open `examples/index.html` in a browser to render the full intent × size × microstate matrix + button-group compositions. The specimen is a self-contained HTML page seeded with `tokens-baseline` light + auto-dark values; in a real consumer the active token + theme pack supplies these via the compiler pipeline.

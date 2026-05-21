@@ -383,6 +383,77 @@ A `quoin-handoff` package was delivered describing the v1.0 launch plan. Mapping
 
 ---
 
+## Phase 22 — Consolidation 3 architectural locks (v3.G.15 through v3.G.20)
+
+**Shipped:** 2026-05-20 with `@quoin/pattern-hero` consolidation (5 parallel hero packs collapsed to one with variant tokens). These 6 locks generalize the Cons. 3 operator decisions to all remaining structural consolidations (Cons. 4–9 in the unification dossier).
+
+### v3.G.15 — data-pattern naming convention (programmatic)
+
+**Lock:** every `data-pattern="..."` value uses short form `<pattern-name>-<slot>`. The long form `pattern-<name>-<slot>` prefix is forbidden; double-dash separators are forbidden.
+
+**Examples:**
+- ✓ `data-pattern="hero-section"` / `data-pattern="hero-eyebrow"`
+- ✗ `data-pattern="pattern-hero-section"` (forbidden `pattern-` prefix)
+- ✗ `data-pattern="hero--section"` (forbidden double-dash)
+
+**Enforced by:** `02_reference-packs/scripts/bootstrap-integrity.js` check #6 (`DATA_PATTERN_NAMING_RULES`). Runs against every specimen across every pack.
+
+### v3.G.16 — data-register deprecation per consolidation (programmatic)
+
+**Lock:** `data-register` is being phased out across the catalog. For packs in the `DATA_REGISTER_DEPRECATED_IN` registry, the gate fails any `data-register=` usage. Other packs keep `data-register` until their own consolidation lands.
+
+**Cons. 3 registry entry:** `hero` — replaced by `data-alignment` (universal alignment), `data-video-mode` (video variant), `data-kind` (sub-slot kind), `data-cluster` (actions cluster), `data-layout` (brand-photo variant — orthogonal axis per Cons. 3 Q3).
+
+**Future consolidations** add their pack name + replacement attributes to the registry as they ship.
+
+**Enforced by:** `bootstrap-integrity.js` check #7.
+
+### v3.G.17 — composition reality (programmatic)
+
+**Lock:** a pattern that declares a peer pack in `quoin.pack.json`'s `peerPacks` field must actually consume that peer's canonical primitives in its specimens. Inlined re-implementations of a peer pack's contract under a different class name fail the gate.
+
+**Cons. 3 enforcement scope:** `hero` pack (currently the only consolidation that's fixed its composition lineage). Future consolidations expand the enforcement set as their packs ship real composition.
+
+**Cons. 3 composition mapping:**
+- `@quoin/pattern-button-system` → must use `class="action-button"`
+
+**Enforced by:** `bootstrap-integrity.js` check #8. Failure message: `composition lineage drift: {pack} declares {peerPack} as peerPack but no <element class="{primClass}"> usage found`.
+
+### v3.G.18 — anatomy documentation convention (documented)
+
+**Lock:** until a formal JSON anatomy contract format ships, pattern packs document their anatomy via four structured-markdown tables in `README.md`:
+
+1. Mandatory slots — slot / element / role / token references
+2. Conditional slots — slot / gated-by / role / tokens
+3. Variants — variant / conditional slots activated / variant-specific attributes / pattern-local CSS tokens / notes
+4. Composition lineage — consumed primitive / source pack / used in / how (the real, not aspirational, lineage per v3.G.17)
+
+Designed to be JSON-extractable for the future formal contract. Schema iterates with each structural consolidation; formalization deferred per Cons. 3 Q6 until the full structural-consolidation series (hero + nav + label + sequence) is complete.
+
+**Enforced by:** convention; not directly checkable programmatically until JSON contract format ships.
+
+### v3.G.19 — pack code lives once; examples demonstrate variants (documented)
+
+**Lock:** a pattern pack's CSS / primitives / manifest live in one place. Variants are demonstrated via multiple example HTML files in the pack's `examples/` directory, not via multiple parallel packs.
+
+**Cons. 3 embodies this:** `02_reference-packs/patterns/hero/` is the single pack; `examples/{type-only,animated,gradient-mesh,brand-photo,video}.html` are the variant demos. The pre-Cons.3 form (`patterns/hero-{variant}/`) is the anti-pattern this lock prevents.
+
+**Future consolidations** (nav variants → Cons. 4; badge/tag/status-pill → Cons. 5; etc.) follow the same shape.
+
+**Enforced by:** future PR review + the natural structure of `quoin.pack.json` which doesn't permit parallel packs at the same name.
+
+### v3.G.20 — variants in pattern packs; values in aesthetic packs (documented)
+
+**Lock:** pattern packs declare variant *axes* (e.g., `data-palette` with allowed value enums). Aesthetic packs supply specific *values* that customize the rendering (e.g., a yeezy-donda aesthetic pack provides a specific `cool` palette recipe).
+
+**Extends:** the existing aesthetic-pack boundary lock — aesthetic packs may declare only token values and named variants, not anatomy.
+
+**Cons. 3 establishes the contract** for hero variants (5 variants × N customizable per-variant axes); aesthetic packs will later target these axes. The first such aesthetic pack ships as future work.
+
+**Enforced by:** convention + the existing aesthetic-pack manifest validator (which checks aesthetic packs only override token values, not declare new anatomy).
+
+---
+
 ## What "operator review completed" means
 
 The operator has read the phase's output, run any provided demos or tests themselves, and explicitly approved advancement. A phase is not complete simply because an agent reports completion. The operator's sign-off is the final criterion at every gate.

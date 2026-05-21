@@ -105,31 +105,40 @@ const ENROLLMENT = {
     composesSiblings: ['pattern-button-system', 'vocab-app-shell', 'pattern-nav-app-chrome'],
     markers: ['Galley', 'aria-current', 'avatar-stack'],
   },
-  'hero-type-only': {
+  // Phase 22 Cons. 3 (2026-05-20): the 5 hero packs consolidated to a single
+  // @quoin/pattern-hero with variant example files. Enrollment keys updated
+  // to reflect the unified structure; `path` field overrides the default
+  // examples/index.html lookup.
+  'hero/type-only': {
+    path: 'hero/examples/type-only.html',
     requireGalley: true,
     requireLineage: true,
     composesSiblings: ['pattern-button-system'],
     markers: ['Galley', 'Five tools', 'aria-labelledby', 'text-wrap: balance'],
   },
-  'hero-animated': {
+  'hero/animated': {
+    path: 'hero/examples/animated.html',
     requireGalley: true,
     requireLineage: true,
     composesSiblings: ['pattern-button-system'],
     markers: ['Galley', 'prefers-reduced-motion', 'WCAG 2.3.3', 'aria-hidden'],
   },
-  'hero-gradient-mesh': {
+  'hero/gradient-mesh': {
+    path: 'hero/examples/gradient-mesh.html',
     requireGalley: true,
     requireLineage: true,
     composesSiblings: ['pattern-button-system'],
     markers: ['Galley', 'oklch(', 'WCAG 1.4.3', '@supports'],
   },
-  'hero-brand-photo': {
+  'hero/brand-photo': {
+    path: 'hero/examples/brand-photo.html',
     requireGalley: true,
     requireLineage: true,
     composesSiblings: ['pattern-button-system'],
     markers: ['Galley', 'fetchpriority', 'WCAG 1.1.1', 'PLACEHOLDER FIXTURE'],
   },
-  'hero-video': {
+  'hero/video': {
+    path: 'hero/examples/video.html',
     requireGalley: true,
     requireLineage: true,
     composesSiblings: ['pattern-button-system'],
@@ -240,8 +249,13 @@ function auditSpecimen(pack, { body }, spec) {
   for (const pack of enrolledPacks) {
     const spec = ENROLLMENT[pack];
     let response;
+    // Path can be overridden per enrollment entry (used for Cons. 3 unified
+    // packs where multiple variant example files share one pack directory).
+    const urlPath = spec.path
+      ? `/patterns/${spec.path}`
+      : `/patterns/${pack}/examples/index.html`;
     try {
-      response = await fetchPath(port, `/patterns/${pack}/examples/index.html`);
+      response = await fetchPath(port, urlPath);
     } catch (e) {
       lines.push(`SKIP  ${pack}  (fetch error: ${e.message})`);
       continue;
