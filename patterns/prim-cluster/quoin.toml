@@ -1,0 +1,36 @@
+# @quoin/prim-cluster — Cargo-style manifest (D.85, draft format)
+
+[package]
+name = "@quoin/prim-cluster"
+version = "1.0.0"
+type = "primitive"
+quoin-version = "^0.1.0"
+description = "Layout primitive — horizontal wrapping group. See quoin.pack.json for canonical schema."
+category = "layout"
+
+[dependencies]
+"@quoin/tokens-baseline" = "^0.1.0"
+
+[anatomy]
+mandatory-slots = ["cluster-container"]
+data-pattern-prefix = "cluster"
+
+[anatomy.attributes-universal.data-gap]
+values = ["xs", "sm", "md", "lg"]
+default = "sm"
+note = "Maps to baseline spacing tokens: xs=--space-1, sm=--space-2, md=--space-3, lg=--space-card."
+
+[anatomy.attributes-universal.data-justify]
+values = ["start", "center", "end", "space-between", "space-around"]
+default = "start"
+note = "Main-axis justification (justify-content)."
+
+[anatomy.attributes-universal.data-align]
+values = ["start", "center", "end", "baseline", "stretch"]
+default = "center"
+note = "Cross-axis alignment (align-items). Default 'center' fits the common case (button + label baselines aligned)."
+
+[anatomy.attributes-universal.data-wrap]
+values = ["wrap", "nowrap"]
+default = "wrap"
+note = "Whether children wrap when the row overflows."

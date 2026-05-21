@@ -1,0 +1,23 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/prim-center",
+  "version": "1.0.0",
+  "type": "primitive",
+  "quoinVersion": "^0.1.0",
+  "description": "Layout primitive — center content within parent on one or both axes. Used by hero content centered in section, modal centered in viewport, empty-state centered in container. Phase 22.6.",
+  "category": "layout",
+  "variant": "primitive",
+  "variants": ["axis-both", "axis-horizontal", "axis-vertical"],
+  "exports": { "primitives": "./primitives/index.json" },
+  "states": ["default"],
+  "microStates": ["default"],
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/primitives/center",
+    "tags": ["primitive", "layout", "center", "max-width", "measure"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0"
+  }
+}

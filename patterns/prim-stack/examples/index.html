@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en" data-aesthetic="default">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>@quoin/prim-stack — specimen</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/harrowhaus/quoin@main/02_reference-packs/tokens-baseline/tokens.css">
+
+  <style>
+    body {
+      max-width: 48rem; margin: 4rem auto; padding: 0 var(--space-card);
+      background: var(--surface); color: var(--text);
+      font-family: var(--font-sans); line-height: var(--leading-prose);
+    }
+    section { margin: 0 0 var(--space-section); }
+    h2 { font-family: var(--font-sans); font-size: var(--type-size-lg); margin: 0 0 var(--space-3); color: var(--text-emphasis); }
+    .specimen-box {
+      padding: var(--space-card);
+      background: var(--surface-elevated);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-md);
+    }
+    .child-marker {
+      padding: var(--space-2) var(--space-3);
+      background: var(--surface-recessed);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono); font-size: var(--type-size-sm);
+    }
+
+    /* PRIM: stack-container ─────────────────────────────── */
+    [data-pattern="stack-container"] {
+      display: flex;
+      flex-direction: column;
+      gap: var(--prim-stack-gap, var(--space-3));
+      align-items: var(--prim-stack-align, stretch);
+    }
+    [data-pattern="stack-container"][data-gap="xs"] { --prim-stack-gap: var(--space-1); }
+    [data-pattern="stack-container"][data-gap="sm"] { --prim-stack-gap: var(--space-2); }
+    [data-pattern="stack-container"][data-gap="md"] { --prim-stack-gap: var(--space-3); }
+    [data-pattern="stack-container"][data-gap="lg"] { --prim-stack-gap: var(--space-card); }
+    [data-pattern="stack-container"][data-gap="xl"] { --prim-stack-gap: var(--space-section); }
+    [data-pattern="stack-container"][data-align="start"]   { --prim-stack-align: flex-start; }
+    [data-pattern="stack-container"][data-align="center"]  { --prim-stack-align: center; }
+    [data-pattern="stack-container"][data-align="end"]     { --prim-stack-align: flex-end; }
+    [data-pattern="stack-container"][data-align="stretch"] { --prim-stack-align: stretch; }
+    [data-pattern="stack-container"][data-recursive="true"] :where(div, section, article) {
+      display: flex; flex-direction: column;
+      gap: inherit;
+    }
+
+    /* PRIM: stack-separator ─────────────────────────────── */
+    [data-pattern="stack-separator"] {
+      margin-block: 0;
+      border: 0;
+      border-top: var(--border-width-sm) solid var(--border);
+    }
+    [data-pattern="stack-separator"][data-weight="hairline"] {
+      border-top: var(--border-width-sm) solid var(--border-recede, var(--border));
+    }
+    [data-pattern="stack-separator"][data-weight="emphasis"] {
+      border-top: var(--border-width-md) solid var(--border-emphasis);
+    }
+  </style>
+</head>
+<body>
+
+  <section>
+    <h2>data-gap variants</h2>
+    <div class="specimen-box">
+      <div data-pattern="stack-container" data-gap="xs">
+        <div class="child-marker">data-gap="xs" — 4 px</div>
+        <div class="child-marker">child</div>
+        <div class="child-marker">child</div>
+      </div>
+      <hr style="margin: var(--space-card) 0;">
+      <div data-pattern="stack-container" data-gap="md">
+        <div class="child-marker">data-gap="md" — 12 px (default)</div>
+        <div class="child-marker">child</div>
+        <div class="child-marker">child</div>
+      </div>
+      <hr style="margin: var(--space-card) 0;">
+      <div data-pattern="stack-container" data-gap="lg">
+        <div class="child-marker">data-gap="lg" — 24 px</div>
+        <div class="child-marker">child</div>
+        <div class="child-marker">child</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>data-align variants</h2>
+    <div class="specimen-box">
+      <div data-pattern="stack-container" data-gap="sm" data-align="center" style="border: var(--border-width-sm) dashed var(--border-recede, var(--border)); padding: var(--space-2);">
+        <div class="child-marker" style="width: max-content;">data-align="center"</div>
+        <div class="child-marker" style="width: max-content;">centered</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>With stack-separator</h2>
+    <div class="specimen-box">
+      <div data-pattern="stack-container" data-gap="lg">
+        <p>Group A — first cluster of items.</p>
+        <hr data-pattern="stack-separator" data-weight="default" />
+        <p>Group B — second cluster, visually divided.</p>
+        <hr data-pattern="stack-separator" data-weight="emphasis" />
+        <p>Group C — third cluster, emphasized divider.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Composition — stack inside container, with inner stack</h2>
+    <article class="specimen-box">
+      <div data-pattern="stack-container" data-gap="lg">
+        <header>
+          <h3 style="margin: 0; color: var(--text-emphasis); font-family: var(--font-display);">Quickstart</h3>
+          <p style="margin: var(--space-1) 0 0; color: var(--text-recede); font-size: var(--type-size-sm);">3-minute read</p>
+        </header>
+        <div data-pattern="stack-container" data-gap="sm">
+          <p style="margin: 0;">First, install the compiler.</p>
+          <p style="margin: 0;">Then, write your first markup.</p>
+          <p style="margin: 0;">Finally, ship.</p>
+        </div>
+      </div>
+    </article>
+  </section>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/prim-sidebar",
+  "version": "1.0.0",
+  "type": "primitive",
+  "quoinVersion": "^0.1.0",
+  "description": "Layout primitive — sidebar + main content layout that responds to container width via container queries. Used by docs page (TOC sidebar + content), settings page (nav + form), dashboard (nav + main). Phase 22.6.",
+  "category": "layout",
+  "variant": "primitive",
+  "variants": ["side-left", "side-right", "width-narrow", "width-standard", "width-wide"],
+  "exports": { "primitives": "./primitives/index.json" },
+  "states": ["default", "stacked", "side-by-side"],
+  "microStates": ["default"],
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/primitives/sidebar",
+    "tags": ["primitive", "layout", "sidebar", "container-query", "responsive"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0"
+  }
+}

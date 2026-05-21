@@ -1,0 +1,98 @@
+[
+  {
+    "name": "stack-container",
+    "category": "layout",
+    "gating": "mandatory",
+    "role": "Vertical flex column with a single gap between children. The foundational primitive for any vertical content rhythm — composes into prose body sections, sidebar lists, form-field groups, card stacks. Carries no aesthetic concern of its own; gap + alignment come from tokens.",
+    "attributes": {
+      "gap": {
+        "values": ["xs", "sm", "md", "lg", "xl"],
+        "default": "md",
+        "specific": true,
+        "note": "xs=--space-1 (4px), sm=--space-2 (8px), md=--space-3 (12px), lg=--space-card (24px), xl=--space-section (64px). Tokens come from tokens-baseline."
+      },
+      "align": {
+        "values": ["start", "center", "end", "stretch"],
+        "default": "stretch",
+        "specific": true,
+        "note": "Cross-axis (horizontal) alignment of children via align-items."
+      },
+      "recursive": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true,
+        "note": "When true, recursively applies gap to all descendant elements via the lobotomized-owl selector (:where(*) > * + *). Useful when the children themselves contain stacks and you want one declaration to govern the entire subtree."
+      }
+    },
+    "tokens": {
+      "gap": "var(--prim-stack-gap, var(--space-3))",
+      "gapXs": "var(--space-1)",
+      "gapSm": "var(--space-2)",
+      "gapMd": "var(--space-3)",
+      "gapLg": "var(--space-card)",
+      "gapXl": "var(--space-section)"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<div data-pattern='stack-container' data-gap='md' data-align='stretch'>",
+        "  <!-- any flow content; children may themselves be stacks -->",
+        "  <h2>Heading</h2>",
+        "  <p>Paragraph.</p>",
+        "  <p>Another paragraph.</p>",
+        "</div>"
+      ],
+      "ariaPatterns": {
+        "noLandmark": "stack-container is purely structural. It carries no role, no aria-label. Operators wrap a stack in a semantic landmark (<section>, <article>, <aside>) when one is needed; the stack itself is the layout, not the semantics."
+      },
+      "compositionExamples": [
+        "Inside prim-center: <prim-center><prim-stack>...</prim-stack></prim-center> — centered max-width column with internal vertical rhythm.",
+        "Inside prim-sidebar's sidebar-aside slot: <prim-sidebar-aside><prim-stack data-gap='sm'>...</prim-stack></prim-sidebar-aside> — sidebar nav with consistent spacing between items.",
+        "Inside prim-grid cells: <prim-grid><div><prim-stack>...</prim-stack></div></prim-grid> — each grid cell is its own internal stack."
+      ]
+    }
+  },
+  {
+    "name": "stack-separator",
+    "category": "layout",
+    "gating": "conditional",
+    "role": "Optional visual divider between stack children. Renders as a horizontal rule with token-driven color + thickness. Use when the stack's children represent semantically distinct chunks that benefit from a visible break (e.g., between settings sections, between author bio and post list).",
+    "attributes": {
+      "weight": {
+        "values": ["hairline", "default", "emphasis"],
+        "default": "default",
+        "specific": true,
+        "note": "hairline = --border-width-sm + --border-recede (subtle); default = --border-width-sm + --border (visible); emphasis = --border-width-md + --border-emphasis."
+      }
+    },
+    "tokens": {
+      "color": "var(--border)",
+      "colorRecede": "var(--border-recede, var(--border))",
+      "colorEmphasis": "var(--border-emphasis)",
+      "widthSm": "var(--border-width-sm)",
+      "widthMd": "var(--border-width-md)",
+      "marginBlock": "0"
+    },
+    "structure": {
+      "element": "hr"
+    },
+    "children": "none",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<div data-pattern='stack-container' data-gap='lg'>",
+        "  <section>Group A</section>",
+        "  <hr data-pattern='stack-separator' data-weight='default' />",
+        "  <section>Group B</section>",
+        "</div>"
+      ],
+      "ariaPatterns": {
+        "presentationalHr": "<hr> already conveys separator semantics; no role override needed. AT users hear 'separator' or get a contextual pause depending on screen reader."
+      }
+    }
+  }
+]

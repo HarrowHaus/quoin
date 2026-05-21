@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en" data-aesthetic="default">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>@quoin/prim-center — specimen</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/harrowhaus/quoin@main/02_reference-packs/tokens-baseline/tokens.css">
+  <style>
+    body { margin: 0; padding: var(--space-card); background: var(--surface); color: var(--text); font-family: var(--font-sans); line-height: var(--leading-prose); }
+    h2 { font-family: var(--font-sans); font-size: var(--type-size-lg); margin: 0 0 var(--space-3); color: var(--text-emphasis); }
+    section { margin: 0 0 var(--space-section); }
+    .specimen-frame {
+      background: var(--surface-elevated);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-md);
+      min-height: 16rem;
+      overflow: hidden;
+    }
+    .child-marker {
+      padding: var(--space-2) var(--space-3);
+      background: var(--surface-recessed);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono); font-size: var(--type-size-sm);
+    }
+
+    /* PRIM: center-container ──────────────────────────────
+       data-axis="both"      — grid place-items center
+       data-axis="horizontal" — margin-inline auto + max-width
+       data-axis="vertical"   — flex column + justify-content center
+    */
+    [data-pattern="center-container"][data-axis="both"] {
+      display: grid;
+      place-items: center;
+      min-height: 100%;
+      padding: var(--prim-center-padding, var(--space-card));
+    }
+    [data-pattern="center-container"][data-axis="horizontal"] {
+      max-width: var(--prim-center-max-width, 66ch);
+      margin-inline: auto;
+      padding-inline: var(--prim-center-padding, var(--space-card));
+    }
+    [data-pattern="center-container"][data-axis="vertical"] {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 100%;
+      padding: var(--prim-center-padding, var(--space-card));
+    }
+    [data-pattern="center-container"][data-max-width="narrow"]   { --prim-center-max-width: 45ch; }
+    [data-pattern="center-container"][data-max-width="standard"] { --prim-center-max-width: 66ch; }
+    [data-pattern="center-container"][data-max-width="wide"]     { --prim-center-max-width: 80ch; }
+    [data-pattern="center-container"][data-max-width="none"]     { --prim-center-max-width: none; }
+    [data-pattern="center-container"][data-padding="sm"] { --prim-center-padding: var(--space-3); }
+    [data-pattern="center-container"][data-padding="md"] { --prim-center-padding: var(--space-card); }
+    [data-pattern="center-container"][data-padding="lg"] { --prim-center-padding: var(--space-panel); }
+  </style>
+</head>
+<body>
+
+  <section>
+    <h2>data-axis="both" — grid place-items: center</h2>
+    <div class="specimen-frame" style="min-height: 12rem;">
+      <div data-pattern="center-container" data-axis="both" style="min-height: 12rem;">
+        <div data-pattern="center-content">
+          <span class="child-marker">centered both axes</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>data-axis="horizontal" data-max-width="narrow" — readable prose column</h2>
+    <div class="specimen-frame">
+      <div data-pattern="center-container" data-axis="horizontal" data-max-width="narrow">
+        <div data-pattern="center-content">
+          <p>This is a centered readable column constrained to a 45ch measure. The container collapses around the natural width of the prose. Operators reach for this when they want a single-column long-form layout: a blog post body, a docs page, a Tufte-style essay.</p>
+          <p>Prose lives well at 45–75 characters per line; narrower than that and the eye is constantly reversing, wider and lines lose registration.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>data-axis="horizontal" data-max-width="wide" — long-form</h2>
+    <div class="specimen-frame">
+      <div data-pattern="center-container" data-axis="horizontal" data-max-width="wide">
+        <div data-pattern="center-content">
+          <p>Wide variant centers an 80ch column. Useful for content surfaces that include figures, code blocks, or multi-column callouts where the 66ch standard is too tight.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Composition — center wrapping a stack</h2>
+    <div class="specimen-frame">
+      <div data-pattern="center-container" data-axis="horizontal" data-max-width="standard" data-padding="lg">
+        <div data-pattern="center-content">
+          <div style="display: flex; flex-direction: column; gap: var(--space-card);">
+            <h3 style="margin: 0; font-family: var(--font-display); color: var(--text-emphasis);">A composed hero stack</h3>
+            <p style="margin: 0;">center-container provides the max-width + auto-margin centering. An inner stack-container provides the vertical rhythm. Patterns compose these two together to build prose containers, modal contents, hero blocks, and empty states.</p>
+            <p style="margin: 0; color: var(--text-recede); font-size: var(--type-size-sm);">prim-center × prim-stack — the most common layout idiom in the catalog.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

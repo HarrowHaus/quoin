@@ -1,0 +1,31 @@
+# @quoin/prim-center — Cargo-style manifest (D.85, draft format)
+
+[package]
+name = "@quoin/prim-center"
+version = "1.0.0"
+type = "primitive"
+quoin-version = "^0.1.0"
+description = "Layout primitive — center content one or both axes with max-width. See quoin.pack.json for canonical schema."
+category = "layout"
+
+[dependencies]
+"@quoin/tokens-baseline" = "^0.1.0"
+
+[anatomy]
+mandatory-slots = ["center-container", "center-content"]
+data-pattern-prefix = "center"
+
+[anatomy.attributes-universal.data-axis]
+values = ["both", "horizontal", "vertical"]
+default = "both"
+note = "both = display:grid; place-items:center. horizontal = margin-inline:auto. vertical = flex column with align-items:center."
+
+[anatomy.attributes-universal.data-max-width]
+values = ["narrow", "standard", "wide", "none"]
+default = "standard"
+note = "narrow=45ch (readable prose measure). standard=66ch (default reading column). wide=80ch (long-form). none=no max-width (full-width content)."
+
+[anatomy.attributes-universal.data-padding]
+values = ["sm", "md", "lg"]
+default = "md"
+note = "Inline padding inside the container. sm=--space-3, md=--space-card, lg=--space-panel."

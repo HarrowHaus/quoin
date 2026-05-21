@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en" data-aesthetic="default">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>@quoin/prim-cluster — specimen</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/harrowhaus/quoin@main/02_reference-packs/tokens-baseline/tokens.css">
+  <style>
+    body { max-width: 48rem; margin: 4rem auto; padding: 0 var(--space-card); background: var(--surface); color: var(--text); font-family: var(--font-sans); line-height: var(--leading-prose); }
+    section { margin: 0 0 var(--space-section); }
+    h2 { font-family: var(--font-sans); font-size: var(--type-size-lg); margin: 0 0 var(--space-3); color: var(--text-emphasis); }
+    .specimen-box { padding: var(--space-card); background: var(--surface-elevated); border: var(--border-width-sm) solid var(--border); border-radius: var(--radius-md); }
+    .child-marker { padding: var(--space-2) var(--space-3); background: var(--surface-recessed); border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: var(--type-size-sm); }
+    .child-tall { padding: var(--space-4) var(--space-3); }
+
+    /* PRIM: cluster-container ───────────────────────────── */
+    [data-pattern="cluster-container"] {
+      display: flex;
+      flex-wrap: var(--prim-cluster-wrap, wrap);
+      gap: var(--prim-cluster-gap, var(--space-2));
+      justify-content: var(--prim-cluster-justify, flex-start);
+      align-items: var(--prim-cluster-align, center);
+    }
+    [data-pattern="cluster-container"][data-gap="xs"] { --prim-cluster-gap: var(--space-1); }
+    [data-pattern="cluster-container"][data-gap="sm"] { --prim-cluster-gap: var(--space-2); }
+    [data-pattern="cluster-container"][data-gap="md"] { --prim-cluster-gap: var(--space-3); }
+    [data-pattern="cluster-container"][data-gap="lg"] { --prim-cluster-gap: var(--space-card); }
+    [data-pattern="cluster-container"][data-justify="start"]         { --prim-cluster-justify: flex-start; }
+    [data-pattern="cluster-container"][data-justify="center"]        { --prim-cluster-justify: center; }
+    [data-pattern="cluster-container"][data-justify="end"]           { --prim-cluster-justify: flex-end; }
+    [data-pattern="cluster-container"][data-justify="space-between"] { --prim-cluster-justify: space-between; }
+    [data-pattern="cluster-container"][data-justify="space-around"]  { --prim-cluster-justify: space-around; }
+    [data-pattern="cluster-container"][data-align="start"]    { --prim-cluster-align: flex-start; }
+    [data-pattern="cluster-container"][data-align="center"]   { --prim-cluster-align: center; }
+    [data-pattern="cluster-container"][data-align="end"]      { --prim-cluster-align: flex-end; }
+    [data-pattern="cluster-container"][data-align="baseline"] { --prim-cluster-align: baseline; }
+    [data-pattern="cluster-container"][data-align="stretch"]  { --prim-cluster-align: stretch; }
+    [data-pattern="cluster-container"][data-wrap="nowrap"] { --prim-cluster-wrap: nowrap; }
+  </style>
+</head>
+<body>
+
+  <section>
+    <h2>Default — wrap, gap=sm, justify=start, align=center</h2>
+    <div class="specimen-box">
+      <div data-pattern="cluster-container">
+        <span class="child-marker">one</span>
+        <span class="child-marker">two</span>
+        <span class="child-marker">three</span>
+        <span class="child-marker">four</span>
+        <span class="child-marker">five</span>
+        <span class="child-marker">six</span>
+        <span class="child-marker">seven</span>
+        <span class="child-marker">eight</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>data-justify variants</h2>
+    <div class="specimen-box" data-pattern="stack-container" style="display: flex; flex-direction: column; gap: var(--space-3);">
+      <div data-pattern="cluster-container" data-justify="start" style="border: 1px dashed var(--border-recede, var(--border)); padding: var(--space-2);">
+        <span class="child-marker">justify=start</span><span class="child-marker">a</span><span class="child-marker">b</span>
+      </div>
+      <div data-pattern="cluster-container" data-justify="center" style="border: 1px dashed var(--border-recede, var(--border)); padding: var(--space-2);">
+        <span class="child-marker">justify=center</span><span class="child-marker">a</span><span class="child-marker">b</span>
+      </div>
+      <div data-pattern="cluster-container" data-justify="space-between" style="border: 1px dashed var(--border-recede, var(--border)); padding: var(--space-2);">
+        <span class="child-marker">justify=space-between</span><span class="child-marker">a</span><span class="child-marker">b</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>data-align — mixed-height children</h2>
+    <div class="specimen-box">
+      <div data-pattern="cluster-container" data-gap="md" data-align="baseline" style="border: 1px dashed var(--border-recede, var(--border)); padding: var(--space-2);">
+        <span class="child-marker">align=baseline</span>
+        <span class="child-marker child-tall">tall child</span>
+        <span class="child-marker">normal</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Composition — action bar</h2>
+    <div class="specimen-box">
+      <div data-pattern="cluster-container" data-gap="sm" data-justify="end" role="group" aria-label="Form actions">
+        <button style="padding: var(--space-2) var(--space-3); background: transparent; color: var(--text); border: var(--border-width-sm) solid var(--border); border-radius: var(--radius-md); font-family: inherit; font-size: var(--type-size-sm); cursor: pointer;">Cancel</button>
+        <button style="padding: var(--space-2) var(--space-3); background: var(--accent); color: var(--text-on-accent); border: 0; border-radius: var(--radius-md); font-family: inherit; font-size: var(--type-size-sm); cursor: pointer; font-weight: var(--font-weight-semibold);">Save changes</button>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

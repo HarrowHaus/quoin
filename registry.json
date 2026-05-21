@@ -316,6 +316,90 @@
       ]
     },
     {
+      "name": "prim-stack",
+      "type": "registry:component",
+      "title": "Stack (layout primitive)",
+      "description": "Layout primitive — vertical stack of children with consistent gap. Universal foundation for any vertical content rhythm. 5 gap variants (xs/sm/md/lg/xl) × 4 align variants × optional recursive mode. Phase 22.6 layout-primitive layer.",
+      "categories": ["foundation", "primitive", "layout"],
+      "files": [
+        {
+          "path": "patterns/prim-stack/quoin.pack.json",
+          "type": "registry:file",
+          "target": "components/quoin/primitives/stack.json"
+        }
+      ]
+    },
+    {
+      "name": "prim-cluster",
+      "type": "registry:component",
+      "title": "Cluster (layout primitive)",
+      "description": "Layout primitive — horizontal grouping with wrapping. Universal for nav links, button groups, tag clouds, action bars, breadcrumbs. 4 gap × 5 justify × 5 align × 2 wrap variants. Phase 22.6.",
+      "categories": ["foundation", "primitive", "layout"],
+      "files": [
+        {
+          "path": "patterns/prim-cluster/quoin.pack.json",
+          "type": "registry:file",
+          "target": "components/quoin/primitives/cluster.json"
+        }
+      ]
+    },
+    {
+      "name": "prim-center",
+      "type": "registry:component",
+      "title": "Center (layout primitive)",
+      "description": "Layout primitive — center content one or both axes with max-width. 3 axes × 4 max-width × 3 padding variants. The canonical max-width prose column. Phase 22.6.",
+      "categories": ["foundation", "primitive", "layout"],
+      "files": [
+        {
+          "path": "patterns/prim-center/quoin.pack.json",
+          "type": "registry:file",
+          "target": "components/quoin/primitives/center.json"
+        }
+      ]
+    },
+    {
+      "name": "prim-grid",
+      "type": "registry:component",
+      "title": "Grid (layout primitive)",
+      "description": "Layout primitive — auto-fit grid with min-width per cell. Cells reflow into columns without media queries. 4 min-cell variants × 4 gap × 4 max-columns × 3 align variants. Foundation for feature-grid / pricing-tiers / card lists. Phase 22.6.",
+      "categories": ["foundation", "primitive", "layout"],
+      "files": [
+        {
+          "path": "patterns/prim-grid/quoin.pack.json",
+          "type": "registry:file",
+          "target": "components/quoin/primitives/grid.json"
+        }
+      ]
+    },
+    {
+      "name": "prim-sidebar",
+      "type": "registry:component",
+      "title": "Sidebar (layout primitive)",
+      "description": "Layout primitive — sidebar + main content, container-query responsive (Baseline 2024). Above threshold: side-by-side flex; below: stacked. 2 sides × 3 widths × 3 thresholds. Used by docs page, settings page, dashboard. Phase 22.6.",
+      "categories": ["foundation", "primitive", "layout"],
+      "files": [
+        {
+          "path": "patterns/prim-sidebar/quoin.pack.json",
+          "type": "registry:file",
+          "target": "components/quoin/primitives/sidebar.json"
+        }
+      ]
+    },
+    {
+      "name": "prim-switcher",
+      "type": "registry:component",
+      "title": "Switcher (layout primitive)",
+      "description": "Layout primitive — row that flips to column below a container-width threshold. Container queries (Baseline 2024). For two-column blocks that should stack on narrow containers. 3 thresholds × 4 gaps × 4 align variants. Phase 22.6.",
+      "categories": ["foundation", "primitive", "layout"],
+      "files": [
+        {
+          "path": "patterns/prim-switcher/quoin.pack.json",
+          "type": "registry:file",
+          "target": "components/quoin/primitives/switcher.json"
+        }
+      ]
+    },
+    {
       "name": "tokens-baseline",
       "type": "registry:file",
       "title": "Tokens (Baseline)",

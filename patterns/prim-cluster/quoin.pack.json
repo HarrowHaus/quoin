@@ -1,0 +1,23 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/prim-cluster",
+  "version": "1.0.0",
+  "type": "primitive",
+  "quoinVersion": "^0.1.0",
+  "description": "Layout primitive — horizontal grouping with wrapping. Universal for nav links, button groups, tag clouds, action bars, breadcrumbs. Phase 22.6 layout-primitive layer.",
+  "category": "layout",
+  "variant": "primitive",
+  "variants": ["gap-xs", "gap-sm", "gap-md", "gap-lg"],
+  "exports": { "primitives": "./primitives/index.json" },
+  "states": ["default"],
+  "microStates": ["default"],
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/primitives/cluster",
+    "tags": ["primitive", "layout", "cluster", "horizontal", "wrap", "row"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0"
+  }
+}

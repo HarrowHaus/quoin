@@ -1,0 +1,23 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/prim-grid",
+  "version": "1.0.0",
+  "type": "primitive",
+  "quoinVersion": "^0.1.0",
+  "description": "Layout primitive — auto-fit grid with min-width per cell. Foundation for any card-grid surface (feature-grid, pricing-tiers, future product grids). Cells wrap responsively without media queries. Phase 22.6.",
+  "category": "layout",
+  "variant": "primitive",
+  "variants": ["min-narrow", "min-standard", "min-wide", "min-custom"],
+  "exports": { "primitives": "./primitives/index.json" },
+  "states": ["default"],
+  "microStates": ["default"],
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/primitives/grid",
+    "tags": ["primitive", "layout", "grid", "auto-fit", "responsive"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0"
+  }
+}

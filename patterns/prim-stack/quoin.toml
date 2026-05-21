@@ -1,0 +1,34 @@
+# @quoin/prim-stack — Cargo-style manifest (D.85, draft format)
+#
+# Mirrors quoin.pack.json for dependency-resolution-friendly tooling.
+
+[package]
+name = "@quoin/prim-stack"
+version = "1.0.0"
+type = "primitive"
+quoin-version = "^0.1.0"
+description = "Layout primitive — vertical stack with consistent gap. See quoin.pack.json for canonical schema."
+category = "layout"
+
+[dependencies]
+"@quoin/tokens-baseline" = "^0.1.0"
+
+[anatomy]
+mandatory-slots = ["stack-container"]
+conditional-slots = ["stack-separator"]
+data-pattern-prefix = "stack"
+
+[anatomy.attributes-universal.data-gap]
+values = ["xs", "sm", "md", "lg", "xl"]
+default = "md"
+note = "Maps to baseline spacing tokens: xs=--space-1, sm=--space-2, md=--space-3, lg=--space-card, xl=--space-section."
+
+[anatomy.attributes-universal.data-align]
+values = ["start", "center", "end", "stretch"]
+default = "stretch"
+note = "Cross-axis alignment of children (align-items)."
+
+[anatomy.attributes-universal.data-recursive]
+values = ["true", "false"]
+default = "false"
+note = "When true, applies stack to all descendants for nested stacks via :where(*) > * + * selector."

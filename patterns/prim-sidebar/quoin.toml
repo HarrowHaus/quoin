@@ -1,0 +1,33 @@
+# @quoin/prim-sidebar — Cargo-style manifest (D.85, draft format)
+
+[package]
+name = "@quoin/prim-sidebar"
+version = "1.0.0"
+type = "primitive"
+quoin-version = "^0.1.0"
+description = "Layout primitive — sidebar + main content, container-query responsive. See quoin.pack.json for canonical schema."
+category = "layout"
+
+[dependencies]
+"@quoin/tokens-baseline" = "^0.1.0"
+
+[anatomy]
+mandatory-slots = ["sidebar-container", "sidebar-aside", "sidebar-main"]
+data-pattern-prefix = "sidebar"
+container-query-required = true
+container-type-note = "sidebar-container declares container-type: inline-size for the container query to fire. v3.G.11 container-query convention."
+
+[anatomy.attributes-universal.data-side]
+values = ["left", "right"]
+default = "left"
+note = "Which side the aside renders on. CSS Logical Properties so RTL languages flip naturally."
+
+[anatomy.attributes-universal.data-width]
+values = ["narrow", "standard", "wide"]
+default = "standard"
+note = "Sidebar width: narrow=200px, standard=280px, wide=360px."
+
+[anatomy.attributes-universal.data-threshold]
+values = ["narrow", "standard", "wide"]
+default = "standard"
+note = "Container-width threshold below which the layout stacks. narrow=40em, standard=60em, wide=80em."

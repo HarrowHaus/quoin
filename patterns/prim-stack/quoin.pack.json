@@ -1,0 +1,23 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/prim-stack",
+  "version": "1.0.0",
+  "type": "primitive",
+  "quoinVersion": "^0.1.0",
+  "description": "Layout primitive — vertical stack of children with consistent gap between them. Universal foundation for any vertical content composition. Phase 22.6 layout-primitive layer.",
+  "category": "layout",
+  "variant": "primitive",
+  "variants": ["gap-xs", "gap-sm", "gap-md", "gap-lg", "gap-xl"],
+  "exports": { "primitives": "./primitives/index.json" },
+  "states": ["default"],
+  "microStates": ["default"],
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/primitives/stack",
+    "tags": ["primitive", "layout", "stack", "vertical", "flow"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0"
+  }
+}

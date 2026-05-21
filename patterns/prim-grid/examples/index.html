@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en" data-aesthetic="default">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>@quoin/prim-grid — specimen</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/harrowhaus/quoin@main/02_reference-packs/tokens-baseline/tokens.css">
+  <style>
+    body { max-width: 80rem; margin: 4rem auto; padding: 0 var(--space-card); background: var(--surface); color: var(--text); font-family: var(--font-sans); line-height: var(--leading-prose); }
+    section { margin: 0 0 var(--space-section); }
+    h2 { font-family: var(--font-sans); font-size: var(--type-size-lg); margin: 0 0 var(--space-3); color: var(--text-emphasis); }
+    .specimen-cell {
+      padding: var(--space-card);
+      background: var(--surface-elevated);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-md);
+      font-family: var(--font-sans); font-size: var(--type-size-sm);
+    }
+    .specimen-cell h3 { margin: 0 0 var(--space-2); font-size: var(--type-size-md); color: var(--text-emphasis); }
+    .specimen-cell p { margin: 0; color: var(--text-recede); }
+
+    /* PRIM: grid-container ───────────────────────────────── */
+    [data-pattern="grid-container"] {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(var(--prim-grid-min-cell, 280px), 100%), 1fr));
+      gap: var(--prim-grid-gap, var(--space-card));
+      align-items: var(--prim-grid-align, stretch);
+    }
+    [data-pattern="grid-container"][data-min-cell="narrow"]   { --prim-grid-min-cell: 200px; }
+    [data-pattern="grid-container"][data-min-cell="standard"] { --prim-grid-min-cell: 280px; }
+    [data-pattern="grid-container"][data-min-cell="wide"]     { --prim-grid-min-cell: 360px; }
+    [data-pattern="grid-container"][data-gap="xs"] { --prim-grid-gap: var(--space-2); }
+    [data-pattern="grid-container"][data-gap="sm"] { --prim-grid-gap: var(--space-3); }
+    [data-pattern="grid-container"][data-gap="md"] { --prim-grid-gap: var(--space-card); }
+    [data-pattern="grid-container"][data-gap="lg"] { --prim-grid-gap: var(--space-section); }
+    [data-pattern="grid-container"][data-align="start"]   { --prim-grid-align: start; }
+    [data-pattern="grid-container"][data-align="center"]  { --prim-grid-align: center; }
+    [data-pattern="grid-container"][data-align="stretch"] { --prim-grid-align: stretch; }
+    [data-pattern="grid-container"][data-max-columns="2"] { grid-template-columns: repeat(2, minmax(min(var(--prim-grid-min-cell, 280px), 100%), 1fr)); }
+    [data-pattern="grid-container"][data-max-columns="3"] { grid-template-columns: repeat(3, minmax(min(var(--prim-grid-min-cell, 280px), 100%), 1fr)); }
+    [data-pattern="grid-container"][data-max-columns="4"] { grid-template-columns: repeat(4, minmax(min(var(--prim-grid-min-cell, 280px), 100%), 1fr)); }
+  </style>
+</head>
+<body>
+
+  <section>
+    <h2>Default — data-min-cell="standard" (280px) — resize viewport to reflow</h2>
+    <div data-pattern="grid-container">
+      <article class="specimen-cell"><h3>Cell one</h3><p>auto-fit grid; cells are 280px minimum and stretch to fill the row.</p></article>
+      <article class="specimen-cell"><h3>Cell two</h3><p>Cell count reflows based on container width — no media query needed.</p></article>
+      <article class="specimen-cell"><h3>Cell three</h3><p>Cells in the same row are equal height because data-align defaults to stretch.</p></article>
+      <article class="specimen-cell"><h3>Cell four</h3><p>This cell may wrap to the next row depending on viewport width.</p></article>
+    </div>
+  </section>
+
+  <section>
+    <h2>data-min-cell="narrow" (200px) — denser grid</h2>
+    <div data-pattern="grid-container" data-min-cell="narrow" data-gap="sm">
+      <article class="specimen-cell"><h3>One</h3><p>200px min.</p></article>
+      <article class="specimen-cell"><h3>Two</h3><p>200px min.</p></article>
+      <article class="specimen-cell"><h3>Three</h3><p>200px min.</p></article>
+      <article class="specimen-cell"><h3>Four</h3><p>200px min.</p></article>
+      <article class="specimen-cell"><h3>Five</h3><p>200px min.</p></article>
+      <article class="specimen-cell"><h3>Six</h3><p>200px min.</p></article>
+    </div>
+  </section>
+
+  <section>
+    <h2>data-min-cell="wide" (360px) data-max-columns="3" — pricing-tier style</h2>
+    <div data-pattern="grid-container" data-min-cell="wide" data-max-columns="3" data-gap="md">
+      <article class="specimen-cell"><h3>Starter</h3><p>Free, forever. 3 projects, community support.</p></article>
+      <article class="specimen-cell"><h3>Team</h3><p>$29/user/month. Unlimited projects, priority support.</p></article>
+      <article class="specimen-cell"><h3>Enterprise</h3><p>Custom. SSO, custom SLA, dedicated success.</p></article>
+    </div>
+  </section>
+
+  <section>
+    <h2>Composition — grid of stacked cells</h2>
+    <div data-pattern="grid-container" data-min-cell="standard">
+      <article class="specimen-cell">
+        <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+          <h3 style="margin: 0;">Feature one</h3>
+          <p style="margin: 0;">Each cell is its own internal stack — image + heading + description + cta.</p>
+          <p style="margin: 0; font-size: var(--type-size-xs); color: var(--text-recede); letter-spacing: var(--tracking-wide); text-transform: uppercase;">Read more →</p>
+        </div>
+      </article>
+      <article class="specimen-cell">
+        <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+          <h3 style="margin: 0;">Feature two</h3>
+          <p style="margin: 0;">prim-grid owns the outer layout; prim-stack would own each cell's internal rhythm if these were proper components.</p>
+          <p style="margin: 0; font-size: var(--type-size-xs); color: var(--text-recede); letter-spacing: var(--tracking-wide); text-transform: uppercase;">Read more →</p>
+        </div>
+      </article>
+      <article class="specimen-cell">
+        <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+          <h3 style="margin: 0;">Feature three</h3>
+          <p style="margin: 0;">The two primitives compose naturally; future feature-grid pattern will be a thin wrapper over this exact composition.</p>
+          <p style="margin: 0; font-size: var(--type-size-xs); color: var(--text-recede); letter-spacing: var(--tracking-wide); text-transform: uppercase;">Read more →</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+</body>
+</html>

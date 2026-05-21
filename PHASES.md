@@ -2,7 +2,7 @@
 
 This file is the single source of truth for phase status across the Quoin project. It supersedes scattered references in CONSOLIDATION reports, DECISIONS_UPDATES, and session-closing reports. Every future session that opens, closes, or modifies a phase updates this file in its closing batch.
 
-**Last updated:** Session 5 Tracks C + D closing — Phase 22.5.C + 22.5.D complete/scaffolded (2026-05-21)
+**Last updated:** Phase 22.6 closing — Layout Primitive Layer complete (2026-05-21)
 
 ---
 
@@ -150,6 +150,28 @@ This file is the single source of truth for phase status across the Quoin projec
 **Closure ref:** commit `5cf8b2b` (2026-05-20). No formal phase number was assigned at the time; retroactively numbered 22.5 in this ledger because it ships between Phase 22's mid-execution (after Cons. 3) and Phase 23.
 **Operator action item still outstanding:** 19 screenshots per `docs/screenshots/README.md` checklist.
 
+### Phase 22.6 — Layout Primitive Layer
+
+**Status:** ✅ Complete (Phase 22.6 — 2026-05-21)
+**Goal:** Ship the spatial-logic primitive layer (stack / cluster / center / grid / sidebar / switcher) that future patterns compose for layout instead of redeclaring layout CSS in each pack. Peers of the content primitives shipped in Phase 22 (prim-label, prim-sequence, prim-decoration-overlay, prim-searchable-list) but on a different concern axis — spatial relationships rather than visual elements.
+**Output:** six primitive packs at root `patterns/prim-<name>/`, each with `quoin.pack.json` + `quoin.toml` + `primitives/index.json` + `examples/index.html` + `README.md` + `LICENSE` + `package.json`:
+- `patterns/prim-stack/` — vertical stack with consistent gap. 5 gap variants × 4 align × optional recursive mode. Universal foundation for vertical rhythm.
+- `patterns/prim-cluster/` — horizontal wrapping group. 4 gap × 5 justify × 5 align × 2 wrap. For nav links, button groups, tag clouds, action bars, breadcrumbs.
+- `patterns/prim-center/` — center one or both axes with max-width. 3 axes × 4 max-width × 3 padding. The canonical max-width prose column.
+- `patterns/prim-grid/` — auto-fit grid with min-width per cell. 4 min-cell × 4 gap × 4 max-columns × 3 align. Foundation for feature-grid / pricing-tiers / card lists.
+- `patterns/prim-sidebar/` — sidebar + main, container-query responsive (Baseline 2024). 2 sides × 3 widths × 3 thresholds. Used by docs / settings / dashboard.
+- `patterns/prim-switcher/` — row that flips to column below container threshold. 3 thresholds × 4 gap × 4 align. For two-column blocks that stack on narrow containers.
+**Discoverability surface touched (overrides Track E convention per brief):**
+- `/registry.json` — 6 new entries added in the `foundation/primitive/layout` category.
+- `/llms.txt` — new "Layout primitives (6, Phase 22.6)" section between content primitives and patterns. Architectural-locks list extended to include v3.G.21.
+- `/llms-full.txt` — new "Layout primitives (Phase 22.6)" section with full anatomy for each of the six packs inserted before the token reference.
+- `/README.md` — catalog grid restructured: "Layout primitives (6, Phase 22.6)" subgrid added above the production-patterns grid; AI-tools section updated to enumerate counts correctly (15 + 4 + 6 + tokens-baseline).
+**Closure ref:** _this commit_ (2026-05-21).
+**What unblocks:** Session 6's editorial pattern batch (Track B from the prior conversation) — `prose-body`, `code-block`, `pull-quote`, `figure-with-caption` — can author on top of layout primitives. The aesthetic-swap demo (Session 6 Track A) can use prim-grid or prim-stack as its composition shell.
+**Scope boundary:** This phase owns `patterns/prim-{stack,cluster,center,grid,sidebar,switcher}/` plus the discoverability files explicitly enumerated above. No existing patterns are refactored — that's deferred to Phase 22.7 (Layout Composition Consolidation, queued).
+**Halts encountered:** none. Container-query convention (v3.G.11) handled cleanly for prim-sidebar + prim-switcher with documented graceful-degradation behavior for browsers earlier than Baseline 2024.
+**Naming clarification:** the brief stated "quoin.toml … per v3.G.21" but v3.G.21 is the `optionalPeerPacks` lock. The quoin.toml Cargo-style mirror is a separate D.85 emerging convention (first appeared in `patterns/hero/quoin.toml` + `patterns/nav/quoin.toml`); all six new primitive packs adopt the same format, advancing the convention from 2 → 8 packs. Format is still draft.
+
 ### Phase 22.5.B — Editorial Patterns Batch 1 (Track B)
 
 **Status:** 🟡 Queued (not yet started — placeholder pending operator scheduling)
@@ -254,6 +276,46 @@ This file is the single source of truth for phase status across the Quoin projec
 - `aesthetics/default/` — tasteful neutral baseline
 **Next candidates (queued):** Manuscript Future (Junicode 2 + Ranade + Monaspace per Cons. 2 Option D), terminal-monochrome, expressive-motion-heavy.
 **Closure dependency:** none — three reference packs now exist; future packs follow the v1.0 template (`tokens.css` + `overrides/{light,dark}.json` + `specimen/`).
+
+---
+
+## Phase 22.6 outcome (2026-05-21) — Layout Primitive Layer
+
+Brief: ship the spatial-logic primitive layer (stack/cluster/center/grid/sidebar/switcher) that should have existed before extensive pattern authoring. Single-session execution. The existing 15 patterns are NOT refactored in this phase (deferred to Phase 22.7); the new layer is authored fresh and immediately consumable by Session 6's editorial pattern batch.
+
+**Architectural framing:** Layout primitives are peers of the content primitives shipped in Phase 22 (prim-label, prim-sequence, prim-decoration-overlay, prim-searchable-list). Same conventions (v3.G.18 anatomy documentation, v3.G.19 pack-code-lives-once, v3.G.20 variants-in-pattern-packs-tokens-in-aesthetic-packs, v3.G.21 optionalPeerPacks). Different concern axis: spatial relationships rather than visual elements. Both compose into patterns; neither is a pattern itself.
+
+**Shipped:**
+- **`patterns/prim-stack/`** — vertical stack with consistent gap. `<div data-pattern="stack-container" data-gap="xs|sm|md|lg|xl" data-align="start|center|end|stretch" data-recursive="true|false">`. Optional `<hr data-pattern="stack-separator">` for visible breaks. The lobotomized-owl-equivalent in primitive form.
+- **`patterns/prim-cluster/`** — horizontal wrapping group. `<div data-pattern="cluster-container" data-gap data-justify data-align data-wrap>`. Default `align="center"` matches the common case (mixed-height items at optical center).
+- **`patterns/prim-center/`** — center one or both axes with max-width. Two slots (`center-container` + `center-content`) so the operator can wrap content in a semantic landmark without coupling centering to semantics. Default `data-max-width="standard"` = 66ch (readable column).
+- **`patterns/prim-grid/`** — auto-fit grid with min-width per cell. CSS recipe `repeat(auto-fit, minmax(min(var(--prim-grid-min-cell), 100%), 1fr))` — the inner `min(min-cell, 100%)` prevents overflow on viewports narrower than min-cell. `data-max-columns="2|3|4|unlimited"` caps the count.
+- **`patterns/prim-sidebar/`** — sidebar + main, container-query responsive. Three slots: `sidebar-container` (container-query host) + `sidebar-aside` (<aside>, role=complementary) + `sidebar-main` (<main> or <div>). `data-threshold="narrow|standard|wide"` controls the container-width below which the layout stacks.
+- **`patterns/prim-switcher/`** — row that flips to column below container threshold. Single slot with N peer children that all flip together. Children get `flex: 1` in row mode for equal-width split.
+
+**Discoverability surface (touched per brief's explicit override of Track E convention):**
+- `/registry.json` — six new `foundation/primitive/layout` entries added before the `tokens-baseline` entry; JSON validated.
+- `/llms.txt` — header tagline updated to "15 patterns + 4 content primitives + 6 layout primitives"; new "Layout primitives (6, Phase 22.6)" section inserted between content primitives and patterns. Architectural-locks list extended from 6 → 7 to include v3.G.21.
+- `/llms-full.txt` — new "Layout primitives (Phase 22.6)" section before the Token reference; each primitive documented per the standard format (Identity / Anatomy / Attributes / Minimal markup), with CSS recipes for prim-grid (the inner-min trick) and prim-sidebar (container-query gating).
+- `/README.md` — catalog grid restructured with a new "Layout primitives" 3-column subgrid above the production-patterns grid; badge updated to "15 + 4 content + 6 layout primitives"; AI-tools section reflects the corrected count.
+
+**Architectural proof points:**
+- **v3.G.18 holds for primitives.** Each pack ships the four README anatomy tables (mandatory slots / conditional slots / variants / composition lineage). Composition lineage is `(none)` for all six — they are foundational, consume only tokens.
+- **v3.G.20 holds for layout.** Layout primitives declare token references (`--space-*`, container-query thresholds). Aesthetic packs can override the underlying tokens (e.g., a tight aesthetic narrows the `--space-card`) without touching primitive anatomy.
+- **v3.G.11 container-query convention adopted.** prim-sidebar and prim-switcher use `container-type: inline-size`. Documented Baseline 2024 support + graceful degradation per the brief's halt-condition #2.
+- **D.85 quoin.toml convention advanced.** From 2 packs (hero, nav) → 8 packs (hero, nav, + six new primitives). Format still draft; iterates when adoption reaches the operator-set ratification threshold.
+
+**Out of scope (deferred):**
+- Refactoring existing patterns to compose layout primitives. Feature-grid, hero, page-header, pricing-tiers, footer-mega all inline some layout CSS that prim-grid / prim-stack / prim-cluster could replace. Deferred to **Phase 22.7 — Layout Composition Consolidation** (queued).
+- Adding a `prim-frame` primitive for figure-with-caption / pull-quote framing concerns. Flagged for future addition if Session 6 surfaces the need.
+- Aesthetic-pack overrides demonstrating layout-primitive tuning (e.g., a Harrow-Haus tight-margin aesthetic overriding `--space-card`). Operator-driven.
+
+**Halts encountered:** none.
+
+**Unblocks:**
+- Session 6 editorial pattern batch (`prose-body`, `code-block`, `pull-quote`, `figure-with-caption`, plus the article-meta / footnote / table-of-contents / prose-aside already shipped in Track C) can author on top of layout primitives.
+- Session 6's aesthetic-swap demo (Track A from the prior conversation, now part of the maximized Session 6 brief) can use prim-grid or prim-stack as its composition shell.
+- Phase 22.7 (Layout Composition Consolidation) is queued.
 
 ---
 
@@ -434,6 +496,9 @@ Phase 0 (spec)
               → Phase 22.5.D (Page Templates Batch 1 — ✅ partial)
                 → Track E (discoverability sweep for templates) [UNBLOCKED]
                 → Templates layer beyond v1.0 [UNBLOCKED, ongoing]
+              → Phase 22.6 (Layout Primitive Layer — ✅)
+                → Session 6 editorial pattern batch [UNBLOCKED to compose on layout primitives]
+                → Phase 22.7 (Layout Composition Consolidation — refactor existing patterns to compose layout primitives) [QUEUED]
               → Phase 23 (Compiler IR) [BLOCKED on Phase 22 closure]
                 → Phase 24 (Build Pipeline) [BLOCKED on Phase 23]
                 → Phase 25 (MCP + Distribution) [BLOCKED on Phase 23]

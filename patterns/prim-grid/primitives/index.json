@@ -1,0 +1,72 @@
+[
+  {
+    "name": "grid-container",
+    "category": "layout",
+    "gating": "mandatory",
+    "role": "Auto-fit grid container. Cells reflow into rows + columns based on container width and per-cell minimum width; no media queries required. The foundation for feature-grid, pricing-tier-grid, card lists, image galleries, dashboard widget grids.",
+    "attributes": {
+      "min-cell": {
+        "values": ["narrow", "standard", "wide", "custom"],
+        "default": "standard",
+        "specific": true,
+        "note": "narrow=200px, standard=280px (default — fits 1–3 columns at common widths), wide=360px. 'custom' lets the operator set --prim-grid-min-cell directly on the element or an ancestor."
+      },
+      "gap": {
+        "values": ["xs", "sm", "md", "lg"],
+        "default": "md",
+        "specific": true,
+        "note": "xs=--space-2, sm=--space-3, md=--space-card (24px), lg=--space-section (64px)."
+      },
+      "max-columns": {
+        "values": ["2", "3", "4", "unlimited"],
+        "default": "unlimited",
+        "specific": true,
+        "note": "Caps the maximum column count. 'unlimited' = no cap (true auto-fit, fills as many columns as fit). When capped, the grid uses repeat(auto-fit, minmax(min(max-cell-width, 100%), 1fr)) — preserves the auto-fit behavior up to the cap."
+      },
+      "align": {
+        "values": ["start", "center", "stretch"],
+        "default": "stretch",
+        "specific": true,
+        "note": "Cross-axis (vertical) alignment of grid items. 'stretch' (default) makes all cells in a row equal height."
+      }
+    },
+    "tokens": {
+      "minCell": "var(--prim-grid-min-cell, 280px)",
+      "minCellNarrow": "200px",
+      "minCellStandard": "280px",
+      "minCellWide": "360px",
+      "gap": "var(--prim-grid-gap, var(--space-card))",
+      "gapXs": "var(--space-2)",
+      "gapSm": "var(--space-3)",
+      "gapMd": "var(--space-card)",
+      "gapLg": "var(--space-section)"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<div data-pattern='grid-container' data-min-cell='standard' data-gap='md'>",
+        "  <!-- grid cells; cells are typically articles or list items -->",
+        "  <article>...</article>",
+        "  <article>...</article>",
+        "  <article>...</article>",
+        "</div>"
+      ],
+      "cssRecipe": "display: grid; grid-template-columns: repeat(auto-fit, minmax(min(var(--prim-grid-min-cell, 280px), 100%), 1fr)); gap: var(--prim-grid-gap, var(--space-card));",
+      "minMaxRationale": "The inner min(min-cell, 100%) prevents overflow on viewports narrower than min-cell — without it, a 200px min-cell on a 150px viewport would cause horizontal scroll.",
+      "ariaPatterns": {
+        "noRole": "grid-container is structural. It is NOT a [role='grid'] (which has different semantic + interaction contracts — data-table's grid role). For data-grid behavior, use pattern-data-table.",
+        "semanticOuter": "Operators wrap the grid in <ul> when cells are list items, or leave it as <div> when cells are independent articles."
+      },
+      "compositionExamples": [
+        "Cells with internal stack: <prim-grid><div><prim-stack>...</prim-stack></div></prim-grid>",
+        "Pricing tier grid: <prim-grid data-min-cell='wide'><pricing-tier>...</pricing-tier></prim-grid>",
+        "Card list with hover: <prim-grid><article class='card'>...</article></prim-grid>"
+      ],
+      "deprecationOpportunity": "feature-grid pattern currently inlines this auto-fit grid recipe. Future consolidation (deferred, call it Phase 22.7) refactors feature-grid to compose prim-grid. Not in this session's scope."
+    }
+  }
+]

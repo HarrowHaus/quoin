@@ -1,0 +1,11 @@
+{
+  "name": "@quoin/prim-switcher",
+  "version": "1.0.0",
+  "description": "Layout primitive — row that flips to column below a container-width threshold. Container queries (Baseline 2024).",
+  "main": "quoin.pack.json",
+  "files": ["quoin.pack.json", "quoin.toml", "primitives/", "examples/", "README.md", "LICENSE"],
+  "keywords": ["quoin", "primitive", "layout", "switcher", "row-to-column", "container-query"],
+  "license": "MIT",
+  "homepage": "https://harrow.haus/quoin/primitives/switcher",
+  "repository": { "type": "git", "url": "https://github.com/harrowhaus/quoin.git", "directory": "patterns/prim-switcher" }
+}

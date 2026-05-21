@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en" data-aesthetic="default">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>@quoin/prim-switcher — specimen</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/harrowhaus/quoin@main/02_reference-packs/tokens-baseline/tokens.css">
+  <style>
+    body { max-width: 72rem; margin: 4rem auto; padding: 0 var(--space-card); background: var(--surface); color: var(--text); font-family: var(--font-sans); line-height: var(--leading-prose); }
+    section { margin: 0 0 var(--space-section); }
+    h2 { font-family: var(--font-sans); font-size: var(--type-size-lg); margin: 0 0 var(--space-3); color: var(--text-emphasis); }
+    .resize-hint { font-family: var(--font-mono); font-size: var(--type-size-xs); color: var(--text-recede); margin: 0 0 var(--space-2); }
+    .specimen-frame {
+      background: var(--surface-elevated);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--space-card);
+      resize: horizontal;
+      overflow: auto;
+      min-width: 16rem;
+      max-width: 100%;
+    }
+    .child {
+      padding: var(--space-card);
+      background: var(--surface-recessed);
+      border-radius: var(--radius-sm);
+    }
+    .child h3 { margin: 0 0 var(--space-2); font-size: var(--type-size-md); color: var(--text-emphasis); }
+    .child p { margin: 0; font-size: var(--type-size-sm); color: var(--text); }
+
+    /* PRIM: switcher-container ──────────────────────────────
+       Children stacked below threshold, side-by-side above.
+       container-type: inline-size on the container itself.
+    */
+    [data-pattern="switcher-container"] {
+      container-type: inline-size;
+      display: flex;
+      flex-direction: column;
+      gap: var(--prim-switcher-gap, var(--space-card));
+      align-items: var(--prim-switcher-align, stretch);
+    }
+    [data-pattern="switcher-container"][data-gap="xs"] { --prim-switcher-gap: var(--space-2); }
+    [data-pattern="switcher-container"][data-gap="sm"] { --prim-switcher-gap: var(--space-3); }
+    [data-pattern="switcher-container"][data-gap="md"] { --prim-switcher-gap: var(--space-card); }
+    [data-pattern="switcher-container"][data-gap="lg"] { --prim-switcher-gap: var(--space-section); }
+    [data-pattern="switcher-container"][data-align="start"]   { --prim-switcher-align: flex-start; }
+    [data-pattern="switcher-container"][data-align="center"]  { --prim-switcher-align: center; }
+    [data-pattern="switcher-container"][data-align="end"]     { --prim-switcher-align: flex-end; }
+    [data-pattern="switcher-container"][data-align="stretch"] { --prim-switcher-align: stretch; }
+
+    @container (inline-size >= 30em) {
+      [data-pattern="switcher-container"][data-threshold="narrow"] {
+        flex-direction: row;
+      }
+      [data-pattern="switcher-container"][data-threshold="narrow"] > * { flex: 1; min-inline-size: 0; }
+    }
+    @container (inline-size >= 40em) {
+      [data-pattern="switcher-container"][data-threshold="standard"] {
+        flex-direction: row;
+      }
+      [data-pattern="switcher-container"][data-threshold="standard"] > * { flex: 1; min-inline-size: 0; }
+    }
+    @container (inline-size >= 60em) {
+      [data-pattern="switcher-container"][data-threshold="wide"] {
+        flex-direction: row;
+      }
+      [data-pattern="switcher-container"][data-threshold="wide"] > * { flex: 1; min-inline-size: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <section>
+    <h2>data-threshold="standard" (40em) — drag to test</h2>
+    <p class="resize-hint">↘ specimen frame has resize: horizontal. Drag below 40em to stack.</p>
+    <div class="specimen-frame" style="width: 50rem;">
+      <div data-pattern="switcher-container" data-threshold="standard" data-gap="md" data-align="center">
+        <div class="child">
+          <h3>Left child</h3>
+          <p>Above 40em container width, this and the next child sit side by side. Below 40em they stack.</p>
+        </div>
+        <div class="child">
+          <h3>Right child</h3>
+          <p>Both children get flex: 1 in row mode, so they share inline-size equally. Operators set explicit flex-basis on a child to override.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>data-threshold="narrow" (30em) — tighter switch</h2>
+    <div class="specimen-frame" style="width: 40rem;">
+      <div data-pattern="switcher-container" data-threshold="narrow" data-gap="sm">
+        <div class="child">
+          <h3>Left</h3>
+          <p>30em threshold suits compact two-column blocks that should remain side-by-side as long as possible.</p>
+        </div>
+        <div class="child">
+          <h3>Right</h3>
+          <p>For real two-column heroes, 40em standard is usually the right choice.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Three children — same switcher contract</h2>
+    <div class="specimen-frame" style="width: 60rem;">
+      <div data-pattern="switcher-container" data-threshold="wide" data-gap="md">
+        <div class="child"><h3>One</h3><p>Three or more children all switch together. The flex: 1 distribution still applies — all peers share width equally above the threshold.</p></div>
+        <div class="child"><h3>Two</h3><p>Below the threshold, they stack in order.</p></div>
+        <div class="child"><h3>Three</h3><p>If a 3-up layout should wrap to a 2×2 grid instead of stacking, use prim-grid instead — switcher is for stack-or-row, not wrap.</p></div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

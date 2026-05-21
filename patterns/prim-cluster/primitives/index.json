@@ -1,0 +1,64 @@
+[
+  {
+    "name": "cluster-container",
+    "category": "layout",
+    "gating": "mandatory",
+    "role": "Horizontal flex row with wrapping. The foundational primitive for nav link rows, button groups, tag clouds, action bars, breadcrumb trails — any 'inline group of related items that may overflow to a second line'.",
+    "attributes": {
+      "gap": {
+        "values": ["xs", "sm", "md", "lg"],
+        "default": "sm",
+        "specific": true,
+        "note": "xs=--space-1, sm=--space-2 (default — fits buttons + tags), md=--space-3, lg=--space-card."
+      },
+      "justify": {
+        "values": ["start", "center", "end", "space-between", "space-around"],
+        "default": "start",
+        "specific": true,
+        "note": "Main-axis (horizontal) justification."
+      },
+      "align": {
+        "values": ["start", "center", "end", "baseline", "stretch"],
+        "default": "center",
+        "specific": true,
+        "note": "Cross-axis (vertical) alignment. Default 'center' matches the common case (mixed-height items aligned to optical center)."
+      },
+      "wrap": {
+        "values": ["wrap", "nowrap"],
+        "default": "wrap",
+        "specific": true,
+        "note": "Whether children wrap to a second line when the row overflows. 'nowrap' should be used sparingly — it sacrifices responsiveness."
+      }
+    },
+    "tokens": {
+      "gap": "var(--prim-cluster-gap, var(--space-2))",
+      "gapXs": "var(--space-1)",
+      "gapSm": "var(--space-2)",
+      "gapMd": "var(--space-3)",
+      "gapLg": "var(--space-card)"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<div data-pattern='cluster-container' data-gap='sm' data-justify='start' data-align='center'>",
+        "  <button>Save</button>",
+        "  <button>Cancel</button>",
+        "  <span class='hint'>Unsaved changes</span>",
+        "</div>"
+      ],
+      "ariaPatterns": {
+        "noLandmark": "cluster-container is structural. When the cluster represents a related group of controls, wrap it in <div role='group' aria-label='Form actions'> (operator adds the role; the primitive does not).",
+        "navCluster": "When the cluster is a nav link row, wrap it in <nav aria-label='Primary'>; the cluster itself stays role-less."
+      },
+      "compositionExamples": [
+        "Inside a stack: <prim-stack><prim-cluster>buttons</prim-cluster><prim-cluster>tags</prim-cluster></prim-stack>",
+        "Inside any pattern's actions slot: <hero-actions><prim-cluster data-justify='center'>action-buttons</prim-cluster></hero-actions>",
+        "As article-meta inline meta items: <article-meta><prim-cluster data-gap='md'>author · date · reading-time</prim-cluster></article-meta>"
+      ]
+    }
+  }
+]

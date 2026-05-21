@@ -752,6 +752,235 @@ Toast notification system with stacking, auto-dismiss, action affordance, live-r
 
 ---
 
+# Layout primitives (Phase 22.6)
+
+The layout primitive layer ships the spatial-logic primitives that future patterns compose for layout instead of redeclaring layout CSS. They are peers of the content primitives (prim-label, prim-sequence, prim-decoration-overlay, prim-searchable-list) but operate on a different concern axis — spatial relationships rather than visual elements.
+
+Aesthetic packs may override the `--space-*` tokens these primitives reference, but cannot change layout primitive anatomy. Layout primitives carry no aesthetic concern of their own.
+
+All six layout primitives ship at root `patterns/prim-<name>/` and follow v3.G.18 anatomy documentation.
+
+## prim-stack
+
+**Pack:** `@quoin/prim-stack@1.0.0`
+**Folder:** `patterns/prim-stack/`
+**Specimen:** `examples/index.html`
+
+Vertical stack of children with consistent gap. Universal foundation for any vertical content composition.
+
+### Anatomy
+
+| Slot | Element | Role |
+|---|---|---|
+| `stack-container` | `<div>` | The flex column; sets gap between children |
+| `stack-separator` (conditional) | `<hr>` | Optional visual divider between children |
+
+### Attributes (stack-container)
+
+| Attribute | Values | Default |
+|---|---|---|
+| `data-gap` | `xs` (--space-1) / `sm` (--space-2) / `md` (--space-3) / `lg` (--space-card) / `xl` (--space-section) | `md` |
+| `data-align` | `start` / `center` / `end` / `stretch` | `stretch` |
+| `data-recursive` | `true` / `false` | `false` |
+
+### Minimal markup
+
+```html
+<div data-pattern="stack-container" data-gap="md">
+  <h2>Heading</h2>
+  <p>Paragraph.</p>
+  <p>Another paragraph.</p>
+</div>
+```
+
+---
+
+## prim-cluster
+
+**Pack:** `@quoin/prim-cluster@1.0.0`
+**Folder:** `patterns/prim-cluster/`
+
+Horizontal wrapping group. Universal for nav link rows, button groups, tag clouds, action bars, breadcrumbs.
+
+### Anatomy
+
+| Slot | Element | Role |
+|---|---|---|
+| `cluster-container` | `<div>` | Horizontal flex row that wraps |
+
+### Attributes (cluster-container)
+
+| Attribute | Values | Default |
+|---|---|---|
+| `data-gap` | `xs` / `sm` / `md` / `lg` | `sm` |
+| `data-justify` | `start` / `center` / `end` / `space-between` / `space-around` | `start` |
+| `data-align` | `start` / `center` / `end` / `baseline` / `stretch` | `center` |
+| `data-wrap` | `wrap` / `nowrap` | `wrap` |
+
+### Minimal markup
+
+```html
+<div data-pattern="cluster-container" data-gap="sm" data-justify="start">
+  <button>Save</button>
+  <button>Cancel</button>
+  <span>Unsaved changes</span>
+</div>
+```
+
+---
+
+## prim-center
+
+**Pack:** `@quoin/prim-center@1.0.0`
+**Folder:** `patterns/prim-center/`
+
+Center content within parent on one or both axes. The canonical max-width prose column.
+
+### Anatomy
+
+| Slot | Element | Role |
+|---|---|---|
+| `center-container` | `<div>` | Owns centering mechanism + max-width |
+| `center-content` | `<div>` | Inner wrapper; the thing being centered |
+
+### Attributes (center-container)
+
+| Attribute | Values | Default |
+|---|---|---|
+| `data-axis` | `both` / `horizontal` / `vertical` | `both` |
+| `data-max-width` | `narrow` (45ch) / `standard` (66ch) / `wide` (80ch) / `none` | `standard` |
+| `data-padding` | `sm` / `md` / `lg` | `md` |
+
+### Minimal markup
+
+```html
+<div data-pattern="center-container" data-axis="horizontal" data-max-width="standard">
+  <div data-pattern="center-content">
+    <!-- centered content -->
+  </div>
+</div>
+```
+
+---
+
+## prim-grid
+
+**Pack:** `@quoin/prim-grid@1.0.0`
+**Folder:** `patterns/prim-grid/`
+
+Auto-fit grid with min-width per cell. Cells reflow into columns without media queries.
+
+### Anatomy
+
+| Slot | Element | Role |
+|---|---|---|
+| `grid-container` | `<div>` | Auto-fit grid |
+
+### Attributes (grid-container)
+
+| Attribute | Values | Default |
+|---|---|---|
+| `data-min-cell` | `narrow` (200px) / `standard` (280px) / `wide` (360px) / `custom` | `standard` |
+| `data-gap` | `xs` / `sm` / `md` / `lg` | `md` |
+| `data-max-columns` | `2` / `3` / `4` / `unlimited` | `unlimited` |
+| `data-align` | `start` / `center` / `stretch` | `stretch` |
+
+### CSS recipe (truth)
+
+```css
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(min(var(--prim-grid-min-cell, 280px), 100%), 1fr));
+gap: var(--prim-grid-gap, var(--space-card));
+```
+
+### Minimal markup
+
+```html
+<div data-pattern="grid-container" data-min-cell="standard" data-gap="md">
+  <article>Cell one</article>
+  <article>Cell two</article>
+  <article>Cell three</article>
+</div>
+```
+
+---
+
+## prim-sidebar
+
+**Pack:** `@quoin/prim-sidebar@1.0.0`
+**Folder:** `patterns/prim-sidebar/`
+
+Sidebar + main content, container-query responsive (Baseline 2024). Above threshold: side-by-side. Below: stacked column.
+
+### Anatomy
+
+| Slot | Element | Role |
+|---|---|---|
+| `sidebar-container` | `<div>` | Container-query host; owns responsive switch |
+| `sidebar-aside` | `<aside>` | Sidebar (implicit `role="complementary"`) |
+| `sidebar-main` | `<main>` or `<div>` | Main content area (`flex: 1`, `min-inline-size: 0`) |
+
+### Attributes (sidebar-container)
+
+| Attribute | Values | Default |
+|---|---|---|
+| `data-side` | `left` / `right` | `left` |
+| `data-width` | `narrow` (200px) / `standard` (280px) / `wide` (360px) | `standard` |
+| `data-threshold` | `narrow` (40em) / `standard` (60em) / `wide` (80em) | `standard` |
+
+### Container-query requirement
+
+`sidebar-container` MUST have `container-type: inline-size`. The pack's CSS sets this directly. v3.G.11 container-query convention applies. Browser support is Baseline 2024 (Chrome 105+, Safari 16+, Firefox 110+). Older browsers degrade to the stacked layout.
+
+### Minimal markup
+
+```html
+<div data-pattern="sidebar-container" data-side="left" data-width="standard" data-threshold="standard">
+  <aside data-pattern="sidebar-aside" aria-label="Documentation">...</aside>
+  <main data-pattern="sidebar-main">...</main>
+</div>
+```
+
+---
+
+## prim-switcher
+
+**Pack:** `@quoin/prim-switcher@1.0.0`
+**Folder:** `patterns/prim-switcher/`
+
+Row that flips to column below a container-width threshold. For two-column blocks that should stack on narrow containers.
+
+### Anatomy
+
+| Slot | Element | Role |
+|---|---|---|
+| `switcher-container` | `<div>` | Container-query host; flips between row + column |
+
+### Attributes (switcher-container)
+
+| Attribute | Values | Default |
+|---|---|---|
+| `data-threshold` | `narrow` (30em) / `standard` (40em) / `wide` (60em) | `standard` |
+| `data-gap` | `xs` / `sm` / `md` / `lg` | `md` |
+| `data-align` | `start` / `center` / `end` / `stretch` | `stretch` |
+
+### Difference from prim-sidebar and prim-grid
+
+- **prim-sidebar** has two distinct slots (sidebar + main) with different roles. Use when one child is structurally a sidebar.
+- **prim-switcher** has N equal children that flip together. Use when children are peers.
+- **prim-grid** wraps N children into rows + columns based on cell width. Use when N varies and cells should wrap into multiple rows.
+
+### Minimal markup
+
+```html
+<div data-pattern="switcher-container" data-threshold="standard" data-gap="md">
+  <div><!-- left/top child --></div>
+  <div><!-- right/bottom child --></div>
+</div>
+```
+
+---
+
 # Token reference (excerpt from @quoin/tokens-baseline)
 
 The full canonical namespace is 175 tokens across 11 DTCG 2025.10 types. The token file lives at `02_reference-packs/tokens-baseline/tokens.css`. Below are the names most commonly referenced from patterns.

@@ -1,0 +1,36 @@
+# @quoin/prim-grid — Cargo-style manifest (D.85, draft format)
+
+[package]
+name = "@quoin/prim-grid"
+version = "1.0.0"
+type = "primitive"
+quoin-version = "^0.1.0"
+description = "Layout primitive — auto-fit grid with min-width per cell. See quoin.pack.json for canonical schema."
+category = "layout"
+
+[dependencies]
+"@quoin/tokens-baseline" = "^0.1.0"
+
+[anatomy]
+mandatory-slots = ["grid-container"]
+data-pattern-prefix = "grid"
+
+[anatomy.attributes-universal.data-min-cell]
+values = ["narrow", "standard", "wide", "custom"]
+default = "standard"
+note = "narrow=200px, standard=280px, wide=360px. 'custom' lets the operator set --prim-grid-min-cell directly."
+
+[anatomy.attributes-universal.data-gap]
+values = ["xs", "sm", "md", "lg"]
+default = "md"
+note = "Maps to --space-2 / --space-3 / --space-card / --space-section."
+
+[anatomy.attributes-universal.data-max-columns]
+values = ["2", "3", "4", "unlimited"]
+default = "unlimited"
+note = "Caps the column count. 'unlimited' = no cap (true auto-fit)."
+
+[anatomy.attributes-universal.data-align]
+values = ["start", "center", "stretch"]
+default = "stretch"
+note = "Cross-axis alignment of grid items (align-items)."

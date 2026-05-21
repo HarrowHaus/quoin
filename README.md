@@ -7,7 +7,7 @@
 *A semantic vocabulary for the patterns every website needs — meaning over markup, anatomy over aesthetic.*
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Patterns](https://img.shields.io/badge/patterns-15%20%2B%204%20primitives-2ea44f.svg)](#pattern-catalog)
+[![Patterns](https://img.shields.io/badge/patterns-15%20%2B%204%20content%20%2B%206%20layout%20primitives-2ea44f.svg)](#pattern-catalog)
 [![Version](https://img.shields.io/badge/version-0.1.0-e8a33d.svg)](CHANGELOG.md)
 [![Stars](https://img.shields.io/github/stars/harrowhaus/quoin?style=social)](https://github.com/harrowhaus/quoin)
 
@@ -60,7 +60,18 @@ The result renders at production quality: token-grounded surfaces, balanced disp
 
 ## Pattern catalog
 
-Fifteen production patterns. Each link opens the canonical specimen rendered live via raw.githack.com — markup, real CSS, real interaction. The grid is the catalog as of v0.1.0 (post-Phase-22 Cons. 4 nav unification); see [`CHANGELOG.md`](CHANGELOG.md) for additions and [`PHASES.md`](PHASES.md) for phase status.
+Fifteen production patterns + four content primitives + six layout primitives. Each link opens the canonical specimen rendered live via raw.githack.com — markup, real CSS, real interaction. The grid is the catalog as of v0.1.0 (post-Phase-22.6 layout-primitive layer); see [`CHANGELOG.md`](CHANGELOG.md) for additions and [`PHASES.md`](PHASES.md) for phase status.
+
+### Layout primitives (6, Phase 22.6)
+
+Spatial-logic primitives that future patterns compose for layout instead of redeclaring layout CSS. Pure layout, no aesthetic concern.
+
+| | | |
+|---|---|---|
+| **[prim-stack](https://raw.githack.com/harrowhaus/quoin/main/patterns/prim-stack/examples/index.html)**<br>Vertical stack with consistent gap. 5 gap × 4 align × optional recursive mode. | **[prim-cluster](https://raw.githack.com/harrowhaus/quoin/main/patterns/prim-cluster/examples/index.html)**<br>Horizontal wrapping group. 4 gap × 5 justify × 5 align × 2 wrap. | **[prim-center](https://raw.githack.com/harrowhaus/quoin/main/patterns/prim-center/examples/index.html)**<br>Center on one or both axes with max-width. 3 axes × 4 max-width × 3 padding. |
+| **[prim-grid](https://raw.githack.com/harrowhaus/quoin/main/patterns/prim-grid/examples/index.html)**<br>Auto-fit grid with min-width per cell. 4 min-cell × 4 gap × 4 max-columns × 3 align. | **[prim-sidebar](https://raw.githack.com/harrowhaus/quoin/main/patterns/prim-sidebar/examples/index.html)**<br>Sidebar + main; container-query responsive (Baseline 2024). 2 sides × 3 widths × 3 thresholds. | **[prim-switcher](https://raw.githack.com/harrowhaus/quoin/main/patterns/prim-switcher/examples/index.html)**<br>Row that flips to column below container threshold. 3 thresholds × 4 gap × 4 align. |
+
+### Production patterns (15)
 
 | | | |
 |---|---|---|
@@ -86,7 +97,7 @@ Quoin publishes structured documentation specifically for AI coding tools (Claud
 
 - [`/llms.txt`](llms.txt) — a concise summary of the catalog, the architecture, and how to consume Quoin from generated code. Following the [llmstxt.org](https://llmstxt.org/) convention.
 - [`/llms-full.txt`](llms-full.txt) — full anatomy reference for every pattern (slots, variants, microstates, ARIA contracts, composition lineage). Use this when generating Quoin markup at scale.
-- [`/registry.json`](registry.json) — a shadcn-registry-compatible static endpoint enumerating the 18 patterns. Lets you wire Quoin into any tool that already speaks shadcn.
+- [`/registry.json`](registry.json) — a shadcn-registry-compatible static endpoint enumerating the 15 patterns + 4 content primitives + 6 layout primitives + the tokens-baseline pack. Lets you wire Quoin into any tool that already speaks shadcn.
 
 **Add Quoin to a shadcn-MCP config:**
 

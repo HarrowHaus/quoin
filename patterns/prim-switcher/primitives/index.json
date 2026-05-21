@@ -1,0 +1,58 @@
+[
+  {
+    "name": "switcher-container",
+    "category": "layout",
+    "gating": "mandatory",
+    "role": "Container that lays its children side-by-side (row) above a width threshold and stacks them (column) below. Universal for two-up content blocks that need to remain readable as the container narrows — split heroes, two-column comparisons, side-by-side cards.",
+    "attributes": {
+      "threshold": {
+        "values": ["narrow", "standard", "wide"],
+        "default": "standard",
+        "specific": true,
+        "note": "Container-width threshold below which the row stacks. narrow=30em (~480px), standard=40em (~640px), wide=60em (~960px)."
+      },
+      "gap": {
+        "values": ["xs", "sm", "md", "lg"],
+        "default": "md",
+        "specific": true,
+        "note": "Gap between children in both row and column mode."
+      },
+      "align": {
+        "values": ["start", "center", "end", "stretch"],
+        "default": "stretch",
+        "specific": true,
+        "note": "Cross-axis alignment in row mode (align-items). Column mode uses stretch by default."
+      }
+    },
+    "tokens": {
+      "containerType": "inline-size",
+      "gap": "var(--prim-switcher-gap, var(--space-card))",
+      "gapXs": "var(--space-2)",
+      "gapSm": "var(--space-3)",
+      "gapMd": "var(--space-card)",
+      "gapLg": "var(--space-section)",
+      "thresholdNarrow": "30em",
+      "thresholdStandard": "40em",
+      "thresholdWide": "60em"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<div data-pattern='switcher-container' data-threshold='standard' data-gap='md' data-align='center'",
+        "     style='container-type: inline-size;'>",
+        "  <div><!-- left or top child --></div>",
+        "  <div><!-- right or bottom child --></div>",
+        "</div>"
+      ],
+      "containerQueryContract": "switcher-container declares container-type: inline-size. v3.G.11 container-query convention applies.",
+      "browserSupportBaseline": "Container queries are Baseline 2024. Older browsers degrade to the row layout always — the operator can choose to ship a stacked fallback via @supports gating instead, if a always-stacked fallback is preferred on legacy browsers.",
+      "differenceFromSidebar": "prim-sidebar has TWO distinct slots (sidebar + main) with different roles. prim-switcher has N equal children that all flip together. Use prim-sidebar when one child is structurally a sidebar; use prim-switcher when the children are peers (e.g., two equal columns).",
+      "cssRecipe": "container-type: inline-size; display: flex; flex-direction: column; gap: var(...); @container (inline-size >= threshold) { flex-direction: row; & > * { flex: 1; } }",
+      "flexChildrenInRowMode": "In row mode, children get flex: 1 to share inline-size equally. Operators who want unequal splits set explicit flex-basis on the child elements after composing the primitive."
+    }
+  }
+]

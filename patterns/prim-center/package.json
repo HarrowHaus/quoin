@@ -1,0 +1,11 @@
+{
+  "name": "@quoin/prim-center",
+  "version": "1.0.0",
+  "description": "Layout primitive — center content one or both axes with max-width.",
+  "main": "quoin.pack.json",
+  "files": ["quoin.pack.json", "quoin.toml", "primitives/", "examples/", "README.md", "LICENSE"],
+  "keywords": ["quoin", "primitive", "layout", "center", "max-width", "measure"],
+  "license": "MIT",
+  "homepage": "https://harrow.haus/quoin/primitives/center",
+  "repository": { "type": "git", "url": "https://github.com/harrowhaus/quoin.git", "directory": "patterns/prim-center" }
+}

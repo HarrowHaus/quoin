@@ -1,0 +1,77 @@
+[
+  {
+    "name": "center-container",
+    "category": "layout",
+    "gating": "mandatory",
+    "role": "Outer container. Owns the centering mechanism (grid place-items, margin-inline auto, or flex align) based on data-axis. Owns the max-width that defines the readable measure.",
+    "attributes": {
+      "axis": {
+        "values": ["both", "horizontal", "vertical"],
+        "default": "both",
+        "specific": true,
+        "note": "'both' uses display:grid;place-items:center;height:100%. 'horizontal' uses margin-inline:auto + max-width. 'vertical' uses flex column with justify-content:center."
+      },
+      "max-width": {
+        "values": ["narrow", "standard", "wide", "none"],
+        "default": "standard",
+        "specific": true,
+        "note": "narrow=45ch (prose measure). standard=66ch. wide=80ch. none = no max-width."
+      },
+      "padding": {
+        "values": ["sm", "md", "lg"],
+        "default": "md",
+        "specific": true,
+        "note": "Inline padding inside the container."
+      }
+    },
+    "tokens": {
+      "maxWidthNarrow":  "45ch",
+      "maxWidthStandard": "66ch",
+      "maxWidthWide": "80ch",
+      "paddingSm": "var(--space-3)",
+      "paddingMd": "var(--space-card)",
+      "paddingLg": "var(--space-panel)",
+      "marginInline": "auto"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<div data-pattern='center-container' data-axis='horizontal' data-max-width='standard'>",
+        "  <div data-pattern='center-content'>",
+        "    <!-- flow content sized by max-width -->",
+        "  </div>",
+        "</div>"
+      ],
+      "axisCSSRecipes": {
+        "both": "display: grid; place-items: center; min-height: 100%;",
+        "horizontal": "max-width: var(...); margin-inline: auto; padding-inline: var(...);",
+        "vertical": "display: flex; flex-direction: column; justify-content: center; min-height: 100%;"
+      }
+    }
+  },
+  {
+    "name": "center-content",
+    "category": "layout",
+    "gating": "mandatory",
+    "role": "Inner content wrapper. Carries no styling of its own; serves as a stable child reference so the container's centering mechanism has exactly one item to center on (especially in the grid place-items case).",
+    "attributes": {},
+    "tokens": {},
+    "structure": {
+      "element": "div"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<div data-pattern='center-content'>",
+        "  <!-- centered content goes here -->",
+        "</div>"
+      ],
+      "whyTwoSlots": "Separating container from content lets the container own positioning (grid/flex/margin) and the content own its own sizing/styling. This also allows the operator to wrap content in a semantic landmark (<article>, <main>) while keeping the centering layer purely structural."
+    }
+  }
+]

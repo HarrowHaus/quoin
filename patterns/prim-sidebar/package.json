@@ -1,0 +1,11 @@
+{
+  "name": "@quoin/prim-sidebar",
+  "version": "1.0.0",
+  "description": "Layout primitive — sidebar + main content, container-query responsive (Baseline 2024).",
+  "main": "quoin.pack.json",
+  "files": ["quoin.pack.json", "quoin.toml", "primitives/", "examples/", "README.md", "LICENSE"],
+  "keywords": ["quoin", "primitive", "layout", "sidebar", "container-query", "responsive"],
+  "license": "MIT",
+  "homepage": "https://harrow.haus/quoin/primitives/sidebar",
+  "repository": { "type": "git", "url": "https://github.com/harrowhaus/quoin.git", "directory": "patterns/prim-sidebar" }
+}

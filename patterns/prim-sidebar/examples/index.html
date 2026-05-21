@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en" data-aesthetic="default">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>@quoin/prim-sidebar — specimen</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/harrowhaus/quoin@main/02_reference-packs/tokens-baseline/tokens.css">
+  <style>
+    body { max-width: 80rem; margin: 4rem auto; padding: 0 var(--space-card); background: var(--surface); color: var(--text); font-family: var(--font-sans); line-height: var(--leading-prose); }
+    section { margin: 0 0 var(--space-section); }
+    h2 { font-family: var(--font-sans); font-size: var(--type-size-lg); margin: 0 0 var(--space-3); color: var(--text-emphasis); }
+    .resize-hint { font-family: var(--font-mono); font-size: var(--type-size-xs); color: var(--text-recede); margin: 0 0 var(--space-2); }
+    .specimen-frame {
+      background: var(--surface-elevated);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--space-card);
+      resize: horizontal;
+      overflow: auto;
+      min-width: 18rem;
+      max-width: 100%;
+    }
+    .sidebar-content { background: var(--surface-recessed); padding: var(--space-3); border-radius: var(--radius-sm); }
+    .main-content { background: var(--surface); padding: var(--space-3); border: var(--border-width-sm) solid var(--border-recede, var(--border)); border-radius: var(--radius-sm); }
+    .sidebar-content h3, .main-content h3 { margin: 0 0 var(--space-2); font-size: var(--type-size-md); color: var(--text-emphasis); }
+    .sidebar-content ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--space-2); font-size: var(--type-size-sm); }
+    .sidebar-content a { color: var(--text); text-decoration: none; }
+    .sidebar-content a:hover { color: var(--accent); }
+
+    /* PRIM: sidebar-container ────────────────────────────────
+       Container-query responsive layout. v3.G.11.
+       Above threshold: side-by-side flex. Below: stacked column.
+       Older browsers without container-query support degrade to the stacked layout (still functions, just not container-responsive).
+    */
+    [data-pattern="sidebar-container"] {
+      container-type: inline-size;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-card);
+    }
+    [data-pattern="sidebar-container"][data-width="narrow"]   { --prim-sidebar-width: 200px; }
+    [data-pattern="sidebar-container"][data-width="standard"] { --prim-sidebar-width: 280px; }
+    [data-pattern="sidebar-container"][data-width="wide"]     { --prim-sidebar-width: 360px; }
+
+    /* Threshold standard (60em) — most common */
+    @container (inline-size >= 60em) {
+      [data-pattern="sidebar-container"][data-threshold="standard"] {
+        flex-direction: row;
+      }
+      [data-pattern="sidebar-container"][data-threshold="standard"][data-side="right"] {
+        flex-direction: row-reverse;
+      }
+    }
+    /* Threshold narrow (40em) */
+    @container (inline-size >= 40em) {
+      [data-pattern="sidebar-container"][data-threshold="narrow"] {
+        flex-direction: row;
+      }
+      [data-pattern="sidebar-container"][data-threshold="narrow"][data-side="right"] {
+        flex-direction: row-reverse;
+      }
+    }
+    /* Threshold wide (80em) */
+    @container (inline-size >= 80em) {
+      [data-pattern="sidebar-container"][data-threshold="wide"] {
+        flex-direction: row;
+      }
+      [data-pattern="sidebar-container"][data-threshold="wide"][data-side="right"] {
+        flex-direction: row-reverse;
+      }
+    }
+
+    [data-pattern="sidebar-aside"] {
+      flex-shrink: 0;
+      inline-size: var(--prim-sidebar-width, 280px);
+    }
+    /* When stacked (container below threshold), the aside should take full width */
+    @container (inline-size < 60em) {
+      [data-pattern="sidebar-container"][data-threshold="standard"] [data-pattern="sidebar-aside"] { inline-size: 100%; }
+    }
+    @container (inline-size < 40em) {
+      [data-pattern="sidebar-container"][data-threshold="narrow"] [data-pattern="sidebar-aside"] { inline-size: 100%; }
+    }
+    @container (inline-size < 80em) {
+      [data-pattern="sidebar-container"][data-threshold="wide"] [data-pattern="sidebar-aside"] { inline-size: 100%; }
+    }
+
+    [data-pattern="sidebar-main"] {
+      flex: 1;
+      min-inline-size: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <section>
+    <h2>data-side="left" data-threshold="standard" — drag the resizer to test</h2>
+    <p class="resize-hint">↘ specimen frame has resize: horizontal. Drag the bottom-right corner to narrow it below 60em — the layout stacks.</p>
+    <div class="specimen-frame" style="width: 60rem;">
+      <div data-pattern="sidebar-container" data-side="left" data-width="standard" data-threshold="standard">
+        <aside data-pattern="sidebar-aside" aria-label="Documentation">
+          <div class="sidebar-content">
+            <h3>Doc tree</h3>
+            <ul>
+              <li><a href="#">Getting started</a></li>
+              <li><a href="#">Concepts</a></li>
+              <li><a href="#">API reference</a></li>
+              <li><a href="#">Troubleshooting</a></li>
+            </ul>
+          </div>
+        </aside>
+        <main data-pattern="sidebar-main">
+          <div class="main-content">
+            <h3>Main content</h3>
+            <p>This area takes the remaining inline size beside the sidebar. When the container drops below the 60em threshold (drag the resize handle), the layout switches to stacked.</p>
+            <p>The switch happens via @container (inline-size >= 60em), not @media — so this primitive is portable into any wrapper layout without re-tuning breakpoints to viewport width.</p>
+          </div>
+        </main>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>data-side="right" — aside on the trailing edge</h2>
+    <div class="specimen-frame" style="width: 60rem;">
+      <div data-pattern="sidebar-container" data-side="right" data-width="narrow" data-threshold="standard">
+        <aside data-pattern="sidebar-aside" aria-label="On this page">
+          <div class="sidebar-content">
+            <h3>On this page</h3>
+            <ul>
+              <li><a href="#">Introduction</a></li>
+              <li><a href="#">Anatomy</a></li>
+              <li><a href="#">Composition</a></li>
+            </ul>
+          </div>
+        </aside>
+        <main data-pattern="sidebar-main">
+          <div class="main-content">
+            <h3>Article body</h3>
+            <p>This pattern flips via data-side="right" — the aside appears on the inline-end side (right in LTR; left in RTL).</p>
+          </div>
+        </main>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

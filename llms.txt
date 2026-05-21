@@ -1,6 +1,6 @@
 # Quoin
 
-> A semantic vocabulary for the patterns every website needs. Quoin is a CSS-replacement design language: write `<section data-pattern="hero-section" data-variant="type-only">` instead of a 12-class utility soup. 18 patterns, declared anatomy, ARIA contracts and microstates baked in, aesthetic swappable.
+> A semantic vocabulary for the patterns every website needs. Quoin is a CSS-replacement design language: write `<section data-pattern="hero-section" data-variant="type-only">` instead of a 12-class utility soup. 15 patterns + 4 content primitives + 6 layout primitives, declared anatomy, ARIA contracts and microstates baked in, aesthetic swappable.
 
 Quoin treats markup like type. Each pattern is a slot-and-variant contract — `hero-section` has 6 mandatory slots (`eyebrow / headline / subhead / actions / meta` + the section itself) plus 5 conditional slots gated by `data-variant`. The visual identity lives in a separable aesthetic layer; the same markup renders correctly across vellum, terminal, broadsheet, arcade, or any 2026-era aesthetic pack.
 
@@ -14,14 +14,25 @@ For AI coding tools generating Quoin markup at scale: this file is the index. Re
 - **Composition.** Patterns that need buttons consume `class="action-button"` from `@quoin/pattern-button-system` directly; they do not re-inline button CSS under a different class name. The composition reality is enforced by the gate (v3.G.17).
 - **Tokens.** Every CSS value comes from `@quoin/tokens-baseline` (175 canonical tokens across 11 DTCG 2025.10 types). Patterns do not declare raw color, spacing, type-size, or motion values — they reference token names. The token namespace is frozen at v1.0.
 
-## Pattern catalog (15 patterns + 4 primitives)
+## Pattern catalog (15 patterns + 4 content primitives + 6 layout primitives)
 
-### Foundation primitives (4)
+### Content primitives (4)
 
 - [prim-label](https://github.com/harrowhaus/quoin/blob/main/02_reference-packs/primitives/label/README.md): label primitive consolidating badge / status-pill / tag / chip / dismissible contracts. `class="label" data-role="badge | status | tag | chip | dismissible" data-tone="neutral | accent | success | warning | critical | info | new | beta"`. Phase 22 Cons. 5.
 - [prim-sequence](https://github.com/harrowhaus/quoin/blob/main/02_reference-packs/primitives/sequence/README.md): sequence primitive (breadcrumb / ordered-list / unordered-list / sidebar-vertical). `class="sequence" data-role="..." data-separator="chevron | slash | dot | pipe | number | none"`. Phase 22 Cons. 6.
 - [prim-decoration-overlay](https://github.com/harrowhaus/quoin/blob/main/02_reference-packs/primitives/decoration-overlay/README.md): positioned-absolute decorative layer (grain / texture / pattern / gradient). 5% LCP impact maximum (v3.G.14). Forward-looking for Boeing Watch + future aesthetic packs. Phase 22 Cons. 7.
 - [prim-searchable-list](https://github.com/harrowhaus/quoin/blob/main/02_reference-packs/primitives/searchable-list/README.md): combobox + listbox search-and-filter primitive. 3 variants (command-palette / autocomplete-results / filter-dropdown). Composes form-fields (required) + prim-label (optional). Phase 22 Cons. 8.
+
+### Layout primitives (6, Phase 22.6)
+
+Spatial-logic primitives that govern composition. Pure layout — no aesthetic concern. Future patterns compose these instead of redeclaring layout CSS. Aesthetic packs may override the underlying `--space-*` tokens but do not change layout primitive anatomy.
+
+- [prim-stack](https://raw.githack.com/harrowhaus/quoin/main/patterns/prim-stack/examples/index.html): vertical stack with consistent gap. `<div data-pattern="stack-container" data-gap="xs | sm | md | lg | xl" data-align="start | center | end | stretch">`. Universal foundation for vertical rhythm.
+- [prim-cluster](https://raw.githack.com/harrowhaus/quoin/main/patterns/prim-cluster/examples/index.html): horizontal wrapping group. `<div data-pattern="cluster-container" data-gap data-justify data-align data-wrap>`. For nav link rows, button groups, tag clouds, action bars, breadcrumbs.
+- [prim-center](https://raw.githack.com/harrowhaus/quoin/main/patterns/prim-center/examples/index.html): center content one or both axes with max-width. `<div data-pattern="center-container" data-axis="both | horizontal | vertical" data-max-width="narrow (45ch) | standard (66ch) | wide (80ch) | none">`. The canonical max-width prose column.
+- [prim-grid](https://raw.githack.com/harrowhaus/quoin/main/patterns/prim-grid/examples/index.html): auto-fit grid with min-width per cell. `<div data-pattern="grid-container" data-min-cell="narrow (200px) | standard (280px) | wide (360px) | custom" data-max-columns="2 | 3 | 4 | unlimited">`. Cells reflow without media queries.
+- [prim-sidebar](https://raw.githack.com/harrowhaus/quoin/main/patterns/prim-sidebar/examples/index.html): sidebar + main, container-query responsive (Baseline 2024). `<div data-pattern="sidebar-container" data-side="left | right" data-width data-threshold>` containing `<aside data-pattern="sidebar-aside">` + `<main data-pattern="sidebar-main">`. Above threshold: side-by-side. Below: stacked.
+- [prim-switcher](https://raw.githack.com/harrowhaus/quoin/main/patterns/prim-switcher/examples/index.html): row that flips to column below container threshold. `<div data-pattern="switcher-container" data-threshold="narrow (30em) | standard (40em) | wide (60em)" data-gap data-align>`. For two-column blocks that stack on narrow containers.
 
 ### Patterns (15)
 
@@ -97,7 +108,7 @@ If you (the AI tool) generate markup that violates these, the bootstrap-integrit
 
 ## Architectural locks (the v3.G.\* series)
 
-Six locks ship with Phase 22 Consolidation 3 — see [`PHASE_GATES.md`](PHASE_GATES.md) for the full text:
+Seven locks in force as of Phase 22 closure — see [`PHASE_GATES.md`](PHASE_GATES.md) for the full text:
 
 - v3.G.15 — `data-pattern` naming convention (programmatic)
 - v3.G.16 — `data-register` deprecation per consolidation (programmatic)
@@ -105,6 +116,7 @@ Six locks ship with Phase 22 Consolidation 3 — see [`PHASE_GATES.md`](PHASE_GA
 - v3.G.18 — anatomy documentation via structured-markdown tables (documented)
 - v3.G.19 — pack code lives once; examples demonstrate variants (documented)
 - v3.G.20 — variants in pattern packs; values in aesthetic packs (documented)
+- v3.G.21 — optionalPeerPacks convention for variant-conditional composition (documented + programmatic)
 
 ## Documentation depth
 

@@ -1,0 +1,22 @@
+{
+  "name": "@quoin/prim-stack",
+  "version": "1.0.0",
+  "description": "Layout primitive — vertical stack with consistent gap. Universal foundation for vertical content rhythm.",
+  "main": "quoin.pack.json",
+  "files": [
+    "quoin.pack.json",
+    "quoin.toml",
+    "primitives/",
+    "examples/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "primitive", "layout", "stack", "vertical"],
+  "license": "MIT",
+  "homepage": "https://harrow.haus/quoin/primitives/stack",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "patterns/prim-stack"
+  }
+}

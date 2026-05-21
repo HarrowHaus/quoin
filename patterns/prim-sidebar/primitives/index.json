@@ -1,0 +1,115 @@
+[
+  {
+    "name": "sidebar-container",
+    "category": "layout",
+    "gating": "mandatory",
+    "role": "Outer wrapper. Declares the container-query inline-size context AND owns the responsive layout switch via container query. Above the threshold: side-by-side flex. Below: stacked flex column.",
+    "attributes": {
+      "side": {
+        "values": ["left", "right"],
+        "default": "left",
+        "specific": true,
+        "note": "Which side the aside renders on. Uses CSS Logical Properties (inline-start / inline-end) so RTL languages flip naturally."
+      },
+      "width": {
+        "values": ["narrow", "standard", "wide"],
+        "default": "standard",
+        "specific": true,
+        "note": "Sidebar width: narrow=200px, standard=280px, wide=360px."
+      },
+      "threshold": {
+        "values": ["narrow", "standard", "wide"],
+        "default": "standard",
+        "specific": true,
+        "note": "Container-width threshold below which the layout stacks. narrow=40em, standard=60em, wide=80em."
+      }
+    },
+    "tokens": {
+      "containerType": "inline-size",
+      "sidebarWidthNarrow": "200px",
+      "sidebarWidthStandard": "280px",
+      "sidebarWidthWide": "360px",
+      "thresholdNarrow": "40em",
+      "thresholdStandard": "60em",
+      "thresholdWide": "80em",
+      "gap": "var(--space-section)"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<div data-pattern='sidebar-container' data-side='left' data-width='standard' data-threshold='standard'",
+        "     style='container-type: inline-size;'>",
+        "  <aside data-pattern='sidebar-aside'>...</aside>",
+        "  <main data-pattern='sidebar-main'>...</main>",
+        "</div>"
+      ],
+      "containerQueryContract": "sidebar-container MUST have container-type: inline-size declared (either via the pack's CSS or operator-applied inline). v3.G.11 container-query convention applies.",
+      "browserSupportBaseline": "CSS container queries are Baseline 2024 (Chrome 105+, Safari 16+, Firefox 110+). Older browsers degrade to the stacked layout (no side-by-side); the layout still functions, just not responsive at the container level.",
+      "ariaPatterns": {
+        "noLandmark": "sidebar-container itself carries no role. The sidebar-aside slot uses <aside> (which has implicit role='complementary'); the sidebar-main slot uses <main> (which has implicit role='main') or <article> depending on the page context."
+      },
+      "cssRecipe": "container-type: inline-size; display: flex; flex-direction: column; gap: var(--space-section); @container (inline-size >= threshold) { flex-direction: row; }"
+    }
+  },
+  {
+    "name": "sidebar-aside",
+    "category": "layout",
+    "gating": "mandatory",
+    "role": "The sidebar. Element is <aside> (implicit role='complementary'). Width set by the container's data-width. Always rendered first or last in DOM based on data-side (CSS controls visual side via order).",
+    "attributes": {},
+    "tokens": {
+      "inlineSize": "var(--prim-sidebar-width, 280px)",
+      "flexShrink": "0"
+    },
+    "structure": {
+      "element": "aside"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<aside data-pattern='sidebar-aside'>",
+        "  <!-- TOC / nav / settings menu / etc. -->",
+        "</aside>"
+      ],
+      "ariaPatterns": {
+        "complementaryImplicit": "<aside> has implicit role='complementary' — no role override needed. Operators may add aria-label='Documentation' or aria-labelledby for context."
+      },
+      "compositionExamples": [
+        "Stack inside aside: <prim-sidebar-aside><prim-stack>nav items</prim-stack></prim-sidebar-aside>",
+        "TOC inside aside: <prim-sidebar-aside><nav data-pattern='toc-container'>...</nav></prim-sidebar-aside>"
+      ]
+    }
+  },
+  {
+    "name": "sidebar-main",
+    "category": "layout",
+    "gating": "mandatory",
+    "role": "The main content area. Takes the remaining inline size beside the sidebar (or full width when stacked). Element is <main> for top-level pages or <div> when prim-sidebar is composed inside a larger landmark.",
+    "attributes": {},
+    "tokens": {
+      "flex": "1",
+      "minInlineSize": "0"
+    },
+    "structure": {
+      "element": "main-OR-div"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<main data-pattern='sidebar-main'>",
+        "  <!-- article body / form / dashboard content -->",
+        "</main>"
+      ],
+      "minInlineSizeZero": "min-inline-size: 0 is required for flex children to shrink below their content's intrinsic minimum (otherwise long unbreakable strings push the layout horizontally).",
+      "ariaPatterns": {
+        "mainLandmarkOnePerPage": "When using <main>, there must be exactly one per page. If prim-sidebar is composed inside a page that already has a <main>, switch sidebar-main's element to <div> or <article>."
+      }
+    }
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "name": "@quoin/prim-grid",
+  "version": "1.0.0",
+  "description": "Layout primitive — auto-fit grid with min-width per cell. Cells reflow without media queries.",
+  "main": "quoin.pack.json",
+  "files": ["quoin.pack.json", "quoin.toml", "primitives/", "examples/", "README.md", "LICENSE"],
+  "keywords": ["quoin", "primitive", "layout", "grid", "auto-fit", "responsive"],
+  "license": "MIT",
+  "homepage": "https://harrow.haus/quoin/primitives/grid",
+  "repository": { "type": "git", "url": "https://github.com/harrowhaus/quoin.git", "directory": "patterns/prim-grid" }
+}
