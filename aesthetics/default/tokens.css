@@ -1,0 +1,124 @@
+/**
+ * @quoin/aesthetic-default — token overrides
+ *
+ * Tasteful neutral aesthetic. Inter Variable + IBM Plex Mono. Standard
+ * easings. Single accent color (deep blue) against neutral grays. The
+ * comparison baseline against which opinionated aesthetics look
+ * distinctive.
+ *
+ * Apply by setting data-aesthetic="default" on <html> or <body>.
+ */
+
+[data-aesthetic="default"] {
+  /* ──────────── surfaces ──────────── */
+  --surface:          oklch(98% 0 0);
+  --surface-elevated: oklch(100% 0 0);
+  --surface-recessed: oklch(95% 0 0);
+  --surface-inverse:  oklch(18% 0 0);
+  --scrim:            oklch(18% 0 0 / 0.55);
+
+  /* ──────────── text ──────────── */
+  --text:             oklch(28% 0 0);
+  --text-emphasis:    oklch(15% 0 0);
+  --text-recede:      oklch(50% 0 0);
+  --text-disabled:    oklch(72% 0 0);
+  --text-on-accent:   oklch(100% 0 0);
+  --text-on-critical: oklch(100% 0 0);
+  --text-on-success:  oklch(100% 0 0);
+  --text-on-warning:  oklch(15% 0 0);
+  --text-on-info:     oklch(100% 0 0);
+  --highlight:        oklch(85% 0.16 90 / 0.30);
+
+  /* ──────────── borders ──────────── */
+  --border:          oklch(88% 0 0);
+  --border-emphasis: oklch(18% 0 0);
+  --border-recede:   oklch(93% 0 0);
+
+  /* ──────────── accent + status ──────────── */
+  --accent:        oklch(55% 0.18 245);    /* deep blue */
+  --accent-recede: oklch(92% 0.04 245);
+  --accent-hover:  oklch(48% 0.20 245);
+  --accent-active: oklch(40% 0.18 245);
+  --critical:      oklch(58% 0.22 28);
+  --critical-soft: oklch(94% 0.04 28);
+  --success:       oklch(58% 0.18 155);
+  --success-soft:  oklch(94% 0.05 155);
+  --warning:       oklch(75% 0.18 80);
+  --warning-soft:  oklch(94% 0.05 80);
+  --info:          oklch(60% 0.14 235);
+  --info-soft:     oklch(94% 0.04 235);
+
+  /* ──────────── focus + links + shadows ──────────── */
+  --focus-ring:        oklch(55% 0.18 245);
+  --focus-ring-width:  2px;
+  --focus-ring-offset: 2px;
+  --link:              oklch(55% 0.18 245);
+  --link-visited:      oklch(48% 0.14 290);
+  --link-hover:        oklch(48% 0.20 245);
+  --shadow-tint:       oklch(0% 0 0 / 0.08);
+
+  /* ──────────── typography — contemporary system ──────────── */
+  --font-sans:    'Inter Variable', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Inter Variable', 'Inter', system-ui, sans-serif;
+  --font-serif:   ui-serif, Georgia, 'Times New Roman', serif;
+  --font-mono:    'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* ──────────── tracking ──────────── */
+  --tracking-tight:  -0.02em;
+  --tracking-normal: 0em;
+  --tracking-wide:   0.05em;
+
+  /* ──────────── radius — modern soft ──────────── */
+  --radius-none:  0;
+  --radius-sm:    4px;
+  --radius-md:    6px;
+  --radius-lg:    8px;
+  --radius-xl:    16px;
+  --radius-pill:  9999px;
+  --radius-card:  8px;
+
+  /* ──────────── motion — baseline standard ──────────── */
+  --motion-instant: 50ms;
+  --motion-fast:    100ms;
+  --motion-normal:  200ms;
+  --motion-slow:    400ms;
+  --motion-slower:  800ms;
+
+  --ease-standard:   cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-decelerate: cubic-bezier(0, 0, 0.2, 1);
+  --ease-accelerate: cubic-bezier(0.4, 0, 1, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --ease-spring:     cubic-bezier(0.5, 1.5, 0.5, 1);
+
+  /* ──────────── shadows ──────────── */
+  --shadow-xs:    0 1px 2px var(--shadow-tint);
+  --shadow-sm:    0 1px 3px var(--shadow-tint);
+  --shadow-md:    0 4px 6px -1px var(--shadow-tint), 0 2px 4px -1px var(--shadow-tint);
+  --shadow-lg:    0 10px 15px -3px var(--shadow-tint), 0 4px 6px -2px var(--shadow-tint);
+  --shadow-xl:    0 20px 25px -5px var(--shadow-tint), 0 8px 10px -6px var(--shadow-tint);
+  --shadow-2xl:   0 25px 50px -12px var(--shadow-tint);
+  --shadow-inner: inset 0 2px 4px var(--shadow-tint);
+}
+
+/* ──────────── dark mode ──────────── */
+@media (prefers-color-scheme: dark) {
+  [data-aesthetic="default"] {
+    --surface:          oklch(11% 0 0);
+    --surface-elevated: oklch(16% 0 0);
+    --surface-recessed: oklch(8% 0 0);
+    --surface-inverse:  oklch(96% 0 0);
+    --text:             oklch(88% 0 0);
+    --text-emphasis:    oklch(98% 0 0);
+    --text-recede:      oklch(62% 0 0);
+    --text-on-accent:   oklch(98% 0 0);
+    --border:           oklch(22% 0 0);
+    --border-emphasis:  oklch(88% 0 0);
+    --border-recede:    oklch(16% 0 0);
+    --accent:           oklch(70% 0.18 245);
+    --accent-recede:    oklch(22% 0.06 245);
+    --accent-hover:     oklch(76% 0.20 245);
+    --link:             oklch(70% 0.18 245);
+    --link-hover:       oklch(76% 0.20 245);
+    --shadow-tint:      oklch(0% 0 0 / 0.4);
+  }
+}

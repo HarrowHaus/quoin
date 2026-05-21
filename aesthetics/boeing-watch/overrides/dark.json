@@ -1,0 +1,21 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "@quoin/aesthetic-boeing-watch — dark mode token overrides. Inverted: deep navy panel ground with cream-on-navy text + amber accent for chrome.",
+
+  "surface":          { "$type": "color", "$value": "oklch(14% 0.04 245)" },
+  "surface-elevated": { "$type": "color", "$value": "oklch(20% 0.05 245)" },
+  "surface-recessed": { "$type": "color", "$value": "oklch(10% 0.04 245)" },
+
+  "text":             { "$type": "color", "$value": "oklch(88% 0.018 85)" },
+  "text-emphasis":    { "$type": "color", "$value": "oklch(98% 0.010 85)" },
+  "text-recede":      { "$type": "color", "$value": "oklch(60% 0.022 245)" },
+  "text-on-accent":   { "$type": "color", "$value": "oklch(14% 0.05 245)" },
+
+  "border":           { "$type": "color", "$value": "oklch(28% 0.05 245)" },
+  "border-emphasis":  { "$type": "color", "$value": "oklch(86% 0.018 85)" },
+
+  "accent":           { "$type": "color", "$value": "oklch(75% 0.16 78)" },
+  "accent-recede":    { "$type": "color", "$value": "oklch(28% 0.06 78)" },
+
+  "shadow-tint":      { "$type": "color", "$value": "oklch(0% 0 0 / 0.5)" }
+}

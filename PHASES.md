@@ -2,7 +2,7 @@
 
 This file is the single source of truth for phase status across the Quoin project. It supersedes scattered references in CONSOLIDATION reports, DECISIONS_UPDATES, and session-closing reports. Every future session that opens, closes, or modifies a phase updates this file in its closing batch.
 
-**Last updated:** Session 4 closing — Phase 22 complete (2026-05-20)
+**Last updated:** Session 5 Track A closing — Phase 22.5.A complete (2026-05-21)
 
 ---
 
@@ -150,6 +150,20 @@ This file is the single source of truth for phase status across the Quoin projec
 **Closure ref:** commit `5cf8b2b` (2026-05-20). No formal phase number was assigned at the time; retroactively numbered 22.5 in this ledger because it ships between Phase 22's mid-execution (after Cons. 3) and Phase 23.
 **Operator action item still outstanding:** 19 screenshots per `docs/screenshots/README.md` checklist.
 
+### Phase 22.5.A — Aesthetic Packs v1.0 + Aesthetic-Swap Demo
+
+**Status:** ✅ Complete (Session 5 Track A — 2026-05-21)
+**Goal:** Ship the first three production aesthetic packs (Boeing Watch · Harrow Haus · Default) at root `aesthetics/`, plus a live `demos/aesthetic-swap/` specimen that crossfades between them via the View Transitions API. First production proof of the v3.G.20 architecture (aesthetic packs declare token values; never anatomy).
+**Output:**
+- `aesthetics/boeing-watch/` — precision-instrumental aerospace; IBM Plex Sans/Condensed/Mono; navy + cream + signal amber; tight density; mechanical easings; radius ≤2px. Full pack: `quoin.pack.json`, `tokens.css`, `overrides/{light,dark}.json`, `README.md`, `LICENSE`, `package.json`, `specimen/index.html`.
+- `aesthetics/harrow-haus/` — operator's house; post-industrial editorial minimalism; paper/ink/signal-red palette; Junicode 2 + Source Serif 4 + Recursive + IBM Plex Mono; 1.5× baseline outer margins; civil motion. Full pack.
+- `aesthetics/default/` — tasteful neutral baseline; Inter Variable + IBM Plex Mono; neutral grays + deep-blue accent; standard easings and durations. The comparison register against which the opinionated packs read as distinctive. Full pack.
+- `demos/aesthetic-swap/index.html` — self-contained 749-line specimen. 4 patterns composed (nav-marketing + hero-gradient-mesh + feature-grid-three-up + footer-compact). Three buttons swap aesthetic via `document.startViewTransition()` with 400ms crossfade. Respects `prefers-reduced-motion` (collapses animation to 1ms). Keyboard navigable (`role="radiogroup"`, Arrow keys move focus + activate). Per-aesthetic hero gradient-mesh backgrounds.
+- Three per-aesthetic specimen pages (`aesthetics/{boeing-watch,harrow-haus,default}/specimen/index.html`) — same 4 patterns under a locked aesthetic, each consuming the pack's own `tokens.css` directly.
+**Closure ref:** _this commit_ (2026-05-21).
+**What unblocks:** the aesthetic-pack architecture is now production-proven. Future aesthetic packs follow this template (`overrides/{light,dark}.json` + `tokens.css` + `specimen/`). The Aesthetic Packs (beyond v1.0) ongoing workstream is now live with three reference packs to model against. Track E (catalog discoverability sweep — `/llms.txt`, `/llms-full.txt`, `/registry.json`, `README.md`) is unblocked.
+**Scope boundary:** This phase owns `aesthetics/{boeing-watch,harrow-haus,default}/`, `demos/aesthetic-swap/`, and this PHASES.md entry only. The discoverability surface (`/llms.txt`, `/llms-full.txt`, `/registry.json`, `README.md`) is owned by Track E and not touched in this phase.
+
 ### Phase 23 — Compiler IR Architecture
 
 **Status:** 🟡 Queued
@@ -194,9 +208,44 @@ This file is the single source of truth for phase status across the Quoin projec
 
 ### Aesthetic Packs (beyond v1.0)
 
-**Status:** 🔄 Ongoing
-**Goal:** Ship aesthetic packs that target the variant axes declared by pattern packs (per v3.G.20). First such pack queued: `@quoin/aesthetic-manuscript-future` covering Junicode 2 + Ranade + Monaspace per the Cons. 2 Option D architecture.
-**Closure dependency:** Phase 22 closure (variants in pattern packs need to be stable before aesthetic packs target them).
+**Status:** 🔄 Ongoing (v1.0 shipped Phase 22.5.A — three packs)
+**Goal:** Ship aesthetic packs that target the variant axes declared by pattern packs (per v3.G.20).
+**v1.0 packs (shipped Phase 22.5.A, 2026-05-21):**
+- `aesthetics/boeing-watch/` — precision-instrumental aerospace
+- `aesthetics/harrow-haus/` — operator's house, post-industrial editorial
+- `aesthetics/default/` — tasteful neutral baseline
+**Next candidates (queued):** Manuscript Future (Junicode 2 + Ranade + Monaspace per Cons. 2 Option D), terminal-monochrome, expressive-motion-heavy.
+**Closure dependency:** none — three reference packs now exist; future packs follow the v1.0 template (`tokens.css` + `overrides/{light,dark}.json` + `specimen/`).
+
+---
+
+## Session 5 outcome (2026-05-21) — Phase 22.5.A (Aesthetic Packs v1.0)
+
+Brief: Session 5 ran in parallel tracks. **Track A** (this entry) shipped the first three production aesthetic packs and a live aesthetic-swap demo proving the v3.G.20 boundary in production. Track E (catalog discoverability sweep for aesthetics — `/llms.txt`, `/llms-full.txt`, `/registry.json`, `README.md`) runs separately and is now unblocked.
+
+**Shipped — Track A:**
+- **Three aesthetic packs** at root `aesthetics/`. Each pack ships `quoin.pack.json` (manifest declaring `type: "aesthetic"`, `peerPacks: ["tokens-baseline"]`, light/dark overrides + tokens.css exports), `tokens.css` (the actual `[data-aesthetic="X"]`-scoped overrides), `overrides/{light,dark}.json` (DTCG 2025.10-format compiler-consumable overrides), `README.md` (philosophy + variant-token-slot table + loading instructions), `LICENSE`, `package.json`, and `specimen/index.html` (4-pattern static specimen).
+  - **Boeing Watch.** Precision-instrumental aerospace. IBM Plex Sans / Plex Sans Condensed / Plex Mono. Navy (`oklch(22% 0.04 245)`) + cream (`oklch(94% 0.014 85)`) + signal amber accent (dark mode). Tight density, mechanical easings (`cubic-bezier(0.32, 0.08, 0.12, 1)`), radius ≤2px, wide tracking on labels.
+  - **Harrow Haus.** Operator's house — post-industrial editorial minimalism. Paper `oklch(94.5% 0.015 80)` (#f4efe6) / ink `oklch(15% 0.008 60)` (#1d1a16) / signal red `oklch(38% 0.13 25)` (#7a2f22). Junicode 2 display + Source Serif 4 prose + Recursive sans + IBM Plex Mono. 1.5× baseline outer margins (`--space-panel: 3rem; --space-section: 6rem`). Civil motion — no spring overshoot.
+  - **Default.** Tasteful neutral baseline. Inter Variable + IBM Plex Mono. Neutral grays + deep-blue accent `oklch(55% 0.18 245)`. Standard easings, baseline durations. The comparison register.
+- **Live aesthetic-swap demo** at `demos/aesthetic-swap/index.html`. 749-line self-contained HTML page composing 4 patterns: nav-marketing + hero-section gradient-mesh + feature-grid three-up + footer-mega compact. Three buttons in a sticky control surface (`role="radiogroup"`) swap the `data-aesthetic` attribute via `document.startViewTransition()` for a 400ms crossfade. Per-aesthetic hero gradient-mesh backgrounds (different OKLCH coordinates per aesthetic). Respects `prefers-reduced-motion` (collapses animation to 1ms). Keyboard navigable (Arrow keys move focus + click).
+- **Per-aesthetic specimen pages** at `aesthetics/{boeing-watch,harrow-haus,default}/specimen/index.html`. Same 4 patterns under a locked aesthetic; each loads the pack's own `tokens.css` directly via `<link rel="stylesheet" href="../tokens.css">`. Lighter than the swap demo (~350 lines each) since they don't carry the three-aesthetic crossfade machinery.
+- PHASES.md updated (this entry + Phase 22.5.A in the phase index + dependency graph update + Aesthetic Packs workstream update).
+
+**Architectural proof points:**
+- **v3.G.20 in production.** Same pattern markup ships under all three aesthetics; only `data-aesthetic` changes. Anatomy lives in pattern packs; values live in aesthetic packs. The aesthetic boundary holds.
+- **v3.G.21 ready.** Each pack's manifest models the `peerPacks: ["tokens-baseline"]` + (forthcoming) `optionalPeerPacks` shape from Session 4 Prelude.
+- **View Transitions API as Baseline 2026.** First Quoin-shipped use; degrades gracefully on browsers without `document.startViewTransition`.
+- **Cons. 2 Option D in action.** `tokens-baseline` ships system-stack fallbacks; aesthetic packs override with specific brand fonts (Junicode 2, IBM Plex, Inter Variable, Recursive, Source Serif 4) loaded from OFL sources (Google Fonts + psb1558 CDN for Junicode 2).
+
+**Out of scope for Track A (handed off to Track E):**
+- `/llms.txt`, `/llms-full.txt`, `/registry.json`, `README.md` discoverability surface updates reflecting the three new packs.
+- The Aesthetic Packs Catalog Extension skill template (analog of `skills/quoin-pattern-extension-author.md`).
+
+**Deferred:**
+- Block B from Session 2 (8 editorial patterns) — still queued.
+- Block C from Session 2 (3 page templates) — still queued.
+- Phase 23 (Compiler IR) — unblocked since Session 4; not yet started.
 
 ---
 
@@ -294,11 +343,13 @@ Phase 0 (spec)
         → Phase Themes / Aesthetic Packs v1.0
           → Phase 22 (Unification — 9 consolidations)
             → Phase 22.5 (Discoverability — inserted, ✅)
+              → Phase 22.5.A (Aesthetic Packs v1.0 + swap demo — ✅)
+                → Aesthetic Packs beyond v1.0 [UNBLOCKED, ongoing]
+                → Track E (discoverability sweep for aesthetics) [UNBLOCKED]
               → Phase 23 (Compiler IR) [BLOCKED on Phase 22 closure]
                 → Phase 24 (Build Pipeline) [BLOCKED on Phase 23]
                 → Phase 25 (MCP + Distribution) [BLOCKED on Phase 23]
               → Templates layer [BLOCKED on Cons. 4 nav unification]
-              → Aesthetic Packs beyond v1.0 [BLOCKED on Phase 22 closure]
             → Phase 5e (Launch) [BLOCKED on Phase 23 closure]
             → Phase 26 (Standards) [DEFERRED]
             → Catalog Extension [UNBLOCKED, ongoing]

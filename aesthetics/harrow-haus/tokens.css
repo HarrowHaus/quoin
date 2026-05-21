@@ -1,0 +1,141 @@
+/**
+ * @quoin/aesthetic-harrow-haus — token overrides
+ *
+ * Operator's house aesthetic. Post-industrial minimalism with editorial
+ * roots. Paper #f4efe6 ground, ink #1d1a16 figure, signal red #7a2f22
+ * held in reserve. Junicode 2 + Source Serif 4 + IBM Plex Mono +
+ * Recursive typography stack.
+ *
+ * Apply by setting data-aesthetic="harrow-haus" on <html> or <body>.
+ */
+
+[data-aesthetic="harrow-haus"] {
+  /* ──────────── surfaces — paper palette ──────────── */
+  --surface:          oklch(94.5% 0.015 80);  /* #f4efe6 paper */
+  --surface-elevated: oklch(97% 0.010 80);    /* lifted paper */
+  --surface-recessed: oklch(90% 0.020 80);    /* recessed paper */
+  --surface-inverse:  oklch(15% 0.008 60);    /* ink inverse */
+  --scrim:            oklch(15% 0.008 60 / 0.6);
+
+  /* ──────────── text — ink palette ──────────── */
+  --text:             oklch(15% 0.008 60);    /* #1d1a16 ink */
+  --text-emphasis:    oklch(10% 0.006 60);    /* maximum ink */
+  --text-recede:      oklch(40% 0.012 60);    /* mid ink */
+  --text-disabled:    oklch(65% 0.015 70);
+  --text-on-accent:   oklch(94.5% 0.015 80);  /* paper on signal-red */
+  --text-on-critical: oklch(94.5% 0.015 80);
+  --text-on-success:  oklch(15% 0.008 60);
+  --text-on-warning:  oklch(15% 0.008 60);
+  --text-on-info:     oklch(94.5% 0.015 80);
+  --highlight:        oklch(60% 0.18 28 / 0.20);  /* signal red wash */
+
+  /* ──────────── borders ──────────── */
+  --border:          oklch(80% 0.018 70);
+  --border-emphasis: oklch(15% 0.008 60);
+  --border-recede:   oklch(88% 0.012 75);
+
+  /* ──────────── accent + status — signal red as primary chrome ──────────── */
+  --accent:        oklch(38% 0.13 25);        /* #7a2f22 signal red */
+  --accent-recede: oklch(88% 0.04 25);
+  --accent-hover:  oklch(44% 0.14 25);
+  --accent-active: oklch(32% 0.12 25);
+  --critical:      oklch(38% 0.13 25);        /* signal-red doubles as critical */
+  --critical-soft: oklch(92% 0.04 25);
+  --success:       oklch(48% 0.10 145);       /* muted forest green — restrained */
+  --success-soft:  oklch(92% 0.03 145);
+  --warning:       oklch(68% 0.12 70);        /* dimmed amber */
+  --warning-soft:  oklch(94% 0.03 70);
+  --info:          oklch(45% 0.08 245);
+  --info-soft:     oklch(92% 0.02 245);
+
+  /* ──────────── focus + links + shadows ──────────── */
+  --focus-ring:        oklch(38% 0.13 25);     /* signal-red focus — restrained but visible */
+  --focus-ring-width:  2px;
+  --focus-ring-offset: 2px;
+  --link:              oklch(15% 0.008 60);
+  --link-visited:      oklch(32% 0.04 320);
+  --link-hover:        oklch(38% 0.13 25);
+  --shadow-tint:       oklch(15% 0.008 60 / 0.06);
+
+  /* ──────────── spacing — generous outer margins ──────────── */
+  /* Van de Graaf canon proportions: 1.5x baseline outer; baseline inner */
+  --space-panel:   3rem;   /* 48px — 1.5x baseline */
+  --space-section: 6rem;   /* 96px — 1.5x baseline */
+
+  /* ──────────── typography — Harrow Haus house stack ──────────── */
+  --font-display: 'Junicode 2', 'Junicode', 'Source Serif 4', ui-serif, Georgia, serif;
+  --font-serif:   'Source Serif 4', 'Source Serif Pro', ui-serif, Georgia, serif;
+  --font-sans:    'Recursive', 'Inter Variable', 'Inter', system-ui, sans-serif;
+  --font-mono:    'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* ──────────── tracking — editorial discipline ──────────── */
+  --tracking-tight:  -0.015em;
+  --tracking-normal: 0em;
+  --tracking-wide:   0.06em;
+
+  /* ──────────── leading — generous for prose ──────────── */
+  --leading-tight:   1.18;
+  --leading-normal:  1.45;
+  --leading-prose:   1.65;
+  --leading-loose:   2.0;
+  --leading-display: 1.05;
+
+  /* ──────────── radius — editorial squared ──────────── */
+  --radius-none:  0;
+  --radius-sm:    1px;
+  --radius-md:    2px;
+  --radius-lg:    2px;
+  --radius-xl:    2px;
+  --radius-pill:  9999px;
+  --radius-card:  2px;
+  --radius-frame: 0;
+  --radius-media: 0;
+
+  /* ──────────── motion — restrained, considered ──────────── */
+  --motion-instant: 80ms;
+  --motion-fast:    160ms;
+  --motion-normal:  240ms;
+  --motion-slow:    360ms;
+  --motion-slower:  520ms;
+
+  /* ──────────── easing — no spring overshoot ──────────── */
+  --ease-standard:   cubic-bezier(0.3, 0.1, 0.3, 1);
+  --ease-decelerate: cubic-bezier(0, 0, 0.2, 1);
+  --ease-accelerate: cubic-bezier(0.4, 0, 1, 1);
+  --ease-emphasized: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring:     cubic-bezier(0.3, 0.1, 0.3, 1);  /* same as standard — no bounce */
+
+  /* ──────────── shadows — editorial flatness ──────────── */
+  --shadow-xs:    0 0 0 1px var(--border-recede);
+  --shadow-sm:    0 1px 0 var(--shadow-tint);
+  --shadow-md:    0 2px 4px var(--shadow-tint);
+  --shadow-lg:    0 4px 12px var(--shadow-tint);
+  --shadow-xl:    0 8px 24px var(--shadow-tint);
+  --shadow-2xl:   0 16px 40px var(--shadow-tint);
+  --shadow-inner: inset 0 1px 0 var(--shadow-tint);
+}
+
+/* ──────────── dark mode ──────────── */
+@media (prefers-color-scheme: dark) {
+  [data-aesthetic="harrow-haus"] {
+    --surface:          oklch(15% 0.008 60);   /* deep ink */
+    --surface-elevated: oklch(20% 0.012 60);
+    --surface-recessed: oklch(10% 0.006 60);
+    --surface-inverse:  oklch(94.5% 0.015 80);
+    --text:             oklch(88% 0.012 80);   /* paper-on-ink */
+    --text-emphasis:    oklch(96% 0.010 80);
+    --text-recede:      oklch(60% 0.012 70);
+    --text-on-accent:   oklch(94.5% 0.015 80);
+    --border:           oklch(28% 0.012 60);
+    --border-emphasis:  oklch(88% 0.012 80);
+    --border-recede:    oklch(20% 0.012 60);
+    --accent:           oklch(58% 0.18 28);    /* brighter signal-red on ink */
+    --accent-recede:    oklch(28% 0.08 28);
+    --accent-hover:     oklch(64% 0.20 28);
+    --accent-active:    oklch(52% 0.16 28);
+    --link:             oklch(88% 0.012 80);
+    --link-visited:     oklch(70% 0.04 320);
+    --link-hover:       oklch(64% 0.20 28);
+    --shadow-tint:      oklch(0% 0 0 / 0.6);
+  }
+}

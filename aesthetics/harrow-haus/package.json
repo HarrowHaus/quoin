@@ -1,0 +1,11 @@
+{
+  "name": "@quoin/aesthetic-harrow-haus",
+  "version": "1.0.0",
+  "description": "Harrow Haus house aesthetic. Paper + ink + signal red palette; Junicode 2 + Source Serif 4 + IBM Plex Mono + Recursive typography.",
+  "license": "MIT",
+  "main": "./quoin.pack.json",
+  "files": ["quoin.pack.json", "overrides/", "tokens.css", "specimen/", "README.md", "LICENSE"],
+  "keywords": ["quoin", "aesthetic", "harrow-haus", "editorial", "minimalist"],
+  "peerDependencies": { "@quoin/tokens-baseline": "^0.1.0" },
+  "repository": { "type": "git", "url": "https://github.com/harrowhaus/quoin.git", "directory": "aesthetics/harrow-haus" }
+}

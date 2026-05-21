@@ -1,0 +1,28 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/aesthetic-default",
+  "version": "1.0.0",
+  "type": "aesthetic",
+  "quoinVersion": "^0.1.0",
+  "description": "Tasteful neutral aesthetic. Neutral grays + single accent (deep blue). Inter Variable + IBM Plex Mono. Standard easings, no opinion. Intentionally low-character — serves as the comparison baseline against which more opinionated aesthetics (Boeing Watch, Harrow Haus) look distinctive.",
+  "exports": {
+    "lightModeOverrides": "./overrides/light.json",
+    "darkModeOverrides": "./overrides/dark.json",
+    "tokensCss": "./tokens.css"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/aesthetics/default",
+    "tags": ["aesthetic", "default", "neutral", "baseline", "inter"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0"
+  },
+  "overrides-variant-token-slots": [
+    "color (neutral gray + single accent blue)",
+    "font-sans (Inter Variable)",
+    "font-mono (IBM Plex Mono)",
+    "motion-* (standard easings, baseline durations)"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "@quoin/aesthetic-harrow-haus — light mode token overrides. Paper #f4efe6 / ink #1d1a16 / signal red #7a2f22. Junicode 2 + Source Serif 4 + IBM Plex Mono + Recursive.",
+
+  "surface":          { "$type": "color", "$value": "oklch(94.5% 0.015 80)" },
+  "surface-elevated": { "$type": "color", "$value": "oklch(97% 0.010 80)" },
+  "surface-recessed": { "$type": "color", "$value": "oklch(90% 0.020 80)" },
+
+  "text":             { "$type": "color", "$value": "oklch(15% 0.008 60)" },
+  "text-emphasis":    { "$type": "color", "$value": "oklch(10% 0.006 60)" },
+  "text-recede":      { "$type": "color", "$value": "oklch(40% 0.012 60)" },
+  "text-on-accent":   { "$type": "color", "$value": "oklch(94.5% 0.015 80)" },
+
+  "border":           { "$type": "color", "$value": "oklch(80% 0.018 70)" },
+  "border-emphasis":  { "$type": "color", "$value": "oklch(15% 0.008 60)" },
+
+  "accent":           { "$type": "color", "$value": "oklch(38% 0.13 25)" },
+  "accent-recede":    { "$type": "color", "$value": "oklch(88% 0.04 25)" },
+  "critical":         { "$type": "color", "$value": "oklch(38% 0.13 25)" },
+  "warning":          { "$type": "color", "$value": "oklch(68% 0.12 70)" },
+  "success":          { "$type": "color", "$value": "oklch(48% 0.10 145)" },
+  "info":             { "$type": "color", "$value": "oklch(45% 0.08 245)" },
+
+  "focus-ring":       { "$type": "color", "$value": "oklch(38% 0.13 25)" },
+
+  "font-display": { "$type": "fontFamily", "$value": "'Junicode 2', 'Junicode', 'Source Serif 4', ui-serif, Georgia, serif" },
+  "font-serif":   { "$type": "fontFamily", "$value": "'Source Serif 4', 'Source Serif Pro', ui-serif, Georgia, serif" },
+  "font-sans":    { "$type": "fontFamily", "$value": "'Recursive', 'Inter Variable', 'Inter', system-ui, sans-serif" },
+  "font-mono":    { "$type": "fontFamily", "$value": "'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace" },
+
+  "space-panel":   { "$type": "dimension", "$value": "3rem" },
+  "space-section": { "$type": "dimension", "$value": "6rem" },
+
+  "radius-md":     { "$type": "dimension", "$value": "2px" },
+  "radius-card":   { "$type": "dimension", "$value": "2px" },
+
+  "motion-fast":   { "$type": "duration", "$value": "160ms" },
+  "motion-normal": { "$type": "duration", "$value": "240ms" },
+  "motion-slow":   { "$type": "duration", "$value": "360ms" }
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "@quoin/aesthetic-harrow-haus — dark mode. Deep ink ground with paper-on-ink figure; brighter signal red.",
+
+  "surface":          { "$type": "color", "$value": "oklch(15% 0.008 60)" },
+  "surface-elevated": { "$type": "color", "$value": "oklch(20% 0.012 60)" },
+  "surface-recessed": { "$type": "color", "$value": "oklch(10% 0.006 60)" },
+
+  "text":             { "$type": "color", "$value": "oklch(88% 0.012 80)" },
+  "text-emphasis":    { "$type": "color", "$value": "oklch(96% 0.010 80)" },
+  "text-recede":      { "$type": "color", "$value": "oklch(60% 0.012 70)" },
+
+  "border":           { "$type": "color", "$value": "oklch(28% 0.012 60)" },
+  "border-emphasis":  { "$type": "color", "$value": "oklch(88% 0.012 80)" },
+
+  "accent":           { "$type": "color", "$value": "oklch(58% 0.18 28)" },
+  "accent-recede":    { "$type": "color", "$value": "oklch(28% 0.08 28)" }
+}

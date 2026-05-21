@@ -1,0 +1,31 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/aesthetic-boeing-watch",
+  "version": "1.0.0",
+  "type": "aesthetic",
+  "quoinVersion": "^0.1.0",
+  "description": "Precision-instrumental aesthetic. Aerospace cockpit feel: deep navy panel ground, signal amber accent reserved for live indicators, instrument cream surfaces, control gray for chrome. IBM Plex Sans + IBM Plex Mono typography stack. Tight density per instrument-panel discipline. D.65 Boeing Watch primitives target this pack.",
+  "exports": {
+    "lightModeOverrides": "./overrides/light.json",
+    "darkModeOverrides": "./overrides/dark.json",
+    "tokensCss": "./tokens.css"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/aesthetics/boeing-watch",
+    "tags": ["aesthetic", "boeing-watch", "instrument", "aerospace", "precision", "dashboard", "d65"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0"
+  },
+  "overrides-variant-token-slots": [
+    "color (surface / text / accent / borders / status family)",
+    "font-sans / font-display / font-mono (IBM Plex Sans + IBM Plex Mono)",
+    "motion-* (precision timing — slightly faster than baseline)",
+    "ease-* (cubic-bezier instrument-grade curves)",
+    "spacing-* (1x baseline scale — instrument density preserves baseline)",
+    "radius-* (1px-2px maximum — instrument hardware is squared)",
+    "hero gradient-mesh palette overrides for the four cool/warm/monochrome/accent palettes (instrument-cool / instrument-amber / instrument-mono / instrument-signal)"
+  ]
+}

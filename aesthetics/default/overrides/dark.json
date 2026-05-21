@@ -1,0 +1,17 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "@quoin/aesthetic-default — dark mode.",
+
+  "surface":          { "$type": "color", "$value": "oklch(11% 0 0)" },
+  "surface-elevated": { "$type": "color", "$value": "oklch(16% 0 0)" },
+  "surface-recessed": { "$type": "color", "$value": "oklch(8% 0 0)" },
+
+  "text":             { "$type": "color", "$value": "oklch(88% 0 0)" },
+  "text-emphasis":    { "$type": "color", "$value": "oklch(98% 0 0)" },
+  "text-recede":      { "$type": "color", "$value": "oklch(62% 0 0)" },
+
+  "border":           { "$type": "color", "$value": "oklch(22% 0 0)" },
+  "border-emphasis":  { "$type": "color", "$value": "oklch(88% 0 0)" },
+
+  "accent":           { "$type": "color", "$value": "oklch(70% 0.18 245)" }
+}

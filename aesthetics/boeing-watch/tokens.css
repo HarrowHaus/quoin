@@ -1,0 +1,133 @@
+/**
+ * @quoin/aesthetic-boeing-watch — token overrides
+ *
+ * Precision-instrumental aesthetic. Aerospace cockpit feel: deep navy
+ * panel ground, signal amber accent reserved for live indicators,
+ * instrument cream surfaces, control gray for chrome.
+ *
+ * Apply by setting data-aesthetic="boeing-watch" on <html> or <body>.
+ * Load order: tokens-baseline/tokens.css first, then this file.
+ */
+
+[data-aesthetic="boeing-watch"] {
+  /* ──────────── surfaces ──────────── */
+  --surface:          oklch(94% 0.014 85);   /* instrument cream */
+  --surface-elevated: oklch(96.5% 0.010 85); /* lifted cream */
+  --surface-recessed: oklch(90% 0.018 85);   /* recessed cream */
+  --surface-inverse:  oklch(20% 0.04 245);   /* navy panel inverse */
+  --scrim:            oklch(20% 0.04 245 / 0.62);
+
+  /* ──────────── text ──────────── */
+  --text:             oklch(22% 0.04 245);   /* deep navy ink */
+  --text-emphasis:    oklch(14% 0.05 245);   /* maximum navy */
+  --text-recede:      oklch(48% 0.022 245);  /* control gray */
+  --text-disabled:    oklch(70% 0.012 245);
+  --text-on-accent:   oklch(14% 0.05 245);   /* navy on amber for AA */
+  --text-on-critical: oklch(98% 0.005 85);
+  --text-on-success:  oklch(98% 0.005 85);
+  --text-on-warning:  oklch(14% 0.05 245);
+  --text-on-info:     oklch(98% 0.005 85);
+  --highlight:        oklch(75% 0.16 78 / 0.22); /* amber wash */
+
+  /* ──────────── borders ──────────── */
+  --border:          oklch(78% 0.018 245);
+  --border-emphasis: oklch(22% 0.04 245);
+  --border-recede:   oklch(86% 0.012 85);
+
+  /* ──────────── accent + status ──────────── */
+  --accent:        oklch(22% 0.04 245);      /* deep navy — primary chrome */
+  --accent-recede: oklch(86% 0.018 245);
+  --accent-hover:  oklch(28% 0.05 245);
+  --accent-active: oklch(14% 0.05 245);
+  --critical:      oklch(58% 0.21 28);       /* signal red */
+  --critical-soft: oklch(94% 0.04 28);
+  --success:       oklch(62% 0.16 155);      /* status green */
+  --success-soft:  oklch(93% 0.04 155);
+  --warning:       oklch(75% 0.16 78);       /* signal amber */
+  --warning-soft:  oklch(95% 0.05 78);
+  --info:          oklch(60% 0.14 235);
+  --info-soft:     oklch(93% 0.04 235);
+
+  /* ──────────── focus + links + shadows ──────────── */
+  --focus-ring:        oklch(75% 0.16 78);   /* amber focus ring — aerospace convention */
+  --focus-ring-width:  2px;
+  --focus-ring-offset: 1px;
+  --link:              oklch(22% 0.04 245);
+  --link-visited:      oklch(40% 0.04 285);
+  --link-hover:        oklch(40% 0.10 78);
+  --shadow-tint:       oklch(20% 0.04 245 / 0.12);
+
+  /* ──────────── typography — IBM Plex stack ──────────── */
+  --font-sans:    'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'IBM Plex Sans Condensed', 'IBM Plex Sans', system-ui, sans-serif;
+  --font-serif:   'IBM Plex Serif', ui-serif, Georgia, serif;
+  --font-mono:    'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* ──────────── tracking — instrument density ──────────── */
+  --tracking-tight:  -0.005em;
+  --tracking-normal: 0em;
+  --tracking-wide:   0.08em;       /* labels uppercase, wider */
+
+  /* ──────────── radius — instrument squared ──────────── */
+  --radius-none:  0;
+  --radius-sm:    1px;
+  --radius-md:    2px;
+  --radius-lg:    2px;
+  --radius-xl:    3px;
+  --radius-pill:  9999px;
+  --radius-card:  2px;
+  --radius-frame: 1px;
+  --radius-media: 0;
+
+  /* ──────────── motion — precision timing ──────────── */
+  --motion-instant: 60ms;
+  --motion-fast:    120ms;
+  --motion-normal:  180ms;
+  --motion-slow:    320ms;
+  --motion-slower:  640ms;
+
+  /* ──────────── easing — instrument curves ──────────── */
+  --ease-standard:   cubic-bezier(0.32, 0.08, 0.12, 1);       /* deliberate */
+  --ease-decelerate: cubic-bezier(0, 0, 0.18, 1);
+  --ease-accelerate: cubic-bezier(0.5, 0, 1, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --ease-spring:     cubic-bezier(0.32, 0.96, 0.32, 1);       /* no overshoot — mechanical */
+
+  /* ──────────── composite — instrument-grade shadows ──────────── */
+  --shadow-xs:    0 0 0 1px oklch(20% 0.04 245 / 0.08);
+  --shadow-sm:    0 1px 0 var(--shadow-tint);
+  --shadow-md:    0 1px 2px var(--shadow-tint), 0 0 0 1px oklch(20% 0.04 245 / 0.06);
+  --shadow-lg:    0 2px 4px var(--shadow-tint), 0 0 0 1px oklch(20% 0.04 245 / 0.08);
+  --shadow-xl:    0 4px 8px var(--shadow-tint), 0 0 0 1px oklch(20% 0.04 245 / 0.10);
+  --shadow-2xl:   0 8px 16px var(--shadow-tint);
+  --shadow-inner: inset 0 1px 2px var(--shadow-tint);
+
+  /* ──────────── hero gradient-mesh palette overrides ──────────── */
+  /* The four cool/warm/monochrome/accent palettes get instrument-themed values */
+  /* (The hero pack consumes these via its data-palette enum; aesthetic provides the OKLCH coords.) */
+}
+
+/* ──────────── dark mode ──────────── */
+@media (prefers-color-scheme: dark) {
+  [data-aesthetic="boeing-watch"] {
+    --surface:          oklch(14% 0.04 245);   /* deep navy panel */
+    --surface-elevated: oklch(20% 0.05 245);
+    --surface-recessed: oklch(10% 0.04 245);
+    --surface-inverse:  oklch(94% 0.014 85);
+    --text:             oklch(88% 0.018 85);   /* cream-on-navy */
+    --text-emphasis:    oklch(98% 0.010 85);
+    --text-recede:      oklch(60% 0.022 245);
+    --text-on-accent:   oklch(14% 0.05 245);
+    --border:           oklch(28% 0.05 245);
+    --border-emphasis:  oklch(86% 0.018 85);
+    --border-recede:    oklch(20% 0.05 245);
+    --accent:           oklch(75% 0.16 78);    /* amber chrome in dark mode */
+    --accent-recede:    oklch(28% 0.06 78);
+    --accent-hover:     oklch(82% 0.18 78);
+    --accent-active:    oklch(68% 0.14 78);
+    --link:             oklch(75% 0.16 78);
+    --link-visited:     oklch(60% 0.10 285);
+    --link-hover:       oklch(82% 0.18 78);
+    --shadow-tint:      oklch(0% 0 0 / 0.5);
+  }
+}

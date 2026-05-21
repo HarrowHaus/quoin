@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="en" data-aesthetic="default">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quoin — aesthetic swap demo</title>
+
+  <!-- Three aesthetics × multiple typeface families. Preconnect + preload to keep -->
+  <!-- the swap fast and the FOUT minimal. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,300..800&family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..1000,0..1,0..1,0..1&display=swap">
+
+  <!-- Junicode 2 from the maintainer's CDN -->
+  <link rel="stylesheet" href="https://psb1558.github.io/Junicode-font/woff/Junicode2.css" onerror="console.warn('Junicode 2 CDN offline; falling back to Source Serif 4 + system serif.')">
+
+  <!-- Token baseline + three aesthetics inlined below so the demo is self-contained -->
+  <style>
+    /* ════════════════════════════════════════════════════════════
+       QUOIN TOKENS — BASELINE (subset; full baseline lives at
+       02_reference-packs/tokens-baseline/tokens.css)
+       Aesthetic packs override on top via [data-aesthetic="X"] scope.
+       ════════════════════════════════════════════════════════════ */
+
+    :root {
+      color-scheme: light dark;
+
+      /* Surfaces */
+      --surface: oklch(98% 0 0);
+      --surface-elevated: oklch(100% 0 0);
+      --surface-recessed: oklch(95% 0 0);
+      --surface-inverse: oklch(18% 0 0);
+      --scrim: oklch(18% 0 0 / 0.55);
+
+      /* Text */
+      --text: oklch(28% 0 0);
+      --text-emphasis: oklch(15% 0 0);
+      --text-recede: oklch(50% 0 0);
+      --text-on-accent: oklch(100% 0 0);
+
+      /* Borders */
+      --border: oklch(88% 0 0);
+      --border-emphasis: oklch(18% 0 0);
+      --border-recede: oklch(93% 0 0);
+      --border-width-sm: 1px;
+      --border-width-md: 2px;
+
+      /* Accent + status */
+      --accent: oklch(55% 0.18 245);
+      --accent-recede: oklch(92% 0.04 245);
+      --accent-hover: oklch(48% 0.20 245);
+      --accent-active: oklch(40% 0.18 245);
+      --critical: oklch(58% 0.22 28);
+      --warning: oklch(75% 0.18 80);
+      --success: oklch(58% 0.18 155);
+
+      /* Focus + shadows */
+      --focus-ring: oklch(55% 0.18 245);
+      --focus-ring-width: 2px;
+      --focus-ring-offset: 2px;
+      --shadow-tint: oklch(0% 0 0 / 0.08);
+      --shadow-sm: 0 1px 2px var(--shadow-tint);
+      --shadow-md: 0 4px 6px -1px var(--shadow-tint), 0 2px 4px -1px var(--shadow-tint);
+      --shadow-lg: 0 10px 15px -3px var(--shadow-tint), 0 4px 6px -2px var(--shadow-tint);
+
+      /* Spacing */
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-card: 1.5rem;
+      --space-panel: 2rem;
+      --space-section: 4rem;
+
+      /* Type */
+      --type-size-xs: 0.75rem;
+      --type-size-sm: 0.875rem;
+      --type-size-md: 1rem;
+      --type-size-lg: 1.125rem;
+      --type-size-xl: 1.5rem;
+      --type-size-2xl: 2rem;
+      --type-size-3xl: 2.5rem;
+      --type-size-4xl: 3.5rem;
+      --type-size-display: 4.5rem;
+      --font-weight-regular: 400;
+      --font-weight-medium: 500;
+      --font-weight-semibold: 600;
+      --font-weight-bold: 700;
+      --leading-tight: 1.15;
+      --leading-normal: 1.4;
+      --leading-prose: 1.55;
+      --leading-display: 1.05;
+      --tracking-tight: -0.02em;
+      --tracking-normal: 0em;
+      --tracking-wide: 0.05em;
+
+      /* Family — baseline ships system stacks per Cons. 2 Option D */
+      --font-sans: ui-sans-serif, system-ui, -apple-system, sans-serif;
+      --font-display: var(--font-sans);
+      --font-serif: ui-serif, Georgia, Cambria, serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+      /* Motion */
+      --motion-fast: 100ms;
+      --motion-normal: 200ms;
+      --motion-slow: 400ms;
+      --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-default: all var(--motion-normal) var(--ease-standard);
+
+      /* Radius */
+      --radius-sm: 4px;
+      --radius-md: 6px;
+      --radius-lg: 8px;
+      --radius-pill: 9999px;
+      --radius-card: 8px;
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       AESTHETIC: DEFAULT — neutral baseline (inlined from
+       aesthetics/default/tokens.css; full source there)
+       ════════════════════════════════════════════════════════════ */
+    [data-aesthetic="default"] {
+      --surface: oklch(98% 0 0);
+      --surface-elevated: oklch(100% 0 0);
+      --surface-recessed: oklch(95% 0 0);
+      --text: oklch(28% 0 0);
+      --text-emphasis: oklch(15% 0 0);
+      --text-recede: oklch(50% 0 0);
+      --text-on-accent: oklch(100% 0 0);
+      --border: oklch(88% 0 0);
+      --border-emphasis: oklch(18% 0 0);
+      --accent: oklch(55% 0.18 245);
+      --accent-recede: oklch(92% 0.04 245);
+      --accent-hover: oklch(48% 0.20 245);
+      --focus-ring: oklch(55% 0.18 245);
+      --font-sans: 'Inter Variable', 'Inter', system-ui, sans-serif;
+      --font-display: 'Inter Variable', 'Inter', system-ui, sans-serif;
+      --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
+      --radius-md: 6px;
+      --radius-card: 8px;
+      --motion-fast: 100ms;
+      --motion-normal: 200ms;
+      --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       AESTHETIC: BOEING-WATCH — precision-instrumental
+       ════════════════════════════════════════════════════════════ */
+    [data-aesthetic="boeing-watch"] {
+      --surface: oklch(94% 0.014 85);
+      --surface-elevated: oklch(96.5% 0.010 85);
+      --surface-recessed: oklch(90% 0.018 85);
+      --text: oklch(22% 0.04 245);
+      --text-emphasis: oklch(14% 0.05 245);
+      --text-recede: oklch(48% 0.022 245);
+      --text-on-accent: oklch(14% 0.05 245);
+      --border: oklch(78% 0.018 245);
+      --border-emphasis: oklch(22% 0.04 245);
+      --accent: oklch(22% 0.04 245);
+      --accent-recede: oklch(86% 0.018 245);
+      --accent-hover: oklch(28% 0.05 245);
+      --critical: oklch(58% 0.21 28);
+      --warning: oklch(75% 0.16 78);
+      --success: oklch(62% 0.16 155);
+      --focus-ring: oklch(75% 0.16 78);
+      --shadow-tint: oklch(20% 0.04 245 / 0.12);
+      --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
+      --font-display: 'IBM Plex Sans Condensed', 'IBM Plex Sans', system-ui, sans-serif;
+      --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+      --tracking-wide: 0.08em;
+      --radius-sm: 1px;
+      --radius-md: 2px;
+      --radius-lg: 2px;
+      --radius-card: 2px;
+      --motion-fast: 120ms;
+      --motion-normal: 180ms;
+      --ease-standard: cubic-bezier(0.32, 0.08, 0.12, 1);
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       AESTHETIC: HARROW-HAUS — operator house
+       ════════════════════════════════════════════════════════════ */
+    [data-aesthetic="harrow-haus"] {
+      --surface: oklch(94.5% 0.015 80);
+      --surface-elevated: oklch(97% 0.010 80);
+      --surface-recessed: oklch(90% 0.020 80);
+      --text: oklch(15% 0.008 60);
+      --text-emphasis: oklch(10% 0.006 60);
+      --text-recede: oklch(40% 0.012 60);
+      --text-on-accent: oklch(94.5% 0.015 80);
+      --border: oklch(80% 0.018 70);
+      --border-emphasis: oklch(15% 0.008 60);
+      --accent: oklch(38% 0.13 25);
+      --accent-recede: oklch(88% 0.04 25);
+      --accent-hover: oklch(44% 0.14 25);
+      --focus-ring: oklch(38% 0.13 25);
+      --shadow-tint: oklch(15% 0.008 60 / 0.06);
+      --font-display: 'Junicode 2', 'Junicode', 'Source Serif 4', ui-serif, Georgia, serif;
+      --font-serif: 'Source Serif 4', 'Source Serif Pro', ui-serif, Georgia, serif;
+      --font-sans: 'Recursive', 'Inter Variable', 'Inter', system-ui, sans-serif;
+      --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+      --leading-prose: 1.65;
+      --tracking-tight: -0.015em;
+      --space-panel: 3rem;
+      --space-section: 6rem;
+      --radius-sm: 1px;
+      --radius-md: 2px;
+      --radius-lg: 2px;
+      --radius-card: 2px;
+      --motion-fast: 160ms;
+      --motion-normal: 240ms;
+      --motion-slow: 360ms;
+      --ease-standard: cubic-bezier(0.3, 0.1, 0.3, 1);
+    }
+
+    /* Dark-mode mirrors for each aesthetic (compressed; full source in pack tokens.css) */
+    @media (prefers-color-scheme: dark) {
+      [data-aesthetic="default"] {
+        --surface: oklch(11% 0 0); --surface-elevated: oklch(16% 0 0); --surface-recessed: oklch(8% 0 0);
+        --text: oklch(88% 0 0); --text-emphasis: oklch(98% 0 0); --text-recede: oklch(62% 0 0);
+        --border: oklch(22% 0 0); --border-emphasis: oklch(88% 0 0);
+        --accent: oklch(70% 0.18 245); --accent-hover: oklch(76% 0.20 245);
+        --shadow-tint: oklch(0% 0 0 / 0.4);
+      }
+      [data-aesthetic="boeing-watch"] {
+        --surface: oklch(14% 0.04 245); --surface-elevated: oklch(20% 0.05 245); --surface-recessed: oklch(10% 0.04 245);
+        --text: oklch(88% 0.018 85); --text-emphasis: oklch(98% 0.010 85); --text-recede: oklch(60% 0.022 245);
+        --text-on-accent: oklch(14% 0.05 245);
+        --border: oklch(28% 0.05 245); --border-emphasis: oklch(86% 0.018 85);
+        --accent: oklch(75% 0.16 78); --accent-recede: oklch(28% 0.06 78); --accent-hover: oklch(82% 0.18 78);
+        --shadow-tint: oklch(0% 0 0 / 0.5);
+      }
+      [data-aesthetic="harrow-haus"] {
+        --surface: oklch(15% 0.008 60); --surface-elevated: oklch(20% 0.012 60); --surface-recessed: oklch(10% 0.006 60);
+        --text: oklch(88% 0.012 80); --text-emphasis: oklch(96% 0.010 80); --text-recede: oklch(60% 0.012 70);
+        --text-on-accent: oklch(94.5% 0.015 80);
+        --border: oklch(28% 0.012 60); --border-emphasis: oklch(88% 0.012 80);
+        --accent: oklch(58% 0.18 28); --accent-recede: oklch(28% 0.08 28); --accent-hover: oklch(64% 0.20 28);
+        --shadow-tint: oklch(0% 0 0 / 0.6);
+      }
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       VIEW TRANSITIONS — crossfade on aesthetic swap
+       Baseline 2026; degrades gracefully without it.
+       ════════════════════════════════════════════════════════════ */
+    @view-transition { navigation: auto; }
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation-duration: 400ms;
+      animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Reduced-motion — collapse the swap to an instant cross with no animation */
+    @media (prefers-reduced-motion: reduce) {
+      ::view-transition-old(root),
+      ::view-transition-new(root) {
+        animation-duration: 1ms;
+      }
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       PAGE CHROME
+       ════════════════════════════════════════════════════════════ */
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0;
+      background: var(--surface);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-md);
+      line-height: var(--leading-prose);
+      -webkit-font-smoothing: antialiased;
+      transition: background var(--motion-normal) var(--ease-standard),
+                  color var(--motion-normal) var(--ease-standard);
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       CONTROL SURFACE — top bar with three aesthetic buttons
+       ════════════════════════════════════════════════════════════ */
+    .control-surface {
+      position: sticky; top: 0; z-index: 200;
+      background: color-mix(in oklch, var(--surface-elevated) 92%, transparent);
+      backdrop-filter: blur(12px);
+      border-bottom: var(--border-width-sm) solid var(--border);
+      padding: var(--space-3) var(--space-panel);
+      display: flex; align-items: center; gap: var(--space-card); flex-wrap: wrap;
+      transition: background var(--motion-normal) var(--ease-standard),
+                  border-color var(--motion-normal) var(--ease-standard);
+    }
+    .control-surface .meta {
+      display: flex; flex-direction: column; gap: 2px;
+      flex: 1; min-width: 220px;
+    }
+    .control-surface .meta strong {
+      font-family: var(--font-display);
+      font-size: var(--type-size-md);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--tracking-tight);
+      color: var(--text-emphasis);
+    }
+    .control-surface .meta span {
+      font-size: var(--type-size-sm);
+      color: var(--text-recede);
+    }
+    .control-surface .switcher {
+      display: inline-flex; gap: var(--space-1);
+      padding: var(--space-1);
+      background: var(--surface-recessed);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-pill);
+    }
+    .control-surface button.swap {
+      appearance: none; border: 0; cursor: pointer;
+      background: transparent; color: var(--text-recede);
+      padding: var(--space-2) var(--space-4);
+      font-family: var(--font-sans); font-size: var(--type-size-sm); font-weight: var(--font-weight-medium);
+      letter-spacing: var(--tracking-normal);
+      border-radius: var(--radius-pill);
+      transition: var(--transition-default);
+    }
+    .control-surface button.swap:hover { color: var(--text-emphasis); background: var(--surface-elevated); }
+    .control-surface button.swap[aria-pressed="true"] {
+      background: var(--accent); color: var(--text-on-accent);
+    }
+    .control-surface button.swap:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       PATTERN: nav-marketing
+       ════════════════════════════════════════════════════════════ */
+    [data-pattern="nav-section"][data-variant="marketing"] {
+      width: 100%;
+      padding: var(--space-3) var(--space-panel);
+      background: var(--surface);
+      border-bottom: var(--border-width-sm) solid var(--border);
+      transition: var(--transition-default);
+    }
+    [data-pattern="nav-section"][data-variant="marketing"] > .inner {
+      max-width: 1280px; margin: 0 auto;
+      display: flex; align-items: center; gap: var(--space-card);
+    }
+    [data-pattern="nav-brand"] {
+      display: inline-flex; align-items: baseline; gap: var(--space-2);
+      font-family: var(--font-display); font-size: var(--type-size-lg);
+      font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-tight);
+      color: var(--text-emphasis); text-decoration: none;
+    }
+    [data-pattern="nav-brand"]::before {
+      content: "▢"; font-size: var(--type-size-md); color: var(--accent);
+    }
+    [data-pattern="nav-primary-links"] {
+      list-style: none; padding: 0; margin: 0 0 0 var(--space-card);
+      display: flex; gap: var(--space-card); flex: 1;
+    }
+    [data-pattern="nav-primary-links"] a {
+      color: var(--text-recede); text-decoration: none;
+      font-size: var(--type-size-sm); font-weight: var(--font-weight-medium);
+      transition: var(--transition-default);
+    }
+    [data-pattern="nav-primary-links"] a:hover { color: var(--text-emphasis); }
+    [data-pattern="nav-secondary-actions"] {
+      display: inline-flex; gap: var(--space-2); align-items: center;
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       SHARED: action-button (from button-system)
+       ════════════════════════════════════════════════════════════ */
+    .action-button {
+      display: inline-flex; align-items: center; gap: var(--space-2);
+      padding: var(--space-3) var(--space-card);
+      border-radius: var(--radius-md);
+      font-family: var(--font-sans); font-size: var(--type-size-sm); font-weight: var(--font-weight-semibold);
+      text-decoration: none; cursor: pointer;
+      border: var(--border-width-sm) solid transparent;
+      transition: var(--transition-default);
+    }
+    .action-button[data-intent="primary"] {
+      background: var(--accent); color: var(--text-on-accent);
+    }
+    .action-button[data-intent="primary"]:hover { background: var(--accent-hover); }
+    .action-button[data-intent="ghost"] {
+      background: transparent; color: var(--text-emphasis);
+    }
+    .action-button[data-intent="ghost"]:hover { background: var(--surface-elevated); }
+    .action-button:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       PATTERN: hero-section / variant gradient-mesh
+       ════════════════════════════════════════════════════════════ */
+    [data-pattern="hero-section"][data-variant="gradient-mesh"] {
+      position: relative; width: 100%;
+      padding: var(--space-section) var(--space-panel);
+      min-height: 480px;
+      overflow: hidden;
+      transition: var(--transition-default);
+    }
+    [data-pattern="hero-background"] {
+      position: absolute; inset: 0; z-index: 0;
+      opacity: 0.85; pointer-events: none;
+      transition: opacity var(--motion-normal) var(--ease-standard),
+                  background var(--motion-normal) var(--ease-standard);
+    }
+    /* The mesh background follows the aesthetic's accent color */
+    [data-aesthetic="default"] [data-pattern="hero-background"] {
+      background:
+        radial-gradient(circle at 22% 28%, oklch(80% 0.16 240) 0%, transparent 50%),
+        radial-gradient(circle at 78% 22%, oklch(78% 0.18 220) 0%, transparent 55%),
+        radial-gradient(circle at 52% 88%, oklch(82% 0.14 260) 0%, transparent 60%),
+        oklch(98% 0 0);
+    }
+    [data-aesthetic="boeing-watch"] [data-pattern="hero-background"] {
+      background:
+        radial-gradient(circle at 25% 30%, oklch(85% 0.14 75) 0%, transparent 50%),
+        radial-gradient(circle at 75% 25%, oklch(82% 0.06 245) 0%, transparent 55%),
+        radial-gradient(circle at 55% 85%, oklch(88% 0.10 85) 0%, transparent 60%),
+        oklch(94% 0.014 85);
+    }
+    [data-aesthetic="harrow-haus"] [data-pattern="hero-background"] {
+      background:
+        radial-gradient(circle at 22% 28%, oklch(88% 0.08 25) 0%, transparent 55%),
+        radial-gradient(circle at 78% 22%, oklch(90% 0.04 60) 0%, transparent 60%),
+        radial-gradient(circle at 55% 90%, oklch(85% 0.10 30) 0%, transparent 65%),
+        oklch(94.5% 0.015 80);
+    }
+    [data-pattern="hero-section"] .inner {
+      position: relative; z-index: 1;
+      max-width: 720px; margin: 0 auto;
+      text-align: center;
+    }
+    [data-pattern="hero-eyebrow"] {
+      color: var(--accent); font-size: var(--type-size-sm);
+      font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-wide);
+      text-transform: uppercase; line-height: var(--leading-tight);
+      margin: 0 0 var(--space-3);
+    }
+    [data-pattern="hero-headline"] {
+      color: var(--text-emphasis); font-family: var(--font-display);
+      font-size: var(--type-size-4xl); font-weight: var(--font-weight-semibold);
+      line-height: var(--leading-display); letter-spacing: var(--tracking-tight);
+      margin: 0 auto; max-width: 22ch; text-wrap: balance;
+    }
+    [data-pattern="hero-subhead"] {
+      color: var(--text); font-size: var(--type-size-lg);
+      font-weight: var(--font-weight-medium); line-height: var(--leading-prose);
+      margin: var(--space-3) auto 0; max-width: 60ch; text-wrap: pretty;
+    }
+    [data-pattern="hero-actions"] {
+      display: inline-flex; gap: var(--space-3); align-items: center;
+      margin: var(--space-card) 0 0; flex-wrap: wrap; justify-content: center;
+    }
+    [data-pattern="hero-actions"] .action-button[data-intent="ghost"] {
+      background: color-mix(in oklch, var(--surface-elevated) 70%, transparent);
+      color: var(--text-emphasis); backdrop-filter: blur(8px);
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       PATTERN: feature-grid three-up
+       ════════════════════════════════════════════════════════════ */
+    [data-pattern="feature-grid-section"] {
+      max-width: 1280px; margin: 0 auto;
+      padding: var(--space-section) var(--space-panel);
+    }
+    [data-pattern="feature-grid-section"] .eyebrow {
+      color: var(--text-recede); font-size: var(--type-size-sm);
+      font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-wide);
+      text-transform: uppercase; text-align: center; margin: 0 0 var(--space-3);
+    }
+    [data-pattern="feature-grid-section"] h2 {
+      font-family: var(--font-display); font-size: var(--type-size-3xl);
+      font-weight: var(--font-weight-semibold); line-height: var(--leading-display);
+      letter-spacing: var(--tracking-tight); color: var(--text-emphasis);
+      text-align: center; margin: 0 auto var(--space-card); max-width: 22ch;
+      text-wrap: balance;
+    }
+    [data-pattern="feature-grid"] {
+      display: grid; gap: var(--space-card);
+      grid-template-columns: repeat(3, 1fr);
+      padding: 0; margin: 0; list-style: none;
+    }
+    @media (max-width: 1023px) {
+      [data-pattern="feature-grid"] { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 639px) {
+      [data-pattern="feature-grid"] { grid-template-columns: 1fr; }
+    }
+    [data-pattern="feature-cell"] {
+      display: flex; flex-direction: column; gap: var(--space-3);
+      padding: var(--space-card);
+      background: var(--surface-elevated); color: var(--text);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-card);
+      transition: var(--transition-default);
+    }
+    [data-pattern="feature-cell"] .leading {
+      width: 36px; height: 36px;
+      display: inline-flex; align-items: center; justify-content: center;
+      color: var(--accent);
+    }
+    [data-pattern="feature-cell"] .leading svg {
+      width: 24px; height: 24px;
+      stroke: currentColor; fill: none; stroke-width: 1.5;
+    }
+    [data-pattern="feature-cell"] h4 {
+      margin: 0; font-family: var(--font-display);
+      font-size: var(--type-size-lg); font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--tracking-tight); line-height: var(--leading-tight);
+      color: var(--text-emphasis);
+    }
+    [data-pattern="feature-cell"] p {
+      margin: 0; font-size: var(--type-size-sm); line-height: var(--leading-prose);
+      color: var(--text);
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       PATTERN: footer-mega — compact register
+       ════════════════════════════════════════════════════════════ */
+    [data-pattern="footer-section"] {
+      background: var(--surface-recessed);
+      padding: var(--space-section) var(--space-panel) var(--space-card);
+      transition: var(--transition-default);
+    }
+    [data-pattern="footer-section"] .inner { max-width: 1280px; margin: 0 auto; }
+    [data-pattern="footer-section"] .footer-top {
+      display: grid; grid-template-columns: 2fr repeat(3, 1fr);
+      gap: var(--space-section); margin-bottom: var(--space-section);
+    }
+    @media (max-width: 720px) {
+      [data-pattern="footer-section"] .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+    [data-pattern="footer-brand-block"] {
+      display: flex; flex-direction: column; gap: var(--space-3);
+    }
+    [data-pattern="footer-brand-block"] .wordmark {
+      display: inline-flex; align-items: baseline; gap: var(--space-2);
+      font-family: var(--font-display); font-size: var(--type-size-xl);
+      font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-tight);
+      color: var(--text-emphasis); text-decoration: none;
+    }
+    [data-pattern="footer-brand-block"] .wordmark::before {
+      content: "▢"; font-size: var(--type-size-md); color: var(--accent);
+    }
+    [data-pattern="footer-brand-block"] .tagline {
+      color: var(--text-recede); font-size: var(--type-size-sm);
+      max-width: 32ch; margin: 0;
+    }
+    [data-pattern="footer-link-group"] h3 {
+      font-size: var(--type-size-xs); font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--tracking-wide); color: var(--text-emphasis);
+      text-transform: uppercase; margin: 0 0 var(--space-3);
+    }
+    [data-pattern="footer-link-group"] ul {
+      list-style: none; padding: 0; margin: 0;
+      display: flex; flex-direction: column; gap: var(--space-2);
+    }
+    [data-pattern="footer-link-group"] a {
+      color: var(--text-recede); font-size: var(--type-size-sm);
+      text-decoration: none;
+    }
+    [data-pattern="footer-link-group"] a:hover { color: var(--accent-hover); }
+    [data-pattern="footer-legal-row"] {
+      padding-top: var(--space-4);
+      border-top: var(--border-width-sm) solid var(--border);
+      display: flex; justify-content: space-between; flex-wrap: wrap;
+      gap: var(--space-3);
+      color: var(--text-recede); font-size: var(--type-size-xs);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════ CONTROL SURFACE ═════════════════════ -->
+  <div class="control-surface" role="region" aria-label="Aesthetic control">
+    <div class="meta">
+      <strong>Quoin — aesthetic swap</strong>
+      <span>Same content, three aesthetics. Quoin's aesthetic-pack architecture in action.</span>
+    </div>
+    <div class="switcher" role="radiogroup" aria-label="Choose aesthetic">
+      <button class="swap" type="button" role="radio" aria-checked="true" aria-pressed="true" data-aesthetic="default">Default</button>
+      <button class="swap" type="button" role="radio" aria-checked="false" aria-pressed="false" data-aesthetic="boeing-watch">Boeing Watch</button>
+      <button class="swap" type="button" role="radio" aria-checked="false" aria-pressed="false" data-aesthetic="harrow-haus">Harrow Haus</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════ NAV-MARKETING ═══════════════════════ -->
+  <header data-pattern="nav-section" data-variant="marketing" data-alignment="left" data-mode="default" role="banner">
+    <div class="inner">
+      <a data-pattern="nav-brand" href="/" aria-label="Quoin home">Quoin</a>
+      <nav aria-label="Primary">
+        <ul data-pattern="nav-primary-links">
+          <li><a href="/patterns/">Patterns</a></li>
+          <li><a href="/aesthetics/">Aesthetics</a></li>
+          <li><a href="/docs/">Docs</a></li>
+          <li><a href="/changelog/">Changelog</a></li>
+        </ul>
+      </nav>
+      <div data-pattern="nav-secondary-actions" role="group">
+        <a class="action-button" data-intent="ghost" href="/docs">Read docs</a>
+        <a class="action-button" data-intent="primary" href="/start">Get started</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════ HERO — gradient-mesh ════════════════ -->
+  <main>
+    <section data-pattern="hero-section" data-variant="gradient-mesh" data-palette="accent"
+             data-intensity="default" data-alignment="centered" aria-labelledby="hero-h">
+      <div data-pattern="hero-background" aria-hidden="true"></div>
+      <div class="inner">
+        <p data-pattern="hero-eyebrow">Same markup · three aesthetics</p>
+        <h1 data-pattern="hero-headline" id="hero-h">Quoin separates anatomy from aesthetic.</h1>
+        <p data-pattern="hero-subhead">Pattern packs declare anatomy and variant slots. Aesthetic packs supply the token values. Swap the aesthetic — markup doesn't change.</p>
+        <div data-pattern="hero-actions" role="group" aria-label="Get started actions">
+          <a class="action-button" data-intent="primary" href="/start">Get started</a>
+          <a class="action-button" data-intent="ghost" href="/aesthetics/">Browse aesthetics</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ FEATURE-GRID ════════════════════════ -->
+    <section data-pattern="feature-grid-section">
+      <p class="eyebrow">Aesthetic boundary</p>
+      <h2>One contract. Many faces.</h2>
+      <ul data-pattern="feature-grid" data-layout="three-up">
+        <li>
+          <article data-pattern="feature-cell" data-variant="default">
+            <span class="leading" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M3 12l3-3 4 4 8-8 3 3"/></svg>
+            </span>
+            <h4>Anatomy in pattern packs</h4>
+            <p>Pattern packs declare slots and variant axes. They consume tokens; they never declare values.</p>
+          </article>
+        </li>
+        <li>
+          <article data-pattern="feature-cell" data-variant="default">
+            <span class="leading" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            </span>
+            <h4>Values in aesthetic packs</h4>
+            <p>Aesthetic packs override token values. Color, type, motion, radius — every visible decision lives here.</p>
+          </article>
+        </li>
+        <li>
+          <article data-pattern="feature-cell" data-variant="default">
+            <span class="leading" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg>
+            </span>
+            <h4>Swap without rewrite</h4>
+            <p>Try the buttons up top. Same markup, three aesthetics, View Transitions API crossfade. v3.G.20 in production.</p>
+          </article>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- ═══════════════ FOOTER-MEGA — compact ═══════════════ -->
+  <footer data-pattern="footer-section" data-variant="compact" role="contentinfo">
+    <div class="inner">
+      <div class="footer-top">
+        <div data-pattern="footer-brand-block">
+          <a class="wordmark" href="/" aria-label="Quoin home">Quoin</a>
+          <p class="tagline">A semantic vocabulary for the patterns every website needs — meaning over markup, anatomy over aesthetic.</p>
+        </div>
+        <div data-pattern="footer-link-group">
+          <h3>Catalog</h3>
+          <ul>
+            <li><a href="/patterns/">Patterns</a></li>
+            <li><a href="/aesthetics/">Aesthetics</a></li>
+            <li><a href="/playground/">Playground</a></li>
+          </ul>
+        </div>
+        <div data-pattern="footer-link-group">
+          <h3>Build</h3>
+          <ul>
+            <li><a href="/docs/">Documentation</a></li>
+            <li><a href="/llms.txt">For AI tools</a></li>
+            <li><a href="/changelog/">Changelog</a></li>
+          </ul>
+        </div>
+        <div data-pattern="footer-link-group">
+          <h3>About</h3>
+          <ul>
+            <li><a href="https://github.com/harrowhaus/quoin">GitHub</a></li>
+            <li><a href="/spec/">Specification</a></li>
+            <li><a href="https://harrow.haus">Harrow Haus</a></li>
+          </ul>
+        </div>
+      </div>
+      <div data-pattern="footer-legal-row">
+        <p>© 2026 Harrow Haus · Quoin v0.1.0 · MIT License</p>
+        <span>Aesthetic-swap demo · v3.G.20 + View Transitions API</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Swap aesthetic via View Transitions API where available; instant otherwise.
+    const buttons = document.querySelectorAll('button.swap');
+    const root = document.documentElement;
+
+    function swapTo(name) {
+      // Reduced-motion users bypass the transition entirely (defensive — the CSS
+      // already collapses the animation duration; this also skips startViewTransition
+      // entirely so there's no flicker for screen readers).
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const apply = () => {
+        root.setAttribute('data-aesthetic', name);
+        buttons.forEach(b => {
+          const active = b.dataset.aesthetic === name;
+          b.setAttribute('aria-pressed', active ? 'true' : 'false');
+          b.setAttribute('aria-checked', active ? 'true' : 'false');
+        });
+      };
+
+      if (!reduced && document.startViewTransition) {
+        document.startViewTransition(apply);
+      } else {
+        apply();
+      }
+    }
+
+    buttons.forEach(b => b.addEventListener('click', () => swapTo(b.dataset.aesthetic)));
+
+    // Keyboard nav between radiogroup buttons (Arrow keys move focus + activate).
+    const switcher = document.querySelector('.switcher');
+    switcher.addEventListener('keydown', (e) => {
+      if (!['ArrowLeft', 'ArrowRight'].includes(e.key)) return;
+      const arr = [...buttons];
+      const idx = arr.indexOf(document.activeElement);
+      if (idx < 0) return;
+      const next = e.key === 'ArrowRight'
+        ? (idx + 1) % arr.length
+        : (idx - 1 + arr.length) % arr.length;
+      arr[next].focus();
+      arr[next].click();
+      e.preventDefault();
+    });
+  </script>
+</body>
+</html>

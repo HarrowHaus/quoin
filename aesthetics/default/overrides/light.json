@@ -1,0 +1,32 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "@quoin/aesthetic-default — light mode. Neutral grays + deep-blue accent. Inter + IBM Plex Mono.",
+
+  "surface":          { "$type": "color", "$value": "oklch(98% 0 0)" },
+  "surface-elevated": { "$type": "color", "$value": "oklch(100% 0 0)" },
+  "surface-recessed": { "$type": "color", "$value": "oklch(95% 0 0)" },
+
+  "text":             { "$type": "color", "$value": "oklch(28% 0 0)" },
+  "text-emphasis":    { "$type": "color", "$value": "oklch(15% 0 0)" },
+  "text-recede":      { "$type": "color", "$value": "oklch(50% 0 0)" },
+  "text-on-accent":   { "$type": "color", "$value": "oklch(100% 0 0)" },
+
+  "border":           { "$type": "color", "$value": "oklch(88% 0 0)" },
+  "border-emphasis":  { "$type": "color", "$value": "oklch(18% 0 0)" },
+
+  "accent":           { "$type": "color", "$value": "oklch(55% 0.18 245)" },
+  "accent-recede":    { "$type": "color", "$value": "oklch(92% 0.04 245)" },
+  "critical":         { "$type": "color", "$value": "oklch(58% 0.22 28)" },
+  "warning":          { "$type": "color", "$value": "oklch(75% 0.18 80)" },
+  "success":          { "$type": "color", "$value": "oklch(58% 0.18 155)" },
+  "info":             { "$type": "color", "$value": "oklch(60% 0.14 235)" },
+
+  "focus-ring":       { "$type": "color", "$value": "oklch(55% 0.18 245)" },
+
+  "font-sans":    { "$type": "fontFamily", "$value": "'Inter Variable', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif" },
+  "font-display": { "$type": "fontFamily", "$value": "'Inter Variable', 'Inter', system-ui, sans-serif" },
+  "font-mono":    { "$type": "fontFamily", "$value": "'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" },
+
+  "radius-md":   { "$type": "dimension", "$value": "6px" },
+  "radius-card": { "$type": "dimension", "$value": "8px" }
+}

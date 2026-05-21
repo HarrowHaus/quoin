@@ -1,0 +1,33 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/aesthetic-harrow-haus",
+  "version": "1.0.0",
+  "type": "aesthetic",
+  "quoinVersion": "^0.1.0",
+  "description": "Harrow Haus house aesthetic. Post-industrial minimalism with editorial roots: paper #f4efe6 ground, ink #1d1a16 figure, signal red #7a2f22 reserved. Junicode 2 + Source Serif 4 + IBM Plex Mono + Recursive typography stack. Restrained motion (no spring overshoot, no iOS snap). Generous outer margins via Van de Graaf canon-informed proportions.",
+  "exports": {
+    "lightModeOverrides": "./overrides/light.json",
+    "darkModeOverrides": "./overrides/dark.json",
+    "tokensCss": "./tokens.css"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/aesthetics/harrow-haus",
+    "tags": ["aesthetic", "harrow-haus", "editorial", "minimalist", "post-industrial", "junicode", "house-brand"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0"
+  },
+  "overrides-variant-token-slots": [
+    "color (paper / ink / signal-red palette; restrained chroma)",
+    "font-display (Junicode 2 for wordmark + display headlines)",
+    "font-serif (Source Serif 4 for prose)",
+    "font-sans (Recursive for variable-axis surfaces)",
+    "font-mono (IBM Plex Mono for code)",
+    "motion-* (longer durations: 240/360/520ms — considered, not bouncy)",
+    "ease-* (no spring overshoot — single linear-out curve)",
+    "spacing-* (1.5x outer margin scale; baseline preserved for inner)",
+    "radius-* (0-2px — squared editorial discipline)"
+  ]
+}

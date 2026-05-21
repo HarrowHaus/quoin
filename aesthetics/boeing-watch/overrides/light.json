@@ -1,0 +1,39 @@
+{
+  "$schema": "https://designtokens.org/schema-2025-10/",
+  "$description": "@quoin/aesthetic-boeing-watch — light mode token overrides. Precision-instrumental aesthetic with aerospace-cockpit palette. Compiler-consumable mirror of tokens.css.",
+
+  "surface":          { "$type": "color", "$value": "oklch(94% 0.014 85)" },
+  "surface-elevated": { "$type": "color", "$value": "oklch(96.5% 0.010 85)" },
+  "surface-recessed": { "$type": "color", "$value": "oklch(90% 0.018 85)" },
+
+  "text":             { "$type": "color", "$value": "oklch(22% 0.04 245)" },
+  "text-emphasis":    { "$type": "color", "$value": "oklch(14% 0.05 245)" },
+  "text-recede":      { "$type": "color", "$value": "oklch(48% 0.022 245)" },
+  "text-on-accent":   { "$type": "color", "$value": "oklch(14% 0.05 245)" },
+
+  "border":           { "$type": "color", "$value": "oklch(78% 0.018 245)" },
+  "border-emphasis":  { "$type": "color", "$value": "oklch(22% 0.04 245)" },
+
+  "accent":           { "$type": "color", "$value": "oklch(22% 0.04 245)" },
+  "accent-recede":    { "$type": "color", "$value": "oklch(86% 0.018 245)" },
+  "critical":         { "$type": "color", "$value": "oklch(58% 0.21 28)" },
+  "warning":          { "$type": "color", "$value": "oklch(75% 0.16 78)" },
+  "success":          { "$type": "color", "$value": "oklch(62% 0.16 155)" },
+  "info":             { "$type": "color", "$value": "oklch(60% 0.14 235)" },
+
+  "focus-ring":       { "$type": "color", "$value": "oklch(75% 0.16 78)" },
+  "shadow-tint":      { "$type": "color", "$value": "oklch(20% 0.04 245 / 0.12)" },
+
+  "font-sans":    { "$type": "fontFamily", "$value": "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif" },
+  "font-display": { "$type": "fontFamily", "$value": "'IBM Plex Sans Condensed', 'IBM Plex Sans', system-ui, sans-serif" },
+  "font-mono":    { "$type": "fontFamily", "$value": "'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" },
+  "font-serif":   { "$type": "fontFamily", "$value": "'IBM Plex Serif', ui-serif, Georgia, serif" },
+
+  "radius-md":    { "$type": "dimension", "$value": "2px" },
+  "radius-lg":    { "$type": "dimension", "$value": "2px" },
+  "radius-card":  { "$type": "dimension", "$value": "2px" },
+
+  "motion-fast":   { "$type": "duration", "$value": "120ms" },
+  "motion-normal": { "$type": "duration", "$value": "180ms" },
+  "motion-slow":   { "$type": "duration", "$value": "320ms" }
+}

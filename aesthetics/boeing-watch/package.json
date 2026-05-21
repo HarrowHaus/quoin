@@ -1,0 +1,11 @@
+{
+  "name": "@quoin/aesthetic-boeing-watch",
+  "version": "1.0.0",
+  "description": "Boeing Watch precision-instrumental aesthetic. Aerospace cockpit palette (navy + amber + cream + control gray). IBM Plex Sans / IBM Plex Mono.",
+  "license": "MIT",
+  "main": "./quoin.pack.json",
+  "files": ["quoin.pack.json", "overrides/", "tokens.css", "specimen/", "README.md", "LICENSE"],
+  "keywords": ["quoin", "aesthetic", "boeing-watch", "instrument", "d65"],
+  "peerDependencies": { "@quoin/tokens-baseline": "^0.1.0" },
+  "repository": { "type": "git", "url": "https://github.com/harrowhaus/quoin.git", "directory": "aesthetics/boeing-watch" }
+}

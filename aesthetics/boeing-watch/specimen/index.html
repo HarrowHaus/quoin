@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en" data-aesthetic="boeing-watch">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>@quoin/aesthetic-boeing-watch — specimen</title>
+
+  <!-- Boeing Watch typography: IBM Plex Sans + IBM Plex Sans Condensed + IBM Plex Mono (OFL) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+  <!-- Pack tokens (the actual aesthetic) -->
+  <link rel="stylesheet" href="../tokens.css">
+
+  <style>
+    /* Baseline tokens subset — full baseline lives at
+       02_reference-packs/tokens-baseline/tokens.css */
+    :root {
+      color-scheme: light dark;
+      --surface: oklch(98% 0 0); --surface-elevated: oklch(100% 0 0); --surface-recessed: oklch(95% 0 0);
+      --text: oklch(28% 0 0); --text-emphasis: oklch(15% 0 0); --text-recede: oklch(50% 0 0);
+      --text-on-accent: oklch(100% 0 0);
+      --border: oklch(88% 0 0); --border-emphasis: oklch(18% 0 0);
+      --border-width-sm: 1px; --border-width-md: 2px;
+      --accent: oklch(55% 0.18 245); --accent-hover: oklch(48% 0.20 245);
+      --focus-ring: oklch(55% 0.18 245); --focus-ring-width: 2px; --focus-ring-offset: 2px;
+      --shadow-tint: oklch(0% 0 0 / 0.08);
+      --shadow-sm: 0 1px 2px var(--shadow-tint);
+      --shadow-md: 0 4px 6px -1px var(--shadow-tint), 0 2px 4px -1px var(--shadow-tint);
+      --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
+      --space-card: 1.5rem; --space-panel: 2rem; --space-section: 4rem;
+      --type-size-xs: 0.75rem; --type-size-sm: 0.875rem; --type-size-md: 1rem;
+      --type-size-lg: 1.125rem; --type-size-xl: 1.5rem; --type-size-2xl: 2rem;
+      --type-size-3xl: 2.5rem; --type-size-4xl: 3.5rem;
+      --font-weight-regular: 400; --font-weight-medium: 500;
+      --font-weight-semibold: 600; --font-weight-bold: 700;
+      --leading-tight: 1.15; --leading-prose: 1.55; --leading-display: 1.05;
+      --tracking-tight: -0.02em; --tracking-normal: 0em; --tracking-wide: 0.05em;
+      --font-sans: ui-sans-serif, system-ui, sans-serif;
+      --font-display: var(--font-sans);
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+      --motion-fast: 100ms; --motion-normal: 200ms; --motion-slow: 400ms;
+      --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-default: all var(--motion-normal) var(--ease-standard);
+      --radius-sm: 4px; --radius-md: 6px; --radius-lg: 8px; --radius-pill: 9999px; --radius-card: 8px;
+    }
+
+    /* Page chrome */
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0;
+      background: var(--surface); color: var(--text);
+      font-family: var(--font-sans); font-size: var(--type-size-md);
+      line-height: var(--leading-prose);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Specimen banner — identifies the aesthetic */
+    .specimen-banner {
+      padding: var(--space-3) var(--space-panel);
+      background: var(--surface-elevated);
+      border-bottom: var(--border-width-sm) solid var(--border);
+      display: flex; align-items: baseline; gap: var(--space-card); flex-wrap: wrap;
+      font-family: var(--font-mono); font-size: var(--type-size-sm);
+      color: var(--text-recede);
+    }
+    .specimen-banner strong {
+      font-family: var(--font-display); font-size: var(--type-size-md);
+      color: var(--text-emphasis); letter-spacing: var(--tracking-tight);
+    }
+    .specimen-banner a {
+      color: var(--accent); text-decoration: none;
+      border-bottom: var(--border-width-sm) solid var(--accent-recede, transparent);
+    }
+
+    /* PATTERN: nav-marketing */
+    [data-pattern="nav-section"][data-variant="marketing"] {
+      width: 100%; padding: var(--space-3) var(--space-panel);
+      background: var(--surface); border-bottom: var(--border-width-sm) solid var(--border);
+    }
+    [data-pattern="nav-section"][data-variant="marketing"] > .inner {
+      max-width: 1280px; margin: 0 auto;
+      display: flex; align-items: center; gap: var(--space-card);
+    }
+    [data-pattern="nav-brand"] {
+      display: inline-flex; align-items: baseline; gap: var(--space-2);
+      font-family: var(--font-display); font-size: var(--type-size-lg);
+      font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-tight);
+      color: var(--text-emphasis); text-decoration: none;
+    }
+    [data-pattern="nav-brand"]::before { content: "▢"; color: var(--accent); }
+    [data-pattern="nav-primary-links"] {
+      list-style: none; padding: 0; margin: 0 0 0 var(--space-card);
+      display: flex; gap: var(--space-card); flex: 1;
+    }
+    [data-pattern="nav-primary-links"] a {
+      color: var(--text-recede); text-decoration: none;
+      font-size: var(--type-size-sm); font-weight: var(--font-weight-medium);
+    }
+    [data-pattern="nav-primary-links"] a:hover { color: var(--text-emphasis); }
+    [data-pattern="nav-secondary-actions"] { display: inline-flex; gap: var(--space-2); }
+
+    /* SHARED: action-button */
+    .action-button {
+      display: inline-flex; align-items: center; gap: var(--space-2);
+      padding: var(--space-3) var(--space-card);
+      border-radius: var(--radius-md);
+      font-family: var(--font-sans); font-size: var(--type-size-sm); font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--tracking-wide);
+      text-decoration: none; cursor: pointer;
+      border: var(--border-width-sm) solid transparent;
+      transition: var(--transition-default);
+    }
+    .action-button[data-intent="primary"] {
+      background: var(--accent); color: var(--text-on-accent);
+    }
+    .action-button[data-intent="primary"]:hover { background: var(--accent-hover); }
+    .action-button[data-intent="ghost"] {
+      background: transparent; color: var(--text-emphasis);
+      border-color: var(--border);
+    }
+    .action-button[data-intent="ghost"]:hover { background: var(--surface-elevated); }
+    .action-button:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+
+    /* PATTERN: hero-section gradient-mesh */
+    [data-pattern="hero-section"][data-variant="gradient-mesh"] {
+      position: relative; width: 100%;
+      padding: var(--space-section) var(--space-panel);
+      min-height: 480px; overflow: hidden;
+    }
+    [data-pattern="hero-background"] {
+      position: absolute; inset: 0; z-index: 0; opacity: 0.85; pointer-events: none;
+      background:
+        radial-gradient(circle at 25% 30%, oklch(85% 0.14 75) 0%, transparent 50%),
+        radial-gradient(circle at 75% 25%, oklch(82% 0.06 245) 0%, transparent 55%),
+        radial-gradient(circle at 55% 85%, oklch(88% 0.10 85) 0%, transparent 60%),
+        oklch(94% 0.014 85);
+    }
+    [data-pattern="hero-section"] .inner {
+      position: relative; z-index: 1; max-width: 720px; margin: 0 auto; text-align: center;
+    }
+    [data-pattern="hero-eyebrow"] {
+      color: var(--accent); font-family: var(--font-mono); font-size: var(--type-size-sm);
+      font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-wide);
+      text-transform: uppercase; line-height: var(--leading-tight);
+      margin: 0 0 var(--space-3);
+    }
+    [data-pattern="hero-headline"] {
+      color: var(--text-emphasis); font-family: var(--font-display);
+      font-size: var(--type-size-4xl); font-weight: var(--font-weight-semibold);
+      line-height: var(--leading-display); letter-spacing: var(--tracking-tight);
+      margin: 0 auto; max-width: 22ch; text-wrap: balance;
+    }
+    [data-pattern="hero-subhead"] {
+      color: var(--text); font-size: var(--type-size-lg);
+      font-weight: var(--font-weight-medium); line-height: var(--leading-prose);
+      margin: var(--space-3) auto 0; max-width: 60ch; text-wrap: pretty;
+    }
+    [data-pattern="hero-actions"] {
+      display: inline-flex; gap: var(--space-3); align-items: center;
+      margin: var(--space-card) 0 0; flex-wrap: wrap; justify-content: center;
+    }
+
+    /* PATTERN: feature-grid three-up */
+    [data-pattern="feature-grid-section"] {
+      max-width: 1280px; margin: 0 auto;
+      padding: var(--space-section) var(--space-panel);
+    }
+    [data-pattern="feature-grid-section"] .eyebrow {
+      color: var(--text-recede); font-family: var(--font-mono); font-size: var(--type-size-sm);
+      font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-wide);
+      text-transform: uppercase; text-align: center; margin: 0 0 var(--space-3);
+    }
+    [data-pattern="feature-grid-section"] h2 {
+      font-family: var(--font-display); font-size: var(--type-size-3xl);
+      font-weight: var(--font-weight-semibold); line-height: var(--leading-display);
+      letter-spacing: var(--tracking-tight); color: var(--text-emphasis);
+      text-align: center; margin: 0 auto var(--space-card); max-width: 22ch;
+      text-wrap: balance;
+    }
+    [data-pattern="feature-grid"] {
+      display: grid; gap: var(--space-card);
+      grid-template-columns: repeat(3, 1fr);
+      padding: 0; margin: 0; list-style: none;
+    }
+    @media (max-width: 1023px) { [data-pattern="feature-grid"] { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 639px)  { [data-pattern="feature-grid"] { grid-template-columns: 1fr; } }
+    [data-pattern="feature-cell"] {
+      display: flex; flex-direction: column; gap: var(--space-3);
+      padding: var(--space-card);
+      background: var(--surface-elevated); color: var(--text);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-card);
+    }
+    [data-pattern="feature-cell"] .leading {
+      width: 36px; height: 36px;
+      display: inline-flex; align-items: center; justify-content: center;
+      color: var(--accent);
+    }
+    [data-pattern="feature-cell"] .leading svg { width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+    [data-pattern="feature-cell"] h4 {
+      margin: 0; font-family: var(--font-display);
+      font-size: var(--type-size-lg); font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--tracking-tight); line-height: var(--leading-tight);
+      color: var(--text-emphasis);
+    }
+    [data-pattern="feature-cell"] p {
+      margin: 0; font-size: var(--type-size-sm); line-height: var(--leading-prose); color: var(--text);
+    }
+
+    /* PATTERN: footer-mega compact */
+    [data-pattern="footer-section"] {
+      background: var(--surface-recessed);
+      padding: var(--space-section) var(--space-panel) var(--space-card);
+    }
+    [data-pattern="footer-section"] .inner { max-width: 1280px; margin: 0 auto; }
+    [data-pattern="footer-section"] .footer-top {
+      display: grid; grid-template-columns: 2fr repeat(3, 1fr);
+      gap: var(--space-section); margin-bottom: var(--space-section);
+    }
+    @media (max-width: 720px) { [data-pattern="footer-section"] .footer-top { grid-template-columns: 1fr 1fr; } }
+    [data-pattern="footer-brand-block"] { display: flex; flex-direction: column; gap: var(--space-3); }
+    [data-pattern="footer-brand-block"] .wordmark {
+      display: inline-flex; align-items: baseline; gap: var(--space-2);
+      font-family: var(--font-display); font-size: var(--type-size-xl);
+      font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-tight);
+      color: var(--text-emphasis); text-decoration: none;
+    }
+    [data-pattern="footer-brand-block"] .wordmark::before { content: "▢"; color: var(--accent); }
+    [data-pattern="footer-brand-block"] .tagline { color: var(--text-recede); font-size: var(--type-size-sm); max-width: 32ch; margin: 0; }
+    [data-pattern="footer-link-group"] h3 {
+      font-family: var(--font-mono); font-size: var(--type-size-xs); font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--tracking-wide); color: var(--text-emphasis);
+      text-transform: uppercase; margin: 0 0 var(--space-3);
+    }
+    [data-pattern="footer-link-group"] ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--space-2); }
+    [data-pattern="footer-link-group"] a { color: var(--text-recede); font-size: var(--type-size-sm); text-decoration: none; }
+    [data-pattern="footer-link-group"] a:hover { color: var(--accent-hover); }
+    [data-pattern="footer-legal-row"] {
+      padding-top: var(--space-4);
+      border-top: var(--border-width-sm) solid var(--border);
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-3);
+      color: var(--text-recede); font-family: var(--font-mono); font-size: var(--type-size-xs);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="specimen-banner" role="region" aria-label="Specimen header">
+    <strong>@quoin/aesthetic-boeing-watch</strong>
+    <span>Specimen · same patterns, locked aesthetic. <a href="../../../demos/aesthetic-swap/">Compare in swap demo →</a></span>
+  </div>
+
+  <!-- NAV-MARKETING -->
+  <header data-pattern="nav-section" data-variant="marketing" data-alignment="left" role="banner">
+    <div class="inner">
+      <a data-pattern="nav-brand" href="/" aria-label="Quoin home">Quoin</a>
+      <nav aria-label="Primary">
+        <ul data-pattern="nav-primary-links">
+          <li><a href="/patterns/">Patterns</a></li>
+          <li><a href="/aesthetics/">Aesthetics</a></li>
+          <li><a href="/docs/">Docs</a></li>
+          <li><a href="/changelog/">Changelog</a></li>
+        </ul>
+      </nav>
+      <div data-pattern="nav-secondary-actions" role="group">
+        <a class="action-button" data-intent="ghost" href="/docs">Read docs</a>
+        <a class="action-button" data-intent="primary" href="/start">Get started</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main>
+    <section data-pattern="hero-section" data-variant="gradient-mesh" aria-labelledby="hero-h">
+      <div data-pattern="hero-background" aria-hidden="true"></div>
+      <div class="inner">
+        <p data-pattern="hero-eyebrow">Aesthetic — Boeing Watch</p>
+        <h1 data-pattern="hero-headline" id="hero-h">Instrument-panel discipline for digital surfaces.</h1>
+        <p data-pattern="hero-subhead">A precision-instrumental aesthetic. Navy + cream + signal amber, tight density, mechanical motion. The same Quoin patterns rendered with the gravity of a cockpit panel.</p>
+        <div data-pattern="hero-actions" role="group" aria-label="Get started actions">
+          <a class="action-button" data-intent="primary" href="/start">Adopt aesthetic</a>
+          <a class="action-button" data-intent="ghost" href="../README.md">Read pack notes</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURE-GRID -->
+    <section data-pattern="feature-grid-section">
+      <p class="eyebrow">What you get</p>
+      <h2>Where the aesthetic shows up.</h2>
+      <ul data-pattern="feature-grid" data-layout="three-up">
+        <li>
+          <article data-pattern="feature-cell" data-variant="default">
+            <span class="leading" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M3 12l3-3 4 4 8-8 3 3"/></svg>
+            </span>
+            <h4>Palette</h4>
+            <p>Deep navy text on instrument cream. Signal amber for focus and warning. No decorative color outside the system.</p>
+          </article>
+        </li>
+        <li>
+          <article data-pattern="feature-cell" data-variant="default">
+            <span class="leading" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            </span>
+            <h4>Typography</h4>
+            <p>IBM Plex Sans for body, Plex Sans Condensed for display, Plex Mono for data. Wide tracking on labels.</p>
+          </article>
+        </li>
+        <li>
+          <article data-pattern="feature-cell" data-variant="default">
+            <span class="leading" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg>
+            </span>
+            <h4>Motion + form</h4>
+            <p>Mechanical easings, sub-200ms primary motion. Radius capped at 2px — surfaces read as machined, not soft.</p>
+          </article>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer data-pattern="footer-section" data-variant="compact" role="contentinfo">
+    <div class="inner">
+      <div class="footer-top">
+        <div data-pattern="footer-brand-block">
+          <a class="wordmark" href="/" aria-label="Quoin home">Quoin</a>
+          <p class="tagline">A semantic vocabulary for the patterns every website needs. Anatomy over aesthetic.</p>
+        </div>
+        <div data-pattern="footer-link-group">
+          <h3>Catalog</h3>
+          <ul>
+            <li><a href="/patterns/">Patterns</a></li>
+            <li><a href="/aesthetics/">Aesthetics</a></li>
+            <li><a href="/playground/">Playground</a></li>
+          </ul>
+        </div>
+        <div data-pattern="footer-link-group">
+          <h3>Build</h3>
+          <ul>
+            <li><a href="/docs/">Documentation</a></li>
+            <li><a href="/llms.txt">For AI tools</a></li>
+            <li><a href="/changelog/">Changelog</a></li>
+          </ul>
+        </div>
+        <div data-pattern="footer-link-group">
+          <h3>About</h3>
+          <ul>
+            <li><a href="https://github.com/harrowhaus/quoin">GitHub</a></li>
+            <li><a href="/spec/">Specification</a></li>
+            <li><a href="https://harrow.haus">Harrow Haus</a></li>
+          </ul>
+        </div>
+      </div>
+      <div data-pattern="footer-legal-row">
+        <p>© 2026 Harrow Haus · Quoin v0.1.0 · MIT License</p>
+        <span>Boeing Watch specimen · v3.G.20</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
