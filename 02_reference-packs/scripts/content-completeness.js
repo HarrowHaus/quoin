@@ -51,13 +51,18 @@ const ENROLLMENT = {
     composesSiblings: ['pattern-button-system', 'pattern-form-fields'],
     markers: ['GALLEY', 'Newsletter'],
   },
-  'nav-marketing': {
+  // Phase 22 Cons. 4 (2026-05-20): 4 nav packs consolidated to @quoin/pattern-nav
+  // with variant example files. Enrollment keys updated to reflect unified
+  // structure; `path` field overrides default examples/index.html lookup.
+  'nav/marketing': {
+    path: 'nav/examples/marketing.html',
     requireGalley: true,
     requireLineage: true,
     composesSiblings: ['pattern-button-system'],
     markers: ['GALLEY'],
   },
-  'nav-app-chrome': {
+  'nav/app-chrome': {
+    path: 'nav/examples/app-chrome.html',
     requireGalley: true,
     requireLineage: true,
     composesSiblings: ['pattern-button-system'],
@@ -144,13 +149,15 @@ const ENROLLMENT = {
     composesSiblings: ['pattern-button-system'],
     markers: ['Galley', 'WCAG 2.2.2', 'playsinline', 'PLACEHOLDER FIXTURE'],
   },
-  'nav-docs': {
+  'nav/docs': {
+    path: 'nav/examples/docs.html',
     requireGalley: false,
     requireLineage: true,
     composesSiblings: ['pattern-button-system'],
     markers: ['Quoin', 'WCAG 2.4.1', 'aria-current', 'Cmd+K'],
   },
-  'nav-editorial': {
+  'nav/editorial': {
+    path: 'nav/examples/editorial.html',
     requireGalley: false,
     requireLineage: true,
     composesSiblings: ['pattern-button-system'],
@@ -213,6 +220,10 @@ function auditSpecimen(pack, { body }, spec) {
       lcBody.includes('composition lineage') ||
       lcBody.includes('what this pattern consumes') ||
       lcBody.includes('what footer-mega consumes') ||
+      lcBody.includes('what the nav (marketing variant) consumes') ||
+      lcBody.includes('what the nav (app-chrome variant) consumes') ||
+      lcBody.includes('what the nav (docs variant) consumes') ||
+      lcBody.includes('what the nav (editorial variant) consumes') ||
       lcBody.includes('what nav-marketing consumes') ||
       lcBody.includes('what nav-app-chrome consumes');
     if (!hasLineage) {

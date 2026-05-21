@@ -6,6 +6,18 @@ versioning follows pre-1.0 conventions until v1.0.0 publication.
 
 ## [Unreleased]
 
+### Phase 22 / Consolidation 4 — Nav anatomy unification (2026-05-20)
+
+Four parallel nav packs collapsed to a single `@quoin/pattern-nav` with 4 variants (`marketing` / `app-chrome` / `docs` / `editorial`). 2 mandatory slots (section + brand) + 17 conditional slots gated by `data-variant`. Mechanical application of Cons. 3's Q1-Q8 cascade; no novel architectural questions.
+
+- **NEW** `02_reference-packs/patterns/nav/` — unified pack (4 example files; manifest declares `peerPacks: button-system + form-fields + modal-dialog + tokens-baseline`)
+- **REMOVED** `02_reference-packs/patterns/nav-{marketing, app-chrome, docs, editorial}/` (4 deprecated directories)
+- **GATE EXTENSION** `bootstrap-integrity.js`: `nav` added to `DATA_REGISTER_DEPRECATED_IN` (v3.G.16) and `COMPOSITION_REALITY_ENFORCED_FOR` (v3.G.17). No new gate logic — same checks, expanded enforcement set.
+- **DATA-VARIANT COLLISION RESOLVED** per Cons. 3 Q3 cascade: existing per-pack `data-variant` values (sticky/transparent/compact/standard/with-subnav/condensed/topbar-only/with-sidebar/single-row/stacked) renamed to `data-mode`. New top-level `data-variant` carries marketing/app-chrome/docs/editorial.
+- **REVERSE-LINEAGE UPDATED** per D.82: button-system, modal-dialog, form-fields README files now list nav as consumer.
+- **DISCOVERABILITY** updated: README pattern count 18 → 15; pattern catalog grid restructured; llms.txt + llms-full.txt nav sections unified; registry.json items 19 → 16.
+- Report: `02_reference-packs/CONSOLIDATION-4-REPORT.md`.
+
 ### Phase 22 / Consolidation 3 — Hero anatomy unification (2026-05-20)
 
 Five parallel hero packs collapsed to a single `@quoin/pattern-hero` with

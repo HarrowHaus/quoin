@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>@quoin/pattern-nav-marketing — specimen</title>
+  <title>@quoin/pattern-nav — marketing variant — specimen</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -191,7 +191,7 @@
 
     /* ===== NAV PRODUCTION STYLES ===== */
 
-    [data-pattern="nav-marketing"] {
+    [data-pattern="nav-section"][data-variant="marketing"] {
       width: 100%;
       background: var(--surface);
       color: var(--text);
@@ -200,18 +200,18 @@
       position: relative;
       z-index: 100;
     }
-    [data-pattern="nav-marketing"][data-variant="sticky"] { position: sticky; top: 0; }
-    [data-pattern="nav-marketing"][data-variant="transparent"] {
+    [data-pattern="nav-section"][data-variant="marketing"][data-mode="sticky"] { position: sticky; top: 0; }
+    [data-pattern="nav-section"][data-variant="marketing"][data-mode="transparent"] {
       background: transparent;
       border-bottom-color: transparent;
       color: var(--text-emphasis);
     }
-    [data-pattern="nav-marketing"][data-state="scrolled"] {
+    [data-pattern="nav-section"][data-variant="marketing"][data-state="scrolled"] {
       background: var(--surface-elevated);
       box-shadow: var(--shadow-md);
       border-bottom-color: var(--border);
     }
-    [data-pattern="nav-marketing"] > nav {
+    [data-pattern="nav-section"][data-variant="marketing"] > nav {
       display: flex;
       align-items: center;
       gap: var(--space-card);
@@ -219,7 +219,7 @@
       max-width: 1440px;
       margin: 0 auto;
     }
-    [data-pattern="nav-marketing"][data-variant="compact"] > nav { padding: var(--space-2) var(--space-card); }
+    [data-pattern="nav-section"][data-variant="marketing"][data-mode="compact"] > nav { padding: var(--space-2) var(--space-card); }
 
     /* nav-brand */
     [data-pattern="nav-brand"] {
@@ -245,15 +245,15 @@
       border-radius: var(--radius-sm);
     }
 
-    /* nav-primary-list */
-    [data-pattern="nav-primary-list"] {
+    /* nav-primary-links */
+    [data-pattern="nav-primary-links"] {
       list-style: none; padding: 0; margin: 0;
       display: flex;
       gap: var(--space-1);
       flex: 1;
       margin-left: var(--space-card);
     }
-    @media (max-width: 960px) { [data-pattern="nav-primary-list"] { display: none; } }
+    @media (max-width: 960px) { [data-pattern="nav-primary-links"] { display: none; } }
 
     /* nav-item */
     [data-pattern="nav-item"] {
@@ -311,11 +311,11 @@
       min-width: 240px;
     }
     [data-pattern="nav-dropdown-panel"][data-open="false"] { display: none; }
-    [data-pattern="nav-dropdown-panel"][data-register="simple"] {
+    [data-pattern="nav-dropdown-panel"][data-kind="simple"] {
       display: flex; flex-direction: column; gap: var(--space-1);
       min-width: 280px;
     }
-    [data-pattern="nav-dropdown-panel"][data-register="simple"] a {
+    [data-pattern="nav-dropdown-panel"][data-kind="simple"] a {
       display: block;
       padding: var(--space-2) var(--space-3);
       border-radius: var(--radius-sm);
@@ -325,25 +325,25 @@
       font-weight: var(--font-weight-medium);
       transition: var(--transition-default);
     }
-    [data-pattern="nav-dropdown-panel"][data-register="simple"] a:hover {
+    [data-pattern="nav-dropdown-panel"][data-kind="simple"] a:hover {
       background: var(--surface-recessed);
       color: var(--accent-hover);
     }
-    [data-pattern="nav-dropdown-panel"][data-register="simple"] a .desc {
+    [data-pattern="nav-dropdown-panel"][data-kind="simple"] a .desc {
       display: block;
       font-size: var(--type-size-xs);
       color: var(--text-recede);
       font-weight: var(--font-weight-medium);
       margin-top: 2px;
     }
-    [data-pattern="nav-dropdown-panel"][data-register="mega"] {
+    [data-pattern="nav-dropdown-panel"][data-kind="mega"] {
       display: grid;
       gap: var(--space-card);
       min-width: 720px;
     }
-    [data-pattern="nav-dropdown-panel"][data-register="mega"][data-columns="3"] { grid-template-columns: repeat(3, 1fr); }
-    [data-pattern="nav-dropdown-panel"][data-register="mega"][data-columns="4"] { grid-template-columns: repeat(4, 1fr); min-width: 880px; }
-    [data-pattern="nav-dropdown-panel"][data-register="mega"] .column h4 {
+    [data-pattern="nav-dropdown-panel"][data-kind="mega"][data-columns="3"] { grid-template-columns: repeat(3, 1fr); }
+    [data-pattern="nav-dropdown-panel"][data-kind="mega"][data-columns="4"] { grid-template-columns: repeat(4, 1fr); min-width: 880px; }
+    [data-pattern="nav-dropdown-panel"][data-kind="mega"] .column h4 {
       font-size: var(--type-size-xs);
       font-weight: var(--font-weight-semibold);
       letter-spacing: var(--tracking-wide);
@@ -351,11 +351,11 @@
       color: var(--text-emphasis);
       margin: 0 0 var(--space-3);
     }
-    [data-pattern="nav-dropdown-panel"][data-register="mega"] .column ul {
+    [data-pattern="nav-dropdown-panel"][data-kind="mega"] .column ul {
       list-style: none; padding: 0; margin: 0;
       display: flex; flex-direction: column; gap: var(--space-1);
     }
-    [data-pattern="nav-dropdown-panel"][data-register="mega"] .column a {
+    [data-pattern="nav-dropdown-panel"][data-kind="mega"] .column a {
       display: block;
       padding: var(--space-2);
       border-radius: var(--radius-sm);
@@ -365,25 +365,25 @@
       font-weight: var(--font-weight-medium);
       transition: var(--transition-default);
     }
-    [data-pattern="nav-dropdown-panel"][data-register="mega"] .column a:hover {
+    [data-pattern="nav-dropdown-panel"][data-kind="mega"] .column a:hover {
       background: var(--surface-recessed);
       color: var(--accent-hover);
     }
-    [data-pattern="nav-dropdown-panel"][data-register="mega"] .column a .desc {
+    [data-pattern="nav-dropdown-panel"][data-kind="mega"] .column a .desc {
       display: block;
       font-size: var(--type-size-xs);
       color: var(--text-recede);
       margin-top: 2px;
     }
 
-    /* nav-cta-cluster */
-    [data-pattern="nav-cta-cluster"] {
+    /* nav-secondary-actions */
+    [data-pattern="nav-secondary-actions"] {
       display: inline-flex;
       align-items: center;
       gap: var(--space-2);
       margin-left: auto;
     }
-    [data-pattern="nav-cta-cluster"] .cta {
+    [data-pattern="nav-secondary-actions"] .action-button {
       display: inline-flex;
       align-items: center;
       padding: var(--space-2) var(--space-4);
@@ -396,19 +396,19 @@
       transition: var(--transition-default);
       border: var(--border-width-sm) solid transparent;
     }
-    [data-pattern="nav-cta-cluster"] .cta[data-intent="ghost"] {
+    [data-pattern="nav-secondary-actions"] .action-button[data-intent="ghost"] {
       background: transparent; color: var(--text);
     }
-    [data-pattern="nav-cta-cluster"] .cta[data-intent="ghost"]:hover { color: var(--accent-hover); background: var(--surface-elevated); }
-    [data-pattern="nav-cta-cluster"] .cta[data-intent="secondary"] {
+    [data-pattern="nav-secondary-actions"] .action-button[data-intent="ghost"]:hover { color: var(--accent-hover); background: var(--surface-elevated); }
+    [data-pattern="nav-secondary-actions"] .action-button[data-intent="secondary"] {
       background: transparent; color: var(--text-emphasis); border-color: var(--border-emphasis, var(--border));
     }
-    [data-pattern="nav-cta-cluster"] .cta[data-intent="secondary"]:hover { background: var(--surface-elevated); }
-    [data-pattern="nav-cta-cluster"] .cta[data-intent="primary"] {
+    [data-pattern="nav-secondary-actions"] .action-button[data-intent="secondary"]:hover { background: var(--surface-elevated); }
+    [data-pattern="nav-secondary-actions"] .action-button[data-intent="primary"] {
       background: var(--accent); color: var(--text-on-accent, white);
     }
-    [data-pattern="nav-cta-cluster"] .cta[data-intent="primary"]:hover { background: var(--accent-hover); }
-    [data-pattern="nav-cta-cluster"] .cta:focus-visible {
+    [data-pattern="nav-secondary-actions"] .action-button[data-intent="primary"]:hover { background: var(--accent-hover); }
+    [data-pattern="nav-secondary-actions"] .action-button:focus-visible {
       outline: var(--focus-ring-width) solid var(--focus-ring);
       outline-offset: var(--focus-ring-offset);
     }
@@ -432,7 +432,7 @@
     }
     @media (max-width: 960px) {
       [data-pattern="nav-mobile-toggle"] { display: inline-flex; }
-      [data-pattern="nav-cta-cluster"] { display: none; }
+      [data-pattern="nav-secondary-actions"] { display: none; }
     }
 
     /* nav-announcement-bar */
@@ -553,7 +553,7 @@
       overflow: hidden;
       margin: 0 auto;
     }
-    .mobile-frame [data-pattern="nav-marketing"] > nav { padding: var(--space-2) var(--space-3); }
+    .mobile-frame [data-pattern="nav-section"][data-variant="marketing"] > nav { padding: var(--space-2) var(--space-3); }
     [data-pattern="nav-mobile-overlay"] {
       position: absolute;
       top: 0; right: 0;
@@ -593,12 +593,12 @@
     [data-pattern="nav-mobile-overlay"] ul a[aria-current="page"] {
       background: var(--surface-elevated); color: var(--text-emphasis); font-weight: var(--font-weight-semibold);
     }
-    [data-pattern="nav-mobile-overlay"] .cta-stack {
+    [data-pattern="nav-mobile-overlay"] .action-button-stack {
       display: flex; flex-direction: column; gap: var(--space-2);
       padding-top: var(--space-3);
       border-top: var(--border-width-sm) solid var(--border);
     }
-    [data-pattern="nav-mobile-overlay"] .cta-stack .cta {
+    [data-pattern="nav-mobile-overlay"] .action-button-stack .action-button {
       display: inline-flex; justify-content: center; align-items: center;
       padding: var(--space-3);
       border-radius: var(--radius-sm);
@@ -608,10 +608,10 @@
       transition: var(--transition-default);
       border: var(--border-width-sm) solid transparent;
     }
-    [data-pattern="nav-mobile-overlay"] .cta-stack .cta[data-intent="secondary"] {
+    [data-pattern="nav-mobile-overlay"] .action-button-stack .action-button[data-intent="secondary"] {
       background: var(--surface-elevated); color: var(--text-emphasis); border-color: var(--border);
     }
-    [data-pattern="nav-mobile-overlay"] .cta-stack .cta[data-intent="primary"] {
+    [data-pattern="nav-mobile-overlay"] .action-button-stack .action-button[data-intent="primary"] {
       background: var(--accent); color: var(--text-on-accent, white);
     }
 
@@ -641,10 +641,10 @@
 <body id="top">
   <main>
     <header>
-      <h1>pattern-nav-marketing — specimen</h1>
+      <h1>pattern-nav — marketing variant — specimen</h1>
       <p class="lede">The marketing-site top nav. Nine primitives composing brand identity, primary navigation with dropdowns and mega panels, CTA cluster, optional announcement bar, and mobile drawer overlay. Composes <code>@quoin/pattern-button-system</code> for every CTA.</p>
       <dl class="meta">
-        <div><dt>Pack</dt><dd>@quoin/pattern-nav-marketing@1.0.0</dd></div>
+        <div><dt>Pack</dt><dd>@quoin/pattern-nav@1.0.0 (data-variant="marketing")</dd></div>
         <div><dt>Primitives</dt><dd>9</dd></div>
         <div><dt>Variants</dt><dd>4 (default / sticky / transparent / compact)</dd></div>
         <div><dt>States</dt><dd>default / scrolled / dropdown-open / mobile-open</dd></div>
@@ -659,19 +659,19 @@
       <p>Canonical marketing-page nav. Solid <code>--surface</code> ground, full link list, link-plus-cta cluster on the right.</p>
     </section>
     <div class="preview-frame">
-      <header data-pattern="nav-marketing" data-variant="default" role="banner">
+      <header data-pattern="nav-section" data-variant="marketing" data-mode="default" role="banner">
         <nav aria-label="Primary">
           <a data-pattern="nav-brand" href="/" aria-label="GALLEY home">GALLEY</a>
-          <ul data-pattern="nav-primary-list">
+          <ul data-pattern="nav-primary-links">
             <li><a data-pattern="nav-item" data-variant="link" href="/product">Product</a></li>
             <li><a data-pattern="nav-item" data-variant="link" href="/pricing" aria-current="page">Pricing</a></li>
             <li><a data-pattern="nav-item" data-variant="link" href="/customers">Customers</a></li>
             <li><a data-pattern="nav-item" data-variant="link" href="/docs">Docs</a></li>
             <li><a data-pattern="nav-item" data-variant="link" href="/blog">Blog</a></li>
           </ul>
-          <div data-pattern="nav-cta-cluster" role="group" aria-label="Account actions">
-            <a class="cta" data-intent="ghost" href="/login">Log in</a>
-            <a class="cta" data-intent="primary" href="/signup">Sign up free</a>
+          <div data-pattern="nav-secondary-actions" role="group" aria-label="Account actions">
+            <a class="action-button" data-intent="ghost" href="/login">Log in</a>
+            <a class="action-button" data-intent="primary" href="/signup">Sign up free</a>
           </div>
           <button data-pattern="nav-mobile-toggle" type="button" aria-expanded="false" aria-controls="nav-mobile-overlay-demo" aria-label="Open menu">
             <svg class="icon-24" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" /></svg>
@@ -686,17 +686,17 @@
       <p>The same default header in its scrolled state — condensed padding, elevated surface, <code>--shadow-md</code>. Triggered by host JS setting <code>data-state="scrolled"</code> when scrollY &gt; 80px.</p>
     </section>
     <div class="preview-frame">
-      <header data-pattern="nav-marketing" data-variant="sticky" data-state="scrolled" role="banner">
+      <header data-pattern="nav-section" data-variant="marketing" data-mode="sticky" data-state="scrolled" role="banner">
         <nav aria-label="Primary">
           <a data-pattern="nav-brand" href="/" aria-label="GALLEY home">GALLEY</a>
-          <ul data-pattern="nav-primary-list">
+          <ul data-pattern="nav-primary-links">
             <li><a data-pattern="nav-item" data-variant="link" href="/product">Product</a></li>
             <li><a data-pattern="nav-item" data-variant="link" href="/pricing">Pricing</a></li>
             <li><a data-pattern="nav-item" data-variant="link" href="/docs">Docs</a></li>
           </ul>
-          <div data-pattern="nav-cta-cluster" role="group" aria-label="Account actions">
-            <a class="cta" data-intent="ghost" href="/login">Log in</a>
-            <a class="cta" data-intent="primary" href="/signup">Sign up free</a>
+          <div data-pattern="nav-secondary-actions" role="group" aria-label="Account actions">
+            <a class="action-button" data-intent="ghost" href="/login">Log in</a>
+            <a class="action-button" data-intent="primary" href="/signup">Sign up free</a>
           </div>
         </nav>
       </header>
@@ -708,18 +708,18 @@
       <p>Renders over hero artwork with no background, no border, no shadow until scroll-threshold is crossed. Used on flagship marketing home pages with full-bleed hero imagery.</p>
     </section>
     <div class="preview-frame hero-bg">
-      <header data-pattern="nav-marketing" data-variant="transparent" role="banner">
+      <header data-pattern="nav-section" data-variant="marketing" data-mode="transparent" role="banner">
         <nav aria-label="Primary">
           <a data-pattern="nav-brand" href="/" aria-label="GALLEY home">GALLEY</a>
-          <ul data-pattern="nav-primary-list">
+          <ul data-pattern="nav-primary-links">
             <li><a data-pattern="nav-item" data-variant="link" href="/product">Product</a></li>
             <li><a data-pattern="nav-item" data-variant="link" href="/pricing">Pricing</a></li>
             <li><a data-pattern="nav-item" data-variant="link" href="/customers">Customers</a></li>
             <li><a data-pattern="nav-item" data-variant="link" href="/docs">Docs</a></li>
           </ul>
-          <div data-pattern="nav-cta-cluster" role="group" aria-label="Account actions">
-            <a class="cta" data-intent="ghost" href="/login">Log in</a>
-            <a class="cta" data-intent="primary" href="/signup">Start free trial</a>
+          <div data-pattern="nav-secondary-actions" role="group" aria-label="Account actions">
+            <a class="action-button" data-intent="ghost" href="/login">Log in</a>
+            <a class="action-button" data-intent="primary" href="/signup">Start free trial</a>
           </div>
         </nav>
       </header>
@@ -735,16 +735,16 @@
       <p>Tighter padding-y. Used on sub-pages, embedded contexts, or in-app marketing surfaces.</p>
     </section>
     <div class="preview-frame">
-      <header data-pattern="nav-marketing" data-variant="compact" role="banner">
+      <header data-pattern="nav-section" data-variant="marketing" data-mode="compact" role="banner">
         <nav aria-label="Primary">
           <a data-pattern="nav-brand" href="/" aria-label="GALLEY home">GALLEY</a>
-          <ul data-pattern="nav-primary-list">
+          <ul data-pattern="nav-primary-links">
             <li><a data-pattern="nav-item" data-variant="link" data-size="sm" href="/changelog">Changelog</a></li>
             <li><a data-pattern="nav-item" data-variant="link" data-size="sm" href="/blog" aria-current="page">Blog</a></li>
             <li><a data-pattern="nav-item" data-variant="link" data-size="sm" href="/community">Community</a></li>
           </ul>
-          <div data-pattern="nav-cta-cluster" role="group" aria-label="Account actions">
-            <a class="cta" data-intent="primary" href="/signup">Sign up free</a>
+          <div data-pattern="nav-secondary-actions" role="group" aria-label="Account actions">
+            <a class="action-button" data-intent="primary" href="/signup">Sign up free</a>
           </div>
         </nav>
       </header>
@@ -759,16 +759,16 @@
       <div data-pattern="nav-announcement-bar" data-tone="info" role="region" aria-label="Announcement">
         New: Galley Easel ships brushes and pen pressure. <a href="/changelog/easel-pressure">Read the release →</a>
       </div>
-      <header data-pattern="nav-marketing" data-variant="default" data-announcement="true" role="banner">
+      <header data-pattern="nav-section" data-variant="marketing" data-mode="default" data-announcement="true" role="banner">
         <nav aria-label="Primary">
           <a data-pattern="nav-brand" href="/" aria-label="GALLEY home">GALLEY</a>
-          <ul data-pattern="nav-primary-list">
+          <ul data-pattern="nav-primary-links">
             <li><a data-pattern="nav-item" data-variant="link" href="/product">Product</a></li>
             <li><a data-pattern="nav-item" data-variant="link" href="/pricing">Pricing</a></li>
             <li><a data-pattern="nav-item" data-variant="link" href="/docs">Docs</a></li>
           </ul>
-          <div data-pattern="nav-cta-cluster" role="group" aria-label="Account actions">
-            <a class="cta" data-intent="primary" href="/signup">Sign up free</a>
+          <div data-pattern="nav-secondary-actions" role="group" aria-label="Account actions">
+            <a class="action-button" data-intent="primary" href="/signup">Sign up free</a>
           </div>
         </nav>
       </header>
@@ -796,16 +796,16 @@
       <p>Vertical list of links under a dropdown trigger. Trigger carries <code>aria-expanded="true"</code> and the chevron rotates 180°.</p>
     </section>
     <div class="preview-frame" style="min-height: 380px;">
-      <header data-pattern="nav-marketing" data-variant="default" data-state="dropdown-open" role="banner">
+      <header data-pattern="nav-section" data-variant="marketing" data-mode="default" data-state="dropdown-open" role="banner">
         <nav aria-label="Primary">
           <a data-pattern="nav-brand" href="/" aria-label="GALLEY home">GALLEY</a>
-          <ul data-pattern="nav-primary-list" style="position: relative;">
+          <ul data-pattern="nav-primary-links" style="position: relative;">
             <li style="position: relative;">
               <button data-pattern="nav-item" data-variant="dropdown" type="button" aria-expanded="true" aria-controls="dropdown-product-simple" aria-haspopup="true" id="trigger-product-simple">
                 Product
                 <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" /></svg>
               </button>
-              <div data-pattern="nav-dropdown-panel" data-register="simple" data-open="true" id="dropdown-product-simple" aria-labelledby="trigger-product-simple">
+              <div data-pattern="nav-dropdown-panel" data-kind="simple" data-open="true" id="dropdown-product-simple" aria-labelledby="trigger-product-simple">
                 <a href="/pdf">
                   Galley PDF Studio
                   <span class="desc">Edit, sign, merge, split.</span>
@@ -831,9 +831,9 @@
             <li><a data-pattern="nav-item" data-variant="link" href="/pricing">Pricing</a></li>
             <li><a data-pattern="nav-item" data-variant="link" href="/docs">Docs</a></li>
           </ul>
-          <div data-pattern="nav-cta-cluster" role="group" aria-label="Account actions">
-            <a class="cta" data-intent="ghost" href="/login">Log in</a>
-            <a class="cta" data-intent="primary" href="/signup">Sign up free</a>
+          <div data-pattern="nav-secondary-actions" role="group" aria-label="Account actions">
+            <a class="action-button" data-intent="ghost" href="/login">Log in</a>
+            <a class="action-button" data-intent="primary" href="/signup">Sign up free</a>
           </div>
         </nav>
       </header>
@@ -845,16 +845,16 @@
       <p>Multi-column panel with category headings and per-link descriptions. Used on flagship marketing where the nav surfaces the full product surface.</p>
     </section>
     <div class="preview-frame" style="min-height: 460px;">
-      <header data-pattern="nav-marketing" data-variant="default" data-state="dropdown-open" role="banner">
+      <header data-pattern="nav-section" data-variant="marketing" data-mode="default" data-state="dropdown-open" role="banner">
         <nav aria-label="Primary">
           <a data-pattern="nav-brand" href="/" aria-label="GALLEY home">GALLEY</a>
-          <ul data-pattern="nav-primary-list" style="position: relative;">
+          <ul data-pattern="nav-primary-links" style="position: relative;">
             <li style="position: relative;">
               <button data-pattern="nav-item" data-variant="dropdown" type="button" aria-expanded="true" aria-controls="dropdown-product-mega" aria-haspopup="true" id="trigger-product-mega">
                 Product
                 <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" /></svg>
               </button>
-              <div data-pattern="nav-dropdown-panel" data-register="mega" data-columns="3" data-open="true" id="dropdown-product-mega" aria-labelledby="trigger-product-mega">
+              <div data-pattern="nav-dropdown-panel" data-kind="mega" data-columns="3" data-open="true" id="dropdown-product-mega" aria-labelledby="trigger-product-mega">
                 <div class="column">
                   <h4>Documents</h4>
                   <ul>
@@ -882,9 +882,9 @@
             <li><a data-pattern="nav-item" data-variant="link" href="/customers">Customers</a></li>
             <li><a data-pattern="nav-item" data-variant="link" href="/docs">Docs</a></li>
           </ul>
-          <div data-pattern="nav-cta-cluster" role="group" aria-label="Account actions">
-            <a class="cta" data-intent="ghost" href="/login">Log in</a>
-            <a class="cta" data-intent="primary" href="/signup">Sign up free</a>
+          <div data-pattern="nav-secondary-actions" role="group" aria-label="Account actions">
+            <a class="action-button" data-intent="ghost" href="/login">Log in</a>
+            <a class="action-button" data-intent="primary" href="/signup">Sign up free</a>
           </div>
         </nav>
       </header>
@@ -898,30 +898,30 @@
     <div class="preview-frame" style="padding: var(--space-card); display: flex; flex-direction: column; gap: var(--space-3); background: var(--surface);">
       <div style="display: flex; gap: var(--space-card); align-items: center;">
         <span style="font-size: var(--type-size-xs); color: var(--text-recede); width: 130px;">link-plus-cta</span>
-        <div data-pattern="nav-cta-cluster" role="group" aria-label="Account actions" style="margin: 0;">
-          <a class="cta" data-intent="ghost" href="/login">Log in</a>
-          <a class="cta" data-intent="primary" href="/signup">Sign up free</a>
+        <div data-pattern="nav-secondary-actions" role="group" aria-label="Account actions" style="margin: 0;">
+          <a class="action-button" data-intent="ghost" href="/login">Log in</a>
+          <a class="action-button" data-intent="primary" href="/signup">Sign up free</a>
         </div>
       </div>
       <div style="display: flex; gap: var(--space-card); align-items: center;">
         <span style="font-size: var(--type-size-xs); color: var(--text-recede); width: 130px;">cta-only</span>
-        <div data-pattern="nav-cta-cluster" role="group" aria-label="Account actions" style="margin: 0;">
-          <a class="cta" data-intent="primary" href="/get-started">Get started</a>
+        <div data-pattern="nav-secondary-actions" role="group" aria-label="Account actions" style="margin: 0;">
+          <a class="action-button" data-intent="primary" href="/get-started">Get started</a>
         </div>
       </div>
       <div style="display: flex; gap: var(--space-card); align-items: center;">
         <span style="font-size: var(--type-size-xs); color: var(--text-recede); width: 130px;">dual-cta</span>
-        <div data-pattern="nav-cta-cluster" role="group" aria-label="Account actions" style="margin: 0;">
-          <a class="cta" data-intent="secondary" href="/pricing">Pricing</a>
-          <a class="cta" data-intent="primary" href="/signup">Sign up free</a>
+        <div data-pattern="nav-secondary-actions" role="group" aria-label="Account actions" style="margin: 0;">
+          <a class="action-button" data-intent="secondary" href="/pricing">Pricing</a>
+          <a class="action-button" data-intent="primary" href="/signup">Sign up free</a>
         </div>
       </div>
       <div style="display: flex; gap: var(--space-card); align-items: center;">
         <span style="font-size: var(--type-size-xs); color: var(--text-recede); width: 130px;">extended</span>
-        <div data-pattern="nav-cta-cluster" role="group" aria-label="Account actions" style="margin: 0;">
-          <a class="cta" data-intent="ghost" href="/contact-sales">Talk to sales</a>
-          <a class="cta" data-intent="secondary" href="/login">Log in</a>
-          <a class="cta" data-intent="primary" href="/signup">Start free trial</a>
+        <div data-pattern="nav-secondary-actions" role="group" aria-label="Account actions" style="margin: 0;">
+          <a class="action-button" data-intent="ghost" href="/contact-sales">Talk to sales</a>
+          <a class="action-button" data-intent="secondary" href="/login">Log in</a>
+          <a class="action-button" data-intent="primary" href="/signup">Start free trial</a>
         </div>
       </div>
     </div>
@@ -936,7 +936,7 @@
       <div>
         <p style="text-align: center; font-size: var(--type-size-xs); color: var(--text-recede); margin: 0 0 var(--space-3);">closed</p>
         <div class="mobile-frame">
-          <header data-pattern="nav-marketing" data-variant="default" role="banner">
+          <header data-pattern="nav-section" data-variant="marketing" data-mode="default" role="banner">
             <nav aria-label="Primary" style="padding: var(--space-2) var(--space-3);">
               <a data-pattern="nav-brand" href="/" aria-label="GALLEY home">GALLEY</a>
               <button data-pattern="nav-mobile-toggle" type="button" aria-expanded="false" aria-controls="nav-mobile-overlay-closed" aria-label="Open menu" style="display: inline-flex;">
@@ -952,7 +952,7 @@
       <div>
         <p style="text-align: center; font-size: var(--type-size-xs); color: var(--text-recede); margin: 0 0 var(--space-3);">open</p>
         <div class="mobile-frame">
-          <header data-pattern="nav-marketing" data-variant="default" data-state="mobile-open" role="banner">
+          <header data-pattern="nav-section" data-variant="marketing" data-mode="default" data-state="mobile-open" role="banner">
             <nav aria-label="Primary" style="padding: var(--space-2) var(--space-3);">
               <a data-pattern="nav-brand" href="/" aria-label="GALLEY home">GALLEY</a>
               <button data-pattern="nav-mobile-toggle" type="button" aria-expanded="true" aria-controls="nav-mobile-overlay-open" aria-label="Close menu" style="display: inline-flex;">
@@ -976,8 +976,8 @@
               </ul>
             </nav>
             <div class="cta-stack">
-              <a class="cta" data-intent="secondary" href="/login">Log in</a>
-              <a class="cta" data-intent="primary" href="/signup">Sign up free</a>
+              <a class="action-button" data-intent="secondary" href="/login">Log in</a>
+              <a class="action-button" data-intent="primary" href="/signup">Sign up free</a>
             </div>
           </div>
         </div>
@@ -1005,7 +1005,7 @@
 
     <!-- ===== COMPOSITION LINEAGE ===== -->
     <section class="specimen-divider">
-      <h2>Composition lineage — what nav-marketing consumes</h2>
+      <h2>Composition lineage — what the nav (marketing variant) consumes</h2>
       <p>This pattern composes <code>pattern-button-system</code> for every CTA. Optionally consumes <code>pattern-feature-grid</code> in P1 when the mega-dropdown surfaces featured cells.</p>
     </section>
     <table class="lineage">
@@ -1016,19 +1016,19 @@
         <tr>
           <td><code>&lt;action-button intent="primary"&gt;</code></td>
           <td>@quoin/pattern-button-system</td>
-          <td>nav-cta-cluster (every primary CTA)</td>
+          <td>nav-secondary-actions (every primary CTA)</td>
           <td>Rightmost CTA in every variant. Inherits all 4 sizes + 8 microstates.</td>
         </tr>
         <tr>
           <td><code>&lt;action-button intent="ghost"&gt;</code></td>
           <td>@quoin/pattern-button-system</td>
-          <td>nav-cta-cluster Log-in link · nav-mobile-toggle</td>
+          <td>nav-secondary-actions Log-in link · nav-mobile-toggle</td>
           <td>Ghost-intent for the de-escalated 'Log in' and for the icon-only mobile hamburger button.</td>
         </tr>
         <tr>
           <td><code>&lt;action-button intent="secondary"&gt;</code></td>
           <td>@quoin/pattern-button-system</td>
-          <td>nav-cta-cluster (dual-cta / extended registers)</td>
+          <td>nav-secondary-actions (dual-cta / extended registers)</td>
           <td>Mid-intent CTA for pricing-link / talk-to-sales when alongside a primary CTA.</td>
         </tr>
         <tr>

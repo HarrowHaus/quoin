@@ -155,6 +155,17 @@ Open `examples/index.html` to render every widget × every microstate × every s
 - Accessibility checklist (15 line items covering label wiring / ARIA / hit targets / focus rings / reduced-motion)
 - Typography precision section
 
+## Consumed by (reverse lineage)
+
+Per Phase 22 Consolidation 3 (Q5 — composition reality) + D.82 reverse-lineage tables. Declared consumers:
+
+| Consumer pack | Used as | Phase |
+|---|---|---|
+| `@quoin/pattern-form-validation` | Wraps form-control inputs; adds field-level + form-level error display, live-region announcement on submit. | Phase Patterns v1.0 |
+| `@quoin/pattern-footer-mega` (mega variant) | Email input inside the newsletter primitive. | Phase Patterns v1.0 |
+| `@quoin/pattern-modal-dialog` (form variant) | Inputs inside form-in-modal patterns. | Phase Patterns v1.0 |
+| `@quoin/pattern-nav` (editorial variant) | `nav-search-inline` — expandable inline search input. Composes a single text input from form-fields with the canonical focus / disabled / readonly states intact. | Phase 22 Cons. 4 / 2026-05-20 |
+
 ## License
 
 MIT.

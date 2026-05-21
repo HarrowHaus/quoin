@@ -176,6 +176,7 @@ const DATA_PATTERN_NAMING_RULES = {
  */
 const DATA_REGISTER_DEPRECATED_IN = {
   'hero': 'data-alignment (universal) / data-video-mode (video variant) / data-kind (sub-slot kind) / data-cluster (actions cluster) / data-layout (brand-photo)',
+  'nav':  'data-alignment (universal) / data-variant (top-level marketing/app-chrome/docs/editorial) / data-mode (section-level: sticky/transparent/compact/standard/with-subnav/condensed/topbar-only/with-sidebar) / data-kind (sub-slot: simple/mega for dropdown-panel; pill/outline for subscribe-cta; underline/pill/boxed for nav-page-tabs)',
 };
 
 /**
@@ -191,7 +192,7 @@ const DATA_REGISTER_DEPRECATED_IN = {
  *
  * Phase 22 Cons. 3 / 2026-05-20 lock — operator Q5.
  */
-const COMPOSITION_REALITY_ENFORCED_FOR = new Set(['hero']);
+const COMPOSITION_REALITY_ENFORCED_FOR = new Set(['hero', 'nav']);
 const COMPOSITION_PRIMITIVES = {
   '@quoin/pattern-button-system': ['action-button'],
 };

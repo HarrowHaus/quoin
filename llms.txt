@@ -14,7 +14,7 @@ For AI coding tools generating Quoin markup at scale: this file is the index. Re
 - **Composition.** Patterns that need buttons consume `class="action-button"` from `@quoin/pattern-button-system` directly; they do not re-inline button CSS under a different class name. The composition reality is enforced by the gate (v3.G.17).
 - **Tokens.** Every CSS value comes from `@quoin/tokens-baseline` (175 canonical tokens across 11 DTCG 2025.10 types). Patterns do not declare raw color, spacing, type-size, or motion values — they reference token names. The token namespace is frozen at v1.0.
 
-## Pattern catalog (18 patterns)
+## Pattern catalog (15 patterns)
 
 Each link below opens the canonical specimen rendered live (raw.githack.com). The specimen is the source of truth for the pattern's anatomy.
 
@@ -29,21 +29,18 @@ Each link below opens the canonical specimen rendered live (raw.githack.com). Th
 - [toast-notifier](https://raw.githack.com/harrowhaus/quoin/main/02_reference-packs/patterns/toast-notifier/examples/index.html): stacked toasts, auto-dismiss (timed), action affordance, live-region announcement. `role="status"` for info; `role="alert"` for critical.
 - [page-header](https://raw.githack.com/harrowhaus/quoin/main/02_reference-packs/patterns/page-header/examples/index.html): breadcrumb + title + status badges + primary action + overflow actions. Sticky variant + status-badge composition.
 
-### Marketing surface (8)
+### Marketing surface (7)
 
 - [hero](https://raw.githack.com/harrowhaus/quoin/main/02_reference-packs/patterns/hero/examples/type-only.html): unified hero pack with 5 variants. `data-variant="type-only | animated | gradient-mesh | brand-photo | video"`. Mandatory slots: section / eyebrow / headline / subhead / actions / meta. Conditional slots gated by variant: accent (animated), background (gradient-mesh), media + overlay (brand-photo + video), controls (video, WCAG 2.2.2 mandatory).
 - [feature-grid](https://raw.githack.com/harrowhaus/quoin/main/02_reference-packs/patterns/feature-grid/examples/index.html): `data-layout="three-up | four-tile | six-tile | bento | steps"` × 4 cell variants × 6 grid-level states.
 - [footer-mega](https://raw.githack.com/harrowhaus/quoin/main/02_reference-packs/patterns/footer-mega/examples/index.html): `data-variant="minimal | compact | default | mega"`. Mega variant ships newsletter primitive (composes form-fields + button-system) and locale picker.
-- [nav-marketing](https://raw.githack.com/harrowhaus/quoin/main/02_reference-packs/patterns/nav-marketing/examples/index.html): top-nav with mega-menu, mobile drawer, theme toggle, primary CTA.
 - [pricing-tiers](https://raw.githack.com/harrowhaus/quoin/main/02_reference-packs/patterns/pricing-tiers/examples/index.html): 3-tier comparison with monthly/annual toggle, per-tier feature list, per-tier CTA. "Popular" badge on featured tier.
 - [stat-card](https://raw.githack.com/harrowhaus/quoin/main/02_reference-packs/patterns/stat-card/examples/index.html): numeric value + label + optional trend indicator + optional sparkline slot. Tabular numerics enforced.
 - [testimonial](https://raw.githack.com/harrowhaus/quoin/main/02_reference-packs/patterns/testimonial/examples/index.html): `data-variant="compact | default | featured"`. Composes avatar-stack from vocab-app-shell.
 
-### Navigation chrome (4 — 2 in app surface, 2 marketing-adjacent)
+### Navigation (1 — unified)
 
-- [nav-app-chrome](https://raw.githack.com/harrowhaus/quoin/main/02_reference-packs/patterns/nav-app-chrome/examples/index.html): application top-nav with workspace switcher, command-palette trigger (Cmd-K), and avatar menu. Sticky on scroll.
-- [nav-docs](https://raw.githack.com/harrowhaus/quoin/main/02_reference-packs/patterns/nav-docs/examples/index.html): documentation sidebar with sticky table-of-contents, search affordance, Cmd-K trigger, version switcher.
-- [nav-editorial](https://raw.githack.com/harrowhaus/quoin/main/02_reference-packs/patterns/nav-editorial/examples/index.html): newsroom-style nav with utility row, edition date, masthead, sections row.
+- [nav](https://raw.githack.com/harrowhaus/quoin/main/02_reference-packs/patterns/nav/examples/marketing.html): unified nav pack with 4 variants. `data-variant="marketing | app-chrome | docs | editorial"`. Mandatory slots: section + brand. Conditional slots (17 total) gated by variant: primary-links, item, dropdown-panel, secondary-actions, mobile-toggle (marketing + app-chrome); workspace-switcher, search, avatar, subnav (app-chrome); skip-link, topbar, sidebar, sidebar-section, meta-actions (docs); utility, masthead, sections, search-inline, subscribe-cta (editorial). Composes button-system + form-fields + modal-dialog as peer packs.
 
 ## How to use Quoin from generated code
 

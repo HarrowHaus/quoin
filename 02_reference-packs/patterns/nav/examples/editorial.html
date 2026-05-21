@@ -288,16 +288,16 @@
     }
 
     /* single-row register */
-    [data-pattern="nav-section"][data-variant="editorial"][data-register="single-row"] [data-pattern="nav-utility"] { display: none; }
-    [data-pattern="nav-section"][data-variant="editorial"][data-register="single-row"] [data-pattern="nav-masthead"] {
+    [data-pattern="nav-section"][data-variant="editorial"][data-mode="single-row"] [data-pattern="nav-utility"] { display: none; }
+    [data-pattern="nav-section"][data-variant="editorial"][data-mode="single-row"] [data-pattern="nav-masthead"] {
       display: inline-flex; padding: var(--space-3) var(--space-card); border-bottom: 0; text-align: left;
     }
-    [data-pattern="nav-section"][data-variant="editorial"][data-register="single-row"] [data-pattern="nav-masthead"] .wordmark { font-size: var(--type-size-xl); }
-    [data-pattern="nav-section"][data-variant="editorial"][data-register="single-row"] .single-row-flex {
+    [data-pattern="nav-section"][data-variant="editorial"][data-mode="single-row"] [data-pattern="nav-masthead"] .wordmark { font-size: var(--type-size-xl); }
+    [data-pattern="nav-section"][data-variant="editorial"][data-mode="single-row"] .single-row-flex {
       display: flex; align-items: center; gap: var(--space-card);
       padding: 0 var(--space-card) 0 0;
     }
-    [data-pattern="nav-section"][data-variant="editorial"][data-register="single-row"] [data-pattern="nav-sections"] {
+    [data-pattern="nav-section"][data-variant="editorial"][data-mode="single-row"] [data-pattern="nav-sections"] {
       flex: 1; justify-content: flex-start;
       padding: var(--space-3) 0;
     }
@@ -332,7 +332,7 @@
       <p>Three rows — utility (small, top) → masthead (large, centered with edition date) → categories (medium, below). The classic newspaper masthead layout used by NYT, The Guardian, FT, Atlantic.</p>
     </section>
     <div class="stage">
-      <header data-pattern="nav-section" data-variant="editorial" data-register="stacked" data-weight="standard" role="banner">
+      <header data-pattern="nav-section" data-variant="editorial" data-mode="stacked" data-weight="standard" role="banner">
         <div data-pattern="nav-utility" role="group" aria-label="Utility actions">
           <span class="edition-date">Saturday, December 14, 2026 · Issue 247</span>
           <div class="spacer"></div>
@@ -347,7 +347,7 @@
           </form>
           <span class="separator" aria-hidden="true">·</span>
           <a href="/account">Sign in</a>
-          <a data-pattern="nav-subscribe-cta" href="/subscribe" data-register="pill">Subscribe</a>
+          <a class="action-button" data-pattern="nav-subscribe-cta" href="/subscribe" data-kind="pill">Subscribe</a>
         </div>
         <div data-pattern="nav-masthead" data-align="center">
           <a class="wordmark" href="/" aria-label="The Broadsheet home">The Broadsheet</a>
@@ -373,12 +373,12 @@
       <p>Border-width-md dividers (thicker), type-size-3xl masthead. Strong typographic statement — for publications leaning hard on editorial gravitas.</p>
     </section>
     <div class="stage">
-      <header data-pattern="nav-section" data-variant="editorial" data-register="stacked" data-weight="heavy" role="banner">
+      <header data-pattern="nav-section" data-variant="editorial" data-mode="stacked" data-weight="heavy" role="banner">
         <div data-pattern="nav-utility" role="group" aria-label="Utility actions">
           <span class="edition-date">Vol. XII · No. 247 · Saturday, December 14</span>
           <div class="spacer"></div>
           <a href="/account">Sign in</a>
-          <a data-pattern="nav-subscribe-cta" href="/subscribe">Subscribe</a>
+          <a class="action-button" data-pattern="nav-subscribe-cta" href="/subscribe">Subscribe</a>
         </div>
         <div data-pattern="nav-masthead" data-align="center">
           <a class="wordmark" href="/" aria-label="The Quoin Review home">The Quoin Review</a>
@@ -402,7 +402,7 @@
       <p>Everything in one horizontal line — small logo, categories inline, utility actions right. Used at narrow viewports OR for condensed publications.</p>
     </section>
     <div class="stage">
-      <header data-pattern="nav-section" data-variant="editorial" data-register="single-row" data-weight="standard" role="banner">
+      <header data-pattern="nav-section" data-variant="editorial" data-mode="single-row" data-weight="standard" role="banner">
         <div class="single-row-flex">
           <div data-pattern="nav-masthead" data-align="left">
             <a class="wordmark" href="/" aria-label="Galley Reader home">Galley Reader</a>
@@ -417,7 +417,7 @@
           </nav>
           <div class="spacer" style="flex: 1;"></div>
           <a href="/account" style="font-size: var(--type-size-xs); color: var(--text-recede); text-decoration: none; font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-wide); text-transform: uppercase;">Sign in</a>
-          <a data-pattern="nav-subscribe-cta" href="/subscribe">Subscribe</a>
+          <a class="action-button" data-pattern="nav-subscribe-cta" href="/subscribe">Subscribe</a>
         </div>
       </header>
     </div>
@@ -428,8 +428,8 @@
       <p>Extended utility row adds edition date, weather/locale, saved-articles count. Used by full-feature editorial brands.</p>
     </section>
     <div class="stage">
-      <header data-pattern="nav-section" data-variant="editorial" data-register="stacked" data-weight="standard" role="banner">
-        <div data-pattern="nav-utility" data-register="extended" role="group" aria-label="Utility actions" style="background: var(--surface);">
+      <header data-pattern="nav-section" data-variant="editorial" data-mode="stacked" data-weight="standard" role="banner">
+        <div data-pattern="nav-utility" data-kind="extended" role="group" aria-label="Utility actions" style="background: var(--surface);">
           <span class="edition-date">Saturday, December 14, 2026</span>
           <span class="separator" aria-hidden="true">·</span>
           <span>Edinburgh · 4°C overcast</span>
@@ -439,7 +439,7 @@
           <a href="/comments">My comments</a>
           <span class="separator" aria-hidden="true">·</span>
           <a href="/account">Account</a>
-          <a data-pattern="nav-subscribe-cta" href="/subscribe" data-kind="outline">Subscribe</a>
+          <a class="action-button" data-pattern="nav-subscribe-cta" href="/subscribe" data-kind="outline">Subscribe</a>
         </div>
         <div data-pattern="nav-masthead" data-align="center">
           <a class="wordmark" href="/" aria-label="The Broadsheet home">The Broadsheet</a>
@@ -461,8 +461,8 @@
       <p>Two registers — pill (filled --accent ground, the standard) and outline (transparent ground with --accent border, used in heavier-weight publications where the pill ground would compete with the masthead).</p>
     </section>
     <div class="stage" style="padding: var(--space-card); display: flex; gap: var(--space-card); align-items: center; background: var(--surface);">
-      <a data-pattern="nav-subscribe-cta" href="/subscribe" data-register="pill">Subscribe</a>
-      <a data-pattern="nav-subscribe-cta" href="/subscribe" data-kind="outline">Subscribe</a>
+      <a class="action-button" data-pattern="nav-subscribe-cta" href="/subscribe" data-kind="pill">Subscribe</a>
+      <a class="action-button" data-pattern="nav-subscribe-cta" href="/subscribe" data-kind="outline">Subscribe</a>
       <span style="font-size: var(--type-size-sm); color: var(--text-recede);">pill (default) and outline registers</span>
     </div>
 

@@ -147,6 +147,16 @@ Open `examples/index.html` in a browser. Specimen statically renders every varia
 - **Composition lineage table** with 6 consumed primitives
 - **14-item accessibility checklist** covering role/aria-modal/aria-labelledby, inert background, body scroll lock, focus trap + restoration, Escape + backdrop dismiss policy, Cancel button tab-order discipline, destructive button text guidelines, async submit state handling, command palette ARIA, reduced-motion handling
 
+## Consumed by (reverse lineage)
+
+Per Phase 22 Consolidation 3 (Q5 — composition reality) + D.82 reverse-lineage tables. This pack tracks its declared consumers:
+
+| Consumer pack | Used as | Phase |
+|---|---|---|
+| `@quoin/pattern-nav` (variants: app-chrome, docs) | Cmd+K command-palette dialog opened by `nav-search` trigger. Modal-dialog's `data-variant="command"` register hosts the searchable list of routes / actions; activation handled by the host JS (palette opens, focus traps inside, ESC dismisses, focus restores to the trigger). | Phase 22 Cons. 4 / 2026-05-20 |
+
+This list grows as more patterns formally declare modal-dialog as a peer pack and consume `<dialog data-pattern="modal-dialog">` directly.
+
 ## License
 
 MIT.

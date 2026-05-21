@@ -538,91 +538,80 @@ Accessible modal with focus trap, ESC-to-close, scrim click, scroll lock. Built 
 
 ---
 
-## nav-app-chrome
+## nav
 
-**Pack:** `@quoin/pattern-nav-app-chrome@1.0.0`
-**Folder:** `02_reference-packs/patterns/nav-app-chrome/`
+**Pack:** `@quoin/pattern-nav@1.0.0`
+**Folder:** `02_reference-packs/patterns/nav/`
+**Specimens:** `examples/{marketing, app-chrome, docs, editorial}.html`
 
-Application top-nav with workspace switcher, command-palette trigger (Cmd-K), and avatar menu.
+Unified nav pattern. Four variants share a 2-slot core anatomy (section + brand) plus 17 conditional slots gated by variant. Consolidates the 4 pre-Cons.4 parallel nav packs.
 
-### Anatomy
-
-| Slot | Element | Role |
-|---|---|---|
-| `nav-app-chrome-section` | `<header role="banner">` | Top-nav landmark |
-| `nav-app-chrome-workspace` | `<button>` | Workspace switcher |
-| `nav-app-chrome-search` | `<button>` | Cmd-K trigger |
-| `nav-app-chrome-primary-links` | `<nav>` | Primary navigation |
-| `nav-app-chrome-avatar` | `<button>` | User menu trigger |
-
-### Composition
-
-- Consumes: `@quoin/pattern-button-system` for chrome buttons.
-- Consumes: `@quoin/vocab-app-shell` for the avatar primitive.
-
----
-
-## nav-docs
-
-**Pack:** `@quoin/pattern-nav-docs@1.0.0`
-**Folder:** `02_reference-packs/patterns/nav-docs/`
-
-Documentation sidebar with sticky table-of-contents, search affordance, Cmd-K trigger, version switcher.
-
-### Anatomy
+### Anatomy — mandatory (2 slots, every variant)
 
 | Slot | Element | Role |
 |---|---|---|
-| `nav-docs-section` | `<aside>` | Sidebar |
-| `nav-docs-topbar` | `<header>` | Search + version switcher |
-| `nav-docs-skip-link` | `<a class="sr-only-focusable">` | Skip-to-content link (WCAG 2.4.1) |
-| `nav-docs-section-list` | `<nav>` | Sections list |
-| `nav-docs-toc` | `<nav aria-label="On this page">` | Sticky table-of-contents |
+| `nav-section` | `<header role="banner">` (top-of-page) or `<nav>` (secondary) or `<div>` (docs hybrid) | Container; carries `data-variant`, `data-alignment`, `data-state`, `data-mode` |
+| `nav-brand` | `<a>` | Wordmark / logo / brand link to home |
 
-### ARIA contract
+### Anatomy — conditional (17 slots, gated by data-variant)
 
-- Skip link: visible on focus only. Targets `<main id="content">`.
-- TOC links use `aria-current="location"` for the currently-scrolled section.
-
----
-
-## nav-editorial
-
-**Pack:** `@quoin/pattern-nav-editorial@1.0.0`
-**Folder:** `02_reference-packs/patterns/nav-editorial/`
-
-Newsroom-style nav with utility row, edition date, masthead, sections row.
-
-### Anatomy
-
-| Slot | Element | Role |
+| Slot | Variants | Role |
 |---|---|---|
-| `nav-editorial-section` | `<header role="banner">` | Nav landmark |
-| `nav-editorial-utility` | `<div>` | Top utility row (date, login, subscribe) |
-| `nav-editorial-masthead` | `<div>` | Publication name |
-| `nav-editorial-sections` | `<nav>` | Sections row |
-| `nav-editorial-subscribe-cta` | `<a class="action-button">` | Subscribe pill |
-| `nav-editorial-search-form` | `<form role="search">` | Search box |
+| `nav-primary-links` | marketing, app-chrome | `<ul>` primary nav items |
+| `nav-item` | marketing, app-chrome, editorial (sections) | `<a>` single nav link; `aria-current="page"` for active |
+| `nav-dropdown-panel` | marketing | Floating panel for dropdown / mega-menu; `data-kind="simple \| mega"` |
+| `nav-secondary-actions` | marketing, app-chrome | Action cluster (theme toggle + primary CTA) |
+| `nav-mobile-toggle` | marketing, app-chrome, docs | Hamburger trigger (inline-expansion via `data-state="menu-open"`) |
+| `nav-workspace-switcher` | app-chrome | App-shell workspace selector trigger |
+| `nav-search` | app-chrome, docs | Cmd-K palette trigger (opens modal-dialog) |
+| `nav-search-inline` | editorial | Expandable inline search input (composes form-fields) |
+| `nav-avatar` | app-chrome | User menu trigger (composes vocab-app-shell avatar + button-system) |
+| `nav-skip-link` | docs (WCAG 2.4.1 mandatory) | Skip-to-content link |
+| `nav-topbar` | docs | Sticky topbar with brand + search + meta |
+| `nav-sidebar` | docs | Documentation sidebar `<aside>` |
+| `nav-sidebar-section` | docs | Collapsible section in the sidebar |
+| `nav-meta-actions` | docs | Version switcher + theme toggle + GitHub link |
+| `nav-utility` | editorial | Utility row above masthead |
+| `nav-masthead` | editorial | Large display wordmark; `data-weight`, `data-align` |
+| `nav-sections` | editorial | Section links row |
+| `nav-subscribe-cta` | editorial | Subscribe pill (composes action-button) |
+| `nav-subnav` | app-chrome (with-subnav data-mode) | Second-tier nav row |
 
----
+### Universal attributes
 
-## nav-marketing
-
-**Pack:** `@quoin/pattern-nav-marketing@1.0.0`
-**Folder:** `02_reference-packs/patterns/nav-marketing/`
-
-Marketing-site top nav with mega-menu, mobile drawer, theme toggle, primary CTA.
-
-### Anatomy
-
-| Slot | Element | Role |
+| Attribute | Values | Default |
 |---|---|---|
-| `nav-marketing-section` | `<header role="banner">` | Nav landmark |
-| `nav-marketing-wordmark` | `<a>` | Brand wordmark |
-| `nav-marketing-links` | `<nav>` `<ul>` | Primary links |
-| `nav-marketing-megamenu` | `<div role="region">` | Mega-menu panel (opened on hover/click) |
-| `nav-marketing-actions` | `<div>` | CTA cluster (theme toggle + primary CTA) |
-| `nav-marketing-drawer` | `<div role="dialog">` | Mobile drawer |
+| `data-variant` | `marketing` / `app-chrome` / `docs` / `editorial` | `marketing` |
+| `data-alignment` | `centered` / `left` / `right` / `split-anchor` | `left` |
+| `data-state` | `default` / `scrolled` / `menu-open` / `search-open` | `default` |
+| `data-mode` | per-variant (sticky/transparent/compact for marketing; standard/with-subnav/condensed for app-chrome; topbar-only/with-sidebar for docs; single-row/stacked for editorial) | varies |
+
+### Composition (real, not aspirational)
+
+- `@quoin/pattern-button-system` — `class="action-button"` in nav-secondary-actions (marketing + app-chrome) and nav-subscribe-cta (editorial)
+- `@quoin/pattern-form-fields` — text input inside nav-search-inline (editorial)
+- `@quoin/pattern-modal-dialog` — Cmd-K palette opened by nav-search trigger (app-chrome, docs)
+- `@quoin/tokens-baseline`
+
+### Minimal markup (marketing variant)
+
+```html
+<header data-pattern="nav-section" data-variant="marketing" data-alignment="left" data-mode="default" role="banner">
+  <div class="inner">
+    <a data-pattern="nav-brand" href="/" aria-label="Home">Brand</a>
+    <nav aria-label="Primary">
+      <ul data-pattern="nav-primary-links">
+        <li><a data-pattern="nav-item" href="/product">Product</a></li>
+        <li><a data-pattern="nav-item" href="/pricing" aria-current="page">Pricing</a></li>
+      </ul>
+    </nav>
+    <div data-pattern="nav-secondary-actions" role="group">
+      <a class="action-button" data-intent="ghost" href="/login">Sign in</a>
+      <a class="action-button" data-intent="primary" href="/start">Get started</a>
+    </div>
+  </div>
+</header>
+```
 
 ---
 

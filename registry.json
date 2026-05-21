@@ -156,61 +156,32 @@
       ]
     },
     {
-      "name": "nav-app-chrome",
+      "name": "nav",
       "type": "registry:component",
-      "title": "Nav (App Chrome)",
-      "description": "Application top-nav with workspace switcher, command-palette trigger (Cmd-K), and avatar menu. Sticky on scroll.",
-      "categories": ["application", "navigation"],
-      "registryDependencies": ["button-system"],
+      "title": "Nav",
+      "description": "Unified nav pattern — 4 variants (marketing / app-chrome / docs / editorial) sharing 2 mandatory + 17 conditional slots. Consolidated from 4 parallel packs per Phase 22 Cons. 4.",
+      "categories": ["navigation"],
+      "registryDependencies": ["button-system", "form-fields", "modal-dialog"],
       "files": [
         {
-          "path": "02_reference-packs/patterns/nav-app-chrome/examples/index.html",
+          "path": "02_reference-packs/patterns/nav/examples/marketing.html",
           "type": "registry:component",
-          "target": "components/quoin/nav-app-chrome.html"
-        }
-      ]
-    },
-    {
-      "name": "nav-docs",
-      "type": "registry:component",
-      "title": "Nav (Docs)",
-      "description": "Documentation sidebar nav with sticky table-of-contents, search affordance, Cmd-K trigger, version switcher, and skip-to-content link (WCAG 2.4.1).",
-      "categories": ["navigation", "documentation"],
-      "files": [
+          "target": "components/quoin/nav/marketing.html"
+        },
         {
-          "path": "02_reference-packs/patterns/nav-docs/examples/index.html",
+          "path": "02_reference-packs/patterns/nav/examples/app-chrome.html",
           "type": "registry:component",
-          "target": "components/quoin/nav-docs.html"
-        }
-      ]
-    },
-    {
-      "name": "nav-editorial",
-      "type": "registry:component",
-      "title": "Nav (Editorial)",
-      "description": "Newsroom-style nav with utility row, edition date, masthead, sections row above the headlines.",
-      "categories": ["editorial", "navigation"],
-      "registryDependencies": ["button-system"],
-      "files": [
+          "target": "components/quoin/nav/app-chrome.html"
+        },
         {
-          "path": "02_reference-packs/patterns/nav-editorial/examples/index.html",
+          "path": "02_reference-packs/patterns/nav/examples/docs.html",
           "type": "registry:component",
-          "target": "components/quoin/nav-editorial.html"
-        }
-      ]
-    },
-    {
-      "name": "nav-marketing",
-      "type": "registry:component",
-      "title": "Nav (Marketing)",
-      "description": "Marketing-site top nav with mega-menu, mobile drawer, theme toggle, and primary CTA.",
-      "categories": ["marketing", "navigation"],
-      "registryDependencies": ["button-system"],
-      "files": [
+          "target": "components/quoin/nav/docs.html"
+        },
         {
-          "path": "02_reference-packs/patterns/nav-marketing/examples/index.html",
+          "path": "02_reference-packs/patterns/nav/examples/editorial.html",
           "type": "registry:component",
-          "target": "components/quoin/nav-marketing.html"
+          "target": "components/quoin/nav/editorial.html"
         }
       ]
     },

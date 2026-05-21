@@ -106,6 +106,7 @@ its declared consumers. The first explicit consumer:
 | Consumer pack | Used as | Phase |
 |---|---|---|
 | `@quoin/pattern-hero` (all 5 variants: type-only, animated, gradient-mesh, brand-photo, video) | `<a class="action-button" data-intent="primary"&#124;ghost&#124;secondary" href="...">` in the `hero-actions` slot. The hero pack adds context-scoped backdrop-blur overrides on ghost CTAs when sitting over media (brand-photo's image-full-bleed / image-overlay layouts, and the video variant) — button-system stays unchanged; the overrides ride on cascade specificity. | Phase 22 Cons. 3 / 2026-05-20 |
+| `@quoin/pattern-nav` (all 4 variants: marketing, app-chrome, docs, editorial) | `<a class="action-button" data-intent="primary"&#124;ghost&#124;secondary" href="...">` in `nav-secondary-actions` (marketing + app-chrome), `nav-subscribe-cta` (editorial), `nav-meta-actions` (docs version switcher + theme toggle + GitHub trigger). | Phase 22 Cons. 4 / 2026-05-20 |
 
 This list grows as more patterns formally declare button-system as a peer
 pack and consume `<action-button>` directly (v3.G.17 gate enforces the

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>@quoin/pattern-nav-app-chrome — specimen</title>
+  <title>@quoin/pattern-nav — app-chrome variant — specimen</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -187,7 +187,7 @@
 
     /* ===== APP-CHROME PRODUCTION STYLES ===== */
 
-    [data-pattern="nav-app-chrome"] {
+    [data-pattern="nav-section"][data-variant="app-chrome"] {
       width: 100%;
       background: var(--surface);
       color: var(--text);
@@ -196,17 +196,17 @@
       position: relative;
       z-index: 100;
     }
-    [data-pattern="nav-app-chrome"] > nav {
+    [data-pattern="nav-section"][data-variant="app-chrome"] > nav {
       display: flex;
       align-items: center;
       gap: var(--space-3);
       padding: var(--space-3) var(--space-card);
       min-height: 56px;
     }
-    [data-pattern="nav-app-chrome"][data-variant="condensed"] > nav { padding: var(--space-2) var(--space-card); min-height: 44px; }
+    [data-pattern="nav-section"][data-variant="app-chrome"][data-mode="condensed"] > nav { padding: var(--space-2) var(--space-card); min-height: 44px; }
 
     /* workspace-switcher */
-    [data-pattern="app-workspace-switcher"] {
+    [data-pattern="nav-workspace-switcher"] {
       display: inline-flex;
       align-items: center;
       gap: var(--space-2);
@@ -221,13 +221,13 @@
       cursor: pointer;
       transition: var(--transition-default);
     }
-    [data-pattern="app-workspace-switcher"]:hover { background: var(--surface-elevated); }
-    [data-pattern="app-workspace-switcher"]:focus-visible {
+    [data-pattern="nav-workspace-switcher"]:hover { background: var(--surface-elevated); }
+    [data-pattern="nav-workspace-switcher"]:focus-visible {
       outline: var(--focus-ring-width) solid var(--focus-ring);
       outline-offset: var(--focus-ring-offset);
     }
-    [data-pattern="app-workspace-switcher"][aria-expanded="true"] { background: var(--surface-elevated); }
-    [data-pattern="app-workspace-switcher"] .logo {
+    [data-pattern="nav-workspace-switcher"][aria-expanded="true"] { background: var(--surface-elevated); }
+    [data-pattern="nav-workspace-switcher"] .logo {
       width: 20px; height: 20px;
       background: var(--accent);
       color: var(--text-on-accent, white);
@@ -239,7 +239,7 @@
       font-weight: var(--font-weight-bold, 700);
       font-family: var(--font-display);
     }
-    [data-pattern="app-workspace-switcher"] .plan-badge {
+    [data-pattern="nav-workspace-switcher"] .plan-badge {
       background: var(--accent-recede);
       color: var(--text-emphasis);
       padding: 1px 6px;
@@ -249,18 +249,18 @@
       letter-spacing: var(--tracking-wide);
       text-transform: uppercase;
     }
-    [data-pattern="app-workspace-switcher"] .chevron {
+    [data-pattern="nav-workspace-switcher"] .chevron {
       width: 12px; height: 12px;
       transition: transform var(--motion-fast) var(--ease-standard);
     }
-    [data-pattern="app-workspace-switcher"][aria-expanded="true"] .chevron { transform: rotate(180deg); }
+    [data-pattern="nav-workspace-switcher"][aria-expanded="true"] .chevron { transform: rotate(180deg); }
 
     /* breadcrumb */
-    [data-pattern="app-breadcrumb"] {
+    [data-pattern="nav-breadcrumb"] {
       display: inline-flex;
       align-items: center;
     }
-    [data-pattern="app-breadcrumb"] ol {
+    [data-pattern="nav-breadcrumb"] ol {
       list-style: none; padding: 0; margin: 0;
       display: inline-flex;
       align-items: center;
@@ -268,7 +268,7 @@
       font-family: var(--font-sans);
       font-size: var(--type-size-sm);
     }
-    [data-pattern="app-breadcrumb"] a {
+    [data-pattern="nav-breadcrumb"] a {
       color: var(--text-recede);
       text-decoration: none;
       font-weight: var(--font-weight-medium);
@@ -276,16 +276,16 @@
       border-radius: var(--radius-sm);
       transition: var(--transition-default);
     }
-    [data-pattern="app-breadcrumb"] a:hover { background: var(--surface-elevated); color: var(--accent-hover); }
-    [data-pattern="app-breadcrumb"] a:focus-visible {
+    [data-pattern="nav-breadcrumb"] a:hover { background: var(--surface-elevated); color: var(--accent-hover); }
+    [data-pattern="nav-breadcrumb"] a:focus-visible {
       outline: var(--focus-ring-width) solid var(--focus-ring);
       outline-offset: var(--focus-ring-offset);
     }
-    [data-pattern="app-breadcrumb"] [aria-current="page"] {
+    [data-pattern="nav-breadcrumb"] [aria-current="page"] {
       color: var(--text-emphasis);
       font-weight: var(--font-weight-semibold);
     }
-    [data-pattern="app-breadcrumb"] .separator {
+    [data-pattern="nav-breadcrumb"] .separator {
       color: var(--border-emphasis, var(--border));
       font-size: var(--type-size-xs);
       user-select: none;
@@ -294,7 +294,7 @@
     .spacer { flex: 1; }
 
     /* global-search */
-    [data-pattern="app-global-search"] {
+    [data-pattern="nav-search"] {
       display: inline-flex;
       align-items: center;
       gap: var(--space-2);
@@ -310,16 +310,16 @@
       cursor: pointer;
       transition: var(--transition-default);
     }
-    [data-pattern="app-global-search"]:hover {
+    [data-pattern="nav-search"]:hover {
       color: var(--text);
       border-color: var(--border-emphasis, var(--border));
     }
-    [data-pattern="app-global-search"]:focus-visible {
+    [data-pattern="nav-search"]:focus-visible {
       outline: var(--focus-ring-width) solid var(--focus-ring);
       outline-offset: var(--focus-ring-offset);
     }
-    [data-pattern="app-global-search"] .placeholder { flex: 1; text-align: left; }
-    [data-pattern="app-global-search"] kbd {
+    [data-pattern="nav-search"] .placeholder { flex: 1; text-align: left; }
+    [data-pattern="nav-search"] kbd {
       background: var(--surface-recessed);
       color: var(--text-recede);
       border: var(--border-width-sm) solid var(--border);
@@ -331,12 +331,12 @@
     }
 
     /* action-cluster */
-    [data-pattern="app-action-cluster"] {
+    [data-pattern="nav-secondary-actions"] {
       display: inline-flex;
       align-items: center;
       gap: var(--space-2);
     }
-    [data-pattern="app-action-cluster"] .action {
+    [data-pattern="nav-secondary-actions"] .action-button{
       display: inline-flex;
       align-items: center;
       gap: var(--space-1);
@@ -352,26 +352,26 @@
       text-decoration: none;
       transition: var(--transition-default);
     }
-    [data-pattern="app-action-cluster"] .action:hover { background: var(--surface-elevated); color: var(--accent-hover); }
-    [data-pattern="app-action-cluster"] .action[data-intent="primary"] {
+    [data-pattern="nav-secondary-actions"] .action-button:hover { background: var(--surface-elevated); color: var(--accent-hover); }
+    [data-pattern="nav-secondary-actions"] .action-button[data-intent="primary"] {
       background: var(--accent); color: var(--text-on-accent, white);
     }
-    [data-pattern="app-action-cluster"] .action[data-intent="primary"]:hover { background: var(--accent-hover); }
-    [data-pattern="app-action-cluster"] .action[data-intent="secondary"] {
+    [data-pattern="nav-secondary-actions"] .action-button[data-intent="primary"]:hover { background: var(--accent-hover); }
+    [data-pattern="nav-secondary-actions"] .action-button[data-intent="secondary"] {
       background: transparent;
       color: var(--text-emphasis);
       border: var(--border-width-sm) solid var(--border-emphasis, var(--border));
     }
-    [data-pattern="app-action-cluster"] .action[data-intent="secondary"]:hover { background: var(--surface-elevated); }
-    [data-pattern="app-action-cluster"] .action:focus-visible {
+    [data-pattern="nav-secondary-actions"] .action-button[data-intent="secondary"]:hover { background: var(--surface-elevated); }
+    [data-pattern="nav-secondary-actions"] .action-button:focus-visible {
       outline: var(--focus-ring-width) solid var(--focus-ring);
       outline-offset: var(--focus-ring-offset);
     }
-    [data-pattern="app-action-cluster"] .action[aria-disabled="true"] { opacity: 0.55; cursor: not-allowed; }
-    [data-pattern="app-action-cluster"] .icon-only { padding: var(--space-2); }
+    [data-pattern="nav-secondary-actions"] .action-button[aria-disabled="true"] { opacity: 0.55; cursor: not-allowed; }
+    [data-pattern="nav-secondary-actions"] .icon-only { padding: var(--space-2); }
 
     /* notification-bell */
-    [data-pattern="app-notification-bell"] {
+    [data-pattern="nav-notification-bell"] {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -384,13 +384,13 @@
       position: relative;
       transition: var(--transition-default);
     }
-    [data-pattern="app-notification-bell"]:hover { background: var(--surface-elevated); color: var(--text-emphasis); }
-    [data-pattern="app-notification-bell"][aria-expanded="true"] { background: var(--surface-elevated); }
-    [data-pattern="app-notification-bell"]:focus-visible {
+    [data-pattern="nav-notification-bell"]:hover { background: var(--surface-elevated); color: var(--text-emphasis); }
+    [data-pattern="nav-notification-bell"][aria-expanded="true"] { background: var(--surface-elevated); }
+    [data-pattern="nav-notification-bell"]:focus-visible {
       outline: var(--focus-ring-width) solid var(--focus-ring);
       outline-offset: var(--focus-ring-offset);
     }
-    [data-pattern="app-notification-bell"] .badge {
+    [data-pattern="nav-notification-bell"] .badge {
       position: absolute;
       top: 2px; right: 2px;
       background: var(--critical);
@@ -405,7 +405,7 @@
     }
 
     /* user-menu */
-    [data-pattern="app-user-menu"] {
+    [data-pattern="nav-avatar"] {
       display: inline-flex;
       align-items: center;
       background: transparent;
@@ -416,11 +416,11 @@
       transition: var(--transition-default);
       position: relative;
     }
-    [data-pattern="app-user-menu"]:focus-visible {
+    [data-pattern="nav-avatar"]:focus-visible {
       outline: var(--focus-ring-width) solid var(--focus-ring);
       outline-offset: var(--focus-ring-offset);
     }
-    [data-pattern="app-user-menu"] .avatar {
+    [data-pattern="nav-avatar"] .avatar {
       width: 32px; height: 32px;
       background: var(--accent-recede);
       color: var(--text-emphasis);
@@ -433,7 +433,7 @@
       font-size: 0.85rem;
       font-weight: var(--font-weight-semibold);
     }
-    [data-pattern="app-user-menu"] .status-dot {
+    [data-pattern="nav-avatar"] .status-dot {
       position: absolute;
       bottom: 0; right: 0;
       width: 10px; height: 10px;
@@ -443,19 +443,19 @@
     }
 
     /* page-tabs */
-    [data-pattern="app-page-tabs"] {
+    [data-pattern="nav-page-tabs"] {
       width: 100%;
       background: var(--surface);
       border-bottom: var(--border-width-sm) solid var(--border);
     }
-    [data-pattern="app-page-tabs"] ul {
+    [data-pattern="nav-page-tabs"] ul {
       list-style: none; padding: 0 var(--space-card); margin: 0;
       display: flex;
       gap: var(--space-1);
       max-width: 1440px;
     }
-    [data-pattern="app-page-tabs"] li { position: relative; }
-    [data-pattern="app-page-tabs"] a {
+    [data-pattern="nav-page-tabs"] li { position: relative; }
+    [data-pattern="nav-page-tabs"] a {
       display: inline-flex;
       align-items: center;
       gap: var(--space-1);
@@ -467,17 +467,17 @@
       font-weight: var(--font-weight-medium);
       transition: var(--transition-default);
     }
-    [data-pattern="app-page-tabs"] a:hover { color: var(--accent-hover); }
-    [data-pattern="app-page-tabs"] a:focus-visible {
+    [data-pattern="nav-page-tabs"] a:hover { color: var(--accent-hover); }
+    [data-pattern="nav-page-tabs"] a:focus-visible {
       outline: var(--focus-ring-width) solid var(--focus-ring);
       outline-offset: var(--focus-ring-offset);
     }
-    [data-pattern="app-page-tabs"] a[aria-current="page"] {
+    [data-pattern="nav-page-tabs"] a[aria-current="page"] {
       color: var(--text-emphasis);
       font-weight: var(--font-weight-semibold);
     }
     /* register: underline */
-    [data-pattern="app-page-tabs"][data-register="underline"] a[aria-current="page"]::after {
+    [data-pattern="nav-page-tabs"][data-kind="underline"] a[aria-current="page"]::after {
       content: "";
       position: absolute;
       left: var(--space-3); right: var(--space-3); bottom: -1px;
@@ -485,30 +485,30 @@
       background: var(--accent);
     }
     /* register: pill */
-    [data-pattern="app-page-tabs"][data-register="pill"] ul { padding: var(--space-2) var(--space-card); }
-    [data-pattern="app-page-tabs"][data-register="pill"] a {
+    [data-pattern="nav-page-tabs"][data-kind="pill"] ul { padding: var(--space-2) var(--space-card); }
+    [data-pattern="nav-page-tabs"][data-kind="pill"] a {
       padding: var(--space-2) var(--space-3);
       border-radius: var(--radius-sm);
     }
-    [data-pattern="app-page-tabs"][data-register="pill"] a[aria-current="page"] {
+    [data-pattern="nav-page-tabs"][data-kind="pill"] a[aria-current="page"] {
       background: var(--surface-elevated);
     }
-    [data-pattern="app-page-tabs"][data-register="pill"] a[aria-current="page"]::after { display: none; }
+    [data-pattern="nav-page-tabs"][data-kind="pill"] a[aria-current="page"]::after { display: none; }
     /* register: boxed */
-    [data-pattern="app-page-tabs"][data-register="boxed"] { background: var(--surface-recessed); border-bottom: 0; }
-    [data-pattern="app-page-tabs"][data-register="boxed"] ul { padding: var(--space-2) var(--space-card) 0; gap: 0; }
-    [data-pattern="app-page-tabs"][data-register="boxed"] a {
+    [data-pattern="nav-page-tabs"][data-kind="boxed"] { background: var(--surface-recessed); border-bottom: 0; }
+    [data-pattern="nav-page-tabs"][data-kind="boxed"] ul { padding: var(--space-2) var(--space-card) 0; gap: 0; }
+    [data-pattern="nav-page-tabs"][data-kind="boxed"] a {
       padding: var(--space-2) var(--space-card);
       border: var(--border-width-sm) solid transparent;
       border-bottom: 0;
       border-radius: var(--radius-sm) var(--radius-sm) 0 0;
       margin-bottom: -1px;
     }
-    [data-pattern="app-page-tabs"][data-register="boxed"] a[aria-current="page"] {
+    [data-pattern="nav-page-tabs"][data-kind="boxed"] a[aria-current="page"] {
       background: var(--surface);
       border-color: var(--border);
     }
-    [data-pattern="app-page-tabs"][data-register="boxed"] a[aria-current="page"]::after { display: none; }
+    [data-pattern="nav-page-tabs"][data-kind="boxed"] a[aria-current="page"]::after { display: none; }
 
     /* status-banner */
     [data-pattern="app-status-banner"] {
@@ -693,10 +693,10 @@
 <body id="top">
   <main>
     <header>
-      <h1>pattern-nav-app-chrome — specimen</h1>
+      <h1>pattern-nav — app-chrome variant — specimen</h1>
       <p class="lede">In-app top nav for the SaaS app shell. Nine primitives covering workspace identity, breadcrumb wayfinding, Cmd+K palette, page action cluster, notifications, user menu, optional page tabs, and a status banner for degraded service. The Linear / Notion / Figma chrome reframed as token-driven primitives.</p>
       <dl class="meta">
-        <div><dt>Pack</dt><dd>@quoin/pattern-nav-app-chrome@1.0.0</dd></div>
+        <div><dt>Pack</dt><dd>@quoin/pattern-nav@1.0.0 (data-variant="app-chrome")</dd></div>
         <div><dt>Primitives</dt><dd>9</dd></div>
         <div><dt>Variants</dt><dd>3 (standard / with-subnav / condensed)</dd></div>
         <div><dt>States</dt><dd>default / search-open / menu-open / notifications-open / offline</dd></div>
@@ -711,15 +711,15 @@
       <p>Full main row: workspace switcher + breadcrumb + Cmd+K + action cluster + notifications + user menu. Used on most in-app pages.</p>
     </section>
     <div class="preview-frame">
-      <header data-pattern="nav-app-chrome" data-variant="standard" role="banner">
+      <header data-pattern="nav-section" data-variant="app-chrome" data-mode="standard" role="banner">
         <nav aria-label="App shell">
-          <button data-pattern="app-workspace-switcher" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="ws-popover-1">
+          <button data-pattern="nav-workspace-switcher" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="ws-popover-1">
             <span class="logo" aria-hidden="true">G</span>
             <span class="name">Elena's Galley</span>
             <span class="plan-badge">Pro</span>
             <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" /></svg>
           </button>
-          <nav data-pattern="app-breadcrumb" aria-label="Breadcrumb">
+          <nav data-pattern="nav-breadcrumb" aria-label="Breadcrumb">
             <ol>
               <li><a href="/notes">Notes</a></li>
               <li class="separator" aria-hidden="true">/</li>
@@ -729,20 +729,20 @@
             </ol>
           </nav>
           <div class="spacer"></div>
-          <button data-pattern="app-global-search" type="button" aria-keyshortcuts="Meta+K Control+K" aria-expanded="false" aria-haspopup="dialog" aria-label="Search; press Command K">
+          <button data-pattern="nav-search" type="button" aria-keyshortcuts="Meta+K Control+K" aria-expanded="false" aria-haspopup="dialog" aria-label="Search; press Command K">
             <svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" /></svg>
             <span class="placeholder">Search…</span>
             <kbd>⌘K</kbd>
           </button>
-          <div data-pattern="app-action-cluster" role="group" aria-label="Page actions">
-            <button class="action" type="button"><svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>New</button>
-            <button class="action" type="button" data-intent="secondary"><svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v14" /></svg>Share</button>
+          <div data-pattern="nav-secondary-actions" role="group" aria-label="Page actions">
+            <button class="action-button" type="button"><svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>New</button>
+            <button class="action-button" type="button" data-intent="secondary"><svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v14" /></svg>Share</button>
           </div>
-          <button data-pattern="app-notification-bell" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="notifications-popover" aria-label="Notifications, 3 unread">
+          <button data-pattern="nav-notification-bell" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="notifications-popover" aria-label="Notifications, 3 unread">
             <svg class="icon-18" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 01-3.4 0" /></svg>
             <span class="badge" aria-hidden="true">3</span>
           </button>
-          <button data-pattern="app-user-menu" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="user-popover-1" aria-label="Account menu — Elena Park">
+          <button data-pattern="nav-avatar" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="user-popover-1" aria-label="Account menu — Elena Park">
             <span class="avatar" aria-hidden="true">EP</span>
             <span class="status-dot" aria-hidden="true"></span>
           </button>
@@ -756,15 +756,15 @@
       <p>Main row + page-tabs subnav row. Used on document / project / settings pages where sub-section navigation is page-local.</p>
     </section>
     <div class="preview-frame">
-      <header data-pattern="nav-app-chrome" data-variant="with-subnav" role="banner">
+      <header data-pattern="nav-section" data-variant="app-chrome" data-mode="with-subnav" role="banner">
         <nav aria-label="App shell">
-          <button data-pattern="app-workspace-switcher" type="button" aria-haspopup="true" aria-expanded="false">
+          <button data-pattern="nav-workspace-switcher" type="button" aria-haspopup="true" aria-expanded="false">
             <span class="logo" aria-hidden="true">G</span>
             <span class="name">Elena's Galley</span>
             <span class="plan-badge">Pro</span>
             <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" /></svg>
           </button>
-          <nav data-pattern="app-breadcrumb" aria-label="Breadcrumb">
+          <nav data-pattern="nav-breadcrumb" aria-label="Breadcrumb">
             <ol>
               <li><a href="/projects">Projects</a></li>
               <li class="separator" aria-hidden="true">/</li>
@@ -772,22 +772,22 @@
             </ol>
           </nav>
           <div class="spacer"></div>
-          <button data-pattern="app-global-search" type="button" aria-keyshortcuts="Meta+K Control+K" aria-label="Search; press Command K">
+          <button data-pattern="nav-search" type="button" aria-keyshortcuts="Meta+K Control+K" aria-label="Search; press Command K">
             <svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" /></svg>
             <span class="placeholder">Search…</span>
             <kbd>⌘K</kbd>
           </button>
-          <div data-pattern="app-action-cluster" role="group" aria-label="Page actions">
-            <button class="action" type="button" data-intent="primary"><svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13l4 4L19 7" /></svg>Publish</button>
+          <div data-pattern="nav-secondary-actions" role="group" aria-label="Page actions">
+            <button class="action-button" type="button" data-intent="primary"><svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13l4 4L19 7" /></svg>Publish</button>
           </div>
-          <button data-pattern="app-notification-bell" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Notifications, no unread">
+          <button data-pattern="nav-notification-bell" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Notifications, no unread">
             <svg class="icon-18" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 01-3.4 0" /></svg>
           </button>
-          <button data-pattern="app-user-menu" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Account menu — Elena Park">
+          <button data-pattern="nav-avatar" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Account menu — Elena Park">
             <span class="avatar" aria-hidden="true">EP</span>
           </button>
         </nav>
-        <nav data-pattern="app-page-tabs" data-register="underline" aria-label="Page sections">
+        <nav data-pattern="nav-page-tabs" data-kind="underline" aria-label="Page sections">
           <ul>
             <li><a href="/projects/quoin/overview" aria-current="page">Overview</a></li>
             <li><a href="/projects/quoin/activity">Activity</a></li>
@@ -805,17 +805,17 @@
       <p>Workspace switcher + minimal action cluster + user menu. No breadcrumb. Used in fullscreen-editor modes.</p>
     </section>
     <div class="preview-frame">
-      <header data-pattern="nav-app-chrome" data-variant="condensed" role="banner">
+      <header data-pattern="nav-section" data-variant="app-chrome" data-mode="condensed" role="banner">
         <nav aria-label="App shell">
-          <button data-pattern="app-workspace-switcher" type="button" aria-haspopup="true" aria-expanded="false">
+          <button data-pattern="nav-workspace-switcher" type="button" aria-haspopup="true" aria-expanded="false">
             <span class="logo" aria-hidden="true">G</span>
             <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" /></svg>
           </button>
           <div class="spacer"></div>
-          <div data-pattern="app-action-cluster" role="group" aria-label="Page actions">
+          <div data-pattern="nav-secondary-actions" role="group" aria-label="Page actions">
             <button class="action icon-only" type="button" aria-label="Exit focus mode"><svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9V6a3 3 0 013-3h3M21 9V6a3 3 0 00-3-3h-3M3 15v3a3 3 0 003 3h3M21 15v3a3 3 0 01-3 3h-3" /></svg></button>
           </div>
-          <button data-pattern="app-user-menu" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Account menu — Elena Park">
+          <button data-pattern="nav-avatar" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Account menu — Elena Park">
             <span class="avatar" aria-hidden="true">EP</span>
           </button>
         </nav>
@@ -828,19 +828,19 @@
       <p>Critical-tone status banner above the main chrome. <code>role="alert"</code> with assertive live region for screen-reader announcement.</p>
     </section>
     <div class="preview-frame">
-      <header data-pattern="nav-app-chrome" data-variant="standard" data-state="offline" role="banner">
+      <header data-pattern="nav-section" data-variant="app-chrome" data-mode="standard" data-state="offline" role="banner">
         <div data-pattern="app-status-banner" data-tone="critical" role="alert" aria-live="assertive" aria-label="App status">
           <span class="dot" aria-hidden="true"></span>
           Offline — local edits will sync when connection returns.
         </div>
         <nav aria-label="App shell">
-          <button data-pattern="app-workspace-switcher" type="button" aria-haspopup="true" aria-expanded="false">
+          <button data-pattern="nav-workspace-switcher" type="button" aria-haspopup="true" aria-expanded="false">
             <span class="logo" aria-hidden="true">G</span>
             <span class="name">Elena's Galley</span>
             <span class="plan-badge">Pro</span>
             <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" /></svg>
           </button>
-          <nav data-pattern="app-breadcrumb" aria-label="Breadcrumb">
+          <nav data-pattern="nav-breadcrumb" aria-label="Breadcrumb">
             <ol>
               <li><a href="/notes">Notes</a></li>
               <li class="separator" aria-hidden="true">/</li>
@@ -848,18 +848,18 @@
             </ol>
           </nav>
           <div class="spacer"></div>
-          <button data-pattern="app-global-search" type="button" aria-keyshortcuts="Meta+K Control+K" aria-label="Search; press Command K">
+          <button data-pattern="nav-search" type="button" aria-keyshortcuts="Meta+K Control+K" aria-label="Search; press Command K">
             <svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" /></svg>
             <span class="placeholder">Search…</span>
             <kbd>⌘K</kbd>
           </button>
-          <div data-pattern="app-action-cluster" role="group" aria-label="Page actions">
-            <button class="action" type="button" aria-disabled="true" disabled><svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v14" /></svg>Share</button>
+          <div data-pattern="nav-secondary-actions" role="group" aria-label="Page actions">
+            <button class="action-button" type="button" aria-disabled="true" disabled><svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v14" /></svg>Share</button>
           </div>
-          <button data-pattern="app-notification-bell" type="button" aria-label="Notifications unavailable while offline" aria-disabled="true" disabled>
+          <button data-pattern="nav-notification-bell" type="button" aria-label="Notifications unavailable while offline" aria-disabled="true" disabled>
             <svg class="icon-18" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 01-3.4 0" /></svg>
           </button>
-          <button data-pattern="app-user-menu" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Account menu — Elena Park (offline)">
+          <button data-pattern="nav-avatar" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Account menu — Elena Park (offline)">
             <span class="avatar" aria-hidden="true">EP</span>
           </button>
         </nav>
@@ -872,10 +872,10 @@
       <p>All three follow the same WAI-ARIA pattern: <code>aria-haspopup="true"</code> + <code>aria-expanded="true"</code> + <code>aria-controls</code>. Escape closes; click-outside closes; focus returns to trigger.</p>
     </section>
     <div class="preview-frame" style="min-height: 380px;">
-      <header data-pattern="nav-app-chrome" data-variant="standard" data-state="menu-open" role="banner" style="position: relative; overflow: visible;">
+      <header data-pattern="nav-section" data-variant="app-chrome" data-mode="standard" data-state="menu-open" role="banner" style="position: relative; overflow: visible;">
         <nav aria-label="App shell" style="overflow: visible;">
           <div style="position: relative;">
-            <button data-pattern="app-workspace-switcher" type="button" aria-haspopup="true" aria-expanded="true" aria-controls="ws-popover-open" id="ws-trigger-open">
+            <button data-pattern="nav-workspace-switcher" type="button" aria-haspopup="true" aria-expanded="true" aria-controls="ws-popover-open" id="ws-trigger-open">
               <span class="logo" aria-hidden="true">G</span>
               <span class="name">Elena's Galley</span>
               <span class="plan-badge">Pro</span>
@@ -910,7 +910,7 @@
               </button>
             </div>
           </div>
-          <nav data-pattern="app-breadcrumb" aria-label="Breadcrumb">
+          <nav data-pattern="nav-breadcrumb" aria-label="Breadcrumb">
             <ol>
               <li><a href="/notes">Notes</a></li>
               <li class="separator" aria-hidden="true">/</li>
@@ -919,7 +919,7 @@
           </nav>
           <div class="spacer"></div>
           <div style="position: relative;">
-            <button data-pattern="app-notification-bell" type="button" aria-haspopup="true" aria-expanded="true" aria-controls="notif-popover-open" id="notif-trigger-open" aria-label="Notifications, 3 unread">
+            <button data-pattern="nav-notification-bell" type="button" aria-haspopup="true" aria-expanded="true" aria-controls="notif-popover-open" id="notif-trigger-open" aria-label="Notifications, 3 unread">
               <svg class="icon-18" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 01-3.4 0" /></svg>
               <span class="badge" aria-hidden="true">3</span>
             </button>
@@ -953,7 +953,7 @@
             </div>
           </div>
           <div style="position: relative;">
-            <button data-pattern="app-user-menu" type="button" aria-haspopup="true" aria-expanded="true" aria-controls="user-popover-open" id="user-trigger-open" aria-label="Account menu — Elena Park">
+            <button data-pattern="nav-avatar" type="button" aria-haspopup="true" aria-expanded="true" aria-controls="user-popover-open" id="user-trigger-open" aria-label="Account menu — Elena Park">
               <span class="avatar" aria-hidden="true">EP</span>
             </button>
             <div class="popover user-popover" role="menu" id="user-popover-open" aria-labelledby="user-trigger-open" style="right: 0;">
@@ -991,11 +991,11 @@
 
     <!-- ===== PAGE TABS REGISTERS ===== -->
     <section class="specimen-divider">
-      <h2>app-page-tabs — 3 registers</h2>
+      <h2>nav-page-tabs — 3 registers</h2>
       <p>Same content rendered three ways: underline (canonical Linear / GitHub), pill (when underline collides with adjacent UI), boxed (true page-content tab switcher).</p>
     </section>
     <div class="preview-frame">
-      <nav data-pattern="app-page-tabs" data-register="underline" aria-label="Page sections (underline)">
+      <nav data-pattern="nav-page-tabs" data-kind="underline" aria-label="Page sections (underline)">
         <ul>
           <li><a href="#" aria-current="page">Overview</a></li>
           <li><a href="#">Activity</a></li>
@@ -1006,7 +1006,7 @@
       </nav>
     </div>
     <div class="preview-frame">
-      <nav data-pattern="app-page-tabs" data-register="pill" aria-label="Page sections (pill)">
+      <nav data-pattern="nav-page-tabs" data-kind="pill" aria-label="Page sections (pill)">
         <ul>
           <li><a href="#" aria-current="page">Overview</a></li>
           <li><a href="#">Activity</a></li>
@@ -1017,7 +1017,7 @@
       </nav>
     </div>
     <div class="preview-frame">
-      <nav data-pattern="app-page-tabs" data-register="boxed" aria-label="Page sections (boxed)">
+      <nav data-pattern="nav-page-tabs" data-kind="boxed" aria-label="Page sections (boxed)">
         <ul>
           <li><a href="#" aria-current="page">Overview</a></li>
           <li><a href="#">Activity</a></li>
@@ -1058,10 +1058,10 @@
     </section>
     <div class="microstate-grid">
       <div class="label">workspace switcher</div>
-      <div class="cell"><div><div class="ms-label">default</div><button data-pattern="app-workspace-switcher" type="button" style="background: transparent;"><span class="logo" aria-hidden="true">G</span><span>Elena's Galley</span><svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" /></svg></button></div></div>
-      <div class="cell"><div><div class="ms-label">hover</div><button data-pattern="app-workspace-switcher" type="button" style="background: var(--surface-elevated);"><span class="logo" aria-hidden="true">G</span><span>Elena's Galley</span><svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" /></svg></button></div></div>
-      <div class="cell"><div><div class="ms-label">aria-expanded</div><button data-pattern="app-workspace-switcher" type="button" aria-expanded="true" style="background: var(--surface-elevated);"><span class="logo" aria-hidden="true">G</span><span>Elena's Galley</span><svg class="chevron" viewBox="0 0 12 12" aria-hidden="true" style="transform: rotate(180deg);"><path d="M3 4.5 6 7.5 9 4.5" /></svg></button></div></div>
-      <div class="cell"><div><div class="ms-label">focus-visible</div><button data-pattern="app-workspace-switcher" type="button" style="outline: var(--focus-ring-width) solid var(--focus-ring); outline-offset: var(--focus-ring-offset);"><span class="logo" aria-hidden="true">G</span><span>Elena's Galley</span><svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" /></svg></button></div></div>
+      <div class="cell"><div><div class="ms-label">default</div><button data-pattern="nav-workspace-switcher" type="button" style="background: transparent;"><span class="logo" aria-hidden="true">G</span><span>Elena's Galley</span><svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" /></svg></button></div></div>
+      <div class="cell"><div><div class="ms-label">hover</div><button data-pattern="nav-workspace-switcher" type="button" style="background: var(--surface-elevated);"><span class="logo" aria-hidden="true">G</span><span>Elena's Galley</span><svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" /></svg></button></div></div>
+      <div class="cell"><div><div class="ms-label">aria-expanded</div><button data-pattern="nav-workspace-switcher" type="button" aria-expanded="true" style="background: var(--surface-elevated);"><span class="logo" aria-hidden="true">G</span><span>Elena's Galley</span><svg class="chevron" viewBox="0 0 12 12" aria-hidden="true" style="transform: rotate(180deg);"><path d="M3 4.5 6 7.5 9 4.5" /></svg></button></div></div>
+      <div class="cell"><div><div class="ms-label">focus-visible</div><button data-pattern="nav-workspace-switcher" type="button" style="outline: var(--focus-ring-width) solid var(--focus-ring); outline-offset: var(--focus-ring-offset);"><span class="logo" aria-hidden="true">G</span><span>Elena's Galley</span><svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" /></svg></button></div></div>
 
       <div class="label">page tab</div>
       <div class="cell"><div><div class="ms-label">default</div><a href="#" style="color: var(--text-recede); padding: var(--space-2); text-decoration: none;">Activity</a></div></div>
@@ -1072,7 +1072,7 @@
 
     <!-- ===== COMPOSITION LINEAGE ===== -->
     <section class="specimen-divider">
-      <h2>Composition lineage — what nav-app-chrome consumes</h2>
+      <h2>Composition lineage — what the nav (app-chrome variant) consumes</h2>
     </section>
     <table class="lineage">
       <thead>
