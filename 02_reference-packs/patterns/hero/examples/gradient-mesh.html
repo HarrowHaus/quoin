@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>@quoin/pattern-hero — gradient-mesh variant — specimen</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=JetBrains+Mono:wght@100..800&display=swap">
+
+  <style>
+    :root {
+      color-scheme: light dark;
+
+      --surface: oklch(98% 0 0);
+      --surface-elevated: oklch(100% 0 0);
+      --surface-recessed: oklch(96% 0 0);
+      --text: oklch(30% 0 0);
+      --text-emphasis: oklch(15% 0 0);
+      --text-recede: oklch(50% 0 0);
+      --text-disabled: oklch(72% 0 0);
+      --text-on-accent: oklch(100% 0 0);
+      --accent: oklch(20% 0 0);
+      --accent-hover: oklch(28% 0 0);
+      --accent-active: oklch(12% 0 0);
+      --accent-recede: oklch(94% 0 0);
+      --critical: oklch(55% 0.22 25);
+      --success: oklch(50% 0.18 155);
+      --warning: oklch(75% 0.18 80);
+
+      --border: oklch(88% 0 0);
+      --border-emphasis: oklch(20% 0 0);
+      --border-recede: oklch(94% 0 0);
+      --border-width-sm: 1px;
+      --border-width-md: 2px;
+
+      --focus-ring: oklch(55% 0.22 260);
+      --focus-ring-width: 2px;
+      --focus-ring-offset: 2px;
+
+      /* Phase 22 / Consolidation 1: rem-native canonical scale (matches tokens-baseline) */
+      --space-half-1: 0.125rem;
+      --space-half-2: 0.375rem;
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-card: 1.5rem;
+      --space-panel: 2rem;
+      --space-section: 4rem;
+
+      --radius-sm: 4px;
+      --radius-md: 6px;
+      --radius-card: 12px;
+      --radius-pill: 999px;
+
+      --font-sans: 'Inter Variable', 'Inter', system-ui, sans-serif;
+      --font-display: 'Inter Variable', 'Inter', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+      /* Phase 22 / Consolidation 2: type-scale + leading match tokens-baseline canonical */
+      --type-size-xs: 0.75rem;
+      --type-size-sm: 0.875rem;
+      --type-size-md: 1rem;
+      --type-size-lg: 1.125rem;
+      --type-size-xl: 1.5rem;
+      --type-size-2xl: 2rem;
+      --type-size-3xl: 2.5rem;
+      --type-size-4xl: 3.5rem;
+      --font-weight-medium: 500;
+      --font-weight-semibold: 600;
+      --font-weight-bold: 700;
+      --leading-tight: 1.15;
+      --leading-prose: 1.55;
+      --leading-display: 1.05;
+      --tracking-tight: -0.02em;
+      --tracking-wide: 0.08em;
+
+      --motion-fast: 120ms;
+      --motion-normal: 160ms;
+      --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+      --transition-default: all var(--motion-normal) var(--ease-standard);
+
+      --shadow-tint: oklch(0% 0 0 / 0.06);
+      --shadow-sm: 0 1px 2px 0 var(--shadow-tint);
+      --shadow-md: 0 4px 6px -1px var(--shadow-tint), 0 2px 4px -1px var(--shadow-tint);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --surface: oklch(10% 0 0);
+        --surface-elevated: oklch(15% 0 0);
+        --surface-recessed: oklch(8% 0 0);
+        --text: oklch(85% 0 0);
+        --text-emphasis: oklch(98% 0 0);
+        --text-recede: oklch(60% 0 0);
+        --accent: oklch(95% 0 0);
+        --accent-recede: oklch(20% 0 0);
+        --border: oklch(20% 0 0);
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      :root { --motion-fast: 0ms; --motion-normal: 0ms; --transition-default: none; }
+      * { animation: none !important; }
+    }
+
+    * { box-sizing: border-box; }
+  </style>
+
+  <style>
+    html, body { margin: 0; padding: 0; background: var(--surface); color: var(--text); font-family: var(--font-sans); font-size: var(--type-size-md); line-height: var(--leading-prose); -webkit-font-smoothing: antialiased; }
+    main { max-width: 1280px; margin: 0 auto; padding: var(--space-section) var(--space-panel); }
+    h1.doc { font-family: var(--font-display); font-size: var(--type-size-3xl); font-weight: var(--font-weight-semibold); line-height: var(--leading-display); letter-spacing: var(--tracking-tight); margin: 0 0 var(--space-4); text-wrap: balance; }
+    main > h2 { font-family: var(--font-display); font-size: var(--type-size-2xl); font-weight: var(--font-weight-semibold); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); margin: var(--space-section) 0 var(--space-4); text-wrap: balance; }
+    .lede { font-size: var(--type-size-lg); line-height: var(--leading-prose); color: var(--text-recede); max-width: 70ch; margin: 0 0 var(--space-section); }
+    .meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-4); padding: var(--space-4); background: var(--surface-elevated); border: var(--border-width-sm) solid var(--border); border-radius: var(--radius-card); margin-bottom: var(--space-section); font-size: var(--type-size-sm); }
+    .meta dt { font-weight: var(--font-weight-semibold); color: var(--text-emphasis); margin-bottom: var(--space-1); }
+    .meta dd { margin: 0; color: var(--text-recede); }
+    .specimen-divider { margin: var(--space-section) 0 var(--space-card); padding-bottom: var(--space-2); border-bottom: var(--border-width-sm) solid var(--border); }
+    .specimen-divider h2 { margin: 0; font-family: var(--font-display); font-size: var(--type-size-2xl); font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-tight); }
+    .specimen-divider p { margin: var(--space-2) 0 0; color: var(--text-recede); font-size: var(--type-size-sm); }
+    .label-row { font-size: var(--type-size-xs); color: var(--text-recede); font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-wide); text-transform: uppercase; margin: 0 0 var(--space-2); }
+    .stage { background: var(--surface-recessed); border: var(--border-width-sm) solid var(--border); border-radius: var(--radius-card); overflow: hidden; margin-bottom: var(--space-card); position: relative; }
+
+    /* ===== HERO-MESH PRODUCTION STYLES ===== */
+    [data-pattern="hero-section"] {
+      position: relative;
+      width: 100%;
+      background: var(--surface);
+      color: var(--text);
+      padding: var(--space-section) var(--space-panel);
+      min-height: 480px;
+      overflow: hidden;
+      transition: var(--transition-default);
+    }
+
+    [data-pattern="hero-background"] {
+      position: absolute; inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      transition: background-position var(--motion-normal) var(--ease-standard), opacity var(--motion-normal) var(--ease-standard);
+    }
+
+    /* Palettes — each is a stack of 3 radial-gradients in OKLCH */
+    /* COOL palette: blue / cyan / violet */
+    [data-pattern="hero-section"][data-palette="cool"] [data-pattern="hero-background"] {
+      background:
+        radial-gradient(circle at 20% 30%, oklch(85% 0.12 240) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, oklch(82% 0.14 200) 0%, transparent 55%),
+        radial-gradient(circle at 50% 90%, oklch(85% 0.10 270) 0%, transparent 60%),
+        oklch(98% 0 0);
+    }
+
+    /* WARM palette: orange / coral / pink */
+    [data-pattern="hero-section"][data-palette="warm"] [data-pattern="hero-background"] {
+      background:
+        radial-gradient(circle at 20% 30%, oklch(88% 0.12 40) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, oklch(85% 0.14 20) 0%, transparent 55%),
+        radial-gradient(circle at 50% 90%, oklch(88% 0.10 0) 0%, transparent 60%),
+        oklch(98% 0 0);
+    }
+
+    /* MONOCHROME palette: --accent + --accent-recede variations */
+    [data-pattern="hero-section"][data-palette="monochrome"] [data-pattern="hero-background"] {
+      background:
+        radial-gradient(circle at 20% 30%, var(--accent-recede) 0%, transparent 60%),
+        radial-gradient(circle at 80% 20%, color-mix(in oklch, var(--accent) 8%, var(--surface)) 0%, transparent 60%),
+        radial-gradient(circle at 50% 90%, var(--accent-recede) 0%, transparent 65%),
+        var(--surface);
+    }
+
+    /* ACCENT palette: --accent-recede multi-pos */
+    [data-pattern="hero-section"][data-palette="accent"] [data-pattern="hero-background"] {
+      background:
+        radial-gradient(circle at 25% 25%, var(--accent-recede) 0%, transparent 60%),
+        radial-gradient(circle at 75% 75%, color-mix(in oklch, var(--accent) 12%, var(--surface)) 0%, transparent 65%),
+        radial-gradient(circle at 50% 100%, var(--accent-recede) 0%, transparent 70%),
+        var(--surface);
+    }
+
+    /* PLAYFUL palette: multi-hue green / yellow / pink / cyan */
+    [data-pattern="hero-section"][data-palette="playful"] [data-pattern="hero-background"] {
+      background:
+        radial-gradient(circle at 15% 25%, oklch(85% 0.15 130) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, oklch(88% 0.15 90) 0%, transparent 50%),
+        radial-gradient(circle at 70% 80%, oklch(85% 0.15 340) 0%, transparent 55%),
+        radial-gradient(circle at 20% 90%, oklch(85% 0.12 200) 0%, transparent 55%),
+        oklch(98% 0 0);
+    }
+
+    /* Intensity affects blob opacity */
+    [data-pattern="hero-section"][data-intensity="subtle"] [data-pattern="hero-background"] { opacity: 0.5; }
+    [data-pattern="hero-section"][data-intensity="default"] [data-pattern="hero-background"] { opacity: 0.8; }
+    [data-pattern="hero-section"][data-intensity="dramatic"] [data-pattern="hero-background"] { opacity: 1; }
+
+    /* Grain texture overlay */
+    [data-pattern="hero-section"][data-texture="grained"] [data-pattern="hero-background"]::after {
+      content: "";
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+      opacity: 0.08;
+      pointer-events: none;
+    }
+
+    /* shift-on-hover behaviour */
+    [data-pattern="hero-section"][data-shift-on-hover="true"]:hover [data-pattern="hero-background"] {
+      background-position: 5% 5%, -5% -5%, 0 -5%;
+    }
+
+    /* Content layer — above mesh */
+    [data-pattern="hero-section"] .inner {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    [data-pattern="hero-section"][data-alignment="left"] .inner { text-align: left; max-width: 1080px; }
+
+    [data-pattern="hero-eyebrow"] {
+      color: var(--text-recede);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-sm);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      line-height: var(--leading-tight);
+      margin: 0 0 var(--space-3);
+    }
+    [data-pattern="hero-eyebrow"][data-tone="accent"] { color: var(--accent); }
+    [data-pattern="hero-eyebrow"][data-tone="on-mesh"] { color: var(--text-emphasis); }
+
+    [data-pattern="hero-headline"] {
+      color: var(--text-emphasis);
+      font-family: var(--font-display);
+      font-size: var(--type-size-3xl);
+      font-weight: var(--font-weight-semibold);
+      line-height: var(--leading-display);
+      letter-spacing: var(--tracking-tight);
+      margin: 0 auto;
+      max-width: 22ch;
+      text-wrap: balance;
+    }
+    [data-pattern="hero-section"][data-alignment="left"] [data-pattern="hero-headline"] { margin: 0; }
+
+    [data-pattern="hero-subhead"] {
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-lg);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--leading-prose);
+      margin: var(--space-3) auto 0;
+      max-width: 60ch;
+      text-wrap: pretty;
+    }
+    [data-pattern="hero-section"][data-intensity="dramatic"] [data-pattern="hero-subhead"] {
+      color: var(--text-emphasis);
+    }
+    [data-pattern="hero-subhead"][data-background-tint="subtle"] {
+      background: color-mix(in oklch, var(--surface-elevated) 50%, transparent);
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-sm);
+      display: inline-block;
+    }
+    [data-pattern="hero-section"][data-alignment="left"] [data-pattern="hero-subhead"] { margin: var(--space-3) 0 0; }
+
+    [data-pattern="hero-actions"] {
+      display: inline-flex; gap: var(--space-3); align-items: center; flex-wrap: wrap; justify-content: center;
+      margin: var(--space-card) 0 0;
+    }
+    [data-pattern="hero-section"][data-alignment="left"] [data-pattern="hero-actions"] { justify-content: flex-start; }
+    [data-pattern="hero-actions"] .action-button {
+      display: inline-flex; align-items: center; gap: var(--space-2);
+      padding: var(--space-3) var(--space-card);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans); font-size: var(--type-size-md); font-weight: var(--font-weight-semibold);
+      text-decoration: none; cursor: pointer;
+      border: var(--border-width-sm) solid transparent;
+      transition: var(--transition-default);
+    }
+    [data-pattern="hero-actions"] .action-button[data-intent="primary"] { background: var(--accent); color: var(--text-on-accent); }
+    [data-pattern="hero-actions"] .action-button[data-intent="primary"]:hover { background: var(--accent-hover); }
+    [data-pattern="hero-actions"] .action-button[data-intent="ghost"] {
+      background: color-mix(in oklch, var(--surface-elevated) 70%, transparent);
+      color: var(--text-emphasis);
+      backdrop-filter: blur(8px);
+    }
+    [data-pattern="hero-actions"] .action-button[data-intent="ghost"]:hover { background: var(--surface-elevated); }
+    [data-pattern="hero-actions"] .action-button:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+
+    [data-pattern="hero-meta"] {
+      color: var(--text-recede);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-xs);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--leading-prose);
+      margin: var(--space-3) 0 0;
+      display: inline-flex; gap: var(--space-3); flex-wrap: wrap; justify-content: center;
+    }
+    [data-pattern="hero-section"][data-intensity="dramatic"] [data-pattern="hero-meta"] { color: var(--text-emphasis); }
+    [data-pattern="hero-meta"] .dot { color: var(--border-emphasis); user-select: none; }
+
+    /* @supports fallback for browsers without oklch / color-mix */
+    @supports not (color: oklch(0% 0 0)) {
+      [data-pattern="hero-background"] {
+        background: var(--accent-recede) !important;
+      }
+    }
+
+    .lineage { width: 100%; border-collapse: collapse; font-size: var(--type-size-sm); }
+    .lineage th, .lineage td { text-align: left; padding: var(--space-2) var(--space-3); border-bottom: var(--border-width-sm) solid var(--border); vertical-align: top; }
+    .lineage th { background: var(--surface-elevated); color: var(--text-emphasis); font-weight: var(--font-weight-semibold); font-size: var(--type-size-xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; }
+    .lineage code { font-family: var(--font-mono); font-size: var(--type-size-xs); background: var(--surface-recessed); padding: 0 4px; border-radius: 3px; color: var(--text-emphasis); }
+    .a11y-list { font-size: var(--type-size-sm); line-height: var(--leading-prose); color: var(--text-recede); padding-left: var(--space-card); }
+    .a11y-list code { font-family: var(--font-mono); font-size: 0.85em; background: var(--surface-recessed); padding: 0 4px; border-radius: 3px; color: var(--text-emphasis); }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1 class="doc">pattern-hero — gradient-mesh variant — specimen</h1>
+      <p class="lede">OKLCH gradient-mesh marketing hero — the <code>gradient-mesh</code> variant of <code>@quoin/pattern-hero</code>. Inherits the 6 mandatory slots; activates the <code>hero-background</code> conditional slot for a procedural radial-gradient layer. Five palettes × three intensities × two textures. CSS Color Module Level 4 (<code>oklch()</code>, <code>color-mix(in oklch, …)</code>); falls back to solid <code>var(--accent-recede)</code> on unsupported browsers via <code>@supports</code>.</p>
+      <dl class="meta">
+        <div><dt>Pack</dt><dd>@quoin/pattern-hero@1.0.0 (data-variant="gradient-mesh")</dd></div>
+        <div><dt>Slots</dt><dd>6 mandatory + 1 conditional (background — gated by data-variant=gradient-mesh)</dd></div>
+        <div><dt>Palettes</dt><dd>cool / warm / monochrome / accent / playful</dd></div>
+        <div><dt>Intensities</dt><dd>subtle / default / dramatic</dd></div>
+        <div><dt>Textures</dt><dd>smooth / grained (SVG noise overlay)</dd></div>
+        <div><dt>Composes</dt><dd>@quoin/pattern-button-system (real consumption per Cons. 3 Q5)</dd></div>
+        <div><dt>WCAG</dt><dd>1.4.3 (contrast on dramatic intensity), 2.3.3 (reduced motion)</dd></div>
+        <div><dt>Variant position</dt><dd>3 of 5 (sibling variants: type-only / animated / brand-photo / video)</dd></div>
+      </dl>
+    </header>
+
+    <!-- =================== ACCENT — DEFAULT =================== -->
+    <section class="specimen-divider">
+      <h2>Palette: accent · default intensity · smooth</h2>
+      <p>The default. Mesh blobs use <code>--accent-recede</code> + <code>color-mix(in oklch, --accent 12%, --surface)</code> — adapts to the current aesthetic pack so every theme's mesh hero looks distinctly its own.</p>
+    </section>
+    <div class="stage">
+      <section data-pattern="hero-section" data-variant="gradient-mesh" data-palette="accent" data-intensity="default" data-texture="smooth" data-alignment="centered" aria-labelledby="hero-mesh-accent-headline">
+        <div data-pattern="hero-background" aria-hidden="true"></div>
+        <div class="inner">
+          <p data-pattern="hero-eyebrow" data-tone="accent">GALLEY</p>
+          <h1 data-pattern="hero-headline" id="hero-mesh-accent-headline">Documents, notes, dues, keys, easel.<br>Five tools, one Galley.</h1>
+          <p data-pattern="hero-subhead">A multi-tool SaaS umbrella with one subscription and one sign-in. Theme the entire suite in whatever aesthetic suits the work.</p>
+          <div data-pattern="hero-actions" role="group" aria-label="Sign up actions">
+            <a class="action-button" data-intent="primary" href="/signup">Start free trial</a>
+            <a class="action-button" data-intent="ghost" href="/pricing">View pricing</a>
+          </div>
+          <p data-pattern="hero-meta">No credit card required <span class="dot" aria-hidden="true">·</span> 14-day trial</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- =================== ALL 5 PALETTES =================== -->
+    <section class="specimen-divider">
+      <h2>Five palettes — same headline, different blob colors</h2>
+      <p>OKLCH blob coordinates differ per palette. Each Galley tool could adopt a distinct mesh palette for its product landing page.</p>
+    </section>
+    <div style="display: grid; gap: var(--space-card);">
+      <div class="stage">
+        <p class="label-row" style="padding: var(--space-3) var(--space-card) 0; margin: 0;">cool — Galley Notes</p>
+        <section data-pattern="hero-section" data-variant="gradient-mesh" data-palette="cool" data-intensity="default" data-texture="smooth" aria-labelledby="hero-cool-headline" style="min-height: 280px; padding: var(--space-card) var(--space-panel);">
+          <div data-pattern="hero-background" aria-hidden="true"></div>
+          <div class="inner">
+            <p data-pattern="hero-eyebrow">GALLEY NOTES</p>
+            <h1 data-pattern="hero-headline" id="hero-cool-headline">Markdown notes that sync.</h1>
+            <p data-pattern="hero-subhead">Fast, distraction-free, end-to-end encrypted.</p>
+          </div>
+        </section>
+      </div>
+      <div class="stage">
+        <p class="label-row" style="padding: var(--space-3) var(--space-card) 0; margin: 0;">warm — Galley Dues</p>
+        <section data-pattern="hero-section" data-variant="gradient-mesh" data-palette="warm" data-intensity="default" data-texture="smooth" aria-labelledby="hero-warm-headline" style="min-height: 280px; padding: var(--space-card) var(--space-panel);">
+          <div data-pattern="hero-background" aria-hidden="true"></div>
+          <div class="inner">
+            <p data-pattern="hero-eyebrow">GALLEY DUES</p>
+            <h1 data-pattern="hero-headline" id="hero-warm-headline">Every charge in one ledger.</h1>
+            <p data-pattern="hero-subhead">Auto-detected from bank feeds. Renewal alerts a week ahead.</p>
+          </div>
+        </section>
+      </div>
+      <div class="stage">
+        <p class="label-row" style="padding: var(--space-3) var(--space-card) 0; margin: 0;">monochrome — Galley Keys</p>
+        <section data-pattern="hero-section" data-variant="gradient-mesh" data-palette="monochrome" data-intensity="default" data-texture="smooth" aria-labelledby="hero-mono-headline" style="min-height: 280px; padding: var(--space-card) var(--space-panel);">
+          <div data-pattern="hero-background" aria-hidden="true"></div>
+          <div class="inner">
+            <p data-pattern="hero-eyebrow">GALLEY KEYS</p>
+            <h1 data-pattern="hero-headline" id="hero-mono-headline">Passwords. Quiet.</h1>
+            <p data-pattern="hero-subhead">Encrypted vault with audit log. No drama, no telemetry.</p>
+          </div>
+        </section>
+      </div>
+      <div class="stage">
+        <p class="label-row" style="padding: var(--space-3) var(--space-card) 0; margin: 0;">playful — Galley Easel</p>
+        <section data-pattern="hero-section" data-variant="gradient-mesh" data-palette="playful" data-intensity="default" data-texture="smooth" aria-labelledby="hero-playful-headline" style="min-height: 280px; padding: var(--space-card) var(--space-panel);">
+          <div data-pattern="hero-background" aria-hidden="true"></div>
+          <div class="inner">
+            <p data-pattern="hero-eyebrow">GALLEY EASEL</p>
+            <h1 data-pattern="hero-headline" id="hero-playful-headline">Brushes that feel like brushes.</h1>
+            <p data-pattern="hero-subhead">Pressure-sensitive, non-destructive, .psd export.</p>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- =================== INTENSITIES =================== -->
+    <section class="specimen-divider">
+      <h2>Three intensities — subtle / default / dramatic</h2>
+      <p>Mesh opacity scales 50% / 80% / 100%. Dramatic intensity automatically promotes subhead + meta colors to <code>--text-emphasis</code> to maintain WCAG AA contrast against the brightest blob points.</p>
+    </section>
+    <div style="display: grid; gap: var(--space-card);">
+      <div class="stage">
+        <p class="label-row" style="padding: var(--space-3) var(--space-card) 0; margin: 0;">subtle (50% mesh opacity)</p>
+        <section data-pattern="hero-section" data-variant="gradient-mesh" data-palette="accent" data-intensity="subtle" aria-labelledby="hero-int-subtle" style="min-height: 240px; padding: var(--space-card) var(--space-panel);">
+          <div data-pattern="hero-background" aria-hidden="true"></div>
+          <div class="inner">
+            <h1 data-pattern="hero-headline" id="hero-int-subtle" style="font-size: var(--type-size-2xl);">Barely there color.</h1>
+            <p data-pattern="hero-subhead">Mesh visible but content-first.</p>
+          </div>
+        </section>
+      </div>
+      <div class="stage">
+        <p class="label-row" style="padding: var(--space-3) var(--space-card) 0; margin: 0;">default (80% mesh opacity)</p>
+        <section data-pattern="hero-section" data-variant="gradient-mesh" data-palette="accent" data-intensity="default" aria-labelledby="hero-int-default" style="min-height: 240px; padding: var(--space-card) var(--space-panel);">
+          <div data-pattern="hero-background" aria-hidden="true"></div>
+          <div class="inner">
+            <h1 data-pattern="hero-headline" id="hero-int-default" style="font-size: var(--type-size-2xl);">The 80% choice.</h1>
+            <p data-pattern="hero-subhead">Clearly visible color, content still legible.</p>
+          </div>
+        </section>
+      </div>
+      <div class="stage">
+        <p class="label-row" style="padding: var(--space-3) var(--space-card) 0; margin: 0;">dramatic (100% mesh opacity)</p>
+        <section data-pattern="hero-section" data-variant="gradient-mesh" data-palette="playful" data-intensity="dramatic" aria-labelledby="hero-int-dramatic" style="min-height: 240px; padding: var(--space-card) var(--space-panel);">
+          <div data-pattern="hero-background" aria-hidden="true"></div>
+          <div class="inner">
+            <h1 data-pattern="hero-headline" id="hero-int-dramatic" style="font-size: var(--type-size-2xl);">Strong color statement.</h1>
+            <p data-pattern="hero-subhead" data-background-tint="subtle">Subhead gets a subtle tint underlay to guarantee WCAG AA contrast.</p>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- =================== GRAINED TEXTURE =================== -->
+    <section class="specimen-divider">
+      <h2>Grained texture</h2>
+      <p>SVG feTurbulence noise overlay at 8% opacity, mix-blend-mode: overlay. Gives the mesh a film-grain texture — characteristic of broadsheet / vellum aesthetics.</p>
+    </section>
+    <div class="stage">
+      <section data-pattern="hero-section" data-variant="gradient-mesh" data-palette="warm" data-intensity="default" data-texture="grained" aria-labelledby="hero-grained-headline">
+        <div data-pattern="hero-background" aria-hidden="true"></div>
+        <div class="inner">
+          <p data-pattern="hero-eyebrow" data-tone="accent">BROADSHEET</p>
+          <h1 data-pattern="hero-headline" id="hero-grained-headline">Print fidelity, on the web.</h1>
+          <p data-pattern="hero-subhead">Galley themed in broadsheet — Junicode, generous whitespace, film grain overlay.</p>
+          <div data-pattern="hero-actions" role="group" aria-label="Try broadsheet">
+            <a class="action-button" data-intent="primary" href="/themes/broadsheet">View broadsheet</a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- =================== OKLCH RATIONALE =================== -->
+    <section class="specimen-divider">
+      <h2>Why OKLCH</h2>
+      <p>OKLCH (CSS Color Module Level 4) gives perceptually-uniform color interpolation. RGB and HSL gradients between vibrant colors produce muddy gray midpoints; OKLCH keeps the chroma path clean. Baseline browser support since Safari 15.4 / Firefox 113 / Chrome 111.</p>
+    </section>
+    <div class="stage" style="padding: var(--space-card);">
+      <pre style="font-family: var(--font-mono); font-size: var(--type-size-xs); color: var(--text); background: var(--surface); padding: var(--space-3); border-radius: var(--radius-sm); margin: 0; overflow-x: auto; line-height: 1.5;">/* Cool palette — 3 radial-gradient layers in OKLCH */
+[data-pattern="hero-background"] {
+  background:
+    radial-gradient(circle at 20% 30%, oklch(85% 0.12 240) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, oklch(82% 0.14 200) 0%, transparent 55%),
+    radial-gradient(circle at 50% 90%, oklch(85% 0.10 270) 0%, transparent 60%),
+    oklch(98% 0 0);
+}
+
+/* @supports fallback for browsers without OKLCH (pre-2022 Safari, etc.) */
+@supports not (color: oklch(0% 0 0)) {
+  [data-pattern="hero-background"] {
+    background: var(--accent-recede) !important;
+  }
+}</pre>
+    </div>
+
+    <!-- =================== COMPOSITION LINEAGE =================== -->
+    <section class="specimen-divider">
+      <h2>Composition lineage — what hero-gradient-mesh consumes</h2>
+    </section>
+    <table class="lineage">
+      <thead>
+        <tr><th>Consumed primitive</th><th>Source pack</th><th>Used in</th><th>How this pattern uses it</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>&lt;action-button intent="primary"&gt;</code></td>
+          <td>@quoin/pattern-button-system</td>
+          <td>hero-actions</td>
+          <td>Primary CTA. Solid --accent fill stays visually anchored regardless of mesh palette.</td>
+        </tr>
+        <tr>
+          <td><code>&lt;action-button intent="ghost"&gt;</code></td>
+          <td>@quoin/pattern-button-system</td>
+          <td>hero-actions secondary</td>
+          <td>Ghost-intent secondary. On mesh backgrounds, ghost gets a soft <code>color-mix(in oklch, --surface-elevated 70%, transparent)</code> background + backdrop-filter blur for legibility.</td>
+        </tr>
+        <tr>
+          <td>canonical tokens</td>
+          <td>@quoin/tokens-baseline</td>
+          <td>every CSS value</td>
+          <td>Typography / spacing / motion. The pattern uses CSS Color Module Level 4 features (oklch(), color-mix(in oklch, …)) which are baseline-supported — fallback via @supports.</td>
+        </tr>
+        <tr style="background: var(--surface-recessed);">
+          <td colspan="4" style="padding: var(--space-3); font-style: italic; color: var(--text-recede);">
+            <strong style="color: var(--text-emphasis); font-style: normal;">Hero category position:</strong> 3 of 5 hero variants. Same anatomical convention as hero-type-only and hero-animated (eyebrow + headline + subhead + actions + meta). Independent of those packs — does not compose them.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <section class="specimen-divider">
+      <h2>Accessibility checklist</h2>
+    </section>
+    <ul class="a11y-list">
+      <li><strong>Single h1 per page:</strong> hero-headline uses <code>&lt;h1&gt;</code>. Same single-h1 discipline.</li>
+      <li><strong>aria-labelledby:</strong> Section points to the h1's id.</li>
+      <li><strong>Background is decorative:</strong> hero-background always carries <code>aria-hidden="true"</code>.</li>
+      <li><strong>WCAG 1.4.3 (Contrast):</strong> Headline uses <code>--text-emphasis</code> (15% lightness) — 12:1 ratio against the lightest mesh point (85% lightness). Body subhead defaults to <code>--text</code>; dramatic intensity promotes to <code>--text-emphasis</code>. Optional <code>data-background-tint="subtle"</code> on subhead adds a soft surface underlay for guaranteed legibility on busy mesh backgrounds.</li>
+      <li><strong>Ghost CTA legibility:</strong> On mesh backgrounds, ghost-intent CTAs get <code>backdrop-filter: blur(8px)</code> + semi-transparent surface to stay legible against blob colors.</li>
+      <li><strong>OKLCH fallback via @supports:</strong> Browsers without OKLCH support (pre-2022) fall back to a solid <code>--accent-recede</code> background via <code>@supports not (color: oklch(0% 0 0))</code>. The hero still works; the visual just isn't the mesh.</li>
+      <li><strong>WCAG 2.3.3 (Reduced motion):</strong> Mesh is static — no animated movement by default. <code>shift-on-hover</code> is opt-in and is suppressed via the global <code>* { animation: none !important; }</code> reduced-motion rule.</li>
+      <li><strong>Grain overlay aria-hidden:</strong> The SVG noise overlay is purely decorative via <code>::after</code> pseudo-content (not in the accessibility tree).</li>
+      <li><strong>Trust-badge images:</strong> Same alt-text discipline as hero-type-only when hero-meta uses trust-badges register.</li>
+      <li><strong>Focus styles:</strong> CTAs receive visible <code>:focus-visible</code> outline via <code>--focus-ring</code> tokens.</li>
+    </ul>
+  </main>
+</body>
+</html>
