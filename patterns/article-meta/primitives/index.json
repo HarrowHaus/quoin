@@ -1,0 +1,286 @@
+[
+  {
+    "name": "meta-container",
+    "category": "editorial",
+    "role": "Outer container for article meta. Sets the density variant (compact / default / expanded) and position (top / bottom / both). Typically rendered above the article body; may also render below for repeat-meta affordance.",
+    "attributes": {
+      "density": {
+        "values": ["compact", "default", "expanded"],
+        "default": "default",
+        "specific": true
+      },
+      "position": {
+        "values": ["top", "bottom", "both"],
+        "default": "top",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "var(--text-recede)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-sm)",
+      "lineHeight": "var(--leading-prose)",
+      "padding": "var(--space-card) 0",
+      "borderColor": "var(--border)",
+      "borderWidth": "var(--border-width-sm)",
+      "gap": "var(--space-card)",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<div data-pattern='meta-container' data-density='default' data-position='top'>",
+        "  <div data-pattern='article-meta-author'>",
+        "    (optional) <img data-pattern='article-meta-avatar'>",
+        "    <a data-pattern='article-meta-author-name' href='/authors/...'>",
+        "  </div>",
+        "  <time data-pattern='article-meta-date' datetime='ISO-8601'>",
+        "  <span data-pattern='article-meta-reading-time' data-minutes='8'>8 min read</span>",
+        "  (optional) <a data-pattern='article-meta-category' href='/category/...'>",
+        "  (optional) <ul data-pattern='article-meta-tag-list'> — composes prim-label",
+        "  (optional) <div data-pattern='article-meta-share-actions'>",
+        "</div>"
+      ],
+      "densityContracts": {
+        "compact": "Inline single-line strip. Author · Date · Reading time. Conditional slots hidden.",
+        "default": "Inline wrapped strip with conditional category if present. Tag-list/share-actions may render below.",
+        "expanded": "Multi-line; avatar at full size; tag-list as chip row; share-actions as button cluster."
+      },
+      "positionContracts": {
+        "top": "Rendered immediately below the article title.",
+        "bottom": "Rendered after the article body (repeated for affordance after long reads).",
+        "both": "Two instances; top is typically compact, bottom is typically expanded."
+      }
+    }
+  },
+  {
+    "name": "article-meta-author",
+    "category": "editorial",
+    "role": "Author cluster. Required slot. Wraps an optional avatar and the author name as a link to the author's profile page.",
+    "attributes": {
+      "withAvatar": {
+        "values": ["true", "false"],
+        "default": "true",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "var(--text)",
+      "fontWeight": "var(--font-weight-medium)",
+      "gap": "var(--space-2)",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "semanticStructure": [
+        "<div data-pattern='article-meta-author' data-with-avatar='true'>",
+        "  <img data-pattern='article-meta-avatar' src='...' alt='' loading='lazy'>",
+        "  <a data-pattern='article-meta-author-name' href='/authors/jane-doe'",
+        "     rel='author'>Jane Doe</a>",
+        "</div>"
+      ],
+      "ariaPatterns": {
+        "relAuthor": "The author-name link gets rel='author' for the WHATWG author-link semantic.",
+        "avatarAltEmpty": "Decorative avatars take alt='' so AT skips them; the author name carries the semantic. Use alt='Photo of {name}' only when the avatar is the sole identifier."
+      }
+    }
+  },
+  {
+    "name": "article-meta-avatar",
+    "category": "editorial",
+    "role": "Conditional avatar image inside article-meta-author. Square (or pill) image; lazy-loaded.",
+    "attributes": {
+      "size": {
+        "values": ["sm", "md", "lg"],
+        "default": "md",
+        "specific": true
+      },
+      "shape": {
+        "values": ["square", "rounded", "circle"],
+        "default": "circle",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "sizeSm": "1.5rem",
+      "sizeMd": "2rem",
+      "sizeLg": "3rem",
+      "borderRadiusSquare": "var(--radius-sm)",
+      "borderRadiusRounded": "var(--radius-md)",
+      "borderRadiusCircle": "var(--radius-pill)",
+      "borderColor": "var(--border)",
+      "borderWidth": "var(--border-width-sm)"
+    },
+    "structure": {
+      "element": "img"
+    },
+    "children": "none",
+    "scope": "inline",
+    "meta": {
+      "loadingLazy": "Avatars should load lazy unless above-the-fold in the initial viewport.",
+      "objectFit": "object-fit: cover; the image scales to fill the square without distortion."
+    }
+  },
+  {
+    "name": "article-meta-date",
+    "category": "editorial",
+    "role": "Published date. Required slot. Always renders as a <time> element with a machine-readable datetime attribute.",
+    "attributes": {
+      "format": {
+        "values": ["iso", "long", "short", "relative"],
+        "default": "long",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "var(--text-recede)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-sm)"
+    },
+    "structure": {
+      "element": "time"
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "semanticStructure": [
+        "<time data-pattern='article-meta-date' datetime='2026-05-21'>May 21, 2026</time>"
+      ],
+      "datetimeAttribute": "datetime attribute MUST be a valid ISO 8601 date or datetime. Human-readable text inside the element can be any locale-appropriate format.",
+      "relativeFormatNote": "Relative formats ('3 days ago') should be enhanced via JS; the static markup should always include the absolute datetime as the visible text and let progressive enhancement convert to relative if desired."
+    }
+  },
+  {
+    "name": "article-meta-reading-time",
+    "category": "editorial",
+    "role": "Estimated reading time. Required slot. Computed at build time from the article word count — NEVER computed runtime in the browser.",
+    "attributes": {
+      "minutes": {
+        "values": ["number"],
+        "default": "5",
+        "specific": false
+      }
+    },
+    "tokens": {
+      "color": "var(--text-recede)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-sm)"
+    },
+    "structure": {
+      "element": "span"
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "semanticStructure": [
+        "<span data-pattern='article-meta-reading-time' data-minutes='8'>8 min read</span>"
+      ],
+      "buildTimeContract": "Reading time MUST be computed at build time from the article's word count, typically using a 200–250 wpm baseline (operator picks; common defaults are 238 wpm for general reading, 180 for technical). The result is rendered into the HTML at build time. Runtime computation is forbidden because it adds JS for no semantic benefit and risks inconsistencies between server and client.",
+      "ariaPatterns": {
+        "noLiveRegion": "Reading time is static — never live-update. No aria-live."
+      }
+    }
+  },
+  {
+    "name": "article-meta-category",
+    "category": "editorial",
+    "role": "Conditional slot. Article category as a link to a category index page.",
+    "attributes": {},
+    "tokens": {
+      "color": "var(--accent)",
+      "fontWeight": "var(--font-weight-medium)",
+      "textDecoration": "none",
+      "transition": "var(--transition-default)",
+      "hoverColor": "var(--accent-hover)",
+      "focusRing": "var(--focus-ring-width) solid var(--focus-ring)"
+    },
+    "structure": {
+      "element": "a"
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "semanticStructure": [
+        "<a data-pattern='article-meta-category' href='/category/typography' rel='category'>Typography</a>"
+      ]
+    }
+  },
+  {
+    "name": "article-meta-tag-list",
+    "category": "editorial",
+    "role": "Conditional slot. List of topical tags as clickable chips. Composes @quoin/prim-label for each tag.",
+    "attributes": {
+      "density": {
+        "values": ["compact", "default"],
+        "default": "default",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "gap": "var(--space-2)",
+      "padding": "0",
+      "margin": "0"
+    },
+    "structure": {
+      "element": "ul"
+    },
+    "children": "flow-content",
+    "scope": "inline",
+    "meta": {
+      "semanticStructure": [
+        "<ul data-pattern='article-meta-tag-list' aria-label='Tags'>",
+        "  <li>",
+        "    <a href='/tag/css'>",
+        "      <span data-pattern='prim-label' data-variant='tag'>CSS</span>",
+        "    </a>",
+        "  </li>",
+        "</ul>"
+      ],
+      "primLabelComposition": "Each tag renders via prim-label's 'tag' variant (or 'chip'). prim-label is an optionalPeerPack — it's only required when tag-list is rendered.",
+      "ariaPatterns": {
+        "ariaLabelTags": "The <ul> takes aria-label='Tags' so AT users get context for the list."
+      }
+    }
+  },
+  {
+    "name": "article-meta-share-actions",
+    "category": "editorial",
+    "role": "Conditional slot. Social/network share buttons. May include native Web Share API integration via a single 'Share' button + fallback per-network buttons.",
+    "attributes": {
+      "register": {
+        "values": ["web-share", "per-network", "both"],
+        "default": "both",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "gap": "var(--space-2)",
+      "color": "var(--text-recede)"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "flow-content",
+    "scope": "inline",
+    "meta": {
+      "semanticStructure": [
+        "<div data-pattern='article-meta-share-actions' role='group' aria-label='Share article'>",
+        "  <button type='button' data-share='web-share'>Share</button>",
+        "  (optional fallback) <a href='https://twitter.com/...' data-share='twitter'>",
+        "</div>"
+      ],
+      "ariaPatterns": {
+        "roleGroup": "Use role='group' with aria-label='Share article' to wrap the cluster.",
+        "noShareCount": "Don't render share-count badges by default — they require third-party APIs and add tracking. Operators who want them can extend the slot."
+      }
+    }
+  }
+]

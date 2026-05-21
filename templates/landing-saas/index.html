@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="en" data-aesthetic="default">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>@quoin/template-landing-saas — demo</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+  <!-- Baseline tokens + recommended aesthetic (default) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/harrowhaus/quoin@main/02_reference-packs/tokens-baseline/tokens.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/harrowhaus/quoin@main/aesthetics/default/tokens.css">
+
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0;
+      background: var(--surface); color: var(--text);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-md);
+      line-height: var(--leading-prose);
+      -webkit-font-smoothing: antialiased;
+    }
+    main { display: flex; flex-direction: column; gap: 0; }
+
+    /* ─────────── action-button (shared from button-system) ─────────── */
+    .action-button {
+      display: inline-flex; align-items: center; gap: var(--space-2);
+      padding: var(--space-3) var(--space-card);
+      border-radius: var(--radius-md);
+      font-family: var(--font-sans); font-size: var(--type-size-sm); font-weight: var(--font-weight-semibold);
+      text-decoration: none; cursor: pointer;
+      border: var(--border-width-sm) solid transparent;
+      transition: var(--transition-default);
+    }
+    .action-button[data-intent="primary"]   { background: var(--accent); color: var(--text-on-accent); }
+    .action-button[data-intent="primary"]:hover { background: var(--accent-hover); }
+    .action-button[data-intent="ghost"]     { background: transparent; color: var(--text-emphasis); border-color: var(--border); }
+    .action-button[data-intent="ghost"]:hover { background: var(--surface-elevated); }
+    .action-button:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+
+    /* ─────────── nav (marketing) ─────────── */
+    [data-pattern="nav-section"][data-variant="marketing"] {
+      width: 100%; padding: var(--space-3) var(--space-panel);
+      background: var(--surface); border-bottom: var(--border-width-sm) solid var(--border);
+    }
+    [data-pattern="nav-section"][data-variant="marketing"] > .inner {
+      max-width: 1280px; margin: 0 auto;
+      display: flex; align-items: center; gap: var(--space-card);
+    }
+    [data-pattern="nav-brand"] {
+      display: inline-flex; align-items: baseline; gap: var(--space-2);
+      font-family: var(--font-display); font-size: var(--type-size-lg);
+      font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-tight);
+      color: var(--text-emphasis); text-decoration: none;
+    }
+    [data-pattern="nav-brand"]::before { content: "▢"; color: var(--accent); }
+    [data-pattern="nav-primary-links"] {
+      list-style: none; padding: 0; margin: 0 0 0 var(--space-card);
+      display: flex; gap: var(--space-card); flex: 1;
+    }
+    [data-pattern="nav-primary-links"] a {
+      color: var(--text-recede); text-decoration: none;
+      font-size: var(--type-size-sm); font-weight: var(--font-weight-medium);
+    }
+    [data-pattern="nav-primary-links"] a:hover { color: var(--text-emphasis); }
+    [data-pattern="nav-secondary-actions"] { display: inline-flex; gap: var(--space-2); }
+
+    /* ─────────── hero (type-only) ─────────── */
+    [data-pattern="hero-section"][data-variant="type-only"] {
+      width: 100%; padding: var(--space-section) var(--space-panel);
+      text-align: center;
+    }
+    [data-pattern="hero-section"] .inner { max-width: 720px; margin: 0 auto; }
+    [data-pattern="hero-eyebrow"] {
+      color: var(--accent); font-size: var(--type-size-sm);
+      font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-wide);
+      text-transform: uppercase; margin: 0 0 var(--space-3);
+    }
+    [data-pattern="hero-headline"] {
+      color: var(--text-emphasis); font-family: var(--font-display);
+      font-size: var(--type-size-4xl); font-weight: var(--font-weight-semibold);
+      line-height: var(--leading-display); letter-spacing: var(--tracking-tight);
+      margin: 0 auto; max-width: 22ch; text-wrap: balance;
+    }
+    [data-pattern="hero-subhead"] {
+      color: var(--text); font-size: var(--type-size-lg);
+      font-weight: var(--font-weight-medium); line-height: var(--leading-prose);
+      margin: var(--space-3) auto 0; max-width: 60ch; text-wrap: pretty;
+    }
+    [data-pattern="hero-actions"] {
+      display: inline-flex; gap: var(--space-3);
+      margin: var(--space-card) 0 0; flex-wrap: wrap; justify-content: center;
+    }
+
+    /* ─────────── feature-grid (three-up) ─────────── */
+    [data-pattern="feature-grid-section"] {
+      max-width: 1280px; margin: 0 auto;
+      padding: var(--space-section) var(--space-panel);
+    }
+    [data-pattern="feature-grid-section"] .eyebrow {
+      color: var(--text-recede); font-size: var(--type-size-sm);
+      font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-wide);
+      text-transform: uppercase; text-align: center; margin: 0 0 var(--space-3);
+    }
+    [data-pattern="feature-grid-section"] h2 {
+      font-family: var(--font-display); font-size: var(--type-size-3xl);
+      font-weight: var(--font-weight-semibold); line-height: var(--leading-display);
+      letter-spacing: var(--tracking-tight); color: var(--text-emphasis);
+      text-align: center; margin: 0 auto var(--space-card); max-width: 22ch;
+      text-wrap: balance;
+    }
+    [data-pattern="feature-grid"] {
+      display: grid; gap: var(--space-card);
+      grid-template-columns: repeat(3, 1fr);
+      padding: 0; margin: 0; list-style: none;
+    }
+    @media (max-width: 1023px) { [data-pattern="feature-grid"] { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 639px)  { [data-pattern="feature-grid"] { grid-template-columns: 1fr; } }
+    [data-pattern="feature-cell"] {
+      display: flex; flex-direction: column; gap: var(--space-3);
+      padding: var(--space-card);
+      background: var(--surface-elevated); color: var(--text);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-card);
+    }
+    [data-pattern="feature-cell"] .leading { width: 36px; height: 36px; color: var(--accent); }
+    [data-pattern="feature-cell"] .leading svg { width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+    [data-pattern="feature-cell"] h4 {
+      margin: 0; font-family: var(--font-display);
+      font-size: var(--type-size-lg); font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--tracking-tight); line-height: var(--leading-tight);
+      color: var(--text-emphasis);
+    }
+    [data-pattern="feature-cell"] p {
+      margin: 0; font-size: var(--type-size-sm); line-height: var(--leading-prose); color: var(--text);
+    }
+
+    /* ─────────── testimonial (single-quote) ─────────── */
+    [data-pattern="testimonial-section"] {
+      background: var(--surface-recessed);
+      padding: var(--space-section) var(--space-panel);
+    }
+    [data-pattern="testimonial-section"] .inner {
+      max-width: 720px; margin: 0 auto; text-align: center;
+    }
+    [data-pattern="testimonial-quote"] {
+      font-family: var(--font-display); font-size: var(--type-size-2xl);
+      font-weight: var(--font-weight-regular); line-height: var(--leading-display);
+      letter-spacing: var(--tracking-tight); color: var(--text-emphasis);
+      margin: 0 0 var(--space-card); text-wrap: balance;
+    }
+    [data-pattern="testimonial-quote"]::before { content: '\201C'; margin-inline-end: 0.1em; color: var(--accent); }
+    [data-pattern="testimonial-quote"]::after { content: '\201D'; margin-inline-start: 0.1em; color: var(--accent); }
+    [data-pattern="testimonial-attribution"] {
+      display: inline-flex; align-items: center; gap: var(--space-3);
+      font-size: var(--type-size-sm); color: var(--text-recede);
+    }
+    [data-pattern="testimonial-attribution"] img {
+      width: 2.5rem; height: 2.5rem; border-radius: var(--radius-pill);
+      border: var(--border-width-sm) solid var(--border);
+    }
+    [data-pattern="testimonial-attribution"] strong {
+      display: block; color: var(--text-emphasis); font-weight: var(--font-weight-medium);
+    }
+
+    /* ─────────── pricing-tiers (three-tier) ─────────── */
+    [data-pattern="pricing-section"] {
+      max-width: 1280px; margin: 0 auto;
+      padding: var(--space-section) var(--space-panel);
+    }
+    [data-pattern="pricing-section"] h2 {
+      font-family: var(--font-display); font-size: var(--type-size-3xl);
+      font-weight: var(--font-weight-semibold); line-height: var(--leading-display);
+      letter-spacing: var(--tracking-tight); color: var(--text-emphasis);
+      text-align: center; margin: 0 auto var(--space-card); max-width: 22ch;
+      text-wrap: balance;
+    }
+    [data-pattern="pricing-tier-grid"] {
+      display: grid; gap: var(--space-card);
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 1023px) { [data-pattern="pricing-tier-grid"] { grid-template-columns: 1fr; } }
+    [data-pattern="pricing-tier"] {
+      display: flex; flex-direction: column; gap: var(--space-3);
+      padding: var(--space-card);
+      background: var(--surface-elevated); color: var(--text);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-card);
+    }
+    [data-pattern="pricing-tier"][data-highlight="true"] {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-md);
+    }
+    [data-pattern="pricing-tier-name"] {
+      font-family: var(--font-display); font-size: var(--type-size-lg);
+      font-weight: var(--font-weight-semibold); color: var(--text-emphasis);
+      margin: 0;
+    }
+    [data-pattern="pricing-tier-price"] {
+      font-family: var(--font-display); font-size: var(--type-size-3xl);
+      font-weight: var(--font-weight-semibold); color: var(--text-emphasis);
+      margin: 0;
+    }
+    [data-pattern="pricing-tier-price"] .interval {
+      font-size: var(--type-size-sm); color: var(--text-recede);
+      font-weight: var(--font-weight-regular); letter-spacing: var(--tracking-normal);
+    }
+    [data-pattern="pricing-tier-features"] {
+      list-style: none; padding: 0; margin: 0;
+      display: flex; flex-direction: column; gap: var(--space-2);
+      font-size: var(--type-size-sm);
+    }
+    [data-pattern="pricing-tier-features"] li::before {
+      content: "✓"; color: var(--success); margin-inline-end: var(--space-2);
+    }
+
+    /* ─────────── footer-mega (full) ─────────── */
+    [data-pattern="footer-section"] {
+      background: var(--surface-recessed);
+      padding: var(--space-section) var(--space-panel) var(--space-card);
+    }
+    [data-pattern="footer-section"] .inner { max-width: 1280px; margin: 0 auto; }
+    [data-pattern="footer-section"] .footer-top {
+      display: grid; grid-template-columns: 2fr repeat(3, 1fr);
+      gap: var(--space-section); margin-bottom: var(--space-section);
+    }
+    @media (max-width: 720px) { [data-pattern="footer-section"] .footer-top { grid-template-columns: 1fr 1fr; } }
+    [data-pattern="footer-brand-block"] { display: flex; flex-direction: column; gap: var(--space-3); }
+    [data-pattern="footer-brand-block"] .wordmark {
+      display: inline-flex; align-items: baseline; gap: var(--space-2);
+      font-family: var(--font-display); font-size: var(--type-size-xl);
+      font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-tight);
+      color: var(--text-emphasis); text-decoration: none;
+    }
+    [data-pattern="footer-brand-block"] .wordmark::before { content: "▢"; color: var(--accent); }
+    [data-pattern="footer-brand-block"] .tagline { color: var(--text-recede); font-size: var(--type-size-sm); max-width: 32ch; margin: 0; }
+    [data-pattern="footer-link-group"] h3 {
+      font-size: var(--type-size-xs); font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--tracking-wide); color: var(--text-emphasis);
+      text-transform: uppercase; margin: 0 0 var(--space-3);
+    }
+    [data-pattern="footer-link-group"] ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--space-2); }
+    [data-pattern="footer-link-group"] a { color: var(--text-recede); font-size: var(--type-size-sm); text-decoration: none; }
+    [data-pattern="footer-link-group"] a:hover { color: var(--accent-hover); }
+    [data-pattern="footer-legal-row"] {
+      padding-top: var(--space-4);
+      border-top: var(--border-width-sm) solid var(--border);
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-3);
+      color: var(--text-recede); font-size: var(--type-size-xs);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════ nav-marketing ═════════════════════ -->
+  <header data-pattern="nav-section" data-variant="marketing" data-alignment="left" role="banner">
+    <div class="inner">
+      <a data-pattern="nav-brand" href="/">Acme</a>
+      <nav aria-label="Primary">
+        <ul data-pattern="nav-primary-links">
+          <li><a href="/features">Features</a></li>
+          <li><a href="/pricing">Pricing</a></li>
+          <li><a href="/customers">Customers</a></li>
+          <li><a href="/docs">Docs</a></li>
+        </ul>
+      </nav>
+      <div data-pattern="nav-secondary-actions" role="group">
+        <a class="action-button" data-intent="ghost" href="/login">Sign in</a>
+        <a class="action-button" data-intent="primary" href="/signup">Start free</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ═══════════════ hero-type-only ═══════════════════ -->
+    <section data-pattern="hero-section" data-variant="type-only" data-alignment="centered" aria-labelledby="hero-h">
+      <div class="inner">
+        <p data-pattern="hero-eyebrow">For teams who measure work in shipped commits</p>
+        <h1 data-pattern="hero-headline" id="hero-h">The deployment platform that gets out of your way.</h1>
+        <p data-pattern="hero-subhead">Push to main, watch it deploy. No YAML, no agents, no incident channels at 3 a.m. Acme handles the boring parts so your team can build the rest.</p>
+        <div data-pattern="hero-actions" role="group" aria-label="Get started actions">
+          <a class="action-button" data-intent="primary" href="/signup">Start free</a>
+          <a class="action-button" data-intent="ghost" href="/docs">Read docs</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ feature-grid ══════════════════════ -->
+    <section data-pattern="feature-grid-section">
+      <p class="eyebrow">Why Acme</p>
+      <h2>Built for engineers who'd rather be writing code.</h2>
+      <ul data-pattern="feature-grid" data-layout="three-up">
+        <li>
+          <article data-pattern="feature-cell" data-variant="default">
+            <span class="leading" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M3 12l3-3 4 4 8-8 3 3"/></svg>
+            </span>
+            <h4>Zero-config deploys</h4>
+            <p>Push to main. We build, test, deploy. No pipeline definitions to maintain, no shared YAML to bikeshed.</p>
+          </article>
+        </li>
+        <li>
+          <article data-pattern="feature-cell" data-variant="default">
+            <span class="leading" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            </span>
+            <h4>Preview every branch</h4>
+            <p>Every PR gets a real URL with a real database. Share it with stakeholders before the review cycle.</p>
+          </article>
+        </li>
+        <li>
+          <article data-pattern="feature-cell" data-variant="default">
+            <span class="leading" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg>
+            </span>
+            <h4>Run anywhere</h4>
+            <p>Multi-region by default. Edge functions, container workloads, scheduled jobs — same primitive, one platform.</p>
+          </article>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ═══════════════ testimonial ═══════════════════════ -->
+    <section data-pattern="testimonial-section" data-variant="single-quote">
+      <div class="inner">
+        <blockquote data-pattern="testimonial-quote">We replaced our Jenkins + Terraform + custom-glue stack with Acme over a weekend. Three months later, the team is shipping twice as often and on-call rotation is half what it was.</blockquote>
+        <div data-pattern="testimonial-attribution">
+          <img src="https://api.dicebear.com/9.x/initials/svg?seed=Priya+Iyer" alt="" loading="lazy">
+          <div>
+            <strong>Priya Iyer</strong>
+            <span>VP Engineering · Beacon Labs</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ pricing-tiers ═════════════════════ -->
+    <section data-pattern="pricing-section" aria-labelledby="pricing-h">
+      <h2 id="pricing-h">Simple pricing. Pay for what you ship.</h2>
+      <ul data-pattern="pricing-tier-grid" style="padding: 0; list-style: none;">
+        <li>
+          <article data-pattern="pricing-tier">
+            <h3 data-pattern="pricing-tier-name">Starter</h3>
+            <p data-pattern="pricing-tier-price">Free <span class="interval">/ forever</span></p>
+            <ul data-pattern="pricing-tier-features">
+              <li>3 projects</li>
+              <li>Preview deployments</li>
+              <li>Community support</li>
+            </ul>
+            <a class="action-button" data-intent="ghost" href="/signup">Start free</a>
+          </article>
+        </li>
+        <li>
+          <article data-pattern="pricing-tier" data-highlight="true">
+            <h3 data-pattern="pricing-tier-name">Team</h3>
+            <p data-pattern="pricing-tier-price">$29 <span class="interval">/ user · month</span></p>
+            <ul data-pattern="pricing-tier-features">
+              <li>Unlimited projects</li>
+              <li>Multi-region deploys</li>
+              <li>Audit log</li>
+              <li>Priority support</li>
+            </ul>
+            <a class="action-button" data-intent="primary" href="/signup?plan=team">Start 14-day trial</a>
+          </article>
+        </li>
+        <li>
+          <article data-pattern="pricing-tier">
+            <h3 data-pattern="pricing-tier-name">Enterprise</h3>
+            <p data-pattern="pricing-tier-price">Custom</p>
+            <ul data-pattern="pricing-tier-features">
+              <li>Everything in Team</li>
+              <li>SSO + SCIM</li>
+              <li>Custom SLA</li>
+              <li>Dedicated success</li>
+            </ul>
+            <a class="action-button" data-intent="ghost" href="/contact">Contact sales</a>
+          </article>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- ═══════════════ footer-mega ═══════════════════════ -->
+  <footer data-pattern="footer-section" data-variant="full" role="contentinfo">
+    <div class="inner">
+      <div class="footer-top">
+        <div data-pattern="footer-brand-block">
+          <a class="wordmark" href="/">Acme</a>
+          <p class="tagline">The deployment platform for teams who'd rather be writing code than wrangling YAML.</p>
+        </div>
+        <div data-pattern="footer-link-group">
+          <h3>Product</h3>
+          <ul>
+            <li><a href="/features">Features</a></li>
+            <li><a href="/pricing">Pricing</a></li>
+            <li><a href="/changelog">Changelog</a></li>
+          </ul>
+        </div>
+        <div data-pattern="footer-link-group">
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="/docs">Documentation</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/customers">Customers</a></li>
+          </ul>
+        </div>
+        <div data-pattern="footer-link-group">
+          <h3>Company</h3>
+          <ul>
+            <li><a href="/about">About</a></li>
+            <li><a href="/careers">Careers</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div data-pattern="footer-legal-row">
+        <p>© 2026 Acme Inc. · All rights reserved</p>
+        <span>Built on Quoin · template-landing-saas</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

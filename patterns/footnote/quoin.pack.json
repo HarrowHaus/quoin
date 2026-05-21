@@ -1,0 +1,32 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/pattern-footnote",
+  "version": "1.0.0",
+  "type": "pattern",
+  "quoinVersion": "^0.1.0",
+  "description": "Editorial footnote pattern. Inline trigger that reveals footnote content via four position variants (sidenote-margin · footnote-bottom · popup-on-hover · popup-on-click). Sidenote-margin variant uses CSS Anchor Positioning (Baseline January 2026); polyfill via OddBird's css-anchor-positioning for older browsers.",
+  "category": "editorial",
+  "variant": "system",
+  "exports": {
+    "primitives": "./primitives/index.json"
+  },
+  "states": ["default", "expanded", "collapsed"],
+  "microStates": ["default", "hover", "active", "focus", "focus-visible"],
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/patterns/footnote",
+    "tags": ["footnote", "sidenote", "editorial", "prose", "anchor-positioning", "p1"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0",
+    "@quoin/vocab-editorial": "^0.2.0"
+  },
+  "polyfills": {
+    "css-anchor-positioning": {
+      "purpose": "Polyfills CSS Anchor Positioning for browsers earlier than Baseline January 2026 (Safari ≤17.6, Firefox ≤127). Required ONLY for the sidenote-margin variant; other variants degrade naturally without it.",
+      "source": "https://unpkg.com/@oddbird/css-anchor-positioning",
+      "consumption": "See README — load conditionally via @supports CSS query."
+    }
+  }
+}

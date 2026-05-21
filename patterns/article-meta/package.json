@@ -1,0 +1,21 @@
+{
+  "name": "@quoin/pattern-article-meta",
+  "version": "1.0.0",
+  "description": "Article meta strip: author + date + reading-time, with conditional category, tag-list, share-actions. Composes prim-label for tags.",
+  "main": "quoin.pack.json",
+  "files": [
+    "quoin.pack.json",
+    "primitives/",
+    "examples/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "pattern", "article-meta", "byline", "editorial"],
+  "license": "MIT",
+  "homepage": "https://harrow.haus/quoin/patterns/article-meta",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "patterns/article-meta"
+  }
+}

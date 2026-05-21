@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en" data-aesthetic="default">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>@quoin/pattern-table-of-contents — examples</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/harrowhaus/quoin@main/02_reference-packs/tokens-baseline/tokens.css">
+
+  <style>
+    body {
+      max-width: 72rem; margin: 4rem auto; padding: 0 var(--space-card);
+      background: var(--surface); color: var(--text);
+      font-family: var(--font-sans); line-height: var(--leading-prose);
+    }
+    .layout { display: grid; grid-template-columns: 16rem 1fr; gap: var(--space-section); align-items: start; }
+    @media (max-width: 768px) { .layout { grid-template-columns: 1fr; } }
+
+    article { font-family: var(--font-serif, ui-serif, Georgia, serif); max-width: 36rem; }
+    article h1 { font-family: var(--font-sans); font-size: var(--type-size-3xl); margin: 0 0 var(--space-card); color: var(--text-emphasis); }
+    article h2 { font-family: var(--font-sans); font-size: var(--type-size-xl); margin: var(--space-section) 0 var(--space-3); color: var(--text-emphasis); scroll-margin-top: var(--space-card); }
+    article h3 { font-family: var(--font-sans); font-size: var(--type-size-lg); margin: var(--space-card) 0 var(--space-2); color: var(--text-emphasis); scroll-margin-top: var(--space-card); }
+    article p { margin: 0 0 var(--space-3); }
+
+    /* PATTERN: table-of-contents ─────────────────────────── */
+
+    [data-pattern="toc-container"] {
+      background: var(--surface);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-sm);
+      line-height: var(--leading-prose);
+      padding: var(--space-card);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-md);
+    }
+    [data-pattern="toc-container"][data-position="sticky-side"] {
+      position: sticky; top: var(--space-card);
+      max-height: calc(100vh - 2 * var(--space-card));
+      overflow-y: auto;
+    }
+    [data-pattern="toc-container"] > .label {
+      font-family: var(--font-sans); font-size: var(--type-size-xs);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--tracking-wide); text-transform: uppercase;
+      color: var(--text-recede);
+      margin: 0 0 var(--space-3);
+    }
+    [data-pattern="toc-list"] {
+      list-style: none; padding: 0; margin: 0;
+      display: flex; flex-direction: column; gap: var(--space-2);
+    }
+    [data-pattern="toc-list"] [data-pattern="toc-list"] {
+      margin: var(--space-2) 0 0 var(--space-3);
+      padding-inline-start: var(--space-3);
+      border-inline-start: var(--border-width-sm) solid var(--border-recede, var(--border));
+    }
+    [data-pattern="toc-item"] {
+      padding-inline-start: var(--space-2);
+      border-inline-start: var(--border-width-md) solid transparent;
+      transition: var(--transition-default);
+    }
+    [data-pattern="toc-item"] a {
+      color: var(--text-recede);
+      text-decoration: none;
+      display: block;
+      padding: var(--space-1) 0;
+      transition: var(--transition-default);
+    }
+    [data-pattern="toc-item"]:hover a { color: var(--text-emphasis); }
+    [data-pattern="toc-item"]:focus-within {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+    [data-pattern="toc-item"][data-current="true"] {
+      border-inline-start-color: var(--accent);
+    }
+    [data-pattern="toc-item"][data-current="true"] > a {
+      color: var(--text-emphasis);
+      font-weight: var(--font-weight-medium);
+    }
+
+    [data-pattern="toc-scroll-tracker"][data-render="progress-bar"] {
+      height: var(--border-width-md);
+      background: var(--surface-recessed);
+      margin-top: var(--space-3);
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+    }
+    [data-pattern="toc-scroll-tracker"][data-render="progress-bar"] > .fill {
+      height: 100%; background: var(--accent);
+      transition: width var(--motion-normal) var(--ease-standard);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="layout">
+    <nav data-pattern="toc-container" data-position="sticky-side" data-depth="h1-h3" aria-label="Table of contents">
+      <p class="label">Contents</p>
+      <ol data-pattern="toc-list" id="toc-root">
+        <li data-pattern="toc-item" data-level="2"><a href="#intro">Introduction</a></li>
+        <li data-pattern="toc-item" data-level="2">
+          <a href="#anatomy">Anatomy</a>
+          <ol data-pattern="toc-list">
+            <li data-pattern="toc-item" data-level="3"><a href="#slots">Slots</a></li>
+            <li data-pattern="toc-item" data-level="3"><a href="#variants">Variants</a></li>
+          </ol>
+        </li>
+        <li data-pattern="toc-item" data-level="2"><a href="#observer">Active-section detection</a></li>
+        <li data-pattern="toc-item" data-level="2"><a href="#composition">Composition</a></li>
+      </ol>
+      <div data-pattern="toc-scroll-tracker" data-render="progress-bar" aria-hidden="true">
+        <div class="fill" style="width: 0%"></div>
+      </div>
+    </nav>
+
+    <article>
+      <h1>Table-of-contents pattern</h1>
+
+      <h2 id="intro">Introduction</h2>
+      <p>This is the introduction. As you scroll, the TOC on the left updates the active item via IntersectionObserver. The current section gets a colored border-inline-start.</p>
+      <p>Try scrolling through the article — the active link reflects the heading currently in the top 30% of the viewport.</p>
+
+      <h2 id="anatomy">Anatomy</h2>
+      <p>The pattern is built from a small set of slots. The container, the list, the items, and an optional indicator.</p>
+
+      <h3 id="slots">Slots</h3>
+      <p>Mandatory: toc-container, toc-list, toc-item, active-indicator. Conditional: scroll-tracker, collapse-toggle.</p>
+
+      <h3 id="variants">Variants</h3>
+      <p>Three positions (sticky-side / inline-top / floating-overlay) × three depths (h1-h2 / h1-h3 / h1-h6).</p>
+
+      <h2 id="observer">Active-section detection</h2>
+      <p>IntersectionObserver watches the heading elements within the prose. The rootMargin defaults to '0px 0px -70% 0px' — a heading is considered active when it enters the top 30% of the viewport.</p>
+      <p>The script flips data-current and aria-current='location' on the matching toc-item. Styling responds via CSS attribute selectors.</p>
+
+      <h2 id="composition">Composition</h2>
+      <p>This pattern declares prim-sequence as a peer pack — the toc-list slot is rendered via prim-sequence's ordered-list variant. No inlined ordered-list rendering lives in this pack.</p>
+      <p style="min-height: 30vh">Padding to allow scrolling past the last section.</p>
+    </article>
+  </div>
+
+  <script>
+    // Active-section detection — progressive enhancement layer
+    const headings = document.querySelectorAll('article :is(h2, h3)[id]');
+    const items = document.querySelectorAll('[data-pattern="toc-item"]');
+    const linkById = new Map();
+    items.forEach(item => {
+      const link = item.querySelector('a');
+      if (!link) return;
+      const id = link.getAttribute('href').slice(1);
+      linkById.set(id, item);
+    });
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          const item = linkById.get(entry.target.id);
+          if (!item) return;
+          if (entry.isIntersecting) {
+            items.forEach(i => {
+              i.removeAttribute('data-current');
+              i.querySelector('a')?.removeAttribute('aria-current');
+            });
+            item.setAttribute('data-current', 'true');
+            item.querySelector('a')?.setAttribute('aria-current', 'location');
+          }
+        });
+      },
+      { rootMargin: '0px 0px -70% 0px' }
+    );
+    headings.forEach(h => io.observe(h));
+
+    // Optional progress bar — tracks active-section index / total
+    const tracker = document.querySelector('[data-pattern="toc-scroll-tracker"] .fill');
+    const totalSections = headings.length;
+    const updateProgress = () => {
+      const current = document.querySelector('[data-pattern="toc-item"][data-current="true"] a');
+      if (!current) return;
+      const id = current.getAttribute('href').slice(1);
+      const idx = [...headings].findIndex(h => h.id === id);
+      if (tracker) tracker.style.width = `${((idx + 1) / totalSections) * 100}%`;
+    };
+    new MutationObserver(updateProgress).observe(document.querySelector('[data-pattern="toc-list"]'), { attributes: true, subtree: true, attributeFilter: ['data-current'] });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "name": "@quoin/template-docs-site",
+  "version": "0.1.0-scaffold",
+  "description": "Two-column docs site template. Sticky TOC sidebar + main content. Scaffold only — composition completes when Track B prose-body + code-block ship.",
+  "main": "quoin.template.json",
+  "files": [
+    "quoin.template.json",
+    "index.html",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "template", "docs", "documentation", "scaffold"],
+  "license": "MIT",
+  "homepage": "https://harrow.haus/quoin/templates/docs-site",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "templates/docs-site"
+  }
+}

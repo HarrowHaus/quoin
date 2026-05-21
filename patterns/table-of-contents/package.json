@@ -1,0 +1,21 @@
+{
+  "name": "@quoin/pattern-table-of-contents",
+  "version": "1.0.0",
+  "description": "Table of contents pattern. Three position variants × three depth registers. IntersectionObserver active-section detection. Composes prim-sequence.",
+  "main": "quoin.pack.json",
+  "files": [
+    "quoin.pack.json",
+    "primitives/",
+    "examples/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "pattern", "table-of-contents", "toc", "navigation", "editorial", "intersection-observer"],
+  "license": "MIT",
+  "homepage": "https://harrow.haus/quoin/patterns/table-of-contents",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "patterns/table-of-contents"
+  }
+}

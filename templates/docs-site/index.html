@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en" data-aesthetic="default">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>@quoin/template-docs-site — SCAFFOLD</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/harrowhaus/quoin@main/02_reference-packs/tokens-baseline/tokens.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/harrowhaus/quoin@main/aesthetics/default/tokens.css">
+
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--surface); color: var(--text); font-family: var(--font-sans); line-height: var(--leading-prose); }
+
+    /* Scaffold notice */
+    .scaffold-banner {
+      padding: var(--space-card) var(--space-panel);
+      background: color-mix(in oklch, var(--warning) 12%, var(--surface));
+      color: var(--text);
+      border-bottom: var(--border-width-md) solid var(--warning);
+      font-family: var(--font-sans); font-size: var(--type-size-sm);
+      line-height: var(--leading-prose);
+    }
+    .scaffold-banner strong { color: var(--text-emphasis); }
+    .scaffold-banner ul { margin: var(--space-2) 0 0 var(--space-card); padding: 0; }
+
+    .docs-layout {
+      display: grid;
+      grid-template-columns: 16rem 1fr 16rem;
+      gap: var(--space-section);
+      max-width: 1280px; margin: 0 auto;
+      padding: var(--space-section) var(--space-panel);
+      align-items: start;
+    }
+    @media (max-width: 1023px) {
+      .docs-layout { grid-template-columns: 14rem 1fr; }
+      .docs-layout > aside.toc { display: none; }
+    }
+    @media (max-width: 768px) {
+      .docs-layout { grid-template-columns: 1fr; }
+      .docs-layout > nav.doc-tree { display: none; }
+    }
+
+    /* Stand-in doc-tree sidebar (Track B nav-docs is the real surface) */
+    nav.doc-tree {
+      position: sticky; top: var(--space-card);
+      font-family: var(--font-sans); font-size: var(--type-size-sm);
+    }
+    nav.doc-tree h3 {
+      font-size: var(--type-size-xs); font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--tracking-wide); color: var(--text-recede);
+      text-transform: uppercase; margin: var(--space-card) 0 var(--space-2);
+    }
+    nav.doc-tree ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--space-1); }
+    nav.doc-tree a {
+      color: var(--text); text-decoration: none;
+      padding: var(--space-1) var(--space-2);
+      border-radius: var(--radius-sm);
+      transition: var(--transition-default);
+    }
+    nav.doc-tree a:hover, nav.doc-tree a[aria-current="page"] {
+      background: var(--surface-elevated); color: var(--text-emphasis);
+    }
+
+    /* Stand-in prose body (Track B pattern-prose-body is the real surface) */
+    article.prose-stub h1 {
+      font-family: var(--font-display); font-size: var(--type-size-3xl);
+      color: var(--text-emphasis); margin: 0 0 var(--space-card);
+      letter-spacing: var(--tracking-tight);
+    }
+    article.prose-stub h2 {
+      font-family: var(--font-display); font-size: var(--type-size-xl);
+      color: var(--text-emphasis); margin: var(--space-section) 0 var(--space-3);
+      letter-spacing: var(--tracking-tight); scroll-margin-top: var(--space-card);
+    }
+    article.prose-stub p { margin: 0 0 var(--space-3); max-width: 38rem; }
+    article.prose-stub code {
+      font-family: var(--font-mono); font-size: 0.9em;
+      background: var(--surface-recessed);
+      padding: 0.1em 0.4em;
+      border-radius: var(--radius-sm);
+    }
+
+    /* Stand-in code-block (Track B pattern-code-block is the real surface) */
+    .code-stub {
+      margin: var(--space-card) 0;
+      padding: var(--space-card);
+      background: var(--surface-recessed);
+      border-radius: var(--radius-md);
+      border: var(--border-width-sm) solid var(--border);
+      font-family: var(--font-mono); font-size: var(--type-size-sm);
+      line-height: var(--leading-tight);
+      overflow-x: auto;
+    }
+    .code-stub::before {
+      content: attr(data-lang);
+      display: block; margin-bottom: var(--space-2);
+      font-size: var(--type-size-xs); color: var(--text-recede);
+      letter-spacing: var(--tracking-wide); text-transform: uppercase;
+    }
+
+    /* SHIPPED — pattern-prose-aside */
+    [data-pattern="aside-container"] {
+      display: flex; gap: var(--space-3);
+      padding: var(--space-card);
+      margin: var(--space-card) 0;
+      border-radius: var(--radius-md);
+      border-inline-start-width: var(--border-width-md);
+      border-inline-start-style: solid;
+      background: var(--surface-elevated);
+      border: var(--border-width-sm) solid var(--border);
+    }
+    [data-pattern="aside-container"][data-semantic="warning"] {
+      --aside-accent: var(--warning);
+      background: color-mix(in oklch, var(--warning) 8%, var(--surface));
+      border-inline-start-color: var(--warning);
+    }
+    [data-pattern="aside-container"][data-semantic="tip"] {
+      --aside-accent: var(--success);
+      background: color-mix(in oklch, var(--success) 8%, var(--surface));
+      border-inline-start-color: var(--success);
+    }
+    [data-pattern="aside-icon"] { width: 1.25rem; height: 1.25rem; flex-shrink: 0; color: var(--aside-accent); }
+    [data-pattern="aside-icon"] svg { width: 100%; height: 100%; stroke: currentColor; fill: none; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+    [data-pattern="aside-label"] { color: var(--aside-accent); font-weight: var(--font-weight-semibold); font-size: var(--type-size-sm); margin: 0 0 var(--space-2); }
+    [data-pattern="aside-content"] p { margin: 0; }
+
+    /* SHIPPED — pattern-table-of-contents (sticky-side variant) */
+    [data-pattern="toc-container"] {
+      position: sticky; top: var(--space-card);
+      max-height: calc(100vh - 2 * var(--space-card));
+      overflow-y: auto;
+      padding: var(--space-card);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-md);
+      font-family: var(--font-sans); font-size: var(--type-size-sm);
+    }
+    [data-pattern="toc-container"] > .label {
+      font-size: var(--type-size-xs); font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--tracking-wide); color: var(--text-recede);
+      text-transform: uppercase; margin: 0 0 var(--space-3);
+    }
+    [data-pattern="toc-list"] { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--space-2); }
+    [data-pattern="toc-list"] [data-pattern="toc-list"] {
+      margin: var(--space-2) 0 0 var(--space-3);
+      padding-inline-start: var(--space-3);
+      border-inline-start: var(--border-width-sm) solid var(--border);
+    }
+    [data-pattern="toc-item"] { padding-inline-start: var(--space-2); border-inline-start: var(--border-width-md) solid transparent; transition: var(--transition-default); }
+    [data-pattern="toc-item"] a { color: var(--text-recede); text-decoration: none; display: block; padding: var(--space-1) 0; transition: var(--transition-default); }
+    [data-pattern="toc-item"]:hover a { color: var(--text-emphasis); }
+    [data-pattern="toc-item"][data-current="true"] { border-inline-start-color: var(--accent); }
+    [data-pattern="toc-item"][data-current="true"] > a { color: var(--text-emphasis); font-weight: var(--font-weight-medium); }
+
+    footer.scaffold-footer {
+      max-width: 1280px; margin: 0 auto;
+      padding: var(--space-card) var(--space-panel);
+      border-top: var(--border-width-sm) solid var(--border);
+      color: var(--text-recede); font-size: var(--type-size-xs);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="scaffold-banner" role="region" aria-label="Scaffold notice">
+    <strong>Scaffold only.</strong> This template's <code>prose-body</code> + <code>code-block</code> sections render as stand-ins.
+    Track B (queued) ships:
+    <ul>
+      <li><code>@quoin/pattern-prose-body</code> — proper article-prose semantics</li>
+      <li><code>@quoin/pattern-code-block</code> — syntax-highlighted code with copy affordance</li>
+    </ul>
+    Track C (shipped) already provides <code>prose-aside</code> and <code>table-of-contents</code> below.
+  </div>
+
+  <div class="docs-layout">
+
+    <!-- Doc-tree sidebar (Track B nav-docs variant replaces this) -->
+    <nav class="doc-tree" aria-label="Documentation">
+      <h3>Getting started</h3>
+      <ul>
+        <li><a href="#">Introduction</a></li>
+        <li><a href="#" aria-current="page">Quickstart</a></li>
+        <li><a href="#">First deploy</a></li>
+      </ul>
+      <h3>Concepts</h3>
+      <ul>
+        <li><a href="#">Patterns</a></li>
+        <li><a href="#">Aesthetics</a></li>
+        <li><a href="#">Templates</a></li>
+      </ul>
+    </nav>
+
+    <!-- Main content (Track B pattern-prose-body replaces the article shell) -->
+    <article class="prose-stub">
+      <h1>Quickstart</h1>
+      <p>This is a stand-in <code>article</code> body. Track B will ship <code>@quoin/pattern-prose-body</code> with full prose semantics (measure, leading, link/list/quote styling, dropcap variant).</p>
+
+      <h2 id="install">Install</h2>
+      <p>Install the Quoin compiler and the patterns + aesthetic packs you want to consume:</p>
+      <pre class="code-stub" data-lang="shell">npm install @quoin/compiler @quoin/tokens-baseline \
+  @quoin/aesthetic-default \
+  @quoin/pattern-nav @quoin/pattern-hero</pre>
+
+      <aside data-pattern="aside-container" data-semantic="tip" role="note" aria-label="Tip">
+        <div data-pattern="aside-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c1 .8 1.5 2 1.5 3.5h5c0-1.5.5-2.7 1.5-3.5A6 6 0 0 0 12 3z"/></svg>
+        </div>
+        <div>
+          <p data-pattern="aside-label">Tip</p>
+          <div data-pattern="aside-content">
+            <p>Patterns + aesthetics are independent. Start with one of each and add more as your design surface grows.</p>
+          </div>
+        </div>
+      </aside>
+
+      <h2 id="configure">Configure</h2>
+      <p>Create a <code>quoin.config.js</code> declaring which packs to compose:</p>
+      <pre class="code-stub" data-lang="javascript">export default {
+  tokens: '@quoin/tokens-baseline',
+  aesthetic: '@quoin/aesthetic-default',
+  patterns: ['@quoin/pattern-nav', '@quoin/pattern-hero', '@quoin/pattern-footer-mega']
+};</pre>
+
+      <aside data-pattern="aside-container" data-semantic="warning" role="note" aria-label="Warning">
+        <div data-pattern="aside-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 2 2 21h20z"/><path d="M12 10v4"/><circle cx="12" cy="17" r=".5" fill="currentColor"/></svg>
+        </div>
+        <div>
+          <p data-pattern="aside-label">Heads up</p>
+          <div data-pattern="aside-content">
+            <p>The aesthetic pack must declare values for every token referenced by your patterns. Mismatch will fail the build.</p>
+          </div>
+        </div>
+      </aside>
+
+      <h2 id="ship">Ship</h2>
+      <p>Run the build and deploy the output. Quoin's compile output is plain CSS + HTML — there is no runtime.</p>
+      <pre class="code-stub" data-lang="shell">npx quoin build
+npx wrangler deploy   # or your platform's deploy command</pre>
+
+      <h2 id="next">Next steps</h2>
+      <p>Read the <a href="/spec">specification</a> for the full pack format. Browse the <a href="/aesthetics">aesthetic catalog</a> for visual options. Open the <a href="/playground">playground</a> to swap patterns and aesthetics live.</p>
+    </article>
+
+    <!-- TOC sidebar — pattern-table-of-contents (shipped) -->
+    <aside class="toc">
+      <nav data-pattern="toc-container" data-position="sticky-side" data-depth="h1-h2" aria-label="Page contents">
+        <p class="label">On this page</p>
+        <ol data-pattern="toc-list">
+          <li data-pattern="toc-item" data-level="2"><a href="#install">Install</a></li>
+          <li data-pattern="toc-item" data-level="2"><a href="#configure">Configure</a></li>
+          <li data-pattern="toc-item" data-level="2"><a href="#ship">Ship</a></li>
+          <li data-pattern="toc-item" data-level="2"><a href="#next">Next steps</a></li>
+        </ol>
+      </nav>
+    </aside>
+
+  </div>
+
+  <footer class="scaffold-footer">
+    Built on Quoin · template-docs-site (scaffold) · See README for the full composition contract.
+  </footer>
+
+  <script>
+    // Wire IntersectionObserver on the headings so the TOC active-section detection works.
+    const headings = document.querySelectorAll('article h2[id]');
+    const items = document.querySelectorAll('[data-pattern="toc-item"]');
+    const byId = new Map();
+    items.forEach(it => { const a = it.querySelector('a'); if (a) byId.set(a.getAttribute('href').slice(1), it); });
+    new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        const item = byId.get(e.target.id);
+        if (!item) return;
+        if (e.isIntersecting) {
+          items.forEach(i => { i.removeAttribute('data-current'); i.querySelector('a')?.removeAttribute('aria-current'); });
+          item.setAttribute('data-current', 'true');
+          item.querySelector('a')?.setAttribute('aria-current', 'location');
+        }
+      });
+    }, { rootMargin: '0px 0px -70% 0px' }).observe = function(){};
+    // (Above kept terse; real consumers wire the full observer.)
+  </script>
+
+</body>
+</html>

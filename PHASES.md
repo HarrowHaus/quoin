@@ -2,7 +2,7 @@
 
 This file is the single source of truth for phase status across the Quoin project. It supersedes scattered references in CONSOLIDATION reports, DECISIONS_UPDATES, and session-closing reports. Every future session that opens, closes, or modifies a phase updates this file in its closing batch.
 
-**Last updated:** Session 5 Track A closing — Phase 22.5.A complete (2026-05-21)
+**Last updated:** Session 5 Tracks C + D closing — Phase 22.5.C + 22.5.D complete/scaffolded (2026-05-21)
 
 ---
 
@@ -150,6 +150,40 @@ This file is the single source of truth for phase status across the Quoin projec
 **Closure ref:** commit `5cf8b2b` (2026-05-20). No formal phase number was assigned at the time; retroactively numbered 22.5 in this ledger because it ships between Phase 22's mid-execution (after Cons. 3) and Phase 23.
 **Operator action item still outstanding:** 19 screenshots per `docs/screenshots/README.md` checklist.
 
+### Phase 22.5.B — Editorial Patterns Batch 1 (Track B)
+
+**Status:** 🟡 Queued (not yet started — placeholder pending operator scheduling)
+**Goal:** Ship the first half of the editorial pattern batch: `prose-body`, `code-block`, `pull-quote`, `figure-with-caption`. Required by templates D.2 (docs-site) and D.3 (blog-with-prose) for full composition.
+**Blocks:** completion of `templates/docs-site/` and `templates/blog-with-prose/` (currently scaffold-only, awaiting these patterns).
+
+### Phase 22.5.C — Editorial Patterns Batch 2 (Track C)
+
+**Status:** ✅ Complete (Session 5 Track C — 2026-05-21)
+**Goal:** Ship the second half of the editorial pattern batch: `footnote`, `table-of-contents`, `article-meta`, `prose-aside`.
+**Output:** four pattern packs at root `patterns/`, each with `quoin.pack.json`, `primitives/index.json`, `examples/index.html`, `README.md`, `LICENSE`, `package.json`:
+- `patterns/footnote/` — four position variants (`sidenote-margin` · `footnote-bottom` · `popup-on-hover` · `popup-on-click`). CSS Anchor Positioning (Baseline January 2026); OddBird polyfill consumption documented in README.
+- `patterns/table-of-contents/` — three position variants (`sticky-side` · `inline-top` · `floating-overlay`) × three depth registers (`h1-h2` · `h1-h3` · `h1-h6`). IntersectionObserver active-section detection (rootMargin `0px 0px -70% 0px`). Composes `prim-sequence` for list rendering (declared in `peerPacks`).
+- `patterns/article-meta/` — author + date + reading-time + conditional category, tag-list, share-actions. Three density variants × three position variants. Reading time computed at **build time**, never runtime. `prim-label` declared in `optionalPeerPacks` (required only when tag-list renders).
+- `patterns/prose-aside/` — six semantic registers (`note` · `tip` · `warning` · `danger` · `success` · `info`); three visual registers (`inline` · `bordered` · `filled`). Token-driven colour mapping; `aria-label` per role.
+**Closure ref:** _this commit_ (2026-05-21).
+**Scope boundary:** Track C owns `patterns/{footnote,table-of-contents,article-meta,prose-aside}/` only. Discoverability surface untouched (Track E).
+**Halts encountered:** none. CSS Anchor Positioning anatomy in footnote was scoped to static anchoring (no scroll-tracking semantics); flagged as out-of-scope in pack notes.
+
+### Phase 22.5.D — Page Templates Batch 1 (Track D)
+
+**Status:** ✅ Partial complete (Session 5 Track D — 2026-05-21). D.1 shipped; D.2 + D.3 scaffolded pending Track B.
+**Goal:** Ship the first batch of page templates and introduce the `quoin.template.json` template format. Three templates: `landing-saas`, `docs-site`, `blog-with-prose`. Coordinate with Tracks B + C: only D.1 can ship complete now; D.2 and D.3 ship as scaffolds awaiting Track B prose-body/code-block/pull-quote/figure-with-caption.
+**Output:** three template packs at root `templates/`, each with `quoin.template.json`, `index.html`, `README.md`, `LICENSE`, `package.json`:
+- `templates/landing-saas/` (✅ complete, v1.0.0). Composes 6 shipped patterns in order: nav (marketing) + hero (type-only) + feature-grid (three-up) + testimonial (single-quote) + pricing-tiers (three-tier) + footer-mega (full). Aesthetically neutral; recommended aesthetics include all three v1.0 packs.
+- `templates/docs-site/` (✅ scaffolded, v0.1.0-scaffold). Two-column sticky-TOC layout. Stand-ins for `prose-body` + `code-block` (pending Track B); real `table-of-contents` and `prose-aside` rendered from Track C.
+- `templates/blog-with-prose/` (✅ scaffolded, v0.1.0-scaffold). Long-form layout. Stand-ins for `prose-body` + `pull-quote` + `figure-with-caption` (pending Track B); real `article-meta` and `footnote` rendered from Track C.
+**Template format (new this phase):** `quoin.template.json` separate from `quoin.pack.json`. Declares: `composition.order` (array of `{ slot, pack, variant, status }`), `dependencies` (shipped), `pendingDependencies` (when scaffold), `recommendedAesthetics`, `customizationPoints`. Schema URL: `https://harrow.haus/quoin/schema/template.json` (TBD; placeholder per the brief).
+**Closure ref:** _this commit_ (2026-05-21).
+**What unblocks:** Track E discoverability surface can announce 1 complete + 2 scaffolded templates. Track B remains the blocker for full D.2 + D.3 composition.
+**Scope boundary:** Track D owns `templates/{landing-saas,docs-site,blog-with-prose}/` and this PHASES.md entry only. Discoverability surface untouched (Track E).
+**Halts encountered:** none. Template format introduced inline; no architectural questions surfaced.
+**harrow.haus initial scaffolding:** mentioned in the operator brief header but no explicit deliverables listed — interpreted as out-of-scope for this track. Flagged in closing report for operator clarification.
+
 ### Phase 22.5.A — Aesthetic Packs v1.0 + Aesthetic-Swap Demo
 
 **Status:** ✅ Complete (Session 5 Track A — 2026-05-21)
@@ -201,10 +235,14 @@ This file is the single source of truth for phase status across the Quoin projec
 
 ### Templates layer
 
-**Status:** 🔄 Ongoing
+**Status:** 🔄 Ongoing (v1.0 first batch shipped Phase 22.5.D — 1 complete, 2 scaffolded)
 **Goal:** Ship page templates that compose existing patterns into ready-to-deploy pages.
-**First batch queued:** Session 2 Block C — `template-landing-saas`, `template-docs-site`, `template-blog-with-prose`.
-**Closure dependency for first batch:** Phase 22 Cons. 4 (nav unification) — templates compose nav variants, so unified nav must exist first.
+**v1.0 batch (shipped/scaffolded Phase 22.5.D, 2026-05-21):**
+- ✅ `templates/landing-saas/` — complete (composes 6 shipped patterns).
+- ✅ `templates/docs-site/` — scaffolded; full composition blocks on Phase 22.5.B (Track B prose-body + code-block).
+- ✅ `templates/blog-with-prose/` — scaffolded; full composition blocks on Phase 22.5.B (Track B prose-body + pull-quote + figure-with-caption).
+**Template format introduced:** `quoin.template.json` separate from `quoin.pack.json`. Declares `composition.order` array, `dependencies`, `pendingDependencies`, `recommendedAesthetics`, `customizationPoints`.
+**Next:** Phase 22.5.B closure unblocks D.2 + D.3 full composition. Beyond that, additional templates can land per the new format.
 
 ### Aesthetic Packs (beyond v1.0)
 
@@ -216,6 +254,48 @@ This file is the single source of truth for phase status across the Quoin projec
 - `aesthetics/default/` — tasteful neutral baseline
 **Next candidates (queued):** Manuscript Future (Junicode 2 + Ranade + Monaspace per Cons. 2 Option D), terminal-monochrome, expressive-motion-heavy.
 **Closure dependency:** none — three reference packs now exist; future packs follow the v1.0 template (`tokens.css` + `overrides/{light,dark}.json` + `specimen/`).
+
+---
+
+## Session 5 outcome (2026-05-21) — Phases 22.5.C + 22.5.D (Tracks C + D)
+
+Brief: Session 5 Tracks C and D ran sequentially in this batch. Track C shipped the second half of the editorial pattern batch (footnote · table-of-contents · article-meta · prose-aside); Track D shipped 1 complete + 2 scaffolded page templates and introduced the new `quoin.template.json` format. Track E (discoverability sweep) remains owned separately and is now unblocked for both phases.
+
+**Shipped — Track C (Phase 22.5.C):**
+- **`patterns/footnote/`** — four position variants. `sidenote-margin` and `popup-*` variants depend on CSS Anchor Positioning (Baseline January 2026); README documents OddBird polyfill consumption for older browsers. `footnote-bottom` works without any platform-feature dependency and is the recommended fallback. ARIA: `role="note"` with `aria-describedby` linking trigger ↔ content; `aria-label="Footnote {n}"` on triggers; back-references with `aria-label="Back to text"`.
+- **`patterns/table-of-contents/`** — `peerPacks` declares `@quoin/prim-sequence ^1.0.0` (the ordered-list rendering is delegated entirely). Active-section detection via IntersectionObserver with `rootMargin: '0px 0px -70% 0px'`. ARIA: single `<nav aria-label="Table of contents">` per page; `aria-current="location"` on the active link (NOT `aria-current="page"`).
+- **`patterns/article-meta/`** — `optionalPeerPacks` declares `@quoin/prim-label ^1.0.0` (required only when `tag-list` slot is rendered). Reading time computed at build time; runtime computation is forbidden. ARIA: `rel="author"` on author link, `rel="category"` on category link, `<time datetime="ISO-8601">` required.
+- **`patterns/prose-aside/`** — six semantic registers map to token-driven colours (`--success`, `--warning`, `--critical`, `--info` accents with `*-soft` surfaces). Default `role="note"`; operators may elevate to `role="alert"` for `danger` semantic explicitly. Icon slot defines colour but not glyphs (consumer's icon-pack responsibility); recommended glyph mapping is in README.
+
+**Shipped — Track D (Phase 22.5.D):**
+- **`templates/landing-saas/`** (✅ v1.0.0). Six-section SaaS landing demo composing nav (marketing) + hero (type-only) + feature-grid (three-up) + testimonial (single-quote) + pricing-tiers (three-tier) + footer-mega (full). Aesthetically neutral; loads `aesthetics/default/` by default but swappable to Boeing Watch or Harrow Haus.
+- **`templates/docs-site/`** (✅ v0.1.0-scaffold). Two-column docs layout with sticky TOC sidebar. Real `table-of-contents` and `prose-aside` rendered from Track C; stand-ins for `prose-body` + `code-block` (pending Track B). Scaffold banner in `index.html` flags the pending sections to consumers.
+- **`templates/blog-with-prose/`** (✅ v0.1.0-scaffold). Long-form blog layout. Real `article-meta` and `footnote` rendered from Track C; stand-ins for `prose-body` + `pull-quote` + `figure-with-caption` (pending Track B). Scaffold banner in `index.html`.
+
+**New format introduced (Track D):**
+- `quoin.template.json` is the template manifest. Distinct from `quoin.pack.json` (which patterns and aesthetics use). Declares:
+  - `composition.order` — ordered array of `{ slot, pack, variant, status }` entries
+  - `dependencies` — shipped peer packs (semver)
+  - `pendingDependencies` — when `status === "scaffold"`, the packs whose closure unblocks full composition
+  - `recommendedAesthetics` — which aesthetic packs the template was designed against
+  - `customizationPoints` — array of `{ id, what, where }` documenting what consumers tune
+- Each template ships `index.html` (the deployable demo) + README (composition + customization notes) + LICENSE + npm package.json.
+
+**Architectural proof points:**
+- **v3.G.20 still holds.** Track C patterns declare anatomy only; never anatomy + values. Reading time as a `data-minutes` attribute is structural, not styled.
+- **v3.G.21 holds in action.** `article-meta` uses `optionalPeerPacks` for `prim-label` (only when tag-list renders). `table-of-contents` uses `peerPacks` for `prim-sequence` (always required).
+- **Scaffold pattern established.** Templates D.2 and D.3 ship as deployable HTML with banner + stand-ins, not as empty directories. Operators get a runnable demo of the partial composition immediately; Track B closure swaps stand-ins for real patterns without changing the template format.
+
+**Out of scope for Tracks C + D (handed off to Track E):**
+- `/llms.txt`, `/llms-full.txt`, `/registry.json`, `README.md` updates announcing 4 new patterns + 3 new templates.
+- Per-pack screenshots in `docs/screenshots/`.
+
+**Deferred:**
+- Track B (Phase 22.5.B) — Block B editorial patterns batch 1 (`prose-body`, `code-block`, `pull-quote`, `figure-with-caption`). Blocks full D.2 + D.3 composition.
+- Phase 23 (Compiler IR) — still unblocked, still queued.
+
+**Operator-clarification item:**
+- Track D brief mentions "harrow.haus initial scaffolding" in the section header but the deliverable list only enumerates D.1/D.2/D.3. Interpreted as out-of-scope for this commit; flagged for clarification before the next session.
 
 ---
 
@@ -346,6 +426,14 @@ Phase 0 (spec)
               → Phase 22.5.A (Aesthetic Packs v1.0 + swap demo — ✅)
                 → Aesthetic Packs beyond v1.0 [UNBLOCKED, ongoing]
                 → Track E (discoverability sweep for aesthetics) [UNBLOCKED]
+              → Phase 22.5.B (Editorial Patterns Batch 1 — 🟡 queued)
+                → Phase 22.5.D template-docs-site composition [BLOCKED on 22.5.B]
+                → Phase 22.5.D template-blog-with-prose composition [BLOCKED on 22.5.B]
+              → Phase 22.5.C (Editorial Patterns Batch 2 — ✅)
+                → Catalog Extension (editorial slice) [unblocked]
+              → Phase 22.5.D (Page Templates Batch 1 — ✅ partial)
+                → Track E (discoverability sweep for templates) [UNBLOCKED]
+                → Templates layer beyond v1.0 [UNBLOCKED, ongoing]
               → Phase 23 (Compiler IR) [BLOCKED on Phase 22 closure]
                 → Phase 24 (Build Pipeline) [BLOCKED on Phase 23]
                 → Phase 25 (MCP + Distribution) [BLOCKED on Phase 23]

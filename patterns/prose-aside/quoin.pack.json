@@ -1,0 +1,25 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/pattern-prose-aside",
+  "version": "1.0.0",
+  "type": "pattern",
+  "quoinVersion": "^0.1.0",
+  "description": "Prose aside (callout / admonition) for editorial and docs prose. Six semantic registers: note, tip, warning, danger, success, info. Token-driven colour + icon mapping per semantic; aria-label per role for screen readers.",
+  "category": "editorial",
+  "variant": "system",
+  "exports": {
+    "primitives": "./primitives/index.json"
+  },
+  "states": ["default"],
+  "microStates": ["default", "hover", "focus", "focus-visible"],
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/patterns/prose-aside",
+    "tags": ["prose-aside", "callout", "admonition", "editorial", "docs", "p1"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0",
+    "@quoin/vocab-editorial": "^0.2.0"
+  }
+}

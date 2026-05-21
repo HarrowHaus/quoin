@@ -1,0 +1,26 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/pattern-table-of-contents",
+  "version": "1.0.0",
+  "type": "pattern",
+  "quoinVersion": "^0.1.0",
+  "description": "Table of contents for long-form articles or docs. Three position variants (sticky-side · inline-top · floating-overlay), three depth registers (h1-h2 / h1-h3 / h1-h6). Active-section detection via IntersectionObserver on heading elements. Composes prim-sequence for the list rendering.",
+  "category": "editorial",
+  "variant": "system",
+  "exports": {
+    "primitives": "./primitives/index.json"
+  },
+  "states": ["default", "collapsed", "expanded"],
+  "microStates": ["default", "hover", "active", "focus", "focus-visible", "current"],
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/patterns/table-of-contents",
+    "tags": ["toc", "table-of-contents", "navigation", "editorial", "intersection-observer", "p1"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0",
+    "@quoin/vocab-editorial": "^0.2.0",
+    "@quoin/prim-sequence": "^1.0.0"
+  }
+}

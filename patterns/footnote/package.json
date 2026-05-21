@@ -1,0 +1,21 @@
+{
+  "name": "@quoin/pattern-footnote",
+  "version": "1.0.0",
+  "description": "Editorial footnote pattern with four position variants (sidenote-margin / footnote-bottom / popup-on-hover / popup-on-click). CSS Anchor Positioning, polyfilled.",
+  "main": "quoin.pack.json",
+  "files": [
+    "quoin.pack.json",
+    "primitives/",
+    "examples/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "pattern", "footnote", "editorial", "anchor-positioning"],
+  "license": "MIT",
+  "homepage": "https://harrow.haus/quoin/patterns/footnote",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "patterns/footnote"
+  }
+}

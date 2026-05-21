@@ -1,0 +1,21 @@
+{
+  "name": "@quoin/pattern-prose-aside",
+  "version": "1.0.0",
+  "description": "Prose aside / callout / admonition with six semantic registers (note, tip, warning, danger, success, info). Token-driven colour; aria-label per role.",
+  "main": "quoin.pack.json",
+  "files": [
+    "quoin.pack.json",
+    "primitives/",
+    "examples/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "pattern", "prose-aside", "callout", "admonition", "editorial", "docs"],
+  "license": "MIT",
+  "homepage": "https://harrow.haus/quoin/patterns/prose-aside",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "patterns/prose-aside"
+  }
+}

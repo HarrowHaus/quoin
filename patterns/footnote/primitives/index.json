@@ -1,0 +1,139 @@
+[
+  {
+    "name": "footnote",
+    "category": "editorial",
+    "role": "Container pattern. Holds the inline trigger and the anchored content. Four position variants control where the content reveals.",
+    "attributes": {
+      "position": {
+        "values": ["sidenote-margin", "footnote-bottom", "popup-on-hover", "popup-on-click"],
+        "default": "footnote-bottom",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "var(--text)",
+      "fontFamily": "var(--font-serif, var(--font-sans))",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "span"
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "semanticStructure": [
+        "<span data-pattern='footnote' data-position='sidenote-margin'>",
+        "  <a data-pattern='footnote-trigger' href='#fn-1' aria-describedby='fn-1'>¹</a>",
+        "  <aside data-pattern='footnote-content' id='fn-1' role='note'>",
+        "    Content body. May contain phrasing or small block content.",
+        "  </aside>",
+        "</span>"
+      ],
+      "positionContracts": {
+        "sidenote-margin": "Content rendered alongside the prose in the page's outer margin. Uses CSS Anchor Positioning (anchor-name on trigger, position-anchor on content). Falls back to footnote-bottom if anchor positioning is unavailable AND the polyfill is not loaded.",
+        "footnote-bottom": "Content rendered at the bottom of the prose block (the classic register). Trigger is a superscript link; content is collected at document end. Works without any new platform features.",
+        "popup-on-hover": "Content rendered as a popover anchored to the trigger; appears on hover (and focus, for keyboard). Uses [popover] attribute + CSS Anchor Positioning. Degrades to footnote-bottom when popover is unavailable.",
+        "popup-on-click": "Content rendered as a popover; appears on click/Enter/Space and dismisses on outside-click or Esc. Same platform requirements as popup-on-hover."
+      },
+      "ariaPatterns": {
+        "trigger": "Anchor with href to the content's id. Uses aria-describedby to associate trigger with content for assistive tech, so screen readers can surface the footnote when the cursor lands on the trigger.",
+        "content": "<aside role='note'> for prose footnotes. Use role='doc-footnote' when DPub-ARIA is in scope (digital publishing applications).",
+        "popoverRoleNote": "For popup-on-hover/popup-on-click, the popover element gets role='note' or role='dialog' depending on whether the operator needs the content to trap focus. Default is 'note' (non-modal); 'dialog' only when the content has its own actions inside."
+      },
+      "anchorPositioningSupport": "Baseline January 2026 (Chrome 125+, Safari 18.2+, Firefox 128+). For older browsers, load the OddBird polyfill before any sidenote-margin or popup-* variant is rendered. See pack README § Polyfill.",
+      "halt": "If a consumer needs scroll-tracking semantics (e.g., footnote auto-collapses when out of viewport), that requires a separate primitive (out of scope for v1.0). v1.0 ships static anchor positioning only."
+    }
+  },
+  {
+    "name": "footnote-trigger",
+    "category": "editorial",
+    "role": "Inline marker (typically a superscript number or symbol) that anchors to the content. Always an interactive anchor element with href.",
+    "attributes": {
+      "marker": {
+        "values": ["numeric", "symbol", "asterisk"],
+        "default": "numeric",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "var(--accent)",
+      "fontFamily": "inherit",
+      "fontSize": "0.7em",
+      "fontWeight": "var(--font-weight-medium)",
+      "verticalAlign": "super",
+      "lineHeight": "1",
+      "textDecoration": "none",
+      "padding": "0 var(--space-1)",
+      "borderRadius": "var(--radius-sm)",
+      "transition": "var(--transition-default)",
+      "hoverBackground": "var(--accent-recede)",
+      "focusRing": "var(--focus-ring-width) solid var(--focus-ring)"
+    },
+    "structure": {
+      "element": "a"
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "semanticStructure": [
+        "<a data-pattern='footnote-trigger' href='#fn-1'",
+        "   aria-describedby='fn-1' aria-label='Footnote 1'>1</a>"
+      ],
+      "ariaPatterns": {
+        "ariaLabel": "Provide aria-label='Footnote {n}' so the marker is announced fully (numeric markers alone are noisy for screen readers).",
+        "ariaDescribedby": "Required — links trigger to content so AT users get the footnote body when focusing the trigger."
+      },
+      "interaction": "Activates the associated content. For popup-on-click variant: invokes showPopover() on the content. For sidenote-margin / footnote-bottom: standard anchor-jump (scroll to content)."
+    }
+  },
+  {
+    "name": "footnote-content",
+    "category": "editorial",
+    "role": "The footnote body. Anchored to the trigger via id reference. Rendered in the position implied by the parent's data-position.",
+    "attributes": {
+      "anchored": {
+        "values": ["trigger", "block"],
+        "default": "trigger",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "var(--text-recede)",
+      "fontFamily": "var(--font-serif, var(--font-sans))",
+      "fontSize": "var(--type-size-sm)",
+      "lineHeight": "var(--leading-prose)",
+      "padding": "var(--space-3) var(--space-card)",
+      "borderRadius": "var(--radius-md)",
+      "background": "var(--surface-elevated)",
+      "borderColor": "var(--border)",
+      "borderWidth": "var(--border-width-sm)",
+      "boxShadow": "var(--shadow-sm)",
+      "marginInlineStart": "var(--space-section)",
+      "maxInlineSize": "20rem",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "aside"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<aside data-pattern='footnote-content' id='fn-1' role='note'",
+        "       popover  /* only for popup-* variants */>",
+        "  <p>Footnote body content. Phrasing or short block content.</p>",
+        "  <a href='#fnref-1' aria-label='Back to text'>↩</a>",
+        "</aside>"
+      ],
+      "cssAnchorPositioning": {
+        "trigger": "anchor-name: --fn-1; (declared on footnote-trigger)",
+        "content": "position-anchor: --fn-1; top: anchor(top); left: anchor(right);",
+        "polyfillNote": "The OddBird polyfill transparently handles these declarations on older browsers. Detection: @supports (anchor-name: --x) {} — when unsupported, conditionally load the polyfill script."
+      },
+      "ariaPatterns": {
+        "roleNote": "role='note' is the right semantic for prose footnotes. role='doc-footnote' is a DPub-ARIA alternative used in formal digital publishing.",
+        "backReference": "Include a back-reference link with aria-label='Back to text' so AT users can return to the trigger after reading the footnote."
+      }
+    }
+  }
+]

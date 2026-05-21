@@ -1,0 +1,162 @@
+[
+  {
+    "name": "aside-container",
+    "category": "editorial",
+    "role": "Outer container. Sets the data-semantic attribute (note / tip / warning / danger / success / info) which drives token mapping for surface, border, icon, and aria-label.",
+    "attributes": {
+      "semantic": {
+        "values": ["note", "tip", "warning", "danger", "success", "info"],
+        "default": "note",
+        "specific": true
+      },
+      "register": {
+        "values": ["inline", "bordered", "filled"],
+        "default": "bordered",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "padding": "var(--space-card)",
+      "borderRadius": "var(--radius-md)",
+      "borderWidthInlineStart": "var(--border-width-md)",
+      "borderWidthOther": "var(--border-width-sm)",
+      "margin": "var(--space-card) 0",
+      "gap": "var(--space-3)",
+      "transition": "var(--transition-default)",
+      "noteSurface": "var(--surface-elevated)",
+      "noteBorder": "var(--border)",
+      "noteAccent": "var(--text-recede)",
+      "tipSurface": "var(--success-soft, color-mix(in oklch, var(--success) 12%, var(--surface)))",
+      "tipBorder": "var(--success)",
+      "tipAccent": "var(--success)",
+      "warningSurface": "var(--warning-soft, color-mix(in oklch, var(--warning) 12%, var(--surface)))",
+      "warningBorder": "var(--warning)",
+      "warningAccent": "var(--warning)",
+      "dangerSurface": "var(--critical-soft, color-mix(in oklch, var(--critical) 12%, var(--surface)))",
+      "dangerBorder": "var(--critical)",
+      "dangerAccent": "var(--critical)",
+      "successSurface": "var(--success-soft, color-mix(in oklch, var(--success) 12%, var(--surface)))",
+      "successBorder": "var(--success)",
+      "successAccent": "var(--success)",
+      "infoSurface": "var(--info-soft, color-mix(in oklch, var(--info) 12%, var(--surface)))",
+      "infoBorder": "var(--info)",
+      "infoAccent": "var(--info)"
+    },
+    "structure": {
+      "element": "aside"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<aside data-pattern='aside-container' data-semantic='warning' data-register='bordered'",
+        "       role='note' aria-label='Warning'>",
+        "  <div data-pattern='aside-icon' aria-hidden='true'>",
+        "    <svg>...</svg>",
+        "  </div>",
+        "  <div class='content'>",
+        "    <p data-pattern='aside-label'>Heads up</p>",
+        "    <div data-pattern='aside-content'>",
+        "      <p>Body content.</p>",
+        "    </div>",
+        "  </div>",
+        "</aside>"
+      ],
+      "registerContracts": {
+        "inline": "Minimal — icon + label inline with body; no surface fill, just an inline-start accent border.",
+        "bordered": "Surface fill + inline-start accent border in the semantic colour. The default register; works in prose flow.",
+        "filled": "Fully filled surface in the semantic-soft colour. Use for higher-emphasis callouts; avoid stacking multiple in close succession."
+      },
+      "semanticAriaLabelMapping": {
+        "note": "aria-label='Note'",
+        "tip": "aria-label='Tip'",
+        "warning": "aria-label='Warning'",
+        "danger": "aria-label='Danger'",
+        "success": "aria-label='Success'",
+        "info": "aria-label='Information'"
+      },
+      "roleNote": "Default role='note'. For semantically critical content where AT should announce it more prominently, operators may switch to role='alert' (typically for danger semantic only). Operators choose explicitly; the pack does NOT auto-promote to role='alert'."
+    }
+  },
+  {
+    "name": "aside-icon",
+    "category": "editorial",
+    "role": "Decorative icon that signals the semantic register. Always aria-hidden. The semantic colour comes from token mapping; the glyph itself is chosen by the consumer (the pack does not ship icons inline — that's the consumer's icon-pack responsibility).",
+    "attributes": {},
+    "tokens": {
+      "color": "var(--aside-accent)",
+      "width": "1.25rem",
+      "height": "1.25rem",
+      "flexShrink": "0"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "ariaHidden": "Always aria-hidden='true'. The aside-container's aria-label carries the semantic signal for AT users; the icon is purely visual reinforcement.",
+      "iconChoiceContract": "The pack defines token mapping (icon colour comes from the semantic-accent token) but does NOT ship the icon glyphs. Consumers wire icons from an icon pack (e.g., @quoin/icons-lucide, @quoin/icons-phosphor) or inline SVG. Recommended glyph mapping: note=info-circle, tip=lightbulb, warning=triangle-alert, danger=octagon-alert, success=check-circle, info=info-circle."
+    }
+  },
+  {
+    "name": "aside-label",
+    "category": "editorial",
+    "role": "Short heading or label for the aside. Optional but recommended — gives context to the body. Visually styled in the semantic-accent colour.",
+    "attributes": {
+      "level": {
+        "values": ["h3", "h4", "p", "strong"],
+        "default": "p",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "var(--aside-accent)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-sm)",
+      "fontWeight": "var(--font-weight-semibold)",
+      "letterSpacing": "var(--tracking-tight)",
+      "lineHeight": "var(--leading-tight)",
+      "margin": "0 0 var(--space-2)",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "p"
+    },
+    "children": "phrasing-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<p data-pattern='aside-label'>Heads up</p>"
+      ],
+      "headingLevelChoice": "When the aside is inside an article and the surrounding section uses h3, set level='h4' to keep the heading hierarchy clean. Default is <p> with strong typography — explicit heading semantics are opt-in.",
+      "redundancyWithAriaLabel": "The label text is visual; the aside-container's aria-label gives AT users a semantic label. The two are not duplicative — the label is the human-authored title (e.g., 'Heads up'), the aria-label is the semantic role ('Warning')."
+    }
+  },
+  {
+    "name": "aside-content",
+    "category": "editorial",
+    "role": "The body of the aside. Flow content — may contain paragraphs, lists, code blocks, links. Token styling inherits from prose surroundings.",
+    "attributes": {},
+    "tokens": {
+      "color": "var(--text)",
+      "fontFamily": "inherit",
+      "fontSize": "inherit",
+      "lineHeight": "var(--leading-prose)"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<div data-pattern='aside-content'>",
+        "  <p>Body paragraph.</p>",
+        "  <p>Multiple paragraphs allowed.</p>",
+        "</div>"
+      ],
+      "inheritedTypography": "Paragraph + list + link rendering inherits from the surrounding prose context. The aside doesn't re-declare prose tokens; if the consumer hasn't set them, the baseline serves."
+    }
+  }
+]

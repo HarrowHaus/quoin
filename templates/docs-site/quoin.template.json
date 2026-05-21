@@ -1,0 +1,62 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/template.json",
+  "name": "@quoin/template-docs-site",
+  "version": "0.1.0-scaffold",
+  "type": "template",
+  "quoinVersion": "^0.1.0",
+  "description": "Docs site template. Two-column layout: sticky TOC sidebar + main content. Composes nav (docs variant) + page-header + prose-body + code-block + prose-aside + table-of-contents + footer-mega. SCAFFOLD ONLY — full composition lands after Track B (prose-body, code-block) ships.",
+
+  "status": "scaffold",
+  "scaffoldNotes": "Track C shipped 2 of 4 required editorial patterns (prose-aside, table-of-contents). Track B (queued) ships the remaining 2 (prose-body, code-block). Composition completes in a follow-up commit once Track B closes.",
+
+  "composition": {
+    "order": [
+      { "slot": "nav", "pack": "@quoin/pattern-nav", "variant": "docs", "status": "shipped" },
+      { "slot": "page-header", "pack": "@quoin/pattern-page-header", "variant": "default", "status": "shipped" },
+      { "slot": "toc", "pack": "@quoin/pattern-table-of-contents", "variant": "sticky-side · h1-h3", "status": "shipped" },
+      { "slot": "prose-body", "pack": "@quoin/pattern-prose-body", "variant": "docs", "status": "pending-track-b" },
+      { "slot": "code-block", "pack": "@quoin/pattern-code-block", "variant": "with-copy", "status": "pending-track-b" },
+      { "slot": "prose-aside", "pack": "@quoin/pattern-prose-aside", "variant": "bordered", "status": "shipped" },
+      { "slot": "footer", "pack": "@quoin/pattern-footer-mega", "variant": "compact", "status": "shipped" }
+    ]
+  },
+
+  "dependencies": {
+    "@quoin/tokens-baseline": "^0.1.0",
+    "@quoin/pattern-nav": "^1.0.0",
+    "@quoin/pattern-page-header": "^1.0.0",
+    "@quoin/pattern-table-of-contents": "^1.0.0",
+    "@quoin/pattern-prose-aside": "^1.0.0",
+    "@quoin/pattern-footer-mega": "^1.0.0",
+    "@quoin/prim-sequence": "^1.0.0"
+  },
+  "pendingDependencies": {
+    "@quoin/pattern-prose-body": "^1.0.0 — queued in Track B",
+    "@quoin/pattern-code-block": "^1.0.0 — queued in Track B"
+  },
+
+  "recommendedAesthetics": [
+    "@quoin/aesthetic-default",
+    "@quoin/aesthetic-harrow-haus"
+  ],
+
+  "customizationPoints": [
+    { "id": "doc-tree", "what": "Sidebar doc tree structure", "where": "nav-docs sidebar" },
+    { "id": "search-backend", "what": "Search input integration (Algolia DocSearch / Pagefind / custom)", "where": "nav-docs search slot" },
+    { "id": "version-selector", "what": "Doc version switcher", "where": "nav-docs primary slot" },
+    { "id": "toc-depth", "what": "h1-h2 / h1-h3 / h1-h6", "where": "toc data-depth attribute" },
+    { "id": "prose-tokens", "what": "Prose font, measure, leading", "where": "tokens override (after Track B ships)" }
+  ],
+
+  "exports": {
+    "index": "./index.html",
+    "readme": "./README.md"
+  },
+
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/templates/docs-site",
+    "tags": ["template", "docs", "documentation", "scaffold"]
+  }
+}

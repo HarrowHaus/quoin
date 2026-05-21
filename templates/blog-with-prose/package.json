@@ -1,0 +1,20 @@
+{
+  "name": "@quoin/template-blog-with-prose",
+  "version": "0.1.0-scaffold",
+  "description": "Long-form blog post template. Composes article-meta + prose-body + pull-quote + figure-with-caption + footnote. Scaffold only — composition completes when Track B ships.",
+  "main": "quoin.template.json",
+  "files": [
+    "quoin.template.json",
+    "index.html",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "template", "blog", "editorial", "prose", "scaffold"],
+  "license": "MIT",
+  "homepage": "https://harrow.haus/quoin/templates/blog-with-prose",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "templates/blog-with-prose"
+  }
+}

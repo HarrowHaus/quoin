@@ -1,0 +1,236 @@
+[
+  {
+    "name": "toc-container",
+    "category": "editorial",
+    "role": "Outer container for the table of contents. Sets the position variant (sticky-side / inline-top / floating-overlay), the depth (h1-h2 / h1-h3 / h1-h6), and the active-section detection root.",
+    "attributes": {
+      "position": {
+        "values": ["sticky-side", "inline-top", "floating-overlay"],
+        "default": "sticky-side",
+        "specific": true
+      },
+      "depth": {
+        "values": ["h1-h2", "h1-h3", "h1-h6"],
+        "default": "h1-h3",
+        "specific": true
+      },
+      "collapsible": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "background": "var(--surface)",
+      "color": "var(--text)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-sm)",
+      "lineHeight": "var(--leading-prose)",
+      "padding": "var(--space-card)",
+      "borderRadius": "var(--radius-md)",
+      "borderColor": "var(--border)",
+      "borderWidth": "var(--border-width-sm)",
+      "transition": "var(--transition-default)",
+      "stickyTopOffset": "var(--space-card)",
+      "overlayShadow": "var(--shadow-lg)"
+    },
+    "structure": {
+      "element": "nav"
+    },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<nav data-pattern='toc-container' data-position='sticky-side' data-depth='h1-h3' aria-label='Table of contents'>",
+        "  (optional) <toc-collapse-toggle> — only when data-collapsible='true'",
+        "  <ol data-pattern='prim-sequence' data-variant='ordered-list'>",
+        "    <li data-pattern='toc-item'>",
+        "      <a href='#section-id'>Section name</a>",
+        "      <!-- nested <ol> for child levels -->",
+        "    </li>",
+        "  </ol>",
+        "  (optional) <div data-pattern='toc-scroll-tracker' aria-hidden='true'>",
+        "</nav>"
+      ],
+      "positionContracts": {
+        "sticky-side": "Sidebar that sticks alongside the prose; position: sticky; top: stickyTopOffset; max-height: calc(100vh - 2 * stickyTopOffset); overflow-y: auto. Typical width 14–18rem in a two-column page layout.",
+        "inline-top": "Inline block above the prose; collapsible by default. Used when there is no sidebar real estate (mobile / narrow content).",
+        "floating-overlay": "Fixed-position overlay anchored to a viewport corner. Toggle via collapse-toggle. Useful for docs-site templates where the TOC is supplementary."
+      },
+      "intersectionObserverContract": "Inline script (or progressive enhancement layer) attaches an IntersectionObserver to the heading elements within the prose. When a heading crosses the rootMargin threshold, the corresponding toc-item gets data-current='true' AND aria-current='location'. Default rootMargin: '0px 0px -70% 0px' (heading considered active when entering the top 30% of viewport).",
+      "ariaPatterns": {
+        "navLandmark": "Use a single <nav aria-label='Table of contents'> per page. Multiple TOCs require disambiguating labels (e.g., 'Documentation contents', 'Page contents').",
+        "ariaCurrentLocation": "When a section is active, set aria-current='location' on its link (NOT aria-current='page' — that's reserved for the page-level navigation indicator)."
+      },
+      "halt": "If the consumer needs scroll-spy semantics beyond IntersectionObserver (e.g., explicit scroll progress percentage), that's a separate primitive deferred from v1.0."
+    }
+  },
+  {
+    "name": "toc-list",
+    "category": "editorial",
+    "role": "The actual ordered list of TOC entries. Composed from prim-sequence's ordered-list variant — this pack does NOT inline its own ordered-list rendering.",
+    "attributes": {},
+    "tokens": {
+      "listStyle": "none",
+      "padding": "0",
+      "margin": "0",
+      "gap": "var(--space-2)"
+    },
+    "structure": {
+      "element": "ol"
+    },
+    "children": "phrasing-content",
+    "scope": "block",
+    "meta": {
+      "primSequenceComposition": "Always render with data-pattern='prim-sequence' data-variant='ordered-list' (or 'unordered-list' if the consumer prefers no numbering). The variant axis lives in prim-sequence; this pack delegates list semantics entirely.",
+      "nestingForDepth": "For data-depth='h1-h3' or deeper, nest <ol> elements inside <li data-pattern='toc-item'> to preserve heading hierarchy. The nested list inherits prim-sequence's nested-list rendering."
+    }
+  },
+  {
+    "name": "toc-item",
+    "category": "editorial",
+    "role": "One TOC entry. Wraps an anchor link to a heading element by id. Sets data-current='true' when its target heading is the active section.",
+    "attributes": {
+      "level": {
+        "values": ["1", "2", "3", "4", "5", "6"],
+        "default": "2",
+        "specific": true
+      },
+      "current": {
+        "values": ["true", "false"],
+        "default": "false",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "var(--text-recede)",
+      "fontWeight": "var(--font-weight-regular)",
+      "paddingInlineStart": "var(--space-2)",
+      "borderInlineStartColor": "transparent",
+      "borderInlineStartWidth": "var(--border-width-md)",
+      "borderInlineStartStyle": "solid",
+      "transition": "var(--transition-default)",
+      "currentColor": "var(--text-emphasis)",
+      "currentBorderColor": "var(--accent)",
+      "currentFontWeight": "var(--font-weight-medium)",
+      "hoverColor": "var(--text-emphasis)",
+      "focusRing": "var(--focus-ring-width) solid var(--focus-ring)"
+    },
+    "structure": {
+      "element": "li"
+    },
+    "children": "phrasing-content",
+    "scope": "block",
+    "meta": {
+      "semanticStructure": [
+        "<li data-pattern='toc-item' data-level='2' data-current='false'>",
+        "  <a href='#section-id'>Section name</a>",
+        "</li>"
+      ],
+      "ariaPatterns": {
+        "ariaCurrent": "When data-current='true', the inner <a> gets aria-current='location'. Set/unset together — the data attribute drives the visual; aria attribute drives AT.",
+        "indentForLevel": "Visual indent comes from the parent <ol> nesting, NOT from a separate padding-per-level. Keep the inset cue purely structural."
+      }
+    }
+  },
+  {
+    "name": "active-indicator",
+    "category": "editorial",
+    "role": "Visual cue showing which section is currently in view. Rendered as a border-inline-start on the active toc-item (and optionally a fill colour change). Has no markup of its own; styling is applied to toc-item via the data-current attribute selector.",
+    "attributes": {
+      "style": {
+        "values": ["border", "dot", "pill", "underline"],
+        "default": "border",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "var(--accent)",
+      "background": "transparent",
+      "borderWidth": "var(--border-width-md)",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "none"
+    },
+    "children": "none",
+    "scope": "inline",
+    "meta": {
+      "implementationNote": "active-indicator is NOT a separate DOM element — it's a styling concern applied to toc-item[data-current='true']. The 'style' attribute on the indicator is set at the toc-container level (e.g., data-indicator-style='border') and selectors target [data-current='true'] within that container."
+    }
+  },
+  {
+    "name": "toc-scroll-tracker",
+    "category": "editorial",
+    "role": "Conditional slot for visualizing scroll progress through the article. Only present when the operator opts in. Hidden from AT — purely decorative reinforcement of the IntersectionObserver-driven active section.",
+    "attributes": {
+      "render": {
+        "values": ["progress-bar", "dot-rail", "off"],
+        "default": "off",
+        "specific": true
+      }
+    },
+    "tokens": {
+      "color": "var(--accent)",
+      "background": "var(--surface-recessed)",
+      "height": "var(--border-width-md)",
+      "transition": "var(--transition-default)"
+    },
+    "structure": {
+      "element": "div"
+    },
+    "children": "none",
+    "scope": "inline",
+    "meta": {
+      "ariaHidden": "Always aria-hidden='true'. The IntersectionObserver-driven aria-current on toc-item provides the semantic active-section signal; this is purely decorative.",
+      "implementationNote": "Progress can be computed from the active-section index / total-sections, or from window.scrollY / document.body.scrollHeight. Either approach works; the first ties more tightly to the IO observer."
+    }
+  },
+  {
+    "name": "toc-collapse-toggle",
+    "category": "editorial",
+    "role": "Conditional slot for collapsing the TOC. Only present when toc-container has data-collapsible='true'. Toggles aria-expanded on itself; CSS hides/shows the list based on aria-expanded.",
+    "attributes": {
+      "labelExpanded": {
+        "values": ["string"],
+        "default": "Hide contents",
+        "specific": false
+      },
+      "labelCollapsed": {
+        "values": ["string"],
+        "default": "Show contents",
+        "specific": false
+      }
+    },
+    "tokens": {
+      "color": "var(--text)",
+      "background": "transparent",
+      "padding": "var(--space-2) var(--space-3)",
+      "borderRadius": "var(--radius-md)",
+      "borderColor": "var(--border)",
+      "borderWidth": "var(--border-width-sm)",
+      "fontFamily": "var(--font-sans)",
+      "fontSize": "var(--type-size-sm)",
+      "transition": "var(--transition-default)",
+      "hoverBackground": "var(--surface-elevated)",
+      "focusRing": "var(--focus-ring-width) solid var(--focus-ring)"
+    },
+    "structure": {
+      "element": "button"
+    },
+    "children": "phrasing-content",
+    "scope": "inline",
+    "meta": {
+      "semanticStructure": [
+        "<button data-pattern='toc-collapse-toggle' type='button'",
+        "        aria-expanded='true' aria-controls='toc-list-id'>",
+        "  Hide contents",
+        "</button>"
+      ],
+      "ariaPatterns": {
+        "ariaExpanded": "Boolean string ('true' / 'false'). Reflects the current state of the controlled list.",
+        "ariaControls": "References the id of the toc-list element."
+      }
+    }
+  }
+]

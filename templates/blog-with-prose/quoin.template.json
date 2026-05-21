@@ -1,0 +1,64 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/template.json",
+  "name": "@quoin/template-blog-with-prose",
+  "version": "0.1.0-scaffold",
+  "type": "template",
+  "quoinVersion": "^0.1.0",
+  "description": "Long-form blog post template. Composes nav (editorial variant) + page-header + article-meta + prose-body + pull-quote + figure-with-caption + footnote + footer-mega. SCAFFOLD ONLY — full composition lands after Track B (prose-body, pull-quote, figure-with-caption) ships.",
+
+  "status": "scaffold",
+  "scaffoldNotes": "Track C shipped 2 of 5 required editorial patterns (article-meta, footnote). Track B (queued) ships the remaining 3 (prose-body, pull-quote, figure-with-caption). Composition completes in a follow-up commit once Track B closes.",
+
+  "composition": {
+    "order": [
+      { "slot": "nav", "pack": "@quoin/pattern-nav", "variant": "editorial", "status": "shipped" },
+      { "slot": "page-header", "pack": "@quoin/pattern-page-header", "variant": "default", "status": "shipped" },
+      { "slot": "article-meta", "pack": "@quoin/pattern-article-meta", "variant": "default · top", "status": "shipped" },
+      { "slot": "prose-body", "pack": "@quoin/pattern-prose-body", "variant": "editorial", "status": "pending-track-b" },
+      { "slot": "pull-quote", "pack": "@quoin/pattern-pull-quote", "variant": "centered", "status": "pending-track-b" },
+      { "slot": "figure-with-caption", "pack": "@quoin/pattern-figure-with-caption", "variant": "inline", "status": "pending-track-b" },
+      { "slot": "footnote", "pack": "@quoin/pattern-footnote", "variant": "footnote-bottom", "status": "shipped" },
+      { "slot": "footer", "pack": "@quoin/pattern-footer-mega", "variant": "compact", "status": "shipped" }
+    ]
+  },
+
+  "dependencies": {
+    "@quoin/tokens-baseline": "^0.1.0",
+    "@quoin/pattern-nav": "^1.0.0",
+    "@quoin/pattern-page-header": "^1.0.0",
+    "@quoin/pattern-article-meta": "^1.0.0",
+    "@quoin/pattern-footnote": "^1.0.0",
+    "@quoin/pattern-footer-mega": "^1.0.0",
+    "@quoin/prim-label": "^1.0.0"
+  },
+  "pendingDependencies": {
+    "@quoin/pattern-prose-body": "^1.0.0 — queued in Track B",
+    "@quoin/pattern-pull-quote": "^1.0.0 — queued in Track B",
+    "@quoin/pattern-figure-with-caption": "^1.0.0 — queued in Track B"
+  },
+
+  "recommendedAesthetics": [
+    "@quoin/aesthetic-harrow-haus",
+    "@quoin/aesthetic-default"
+  ],
+
+  "customizationPoints": [
+    { "id": "frontmatter", "what": "Post frontmatter format (Markdown / MDX / DTCG-friendly JSON)", "where": "build pipeline" },
+    { "id": "archive", "what": "Archive index structure (chronological / by-tag / by-author)", "where": "consumer routing" },
+    { "id": "rss", "what": "RSS / Atom feed generation", "where": "build script" },
+    { "id": "prose-tokens", "what": "Prose font, measure, leading, dropcap behavior", "where": "tokens override (once prose-body ships)" },
+    { "id": "reading-time-wpm", "what": "Words-per-minute baseline for reading-time calc", "where": "build script (article-meta consumer)" }
+  ],
+
+  "exports": {
+    "index": "./index.html",
+    "readme": "./README.md"
+  },
+
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/templates/blog-with-prose",
+    "tags": ["template", "blog", "editorial", "prose", "scaffold"]
+  }
+}

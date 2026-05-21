@@ -1,0 +1,59 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/template.json",
+  "name": "@quoin/template-landing-saas",
+  "version": "1.0.0",
+  "type": "template",
+  "quoinVersion": "^0.1.0",
+  "description": "Six-section SaaS landing page: nav (marketing) + hero (type-only) + feature-grid + testimonial + pricing-tiers + footer-mega. Composes currently-shipped patterns; aesthetically neutral by default.",
+
+  "composition": {
+    "order": [
+      { "slot": "nav", "pack": "@quoin/pattern-nav", "variant": "marketing" },
+      { "slot": "hero", "pack": "@quoin/pattern-hero", "variant": "type-only" },
+      { "slot": "feature-grid", "pack": "@quoin/pattern-feature-grid", "variant": "three-up" },
+      { "slot": "testimonial", "pack": "@quoin/pattern-testimonial", "variant": "single-quote" },
+      { "slot": "pricing", "pack": "@quoin/pattern-pricing-tiers", "variant": "three-tier" },
+      { "slot": "footer", "pack": "@quoin/pattern-footer-mega", "variant": "full" }
+    ]
+  },
+
+  "dependencies": {
+    "@quoin/tokens-baseline": "^0.1.0",
+    "@quoin/pattern-nav": "^1.0.0",
+    "@quoin/pattern-hero": "^1.0.0",
+    "@quoin/pattern-feature-grid": "^1.0.0",
+    "@quoin/pattern-testimonial": "^1.0.0",
+    "@quoin/pattern-pricing-tiers": "^1.0.0",
+    "@quoin/pattern-footer-mega": "^1.0.0",
+    "@quoin/pattern-button-system": "^1.0.0"
+  },
+
+  "recommendedAesthetics": [
+    "@quoin/aesthetic-default",
+    "@quoin/aesthetic-boeing-watch",
+    "@quoin/aesthetic-harrow-haus"
+  ],
+
+  "customizationPoints": [
+    { "id": "brand", "what": "Brand wordmark, tagline, social handles", "where": "nav + footer" },
+    { "id": "palette", "what": "Brand colours (accent, status)", "where": "tokens override" },
+    { "id": "typography", "what": "Font stack (sans, display, mono)", "where": "tokens override" },
+    { "id": "hero-copy", "what": "Headline, subhead, primary + ghost CTA destinations", "where": "hero section" },
+    { "id": "features", "what": "Three feature cells (icon, title, body, optional link)", "where": "feature-grid" },
+    { "id": "testimonial", "what": "Quote text, author, role/company, optional avatar", "where": "testimonial" },
+    { "id": "pricing", "what": "Three tier names, prices, feature lists, CTA destinations", "where": "pricing-tiers" },
+    { "id": "footer-links", "what": "Footer link groups, legal links, social handles", "where": "footer-mega" }
+  ],
+
+  "exports": {
+    "index": "./index.html",
+    "readme": "./README.md"
+  },
+
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/templates/landing-saas",
+    "tags": ["template", "landing-page", "saas", "marketing"]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "@quoin/template-landing-saas",
+  "version": "1.0.0",
+  "description": "Six-section SaaS landing template. Composes nav + hero (type-only) + feature-grid + testimonial + pricing-tiers + footer-mega.",
+  "main": "quoin.template.json",
+  "files": [
+    "quoin.template.json",
+    "index.html",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["quoin", "template", "landing-page", "saas", "marketing"],
+  "license": "MIT",
+  "homepage": "https://harrow.haus/quoin/templates/landing-saas",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "templates/landing-saas"
+  }
+}

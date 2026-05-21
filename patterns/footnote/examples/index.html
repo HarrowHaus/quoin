@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en" data-aesthetic="default">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>@quoin/pattern-footnote — examples</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/harrowhaus/quoin@main/02_reference-packs/tokens-baseline/tokens.css">
+
+  <!-- Conditional polyfill — only loads when CSS Anchor Positioning is unsupported -->
+  <script>
+    if (!CSS.supports('anchor-name', '--x')) {
+      const s = document.createElement('script');
+      s.src = 'https://unpkg.com/@oddbird/css-anchor-positioning';
+      s.type = 'module';
+      document.head.appendChild(s);
+    }
+  </script>
+
+  <style>
+    body {
+      max-width: 38rem; margin: 4rem auto; padding: 0 var(--space-card);
+      background: var(--surface); color: var(--text);
+      font-family: var(--font-serif, ui-serif, Georgia, serif);
+      line-height: var(--leading-prose);
+    }
+    section { margin: 0 0 var(--space-section); }
+    h2 { font-family: var(--font-sans); font-size: var(--type-size-lg); margin: 0 0 var(--space-3); color: var(--text-emphasis); }
+    p { margin: 0 0 var(--space-4); }
+
+    /* PATTERN: footnote ─────────────────────────────────── */
+
+    [data-pattern="footnote-trigger"] {
+      color: var(--accent);
+      font-size: 0.7em; vertical-align: super; line-height: 1;
+      font-weight: var(--font-weight-medium);
+      text-decoration: none;
+      padding: 0 var(--space-1);
+      border-radius: var(--radius-sm);
+      transition: var(--transition-default);
+    }
+    [data-pattern="footnote-trigger"]:hover { background: var(--accent-recede); }
+    [data-pattern="footnote-trigger"]:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+
+    /* Variant: sidenote-margin — anchored to outer margin via anchor-positioning */
+    [data-pattern="footnote"][data-position="sidenote-margin"] {
+      position: relative;
+    }
+    [data-pattern="footnote"][data-position="sidenote-margin"] [data-pattern="footnote-trigger"] {
+      anchor-name: var(--anchor-name, --footnote-anchor);
+    }
+    [data-pattern="footnote"][data-position="sidenote-margin"] [data-pattern="footnote-content"] {
+      position: absolute;
+      position-anchor: var(--anchor-name, --footnote-anchor);
+      top: anchor(top);
+      left: calc(anchor(right) + var(--space-card));
+      width: 14rem;
+      padding: var(--space-3) var(--space-card);
+      background: var(--surface-elevated);
+      color: var(--text-recede);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-sm);
+      line-height: var(--leading-prose);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Variant: footnote-bottom — collected at document end */
+    [data-pattern="footnote"][data-position="footnote-bottom"] [data-pattern="footnote-content"] {
+      display: none;
+    }
+    .footnote-list {
+      margin: var(--space-section) 0 0;
+      padding: var(--space-card) 0 0;
+      border-top: var(--border-width-sm) solid var(--border);
+      list-style: decimal inside;
+    }
+    .footnote-list li { color: var(--text-recede); font-size: var(--type-size-sm); margin: 0 0 var(--space-2); }
+
+    /* Variant: popup-on-hover + popup-on-click — popover anchored to trigger */
+    [data-pattern="footnote"][data-position="popup-on-hover"] [data-pattern="footnote-trigger"],
+    [data-pattern="footnote"][data-position="popup-on-click"] [data-pattern="footnote-trigger"] {
+      anchor-name: var(--anchor-name);
+    }
+    [data-pattern="footnote-content"][popover] {
+      margin: 0; padding: var(--space-3) var(--space-card);
+      width: 18rem;
+      background: var(--surface-elevated); color: var(--text);
+      font-family: var(--font-sans); font-size: var(--type-size-sm);
+      line-height: var(--leading-prose);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      position-anchor: var(--anchor-name);
+      top: anchor(bottom);
+      left: anchor(center);
+      translate: -50% var(--space-2);
+    }
+    [data-pattern="footnote-content"][popover]::backdrop { background: transparent; }
+  </style>
+</head>
+<body>
+
+  <section>
+    <h2>Variant: sidenote-margin (CSS Anchor Positioning)</h2>
+    <p>
+      The first variant uses CSS Anchor Positioning to render the footnote in the
+      outer margin alongside the prose<span data-pattern="footnote" data-position="sidenote-margin" style="--anchor-name: --fn-side-1;"><a data-pattern="footnote-trigger" href="#fn-side-1" aria-describedby="fn-side-1" aria-label="Footnote 1">1</a><aside data-pattern="footnote-content" id="fn-side-1" role="note">
+        Tufte-style. The trigger anchors the content to the same vertical position via
+        <code>anchor-name</code> + <code>position-anchor</code>. Baseline 2026.
+      </aside></span>. Wide-viewport readers see the note inline with the text; narrow viewports may want to fall back to footnote-bottom or popup-on-click.
+    </p>
+  </section>
+
+  <section>
+    <h2>Variant: footnote-bottom (classic register)</h2>
+    <p>
+      The default variant collects footnotes at the bottom of the document<span data-pattern="footnote" data-position="footnote-bottom"><a data-pattern="footnote-trigger" id="fnref-bottom-1" href="#fn-bottom-1" aria-describedby="fn-bottom-1" aria-label="Footnote 1">1</a></span>. Works without any new platform features — useful for print fidelity and as a no-script fallback.
+    </p>
+    <p>
+      You can chain multiple<span data-pattern="footnote" data-position="footnote-bottom"><a data-pattern="footnote-trigger" id="fnref-bottom-2" href="#fn-bottom-2" aria-describedby="fn-bottom-2" aria-label="Footnote 2">2</a></span> footnotes inline.
+    </p>
+    <ol class="footnote-list">
+      <li id="fn-bottom-1">The classic 1500s register: footnotes collect at page bottom. <a href="#fnref-bottom-1" aria-label="Back to text">↩</a></li>
+      <li id="fn-bottom-2">Even now, when most reading happens on screens, the bottom-of-block register remains the most reliable. <a href="#fnref-bottom-2" aria-label="Back to text">↩</a></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Variant: popup-on-click (popover + anchor positioning)</h2>
+    <p>
+      The popup variant uses the platform popover attribute together with anchor positioning<span data-pattern="footnote" data-position="popup-on-click" style="--anchor-name: --fn-pop-1;"><a data-pattern="footnote-trigger" href="#fn-pop-1" popovertarget="fn-pop-1" aria-describedby="fn-pop-1" aria-label="Footnote 1">1</a><aside data-pattern="footnote-content" id="fn-pop-1" role="note" popover="auto">
+        Click to reveal; click outside or press Esc to dismiss. No JS required —
+        the browser's popover light dismiss handles it.
+      </aside></span>. Click the marker to reveal.
+    </p>
+  </section>
+
+</body>
+</html>

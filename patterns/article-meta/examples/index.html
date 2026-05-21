@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en" data-aesthetic="default">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>@quoin/pattern-article-meta — examples</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/harrowhaus/quoin@main/02_reference-packs/tokens-baseline/tokens.css">
+
+  <style>
+    body {
+      max-width: 42rem; margin: 4rem auto; padding: 0 var(--space-card);
+      background: var(--surface); color: var(--text);
+      font-family: var(--font-sans); line-height: var(--leading-prose);
+    }
+    section { margin: 0 0 var(--space-section); }
+    section > h2 { font-family: var(--font-sans); font-size: var(--type-size-lg); margin: 0 0 var(--space-card); color: var(--text-emphasis); }
+    .demo-title { font-family: var(--font-display, var(--font-sans)); font-size: var(--type-size-2xl); font-weight: var(--font-weight-semibold); margin: 0 0 var(--space-3); color: var(--text-emphasis); }
+
+    /* PATTERN: article-meta ─────────────────────────────── */
+
+    [data-pattern="meta-container"] {
+      display: flex; gap: var(--space-3) var(--space-card);
+      align-items: center; flex-wrap: wrap;
+      color: var(--text-recede);
+      font-family: var(--font-sans); font-size: var(--type-size-sm);
+      padding: var(--space-3) 0;
+      border-block: var(--border-width-sm) solid var(--border);
+    }
+    [data-pattern="meta-container"][data-density="compact"] {
+      padding: var(--space-2) 0;
+      gap: var(--space-2);
+    }
+    [data-pattern="meta-container"][data-density="expanded"] {
+      flex-direction: column; align-items: flex-start;
+      padding: var(--space-card) 0;
+      gap: var(--space-3);
+    }
+
+    [data-pattern="article-meta-author"] {
+      display: inline-flex; align-items: center; gap: var(--space-2);
+      color: var(--text); font-weight: var(--font-weight-medium);
+    }
+    [data-pattern="article-meta-avatar"] {
+      width: 2rem; height: 2rem;
+      border-radius: var(--radius-pill);
+      object-fit: cover;
+      border: var(--border-width-sm) solid var(--border);
+    }
+    [data-pattern="article-meta-avatar"][data-size="sm"] { width: 1.5rem; height: 1.5rem; }
+    [data-pattern="article-meta-avatar"][data-size="lg"] { width: 3rem; height: 3rem; }
+    [data-pattern="article-meta-avatar"][data-shape="square"]  { border-radius: var(--radius-sm); }
+    [data-pattern="article-meta-avatar"][data-shape="rounded"] { border-radius: var(--radius-md); }
+
+    [data-pattern="article-meta-author"] a {
+      color: var(--text); text-decoration: none;
+      border-bottom: var(--border-width-sm) solid transparent;
+      transition: var(--transition-default);
+    }
+    [data-pattern="article-meta-author"] a:hover { border-bottom-color: var(--text); }
+
+    [data-pattern="article-meta-date"],
+    [data-pattern="article-meta-reading-time"] {
+      color: var(--text-recede);
+      font-variant-numeric: tabular-nums;
+    }
+
+    [data-pattern="article-meta-category"] {
+      color: var(--accent); text-decoration: none;
+      font-weight: var(--font-weight-medium);
+      transition: var(--transition-default);
+    }
+    [data-pattern="article-meta-category"]:hover { color: var(--accent-hover); }
+
+    [data-pattern="article-meta-tag-list"] {
+      list-style: none; padding: 0; margin: 0;
+      display: inline-flex; gap: var(--space-2); flex-wrap: wrap;
+    }
+    [data-pattern="article-meta-tag-list"] li a {
+      text-decoration: none; display: inline-block;
+    }
+    /* Composes prim-label data-variant="tag" — rendered inline here for example */
+    [data-pattern="prim-label"][data-variant="tag"] {
+      display: inline-block;
+      padding: var(--space-1) var(--space-2);
+      background: var(--surface-recessed);
+      color: var(--text);
+      border-radius: var(--radius-sm);
+      font-size: var(--type-size-xs);
+      font-weight: var(--font-weight-medium);
+      transition: var(--transition-default);
+    }
+    [data-pattern="article-meta-tag-list"] li a:hover [data-pattern="prim-label"] {
+      background: var(--accent-recede);
+      color: var(--accent);
+    }
+
+    [data-pattern="article-meta-share-actions"] {
+      display: inline-flex; gap: var(--space-2);
+      margin-inline-start: auto;
+    }
+    [data-pattern="article-meta-share-actions"] button {
+      appearance: none; cursor: pointer;
+      padding: var(--space-2) var(--space-3);
+      background: transparent; color: var(--text);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-md);
+      font-family: inherit; font-size: var(--type-size-sm);
+      transition: var(--transition-default);
+    }
+    [data-pattern="article-meta-share-actions"] button:hover { background: var(--surface-elevated); }
+
+    /* Dividers between inline slots */
+    [data-pattern="meta-container"][data-density="default"] > :not(:last-child):not([data-pattern="article-meta-share-actions"]):after {
+      content: ""; display: inline-block;
+      width: 4px; height: 4px;
+      background: var(--border);
+      border-radius: var(--radius-pill);
+      margin-inline-start: var(--space-card);
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+
+  <section>
+    <h2>Default density · top position</h2>
+    <h1 class="demo-title">The civic case for legible typography</h1>
+    <div data-pattern="meta-container" data-density="default" data-position="top">
+      <div data-pattern="article-meta-author" data-with-avatar="true">
+        <img data-pattern="article-meta-avatar" data-size="md" data-shape="circle" src="https://api.dicebear.com/9.x/initials/svg?seed=Jane+Doe" alt="" loading="lazy">
+        <a href="/authors/jane-doe" rel="author">Jane Doe</a>
+      </div>
+      <time data-pattern="article-meta-date" datetime="2026-05-21">May 21, 2026</time>
+      <span data-pattern="article-meta-reading-time" data-minutes="8">8 min read</span>
+      <a data-pattern="article-meta-category" href="/category/typography" rel="category">Typography</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Compact density</h2>
+    <div data-pattern="meta-container" data-density="compact">
+      <div data-pattern="article-meta-author" data-with-avatar="false">
+        <a href="/authors/jane-doe" rel="author">Jane Doe</a>
+      </div>
+      <time data-pattern="article-meta-date" datetime="2026-05-21">May 21</time>
+      <span data-pattern="article-meta-reading-time" data-minutes="3">3 min</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>Expanded density · with tag-list and share-actions</h2>
+    <h1 class="demo-title">Anatomy over aesthetic: the Quoin design contract</h1>
+    <div data-pattern="meta-container" data-density="expanded">
+      <div data-pattern="article-meta-author" data-with-avatar="true">
+        <img data-pattern="article-meta-avatar" data-size="lg" data-shape="circle" src="https://api.dicebear.com/9.x/initials/svg?seed=Donald+Pilger" alt="" loading="lazy">
+        <a href="/authors/donald-pilger" rel="author">Donald Pilger</a>
+      </div>
+      <div style="display: flex; gap: var(--space-card); align-items: center; flex-wrap: wrap; width: 100%;">
+        <time data-pattern="article-meta-date" datetime="2026-05-21">May 21, 2026</time>
+        <span data-pattern="article-meta-reading-time" data-minutes="12">12 min read</span>
+        <a data-pattern="article-meta-category" href="/category/architecture" rel="category">Architecture</a>
+      </div>
+      <ul data-pattern="article-meta-tag-list" aria-label="Tags">
+        <li><a href="/tag/css"><span data-pattern="prim-label" data-variant="tag">CSS</span></a></li>
+        <li><a href="/tag/design-systems"><span data-pattern="prim-label" data-variant="tag">Design systems</span></a></li>
+        <li><a href="/tag/web-platform"><span data-pattern="prim-label" data-variant="tag">Web platform</span></a></li>
+      </ul>
+      <div data-pattern="article-meta-share-actions" role="group" aria-label="Share article">
+        <button type="button" data-share="web-share">Share</button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Wire up the Web Share API on the share button
+    document.querySelectorAll('[data-share="web-share"]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (!navigator.share) return; // graceful: no fallback shown here
+        try { await navigator.share({ title: document.title, url: location.href }); } catch (_) {}
+      });
+    });
+  </script>
+
+</body>
+</html>

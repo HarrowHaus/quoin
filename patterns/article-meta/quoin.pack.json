@@ -1,0 +1,28 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/pattern-article-meta",
+  "version": "1.0.0",
+  "type": "pattern",
+  "quoinVersion": "^0.1.0",
+  "description": "Article meta strip. Author (with optional avatar) + published date + reading-time, with conditional category, tag-list, and share-actions. Three density variants × three position variants. Reading time computed at build time, not runtime. Composes prim-label for tag-list.",
+  "category": "editorial",
+  "variant": "system",
+  "exports": {
+    "primitives": "./primitives/index.json"
+  },
+  "states": ["default"],
+  "microStates": ["default", "hover", "active", "focus", "focus-visible"],
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/patterns/article-meta",
+    "tags": ["article-meta", "byline", "editorial", "prose", "p1"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0",
+    "@quoin/vocab-editorial": "^0.2.0"
+  },
+  "optionalPeerPacks": {
+    "@quoin/prim-label": "^1.0.0"
+  }
+}

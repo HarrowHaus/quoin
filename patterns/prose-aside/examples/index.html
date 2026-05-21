@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en" data-aesthetic="default">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>@quoin/pattern-prose-aside — examples</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/harrowhaus/quoin@main/02_reference-packs/tokens-baseline/tokens.css">
+
+  <style>
+    body {
+      max-width: 42rem; margin: 4rem auto; padding: 0 var(--space-card);
+      background: var(--surface); color: var(--text);
+      font-family: var(--font-sans); line-height: var(--leading-prose);
+    }
+    h2 { font-family: var(--font-sans); font-size: var(--type-size-lg); margin: var(--space-section) 0 var(--space-3); color: var(--text-emphasis); }
+    p { margin: 0 0 var(--space-3); }
+
+    /* PATTERN: prose-aside ──────────────────────────────── */
+
+    [data-pattern="aside-container"] {
+      display: flex; align-items: flex-start; gap: var(--space-3);
+      padding: var(--space-card);
+      margin: var(--space-card) 0;
+      border-radius: var(--radius-md);
+      border-inline-start-width: var(--border-width-md);
+      border-inline-start-style: solid;
+      transition: var(--transition-default);
+    }
+    [data-pattern="aside-container"][data-register="bordered"] {
+      background: var(--surface-elevated);
+      border: var(--border-width-sm) solid var(--border);
+      border-inline-start-width: var(--border-width-md);
+    }
+    [data-pattern="aside-container"][data-register="inline"] {
+      background: transparent;
+      padding: var(--space-2) 0 var(--space-2) var(--space-3);
+      border-radius: 0;
+    }
+
+    /* Semantic colour mapping */
+    [data-pattern="aside-container"][data-semantic="note"] {
+      --aside-accent: var(--text-recede);
+      border-inline-start-color: var(--text-recede);
+    }
+    [data-pattern="aside-container"][data-semantic="tip"] {
+      --aside-accent: var(--success);
+      background: color-mix(in oklch, var(--success) 8%, var(--surface));
+      border-inline-start-color: var(--success);
+    }
+    [data-pattern="aside-container"][data-semantic="warning"] {
+      --aside-accent: var(--warning);
+      background: color-mix(in oklch, var(--warning) 8%, var(--surface));
+      border-inline-start-color: var(--warning);
+    }
+    [data-pattern="aside-container"][data-semantic="danger"] {
+      --aside-accent: var(--critical);
+      background: color-mix(in oklch, var(--critical) 8%, var(--surface));
+      border-inline-start-color: var(--critical);
+    }
+    [data-pattern="aside-container"][data-semantic="success"] {
+      --aside-accent: var(--success);
+      background: color-mix(in oklch, var(--success) 8%, var(--surface));
+      border-inline-start-color: var(--success);
+    }
+    [data-pattern="aside-container"][data-semantic="info"] {
+      --aside-accent: var(--info, var(--accent));
+      background: color-mix(in oklch, var(--info, var(--accent)) 8%, var(--surface));
+      border-inline-start-color: var(--info, var(--accent));
+    }
+
+    [data-pattern="aside-icon"] {
+      color: var(--aside-accent);
+      width: 1.25rem; height: 1.25rem;
+      flex-shrink: 0;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    [data-pattern="aside-icon"] svg {
+      width: 100%; height: 100%;
+      stroke: currentColor; fill: none; stroke-width: 1.75;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+    .aside-body { flex: 1; }
+    [data-pattern="aside-label"] {
+      color: var(--aside-accent);
+      font-size: var(--type-size-sm);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--tracking-tight);
+      margin: 0 0 var(--space-2);
+    }
+    [data-pattern="aside-content"] p { margin: 0 0 var(--space-2); }
+    [data-pattern="aside-content"] p:last-child { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+
+  <p>The six semantic registers. Each maps to a token-driven colour + an ARIA label per role.</p>
+
+  <h2>note</h2>
+  <aside data-pattern="aside-container" data-semantic="note" data-register="bordered" role="note" aria-label="Note">
+    <div data-pattern="aside-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 17v-5"/><circle cx="12" cy="8" r=".5" fill="currentColor"/></svg>
+    </div>
+    <div class="aside-body">
+      <p data-pattern="aside-label">Note</p>
+      <div data-pattern="aside-content">
+        <p>The neutral register. Use for context that's worth surfacing but isn't strictly required reading.</p>
+      </div>
+    </div>
+  </aside>
+
+  <h2>tip</h2>
+  <aside data-pattern="aside-container" data-semantic="tip" data-register="bordered" role="note" aria-label="Tip">
+    <div data-pattern="aside-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c1 .8 1.5 2 1.5 3.5h5c0-1.5.5-2.7 1.5-3.5A6 6 0 0 0 12 3z"/></svg>
+    </div>
+    <div class="aside-body">
+      <p data-pattern="aside-label">Tip</p>
+      <div data-pattern="aside-content">
+        <p>Optional improvement or shortcut. Doesn't change the outcome if ignored.</p>
+      </div>
+    </div>
+  </aside>
+
+  <h2>warning</h2>
+  <aside data-pattern="aside-container" data-semantic="warning" data-register="bordered" role="note" aria-label="Warning">
+    <div data-pattern="aside-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M12 2 2 21h20z"/><path d="M12 10v4"/><circle cx="12" cy="17" r=".5" fill="currentColor"/></svg>
+    </div>
+    <div class="aside-body">
+      <p data-pattern="aside-label">Warning</p>
+      <div data-pattern="aside-content">
+        <p>Something that may cause unexpected behavior if not handled. Read before proceeding.</p>
+      </div>
+    </div>
+  </aside>
+
+  <h2>danger</h2>
+  <aside data-pattern="aside-container" data-semantic="danger" data-register="bordered" role="note" aria-label="Danger">
+    <div data-pattern="aside-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" y1="8" x2="12" y2="12"/><circle cx="12" cy="16" r=".5" fill="currentColor"/></svg>
+    </div>
+    <div class="aside-body">
+      <p data-pattern="aside-label">Danger</p>
+      <div data-pattern="aside-content">
+        <p>Destructive or irreversible action. The operator can elevate role='alert' here if the AT announcement should be more prominent.</p>
+      </div>
+    </div>
+  </aside>
+
+  <h2>success</h2>
+  <aside data-pattern="aside-container" data-semantic="success" data-register="bordered" role="note" aria-label="Success">
+    <div data-pattern="aside-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>
+    </div>
+    <div class="aside-body">
+      <p data-pattern="aside-label">Success</p>
+      <div data-pattern="aside-content">
+        <p>Confirms a positive outcome. Common in step-by-step docs ("you're done — your environment is ready").</p>
+      </div>
+    </div>
+  </aside>
+
+  <h2>info</h2>
+  <aside data-pattern="aside-container" data-semantic="info" data-register="bordered" role="note" aria-label="Information">
+    <div data-pattern="aside-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 16v-5"/><circle cx="12" cy="8" r=".5" fill="currentColor"/></svg>
+    </div>
+    <div class="aside-body">
+      <p data-pattern="aside-label">Heads up</p>
+      <div data-pattern="aside-content">
+        <p>Informational context. Similar to note but with a stronger visual signal.</p>
+      </div>
+    </div>
+  </aside>
+
+  <h2>Inline register example</h2>
+  <aside data-pattern="aside-container" data-semantic="tip" data-register="inline" role="note" aria-label="Tip">
+    <div data-pattern="aside-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c1 .8 1.5 2 1.5 3.5h5c0-1.5.5-2.7 1.5-3.5A6 6 0 0 0 12 3z"/></svg>
+    </div>
+    <div class="aside-body">
+      <div data-pattern="aside-content">
+        <p>Inline register has no surface fill and no rounded corners — just a vertical accent rule. Fits smaller call-outs without visual weight.</p>
+      </div>
+    </div>
+  </aside>
+
+</body>
+</html>
