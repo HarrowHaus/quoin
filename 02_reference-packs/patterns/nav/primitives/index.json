@@ -1,0 +1,258 @@
+[
+  {
+    "name": "nav-section",
+    "category": "navigation",
+    "gating": "mandatory",
+    "role": "Top-level container for the unified nav pattern. Carries data-variant (marketing/app-chrome/docs/editorial), data-alignment, data-state. The element type depends on the variant: <header role=\"banner\"> when the nav is the page's top landmark (marketing, app-chrome, editorial); <nav> when secondary (docs is a hybrid — uses an outer <div> with <header> for the topbar and <aside> for the sidebar).",
+    "attributes": {
+      "variant": { "values": ["marketing", "app-chrome", "docs", "editorial"], "default": "marketing", "specific": true },
+      "alignment": { "values": ["centered", "left", "right", "split-anchor"], "default": "left", "specific": true },
+      "state": { "values": ["default", "scrolled", "menu-open", "search-open"], "default": "default", "specific": true }
+    },
+    "tokens": {
+      "background": "var(--surface-elevated)",
+      "color": "var(--text)",
+      "borderBottom": "var(--border-default)"
+    },
+    "structure": { "element": "header-OR-nav-OR-div" },
+    "children": "flow-content",
+    "scope": "block",
+    "meta": {
+      "deprecated-from": [
+        "@quoin/pattern-nav-marketing#nav-marketing",
+        "@quoin/pattern-nav-app-chrome#nav-app-chrome",
+        "@quoin/pattern-nav-docs#nav-docs-section",
+        "@quoin/pattern-nav-editorial#nav-editorial-section"
+      ]
+    }
+  },
+  {
+    "name": "nav-brand",
+    "category": "navigation",
+    "gating": "mandatory",
+    "role": "Wordmark / logo link to home. Element is <a>. Some variants enhance with a subtitle or supporting tagline.",
+    "attributes": {},
+    "tokens": {
+      "color": "var(--text-emphasis)",
+      "fontFamily": "var(--font-display)",
+      "fontSize": "var(--type-size-lg)",
+      "fontWeight": "var(--font-weight-semibold)",
+      "letterSpacing": "var(--tracking-tight)"
+    },
+    "structure": { "element": "a", "attributes": { "href": "/", "aria-label": "Home" } },
+    "children": "phrasing-content",
+    "scope": "inline"
+  },
+  {
+    "name": "nav-primary-links",
+    "category": "navigation",
+    "gating": "conditional",
+    "gatedBy": "data-variant in [\"marketing\", \"app-chrome\"]",
+    "role": "List of primary nav items. Element is <ul> inside a <nav> with aria-label.",
+    "attributes": {},
+    "structure": { "element": "ul", "attributes": { "role": "list" } },
+    "children": "li elements",
+    "scope": "block"
+  },
+  {
+    "name": "nav-item",
+    "category": "navigation",
+    "gating": "conditional",
+    "gatedBy": "data-variant in [\"marketing\", \"app-chrome\", \"editorial\"]",
+    "role": "Single nav link. Element is <a> with aria-current=\"page\" when matching the current URL (no class-based active state per Cons. 4 Q-keyboard).",
+    "attributes": {
+      "variant": { "values": ["default", "dropdown"], "default": "default", "specific": true, "note": "dropdown variant opens nav-dropdown-panel" }
+    },
+    "structure": { "element": "a" },
+    "children": "phrasing-content",
+    "scope": "inline"
+  },
+  {
+    "name": "nav-dropdown-panel",
+    "category": "navigation",
+    "gating": "conditional",
+    "gatedBy": "data-variant=\"marketing\"",
+    "role": "Floating panel for dropdown / mega-menu content. Anchored to its trigger nav-item via attribute state (data-open). Inline-positioned by default; CSS Anchor Positioning enhancement is opt-in for browsers that support it.",
+    "attributes": {
+      "kind": { "values": ["simple", "mega"], "default": "simple", "specific": true, "note": "Renamed from data-register per Cons. 3 Q2 / v3.G.16." },
+      "columns": { "values": ["2", "3", "4"], "default": "2", "specific": true, "note": "Used in mega kind only." },
+      "open": { "values": ["true", "false"], "default": "false", "specific": true }
+    },
+    "structure": { "element": "div" },
+    "scope": "block"
+  },
+  {
+    "name": "nav-secondary-actions",
+    "category": "navigation",
+    "gating": "conditional",
+    "gatedBy": "data-variant in [\"marketing\", \"app-chrome\"]",
+    "role": "Action cluster on the right side of the nav. Theme toggle + primary CTA (composes action-button) + avatar trigger (app-chrome only).",
+    "attributes": {},
+    "structure": { "element": "div", "attributes": { "role": "group" } },
+    "scope": "inline",
+    "meta": { "composesFrom": "@quoin/pattern-button-system" }
+  },
+  {
+    "name": "nav-mobile-toggle",
+    "category": "navigation",
+    "gating": "conditional",
+    "gatedBy": "data-variant in [\"marketing\", \"app-chrome\"]",
+    "role": "Hamburger trigger button. Toggles data-state on the nav-section between 'default' and 'menu-open' (inline-expansion pattern; no separate drawer primitive).",
+    "attributes": {},
+    "structure": { "element": "button", "attributes": { "type": "button", "aria-label": "Open menu", "aria-expanded": "false" } },
+    "scope": "inline"
+  },
+  {
+    "name": "nav-workspace-switcher",
+    "category": "navigation",
+    "gating": "conditional",
+    "gatedBy": "data-variant=\"app-chrome\"",
+    "role": "Workspace selector trigger for app-shell contexts. Composes button-system as a popover-trigger button.",
+    "attributes": {},
+    "structure": { "element": "button", "attributes": { "type": "button", "aria-haspopup": "menu" } },
+    "scope": "inline",
+    "meta": { "composesFrom": "@quoin/pattern-button-system" }
+  },
+  {
+    "name": "nav-search",
+    "category": "navigation",
+    "gating": "conditional",
+    "gatedBy": "data-variant in [\"app-chrome\", \"docs\"]",
+    "role": "Command-palette trigger. Rendered as a button (looks like an input). On activation, opens a modal-dialog Cmd-K palette. Real composition with modal-dialog.",
+    "attributes": {},
+    "structure": { "element": "button", "attributes": { "type": "button", "aria-haspopup": "dialog" } },
+    "scope": "inline",
+    "meta": { "composesFrom": "@quoin/pattern-modal-dialog" }
+  },
+  {
+    "name": "nav-search-inline",
+    "category": "navigation",
+    "gating": "conditional",
+    "gatedBy": "data-variant=\"editorial\"",
+    "role": "Expandable inline search input. Composes form-fields' text input. Expands on focus.",
+    "attributes": {
+      "expanded": { "values": ["true", "false"], "default": "false", "specific": true }
+    },
+    "structure": { "element": "form", "attributes": { "role": "search" } },
+    "scope": "block",
+    "meta": { "composesFrom": "@quoin/pattern-form-fields" }
+  },
+  {
+    "name": "nav-avatar",
+    "category": "navigation",
+    "gating": "conditional",
+    "gatedBy": "data-variant=\"app-chrome\"",
+    "role": "User menu trigger. Composes vocab-app-shell avatar primitive + button-system.",
+    "attributes": {},
+    "structure": { "element": "button", "attributes": { "type": "button", "aria-haspopup": "menu" } },
+    "scope": "inline",
+    "meta": { "composesFrom": "@quoin/vocab-app-shell + @quoin/pattern-button-system" }
+  },
+  {
+    "name": "nav-skip-link",
+    "category": "navigation",
+    "gating": "conditional-mandatory",
+    "gatedBy": "data-variant=\"docs\"",
+    "role": "WCAG 2.4.1 skip-to-content link. Visible only on focus. Targets <main id=\"content\">. Non-optional for docs variant per WCAG.",
+    "attributes": {},
+    "structure": { "element": "a", "attributes": { "href": "#content" } },
+    "scope": "inline",
+    "meta": { "wcag": "2.4.1 Bypass Blocks" }
+  },
+  {
+    "name": "nav-topbar",
+    "category": "navigation",
+    "gating": "conditional",
+    "gatedBy": "data-variant=\"docs\"",
+    "role": "Sticky topbar in the docs nav layout. Contains brand + search + meta-actions.",
+    "attributes": {},
+    "structure": { "element": "header" },
+    "scope": "block"
+  },
+  {
+    "name": "nav-sidebar",
+    "category": "navigation",
+    "gating": "conditional",
+    "gatedBy": "data-variant=\"docs\"",
+    "role": "Documentation sidebar with sections and pages. Element is <aside>.",
+    "attributes": {},
+    "structure": { "element": "aside", "attributes": { "aria-label": "Documentation navigation" } },
+    "scope": "block"
+  },
+  {
+    "name": "nav-sidebar-section",
+    "category": "navigation",
+    "gating": "conditional",
+    "gatedBy": "data-variant=\"docs\"",
+    "role": "One collapsible section within the docs sidebar.",
+    "attributes": {
+      "collapsed": { "values": ["true", "false"], "default": "false", "specific": true }
+    },
+    "structure": { "element": "div" },
+    "scope": "block"
+  },
+  {
+    "name": "nav-meta-actions",
+    "category": "navigation",
+    "gating": "conditional",
+    "gatedBy": "data-variant=\"docs\"",
+    "role": "Version switcher + theme toggle + GitHub link cluster in the docs topbar.",
+    "attributes": {},
+    "structure": { "element": "div", "attributes": { "role": "group" } },
+    "scope": "inline"
+  },
+  {
+    "name": "nav-utility",
+    "category": "navigation",
+    "gating": "conditional",
+    "gatedBy": "data-variant=\"editorial\"",
+    "role": "Utility row above the masthead. Edition date, login, subscribe link, small links.",
+    "attributes": {},
+    "structure": { "element": "div" },
+    "scope": "block"
+  },
+  {
+    "name": "nav-masthead",
+    "category": "navigation",
+    "gating": "conditional",
+    "gatedBy": "data-variant=\"editorial\"",
+    "role": "Large display wordmark in the editorial nav.",
+    "attributes": {
+      "weight": { "values": ["default", "heavy"], "default": "default", "specific": true },
+      "align": { "values": ["centered", "left"], "default": "centered", "specific": true }
+    },
+    "structure": { "element": "div" },
+    "scope": "block"
+  },
+  {
+    "name": "nav-sections",
+    "category": "navigation",
+    "gating": "conditional",
+    "gatedBy": "data-variant=\"editorial\"",
+    "role": "Section links row (Politics / Tech / Arts / etc.) below the masthead.",
+    "attributes": {},
+    "structure": { "element": "nav", "attributes": { "aria-label": "Sections" } },
+    "scope": "block"
+  },
+  {
+    "name": "nav-subscribe-cta",
+    "category": "navigation",
+    "gating": "conditional",
+    "gatedBy": "data-variant=\"editorial\"",
+    "role": "Subscribe pill in the editorial nav. Composes action-button from button-system (not inlined per Cons. 3 Q5 / v3.G.17).",
+    "attributes": {},
+    "structure": { "element": "a", "attributes": { "class": "action-button" } },
+    "scope": "inline",
+    "meta": { "composesFrom": "@quoin/pattern-button-system" }
+  },
+  {
+    "name": "nav-subnav",
+    "category": "navigation",
+    "gating": "conditional",
+    "gatedBy": "data-variant=\"app-chrome\" (with-subnav register)",
+    "role": "Second-tier nav row below the primary nav. Used in app contexts with deep section hierarchies.",
+    "attributes": {},
+    "structure": { "element": "nav", "attributes": { "aria-label": "Subsection" } },
+    "scope": "block"
+  }
+]

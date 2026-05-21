@@ -1,0 +1,1129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>@quoin/pattern-nav-app-chrome — specimen</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=JetBrains+Mono:wght@100..800&display=swap">
+
+  <style>
+    :root {
+      color-scheme: light dark;
+
+      --surface: oklch(98% 0 0);
+      --surface-elevated: oklch(100% 0 0);
+      --surface-recessed: oklch(96% 0 0);
+      --text: oklch(30% 0 0);
+      --text-emphasis: oklch(15% 0 0);
+      --text-recede: oklch(50% 0 0);
+      --text-disabled: oklch(72% 0 0);
+      --text-on-accent: oklch(100% 0 0);
+      --accent: oklch(20% 0 0);
+      --accent-hover: oklch(28% 0 0);
+      --accent-active: oklch(12% 0 0);
+      --accent-recede: oklch(94% 0 0);
+      --critical: oklch(55% 0.22 25);
+      --success: oklch(50% 0.18 155);
+      --success-soft: oklch(95% 0.05 155);
+      --warning: oklch(75% 0.18 80);
+
+      --border: oklch(88% 0 0);
+      --border-emphasis: oklch(20% 0 0);
+      --border-recede: oklch(94% 0 0);
+      --border-width-sm: 1px;
+      --border-width-md: 2px;
+
+      --focus-ring: oklch(55% 0.22 260);
+      --focus-ring-width: 2px;
+      --focus-ring-offset: 2px;
+
+      /* Phase 22 / Consolidation 1: rem-native canonical scale (matches tokens-baseline) */
+      --space-half-1: 0.125rem;
+      --space-half-2: 0.375rem;
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-card: 1.5rem;
+      --space-panel: 2rem;
+      --space-section: 4rem;
+
+      --radius-sm: 4px;
+      --radius-md: 6px;
+      --radius-card: 12px;
+      --radius-pill: 999px;
+
+      --font-sans: 'Inter Variable', 'Inter', system-ui, sans-serif;
+      --font-display: 'Inter Variable', 'Inter', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+      /* Phase 22 / Consolidation 2: type-scale + leading match tokens-baseline canonical */
+      --type-size-xs: 0.75rem;
+      --type-size-sm: 0.875rem;
+      --type-size-md: 1rem;
+      --type-size-lg: 1.125rem;
+      --type-size-xl: 1.5rem;
+      --type-size-2xl: 2rem;
+      --type-size-3xl: 2.5rem;
+      --type-size-4xl: 3.5rem;
+      --font-weight-regular: 400;
+      --font-weight-medium: 500;
+      --font-weight-semibold: 600;
+      --font-weight-bold: 700;
+      --leading-tight: 1.15;
+      --leading-prose: 1.55;
+      --leading-display: 1.05;
+      --tracking-tight: -0.01em;
+      --tracking-normal: 0;
+      --tracking-wide: 0.08em;
+
+      --motion-fast: 120ms;
+      --motion-normal: 160ms;
+      --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+      --transition-default: all var(--motion-normal) var(--ease-standard);
+
+      --shadow-tint: oklch(0% 0 0 / 0.06);
+      --shadow-sm: 0 1px 2px 0 var(--shadow-tint);
+      --shadow-md: 0 4px 6px -1px var(--shadow-tint), 0 2px 4px -1px var(--shadow-tint);
+      --shadow-lg: 0 10px 25px -5px var(--shadow-tint), 0 6px 12px -3px var(--shadow-tint);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --surface: oklch(10% 0 0);
+        --surface-elevated: oklch(15% 0 0);
+        --surface-recessed: oklch(8% 0 0);
+        --text: oklch(85% 0 0);
+        --text-emphasis: oklch(98% 0 0);
+        --text-recede: oklch(60% 0 0);
+        --text-disabled: oklch(35% 0 0);
+        --text-on-accent: oklch(10% 0 0);
+        --accent: oklch(95% 0 0);
+        --accent-recede: oklch(20% 0 0);
+        --success-soft: oklch(18% 0.06 155);
+        --border: oklch(20% 0 0);
+        --shadow-tint: oklch(0% 0 0 / 0.4);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      :root { --motion-fast: 0ms; --motion-normal: 0ms; --transition-default: none; }
+      * { animation: none !important; }
+    }
+
+    * { box-sizing: border-box; }
+  </style>
+
+  <style>
+    :root { color-scheme: light dark; }
+    html, body {
+      margin: 0; padding: 0;
+      background: var(--surface);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-md);
+      line-height: var(--leading-prose);
+      -webkit-font-smoothing: antialiased;
+    }
+    main { max-width: 1280px; margin: 0 auto; padding: var(--space-section) var(--space-panel); }
+    h1 {
+      font-family: var(--font-display);
+      font-size: var(--type-size-3xl);
+      font-weight: var(--font-weight-semibold);
+      line-height: var(--leading-display);
+      letter-spacing: var(--tracking-tight);
+      margin: 0 0 var(--space-4);
+      text-wrap: balance;
+    }
+    h2 {
+      font-family: var(--font-display);
+      font-size: var(--type-size-2xl);
+      font-weight: var(--font-weight-semibold);
+      line-height: var(--leading-tight);
+      letter-spacing: var(--tracking-tight);
+      margin: var(--space-section) 0 var(--space-4);
+      text-wrap: balance;
+    }
+    .lede {
+      font-size: var(--type-size-lg);
+      line-height: var(--leading-prose);
+      color: var(--text-recede);
+      max-width: 70ch;
+      margin: 0 0 var(--space-section);
+    }
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--space-4);
+      padding: var(--space-4);
+      background: var(--surface-elevated);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-card);
+      margin-bottom: var(--space-section);
+      font-size: var(--type-size-sm);
+    }
+    .meta dt { font-weight: var(--font-weight-semibold); color: var(--text-emphasis); margin-bottom: var(--space-1); }
+    .meta dd { margin: 0; color: var(--text-recede); }
+    .specimen-divider {
+      margin: var(--space-section) 0 var(--space-card);
+      padding-bottom: var(--space-2);
+      border-bottom: var(--border-width-sm) solid var(--border);
+    }
+    .specimen-divider h2 { margin: 0; }
+    .specimen-divider p { margin: var(--space-2) 0 0; color: var(--text-recede); font-size: var(--type-size-sm); }
+    .preview-frame {
+      background: var(--surface-recessed);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      margin-bottom: var(--space-card);
+      position: relative;
+    }
+
+    /* ===== APP-CHROME PRODUCTION STYLES ===== */
+
+    [data-pattern="nav-app-chrome"] {
+      width: 100%;
+      background: var(--surface);
+      color: var(--text);
+      border-bottom: var(--border-width-sm) solid var(--border);
+      transition: var(--transition-default);
+      position: relative;
+      z-index: 100;
+    }
+    [data-pattern="nav-app-chrome"] > nav {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-3) var(--space-card);
+      min-height: 56px;
+    }
+    [data-pattern="nav-app-chrome"][data-variant="condensed"] > nav { padding: var(--space-2) var(--space-card); min-height: 44px; }
+
+    /* workspace-switcher */
+    [data-pattern="app-workspace-switcher"] {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: transparent;
+      border: 0;
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-sm);
+      color: var(--text-emphasis);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-sm);
+      font-weight: var(--font-weight-semibold);
+      cursor: pointer;
+      transition: var(--transition-default);
+    }
+    [data-pattern="app-workspace-switcher"]:hover { background: var(--surface-elevated); }
+    [data-pattern="app-workspace-switcher"]:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+    [data-pattern="app-workspace-switcher"][aria-expanded="true"] { background: var(--surface-elevated); }
+    [data-pattern="app-workspace-switcher"] .logo {
+      width: 20px; height: 20px;
+      background: var(--accent);
+      color: var(--text-on-accent, white);
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: var(--font-weight-bold, 700);
+      font-family: var(--font-display);
+    }
+    [data-pattern="app-workspace-switcher"] .plan-badge {
+      background: var(--accent-recede);
+      color: var(--text-emphasis);
+      padding: 1px 6px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+    }
+    [data-pattern="app-workspace-switcher"] .chevron {
+      width: 12px; height: 12px;
+      transition: transform var(--motion-fast) var(--ease-standard);
+    }
+    [data-pattern="app-workspace-switcher"][aria-expanded="true"] .chevron { transform: rotate(180deg); }
+
+    /* breadcrumb */
+    [data-pattern="app-breadcrumb"] {
+      display: inline-flex;
+      align-items: center;
+    }
+    [data-pattern="app-breadcrumb"] ol {
+      list-style: none; padding: 0; margin: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-sm);
+    }
+    [data-pattern="app-breadcrumb"] a {
+      color: var(--text-recede);
+      text-decoration: none;
+      font-weight: var(--font-weight-medium);
+      padding: 2px var(--space-1);
+      border-radius: var(--radius-sm);
+      transition: var(--transition-default);
+    }
+    [data-pattern="app-breadcrumb"] a:hover { background: var(--surface-elevated); color: var(--accent-hover); }
+    [data-pattern="app-breadcrumb"] a:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+    [data-pattern="app-breadcrumb"] [aria-current="page"] {
+      color: var(--text-emphasis);
+      font-weight: var(--font-weight-semibold);
+    }
+    [data-pattern="app-breadcrumb"] .separator {
+      color: var(--border-emphasis, var(--border));
+      font-size: var(--type-size-xs);
+      user-select: none;
+    }
+
+    .spacer { flex: 1; }
+
+    /* global-search */
+    [data-pattern="app-global-search"] {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: var(--surface-elevated);
+      color: var(--text-recede);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: var(--space-2) var(--space-3);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-sm);
+      font-weight: var(--font-weight-medium);
+      min-width: 240px;
+      cursor: pointer;
+      transition: var(--transition-default);
+    }
+    [data-pattern="app-global-search"]:hover {
+      color: var(--text);
+      border-color: var(--border-emphasis, var(--border));
+    }
+    [data-pattern="app-global-search"]:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+    [data-pattern="app-global-search"] .placeholder { flex: 1; text-align: left; }
+    [data-pattern="app-global-search"] kbd {
+      background: var(--surface-recessed);
+      color: var(--text-recede);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: var(--font-weight-medium);
+    }
+
+    /* action-cluster */
+    [data-pattern="app-action-cluster"] {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+    [data-pattern="app-action-cluster"] .action {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      background: transparent;
+      border: 0;
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: var(--type-size-sm);
+      font-weight: var(--font-weight-medium);
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition-default);
+    }
+    [data-pattern="app-action-cluster"] .action:hover { background: var(--surface-elevated); color: var(--accent-hover); }
+    [data-pattern="app-action-cluster"] .action[data-intent="primary"] {
+      background: var(--accent); color: var(--text-on-accent, white);
+    }
+    [data-pattern="app-action-cluster"] .action[data-intent="primary"]:hover { background: var(--accent-hover); }
+    [data-pattern="app-action-cluster"] .action[data-intent="secondary"] {
+      background: transparent;
+      color: var(--text-emphasis);
+      border: var(--border-width-sm) solid var(--border-emphasis, var(--border));
+    }
+    [data-pattern="app-action-cluster"] .action[data-intent="secondary"]:hover { background: var(--surface-elevated); }
+    [data-pattern="app-action-cluster"] .action:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+    [data-pattern="app-action-cluster"] .action[aria-disabled="true"] { opacity: 0.55; cursor: not-allowed; }
+    [data-pattern="app-action-cluster"] .icon-only { padding: var(--space-2); }
+
+    /* notification-bell */
+    [data-pattern="app-notification-bell"] {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: 0;
+      padding: var(--space-2);
+      border-radius: var(--radius-sm);
+      color: var(--text-recede);
+      cursor: pointer;
+      position: relative;
+      transition: var(--transition-default);
+    }
+    [data-pattern="app-notification-bell"]:hover { background: var(--surface-elevated); color: var(--text-emphasis); }
+    [data-pattern="app-notification-bell"][aria-expanded="true"] { background: var(--surface-elevated); }
+    [data-pattern="app-notification-bell"]:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+    [data-pattern="app-notification-bell"] .badge {
+      position: absolute;
+      top: 2px; right: 2px;
+      background: var(--critical);
+      color: var(--text-on-accent, white);
+      font-size: 0.65rem;
+      font-weight: var(--font-weight-bold, 700);
+      padding: 1px 5px;
+      border-radius: 999px;
+      min-width: 16px;
+      line-height: 1;
+      text-align: center;
+    }
+
+    /* user-menu */
+    [data-pattern="app-user-menu"] {
+      display: inline-flex;
+      align-items: center;
+      background: transparent;
+      border: 0;
+      padding: 0;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: var(--transition-default);
+      position: relative;
+    }
+    [data-pattern="app-user-menu"]:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+    [data-pattern="app-user-menu"] .avatar {
+      width: 32px; height: 32px;
+      background: var(--accent-recede);
+      color: var(--text-emphasis);
+      border-radius: 999px;
+      border: var(--border-width-sm) solid var(--surface);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: var(--font-weight-semibold);
+    }
+    [data-pattern="app-user-menu"] .status-dot {
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 10px; height: 10px;
+      background: var(--success);
+      border-radius: 999px;
+      border: 2px solid var(--surface);
+    }
+
+    /* page-tabs */
+    [data-pattern="app-page-tabs"] {
+      width: 100%;
+      background: var(--surface);
+      border-bottom: var(--border-width-sm) solid var(--border);
+    }
+    [data-pattern="app-page-tabs"] ul {
+      list-style: none; padding: 0 var(--space-card); margin: 0;
+      display: flex;
+      gap: var(--space-1);
+      max-width: 1440px;
+    }
+    [data-pattern="app-page-tabs"] li { position: relative; }
+    [data-pattern="app-page-tabs"] a {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      padding: var(--space-3) var(--space-3);
+      color: var(--text-recede);
+      text-decoration: none;
+      font-family: var(--font-sans);
+      font-size: var(--type-size-sm);
+      font-weight: var(--font-weight-medium);
+      transition: var(--transition-default);
+    }
+    [data-pattern="app-page-tabs"] a:hover { color: var(--accent-hover); }
+    [data-pattern="app-page-tabs"] a:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring);
+      outline-offset: var(--focus-ring-offset);
+    }
+    [data-pattern="app-page-tabs"] a[aria-current="page"] {
+      color: var(--text-emphasis);
+      font-weight: var(--font-weight-semibold);
+    }
+    /* register: underline */
+    [data-pattern="app-page-tabs"][data-register="underline"] a[aria-current="page"]::after {
+      content: "";
+      position: absolute;
+      left: var(--space-3); right: var(--space-3); bottom: -1px;
+      height: 2px;
+      background: var(--accent);
+    }
+    /* register: pill */
+    [data-pattern="app-page-tabs"][data-register="pill"] ul { padding: var(--space-2) var(--space-card); }
+    [data-pattern="app-page-tabs"][data-register="pill"] a {
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-sm);
+    }
+    [data-pattern="app-page-tabs"][data-register="pill"] a[aria-current="page"] {
+      background: var(--surface-elevated);
+    }
+    [data-pattern="app-page-tabs"][data-register="pill"] a[aria-current="page"]::after { display: none; }
+    /* register: boxed */
+    [data-pattern="app-page-tabs"][data-register="boxed"] { background: var(--surface-recessed); border-bottom: 0; }
+    [data-pattern="app-page-tabs"][data-register="boxed"] ul { padding: var(--space-2) var(--space-card) 0; gap: 0; }
+    [data-pattern="app-page-tabs"][data-register="boxed"] a {
+      padding: var(--space-2) var(--space-card);
+      border: var(--border-width-sm) solid transparent;
+      border-bottom: 0;
+      border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+      margin-bottom: -1px;
+    }
+    [data-pattern="app-page-tabs"][data-register="boxed"] a[aria-current="page"] {
+      background: var(--surface);
+      border-color: var(--border);
+    }
+    [data-pattern="app-page-tabs"][data-register="boxed"] a[aria-current="page"]::after { display: none; }
+
+    /* status-banner */
+    [data-pattern="app-status-banner"] {
+      width: 100%;
+      padding: var(--space-2) var(--space-card);
+      font-size: var(--type-size-sm);
+      font-weight: var(--font-weight-medium);
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+    }
+    [data-pattern="app-status-banner"][data-tone="info"] { background: var(--accent-recede); color: var(--text-emphasis); }
+    [data-pattern="app-status-banner"][data-tone="warning"] { background: var(--warning, #f4a536); color: var(--text-emphasis); }
+    [data-pattern="app-status-banner"][data-tone="critical"] { background: var(--critical); color: var(--text-on-accent, white); }
+    [data-pattern="app-status-banner"] .dot {
+      width: 8px; height: 8px;
+      background: currentColor;
+      border-radius: 999px;
+      display: inline-block;
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) { [data-pattern="app-status-banner"] .dot { animation: none; } }
+
+    /* Popovers */
+    .popover {
+      position: absolute;
+      top: calc(100% + 4px);
+      background: var(--surface-elevated);
+      color: var(--text);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-card);
+      padding: var(--space-2);
+      box-shadow: var(--shadow-md);
+      z-index: 200;
+      min-width: 240px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .popover .header {
+      padding: var(--space-2) var(--space-3);
+      font-size: var(--type-size-xs);
+      color: var(--text-recede);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+    }
+    .popover .row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      text-decoration: none;
+      font-size: var(--type-size-sm);
+      font-weight: var(--font-weight-medium);
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+      text-align: left;
+      transition: var(--transition-default);
+      width: 100%;
+    }
+    .popover .row:hover { background: var(--surface-recessed); color: var(--accent-hover); }
+    .popover .row[aria-current="true"] { background: var(--surface-recessed); color: var(--text-emphasis); font-weight: var(--font-weight-semibold); }
+    .popover .row .logo {
+      width: 20px; height: 20px;
+      background: var(--accent);
+      color: var(--text-on-accent, white);
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: var(--font-weight-bold, 700);
+      font-family: var(--font-display);
+    }
+    .popover .row .checkmark { margin-left: auto; color: var(--accent); }
+    .popover .divider {
+      height: 1px;
+      background: var(--border);
+      margin: var(--space-1) calc(-1 * var(--space-2));
+    }
+    .popover .footer {
+      padding: var(--space-2) var(--space-3);
+      font-size: var(--type-size-xs);
+      color: var(--text-recede);
+    }
+    .popover.user-popover { min-width: 280px; }
+    .popover.user-popover .user-header {
+      padding: var(--space-3);
+      border-bottom: var(--border-width-sm) solid var(--border);
+      margin-bottom: var(--space-1);
+    }
+    .popover.user-popover .user-header .name {
+      font-weight: var(--font-weight-semibold); color: var(--text-emphasis);
+    }
+    .popover.user-popover .user-header .email {
+      font-size: var(--type-size-xs); color: var(--text-recede); margin-top: 2px;
+    }
+    .popover.notifications {
+      min-width: 360px;
+    }
+    .popover.notifications .notif-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+      padding: var(--space-3);
+    }
+    .popover.notifications .notif-row .title {
+      font-weight: var(--font-weight-semibold); color: var(--text-emphasis); font-size: var(--type-size-sm);
+    }
+    .popover.notifications .notif-row .body {
+      font-size: var(--type-size-xs); color: var(--text-recede); line-height: var(--leading-prose);
+    }
+    .popover.notifications .notif-row .time {
+      font-size: var(--type-size-xs); color: var(--text-recede); margin-top: 2px;
+    }
+    .popover.notifications .notif-row.unread { background: var(--accent-recede); }
+    .popover.notifications .notif-row.unread .title { color: var(--text-emphasis); }
+
+    /* Microstate matrix */
+    .microstate-grid {
+      display: grid;
+      grid-template-columns: 140px repeat(4, 1fr);
+      gap: var(--space-2);
+      background: var(--surface);
+      border: var(--border-width-sm) solid var(--border);
+      border-radius: var(--radius-card);
+      padding: var(--space-4);
+      margin-bottom: var(--space-card);
+    }
+    .microstate-grid > .label {
+      font-size: var(--type-size-xs);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-emphasis);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      align-self: center;
+    }
+    .microstate-grid > .cell {
+      background: var(--surface-recessed);
+      border-radius: var(--radius-sm);
+      padding: var(--space-3);
+      display: flex; align-items: center;
+    }
+    .microstate-grid .ms-label {
+      font-size: var(--type-size-xs);
+      color: var(--text-recede);
+      margin-bottom: var(--space-1);
+    }
+
+    /* Composition lineage */
+    .lineage { width: 100%; border-collapse: collapse; font-size: var(--type-size-sm); }
+    .lineage th, .lineage td {
+      text-align: left; padding: var(--space-2) var(--space-3);
+      border-bottom: var(--border-width-sm) solid var(--border);
+      vertical-align: top;
+    }
+    .lineage th {
+      background: var(--surface-elevated); color: var(--text-emphasis);
+      font-weight: var(--font-weight-semibold);
+      font-size: var(--type-size-xs);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+    }
+    .lineage code {
+      font-family: var(--font-mono); font-size: var(--type-size-xs);
+      background: var(--surface-recessed); padding: 0 4px;
+      border-radius: 3px; color: var(--text-emphasis);
+    }
+
+    .icon-12 { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .icon-16 { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .icon-18 { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+</head>
+<body id="top">
+  <main>
+    <header>
+      <h1>pattern-nav-app-chrome — specimen</h1>
+      <p class="lede">In-app top nav for the SaaS app shell. Nine primitives covering workspace identity, breadcrumb wayfinding, Cmd+K palette, page action cluster, notifications, user menu, optional page tabs, and a status banner for degraded service. The Linear / Notion / Figma chrome reframed as token-driven primitives.</p>
+      <dl class="meta">
+        <div><dt>Pack</dt><dd>@quoin/pattern-nav-app-chrome@1.0.0</dd></div>
+        <div><dt>Primitives</dt><dd>9</dd></div>
+        <div><dt>Variants</dt><dd>3 (standard / with-subnav / condensed)</dd></div>
+        <div><dt>States</dt><dd>default / search-open / menu-open / notifications-open / offline</dd></div>
+        <div><dt>Composes</dt><dd>button-system (every actionable element)</dd></div>
+        <div><dt>WCAG</dt><dd>1.3.1, 2.1.1, 2.1.4, 2.4.1, 4.1.2, 4.1.3</dd></div>
+      </dl>
+    </header>
+
+    <!-- ===== STANDARD ===== -->
+    <section class="specimen-divider">
+      <h2>Variant — standard</h2>
+      <p>Full main row: workspace switcher + breadcrumb + Cmd+K + action cluster + notifications + user menu. Used on most in-app pages.</p>
+    </section>
+    <div class="preview-frame">
+      <header data-pattern="nav-app-chrome" data-variant="standard" role="banner">
+        <nav aria-label="App shell">
+          <button data-pattern="app-workspace-switcher" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="ws-popover-1">
+            <span class="logo" aria-hidden="true">G</span>
+            <span class="name">Elena's Galley</span>
+            <span class="plan-badge">Pro</span>
+            <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" /></svg>
+          </button>
+          <nav data-pattern="app-breadcrumb" aria-label="Breadcrumb">
+            <ol>
+              <li><a href="/notes">Notes</a></li>
+              <li class="separator" aria-hidden="true">/</li>
+              <li><a href="/notes/quoin">Quoin spec drafts</a></li>
+              <li class="separator" aria-hidden="true">/</li>
+              <li><span aria-current="page">Phase Pattern Packs · scratch</span></li>
+            </ol>
+          </nav>
+          <div class="spacer"></div>
+          <button data-pattern="app-global-search" type="button" aria-keyshortcuts="Meta+K Control+K" aria-expanded="false" aria-haspopup="dialog" aria-label="Search; press Command K">
+            <svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" /></svg>
+            <span class="placeholder">Search…</span>
+            <kbd>⌘K</kbd>
+          </button>
+          <div data-pattern="app-action-cluster" role="group" aria-label="Page actions">
+            <button class="action" type="button"><svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>New</button>
+            <button class="action" type="button" data-intent="secondary"><svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v14" /></svg>Share</button>
+          </div>
+          <button data-pattern="app-notification-bell" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="notifications-popover" aria-label="Notifications, 3 unread">
+            <svg class="icon-18" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 01-3.4 0" /></svg>
+            <span class="badge" aria-hidden="true">3</span>
+          </button>
+          <button data-pattern="app-user-menu" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="user-popover-1" aria-label="Account menu — Elena Park">
+            <span class="avatar" aria-hidden="true">EP</span>
+            <span class="status-dot" aria-hidden="true"></span>
+          </button>
+        </nav>
+      </header>
+    </div>
+
+    <!-- ===== WITH-SUBNAV ===== -->
+    <section class="specimen-divider">
+      <h2>Variant — with-subnav</h2>
+      <p>Main row + page-tabs subnav row. Used on document / project / settings pages where sub-section navigation is page-local.</p>
+    </section>
+    <div class="preview-frame">
+      <header data-pattern="nav-app-chrome" data-variant="with-subnav" role="banner">
+        <nav aria-label="App shell">
+          <button data-pattern="app-workspace-switcher" type="button" aria-haspopup="true" aria-expanded="false">
+            <span class="logo" aria-hidden="true">G</span>
+            <span class="name">Elena's Galley</span>
+            <span class="plan-badge">Pro</span>
+            <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" /></svg>
+          </button>
+          <nav data-pattern="app-breadcrumb" aria-label="Breadcrumb">
+            <ol>
+              <li><a href="/projects">Projects</a></li>
+              <li class="separator" aria-hidden="true">/</li>
+              <li><span aria-current="page">Quoin v1.0 launch</span></li>
+            </ol>
+          </nav>
+          <div class="spacer"></div>
+          <button data-pattern="app-global-search" type="button" aria-keyshortcuts="Meta+K Control+K" aria-label="Search; press Command K">
+            <svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" /></svg>
+            <span class="placeholder">Search…</span>
+            <kbd>⌘K</kbd>
+          </button>
+          <div data-pattern="app-action-cluster" role="group" aria-label="Page actions">
+            <button class="action" type="button" data-intent="primary"><svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13l4 4L19 7" /></svg>Publish</button>
+          </div>
+          <button data-pattern="app-notification-bell" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Notifications, no unread">
+            <svg class="icon-18" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 01-3.4 0" /></svg>
+          </button>
+          <button data-pattern="app-user-menu" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Account menu — Elena Park">
+            <span class="avatar" aria-hidden="true">EP</span>
+          </button>
+        </nav>
+        <nav data-pattern="app-page-tabs" data-register="underline" aria-label="Page sections">
+          <ul>
+            <li><a href="/projects/quoin/overview" aria-current="page">Overview</a></li>
+            <li><a href="/projects/quoin/activity">Activity</a></li>
+            <li><a href="/projects/quoin/members">Members</a></li>
+            <li><a href="/projects/quoin/integrations">Integrations</a></li>
+            <li><a href="/projects/quoin/settings">Settings</a></li>
+          </ul>
+        </nav>
+      </header>
+    </div>
+
+    <!-- ===== CONDENSED ===== -->
+    <section class="specimen-divider">
+      <h2>Variant — condensed</h2>
+      <p>Workspace switcher + minimal action cluster + user menu. No breadcrumb. Used in fullscreen-editor modes.</p>
+    </section>
+    <div class="preview-frame">
+      <header data-pattern="nav-app-chrome" data-variant="condensed" role="banner">
+        <nav aria-label="App shell">
+          <button data-pattern="app-workspace-switcher" type="button" aria-haspopup="true" aria-expanded="false">
+            <span class="logo" aria-hidden="true">G</span>
+            <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" /></svg>
+          </button>
+          <div class="spacer"></div>
+          <div data-pattern="app-action-cluster" role="group" aria-label="Page actions">
+            <button class="action icon-only" type="button" aria-label="Exit focus mode"><svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9V6a3 3 0 013-3h3M21 9V6a3 3 0 00-3-3h-3M3 15v3a3 3 0 003 3h3M21 15v3a3 3 0 01-3 3h-3" /></svg></button>
+          </div>
+          <button data-pattern="app-user-menu" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Account menu — Elena Park">
+            <span class="avatar" aria-hidden="true">EP</span>
+          </button>
+        </nav>
+      </header>
+    </div>
+
+    <!-- ===== OFFLINE BANNER ===== -->
+    <section class="specimen-divider">
+      <h2>State — offline (status banner)</h2>
+      <p>Critical-tone status banner above the main chrome. <code>role="alert"</code> with assertive live region for screen-reader announcement.</p>
+    </section>
+    <div class="preview-frame">
+      <header data-pattern="nav-app-chrome" data-variant="standard" data-state="offline" role="banner">
+        <div data-pattern="app-status-banner" data-tone="critical" role="alert" aria-live="assertive" aria-label="App status">
+          <span class="dot" aria-hidden="true"></span>
+          Offline — local edits will sync when connection returns.
+        </div>
+        <nav aria-label="App shell">
+          <button data-pattern="app-workspace-switcher" type="button" aria-haspopup="true" aria-expanded="false">
+            <span class="logo" aria-hidden="true">G</span>
+            <span class="name">Elena's Galley</span>
+            <span class="plan-badge">Pro</span>
+            <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" /></svg>
+          </button>
+          <nav data-pattern="app-breadcrumb" aria-label="Breadcrumb">
+            <ol>
+              <li><a href="/notes">Notes</a></li>
+              <li class="separator" aria-hidden="true">/</li>
+              <li><span aria-current="page">Phase Pattern Packs · scratch</span></li>
+            </ol>
+          </nav>
+          <div class="spacer"></div>
+          <button data-pattern="app-global-search" type="button" aria-keyshortcuts="Meta+K Control+K" aria-label="Search; press Command K">
+            <svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" /></svg>
+            <span class="placeholder">Search…</span>
+            <kbd>⌘K</kbd>
+          </button>
+          <div data-pattern="app-action-cluster" role="group" aria-label="Page actions">
+            <button class="action" type="button" aria-disabled="true" disabled><svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v14" /></svg>Share</button>
+          </div>
+          <button data-pattern="app-notification-bell" type="button" aria-label="Notifications unavailable while offline" aria-disabled="true" disabled>
+            <svg class="icon-18" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 01-3.4 0" /></svg>
+          </button>
+          <button data-pattern="app-user-menu" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Account menu — Elena Park (offline)">
+            <span class="avatar" aria-hidden="true">EP</span>
+          </button>
+        </nav>
+      </header>
+    </div>
+
+    <!-- ===== POPOVER STATES ===== -->
+    <section class="specimen-divider">
+      <h2>Popover states — workspace switcher, notifications, user menu</h2>
+      <p>All three follow the same WAI-ARIA pattern: <code>aria-haspopup="true"</code> + <code>aria-expanded="true"</code> + <code>aria-controls</code>. Escape closes; click-outside closes; focus returns to trigger.</p>
+    </section>
+    <div class="preview-frame" style="min-height: 380px;">
+      <header data-pattern="nav-app-chrome" data-variant="standard" data-state="menu-open" role="banner" style="position: relative; overflow: visible;">
+        <nav aria-label="App shell" style="overflow: visible;">
+          <div style="position: relative;">
+            <button data-pattern="app-workspace-switcher" type="button" aria-haspopup="true" aria-expanded="true" aria-controls="ws-popover-open" id="ws-trigger-open">
+              <span class="logo" aria-hidden="true">G</span>
+              <span class="name">Elena's Galley</span>
+              <span class="plan-badge">Pro</span>
+              <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" /></svg>
+            </button>
+            <div class="popover" role="menu" id="ws-popover-open" aria-labelledby="ws-trigger-open">
+              <div class="header">Switch workspace</div>
+              <button class="row" role="menuitem" aria-current="true">
+                <span class="logo" aria-hidden="true">G</span>
+                <span>Elena's Galley</span>
+                <span class="plan-badge" style="background: var(--accent-recede); color: var(--text-emphasis); padding: 1px 6px; border-radius: 999px; font-size: 0.7rem; font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-wide); text-transform: uppercase;">Pro</span>
+                <span class="checkmark" aria-hidden="true">✓</span>
+              </button>
+              <button class="row" role="menuitem">
+                <span class="logo" aria-hidden="true" style="background: #6b5b95;">A</span>
+                <span>Atelier Studio</span>
+                <span style="font-size: 0.7rem; color: var(--text-recede); margin-left: auto;">Free</span>
+              </button>
+              <button class="row" role="menuitem">
+                <span class="logo" aria-hidden="true" style="background: #4a7c59;">T</span>
+                <span>Tideline Design</span>
+                <span style="font-size: 0.7rem; color: var(--text-recede); margin-left: auto;">Team</span>
+              </button>
+              <div class="divider" role="separator" aria-hidden="true"></div>
+              <button class="row" role="menuitem">
+                <svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+                Create workspace
+              </button>
+              <button class="row" role="menuitem">
+                <svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06a1.65 1.65 0 001.82.33h0a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51h0a1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82v0a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" /></svg>
+                Workspace settings
+              </button>
+            </div>
+          </div>
+          <nav data-pattern="app-breadcrumb" aria-label="Breadcrumb">
+            <ol>
+              <li><a href="/notes">Notes</a></li>
+              <li class="separator" aria-hidden="true">/</li>
+              <li><span aria-current="page">Pattern packs · scratch</span></li>
+            </ol>
+          </nav>
+          <div class="spacer"></div>
+          <div style="position: relative;">
+            <button data-pattern="app-notification-bell" type="button" aria-haspopup="true" aria-expanded="true" aria-controls="notif-popover-open" id="notif-trigger-open" aria-label="Notifications, 3 unread">
+              <svg class="icon-18" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 01-3.4 0" /></svg>
+              <span class="badge" aria-hidden="true">3</span>
+            </button>
+            <div class="popover notifications" role="menu" id="notif-popover-open" aria-labelledby="notif-trigger-open">
+              <div class="header" style="display: flex; justify-content: space-between; align-items: center;">
+                Notifications
+                <button class="row" style="width: auto; padding: 2px 6px; font-size: var(--type-size-xs);">Mark all read</button>
+              </div>
+              <div class="notif-row row unread" role="menuitem">
+                <span class="title">Avery commented on your draft</span>
+                <span class="body">"the composition lineage table is the right call — let's make this the convention"</span>
+                <span class="time">2 minutes ago</span>
+              </div>
+              <div class="notif-row row unread" role="menuitem">
+                <span class="title">Phase Pattern Packs P0-E shipped</span>
+                <span class="body">@quoin/pattern-pricing-tiers v1.0.0 published to the catalog.</span>
+                <span class="time">14 minutes ago</span>
+              </div>
+              <div class="notif-row row unread" role="menuitem">
+                <span class="title">Tideline added you to Quoin v1.0 launch</span>
+                <span class="body">You're now a member with Edit access.</span>
+                <span class="time">1 hour ago</span>
+              </div>
+              <div class="notif-row row" role="menuitem">
+                <span class="title">CI: build passed on phase-pattern-packs-p0</span>
+                <span class="body">96 / 96 tests · 0 errors · 2m 14s</span>
+                <span class="time">Yesterday</span>
+              </div>
+              <div class="divider" role="separator" aria-hidden="true"></div>
+              <a class="row" role="menuitem" href="/notifications" style="justify-content: center; font-weight: var(--font-weight-semibold);">View all notifications</a>
+            </div>
+          </div>
+          <div style="position: relative;">
+            <button data-pattern="app-user-menu" type="button" aria-haspopup="true" aria-expanded="true" aria-controls="user-popover-open" id="user-trigger-open" aria-label="Account menu — Elena Park">
+              <span class="avatar" aria-hidden="true">EP</span>
+            </button>
+            <div class="popover user-popover" role="menu" id="user-popover-open" aria-labelledby="user-trigger-open" style="right: 0;">
+              <div class="user-header">
+                <div class="name">Elena Park</div>
+                <div class="email">elena@studio.example</div>
+              </div>
+              <a class="row" role="menuitem" href="/profile">
+                <svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
+                View profile
+              </a>
+              <a class="row" role="menuitem" href="/settings/account">
+                <svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33" /></svg>
+                Account settings
+              </a>
+              <button class="row" role="menuitem">
+                <svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" /></svg>
+                Theme — Auto
+              </button>
+              <button class="row" role="menuitem">
+                <svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="M6 8h2M6 12h2M6 16h2M12 8h2M12 12h2M12 16h2M18 8h.01" /></svg>
+                Keyboard shortcuts
+                <kbd style="margin-left: auto; background: var(--surface-recessed); color: var(--text-recede); padding: 1px 6px; border-radius: 4px; font-family: var(--font-mono); font-size: 0.72rem;">?</kbd>
+              </button>
+              <div class="divider" role="separator" aria-hidden="true"></div>
+              <button class="row" role="menuitem">
+                <svg class="icon-16" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" /></svg>
+                Log out
+              </button>
+            </div>
+          </div>
+        </nav>
+      </header>
+    </div>
+
+    <!-- ===== PAGE TABS REGISTERS ===== -->
+    <section class="specimen-divider">
+      <h2>app-page-tabs — 3 registers</h2>
+      <p>Same content rendered three ways: underline (canonical Linear / GitHub), pill (when underline collides with adjacent UI), boxed (true page-content tab switcher).</p>
+    </section>
+    <div class="preview-frame">
+      <nav data-pattern="app-page-tabs" data-register="underline" aria-label="Page sections (underline)">
+        <ul>
+          <li><a href="#" aria-current="page">Overview</a></li>
+          <li><a href="#">Activity</a></li>
+          <li><a href="#">Members</a></li>
+          <li><a href="#">Integrations</a></li>
+          <li><a href="#">Settings</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="preview-frame">
+      <nav data-pattern="app-page-tabs" data-register="pill" aria-label="Page sections (pill)">
+        <ul>
+          <li><a href="#" aria-current="page">Overview</a></li>
+          <li><a href="#">Activity</a></li>
+          <li><a href="#">Members</a></li>
+          <li><a href="#">Integrations</a></li>
+          <li><a href="#">Settings</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="preview-frame">
+      <nav data-pattern="app-page-tabs" data-register="boxed" aria-label="Page sections (boxed)">
+        <ul>
+          <li><a href="#" aria-current="page">Overview</a></li>
+          <li><a href="#">Activity</a></li>
+          <li><a href="#">Members</a></li>
+          <li><a href="#">Integrations</a></li>
+          <li><a href="#">Settings</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- ===== STATUS BANNERS — 3 TONES ===== -->
+    <section class="specimen-divider">
+      <h2>app-status-banner — 3 tones</h2>
+      <p>Info, warning, critical. Critical uses <code>role="alert"</code> + <code>aria-live="assertive"</code>; info + warning use <code>role="status"</code> + <code>aria-live="polite"</code>.</p>
+    </section>
+    <div class="preview-frame">
+      <div data-pattern="app-status-banner" data-tone="info" role="status" aria-live="polite" aria-label="App status">
+        Syncing your edits…
+      </div>
+    </div>
+    <div class="preview-frame">
+      <div data-pattern="app-status-banner" data-tone="warning" role="status" aria-live="polite" aria-label="App status">
+        <span class="dot" aria-hidden="true"></span>
+        Galley Keys is in a degraded state — vault unlock may be slow.
+      </div>
+    </div>
+    <div class="preview-frame">
+      <div data-pattern="app-status-banner" data-tone="critical" role="alert" aria-live="assertive" aria-label="App status">
+        <span class="dot" aria-hidden="true"></span>
+        Offline — local edits will sync when connection returns.
+      </div>
+    </div>
+
+    <!-- ===== MICROSTATES ===== -->
+    <section class="specimen-divider">
+      <h2>nav-item-equivalent microstates</h2>
+      <p>The shared microstate vocabulary across every interactive element in the chrome (workspace switcher, action buttons, page tabs, notification bell, user menu).</p>
+    </section>
+    <div class="microstate-grid">
+      <div class="label">workspace switcher</div>
+      <div class="cell"><div><div class="ms-label">default</div><button data-pattern="app-workspace-switcher" type="button" style="background: transparent;"><span class="logo" aria-hidden="true">G</span><span>Elena's Galley</span><svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" /></svg></button></div></div>
+      <div class="cell"><div><div class="ms-label">hover</div><button data-pattern="app-workspace-switcher" type="button" style="background: var(--surface-elevated);"><span class="logo" aria-hidden="true">G</span><span>Elena's Galley</span><svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" /></svg></button></div></div>
+      <div class="cell"><div><div class="ms-label">aria-expanded</div><button data-pattern="app-workspace-switcher" type="button" aria-expanded="true" style="background: var(--surface-elevated);"><span class="logo" aria-hidden="true">G</span><span>Elena's Galley</span><svg class="chevron" viewBox="0 0 12 12" aria-hidden="true" style="transform: rotate(180deg);"><path d="M3 4.5 6 7.5 9 4.5" /></svg></button></div></div>
+      <div class="cell"><div><div class="ms-label">focus-visible</div><button data-pattern="app-workspace-switcher" type="button" style="outline: var(--focus-ring-width) solid var(--focus-ring); outline-offset: var(--focus-ring-offset);"><span class="logo" aria-hidden="true">G</span><span>Elena's Galley</span><svg class="chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" /></svg></button></div></div>
+
+      <div class="label">page tab</div>
+      <div class="cell"><div><div class="ms-label">default</div><a href="#" style="color: var(--text-recede); padding: var(--space-2); text-decoration: none;">Activity</a></div></div>
+      <div class="cell"><div><div class="ms-label">hover</div><a href="#" style="color: var(--accent-hover); padding: var(--space-2); text-decoration: none;">Activity</a></div></div>
+      <div class="cell"><div><div class="ms-label">aria-current="page"</div><a href="#" aria-current="page" style="color: var(--text-emphasis); font-weight: var(--font-weight-semibold); padding: var(--space-2); text-decoration: none; border-bottom: 2px solid var(--accent);">Activity</a></div></div>
+      <div class="cell"><div><div class="ms-label">disabled</div><span style="color: var(--text-disabled); padding: var(--space-2); opacity: 0.55;">Activity</span></div></div>
+    </div>
+
+    <!-- ===== COMPOSITION LINEAGE ===== -->
+    <section class="specimen-divider">
+      <h2>Composition lineage — what nav-app-chrome consumes</h2>
+    </section>
+    <table class="lineage">
+      <thead>
+        <tr><th>Consumed primitive</th><th>Source pack</th><th>Used in</th><th>How this pattern uses it</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>&lt;action-button intent="ghost"&gt;</code></td>
+          <td>@quoin/pattern-button-system</td>
+          <td>action-cluster default rows · notification bell · workspace switcher popover rows · user menu popover rows</td>
+          <td>Ghost-intent for in-chrome de-escalated actions. Inherits all 8 microstates.</td>
+        </tr>
+        <tr>
+          <td><code>&lt;action-button intent="secondary"&gt;</code></td>
+          <td>@quoin/pattern-button-system</td>
+          <td>action-cluster "Share" / "Filter" etc.</td>
+          <td>Medium-intent actions in the page action cluster.</td>
+        </tr>
+        <tr>
+          <td><code>&lt;action-button intent="primary"&gt;</code></td>
+          <td>@quoin/pattern-button-system</td>
+          <td>action-cluster "Publish" / "New document"</td>
+          <td>The highest-intent action in the page action cluster, rightmost slot.</td>
+        </tr>
+        <tr>
+          <td>canonical tokens</td>
+          <td>@quoin/tokens-baseline</td>
+          <td>every CSS value</td>
+          <td>Surfaces / typography / borders / motion / shadows / focus-ring. Chrome aesthetic flips with aesthetic-pack swaps; structure invariant.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <section class="specimen-divider">
+      <h2>Accessibility checklist</h2>
+    </section>
+    <ul style="font-size: var(--type-size-sm); line-height: var(--leading-prose); color: var(--text-recede); padding-left: var(--space-card);">
+      <li><strong>Banner landmark:</strong> <code>&lt;header role="banner"&gt;</code> — only one per page.</li>
+      <li><strong>App-shell nav:</strong> <code>&lt;nav aria-label="App shell"&gt;</code> distinguishes from in-page sub-nav and page-tabs nav.</li>
+      <li><strong>Cmd+K shortcut advertised:</strong> <code>aria-keyshortcuts="Meta+K Control+K"</code> on the search trigger; <code>aria-haspopup="dialog"</code> because the palette is a modal dialog.</li>
+      <li><strong>Popover ARIA pattern:</strong> Every popover trigger uses <code>aria-haspopup="true"</code> + <code>aria-expanded="true|false"</code> + <code>aria-controls="<popover-id>"</code>. Popover has <code>aria-labelledby</code> pointing back to trigger.</li>
+      <li><strong>Notification badge:</strong> Trigger's <code>aria-label</code> includes the count ("Notifications, 3 unread"); the visual badge digit is <code>aria-hidden</code> because the label already says it.</li>
+      <li><strong>User menu name:</strong> Trigger's <code>aria-label</code> includes the user's display name ("Account menu — Elena Park").</li>
+      <li><strong>Breadcrumb:</strong> <code>&lt;nav aria-label="Breadcrumb"&gt;</code> wraps an <code>&lt;ol&gt;</code>; last segment is a <code>&lt;span aria-current="page"&gt;</code> (not a link).</li>
+      <li><strong>Page tabs:</strong> <code>&lt;nav aria-label="Page sections"&gt;</code>; active tab carries <code>aria-current="page"</code> since each tab is its own route.</li>
+      <li><strong>Status banner:</strong> Info + warning use <code>role="status"</code> + <code>aria-live="polite"</code>. Critical uses <code>role="alert"</code> + <code>aria-live="assertive"</code>.</li>
+      <li><strong>Offline state:</strong> Sync-dependent actions become <code>aria-disabled="true"</code> with explicit <code>aria-label</code> noting the reason ("Notifications unavailable while offline").</li>
+      <li><strong>Focus management:</strong> Every popover Escape closes + returns focus to trigger. Click-outside also closes. Cmd+K palette traps focus while open.</li>
+      <li><strong>Focus styles:</strong> Every interactive element receives visible <code>:focus-visible</code> outline via <code>--focus-ring</code> tokens.</li>
+      <li><strong>Reduced motion:</strong> Pulse animation on status-banner dot collapses to none under <code>prefers-reduced-motion: reduce</code>.</li>
+    </ul>
+  </main>
+</body>
+</html>

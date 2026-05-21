@@ -1,0 +1,47 @@
+# @quoin/pattern-nav — Cargo-style manifest (D.85, draft format)
+
+[package]
+name = "@quoin/pattern-nav"
+version = "1.0.0"
+type = "pattern"
+quoin-version = "^0.1.0"
+description = "Unified nav pattern. See quoin.pack.json for canonical schema."
+
+[dependencies]
+"@quoin/tokens-baseline" = "^0.1.0"
+"@quoin/pattern-button-system" = "^1.0.0"
+"@quoin/pattern-form-fields" = "^1.0.0"
+"@quoin/pattern-modal-dialog" = "^1.0.0"
+
+[anatomy]
+mandatory-slots = ["section", "brand"]
+data-pattern-prefix = "nav"
+
+[anatomy.attributes-universal.data-variant]
+values = ["marketing", "app-chrome", "docs", "editorial"]
+default = "marketing"
+
+[anatomy.attributes-universal.data-alignment]
+values = ["centered", "left", "right", "split-anchor"]
+default = "left"
+note = "Where applicable. Docs uses intrinsic sidebar/content grid; editorial uses centered masthead."
+
+[anatomy.attributes-universal.data-state]
+values = ["default", "scrolled", "menu-open", "search-open"]
+default = "default"
+
+[variants.marketing]
+conditional-slots = ["primary-links", "item", "dropdown-panel", "secondary-actions", "mobile-toggle"]
+description = "Marketing-site top nav with mega-menu, mobile drawer, theme toggle, primary CTA."
+
+[variants.app-chrome]
+conditional-slots = ["primary-links", "workspace-switcher", "search", "avatar", "mobile-toggle", "secondary-actions", "subnav"]
+description = "Application top-nav with workspace switcher, command-palette trigger (Cmd-K), and avatar menu."
+
+[variants.docs]
+conditional-slots = ["topbar", "search", "meta-actions", "sidebar", "sidebar-section", "skip-link"]
+description = "Documentation sidebar nav with sticky TOC, search affordance, Cmd-K trigger, skip-link."
+
+[variants.editorial]
+conditional-slots = ["utility", "masthead", "sections", "search-inline", "subscribe-cta"]
+description = "Newsroom-style nav with utility row, edition date, masthead, sections row."

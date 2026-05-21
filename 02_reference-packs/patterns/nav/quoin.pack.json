@@ -1,0 +1,33 @@
+{
+  "$schema": "https://harrow.haus/quoin/schema/pack.json",
+  "name": "@quoin/pattern-nav",
+  "version": "1.0.0",
+  "type": "pattern",
+  "quoinVersion": "^0.1.0",
+  "description": "Unified nav pattern. Two mandatory slots (section, brand) + 17 conditional slots gated by data-variant. Four variants (marketing / app-chrome / docs / editorial) consolidated from 4 parallel packs per Phase 22 Cons. 4.",
+  "category": "navigation",
+  "variant": "system",
+  "variants": ["marketing", "app-chrome", "docs", "editorial"],
+  "exports": { "primitives": "./primitives/index.json" },
+  "states": ["default", "scrolled", "menu-open", "search-open"],
+  "microStates": ["default", "hover", "active", "focus", "focus-visible", "disabled", "selected"],
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/patterns/nav",
+    "tags": ["nav", "navigation", "marketing", "application", "docs", "editorial", "p0", "consolidated"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^0.1.0",
+    "@quoin/pattern-button-system": "^1.0.0",
+    "@quoin/pattern-form-fields": "^1.0.0",
+    "@quoin/pattern-modal-dialog": "^1.0.0"
+  },
+  "consolidates": [
+    "@quoin/pattern-nav-marketing",
+    "@quoin/pattern-nav-app-chrome",
+    "@quoin/pattern-nav-docs",
+    "@quoin/pattern-nav-editorial"
+  ],
+  "deprecates": "phase-22-cons-4"
+}

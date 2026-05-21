@@ -1,0 +1,20 @@
+{
+  "name": "@quoin/pattern-nav",
+  "version": "1.0.0",
+  "description": "Unified nav pattern — 4 variants (marketing / app-chrome / docs / editorial) sharing 2 mandatory + 17 conditional slots. Consolidated from 4 parallel packs per Phase 22 Cons. 4.",
+  "license": "MIT",
+  "main": "./quoin.pack.json",
+  "files": ["quoin.pack.json", "quoin.toml", "primitives/", "examples/", "README.md", "LICENSE"],
+  "keywords": ["quoin", "pattern", "nav", "navigation", "consolidated", "p0"],
+  "peerDependencies": {
+    "@quoin/tokens-baseline": "^0.1.0",
+    "@quoin/pattern-button-system": "^1.0.0",
+    "@quoin/pattern-form-fields": "^1.0.0",
+    "@quoin/pattern-modal-dialog": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harrowhaus/quoin.git",
+    "directory": "02_reference-packs/patterns/nav"
+  }
+}
