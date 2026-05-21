@@ -233,7 +233,7 @@ This file is the single source of truth for phase status across the Quoin projec
 - **`docs/translation/quality-gates.md`** — 20 acceptance criteria gates (G.QA-1 through G.QA-20) covering anatomy, variants, composition, accessibility, performance, licensing, naming, and documentation. Opens with the "Quality gates exist because Quoin's specification is publishable" framing paragraph.
 - **Three reference translations** at `patterns/disclosure/` + `patterns/combobox/` + `patterns/tabs/`. Each is a complete Quoin pack with `quoin.pack.json` (including `metadata.source` attribution block) + `primitives/index.json` + `examples/index.html` (working specimen with companion JS) + `README.md` (anatomy tables + Source attribution paragraph at top + Translation notes + "What this pattern is NOT" section) + `LICENSE` (MIT with W3C-Document-License attribution) + `package.json`.
 - **Phase 23 reframe** documented in this PHASES.md (see new section below) — Phase 23 elevated from "the engine that powers multi-backend emission" to "the published specification draft for UI semantics."
-**Closure ref:** _this commit_ (2026-05-21).
+**Closure ref:** commit `d4ea343316516cd15e76cd3d328a42032d66c3cd` (2026-05-21).
 **What unblocks:**
 - **Harvest sessions** can execute against the source registry under the quality-gates framework. ARIA APG yield ramp continues from the 3 reference translations; other approved sources (Radix, shadcn, Material Web, Carbon, Polaris, USWDS) become tractable.
 - **Phase 22.5.B (queued editorial batch)** is unblocked when scheduled; the translation skill is one of the tools that session may use.

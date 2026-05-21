@@ -10,9 +10,8 @@ Quoin ships its first dedicated **specification-framing document** (`THESIS.md`)
 
 ## Commits
 
-(Commit hashes filled at close.)
-
-- **Primary commit** — Phase 22.7 deliverables: THESIS.md + translation skill + source registry + extraction rules + quality gates + three reference translations + Phase 23 reframe in PHASES.md + discoverability updates + this session report.
+- **`d4ea343316516cd15e76cd3d328a42032d66c3cd`** — Phase 22.7 deliverables: THESIS.md + translation skill + source registry + extraction rules + quality gates + three reference translations + Phase 23 reframe in PHASES.md + discoverability updates + this session report. 29 files, +3110/−22.
+- **Follow-up commit** — fill closure-ref hash in PHASES.md.
 
 ## Deliverables
 
