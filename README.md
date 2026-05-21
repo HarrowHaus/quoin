@@ -1,115 +1,132 @@
+<!-- TODO: replace with logo SVG at docs/brand/quoin-wordmark.svg -->
+
+<div align="center">
+
 # Quoin
 
-A semantic design language that sits one layer above utility-first CSS frameworks. You write intent-bearing semantic elements (`<authority-mark>`, `<recede-block>`, `<density-grid>`). The compiler renders them to standard HTML and CSS at build time, using a pluggable token pack to determine the aesthetic. The browser sees normal output — no runtime, no proprietary engine, no AI inference at render time.
+*A semantic vocabulary for the patterns every website needs — meaning over markup, anatomy over aesthetic.*
 
-## Thesis
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Patterns](https://img.shields.io/badge/patterns-18-2ea44f.svg)](#pattern-catalog)
+[![Version](https://img.shields.io/badge/version-0.1.0-e8a33d.svg)](CHANGELOG.md)
+[![Stars](https://img.shields.io/github/stars/harrowhaus/quoin?style=social)](https://github.com/harrowhaus/quoin)
 
-Existing CSS frameworks encode implementation. A typical Tailwind element looks like this:
+<!-- Hero overview screenshot — operator adds via docs/screenshots/README.md checklist -->
+![Quoin patterns rendered in the canonical aesthetic](docs/screenshots/hero-overview.png)
 
-```html
-<div class="px-4 py-2 bg-stone-900 text-stone-50 rounded-lg font-medium tracking-tight hover:bg-stone-800">
-  Submit
 </div>
-```
 
-Quoin encodes intent:
+---
+
+## What Quoin is
+
+Quoin is a semantic CSS replacement: a vocabulary of named, accessibility-correct, aesthetically-neutral patterns — heroes, navs, forms, tables, modals, dialogs — that you compose into a site instead of authoring class strings. Each pattern is a slot-and-variant contract with declared microstates and ARIA hooks, and the visual identity rides on a separable aesthetic layer that swaps without touching the markup. It is for teams whose front-end work is mostly UI-shaped rather than novel, and for AI coding tools that generate that work more cheaply when the units are intent-named rather than utility-class soup.
+
+## Quick start
+
+A working hero in two code blocks. Copy both into a fresh HTML file and open it in a browser.
+
+**1. Markup — paste anywhere in `<body>`:**
 
 ```html
-<primary-action>Submit</primary-action>
+<section data-pattern="hero-section" data-variant="type-only" data-alignment="centered">
+  <div class="inner">
+    <p data-pattern="hero-eyebrow" data-tone="accent">New for 2026</p>
+    <h1 data-pattern="hero-headline">A semantic vocabulary for the application web.</h1>
+    <p data-pattern="hero-subhead">Compose pages from named patterns; swap the aesthetic without touching markup.</p>
+    <div data-pattern="hero-actions" role="group" aria-label="Hero actions">
+      <a class="action-button" data-intent="primary" href="/start">Get started</a>
+      <a class="action-button" data-intent="ghost" href="/docs">Read the docs</a>
+    </div>
+  </div>
+</section>
 ```
 
-The aesthetic is supplied by a separate token pack — Swiss, brutalist, soft, corporate, anything — so the same semantic element renders correctly across any visual register. AI tools emit one semantic tag instead of a multi-class string, cutting token cost by roughly 10x while producing more legible, more reviewable, and more accessible output.
+**2. Styles — paste in `<head>`:**
 
-## Architecture
+```html
+<!-- Canonical tokens (colors, spacing, type, motion). One file; loads everywhere. -->
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/harrowhaus/quoin@main/02_reference-packs/tokens-baseline/tokens.css">
 
-Four layers, three of which already exist as standards or shipped products:
+<!-- Pattern CSS: copy the <style> block from the canonical specimen below.
+     Each specimen is self-contained; the inline styles are the pattern's CSS.
+     https://raw.githack.com/harrowhaus/quoin/main/02_reference-packs/patterns/hero/examples/type-only.html
+     The compiler-driven workflow (one bundle per pack) ships at v1.0 launch;
+     for now, copy the styles from the specimen you want and modify in place. -->
+```
 
-1. **Authoring layer** *(new — Quoin)* — semantic Web Component tags
-2. **Token layer** *(existing — W3C DTCG + Tailwind v4)* — three-tier tokens, pluggable aesthetic
-3. **Compilation layer** *(new — Quoin compiler)* — build-time, emits Tailwind classes or raw CSS
-4. **Rendering layer** *(existing — browser)* — standard HTML + CSS
+The result renders at production quality: token-grounded surfaces, balanced display type, real focus rings, working `prefers-reduced-motion`, real dark mode via `prefers-color-scheme`. No JavaScript needed for the static case; the modal / toast / video-pause patterns ship optional companion JS that loads only when used.
 
-## Pack types
+## Pattern catalog
 
-Seven composable pack categories distributed via npm under the `@quoin/*` scope:
+Eighteen production patterns. Each link opens the canonical specimen rendered live via raw.githack.com — markup, real CSS, real interaction. The grid is the catalog as of v0.1.0; see [`CHANGELOG.md`](CHANGELOG.md) for additions.
 
-- **Token packs** — aesthetic-bearing (colors, type, spacing, motion, radius). Reference: `@quoin/tokens-baseline`. Harvested: 30 production packs from Material 3, Carbon, Polaris, Fluent, Primer, Geist, Tailwind defaults, and more (see `03_harvest/`).
-- **Vocabulary packs** — semantic element definitions for a domain. Reference: `@quoin/vocab-editorial` (21 primitives), `@quoin/vocab-dashboard` (15), `@quoin/vocab-essentials` (10), `@quoin/vocab-app-shell` (5). Harvested: 10 more covering shadcn, Radix, Headless, forms, docs, marketing.
-- **Implementation packs** — compilation targets. Reference: `@quoin/impl-tailwind` (Tailwind v4 arbitrary-value classes, ships `companion.css` for hover/focus/motion polish + `companion.js` for tab / disclosure / modal / Cmd-K behaviors), `@quoin/impl-raw-css` (zero-dependency inline-style emitter).
-- **Theme packs** *(Phase 0.5-extension + Phase Themes)* — mode-scoped token overrides (light / dark / P3 wide-gamut). Reference: `@quoin/theme-baseline-reference`. Shipped: 10 v1.0 packs covering the 2026 trend landscape — `@quoin/theme-{vellum, graphite, aurora, letterpress, terminal, broadsheet, bloom, arcade, prism, vapor}` (see `02_reference-packs/themes/`).
-- **Pattern packs** *(Phase 0.5-extension)* — pre-styled compositions with declared states + microStates. Reference: `@quoin/pattern-button-reference`.
-- **Icon packs** *(Phase 0.5-extension)* — named glyphs resolved by `<icon name="…" size="…" />`. Reference: `@quoin/icons-reference`.
-- **Template packs** *(Phase 0.5-extension)* — scaffoldable starter projects with declared pack dependencies. Reference: `@quoin/template-blank-reference`.
+| | | |
+|---|---|---|
+| ![button-system](docs/screenshots/button-system.png)<br>**[button-system](https://raw.githack.com/harrowhaus/quoin/main/02_reference-packs/patterns/button-system/examples/index.html)**<br>Foundational button primitives — 5 intents × 4 sizes × 8 microstates + button-group composition. | ![data-table](docs/screenshots/data-table.png)<br>**[data-table](https://raw.githack.com/harrowhaus/quoin/main/02_reference-packs/patterns/data-table/examples/index.html)**<br>Sortable, filterable, paginated tabular data with selection, bulk actions, and inline editing. | ![empty-state](docs/screenshots/empty-state.png)<br>**[empty-state](https://raw.githack.com/harrowhaus/quoin/main/02_reference-packs/patterns/empty-state/examples/index.html)**<br>Empty / filtered-empty / error / forbidden state container — 4 variants × 3 sizes. |
+| ![feature-grid](docs/screenshots/feature-grid.png)<br>**[feature-grid](https://raw.githack.com/harrowhaus/quoin/main/02_reference-packs/patterns/feature-grid/examples/index.html)**<br>Marketing feature grid — 5 layouts (three-up / four-tile / six-tile / bento / steps) × 4 cell variants. | ![footer-mega](docs/screenshots/footer-mega.png)<br>**[footer-mega](https://raw.githack.com/harrowhaus/quoin/main/02_reference-packs/patterns/footer-mega/examples/index.html)**<br>Marketing site footer — 4 variants from minimal auth-page footer to flagship mega with newsletter + locale picker. | ![form-fields](docs/screenshots/form-fields.png)<br>**[form-fields](https://raw.githack.com/harrowhaus/quoin/main/02_reference-packs/patterns/form-fields/examples/index.html)**<br>Text / email / number / select / textarea / checkbox / radio inputs with focus, disabled, readonly states. |
+| ![form-validation](docs/screenshots/form-validation.png)<br>**[form-validation](https://raw.githack.com/harrowhaus/quoin/main/02_reference-packs/patterns/form-validation/examples/index.html)**<br>Inline error display + field-level + form-level error summary; live-region announcement on submit. | ![hero](docs/screenshots/hero.png)<br>**[hero](https://raw.githack.com/harrowhaus/quoin/main/02_reference-packs/patterns/hero/examples/type-only.html)**<br>Unified hero pattern — 5 variants (type-only / animated / gradient-mesh / brand-photo / video) sharing a 6-slot anatomy. | ![modal-dialog](docs/screenshots/modal-dialog.png)<br>**[modal-dialog](https://raw.githack.com/harrowhaus/quoin/main/02_reference-packs/patterns/modal-dialog/examples/index.html)**<br>Accessible modal with focus trap, ESC-to-close, scrim click, scroll lock; WCAG 2.4.3 + 2.4.11 dismissal. |
+| ![nav-app-chrome](docs/screenshots/nav-app-chrome.png)<br>**[nav-app-chrome](https://raw.githack.com/harrowhaus/quoin/main/02_reference-packs/patterns/nav-app-chrome/examples/index.html)**<br>Application top-nav with workspace switcher, command-palette trigger, and avatar menu. | ![nav-docs](docs/screenshots/nav-docs.png)<br>**[nav-docs](https://raw.githack.com/harrowhaus/quoin/main/02_reference-packs/patterns/nav-docs/examples/index.html)**<br>Documentation sidebar nav with sticky table-of-contents, search affordance, and Cmd-K trigger. | ![nav-editorial](docs/screenshots/nav-editorial.png)<br>**[nav-editorial](https://raw.githack.com/harrowhaus/quoin/main/02_reference-packs/patterns/nav-editorial/examples/index.html)**<br>Newsroom-style nav with sections row, edition date, and utility row above the masthead. |
+| ![nav-marketing](docs/screenshots/nav-marketing.png)<br>**[nav-marketing](https://raw.githack.com/harrowhaus/quoin/main/02_reference-packs/patterns/nav-marketing/examples/index.html)**<br>Marketing-site top nav with mega-menu, mobile drawer, and theme toggle. | ![page-header](docs/screenshots/page-header.png)<br>**[page-header](https://raw.githack.com/harrowhaus/quoin/main/02_reference-packs/patterns/page-header/examples/index.html)**<br>Application page title bar with breadcrumb, status badges, and primary / overflow actions. | ![pricing-tiers](docs/screenshots/pricing-tiers.png)<br>**[pricing-tiers](https://raw.githack.com/harrowhaus/quoin/main/02_reference-packs/patterns/pricing-tiers/examples/index.html)**<br>Pricing comparison cards with monthly / annual toggle, feature checklist, and per-tier CTA. |
+| ![stat-card](docs/screenshots/stat-card.png)<br>**[stat-card](https://raw.githack.com/harrowhaus/quoin/main/02_reference-packs/patterns/stat-card/examples/index.html)**<br>Numeric stat display with trend indicator, sparkline slot, and optional context label. | ![testimonial](docs/screenshots/testimonial.png)<br>**[testimonial](https://raw.githack.com/harrowhaus/quoin/main/02_reference-packs/patterns/testimonial/examples/index.html)**<br>Customer quote cards — compact / default / featured variants with avatar-stack attribution + 7 microstates. | ![toast-notifier](docs/screenshots/toast-notifier.png)<br>**[toast-notifier](https://raw.githack.com/harrowhaus/quoin/main/02_reference-packs/patterns/toast-notifier/examples/index.html)**<br>Toast notification system with stacking, auto-dismiss, action affordance, and live-region announcement. |
 
-A user composes their build by installing one token pack, one impl pack, one or more vocabulary packs, and (optionally) a theme pack, any number of pattern + icon packs, and a template pack to scaffold from.
+## Why Quoin
 
-## Intellectual lineage
+<!-- TODO: brand-voice value-props section, draft in dedicated brand-voice session -->
 
-- **Christopher Alexander, *A Pattern Language* (1977)** — design as generative grammar with syntax and vocabulary. Patterns as the basis for design systems.
-- **Swiss / International Typographic Style** (Müller-Brockmann, Vignelli, Ruder, Aicher) — grid, hierarchy, restraint as foundational structural principles. The dominant design philosophy of the 20th century and the direct ancestor of modern UI.
-- **Brutalist editorial design** — function over decoration, raw structural clarity, asymmetric composition.
-- **DaisyUI** (19M npm installs, 350K weekly) — proves the appetite for semantic compression on top of Tailwind. Quoin extends the same compression one layer higher, from class names to semantic elements.
-- **Tailwind v4** — three-layer token architecture as native infrastructure.
-- **W3C Design Tokens Community Group (DTCG)** — token format standardization.
+## Used by
 
-## Phase map
+- **harrow.haus** (forthcoming)
 
-| Phase | Folder | Output | Status |
-|-------|--------|--------|--------|
-| 0 | `00_spec/` | Specification document (spec, pack-format, primitives, tokens) | shipped |
-| 0.5 | `00_spec/tokens.md` | Canonical Namespace Expansion — token namespace expanded from ~30 to 175 tokens across 11 DTCG 2025.10 types (164 in original 0.5 + 11 from handoff additive). Identity typography (Junicode + Ranade + Monaspace + Departure Mono) wired into `tokens-baseline`. Frozen at v1.0. | complete |
-| 0.5-ext | `00_spec/{pack-types,theme-pack,template-pack,pattern-pack,icon-pack}.md` | New Pack Types — adds 4 pack types (theme / template / pattern / icon) to the existing 3 (token / vocabulary / implementation). Compiler hooks for theme override resolution + pattern primitive registration + icon resolution. 4 reference packs shipped. | complete |
-| Themes | `02_reference-packs/themes/` | 10 v1.0 theme packs covering the 2026 trend landscape — vellum / graphite / aurora / letterpress / terminal / broadsheet / bloom / arcade / prism / vapor. Each ships light + dark + P3 modes; cross-diversity verified. | complete |
-| 3.5c | `03_harvest/build.js` | Geometric & typographic fidelity — all 30 harvested packs filled with `$value` for every v1.0 canonical token; strict validation passes catalog-wide. | complete |
-| 3.5d | `03_harvest/fidelity/extract.js` | Per-pack source-faithful composite refinement — fidelity framework extended to accept composite + atomic overrides. 3 packs refined (tailwind, material3, bootstrap); remaining 27 stay on 3.5c programmatic defaults. | partial — framework + 3 packs |
-| 1 | `01_compiler/` | Reference compiler (TypeScript, ESM, Vite plugin, browser entry) | shipped |
-| 2 | `02_reference-packs/` | 7 reference packs: 1 token, 4 vocabulary, 2 implementation | shipped |
-| 3 | `03_harvest/` | 40 harvested packs (30 token + 10 vocabulary) | shipped |
-| 3.5 | `03_harvest/fidelity/` | Token Fidelity Pass — byte-faithful extraction framework + per-pack `fidelityTier` annotation (A/B/C) | partial (1 A, 5 B, 24 C; stop condition triggered → Phase 3.5b) |
-| 3.5b | `03_harvest/fidelity/` | Comprehensive Fidelity Pass — three extraction methods (static parse, algorithm exec, per-file). 27 packs upgraded to extraction; 3 documented Tier C. | complete (1 A, 26 B, 3 C) |
-| 4.5 | `04_docs/showcase/`, `04_docs/src/playground/` | Docs site refresh — new showcase page, three-pane playground REPL with all 30 token packs, shareable URLs, token-efficiency badge, fidelity-tier filters on pack browser, theme toggle. | complete |
-| 4 | `04_docs/` | Documentation site, live playground, pack browser, migration guides | shipped |
-| 5a | `02_reference-packs/impl-tailwind/companion.css` | Visual-maturity polish layer — hover, focus, motion, microinteractions | shipped |
-| 5b | (per-primitive) | Specific-attribute variants on key primitives (`emphasis-card variant="featured"`, `alert-band variant="compact"`, etc.) | shipped |
-| 5c | `02_reference-packs/impl-tailwind/companion.js` | Interactive behaviors — tab-panels keyboard nav, disclosure animation, modal trigger, Cmd-K command menu | shipped |
-| 5d | `02_reference-packs/vocab-essentials/`, `vocab-app-shell/` | Two additional vocabulary packs covering the v1 gaps (10 essentials + 5 app-shell primitives) | shipped |
-| 5e | `05_launch/` | npm publication, landing page, launch essay, demo video, HN/X drafts, release tag | pending |
+The list grows as adopters ship. To add your project, open a PR against this section.
 
-## Status
+## For AI tools
 
-Phases 0–4, 4.5, 5a–5d, 0.5, 0.5-ext, Themes, 3.5c, and 3.5d are
-complete. The canonical namespace is at its v1.0 surface area — 175
-tokens across 11 DTCG 2025.10 types — and frozen. Every token pack
-(reference + 30 harvested) supplies a `$value` for every canonical
-name; strict validation passes catalogue-wide. Phase 0.5-ext landed
-4 new pack types (theme / template / pattern / icon) with compiler
-hooks, 4 reference packs, and 19 new tests (96 total, all passing).
-The Themes phase shipped 10 v1.0 theme packs covering the 2026 trend
-landscape with cross-diversity verified by signature gate + 20-cell
-side-by-side showcase. Phase 3.5d extended the fidelity framework
-to support composite + atomic overrides and refined three packs
-(tailwind, material3, bootstrap) with source-faithful shadow / motion
-/ border-width values. The remaining 27 packs continue on Phase 3.5c
-programmatic defaults — incremental refinement that can land any time
-without blocking launch.
+Quoin publishes structured documentation specifically for AI coding tools (Claude Code, Cursor, Lovable, v0, and similar):
 
-Phase 3.5 + 3.5b (Token Fidelity Pass + Comprehensive Fidelity Pass)
-are complete: 27 of 30 token packs extract byte-faithfully from
-canonical upstream sources (1 Tier A + 26 Tier B), with 3 documented
-Tier C packs (clarity, geist, workday). See
-[`03_harvest/REPORT.md`](03_harvest/REPORT.md). Phase 4.5 brought the
-docs site to a modern-REPL standard. Phase 5e (launch) is staged but
-not executed — see [`05_launch/README.md`](05_launch/README.md) for
-the deliverables list, [`CHANGELOG.md`](CHANGELOG.md) for the running
-change log, and [`PHASE_PROMPTS.md`](PHASE_PROMPTS.md) for the
-per-phase Claude Code prompts.
+- [`/llms.txt`](llms.txt) — a concise summary of the catalog, the architecture, and how to consume Quoin from generated code. Following the [llmstxt.org](https://llmstxt.org/) convention.
+- [`/llms-full.txt`](llms-full.txt) — full anatomy reference for every pattern (slots, variants, microstates, ARIA contracts, composition lineage). Use this when generating Quoin markup at scale.
+- [`/registry.json`](registry.json) — a shadcn-registry-compatible static endpoint enumerating the 18 patterns. Lets you wire Quoin into any tool that already speaks shadcn.
 
-## Canonical locations
+**Add Quoin to a shadcn-MCP config:**
 
-- **Repo:** `github.com/harrowhaus/quoin`
-- **Home page:** `harrow.haus/quoin`
-- **npm scope:** `@quoin/*`
+```json
+{
+  "registries": {
+    "@quoin": "https://raw.githubusercontent.com/harrowhaus/quoin/main/registry.json"
+  }
+}
+```
+
+Then in your tool: `npx shadcn@latest add @quoin/hero`. The pattern lands in your project with its canonical markup, ARIA contracts, and microstate CSS intact.
+
+## Documentation (for contributors and architects)
+
+Deep documentation — not required reading to use Quoin, but useful if you're contributing or building on top:
+
+- [`CHANGELOG.md`](CHANGELOG.md) — every shipped change, in reverse chronological order.
+- [`PHASE_GATES.md`](PHASE_GATES.md) — the architectural exit criteria for each phase of Quoin's development. Includes the v3.G.\* lock series.
+- [`HANDOFF.md`](HANDOFF.md) — the current state of the project, packaged for the next contributor.
+- [`02_reference-packs/CONSOLIDATION-1-REPORT.md`](02_reference-packs/CONSOLIDATION-1-REPORT.md) — closing report for the spacing-tokens consolidation.
+- [`02_reference-packs/CONSOLIDATION-2-REPORT.md`](02_reference-packs/CONSOLIDATION-2-REPORT.md) — closing report for the type-scale-tokens consolidation, including the `tokens-baseline` font-family architecture decision.
+- [`02_reference-packs/CONSOLIDATION-3-REPORT.md`](02_reference-packs/CONSOLIDATION-3-REPORT.md) — closing report for the hero-anatomy unification: 5 parallel packs collapsed to one.
+- [`00_spec/`](00_spec/) — the formal specification documents (tokens, primitives, pack format, pack types).
+
+## Contributing
+
+Quoin's pattern catalog is core-team-only through the **50-pattern plateau** milestone. The rationale is recorded in decision **D.73** of the project's decisions log: community contribution to the catalog opens once the first 50 patterns ship and the conventions have stabilized. Until then, the catalog is curated rather than crowd-sourced.
+
+If you're an early adopter who wants to use Quoin and has a question, a bug report, or a feature request, please open an issue. Compiler / aesthetic-pack / harvester contributions are welcome before the 50-pattern plateau — see [`05_launch/README.md`](05_launch/README.md) for the contribution-friendly surface area.
 
 ## License
 
-MIT (planned). All harvested packs preserve their source attribution and license per the methodology in `03_harvest/README.md`.
+MIT. Copyright (c) 2026 Donald Pilger / Harrow Haus.
+
+All harvested token packs in [`03_harvest/`](03_harvest/) preserve their source attribution and original license per the methodology in [`03_harvest/README.md`](03_harvest/README.md).
+
+---
+
+<div align="center">
+<sub>Built at <a href="https://harrow.haus">Harrow Haus</a>, Rockford, Illinois.</sub>
+</div>

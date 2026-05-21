@@ -1,0 +1,828 @@
+# Quoin — full pattern anatomy reference
+
+This file is the long-form anatomy reference for AI coding tools generating Quoin markup at scale. For the short index, read `/llms.txt` first.
+
+Every pattern is documented in the same format:
+
+1. **Identity** — pack name, version, what the pattern is for.
+2. **Anatomy** — mandatory slots + conditional slots (with gating conditions).
+3. **Attributes** — universal axes (apply to every variant) and variant-specific axes.
+4. **States / microstates** — pattern-level states + per-element microstates.
+5. **Composition** — which peer packs the pattern consumes, and via what canonical class names.
+6. **ARIA contract** — landmark roles, label requirements, live regions.
+7. **Minimal markup** — the smallest valid example.
+
+Canonical specimens live at `02_reference-packs/patterns/<pack-name>/examples/`. The specimens are the source of truth: this document summarizes them, but they are byte-faithful.
+
+---
+
+## Universal authoring rules (apply to every pattern)
+
+- **`data-pattern` form**: `<pattern-name>-<slot>`. Never `pattern-<name>-<slot>` (long prefix is rejected by the gate). Never `<pattern>--<slot>` (double-dash separator is rejected).
+- **Content alignment**: `data-alignment="centered | left | right | split-anchor"`. Universal; replaces the legacy `data-register` attribute.
+- **Sub-slot kind**: `data-kind="..."` for descriptive sub-types (e.g. overlay `data-kind="gradient-from-bottom"`, accent `data-kind="pulse"`).
+- **Tokens**: every value comes from `@quoin/tokens-baseline`. Reference token names via `var(--token)`. Never hardcode color, spacing, type-size, motion, or shadow values.
+- **Composition**: when consuming a peer pack, use the peer's canonical class name (`class="action-button"` for button-system). Never re-inline the peer's contract under a local class name.
+- **Reduced motion**: every animated pattern must honor `@media (prefers-reduced-motion: reduce)` — collapse durations to 0 or to a single short opacity fade.
+
+---
+
+# Patterns
+
+## button-system
+
+**Pack:** `@quoin/pattern-button-system@1.0.0`
+**Folder:** `02_reference-packs/patterns/button-system/`
+**Specimen:** `examples/index.html`
+
+Foundational button primitive. The single most-composed pattern in the catalog — every pattern that triggers an action consumes this one.
+
+### Anatomy
+
+| Slot | Element | Class | Role |
+|---|---|---|---|
+| `action-button` | `<button>` or `<a>` (polymorphic) | `.action-button` | The button itself |
+| `button-group` | `<div role="group">` | `.button-group` | Horizontal cluster of buttons |
+
+### Attributes (action-button)
+
+| Attribute | Values | Default |
+|---|---|---|
+| `data-intent` | `primary` / `secondary` / `ghost` / `destructive` / `link` | `primary` |
+| `data-size` | `xs` / `sm` / `md` / `lg` | `md` |
+| `data-state` | `default` / `loading` / `success` / `error` | `default` |
+| `data-icon-position` | `none` / `leading` / `trailing` / `only` | `none` |
+| `aria-pressed` | `true` / `false` | — (for toggle buttons) |
+| `aria-busy` | `true` / `false` | — (loading state) |
+| `disabled` or `aria-disabled` | `true` / `false` | — |
+| `href` | URL | — (polymorphic: renders as `<a>` when present) |
+
+### Attributes (button-group)
+
+| Attribute | Values | Default |
+|---|---|---|
+| `data-register` | `gapped` / `connected` | `gapped` |
+| `data-orientation` | `horizontal` / `vertical` | `horizontal` |
+
+Note: `button-group` is a foundational pack and retains `data-register` for now; its consolidation is future work.
+
+### Microstates
+
+`default`, `hover`, `active`, `focus`, `focus-visible`, `disabled`, `loading`, `selected`.
+
+### Composition
+
+- Consumed by: `@quoin/pattern-hero` (all 5 variants), `@quoin/pattern-modal-dialog`, `@quoin/pattern-form-validation`, `@quoin/pattern-empty-state`, `@quoin/pattern-footer-mega` (newsletter submit), `@quoin/pattern-toast-notifier`, every other pattern with a CTA.
+- Consumes: `@quoin/tokens-baseline`.
+
+### ARIA contract
+
+- Icon-only button must have `aria-label`.
+- Toggle button uses `aria-pressed="true | false"`.
+- Loading button has `aria-busy="true"` and an `aria-live="polite"` for status announcements.
+- Disabled with focus retention: use `aria-disabled="true"` (preserves focus); skip-focus: use the `disabled` attribute.
+
+### Minimal markup
+
+```html
+<button class="action-button" data-intent="primary" type="button">Submit</button>
+<a class="action-button" data-intent="ghost" href="/help">Learn more</a>
+```
+
+---
+
+## data-table
+
+**Pack:** `@quoin/pattern-data-table@1.0.0`
+**Folder:** `02_reference-packs/patterns/data-table/`
+
+Sortable, filterable, paginated tabular data with selection, bulk actions, inline editing, and density toggle.
+
+### Anatomy
+
+| Slot | Element | Role |
+|---|---|---|
+| `data-table-section` | `<section>` | Container with filter + bulk-action chrome |
+| `data-table` | `<table>` | The table itself |
+| `data-table-head` | `<thead>` | Column headers with `aria-sort` |
+| `data-table-body` | `<tbody>` | Rows |
+| `data-table-row` | `<tr>` | Single row, `aria-selected` when selected |
+| `data-table-cell` | `<td>` | Cell |
+| `data-table-pagination` | `<nav>` | Page navigation |
+
+### Attributes (table)
+
+| Attribute | Values | Default |
+|---|---|---|
+| `data-density` | `comfortable` / `compact` | `comfortable` |
+| `data-selectable` | `true` / `false` | `false` |
+
+### States
+
+`default`, `loading`, `empty`, `filtered-empty`, `error`, `selecting`.
+
+### Composition
+
+- Consumes: `@quoin/pattern-empty-state` for the empty / filtered-empty / error cells.
+- Consumes: `@quoin/pattern-button-system` for bulk-action buttons.
+- Consumes: `@quoin/vocab-app-shell` for the avatar primitive in user-column cells.
+
+### ARIA contract
+
+- Sortable columns: `aria-sort="ascending | descending | none"` on `<th>`.
+- Selection checkbox: `aria-checked` on the leading checkbox; `aria-selected` on the row.
+- Pagination: `<nav aria-label="Pagination">` with `aria-current="page"` on the active page button.
+- Empty / error states: see empty-state pattern's ARIA contract.
+
+### Minimal markup
+
+```html
+<section data-pattern="data-table-section">
+  <table data-pattern="data-table" data-density="comfortable" data-selectable="true">
+    <thead data-pattern="data-table-head">
+      <tr><th>Name</th><th aria-sort="ascending">Date</th><th>Status</th></tr>
+    </thead>
+    <tbody data-pattern="data-table-body">
+      <tr data-pattern="data-table-row"><td>Item A</td><td>2026-05-19</td><td>Active</td></tr>
+    </tbody>
+  </table>
+</section>
+```
+
+---
+
+## empty-state
+
+**Pack:** `@quoin/pattern-empty-state@1.0.0`
+**Folder:** `02_reference-packs/patterns/empty-state/`
+
+Reusable empty / filtered-empty / error / forbidden state container. Promoted from data-table's empty cell. Consumed by data-table, modal-dialog, sidebar-list, gallery-grid, and any container that can be empty.
+
+### Anatomy
+
+| Slot | Element | Role |
+|---|---|---|
+| `empty-state` | `<div>` | Container with `role="region"` and `aria-labelledby` |
+| `empty-state-illustration` | `<div aria-hidden="true">` | Decorative SVG / icon |
+| `empty-state-heading` | `<h3>` (md/sm) or `<h2>` (lg) | Title |
+| `empty-state-body` | `<p>` | Constructive copy explaining next steps |
+| `empty-state-actions` | `<div role="group">` | CTA cluster |
+
+### Attributes
+
+| Attribute | Values | Default |
+|---|---|---|
+| `data-variant` | `empty` / `filtered-empty` / `error` / `forbidden` | `empty` |
+| `data-size` | `sm` / `md` / `lg` | `md` |
+| `data-illustration` | `icon` / `illustration` / `none` | `icon` |
+
+### Composition
+
+- Consumes: `@quoin/pattern-button-system` for the CTA cluster.
+- Consumes: `@quoin/tokens-baseline`.
+
+### ARIA contract
+
+- `role="region"` + `aria-labelledby="<heading-id>"`.
+- Error variant's heading wraps the error message in `<span role="alert">` for immediate AT announcement.
+- Filtered-empty parent container gets `aria-live="polite"` for dynamic filter changes.
+- Decorative illustration: `aria-hidden="true"`.
+
+### Minimal markup
+
+```html
+<div data-pattern="empty-state" data-variant="empty" data-size="md" role="region" aria-labelledby="empty-h">
+  <div data-pattern="empty-state-illustration" aria-hidden="true"><svg viewBox="0 0 48 48">...</svg></div>
+  <h3 data-pattern="empty-state-heading" id="empty-h">No subscriptions yet</h3>
+  <p data-pattern="empty-state-body">Add your first to start tracking.</p>
+  <div data-pattern="empty-state-actions" role="group" aria-label="Get started">
+    <a class="action-button" data-intent="primary" href="/new">Add subscription</a>
+  </div>
+</div>
+```
+
+---
+
+## feature-grid
+
+**Pack:** `@quoin/pattern-feature-grid@1.0.0`
+**Folder:** `02_reference-packs/patterns/feature-grid/`
+
+Marketing feature grid with five layouts and four cell variants.
+
+### Anatomy
+
+| Slot | Element | Role |
+|---|---|---|
+| `feature-grid` | `<ul>` | Grid container |
+| `feature-cell` | `<article>` inside `<li>` | One cell |
+
+### Attributes (feature-grid)
+
+| Attribute | Values | Default |
+|---|---|---|
+| `data-layout` | `three-up` / `four-tile` / `six-tile` / `bento` / `steps` | `three-up` |
+| `data-density` | `normal` / `dense` / `sparse` | `normal` |
+
+### Attributes (feature-cell)
+
+| Attribute | Values | Default |
+|---|---|---|
+| `data-variant` | `compact` / `default` / `wide` / `feature` | `default` |
+| `data-interactive` | `true` / `false` | `false` |
+
+### States
+
+Grid: `default`, `empty`, `sparse`, `dense`, `loading`, `error`.
+Cell: 8 microstates (default / hover / active / focus / focus-visible / disabled / loading / selected).
+
+### Composition
+
+- Consumes: `@quoin/tokens-baseline`.
+- Optionally consumes: `@quoin/pattern-button-system` for cell-level CTAs (link CTAs are inline).
+
+### Minimal markup
+
+```html
+<ul data-pattern="feature-grid" data-layout="three-up">
+  <li>
+    <article data-pattern="feature-cell" data-variant="default">
+      <span class="leading" aria-hidden="true"><svg>...</svg></span>
+      <h4>Feature title</h4>
+      <p>One-sentence description.</p>
+    </article>
+  </li>
+</ul>
+```
+
+---
+
+## footer-mega
+
+**Pack:** `@quoin/pattern-footer-mega@1.0.0`
+**Folder:** `02_reference-packs/patterns/footer-mega/`
+
+Marketing site footer — four variants from minimal auth-page footer to flagship mega with newsletter and locale picker.
+
+### Anatomy
+
+| Slot | Element | Role |
+|---|---|---|
+| `footer-section` | `<footer role="contentinfo">` | The footer landmark |
+| `footer-brand-block` | `<div>` | Wordmark + tagline + social |
+| `footer-link-group` | `<div>` | One column of links (3-5 columns per variant) |
+| `footer-newsletter` | `<form>` | Email signup (mega variant only) |
+| `footer-legal-row` | `<div>` | Copyright + legal links |
+
+### Attributes (footer-section)
+
+| Attribute | Values | Default |
+|---|---|---|
+| `data-variant` | `minimal` / `compact` / `default` / `mega` | `default` |
+| `data-newsletter` | `true` / `false` | `true` for mega; `false` otherwise |
+
+### Newsletter states (when `data-variant="mega"`)
+
+`default`, `submitting`, `success`, `error`.
+
+### Composition
+
+- Consumes: `@quoin/pattern-form-fields` for the email input.
+- Consumes: `@quoin/pattern-button-system` for the submit button + locale-picker trigger.
+
+### ARIA contract
+
+- `<footer role="contentinfo">` — single per page.
+- `<nav aria-label="Footer navigation">` wraps the link-group columns.
+- Newsletter: `<form aria-label="Newsletter signup">` with `aria-live="polite"` status region.
+
+### Minimal markup
+
+```html
+<footer data-pattern="footer-section" data-variant="default" role="contentinfo">
+  <div data-pattern="footer-brand-block">
+    <a class="wordmark" href="/">Brand</a>
+    <p class="tagline">One-line description.</p>
+  </div>
+  <nav aria-label="Footer navigation">
+    <div data-pattern="footer-link-group">
+      <h3>Section</h3>
+      <ul><li><a href="/x">Link</a></li></ul>
+    </div>
+  </nav>
+  <div data-pattern="footer-legal-row">
+    <p>© 2026 Brand. All rights reserved.</p>
+  </div>
+</footer>
+```
+
+---
+
+## form-fields
+
+**Pack:** `@quoin/pattern-form-fields@1.0.0`
+**Folder:** `02_reference-packs/patterns/form-fields/`
+
+Text / email / number / select / textarea / checkbox / radio inputs.
+
+### Anatomy
+
+| Slot | Element | Role |
+|---|---|---|
+| `form-field` | `<div>` | Field container |
+| `form-label` | `<label>` | Label element |
+| `form-control` | `<input>` / `<select>` / `<textarea>` | Input element |
+| `form-helper` | `<p>` | Helper / description text |
+| `form-error` | `<p role="alert">` | Error message |
+
+### Attributes (form-control)
+
+| Attribute | Values | Default |
+|---|---|---|
+| `type` | `text` / `email` / `number` / `password` / etc. | `text` |
+| `data-size` | `sm` / `md` / `lg` | `md` |
+| `aria-invalid` | `true` / `false` | — (set when validation fails) |
+| `aria-describedby` | id of helper / error | — |
+| `required` | (attribute) | — |
+| `readonly` | (attribute) | — |
+| `disabled` | (attribute) | — |
+
+### Microstates
+
+`default`, `focus`, `focus-visible`, `hover`, `disabled`, `readonly`, `invalid`, `valid`.
+
+### Composition
+
+- Consumed by: `@quoin/pattern-form-validation`, `@quoin/pattern-footer-mega` (newsletter), `@quoin/pattern-modal-dialog` (form-in-modal patterns).
+- Consumes: `@quoin/tokens-baseline`.
+
+### ARIA contract
+
+- Every input has a `<label for="id">` association.
+- Error message uses `role="alert"` and is referenced via `aria-describedby` on the input.
+- Required fields: `required` attribute; visual indicator on the label.
+- `aria-invalid="true"` set programmatically on validation failure.
+
+---
+
+## form-validation
+
+**Pack:** `@quoin/pattern-form-validation@1.0.0`
+**Folder:** `02_reference-packs/patterns/form-validation/`
+
+Inline error display + field-level + form-level error summary. Live-region announcement on submit.
+
+### Anatomy
+
+| Slot | Element | Role |
+|---|---|---|
+| `form-validation-section` | `<form>` | Form with validation hooks |
+| `form-validation-summary` | `<div role="alert">` | Form-level error summary (appears on submit) |
+| (field-level error) | reuses `<p role="alert">` from form-fields | Per-field error |
+
+### Attributes (form)
+
+| Attribute | Values | Default |
+|---|---|---|
+| `data-state` | `default` / `submitting` / `success` / `error` | `default` |
+| `novalidate` | (attribute) | typically set; pattern handles validation |
+
+### Composition
+
+- Consumes: `@quoin/pattern-form-fields` for inputs.
+- Consumes: `@quoin/pattern-button-system` for submit + cancel.
+
+### ARIA contract
+
+- Form-level summary: `<div role="alert">` so AT announces on submit.
+- Per-field error: `<p role="alert">` linked via `aria-describedby` from the input.
+- Successful submit: optional `<div role="status" aria-live="polite">` for the success message.
+
+---
+
+## hero
+
+**Pack:** `@quoin/pattern-hero@1.0.0`
+**Folder:** `02_reference-packs/patterns/hero/`
+**Specimens:** `examples/{type-only, animated, gradient-mesh, brand-photo, video}.html`
+
+Unified hero pattern. Five variants share a 6-slot core anatomy plus 5 conditional slots gated by variant. Consolidates the 5 pre-Cons.3 parallel hero packs.
+
+### Anatomy — mandatory (6 slots, every variant)
+
+| Slot | Element | Role |
+|---|---|---|
+| `hero-section` | `<section>` | Container; carries `data-variant`, `data-alignment`, `data-size`, `data-background` |
+| `hero-eyebrow` | `<p>` | Pre-heading (uppercase, accent-tone optional) |
+| `hero-headline` | `<h1>` | Display headline (single h1 per page) |
+| `hero-subhead` | `<p>` | Supporting subtitle |
+| `hero-actions` | `<div role="group">` | CTA cluster — composes button-system |
+| `hero-meta` | `<p>` | Trust line / social proof / disclaimer |
+
+### Anatomy — conditional (5 slots, gated by variant)
+
+| Slot | Gated by | Role |
+|---|---|---|
+| `hero-accent` | `data-variant="animated"` | Ambient decoration (pulse / drift) |
+| `hero-background` | `data-variant="gradient-mesh"` | Procedural OKLCH radial-gradient mesh |
+| `hero-media` | `data-variant in [brand-photo, video]` | `<picture>` or `<video>` |
+| `hero-overlay` | `data-variant in [brand-photo, video]` | Scrim for text legibility |
+| `hero-controls` | `data-variant="video"` (mandatory) | WCAG 2.2.2 pause control |
+
+### Universal attributes (hero-section)
+
+| Attribute | Values | Default |
+|---|---|---|
+| `data-variant` | `type-only` / `animated` / `gradient-mesh` / `brand-photo` / `video` | `type-only` |
+| `data-alignment` | `centered` / `left` / `right` / `split-anchor` | `centered` |
+| `data-size` | `compact` / `default` / `oversized` | `default` |
+| `data-background` | `surface` / `surface-elevated` / `surface-recessed` / `accent-recede` / `dark` | `surface` |
+
+### Variant-specific attributes
+
+**animated:** `data-motion-mode="fade-up | spring-overshoot | word-stagger | type-in | scroll-parallax"`, `data-intensity="subtle | default | dramatic"`, `data-state="default | entering | settled | paused"`. Each slot may carry `data-stagger-index="0..4"`.
+
+**gradient-mesh:** `data-palette="cool | warm | monochrome | accent | playful"`, `data-intensity="subtle | default | dramatic"`, `data-texture="smooth | grained"`, `data-shift-on-hover="true | false"`.
+
+**brand-photo:** `data-layout="image-right | image-left | image-full-bleed | image-overlay"`. Orthogonal to `data-alignment`. Media slot: `data-aspect="16:9 | 4:3 | 1:1 | 3:4"`, `data-crop="cover | contain"`, `data-focal-point="center | top | bottom | left | right"`.
+
+**video:** `data-video-mode="background-loop | embed-with-controls"`, `data-state="default | playing | paused | video-error | reduced-motion"`. Headline may carry `data-shadow="true"` for legibility against motion.
+
+**overlay (brand-photo + video):** `data-kind="gradient-from-bottom | gradient-from-side | solid-tint"` × `data-tone="dark | accent"` × `data-strength="subtle | default | strong"`.
+
+**sub-slot kinds:**
+- `hero-meta` `data-kind="disclaimer | social-proof | trust-badges"`
+- `hero-actions` `data-cluster="primary-only | primary-plus-secondary | extended"`
+- `hero-accent` `data-kind="pulse | drift"`
+- `hero-eyebrow` `data-tone="neutral | accent | success | on-image | on-mesh | on-video"`
+
+### Composition
+
+- Consumes: `@quoin/pattern-button-system` directly. CTAs use `<a class="action-button" data-intent="primary | ghost | secondary" href="..."`>. Hero adds context-scoped backdrop-blur on ghost CTAs over media (brand-photo image-full-bleed/overlay layouts; video variant). Button-system pack stays unchanged.
+- Consumes: `@quoin/tokens-baseline`.
+
+### Pattern-local tokens (animated variant only)
+
+`--ease-overshoot`, `--stagger-step`, `--duration-entrance`, `--entrance-distance`. Scoped via `[data-variant="animated"]` selector. Do not promote to baseline.
+
+### ARIA contract
+
+- `<section aria-labelledby="<hero-headline-id>">`.
+- `hero-headline` is the page's single `<h1>`. No other h1s elsewhere on the page.
+- Decorative slots (`accent`, `background`, `overlay`): `aria-hidden="true"`.
+- Video variant's `<video>` carries `aria-label` describing the content.
+- `hero-controls` is `<button type="button" aria-label="Pause hero video | Play hero video">` — label flips with state.
+
+### Reduced motion
+
+`@media (prefers-reduced-motion: reduce)`:
+- animated variant: all entrance animations collapse to 120ms opacity fade. Ambient accents `display: none`.
+- video variant: starts in `data-state="paused"` automatically.
+
+### Minimal markup (type-only variant)
+
+```html
+<section data-pattern="hero-section" data-variant="type-only" data-alignment="centered" aria-labelledby="hero-h">
+  <div class="inner">
+    <p data-pattern="hero-eyebrow" data-tone="accent">New for 2026</p>
+    <h1 data-pattern="hero-headline" id="hero-h">Headline goes here.</h1>
+    <p data-pattern="hero-subhead">Supporting subtitle.</p>
+    <div data-pattern="hero-actions" role="group" aria-label="Get started">
+      <a class="action-button" data-intent="primary" href="/start">Get started</a>
+      <a class="action-button" data-intent="ghost" href="/docs">Read docs</a>
+    </div>
+  </div>
+</section>
+```
+
+---
+
+## modal-dialog
+
+**Pack:** `@quoin/pattern-modal-dialog@1.0.0`
+**Folder:** `02_reference-packs/patterns/modal-dialog/`
+
+Accessible modal with focus trap, ESC-to-close, scrim click, scroll lock. Built on the native `<dialog>` element where available.
+
+### Anatomy
+
+| Slot | Element | Role |
+|---|---|---|
+| `modal-dialog-section` | `<dialog>` or `<div role="dialog">` | The modal |
+| `modal-dialog-header` | `<header>` | Title + close button |
+| `modal-dialog-title` | `<h2>` | Modal title (referenced by `aria-labelledby`) |
+| `modal-dialog-body` | `<div>` | Body content |
+| `modal-dialog-footer` | `<footer>` | Action cluster |
+| `modal-dialog-scrim` | `<div>` | Backdrop (separate element for click-to-close) |
+
+### Attributes
+
+| Attribute | Values | Default |
+|---|---|---|
+| `data-size` | `sm` / `md` / `lg` / `fullscreen` | `md` |
+| `data-variant` | `default` / `confirm` / `destructive` | `default` |
+| `open` | (attribute, set when shown) | — |
+
+### Composition
+
+- Consumes: `@quoin/pattern-button-system` for footer actions.
+- Optionally consumes: `@quoin/pattern-empty-state` for empty-content modals.
+
+### ARIA contract
+
+- `<dialog>` element gets native `role="dialog"` + `aria-modal="true"`.
+- `aria-labelledby` references the title id.
+- `aria-describedby` may reference body content.
+- Focus trap: TAB cycles within modal; SHIFT+TAB cycles in reverse. ESC closes.
+- WCAG 2.4.3 (focus order) + 2.4.11 (focus not obscured) + 1.3.1 (semantic dismissal).
+
+---
+
+## nav-app-chrome
+
+**Pack:** `@quoin/pattern-nav-app-chrome@1.0.0`
+**Folder:** `02_reference-packs/patterns/nav-app-chrome/`
+
+Application top-nav with workspace switcher, command-palette trigger (Cmd-K), and avatar menu.
+
+### Anatomy
+
+| Slot | Element | Role |
+|---|---|---|
+| `nav-app-chrome-section` | `<header role="banner">` | Top-nav landmark |
+| `nav-app-chrome-workspace` | `<button>` | Workspace switcher |
+| `nav-app-chrome-search` | `<button>` | Cmd-K trigger |
+| `nav-app-chrome-primary-links` | `<nav>` | Primary navigation |
+| `nav-app-chrome-avatar` | `<button>` | User menu trigger |
+
+### Composition
+
+- Consumes: `@quoin/pattern-button-system` for chrome buttons.
+- Consumes: `@quoin/vocab-app-shell` for the avatar primitive.
+
+---
+
+## nav-docs
+
+**Pack:** `@quoin/pattern-nav-docs@1.0.0`
+**Folder:** `02_reference-packs/patterns/nav-docs/`
+
+Documentation sidebar with sticky table-of-contents, search affordance, Cmd-K trigger, version switcher.
+
+### Anatomy
+
+| Slot | Element | Role |
+|---|---|---|
+| `nav-docs-section` | `<aside>` | Sidebar |
+| `nav-docs-topbar` | `<header>` | Search + version switcher |
+| `nav-docs-skip-link` | `<a class="sr-only-focusable">` | Skip-to-content link (WCAG 2.4.1) |
+| `nav-docs-section-list` | `<nav>` | Sections list |
+| `nav-docs-toc` | `<nav aria-label="On this page">` | Sticky table-of-contents |
+
+### ARIA contract
+
+- Skip link: visible on focus only. Targets `<main id="content">`.
+- TOC links use `aria-current="location"` for the currently-scrolled section.
+
+---
+
+## nav-editorial
+
+**Pack:** `@quoin/pattern-nav-editorial@1.0.0`
+**Folder:** `02_reference-packs/patterns/nav-editorial/`
+
+Newsroom-style nav with utility row, edition date, masthead, sections row.
+
+### Anatomy
+
+| Slot | Element | Role |
+|---|---|---|
+| `nav-editorial-section` | `<header role="banner">` | Nav landmark |
+| `nav-editorial-utility` | `<div>` | Top utility row (date, login, subscribe) |
+| `nav-editorial-masthead` | `<div>` | Publication name |
+| `nav-editorial-sections` | `<nav>` | Sections row |
+| `nav-editorial-subscribe-cta` | `<a class="action-button">` | Subscribe pill |
+| `nav-editorial-search-form` | `<form role="search">` | Search box |
+
+---
+
+## nav-marketing
+
+**Pack:** `@quoin/pattern-nav-marketing@1.0.0`
+**Folder:** `02_reference-packs/patterns/nav-marketing/`
+
+Marketing-site top nav with mega-menu, mobile drawer, theme toggle, primary CTA.
+
+### Anatomy
+
+| Slot | Element | Role |
+|---|---|---|
+| `nav-marketing-section` | `<header role="banner">` | Nav landmark |
+| `nav-marketing-wordmark` | `<a>` | Brand wordmark |
+| `nav-marketing-links` | `<nav>` `<ul>` | Primary links |
+| `nav-marketing-megamenu` | `<div role="region">` | Mega-menu panel (opened on hover/click) |
+| `nav-marketing-actions` | `<div>` | CTA cluster (theme toggle + primary CTA) |
+| `nav-marketing-drawer` | `<div role="dialog">` | Mobile drawer |
+
+---
+
+## page-header
+
+**Pack:** `@quoin/pattern-page-header@1.0.0`
+**Folder:** `02_reference-packs/patterns/page-header/`
+
+Application page title bar with breadcrumb, status badges, and primary / overflow actions.
+
+### Anatomy
+
+| Slot | Element | Role |
+|---|---|---|
+| `page-header-section` | `<header>` | Page-level title bar |
+| `page-header-breadcrumb` | `<nav aria-label="Breadcrumb">` | Trail |
+| `page-header-title` | `<h1>` | Page title |
+| `page-header-status` | `<span>` | Status badges (composes label primitive) |
+| `page-header-actions` | `<div role="group">` | Action cluster |
+
+### Composition
+
+- Consumes: `@quoin/pattern-button-system`.
+- Consumes: `@quoin/vocab-app-shell` for avatar (when title row includes an actor).
+
+---
+
+## pricing-tiers
+
+**Pack:** `@quoin/pattern-pricing-tiers@1.0.0`
+**Folder:** `02_reference-packs/patterns/pricing-tiers/`
+
+Pricing comparison cards with monthly / annual toggle, feature checklist, per-tier CTA.
+
+### Anatomy
+
+| Slot | Element | Role |
+|---|---|---|
+| `pricing-tiers-section` | `<section>` | Container |
+| `pricing-tiers-toggle` | `<div role="radiogroup">` | Monthly / annual toggle |
+| `pricing-tier-card` | `<article>` | One tier card |
+| `pricing-tier-card[data-featured="true"]` | (modifier) | The "Popular" featured tier |
+
+### Composition
+
+- Consumes: `@quoin/pattern-button-system` for per-tier CTAs.
+
+---
+
+## stat-card
+
+**Pack:** `@quoin/pattern-stat-card@1.0.0`
+**Folder:** `02_reference-packs/patterns/stat-card/`
+
+Numeric stat display with trend indicator, sparkline slot, and optional context label.
+
+### Anatomy
+
+| Slot | Element | Role |
+|---|---|---|
+| `stat-card` | `<article>` | Card |
+| `stat-card-label` | `<p>` | Stat label |
+| `stat-card-value` | `<p>` (with `font-variant-numeric: tabular-nums`) | The number |
+| `stat-card-trend` | `<span role="img">` | Trend indicator (+/− with arrow) |
+| `stat-card-sparkline` | `<svg>` | Optional sparkline |
+
+### Attributes
+
+| Attribute | Values | Default |
+|---|---|---|
+| `data-trend` | `positive` / `negative` / `neutral` | `neutral` |
+| `data-size` | `sm` / `md` / `lg` | `md` |
+
+---
+
+## testimonial
+
+**Pack:** `@quoin/pattern-testimonial@1.0.0`
+**Folder:** `02_reference-packs/patterns/testimonial/`
+
+Customer quote cards — compact / default / featured variants with avatar-stack attribution.
+
+### Anatomy
+
+| Slot | Element | Role |
+|---|---|---|
+| `testimonial-grid` | `<ul>` | Grid container |
+| `testimonial-card` | `<figure>` | One testimonial card |
+| (blockquote) | `<blockquote>` | Quote — uses CSS `quotes` for curly punctuation |
+| (figcaption) | `<figcaption>` | Attribution (composes avatar-stack) |
+
+### Attributes (testimonial-card)
+
+| Attribute | Values | Default |
+|---|---|---|
+| `data-variant` | `compact` / `default` / `featured` | `default` |
+
+### Composition
+
+- Consumes: `@quoin/vocab-app-shell` for the `<avatar-stack>` primitive.
+
+### ARIA contract
+
+- `<figure>` + `<blockquote>` + `<figcaption>` — semantically associated.
+- `<cite>` for the customer name (not italicized — `cite` is semantic, not stylistic).
+- Star ratings carry `aria-label="<n> out of 5 stars"` on the rating element; individual stars `aria-hidden`.
+
+---
+
+## toast-notifier
+
+**Pack:** `@quoin/pattern-toast-notifier@1.0.0`
+**Folder:** `02_reference-packs/patterns/toast-notifier/`
+
+Toast notification system with stacking, auto-dismiss, action affordance, live-region announcement.
+
+### Anatomy
+
+| Slot | Element | Role |
+|---|---|---|
+| `toast-notifier-region` | `<div aria-live="polite">` (info) or `aria-live="assertive"` (critical) | Live region holding toast stack |
+| `toast-notifier-card` | `<div role="status">` (info) or `<div role="alert">` (critical) | One toast |
+
+### Attributes (toast-card)
+
+| Attribute | Values | Default |
+|---|---|---|
+| `data-intent` | `info` / `success` / `warning` / `critical` | `info` |
+| `data-position` | `top-right` / `top-center` / `bottom-right` / `bottom-center` | `top-right` |
+| `data-dismissible` | `true` / `false` | `true` |
+
+### ARIA contract
+
+- Info / success / warning: `role="status"` + `aria-live="polite"`.
+- Critical: `role="alert"` + `aria-live="assertive"`.
+- Dismiss button: `aria-label="Dismiss notification"`.
+- Action button (when present): `<button class="action-button" data-intent="primary" data-size="sm">`.
+
+---
+
+# Token reference (excerpt from @quoin/tokens-baseline)
+
+The full canonical namespace is 175 tokens across 11 DTCG 2025.10 types. The token file lives at `02_reference-packs/tokens-baseline/tokens.css`. Below are the names most commonly referenced from patterns.
+
+### Surfaces & text
+
+`--surface`, `--surface-elevated`, `--surface-recessed`, `--surface-inverse`
+`--text`, `--text-emphasis`, `--text-recede`, `--text-disabled`
+`--text-on-accent`, `--text-on-critical`, `--text-on-success`, `--text-on-warning`, `--text-on-info`
+
+### Borders
+
+`--border`, `--border-emphasis`, `--border-recede`
+`--border-width-hairline`, `--border-width-sm`, `--border-width-md`, `--border-width-lg`
+
+### Accent + status
+
+`--accent`, `--accent-recede`
+`--critical`, `--success`, `--warning`, `--info`
+
+### Spacing (Cons. 1 canonical)
+
+`--space-half-1`, `--space-half-2`, `--space-1` through `--space-8`, `--space-10`, `--space-12`, `--space-16`, `--space-20`, `--space-24`, `--space-32`
+`--space-card` (1.5rem), `--space-panel` (2rem), `--space-section` (4rem)
+`--space-stack-{compact,normal,loose}`, `--space-inline-{tight,normal,loose}`, `--space-frame`
+
+### Type sizes (Cons. 2 canonical)
+
+`--type-size-xs` (0.75rem), `--type-size-sm` (0.875rem), `--type-size-md` (1rem), `--type-size-lg` (1.125rem), `--type-size-xl` (1.5rem), `--type-size-2xl` (2rem), `--type-size-3xl` (2.5rem), `--type-size-4xl` (3.5rem), `--type-size-5xl` (3rem), `--type-size-display` (4.5rem)
+
+### Leading (Cons. 2)
+
+`--leading-tight` (1.15), `--leading-normal` (1.4), `--leading-prose` (1.55), `--leading-loose` (1.9), `--leading-display` (1.05)
+
+### Tracking, weight, font-family
+
+`--tracking-tight` (-0.02em), `--tracking-normal` (0em), `--tracking-wide` (0.05em)
+`--font-weight-{light,regular,medium,semibold,bold,black}`
+`--font-sans`, `--font-serif`, `--font-mono`, `--font-display` (per Cons. 2 — system-stack fallbacks in baseline; aesthetic packs override with specific brand fonts)
+
+### Radius, focus, motion
+
+`--radius-{none,sm,md,lg,xl,pill}`, `--radius-card` (0.5rem), `--radius-frame`, `--radius-media`
+`--focus-ring`, `--focus-ring-width`, `--focus-ring-offset`, `--shadow-focus`
+`--motion-{instant,fast,normal,slow,slower}`, `--ease-{linear,standard,decelerate,accelerate,emphasized,spring}`, `--transition-{default,emphasis,fast,color,transform,opacity}`
+
+### Composites (typography)
+
+`--text-display`, `--text-headline-{lg,md,sm}`, `--text-title-{lg,md,sm}`, `--text-body-{lg,md,sm}`, `--text-label-{lg,md,sm}` — exposed as CSS `font` shorthand for direct use.
+
+---
+
+# Beyond the catalog
+
+- **Aesthetic packs.** Token packs that override `tokens-baseline` to swap visual identity without touching markup. 10 v1.0 aesthetics shipped: vellum, graphite, aurora, letterpress, terminal, broadsheet, bloom, arcade, prism, vapor. See `02_reference-packs/themes/`. Use one with the canonical patterns by linking the aesthetic's `tokens.css` after `tokens-baseline/tokens.css` — the cascade does the rest.
+- **Harvested token packs.** 30 token packs harvested from Material 3, Carbon, Polaris, Fluent, Tailwind defaults, Bootstrap, Mantine, USWDS, Geist, and 21 more. See `03_harvest/`. Each pack ships `tokens/index.json` (DTCG-format graph) + `tokens.css` (CSS custom properties). Use one of these for cross-system fidelity.
+- **Compiler.** TypeScript + Vite plugin. `01_compiler/`. Currently green at 96/96 tests. Production path for v1.0+; launch staged in `05_launch/`.
+
+---
+
+# License
+
+MIT. Copyright (c) 2026 Donald Pilger / Harrow Haus.

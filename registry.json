@@ -1,0 +1,305 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "quoin",
+  "homepage": "https://github.com/harrowhaus/quoin",
+  "items": [
+    {
+      "name": "button-system",
+      "type": "registry:component",
+      "title": "Button System",
+      "description": "Foundational button primitives — 5 intents (primary / secondary / ghost / destructive / link) × 4 sizes × 8 microstates + button-group composition. The single most-composed pattern; consumed by every pattern with a CTA.",
+      "categories": ["application", "foundation"],
+      "files": [
+        {
+          "path": "02_reference-packs/patterns/button-system/examples/index.html",
+          "type": "registry:component",
+          "target": "components/quoin/button-system.html"
+        }
+      ]
+    },
+    {
+      "name": "data-table",
+      "type": "registry:component",
+      "title": "Data Table",
+      "description": "Sortable, filterable, paginated tabular data with selection, bulk actions, inline editing, and density toggle. Composes empty-state for the empty/error cells.",
+      "categories": ["application", "data"],
+      "registryDependencies": ["empty-state", "button-system"],
+      "files": [
+        {
+          "path": "02_reference-packs/patterns/data-table/examples/index.html",
+          "type": "registry:component",
+          "target": "components/quoin/data-table.html"
+        }
+      ]
+    },
+    {
+      "name": "empty-state",
+      "type": "registry:component",
+      "title": "Empty State",
+      "description": "Reusable empty / filtered-empty / error / forbidden state container — 4 variants × 3 sizes. Promoted from data-table's empty cell; consumed by data-table, modal-dialog, and any container that can be empty.",
+      "categories": ["application", "feedback"],
+      "registryDependencies": ["button-system"],
+      "files": [
+        {
+          "path": "02_reference-packs/patterns/empty-state/examples/index.html",
+          "type": "registry:component",
+          "target": "components/quoin/empty-state.html"
+        }
+      ]
+    },
+    {
+      "name": "feature-grid",
+      "type": "registry:component",
+      "title": "Feature Grid",
+      "description": "Marketing feature grid — 5 layouts (three-up / four-tile / six-tile / bento / steps) × 4 cell variants × 6 grid-level states.",
+      "categories": ["marketing"],
+      "files": [
+        {
+          "path": "02_reference-packs/patterns/feature-grid/examples/index.html",
+          "type": "registry:component",
+          "target": "components/quoin/feature-grid.html"
+        }
+      ]
+    },
+    {
+      "name": "footer-mega",
+      "type": "registry:component",
+      "title": "Footer (Mega)",
+      "description": "Marketing site footer — 4 variants from minimal auth-page footer to flagship mega with newsletter (composes form-fields + button-system) and locale picker.",
+      "categories": ["marketing"],
+      "registryDependencies": ["form-fields", "button-system"],
+      "files": [
+        {
+          "path": "02_reference-packs/patterns/footer-mega/examples/index.html",
+          "type": "registry:component",
+          "target": "components/quoin/footer-mega.html"
+        }
+      ]
+    },
+    {
+      "name": "form-fields",
+      "type": "registry:component",
+      "title": "Form Fields",
+      "description": "Text / email / number / select / textarea / checkbox / radio inputs with default / focus / disabled / readonly / error states. 33 declared tokens, 8 microstates, 4 field-level states.",
+      "categories": ["application", "forms"],
+      "files": [
+        {
+          "path": "02_reference-packs/patterns/form-fields/examples/index.html",
+          "type": "registry:component",
+          "target": "components/quoin/form-fields.html"
+        }
+      ]
+    },
+    {
+      "name": "form-validation",
+      "type": "registry:component",
+      "title": "Form Validation",
+      "description": "Inline error display + field-level + form-level error summary. Live-region announcement on submit; per-field error linkage via aria-describedby.",
+      "categories": ["application", "forms"],
+      "registryDependencies": ["form-fields", "button-system"],
+      "files": [
+        {
+          "path": "02_reference-packs/patterns/form-validation/examples/index.html",
+          "type": "registry:component",
+          "target": "components/quoin/form-validation.html"
+        }
+      ]
+    },
+    {
+      "name": "hero",
+      "type": "registry:component",
+      "title": "Hero",
+      "description": "Unified hero pattern — 5 variants (type-only / animated / gradient-mesh / brand-photo / video) sharing a 6-slot mandatory anatomy + 5 conditional slots gated by data-variant. Consolidated from 5 parallel packs per Phase 22 Cons. 3.",
+      "categories": ["marketing"],
+      "registryDependencies": ["button-system"],
+      "files": [
+        {
+          "path": "02_reference-packs/patterns/hero/examples/type-only.html",
+          "type": "registry:component",
+          "target": "components/quoin/hero/type-only.html"
+        },
+        {
+          "path": "02_reference-packs/patterns/hero/examples/animated.html",
+          "type": "registry:component",
+          "target": "components/quoin/hero/animated.html"
+        },
+        {
+          "path": "02_reference-packs/patterns/hero/examples/gradient-mesh.html",
+          "type": "registry:component",
+          "target": "components/quoin/hero/gradient-mesh.html"
+        },
+        {
+          "path": "02_reference-packs/patterns/hero/examples/brand-photo.html",
+          "type": "registry:component",
+          "target": "components/quoin/hero/brand-photo.html"
+        },
+        {
+          "path": "02_reference-packs/patterns/hero/examples/video.html",
+          "type": "registry:component",
+          "target": "components/quoin/hero/video.html"
+        }
+      ]
+    },
+    {
+      "name": "modal-dialog",
+      "type": "registry:component",
+      "title": "Modal Dialog",
+      "description": "Accessible modal with focus trap, ESC-to-close, scrim click, scroll lock; WCAG 2.4.3 + 2.4.11 dismissal contracts. Built on native <dialog> where available.",
+      "categories": ["application", "overlay"],
+      "registryDependencies": ["button-system"],
+      "files": [
+        {
+          "path": "02_reference-packs/patterns/modal-dialog/examples/index.html",
+          "type": "registry:component",
+          "target": "components/quoin/modal-dialog.html"
+        }
+      ]
+    },
+    {
+      "name": "nav-app-chrome",
+      "type": "registry:component",
+      "title": "Nav (App Chrome)",
+      "description": "Application top-nav with workspace switcher, command-palette trigger (Cmd-K), and avatar menu. Sticky on scroll.",
+      "categories": ["application", "navigation"],
+      "registryDependencies": ["button-system"],
+      "files": [
+        {
+          "path": "02_reference-packs/patterns/nav-app-chrome/examples/index.html",
+          "type": "registry:component",
+          "target": "components/quoin/nav-app-chrome.html"
+        }
+      ]
+    },
+    {
+      "name": "nav-docs",
+      "type": "registry:component",
+      "title": "Nav (Docs)",
+      "description": "Documentation sidebar nav with sticky table-of-contents, search affordance, Cmd-K trigger, version switcher, and skip-to-content link (WCAG 2.4.1).",
+      "categories": ["navigation", "documentation"],
+      "files": [
+        {
+          "path": "02_reference-packs/patterns/nav-docs/examples/index.html",
+          "type": "registry:component",
+          "target": "components/quoin/nav-docs.html"
+        }
+      ]
+    },
+    {
+      "name": "nav-editorial",
+      "type": "registry:component",
+      "title": "Nav (Editorial)",
+      "description": "Newsroom-style nav with utility row, edition date, masthead, sections row above the headlines.",
+      "categories": ["editorial", "navigation"],
+      "registryDependencies": ["button-system"],
+      "files": [
+        {
+          "path": "02_reference-packs/patterns/nav-editorial/examples/index.html",
+          "type": "registry:component",
+          "target": "components/quoin/nav-editorial.html"
+        }
+      ]
+    },
+    {
+      "name": "nav-marketing",
+      "type": "registry:component",
+      "title": "Nav (Marketing)",
+      "description": "Marketing-site top nav with mega-menu, mobile drawer, theme toggle, and primary CTA.",
+      "categories": ["marketing", "navigation"],
+      "registryDependencies": ["button-system"],
+      "files": [
+        {
+          "path": "02_reference-packs/patterns/nav-marketing/examples/index.html",
+          "type": "registry:component",
+          "target": "components/quoin/nav-marketing.html"
+        }
+      ]
+    },
+    {
+      "name": "page-header",
+      "type": "registry:component",
+      "title": "Page Header",
+      "description": "Application page title bar with breadcrumb, status badges, and primary / overflow actions.",
+      "categories": ["application"],
+      "registryDependencies": ["button-system"],
+      "files": [
+        {
+          "path": "02_reference-packs/patterns/page-header/examples/index.html",
+          "type": "registry:component",
+          "target": "components/quoin/page-header.html"
+        }
+      ]
+    },
+    {
+      "name": "pricing-tiers",
+      "type": "registry:component",
+      "title": "Pricing Tiers",
+      "description": "Pricing comparison cards with monthly / annual toggle, feature checklist, and per-tier CTA. \"Popular\" badge on featured tier.",
+      "categories": ["marketing"],
+      "registryDependencies": ["button-system"],
+      "files": [
+        {
+          "path": "02_reference-packs/patterns/pricing-tiers/examples/index.html",
+          "type": "registry:component",
+          "target": "components/quoin/pricing-tiers.html"
+        }
+      ]
+    },
+    {
+      "name": "stat-card",
+      "type": "registry:component",
+      "title": "Stat Card",
+      "description": "Numeric stat display with trend indicator, sparkline slot, and optional context label. Tabular numerics enforced.",
+      "categories": ["application", "data"],
+      "files": [
+        {
+          "path": "02_reference-packs/patterns/stat-card/examples/index.html",
+          "type": "registry:component",
+          "target": "components/quoin/stat-card.html"
+        }
+      ]
+    },
+    {
+      "name": "testimonial",
+      "type": "registry:component",
+      "title": "Testimonial",
+      "description": "Customer quote cards — compact / default / featured variants with avatar-stack attribution + 7 microstates.",
+      "categories": ["marketing"],
+      "files": [
+        {
+          "path": "02_reference-packs/patterns/testimonial/examples/index.html",
+          "type": "registry:component",
+          "target": "components/quoin/testimonial.html"
+        }
+      ]
+    },
+    {
+      "name": "toast-notifier",
+      "type": "registry:component",
+      "title": "Toast Notifier",
+      "description": "Toast notification system with stacking, auto-dismiss, action affordance, and live-region announcement.",
+      "categories": ["application", "feedback"],
+      "registryDependencies": ["button-system"],
+      "files": [
+        {
+          "path": "02_reference-packs/patterns/toast-notifier/examples/index.html",
+          "type": "registry:component",
+          "target": "components/quoin/toast-notifier.html"
+        }
+      ]
+    },
+    {
+      "name": "tokens-baseline",
+      "type": "registry:file",
+      "title": "Tokens (Baseline)",
+      "description": "Canonical token namespace — 175 tokens across 11 DTCG 2025.10 types. Surfaces, text, accent + status, spacing, type sizes + leading + tracking, font families (system-stack fallbacks), font weights, radii, focus + shadow, motion + easing. Frozen at v1.0. Load this first; aesthetic packs override on top.",
+      "categories": ["foundation", "tokens"],
+      "files": [
+        {
+          "path": "02_reference-packs/tokens-baseline/tokens.css",
+          "type": "registry:file",
+          "target": "src/styles/quoin-tokens.css"
+        }
+      ]
+    }
+  ]
+}
