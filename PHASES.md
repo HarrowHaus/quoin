@@ -361,7 +361,7 @@ The reframe does not retroactively change Phases 22.6 (Layout Primitives) or 22.
 - **/llms-full.txt** — new "Distribution surfaces (Phase 24.1)" section for AI agent direct consumption.
 - **/registry.json (legacy)** — `_deprecation` block added documenting the deprecation status, deprecation date (2026-05-21), successor URL, supported-through date (2026.12), removal target (2027.x).
 
-**Closure ref:** _this commit_ (2026-05-21).
+**Closure ref:** commit `1c6eb8887eae53f30e22e397931dac3a91c32731` (2026-05-21).
 
 **What unblocks:**
 - **Phase 24.2** (CDN distribution + custom domain) — becomes a polish phase rather than a foundation phase.

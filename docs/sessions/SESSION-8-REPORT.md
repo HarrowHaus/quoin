@@ -12,8 +12,8 @@ This is the session where the Phase 23.1 Editor's Draft becomes consumable rathe
 
 ## Commits
 
-- **`<hash>`** — primary commit shipping all Phase 24.1 deliverables. (Hash filled after push; see follow-up commit.)
-- **`<follow-up>`** — closure-ref hash backfill in PHASES.md + this report.
+- **`1c6eb8887eae53f30e22e397931dac3a91c32731`** — phase-24.1 ships: adoption infrastructure foundation (npm + shadcn registry + MCP). 58 files, +4277/−13.
+- **Follow-up commit** — closure-ref hash backfill in PHASES.md + this report.
 
 ## Shipped
 
