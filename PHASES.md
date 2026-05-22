@@ -388,7 +388,7 @@ The double-enforcement architecture this surfaced is actually a strength: the sc
 - **PHASES.md** — Phase 23.3 entry (this section) + Phase 23.3 outcome section + dependency-graph update.
 - **`spec/examples/README.md` + `spec/tests/README.md`** — line additions noting the new Phase 23.3 example and the new emit/ scaffold respectively.
 
-**Closure ref:** _this commit_ (2026-05-21).
+**Closure ref:** commit `87b29b5ccbc80bf7bc8dfa444851a2aadeb86d7f` (2026-05-21).
 
 **Architectural truths surfaced during emission formalization:**
 

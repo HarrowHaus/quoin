@@ -14,8 +14,8 @@ The Phase 23.1 reference backend L3 conformance claim **holds without revision**
 
 ## Commits
 
-- **`<primary>`** — phase-23.3 ships: §6 formal contract + §4.3 deepened + emission attribution metadata + reference backend verified + emit test scaffold. (Hash filled below.)
-- **`<follow-up>`** — closure-ref hash backfill.
+- **`87b29b5ccbc80bf7bc8dfa444851a2aadeb86d7f`** — phase-23.3 ships: USML §6 backend emission contract formalized. 15 files, +1204/−79.
+- **Follow-up commit** — closure-ref hash backfill in PHASES.md + this report.
 
 ## §6 transformation: sketch → formal contract
 
