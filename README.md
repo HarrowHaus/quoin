@@ -115,6 +115,27 @@ The translation skill is **transitional infrastructure — obsolete by design.**
 - [`docs/translation/anatomy-extraction-rules.md`](docs/translation/anatomy-extraction-rules.md) — per-format extraction procedures including D.7 future native IR ingest.
 - [`docs/translation/quality-gates.md`](docs/translation/quality-gates.md) — 20 acceptance gates ensuring translations meet specification-conformant signal.
 
+## Distribution
+
+USML/Quoin is reachable through three primary surfaces. See [`DISTRIBUTION.md`](DISTRIBUTION.md) for the full canonical documentation.
+
+```bash
+# npm (configuration shipped Phase 24.1; first publication pending operator)
+npm install @harrow-haus/quoin
+
+# shadcn registry (auto-rebuilt on every pack change)
+npx shadcn@latest add \
+  --registry=https://harrowhaus.github.io/quoin/registry/index.json \
+  hero
+
+# MCP server for AI coding agents (Claude Code, Claude Desktop, Cursor, etc.)
+npx @harrow-haus/quoin-mcp
+```
+
+The shadcn registry serves all 38 catalog items (22 patterns + 4 content primitives + 6 layout primitives + 3 aesthetics + 3 templates). Peer-pack composition (e.g., `hero` consumes `button-system`) round-trips through `registryDependencies` — `shadcn add hero` automatically pulls in `button-system`. Aesthetic-pack token overrides round-trip through `cssVars` from the DTCG 2025.10 source format.
+
+The MCP server exposes each catalog item as a resource at `quoin://<kind>/<name>` plus a `find_pattern` search tool. Per-client configuration snippets in [`mcp/README.md`](mcp/README.md).
+
 ## Why Quoin
 
 <!-- TODO: brand-voice value-props section, draft in dedicated brand-voice session -->
@@ -131,7 +152,8 @@ Quoin publishes structured documentation specifically for AI coding tools (Claud
 
 - [`/llms.txt`](llms.txt) — a concise summary of the catalog, the architecture, and how to consume Quoin from generated code. Following the [llmstxt.org](https://llmstxt.org/) convention.
 - [`/llms-full.txt`](llms-full.txt) — full anatomy reference for every pattern (slots, variants, microstates, ARIA contracts, composition lineage). Use this when generating Quoin markup at scale.
-- [`/registry.json`](registry.json) — a shadcn-registry-compatible static endpoint enumerating the 22 patterns + 4 content primitives + 6 layout primitives + the tokens-baseline pack. Lets you wire Quoin into any tool that already speaks shadcn.
+- [`/registry/index.json`](registry/index.json) — **the canonical shadcn-compatible registry** (Phase 24.1). All 38 catalog items with `registryDependencies` resolving across the catalog and `cssVars` for aesthetic packs. Wire into any tool that speaks shadcn.
+- [`/registry.json`](registry.json) — **deprecated as of Phase 24.1**; legacy Quoin-shaped registry retained for backward compatibility through 2026.12. Carries an in-file deprecation notice pointing at `/registry/index.json`.
 
 **Add Quoin to a shadcn-MCP config:**
 

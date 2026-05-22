@@ -1,0 +1,42 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "disclosure",
+  "type": "registry:component",
+  "title": "Disclosure",
+  "description": "Disclosure pattern. A button that toggles the visibility of an associated content region. Foundational expand/collapse anatomy used by accordions, FAQs, settings panels, expand-for-detail surfaces. Translation from W3C ARIA Authoring Practices Guide. Phase 22.7.",
+  "files": [
+    {
+      "path": "patterns/disclosure/quoin.pack.json",
+      "type": "registry:file",
+      "target": "quoin/disclosure/manifest.json"
+    },
+    {
+      "path": "patterns/disclosure/primitives/index.json",
+      "type": "registry:file",
+      "target": "quoin/disclosure/primitives.json"
+    },
+    {
+      "path": "patterns/disclosure/examples/index.html",
+      "type": "registry:file",
+      "target": "quoin/disclosure/examples/index.html"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/pattern-disclosure",
+    "quoinPackVersion": "1.0.0",
+    "usmlVersion": "^0.1.0",
+    "packType": "pattern",
+    "conformanceLevel": "Level 3",
+    "source": {
+      "system": "W3C ARIA Authoring Practices Guide",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/",
+      "license": "W3C-Document-License",
+      "sourcePatternSlug": "disclosure",
+      "captureDate": "2026-05-21",
+      "translationFraming": "transitional — to be retired in favor of native specification publication if ARIA APG publishes Quoin IR for this pattern"
+    },
+    "optionalDependencies": [
+      "stack"
+    ]
+  }
+}

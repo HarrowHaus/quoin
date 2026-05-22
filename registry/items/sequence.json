@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sequence",
+  "type": "registry:component",
+  "title": "Sequence",
+  "description": "Sequence primitive — ordered/contextual list of items with separator + position-semantic state. Variants represent sequence semantics (breadcrumb / ordered-list / unordered-list / sidebar-vertical). Consolidated from inlined breadcrumb + sidebar-section contracts per Phase 22 Cons. 6.",
+  "files": [
+    {
+      "path": "02_reference-packs/primitives/sequence/quoin.pack.json",
+      "type": "registry:file",
+      "target": "quoin/sequence/manifest.json"
+    },
+    {
+      "path": "02_reference-packs/primitives/sequence/primitives/index.json",
+      "type": "registry:file",
+      "target": "quoin/sequence/primitives.json"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/prim-sequence",
+    "quoinPackVersion": "1.0.0",
+    "usmlVersion": "^0.1.0",
+    "packType": "primitive",
+    "conformanceLevel": "Level 3"
+  }
+}

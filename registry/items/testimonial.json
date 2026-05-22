@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "testimonial",
+  "type": "registry:component",
+  "title": "Testimonial",
+  "description": "Testimonial pattern — single card + grid + featured pull-quote variants. Composes avatar-stack for attribution. P0.",
+  "files": [
+    {
+      "path": "02_reference-packs/patterns/testimonial/quoin.pack.json",
+      "type": "registry:file",
+      "target": "quoin/testimonial/manifest.json"
+    },
+    {
+      "path": "02_reference-packs/patterns/testimonial/primitives/index.json",
+      "type": "registry:file",
+      "target": "quoin/testimonial/primitives.json"
+    },
+    {
+      "path": "02_reference-packs/patterns/testimonial/examples/index.html",
+      "type": "registry:file",
+      "target": "quoin/testimonial/examples/index.html"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/pattern-testimonial",
+    "quoinPackVersion": "1.0.0",
+    "usmlVersion": "^0.1.0",
+    "packType": "pattern",
+    "conformanceLevel": "Level 3"
+  }
+}

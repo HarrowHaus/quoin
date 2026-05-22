@@ -1,0 +1,35 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "modal-dialog",
+  "type": "registry:component",
+  "title": "Modal Dialog",
+  "description": "Modal dialogs — alert / form / panel / command (Cmd+K palette). Focus trap, inert background, Escape + backdrop dismiss, restore focus on close. Composes button-system + form-fields.",
+  "files": [
+    {
+      "path": "02_reference-packs/patterns/modal-dialog/quoin.pack.json",
+      "type": "registry:file",
+      "target": "quoin/modal-dialog/manifest.json"
+    },
+    {
+      "path": "02_reference-packs/patterns/modal-dialog/primitives/index.json",
+      "type": "registry:file",
+      "target": "quoin/modal-dialog/primitives.json"
+    },
+    {
+      "path": "02_reference-packs/patterns/modal-dialog/examples/index.html",
+      "type": "registry:file",
+      "target": "quoin/modal-dialog/examples/index.html"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/pattern-modal-dialog",
+    "quoinPackVersion": "1.0.0",
+    "usmlVersion": "^0.1.0",
+    "packType": "pattern",
+    "conformanceLevel": "Level 3"
+  },
+  "registryDependencies": [
+    "button-system",
+    "form-fields"
+  ]
+}

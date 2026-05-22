@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button-system",
+  "type": "registry:component",
+  "title": "Button System",
+  "description": "Full button system — 5 intents (primary/secondary/ghost/destructive/link) × 4 sizes (xs/sm/md/lg) × 8 microstates + button group composition. Foundational P0 pattern.",
+  "files": [
+    {
+      "path": "02_reference-packs/patterns/button-system/quoin.pack.json",
+      "type": "registry:file",
+      "target": "quoin/button-system/manifest.json"
+    },
+    {
+      "path": "02_reference-packs/patterns/button-system/primitives/index.json",
+      "type": "registry:file",
+      "target": "quoin/button-system/primitives.json"
+    },
+    {
+      "path": "02_reference-packs/patterns/button-system/examples/index.html",
+      "type": "registry:file",
+      "target": "quoin/button-system/examples/index.html"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/pattern-button-system",
+    "quoinPackVersion": "1.0.0",
+    "usmlVersion": "^0.1.0",
+    "packType": "pattern",
+    "conformanceLevel": "Level 3"
+  }
+}

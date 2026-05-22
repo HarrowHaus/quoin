@@ -1,0 +1,37 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pricing-tiers",
+  "type": "registry:component",
+  "title": "Pricing Tiers",
+  "description": "Pricing-tiers pattern — 4 tier variants × 3 grid layouts + billing toggle + comparison matrix. First pattern to compose sibling packs (button-system + form-fields + feature-grid).",
+  "files": [
+    {
+      "path": "02_reference-packs/patterns/pricing-tiers/quoin.pack.json",
+      "type": "registry:file",
+      "target": "quoin/pricing-tiers/manifest.json"
+    },
+    {
+      "path": "02_reference-packs/patterns/pricing-tiers/primitives/index.json",
+      "type": "registry:file",
+      "target": "quoin/pricing-tiers/primitives.json"
+    },
+    {
+      "path": "02_reference-packs/patterns/pricing-tiers/examples/index.html",
+      "type": "registry:file",
+      "target": "quoin/pricing-tiers/examples/index.html"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/pattern-pricing-tiers",
+    "quoinPackVersion": "1.0.0",
+    "usmlVersion": "^0.1.0",
+    "packType": "pattern",
+    "conformanceLevel": "Level 3"
+  },
+  "registryDependencies": [
+    "button-system",
+    "form-fields",
+    "feature-grid",
+    "label"
+  ]
+}

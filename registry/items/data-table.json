@@ -1,0 +1,35 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "data-table",
+  "type": "registry:component",
+  "title": "Data Table",
+  "description": "Sortable / filterable / selectable data table — 8 primitives, 3 densities, 7 states. Composes form-fields (search, filters, row selection) + button-system (sort, pagination, bulk).",
+  "files": [
+    {
+      "path": "02_reference-packs/patterns/data-table/quoin.pack.json",
+      "type": "registry:file",
+      "target": "quoin/data-table/manifest.json"
+    },
+    {
+      "path": "02_reference-packs/patterns/data-table/primitives/index.json",
+      "type": "registry:file",
+      "target": "quoin/data-table/primitives.json"
+    },
+    {
+      "path": "02_reference-packs/patterns/data-table/examples/index.html",
+      "type": "registry:file",
+      "target": "quoin/data-table/examples/index.html"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/pattern-data-table",
+    "quoinPackVersion": "1.0.0",
+    "usmlVersion": "^0.1.0",
+    "packType": "pattern",
+    "conformanceLevel": "Level 3"
+  },
+  "registryDependencies": [
+    "button-system",
+    "form-fields"
+  ]
+}

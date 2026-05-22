@@ -1,0 +1,35 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "page-header",
+  "type": "registry:component",
+  "title": "Page Header",
+  "description": "In-app page-header strip below nav-app-chrome. Eyebrow + title + subtitle + breadcrumb + meta + actions. 3 registers × 3 sizes. Composes button-system + avatar-stack.",
+  "files": [
+    {
+      "path": "02_reference-packs/patterns/page-header/quoin.pack.json",
+      "type": "registry:file",
+      "target": "quoin/page-header/manifest.json"
+    },
+    {
+      "path": "02_reference-packs/patterns/page-header/primitives/index.json",
+      "type": "registry:file",
+      "target": "quoin/page-header/primitives.json"
+    },
+    {
+      "path": "02_reference-packs/patterns/page-header/examples/index.html",
+      "type": "registry:file",
+      "target": "quoin/page-header/examples/index.html"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/pattern-page-header",
+    "quoinPackVersion": "1.0.0",
+    "usmlVersion": "^0.1.0",
+    "packType": "pattern",
+    "conformanceLevel": "Level 3"
+  },
+  "registryDependencies": [
+    "button-system",
+    "label"
+  ]
+}

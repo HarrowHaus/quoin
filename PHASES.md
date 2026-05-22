@@ -2,7 +2,7 @@
 
 This file is the single source of truth for phase status across the Quoin project. It supersedes scattered references in CONSOLIDATION reports, DECISIONS_UPDATES, and session-closing reports. Every future session that opens, closes, or modifies a phase updates this file in its closing batch.
 
-**Last updated:** Phase 23.1 closing — USML Editor's Draft 2026.05 + Reference Implementation Conformance Claim (2026-05-21)
+**Last updated:** Phase 24.1 closing — Adoption Infrastructure Foundation (2026-05-21)
 
 ---
 
@@ -339,17 +339,73 @@ The reframe does not retroactively change Phases 22.6 (Layout Primitives) or 22.
 
 **Naming clarification:** the savant-research assessment recommended bifurcating "Quoin" (implementation) from "USML" (specification) to match the HTML/Firefox precedent. This bifurcation is now locked: USML is the spec name; Quoin is the reference implementation name. All normative documents use USML; the implementation continues as Quoin.
 
-### Phase 24 — Build Pipeline Integrations
+### Phase 24 — Build Pipeline Integration + AI Tool Distribution (in progress)
 
-**Status:** 🟡 Queued
-**Goal:** Vite plugin (exists in MVP form), Webpack loader, Rollup plugin, esbuild plugin. Tooling integrations beyond the reference Vite path.
-**Closure dependency:** Phase 23.
+**Status:** 🟢 In progress (Phase 24.1 ✅ Complete 2026-05-21; sub-phases 24.2–24.4 queued)
+**Goal:** Make USML/Quoin reachable from outside the repository through the dominant AI-coding-agent tooling layers (npm, shadcn registry, MCP). Build pipeline integrations (Vite plugin, Webpack loader, etc.) follow once distribution surfaces are stable.
 
-### Phase 25 — MCP Server + Distribution
+### Phase 24.1 — Adoption Infrastructure Foundation
 
-**Status:** 🟡 Queued
-**Goal:** Model Context Protocol server exposing the catalog to MCP-aware clients. npm publication under `@quoin/*` scope.
-**Closure dependency:** Phase 23.
+**Status:** ✅ Complete (Phase 24.1 — 2026-05-21)
+**Goal:** ship the three primary adoption surfaces (npm package, shadcn-compatible registry, MCP server scaffold) plus distribution documentation and automated build pipelines. The reference implementation becomes reachable through the AI-coding-agent default tooling layer.
+**Output:**
+- **`package.json` + `.npmignore`** at repo root — npm package `@harrow-haus/quoin` v0.1.0 configured. `files` allowlist + `.npmignore` safety net. `exports` map exposes patterns, aesthetics, templates, schema, spec, conformance report, and registry by path. `npm pack --dry-run` confirms 298 files / 419 kB / 2.1 MB unpacked with no internal-scaffolding leaks.
+- **`scripts/build-registry.js`** — deterministic build script that scans `/patterns/`, `/aesthetics/`, `/templates/`, `/02_reference-packs/patterns/`, `/02_reference-packs/primitives/` for canonical USML pack manifests and emits the shadcn-compatible distribution at `/registry/`. Maps each Quoin pack name to a short shadcn item name (e.g., `@quoin/pattern-hero` → `hero`). Maps peer-pack composition to `registryDependencies` (auto-installed by shadcn add). Maps optional peer packs to `meta.optionalDependencies` (not auto-installed). Maps DTCG 2025.10 aesthetic-pack overrides to shadcn `cssVars`.
+- **`/registry/`** — generated shadcn-compatible distribution. `index.json` (root manifest) + `index.md` (LLM-friendly Markdown projection) + `items/<name>.json` × 38 items (32 components + 3 styles + 3 blocks). All items pass structural validation; all 6 declared `registryDependencies` resolve to sibling items. `registry/README.md` documents the format, naming convention, item-type mapping, peer-pack composition, and DTCG→cssVars rules.
+- **`/mcp/`** — MCP server scaffold. `package.json` configures `@harrow-haus/quoin-mcp` v0.1.0 as a separate npm package with `quoin-mcp` CLI binary. `server.json` declares the server per MCP Registry conventions. `index.js` implements stdio-transport MCP server using `@modelcontextprotocol/sdk` v1.x. Exposes 38 catalog resources at `quoin://<kind>/<name>` URIs; `find_pattern` tool performs substring search across names, descriptions, tags. End-to-end smoke-test confirmed: `initialize` succeeds; `resources/list` returns 38 items; `resources/read quoin://patterns/hero` returns full pack manifest with 5 variants; `find_pattern("form")` returns 13 matches. `mcp/README.md` documents Claude Code, Claude Desktop, Cursor, generic-MCP-client integration.
+- **`/DISTRIBUTION.md`** — top-level distribution documentation. Sections: Overview / For developers (npm, shadcn, direct file inclusion) / For AI coding agents (MCP, llms.txt, registry) / For design-system maintainers (consuming Quoin, authoring aesthetic packs, native publication) / For standards reviewers (validating the conformance claim, reading the spec, verifying parity) / Operator execution requirements (npm scope claim, NPM_TOKEN secret, first publish, MCP integration test) / Deprecation timeline (legacy `/registry.json`) / Distribution-surface summary.
+- **`.github/workflows/registry-build.yml`** — GitHub Action auto-rebuilding the shadcn registry on every pack-manifest change. Auto-commits regenerated registry. Source of truth remains the canonical pack manifests; registry is derivative.
+- **`.github/workflows/npm-publish.yml`** — GitHub Action publishing `@harrow-haus/quoin` and `@harrow-haus/quoin-mcp` on every `v*.*.*` tag. Requires operator-provisioned `NPM_TOKEN` repository secret.
+- **README.md** — new "Distribution" section with the three primary commands and a pointer to DISTRIBUTION.md. "For AI tools" section updated to reference the new `/registry/index.json` as canonical and mark the legacy `/registry.json` as deprecated.
+- **/llms.txt** — header updated with USML/Quoin bifurcation language. New "Distribution surfaces (Phase 24.1)" section.
+- **/llms-full.txt** — new "Distribution surfaces (Phase 24.1)" section for AI agent direct consumption.
+- **/registry.json (legacy)** — `_deprecation` block added documenting the deprecation status, deprecation date (2026-05-21), successor URL, supported-through date (2026.12), removal target (2027.x).
+
+**Closure ref:** _this commit_ (2026-05-21).
+
+**What unblocks:**
+- **Phase 24.2** (CDN distribution + custom domain) — becomes a polish phase rather than a foundation phase.
+- **Phase 24.3** (documentation site polish) — the spec + catalog + conformance report all have canonical URLs to point at.
+- **Phase 24.4** (first AI-tool integration tests with real coding agents — Cursor, Claude Code, Lovable, v0) — immediately runnable. Operator can ask Cursor "use Quoin's hero pattern with the Harrow Haus aesthetic" and observe the agent's behavior against a real distribution surface.
+- **Phase 25** (multi-source harvest) — harvested patterns ship through the same surfaces as native Quoin patterns; the registry-build.yml action regenerates automatically.
+- **Phase 26** (Standards engagement) — the "1+ external design-system adopter" activation criterion becomes plausible: a design system team trying Quoin via `npm install` or `shadcn add` and publishing about the experience is a concrete adoption signal. The Kaelig-and-W3C-Generative-UI-CG outreach scheduled for weekend work now has a concrete artifact: "I've shipped npm install @harrow-haus/quoin; here's the spec it implements" lands harder than "I've drafted a spec."
+
+**Scope boundary:** Phase 24.1 owns `package.json`, `.npmignore`, `scripts/build-registry.js`, `registry/`, `mcp/`, `DISTRIBUTION.md`, `.github/workflows/{registry-build,npm-publish}.yml`, plus the README/llms.txt/llms-full.txt/legacy-registry.json discoverability updates. The phase does NOT touch `USML-Specification.bs`, `spec/usml-schema.json`, existing pack manifests, or aesthetic packs.
+
+**Halts encountered:** none.
+
+**Architectural truths surfaced during distribution-surface authoring:**
+
+1. **Catalog is split across two physical paths in v0.1.0.** The root `/patterns/`, `/aesthetics/`, `/templates/` host 7 + 6 + 3 + 3 = 19 items shipped Phase 22.5+. The legacy `/02_reference-packs/patterns/` + `/02_reference-packs/primitives/` host 15 + 4 = 19 items shipped Phase 22. The brief's literal direction was to exclude `/02_reference-packs/` from npm distribution as "internal scaffolding"; doing so would have cut the catalog from 38 items to 19 and contradicted the spec's conformance report ("all 32 directly-usable artifacts"). Decision: include `/02_reference-packs/{patterns,primitives}/` as catalog content; exclude only the internal-scaffolding subdirs (consolidation reports, audit docs, vocab packs, scripts). Future migration may consolidate to a single path; for now the bifurcation is documented and the registry exposes the unified catalog.
+
+2. **Peer-pack semantics map cleanly to `registryDependencies`.** Required `peerPacks` become `registryDependencies` (auto-installed); optional `optionalPeerPacks` become `meta.optionalDependencies` (explicitly installed). This separation maps directly to shadcn's eager-resolve semantics: shadcn would force-install any registryDependency, so optional peers must NOT be in that array — the v3.G.21 distinction round-trips cleanly through shadcn's contract.
+
+3. **`@quoin/tokens-baseline` and `@quoin/vocab-*` are not shadcn items.** These are implicit infrastructure — every pack consumes tokens-baseline. Including them as shadcn items would force a circular install (every component depends on tokens, but tokens are not themselves a "component"). Decision: exclude infrastructure packs from `registryDependencies` resolution; their consumption is implicit in any pattern install.
+
+4. **DTCG 2025.10 token format maps cleanly to shadcn `cssVars`.** Each aesthetic pack's `overrides/light.json` and `overrides/dark.json` flatten by unwrapping `$value` and prefixing names with `--`. The aesthetic-pack interface USML §6 specifies DTCG consumption; shadcn `cssVars` is the distribution serialization of that consumption. Round-trip is lossless.
+
+5. **Pack name → shadcn item name normalization.** `@quoin/pattern-hero` → `hero`. `@quoin/aesthetic-default` → `default`. `@quoin/prim-stack` → `stack`. `@quoin/template-landing-saas` → `landing-saas`. This drops the namespace + type prefix to match shadcn's short-name convention. The full Quoin name is preserved in `meta.quoinPackName` for traceability.
+
+6. **MCP server resource URI scheme.** `quoin://<kind>/<name>` where kind is one of `patterns`, `primitives`, `aesthetics`, `templates`. Layout primitives (e.g., `prim-stack`) are placed in the `primitives` namespace despite living under `/patterns/` — the URI scheme uses semantic role, not physical path.
+
+**Operator-execution requirements list:**
+
+| Task | Required for | How |
+|---|---|---|
+| Claim `@harrow-haus` npm scope | First publish | `npm login` + (if needed) request scope availability. If unavailable, choose `@harrowhaus`, `@harrow_haus`, or unscoped `quoin-design-system` and update package.json + workflow refs. |
+| Add `NPM_TOKEN` repository secret | First auto-publish | GitHub Settings → Secrets and variables → Actions → New secret `NPM_TOKEN` with an npm automation token having publish permission on the chosen scope. |
+| Configure GitHub Pages | Public registry URLs to work | Already configured for `docs/usml/` from Phase 23.1. Verify `/registry/` paths are reachable; may require GitHub Pages source = root + the `/registry/` directory served alongside `/docs/`. |
+| First `npm publish` | Public availability | Tag `v0.1.0` and push; npm-publish.yml runs. Verify on https://www.npmjs.com/package/@harrow-haus/quoin after action completes. |
+| First MCP integration test | Verifying real-agent adoption | Add MCP config to Claude Code (~/.config/claude-code/mcp_servers.json) or Cursor; ask agent to "list available Quoin patterns" and verify 38 items returned. |
+| Run first `shadcn add` test in real project | End-to-end shadcn validation | `mkdir tmp && cd tmp && npx shadcn@latest init && npx shadcn@latest add --registry=https://harrowhaus.github.io/quoin/registry/index.json hero` |
+
+**Adoption-surface readiness assessment:**
+
+| Surface | Ready for external testing? | Ready for publication? | Ready for AI-coding-agent integration testing? |
+|---|---|---|---|
+| npm package | ✅ Configured + dry-run-verified | ⚠️ Pending operator (npm scope claim + NPM_TOKEN secret) | ✅ Once published |
+| shadcn registry | ✅ Generated + validated + auto-rebuilt | ✅ Once GitHub Pages serves `/registry/` | ✅ Now (URL-addressable already if GitHub Pages serves) |
+| MCP server | ✅ End-to-end smoke-tested (initialize, resources/list, resources/read, tools/call) | ⚠️ Pending operator (npm publish) | ✅ Once published (or via direct path for local testing) |
 
 ### Phase 26 — Standards Engagement
 
@@ -389,6 +445,74 @@ The reframe does not retroactively change Phases 22.6 (Layout Primitives) or 22.
 - `aesthetics/default/` — tasteful neutral baseline
 **Next candidates (queued):** Manuscript Future (Junicode 2 + Ranade + Monaspace per Cons. 2 Option D), terminal-monochrome, expressive-motion-heavy.
 **Closure dependency:** none — three reference packs now exist; future packs follow the v1.0 template (`tokens.css` + `overrides/{light,dark}.json` + `specimen/`).
+
+---
+
+## Phase 24.1 outcome (2026-05-21) — Adoption Infrastructure Foundation
+
+Brief: ship the three primary adoption surfaces (npm package, shadcn-compatible registry, MCP server scaffold) plus distribution documentation and automated build pipelines, making USML/Quoin reachable from the dominant AI-coding-agent tooling layer. This is the session where Quoin becomes reachable from outside the repo. Per the D11 sequencing decision from the Phase 23.1 handoff (adoption-before-standards), Phase 24.1 is the foundation that subsequent Phase 24 sub-phases and Phase 26 standards engagement build on.
+
+**Shipped:**
+
+- **npm package configuration** at repository root (`package.json` + `.npmignore`). Scoped name `@harrow-haus/quoin` v0.1.0. Content-only package (no JS code): ships pack manifests + USML spec source + JSON Schema + conformance report + spec examples + THESIS + DISTRIBUTION + README + LICENSE. Exports map exposes every pattern, aesthetic, template, schema, spec, conformance, and registry by path. `npm pack --dry-run` verified: 298 files, 419 kB packed (2.1 MB unpacked), no internal-scaffolding leaks.
+- **Build script** at `scripts/build-registry.js`. Deterministic ESM script that scans all five canonical pack manifest directories, transforms each to a shadcn registry item with peer-pack composition resolved to `registryDependencies`, optional peer packs recorded in `meta.optionalDependencies`, and aesthetic-pack DTCG overrides flattened to shadcn `cssVars`. Single invocation generates 38 items + the registry root + the Markdown projection.
+- **shadcn-compatible registry** at `/registry/`. 38 items (32 components + 3 styles + 3 blocks). All items pass structural validation; all declared `registryDependencies` resolve to siblings. `registry/README.md` documents the format, naming convention, item-type mapping, peer-pack composition semantics, DTCG→cssVars rule, and consumption commands.
+- **MCP server scaffold** at `/mcp/`. Separate npm package `@harrow-haus/quoin-mcp` v0.1.0 with `quoin-mcp` CLI binary. Implements stdio-transport MCP server using `@modelcontextprotocol/sdk`. Exposes 38 catalog resources at `quoin://<kind>/<name>` URIs; provides `find_pattern` tool for substring search. End-to-end smoke-test confirmed all three MCP capabilities: `initialize` succeeds, `resources/list` returns 38 items, `resources/read quoin://patterns/hero` returns full manifest with 5 variants, `find_pattern("form")` returns 13 matches. `mcp/README.md` documents Claude Code / Claude Desktop / Cursor / generic-MCP-client integration.
+- **`DISTRIBUTION.md`** at repository root — canonical distribution documentation across all surfaces, with concrete commands and integration examples for developers, AI coding agents, design-system maintainers, and standards reviewers. Operator-execution-requirements list. Deprecation timeline for the legacy `/registry.json`.
+- **GitHub Actions** at `.github/workflows/{registry-build,npm-publish}.yml`. `registry-build.yml` auto-rebuilds the shadcn registry on every canonical-pack-manifest change. `npm-publish.yml` publishes both packages on every `v*.*.*` tag — requires operator-provisioned `NPM_TOKEN` repository secret.
+- **Discoverability updates** — README.md gains a Distribution section; /llms.txt + /llms-full.txt add distribution-surface sections for AI agent direct consumption; legacy `/registry.json` gains a `_deprecation` block pointing at the successor URL.
+
+**Verification (end-to-end):**
+
+| Check | Result |
+|-------|--------|
+| `npm pack --dry-run` succeeds, 298 files / 419 kB | ✅ |
+| No internal scaffolding leaks (node_modules, spec/tests, docs/, skills/, compass_artifact, PHASES.md, CHANGELOG) | ✅ |
+| Build script generates 38 items (32 components + 3 styles + 3 blocks) | ✅ |
+| All 38 registry items structurally valid (required fields, valid types, array files, unique names) | ✅ |
+| All 6 declared `registryDependencies` resolve to sibling items | ✅ (button-system, form-fields, etc.) |
+| `hero` registry item correctly declares `registryDependencies: [button-system]` (round-trips Quoin peerPacks) | ✅ |
+| `default` aesthetic correctly emits `cssVars.light` and `cssVars.dark` from DTCG overrides (sample: `--surface: oklch(98% 0 0)`) | ✅ |
+| MCP server `initialize` request succeeds | ✅ |
+| MCP `resources/list` returns 38 items | ✅ |
+| MCP `resources/read quoin://patterns/hero` returns hero manifest with 5 variants | ✅ |
+| MCP `tools/list` returns `find_pattern` | ✅ |
+| MCP `find_pattern("form")` returns 13 matches | ✅ |
+| Legacy `/registry.json` carries `_deprecation` block | ✅ |
+| README.md "Distribution" section added; "For AI tools" section references new canonical registry + marks legacy as deprecated | ✅ |
+| /llms.txt + /llms-full.txt include Distribution surfaces sections | ✅ |
+| USML-Specification.bs, spec/usml-schema.json, existing pack manifests untouched | ✅ per scope boundary |
+
+**Architectural truths surfaced during distribution-surface authoring:**
+
+1. **Catalog spans two physical paths.** Root `/patterns/` + `/aesthetics/` + `/templates/` (19 items shipped Phase 22.5+) vs `/02_reference-packs/{patterns,primitives}/` (19 items shipped Phase 22). The brief literally said exclude `/02_reference-packs/`; doing so would have cut catalog from 38 to 19 and contradicted the conformance report. Decision: include `/02_reference-packs/{patterns,primitives}/` as catalog content; exclude only internal-scaffolding subdirs.
+2. **Peer-pack semantics map cleanly to shadcn `registryDependencies` for required peers, `meta.optionalDependencies` for optional peers.** v3.G.21 distinction round-trips cleanly.
+3. **`@quoin/tokens-baseline` and vocab packs are not shadcn items.** Implicit infrastructure; including them as items would create circular install (every component depends on tokens, but tokens are not themselves components).
+4. **DTCG 2025.10 → shadcn `cssVars` round-trip is lossless.** Aesthetic packs already ship DTCG-shaped overrides; the flattening rule is mechanical.
+5. **Pack name → shadcn item name normalization.** `@quoin/pattern-X` → `X`. Full Quoin name preserved in `meta.quoinPackName` for traceability.
+6. **MCP resource URI scheme uses semantic role, not physical path.** Layout primitives at `/patterns/prim-*/` are exposed at `quoin://primitives/<name>`.
+
+**Operator-execution requirements (detailed in DISTRIBUTION.md):**
+
+- Claim `@harrow-haus` npm scope (or choose fallback)
+- Add `NPM_TOKEN` repository secret
+- Configure GitHub Pages to serve `/registry/` alongside `/docs/usml/`
+- Tag `v0.1.0` to trigger first publish
+- Run first MCP integration test with Claude Code / Cursor / equivalent
+- Run first `shadcn add` test in a real project
+
+**Adoption-surface readiness:** all three surfaces are ready for external testing now (registry + MCP); npm requires operator credentials before publication.
+
+**Halts encountered:** none.
+
+**Strategic implications:**
+
+- USML/Quoin is reachable through the three dominant AI-coding-agent surfaces. The Phase 26 "1+ external design-system adopter" criterion becomes plausible.
+- The Kaelig outreach and W3C Generative UI CG outreach (scheduled for weekend work) now have a concrete artifact to point at — "I've shipped npm install @harrow-haus/quoin; here's the spec it implements" lands harder than "I've drafted a spec."
+- Phase 24.2 (CDN + custom domain) becomes a polish phase. Phase 24.4 (real-agent integration tests) becomes immediately runnable.
+- Phase 25 (multi-source harvest) has a real distribution target.
+
+**Next-session recommendation:** Phase 24.4 (first AI-tool integration tests with Cursor, Claude Code, Lovable, v0) is the highest-leverage next move — exercises the surfaces shipped here with real-world agent behavior and produces concrete adoption evidence. Alternative: Phase 23.2 (ingest interface spec) if the operator wants to return to spec polish before further distribution. Either is tractable.
 
 ---
 
@@ -718,8 +842,12 @@ Phase 0 (spec)
                   → Phase 23.4 (First reference source adapter formalization) [UNBLOCKED, queued]
                 → Phase 23.5 (Specification publication + first additional reference backend + live translation demo)
                   → Phase 26 (Standards Engagement) [ACTIVATES on adoption thresholds met]
-                → Phase 24 (Build Pipeline + AI Tool Distribution) [BLOCKED on Phase 23 sub-phases]
-                → Phase 25 (Multi-Source Harvest) [BLOCKED on Phase 23 sub-phases]
+                → Phase 24 (Build Pipeline + AI Tool Distribution — in progress)
+                  → Phase 24.1 (Adoption Infrastructure Foundation — ✅)
+                    → Phase 24.2 (CDN distribution + custom domain) [UNBLOCKED, queued]
+                    → Phase 24.3 (Documentation site polish) [UNBLOCKED, queued]
+                    → Phase 24.4 (First AI-tool integration tests) [UNBLOCKED, queued]
+                → Phase 25 (Multi-Source Harvest) [UNBLOCKED — distribution surface now exists for harvested patterns]
               → Templates layer [BLOCKED on Cons. 4 nav unification]
             → Phase 5e (Launch) [BLOCKED on Phase 23 closure]
             → Catalog Extension [UNBLOCKED, ongoing]

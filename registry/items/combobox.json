@@ -1,0 +1,46 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "combobox",
+  "type": "registry:component",
+  "title": "Combobox",
+  "description": "Combobox pattern. A single-line text input paired with a popup listbox of suggestions. The text input is editable; the listbox provides selectable options that filter as the user types (or remain static, depending on variant). Translation from W3C ARIA Authoring Practices Guide. Phase 22.7.",
+  "files": [
+    {
+      "path": "patterns/combobox/quoin.pack.json",
+      "type": "registry:file",
+      "target": "quoin/combobox/manifest.json"
+    },
+    {
+      "path": "patterns/combobox/primitives/index.json",
+      "type": "registry:file",
+      "target": "quoin/combobox/primitives.json"
+    },
+    {
+      "path": "patterns/combobox/examples/index.html",
+      "type": "registry:file",
+      "target": "quoin/combobox/examples/index.html"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/pattern-combobox",
+    "quoinPackVersion": "1.0.0",
+    "usmlVersion": "^0.1.0",
+    "packType": "pattern",
+    "conformanceLevel": "Level 3",
+    "source": {
+      "system": "W3C ARIA Authoring Practices Guide",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/",
+      "license": "W3C-Document-License",
+      "sourcePatternSlug": "combobox",
+      "captureDate": "2026-05-21",
+      "translationFraming": "transitional — to be retired in favor of native specification publication if ARIA APG publishes Quoin IR for this pattern"
+    },
+    "optionalDependencies": [
+      "searchable-list",
+      "label"
+    ]
+  },
+  "registryDependencies": [
+    "form-fields"
+  ]
+}

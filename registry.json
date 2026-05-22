@@ -1,5 +1,15 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "_deprecation": {
+    "status": "deprecated",
+    "deprecatedAt": "2026-05-21",
+    "deprecatedAtPhase": "24.1",
+    "successor": "https://harrowhaus.github.io/quoin/registry/index.json",
+    "successorPath": "/registry/index.json",
+    "supportedThrough": "2026-12",
+    "removalTarget": "2027.x",
+    "note": "This legacy registry remains for backward compatibility. The canonical shadcn-compatible registry now lives at /registry/index.json with all 38 catalog items, peer-pack relationships resolved as registryDependencies, and aesthetic-pack cssVars derived from DTCG 2025.10 overrides. Consumers should migrate before 2027.x. See DISTRIBUTION.md for the migration guide."
+  },
   "name": "quoin",
   "homepage": "https://github.com/harrowhaus/quoin",
   "items": [

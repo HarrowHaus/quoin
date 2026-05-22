@@ -1,0 +1,65 @@
+# Defense-in-depth: exclude everything not in package.json `files` field.
+# Note: `files` in package.json is the allowlist (preferred); .npmignore is the
+# safety net. If a path appears below AND in `files`, `files` wins.
+
+# Internal scaffolding
+00_spec/
+01_compiler/
+03_harvest/
+04_docs/
+05_launch/
+research/
+plans/
+demos/
+docs/
+skills/
+
+# Tests, examples (examples ship through the docs site, not the package)
+spec/tests/
+spec/examples/
+
+# 02_reference-packs internal (only patterns/ and primitives/ subdirs are catalog content; everything else is internal)
+02_reference-packs/CONSOLIDATION*.md
+02_reference-packs/README.md
+02_reference-packs/demos/
+02_reference-packs/icons-reference/
+02_reference-packs/impl-raw-css/
+02_reference-packs/impl-tailwind/
+02_reference-packs/pattern-button-reference/
+02_reference-packs/scripts/
+02_reference-packs/template-blank-reference/
+02_reference-packs/theme-baseline-reference/
+02_reference-packs/themes/
+02_reference-packs/tokens-baseline/
+02_reference-packs/vocab-*/
+02_reference-packs/validate*.js
+
+# MCP server has its own separate npm package
+mcp/
+
+# Build outputs that should not ship
+node_modules/
+*.log
+.DS_Store
+
+# Session artifacts
+PHASES.md
+PHASE_GATES.md
+PHASE_PROMPTS.md
+HANDOFF.md
+CHANGELOG.md
+compass_artifact_*
+
+# Top-level legacy/reference files
+llms.txt
+llms-full.txt
+registry.json
+
+# GitHub workflows
+.github/
+
+# Build script (operator-side; rebuilds happen pre-publish)
+scripts/
+
+# Compass research artifacts (operator-input docs not for distribution)
+compass_artifact_*.md

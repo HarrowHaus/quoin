@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "center",
+  "type": "registry:component",
+  "title": "Center",
+  "description": "Layout primitive — center content within parent on one or both axes. Used by hero content centered in section, modal centered in viewport, empty-state centered in container. Phase 22.6.",
+  "files": [
+    {
+      "path": "patterns/prim-center/quoin.pack.json",
+      "type": "registry:file",
+      "target": "quoin/prim-center/manifest.json"
+    },
+    {
+      "path": "patterns/prim-center/primitives/index.json",
+      "type": "registry:file",
+      "target": "quoin/prim-center/primitives.json"
+    },
+    {
+      "path": "patterns/prim-center/examples/index.html",
+      "type": "registry:file",
+      "target": "quoin/prim-center/examples/index.html"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/prim-center",
+    "quoinPackVersion": "1.0.0",
+    "usmlVersion": "^0.1.0",
+    "packType": "primitive",
+    "conformanceLevel": "Level 3"
+  }
+}

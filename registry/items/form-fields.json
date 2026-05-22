@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "form-fields",
+  "type": "registry:component",
+  "title": "Form Fields",
+  "description": "Form-fields pattern — 9 widget types (text / textarea / select / combobox / checkbox / radio / switch / file / date) × 8 microstates + form-row + form-section composition. P0 foundational.",
+  "files": [
+    {
+      "path": "02_reference-packs/patterns/form-fields/quoin.pack.json",
+      "type": "registry:file",
+      "target": "quoin/form-fields/manifest.json"
+    },
+    {
+      "path": "02_reference-packs/patterns/form-fields/primitives/index.json",
+      "type": "registry:file",
+      "target": "quoin/form-fields/primitives.json"
+    },
+    {
+      "path": "02_reference-packs/patterns/form-fields/examples/index.html",
+      "type": "registry:file",
+      "target": "quoin/form-fields/examples/index.html"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/pattern-form-fields",
+    "quoinPackVersion": "1.0.0",
+    "usmlVersion": "^0.1.0",
+    "packType": "pattern",
+    "conformanceLevel": "Level 3"
+  }
+}

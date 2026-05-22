@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sidebar",
+  "type": "registry:component",
+  "title": "Sidebar",
+  "description": "Layout primitive — sidebar + main content layout that responds to container width via container queries. Used by docs page (TOC sidebar + content), settings page (nav + form), dashboard (nav + main). Phase 22.6.",
+  "files": [
+    {
+      "path": "patterns/prim-sidebar/quoin.pack.json",
+      "type": "registry:file",
+      "target": "quoin/prim-sidebar/manifest.json"
+    },
+    {
+      "path": "patterns/prim-sidebar/primitives/index.json",
+      "type": "registry:file",
+      "target": "quoin/prim-sidebar/primitives.json"
+    },
+    {
+      "path": "patterns/prim-sidebar/examples/index.html",
+      "type": "registry:file",
+      "target": "quoin/prim-sidebar/examples/index.html"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/prim-sidebar",
+    "quoinPackVersion": "1.0.0",
+    "usmlVersion": "^0.1.0",
+    "packType": "primitive",
+    "conformanceLevel": "Level 3"
+  }
+}

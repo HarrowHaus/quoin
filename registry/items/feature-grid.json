@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "feature-grid",
+  "type": "registry:component",
+  "title": "Feature Grid",
+  "description": "Feature-grid pattern — 3-column + 4-tile + 6-tile + bento variants for marketing feature sections. Composes feature-cell primitives. P0.",
+  "files": [
+    {
+      "path": "02_reference-packs/patterns/feature-grid/quoin.pack.json",
+      "type": "registry:file",
+      "target": "quoin/feature-grid/manifest.json"
+    },
+    {
+      "path": "02_reference-packs/patterns/feature-grid/primitives/index.json",
+      "type": "registry:file",
+      "target": "quoin/feature-grid/primitives.json"
+    },
+    {
+      "path": "02_reference-packs/patterns/feature-grid/examples/index.html",
+      "type": "registry:file",
+      "target": "quoin/feature-grid/examples/index.html"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/pattern-feature-grid",
+    "quoinPackVersion": "1.0.0",
+    "usmlVersion": "^0.1.0",
+    "packType": "pattern",
+    "conformanceLevel": "Level 3"
+  }
+}

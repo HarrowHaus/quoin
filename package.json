@@ -1,0 +1,72 @@
+{
+  "name": "@harrow-haus/quoin",
+  "version": "0.1.0",
+  "description": "Reference implementation of USML (UI Semantics Markup Language) 2026.05 — semantic UI patterns with aesthetic-pack and backend-emission interfaces. Catalog: 22 production patterns + 4 content primitives + 6 layout primitives + 3 aesthetic packs + 3 templates.",
+  "type": "module",
+  "keywords": [
+    "design-system",
+    "usml",
+    "ui-components",
+    "design-tokens",
+    "dtcg",
+    "aria",
+    "semantic-ui",
+    "ai-coding",
+    "shadcn-registry",
+    "mcp"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HarrowHaus/quoin.git"
+  },
+  "homepage": "https://harrowhaus.github.io/quoin/",
+  "bugs": {
+    "url": "https://github.com/HarrowHaus/quoin/issues"
+  },
+  "license": "MIT",
+  "author": "Donald Pilger (Harrow Haus) <donald@harrow.haus>",
+  "files": [
+    "patterns/",
+    "aesthetics/",
+    "templates/",
+    "registry/",
+    "02_reference-packs/patterns/",
+    "02_reference-packs/primitives/",
+    "USML-Specification.bs",
+    "spec/usml-schema.json",
+    "spec/conformance-report.md",
+    "spec/examples/",
+    "THESIS.md",
+    "DISTRIBUTION.md",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "default": "./registry/index.json"
+    },
+    "./schema": "./spec/usml-schema.json",
+    "./spec": "./USML-Specification.bs",
+    "./conformance": "./spec/conformance-report.md",
+    "./registry": "./registry/index.json",
+    "./patterns/*": "./patterns/*/quoin.pack.json",
+    "./aesthetics/*": "./aesthetics/*/quoin.pack.json",
+    "./templates/*": "./templates/*/quoin.template.json",
+    "./reference-patterns/*": "./02_reference-packs/patterns/*/quoin.pack.json",
+    "./reference-primitives/*": "./02_reference-packs/primitives/*/quoin.pack.json"
+  },
+  "scripts": {
+    "build:registry": "node scripts/build-registry.js",
+    "verify:schema": "node scripts/verify-schemas.js"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

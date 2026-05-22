@@ -1,0 +1,55 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "nav",
+  "type": "registry:component",
+  "title": "Nav",
+  "description": "Unified nav pattern. Two mandatory slots (section, brand) + 17 conditional slots gated by data-variant. Four variants (marketing / app-chrome / docs / editorial) consolidated from 4 parallel packs per Phase 22 Cons. 4.",
+  "files": [
+    {
+      "path": "02_reference-packs/patterns/nav/quoin.pack.json",
+      "type": "registry:file",
+      "target": "quoin/nav/manifest.json"
+    },
+    {
+      "path": "02_reference-packs/patterns/nav/primitives/index.json",
+      "type": "registry:file",
+      "target": "quoin/nav/primitives.json"
+    },
+    {
+      "path": "02_reference-packs/patterns/nav/examples/app-chrome.html",
+      "type": "registry:file",
+      "target": "quoin/nav/examples/app-chrome.html"
+    },
+    {
+      "path": "02_reference-packs/patterns/nav/examples/docs.html",
+      "type": "registry:file",
+      "target": "quoin/nav/examples/docs.html"
+    },
+    {
+      "path": "02_reference-packs/patterns/nav/examples/editorial.html",
+      "type": "registry:file",
+      "target": "quoin/nav/examples/editorial.html"
+    },
+    {
+      "path": "02_reference-packs/patterns/nav/examples/marketing.html",
+      "type": "registry:file",
+      "target": "quoin/nav/examples/marketing.html"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/pattern-nav",
+    "quoinPackVersion": "1.0.0",
+    "usmlVersion": "^0.1.0",
+    "packType": "pattern",
+    "conformanceLevel": "Level 3",
+    "optionalDependencies": [
+      "label",
+      "sequence"
+    ]
+  },
+  "registryDependencies": [
+    "button-system",
+    "form-fields",
+    "modal-dialog"
+  ]
+}

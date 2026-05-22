@@ -1,0 +1,44 @@
+{
+  "name": "@harrow-haus/quoin-mcp",
+  "version": "0.1.0",
+  "description": "MCP server exposing USML 2026.05 reference implementation (Quoin) patterns as resources and tools for AI coding agents.",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "quoin-mcp": "index.js"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "usml",
+    "quoin",
+    "design-system",
+    "ai-coding"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HarrowHaus/quoin.git",
+    "directory": "mcp"
+  },
+  "homepage": "https://harrowhaus.github.io/quoin/",
+  "bugs": {
+    "url": "https://github.com/HarrowHaus/quoin/issues"
+  },
+  "license": "MIT",
+  "author": "Donald Pilger (Harrow Haus) <donald@harrow.haus>",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "index.js",
+    "server.json",
+    "README.md",
+    "LICENSE"
+  ]
+}

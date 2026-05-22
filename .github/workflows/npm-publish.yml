@@ -1,0 +1,70 @@
+name: Publish to npm
+
+# Publishes @harrow-haus/quoin (the catalog) and @harrow-haus/quoin-mcp
+# (the MCP server) to npm on every git tag matching v*.*.*.
+#
+# REQUIRED REPOSITORY SECRET: NPM_TOKEN
+# Operator must add this manually before the first run:
+#   Repository Settings → Secrets and variables → Actions → New secret
+#   Name: NPM_TOKEN
+#   Value: an npm automation token with publish permission on @harrow-haus/*
+#
+# Phase 24.1.
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  publish-catalog:
+    name: Publish @harrow-haus/quoin
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Rebuild registry (deterministic)
+        run: node scripts/build-registry.js
+
+      - name: Verify package contents
+        run: npm pack --dry-run
+
+      - name: Publish
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  publish-mcp:
+    name: Publish @harrow-haus/quoin-mcp
+    runs-on: ubuntu-latest
+    needs: publish-catalog
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Verify MCP package contents
+        working-directory: mcp
+        run: npm pack --dry-run
+
+      - name: Publish MCP server
+        working-directory: mcp
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

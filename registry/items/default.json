@@ -1,0 +1,72 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "default",
+  "type": "registry:style",
+  "title": "Default",
+  "description": "Tasteful neutral aesthetic. Neutral grays + single accent (deep blue). Inter Variable + IBM Plex Mono. Standard easings, no opinion. Intentionally low-character — serves as the comparison baseline against which more opinionated aesthetics (Boeing Watch, Harrow Haus) look distinctive.",
+  "files": [
+    {
+      "path": "aesthetics/default/quoin.pack.json",
+      "type": "registry:file",
+      "target": "quoin/default/manifest.json"
+    },
+    {
+      "path": "aesthetics/default/tokens.css",
+      "type": "registry:file",
+      "target": "quoin/default/tokens.css"
+    },
+    {
+      "path": "aesthetics/default/overrides/dark.json",
+      "type": "registry:file",
+      "target": "quoin/default/overrides/dark.json"
+    },
+    {
+      "path": "aesthetics/default/overrides/light.json",
+      "type": "registry:file",
+      "target": "quoin/default/overrides/light.json"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/aesthetic-default",
+    "quoinPackVersion": "1.0.0",
+    "usmlVersion": "^0.1.0",
+    "packType": "aesthetic",
+    "conformanceLevel": "Full"
+  },
+  "cssVars": {
+    "light": {
+      "--surface": "oklch(98% 0 0)",
+      "--surface-elevated": "oklch(100% 0 0)",
+      "--surface-recessed": "oklch(95% 0 0)",
+      "--text": "oklch(28% 0 0)",
+      "--text-emphasis": "oklch(15% 0 0)",
+      "--text-recede": "oklch(50% 0 0)",
+      "--text-on-accent": "oklch(100% 0 0)",
+      "--border": "oklch(88% 0 0)",
+      "--border-emphasis": "oklch(18% 0 0)",
+      "--accent": "oklch(55% 0.18 245)",
+      "--accent-recede": "oklch(92% 0.04 245)",
+      "--critical": "oklch(58% 0.22 28)",
+      "--warning": "oklch(75% 0.18 80)",
+      "--success": "oklch(58% 0.18 155)",
+      "--info": "oklch(60% 0.14 235)",
+      "--focus-ring": "oklch(55% 0.18 245)",
+      "--font-sans": "'Inter Variable', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
+      "--font-display": "'Inter Variable', 'Inter', system-ui, sans-serif",
+      "--font-mono": "'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",
+      "--radius-md": "6px",
+      "--radius-card": "8px"
+    },
+    "dark": {
+      "--surface": "oklch(11% 0 0)",
+      "--surface-elevated": "oklch(16% 0 0)",
+      "--surface-recessed": "oklch(8% 0 0)",
+      "--text": "oklch(88% 0 0)",
+      "--text-emphasis": "oklch(98% 0 0)",
+      "--text-recede": "oklch(62% 0 0)",
+      "--border": "oklch(22% 0 0)",
+      "--border-emphasis": "oklch(88% 0 0)",
+      "--accent": "oklch(70% 0.18 245)"
+    }
+  }
+}

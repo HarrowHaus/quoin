@@ -1,0 +1,79 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "harrow-haus",
+  "type": "registry:style",
+  "title": "Harrow Haus",
+  "description": "Harrow Haus house aesthetic. Post-industrial minimalism with editorial roots: paper #f4efe6 ground, ink #1d1a16 figure, signal red #7a2f22 reserved. Junicode 2 + Source Serif 4 + IBM Plex Mono + Recursive typography stack. Restrained motion (no spring overshoot, no iOS snap). Generous outer margins via Van de Graaf canon-informed proportions.",
+  "files": [
+    {
+      "path": "aesthetics/harrow-haus/quoin.pack.json",
+      "type": "registry:file",
+      "target": "quoin/harrow-haus/manifest.json"
+    },
+    {
+      "path": "aesthetics/harrow-haus/tokens.css",
+      "type": "registry:file",
+      "target": "quoin/harrow-haus/tokens.css"
+    },
+    {
+      "path": "aesthetics/harrow-haus/overrides/dark.json",
+      "type": "registry:file",
+      "target": "quoin/harrow-haus/overrides/dark.json"
+    },
+    {
+      "path": "aesthetics/harrow-haus/overrides/light.json",
+      "type": "registry:file",
+      "target": "quoin/harrow-haus/overrides/light.json"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/aesthetic-harrow-haus",
+    "quoinPackVersion": "1.0.0",
+    "usmlVersion": "^0.1.0",
+    "packType": "aesthetic",
+    "conformanceLevel": "Full"
+  },
+  "cssVars": {
+    "light": {
+      "--surface": "oklch(94.5% 0.015 80)",
+      "--surface-elevated": "oklch(97% 0.010 80)",
+      "--surface-recessed": "oklch(90% 0.020 80)",
+      "--text": "oklch(15% 0.008 60)",
+      "--text-emphasis": "oklch(10% 0.006 60)",
+      "--text-recede": "oklch(40% 0.012 60)",
+      "--text-on-accent": "oklch(94.5% 0.015 80)",
+      "--border": "oklch(80% 0.018 70)",
+      "--border-emphasis": "oklch(15% 0.008 60)",
+      "--accent": "oklch(38% 0.13 25)",
+      "--accent-recede": "oklch(88% 0.04 25)",
+      "--critical": "oklch(38% 0.13 25)",
+      "--warning": "oklch(68% 0.12 70)",
+      "--success": "oklch(48% 0.10 145)",
+      "--info": "oklch(45% 0.08 245)",
+      "--focus-ring": "oklch(38% 0.13 25)",
+      "--font-display": "'Junicode 2', 'Junicode', 'Source Serif 4', ui-serif, Georgia, serif",
+      "--font-serif": "'Source Serif 4', 'Source Serif Pro', ui-serif, Georgia, serif",
+      "--font-sans": "'Recursive', 'Inter Variable', 'Inter', system-ui, sans-serif",
+      "--font-mono": "'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace",
+      "--space-panel": "3rem",
+      "--space-section": "6rem",
+      "--radius-md": "2px",
+      "--radius-card": "2px",
+      "--motion-fast": "160ms",
+      "--motion-normal": "240ms",
+      "--motion-slow": "360ms"
+    },
+    "dark": {
+      "--surface": "oklch(15% 0.008 60)",
+      "--surface-elevated": "oklch(20% 0.012 60)",
+      "--surface-recessed": "oklch(10% 0.006 60)",
+      "--text": "oklch(88% 0.012 80)",
+      "--text-emphasis": "oklch(96% 0.010 80)",
+      "--text-recede": "oklch(60% 0.012 70)",
+      "--border": "oklch(28% 0.012 60)",
+      "--border-emphasis": "oklch(88% 0.012 80)",
+      "--accent": "oklch(58% 0.18 28)",
+      "--accent-recede": "oklch(28% 0.08 28)"
+    }
+  }
+}

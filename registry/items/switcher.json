@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "switcher",
+  "type": "registry:component",
+  "title": "Switcher",
+  "description": "Layout primitive — switch from row to column when container width drops below a threshold. Used for two-column heroes that go single-column, side-by-side comparisons that stack, any responsive 'side by side or stacked' composition. Phase 22.6.",
+  "files": [
+    {
+      "path": "patterns/prim-switcher/quoin.pack.json",
+      "type": "registry:file",
+      "target": "quoin/prim-switcher/manifest.json"
+    },
+    {
+      "path": "patterns/prim-switcher/primitives/index.json",
+      "type": "registry:file",
+      "target": "quoin/prim-switcher/primitives.json"
+    },
+    {
+      "path": "patterns/prim-switcher/examples/index.html",
+      "type": "registry:file",
+      "target": "quoin/prim-switcher/examples/index.html"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/prim-switcher",
+    "quoinPackVersion": "1.0.0",
+    "usmlVersion": "^0.1.0",
+    "packType": "primitive",
+    "conformanceLevel": "Level 3"
+  }
+}

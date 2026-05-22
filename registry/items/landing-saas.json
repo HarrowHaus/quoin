@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "landing-saas",
+  "type": "registry:block",
+  "title": "Landing Saas",
+  "description": "Six-section SaaS landing page: nav (marketing) + hero (type-only) + feature-grid + testimonial + pricing-tiers + footer-mega. Composes currently-shipped patterns; aesthetically neutral by default.",
+  "files": [
+    {
+      "path": "templates/landing-saas/quoin.template.json",
+      "type": "registry:file",
+      "target": "quoin/landing-saas/manifest.json"
+    },
+    {
+      "path": "templates/landing-saas/index.html",
+      "type": "registry:file",
+      "target": "quoin/landing-saas/index.html"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/template-landing-saas",
+    "quoinPackVersion": "1.0.0",
+    "usmlVersion": "^0.1.0",
+    "packType": "template",
+    "conformanceLevel": "Level 3"
+  }
+}

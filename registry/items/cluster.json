@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "cluster",
+  "type": "registry:component",
+  "title": "Cluster",
+  "description": "Layout primitive — horizontal grouping with wrapping. Universal for nav links, button groups, tag clouds, action bars, breadcrumbs. Phase 22.6 layout-primitive layer.",
+  "files": [
+    {
+      "path": "patterns/prim-cluster/quoin.pack.json",
+      "type": "registry:file",
+      "target": "quoin/prim-cluster/manifest.json"
+    },
+    {
+      "path": "patterns/prim-cluster/primitives/index.json",
+      "type": "registry:file",
+      "target": "quoin/prim-cluster/primitives.json"
+    },
+    {
+      "path": "patterns/prim-cluster/examples/index.html",
+      "type": "registry:file",
+      "target": "quoin/prim-cluster/examples/index.html"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/prim-cluster",
+    "quoinPackVersion": "1.0.0",
+    "usmlVersion": "^0.1.0",
+    "packType": "primitive",
+    "conformanceLevel": "Level 3"
+  }
+}

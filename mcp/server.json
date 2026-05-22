@@ -1,0 +1,46 @@
+{
+  "$schema": "https://modelcontextprotocol.io/schema/server.json",
+  "name": "quoin-mcp",
+  "displayName": "Quoin (USML reference implementation)",
+  "description": "MCP server exposing USML 2026.05 reference implementation (Quoin) patterns, aesthetic packs, and templates as resources for AI coding agents. Exposes 38 catalog items: 22 production patterns + 4 content primitives + 6 layout primitives + 3 aesthetic packs + 3 templates.",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HarrowHaus/quoin",
+    "subdir": "mcp"
+  },
+  "license": "MIT",
+  "homepage": "https://harrowhaus.github.io/quoin/",
+  "author": {
+    "name": "Donald Pilger",
+    "url": "https://harrow.haus"
+  },
+  "runtime": {
+    "type": "node",
+    "version": ">=18"
+  },
+  "entry": "index.js",
+  "command": "quoin-mcp",
+  "transport": {
+    "type": "stdio",
+    "default": true
+  },
+  "capabilities": {
+    "resources": {
+      "description": "Each Quoin pattern, aesthetic pack, and template is exposed as an MCP resource. Resource URIs use the `quoin://` scheme.",
+      "uriPattern": "quoin://(patterns|aesthetics|templates|primitives)/<name>"
+    },
+    "tools": {
+      "find_pattern": {
+        "description": "Search the Quoin catalog by name or description substring. Returns matching pattern/aesthetic/template names with their URIs."
+      }
+    }
+  },
+  "tags": [
+    "design-system",
+    "usml",
+    "ui-components",
+    "ai-coding",
+    "semantic-ui"
+  ]
+}

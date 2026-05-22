@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "blog-with-prose",
+  "type": "registry:block",
+  "title": "Blog With Prose",
+  "description": "Long-form blog post template. Composes nav (editorial variant) + page-header + article-meta + prose-body + pull-quote + figure-with-caption + footnote + footer-mega. SCAFFOLD ONLY — full composition lands after Track B (prose-body, pull-quote, figure-with-caption) ships.",
+  "files": [
+    {
+      "path": "templates/blog-with-prose/quoin.template.json",
+      "type": "registry:file",
+      "target": "quoin/blog-with-prose/manifest.json"
+    },
+    {
+      "path": "templates/blog-with-prose/index.html",
+      "type": "registry:file",
+      "target": "quoin/blog-with-prose/index.html"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/template-blog-with-prose",
+    "quoinPackVersion": "0.1.0-scaffold",
+    "usmlVersion": "^0.1.0",
+    "packType": "template",
+    "conformanceLevel": "Level 3"
+  }
+}

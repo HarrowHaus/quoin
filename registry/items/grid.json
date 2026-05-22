@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "grid",
+  "type": "registry:component",
+  "title": "Grid",
+  "description": "Layout primitive — auto-fit grid with min-width per cell. Foundation for any card-grid surface (feature-grid, pricing-tiers, future product grids). Cells wrap responsively without media queries. Phase 22.6.",
+  "files": [
+    {
+      "path": "patterns/prim-grid/quoin.pack.json",
+      "type": "registry:file",
+      "target": "quoin/prim-grid/manifest.json"
+    },
+    {
+      "path": "patterns/prim-grid/primitives/index.json",
+      "type": "registry:file",
+      "target": "quoin/prim-grid/primitives.json"
+    },
+    {
+      "path": "patterns/prim-grid/examples/index.html",
+      "type": "registry:file",
+      "target": "quoin/prim-grid/examples/index.html"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/prim-grid",
+    "quoinPackVersion": "1.0.0",
+    "usmlVersion": "^0.1.0",
+    "packType": "primitive",
+    "conformanceLevel": "Level 3"
+  }
+}

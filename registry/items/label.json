@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "label",
+  "type": "registry:component",
+  "title": "Label",
+  "description": "Label primitive — single bounded text with optional icon and optional dismiss affordance. Variants represent semantic role (badge / status / tag / chip / dismissible). Promoted from inlined badge / status-pill contracts across hero, pricing-tiers, nav, page-header per Phase 22 Cons. 5.",
+  "files": [
+    {
+      "path": "02_reference-packs/primitives/label/quoin.pack.json",
+      "type": "registry:file",
+      "target": "quoin/label/manifest.json"
+    },
+    {
+      "path": "02_reference-packs/primitives/label/primitives/index.json",
+      "type": "registry:file",
+      "target": "quoin/label/primitives.json"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/prim-label",
+    "quoinPackVersion": "1.0.0",
+    "usmlVersion": "^0.1.0",
+    "packType": "primitive",
+    "conformanceLevel": "Level 3"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "stack",
+  "type": "registry:component",
+  "title": "Stack",
+  "description": "Layout primitive — vertical stack of children with consistent gap between them. Universal foundation for any vertical content composition. Phase 22.6 layout-primitive layer.",
+  "files": [
+    {
+      "path": "patterns/prim-stack/quoin.pack.json",
+      "type": "registry:file",
+      "target": "quoin/prim-stack/manifest.json"
+    },
+    {
+      "path": "patterns/prim-stack/primitives/index.json",
+      "type": "registry:file",
+      "target": "quoin/prim-stack/primitives.json"
+    },
+    {
+      "path": "patterns/prim-stack/examples/index.html",
+      "type": "registry:file",
+      "target": "quoin/prim-stack/examples/index.html"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/prim-stack",
+    "quoinPackVersion": "1.0.0",
+    "usmlVersion": "^0.1.0",
+    "packType": "primitive",
+    "conformanceLevel": "Level 3"
+  }
+}

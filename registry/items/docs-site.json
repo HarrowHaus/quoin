@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "docs-site",
+  "type": "registry:block",
+  "title": "Docs Site",
+  "description": "Docs site template. Two-column layout: sticky TOC sidebar + main content. Composes nav (docs variant) + page-header + prose-body + code-block + prose-aside + table-of-contents + footer-mega. SCAFFOLD ONLY — full composition lands after Track B (prose-body, code-block) ships.",
+  "files": [
+    {
+      "path": "templates/docs-site/quoin.template.json",
+      "type": "registry:file",
+      "target": "quoin/docs-site/manifest.json"
+    },
+    {
+      "path": "templates/docs-site/index.html",
+      "type": "registry:file",
+      "target": "quoin/docs-site/index.html"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/template-docs-site",
+    "quoinPackVersion": "0.1.0-scaffold",
+    "usmlVersion": "^0.1.0",
+    "packType": "template",
+    "conformanceLevel": "Level 3"
+  }
+}

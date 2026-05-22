@@ -1,0 +1,57 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "hero",
+  "type": "registry:component",
+  "title": "Hero",
+  "description": "Unified hero pattern. Six mandatory slots (section / eyebrow / headline / subhead / actions / meta) + five conditional slots (accent / background / media / overlay / controls) gated by five variants (type-only / animated / gradient-mesh / brand-photo / video). Consolidates the five parallel hero packs that shipped pre-Cons.3.",
+  "files": [
+    {
+      "path": "02_reference-packs/patterns/hero/quoin.pack.json",
+      "type": "registry:file",
+      "target": "quoin/hero/manifest.json"
+    },
+    {
+      "path": "02_reference-packs/patterns/hero/primitives/index.json",
+      "type": "registry:file",
+      "target": "quoin/hero/primitives.json"
+    },
+    {
+      "path": "02_reference-packs/patterns/hero/examples/animated.html",
+      "type": "registry:file",
+      "target": "quoin/hero/examples/animated.html"
+    },
+    {
+      "path": "02_reference-packs/patterns/hero/examples/brand-photo.html",
+      "type": "registry:file",
+      "target": "quoin/hero/examples/brand-photo.html"
+    },
+    {
+      "path": "02_reference-packs/patterns/hero/examples/gradient-mesh.html",
+      "type": "registry:file",
+      "target": "quoin/hero/examples/gradient-mesh.html"
+    },
+    {
+      "path": "02_reference-packs/patterns/hero/examples/type-only.html",
+      "type": "registry:file",
+      "target": "quoin/hero/examples/type-only.html"
+    },
+    {
+      "path": "02_reference-packs/patterns/hero/examples/video.html",
+      "type": "registry:file",
+      "target": "quoin/hero/examples/video.html"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/pattern-hero",
+    "quoinPackVersion": "1.0.0",
+    "usmlVersion": "^0.1.0",
+    "packType": "pattern",
+    "conformanceLevel": "Level 3",
+    "optionalDependencies": [
+      "label"
+    ]
+  },
+  "registryDependencies": [
+    "button-system"
+  ]
+}

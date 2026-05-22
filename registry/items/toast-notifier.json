@@ -1,0 +1,34 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "toast-notifier",
+  "type": "registry:component",
+  "title": "Toast Notifier",
+  "description": "Toast notifications — aria-live region for transient app status. 4 tones × 6 positions × auto-dismiss / persistent. Pauses on hover + focus per WCAG 2.2.1. Composes button-system.",
+  "files": [
+    {
+      "path": "02_reference-packs/patterns/toast-notifier/quoin.pack.json",
+      "type": "registry:file",
+      "target": "quoin/toast-notifier/manifest.json"
+    },
+    {
+      "path": "02_reference-packs/patterns/toast-notifier/primitives/index.json",
+      "type": "registry:file",
+      "target": "quoin/toast-notifier/primitives.json"
+    },
+    {
+      "path": "02_reference-packs/patterns/toast-notifier/examples/index.html",
+      "type": "registry:file",
+      "target": "quoin/toast-notifier/examples/index.html"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/pattern-toast-notifier",
+    "quoinPackVersion": "1.0.0",
+    "usmlVersion": "^0.1.0",
+    "packType": "pattern",
+    "conformanceLevel": "Level 3"
+  },
+  "registryDependencies": [
+    "button-system"
+  ]
+}

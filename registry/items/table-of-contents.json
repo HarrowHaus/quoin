@@ -1,0 +1,34 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "table-of-contents",
+  "type": "registry:component",
+  "title": "Table Of Contents",
+  "description": "Table of contents for long-form articles or docs. Three position variants (sticky-side · inline-top · floating-overlay), three depth registers (h1-h2 / h1-h3 / h1-h6). Active-section detection via IntersectionObserver on heading elements. Composes prim-sequence for the list rendering.",
+  "files": [
+    {
+      "path": "patterns/table-of-contents/quoin.pack.json",
+      "type": "registry:file",
+      "target": "quoin/table-of-contents/manifest.json"
+    },
+    {
+      "path": "patterns/table-of-contents/primitives/index.json",
+      "type": "registry:file",
+      "target": "quoin/table-of-contents/primitives.json"
+    },
+    {
+      "path": "patterns/table-of-contents/examples/index.html",
+      "type": "registry:file",
+      "target": "quoin/table-of-contents/examples/index.html"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/pattern-table-of-contents",
+    "quoinPackVersion": "1.0.0",
+    "usmlVersion": "^0.1.0",
+    "packType": "pattern",
+    "conformanceLevel": "Level 3"
+  },
+  "registryDependencies": [
+    "sequence"
+  ]
+}

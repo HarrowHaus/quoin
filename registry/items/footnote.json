@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "footnote",
+  "type": "registry:component",
+  "title": "Footnote",
+  "description": "Editorial footnote pattern. Inline trigger that reveals footnote content via four position variants (sidenote-margin · footnote-bottom · popup-on-hover · popup-on-click). Sidenote-margin variant uses CSS Anchor Positioning (Baseline January 2026); polyfill via OddBird's css-anchor-positioning for older browsers.",
+  "files": [
+    {
+      "path": "patterns/footnote/quoin.pack.json",
+      "type": "registry:file",
+      "target": "quoin/footnote/manifest.json"
+    },
+    {
+      "path": "patterns/footnote/primitives/index.json",
+      "type": "registry:file",
+      "target": "quoin/footnote/primitives.json"
+    },
+    {
+      "path": "patterns/footnote/examples/index.html",
+      "type": "registry:file",
+      "target": "quoin/footnote/examples/index.html"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/pattern-footnote",
+    "quoinPackVersion": "1.0.0",
+    "usmlVersion": "^0.1.0",
+    "packType": "pattern",
+    "conformanceLevel": "Level 3"
+  }
+}

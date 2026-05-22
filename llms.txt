@@ -1,6 +1,6 @@
 # Quoin
 
-> Quoin is a **specification for UI semantics, with a reference implementation in HTML and CSS** that demonstrates the specification works in practice. Write `<section data-pattern="hero-section" data-variant="type-only">` instead of a 12-class utility soup. 22 patterns + 4 content primitives + 6 layout primitives, declared anatomy, ARIA contracts and microstates baked in, aesthetic swappable. Read [`THESIS.md`](THESIS.md) for the strategic framing.
+> USML (UI Semantics Markup Language) is the specification; Quoin is the reference implementation. Write `<section data-pattern="hero-section" data-variant="type-only">` instead of a 12-class utility soup. 22 patterns + 4 content primitives + 6 layout primitives, declared anatomy, ARIA contracts and microstates baked in, aesthetic swappable. Read [`THESIS.md`](THESIS.md) for the strategic framing. Distribution surfaces shipped Phase 24.1: `npm install @harrow-haus/quoin`, shadcn registry at `https://harrowhaus.github.io/quoin/registry/index.json`, MCP server `@harrow-haus/quoin-mcp`. See [`DISTRIBUTION.md`](DISTRIBUTION.md).
 
 Quoin treats markup like type. Each pattern is a slot-and-variant contract — `hero-section` has 6 mandatory slots (`eyebrow / headline / subhead / actions / meta` + the section itself) plus 5 conditional slots gated by `data-variant`. The visual identity lives in a separable aesthetic layer; the same markup renders correctly across vellum, terminal, broadsheet, arcade, or any 2026-era aesthetic pack.
 
@@ -132,6 +132,18 @@ Seven locks in force as of Phase 22 closure — see [`PHASE_GATES.md`](PHASE_GAT
 - v3.G.19 — pack code lives once; examples demonstrate variants (documented)
 - v3.G.20 — variants in pattern packs; values in aesthetic packs (documented)
 - v3.G.21 — optionalPeerPacks convention for variant-conditional composition (documented + programmatic)
+
+## Distribution surfaces (Phase 24.1)
+
+USML/Quoin is reachable from outside the repo through three primary surfaces:
+
+- **npm:** `npm install @harrow-haus/quoin` ships the full catalog + USML draft + schema + conformance report. Use `@harrow-haus/quoin-mcp` for the MCP server.
+- **shadcn registry:** [`/registry/index.json`](https://harrowhaus.github.io/quoin/registry/index.json) — shadcn-compatible distribution with 38 items, peer-pack composition preserved as `registryDependencies`, aesthetic packs emit `cssVars` from DTCG 2025.10 sources. Auto-rebuilt on every pack change via [`.github/workflows/registry-build.yml`](https://github.com/HarrowHaus/quoin/blob/main/.github/workflows/registry-build.yml).
+- **MCP server (`@harrow-haus/quoin-mcp`):** stdio transport. Resources `quoin://<kind>/<name>` for each catalog item. `find_pattern` tool for substring search. Per-client configuration for Claude Code, Claude Desktop, Cursor in [`mcp/README.md`](https://github.com/HarrowHaus/quoin/blob/main/mcp/README.md).
+
+Canonical distribution documentation: [`/DISTRIBUTION.md`](https://github.com/HarrowHaus/quoin/blob/main/DISTRIBUTION.md).
+
+Legacy `/registry.json` is deprecated as of Phase 24.1. Migrate to `/registry/index.json`. Legacy file supported through 2026.12.
 
 ## Translation skill + source registry
 

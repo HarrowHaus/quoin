@@ -1,0 +1,35 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "footer-mega",
+  "type": "registry:component",
+  "title": "Footer Mega",
+  "description": "Universal marketing footer — brand block + multi-column link grid + newsletter + legal row. 4 variants (minimal/default/mega/compact). Composes form-fields + button-system siblings.",
+  "files": [
+    {
+      "path": "02_reference-packs/patterns/footer-mega/quoin.pack.json",
+      "type": "registry:file",
+      "target": "quoin/footer-mega/manifest.json"
+    },
+    {
+      "path": "02_reference-packs/patterns/footer-mega/primitives/index.json",
+      "type": "registry:file",
+      "target": "quoin/footer-mega/primitives.json"
+    },
+    {
+      "path": "02_reference-packs/patterns/footer-mega/examples/index.html",
+      "type": "registry:file",
+      "target": "quoin/footer-mega/examples/index.html"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/pattern-footer-mega",
+    "quoinPackVersion": "1.0.0",
+    "usmlVersion": "^0.1.0",
+    "packType": "pattern",
+    "conformanceLevel": "Level 3"
+  },
+  "registryDependencies": [
+    "button-system",
+    "form-fields"
+  ]
+}

@@ -1,0 +1,60 @@
+name: Build shadcn registry
+
+# Regenerates /registry/index.json + /registry/items/*.json from the
+# canonical USML pack manifests at /patterns/, /aesthetics/, /templates/,
+# and /02_reference-packs/{patterns,primitives}/ whenever any pack changes.
+#
+# Phase 24.1.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "patterns/**/quoin.pack.json"
+      - "patterns/**/primitives/**"
+      - "patterns/**/examples/**"
+      - "patterns/**/tokens.css"
+      - "aesthetics/**/quoin.pack.json"
+      - "aesthetics/**/overrides/**"
+      - "aesthetics/**/tokens.css"
+      - "templates/**/quoin.template.json"
+      - "templates/**/index.html"
+      - "02_reference-packs/patterns/**/quoin.pack.json"
+      - "02_reference-packs/patterns/**/primitives/**"
+      - "02_reference-packs/patterns/**/examples/**"
+      - "02_reference-packs/primitives/**/quoin.pack.json"
+      - "02_reference-packs/primitives/**/primitives/**"
+      - "scripts/build-registry.js"
+      - ".github/workflows/registry-build.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Regenerate registry
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Build registry
+        run: node scripts/build-registry.js
+
+      - name: Commit registry changes
+        run: |
+          if [ -n "$(git status --porcelain registry/)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add registry/
+            git commit -m "ci: rebuild shadcn registry [skip ci]"
+            git push
+          else
+            echo "No registry changes."
+          fi

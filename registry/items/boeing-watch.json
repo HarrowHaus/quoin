@@ -1,0 +1,81 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "boeing-watch",
+  "type": "registry:style",
+  "title": "Boeing Watch",
+  "description": "Precision-instrumental aesthetic. Aerospace cockpit feel: deep navy panel ground, signal amber accent reserved for live indicators, instrument cream surfaces, control gray for chrome. IBM Plex Sans + IBM Plex Mono typography stack. Tight density per instrument-panel discipline. D.65 Boeing Watch primitives target this pack.",
+  "files": [
+    {
+      "path": "aesthetics/boeing-watch/quoin.pack.json",
+      "type": "registry:file",
+      "target": "quoin/boeing-watch/manifest.json"
+    },
+    {
+      "path": "aesthetics/boeing-watch/tokens.css",
+      "type": "registry:file",
+      "target": "quoin/boeing-watch/tokens.css"
+    },
+    {
+      "path": "aesthetics/boeing-watch/overrides/dark.json",
+      "type": "registry:file",
+      "target": "quoin/boeing-watch/overrides/dark.json"
+    },
+    {
+      "path": "aesthetics/boeing-watch/overrides/light.json",
+      "type": "registry:file",
+      "target": "quoin/boeing-watch/overrides/light.json"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/aesthetic-boeing-watch",
+    "quoinPackVersion": "1.0.0",
+    "usmlVersion": "^0.1.0",
+    "packType": "aesthetic",
+    "conformanceLevel": "Full"
+  },
+  "cssVars": {
+    "light": {
+      "--surface": "oklch(94% 0.014 85)",
+      "--surface-elevated": "oklch(96.5% 0.010 85)",
+      "--surface-recessed": "oklch(90% 0.018 85)",
+      "--text": "oklch(22% 0.04 245)",
+      "--text-emphasis": "oklch(14% 0.05 245)",
+      "--text-recede": "oklch(48% 0.022 245)",
+      "--text-on-accent": "oklch(14% 0.05 245)",
+      "--border": "oklch(78% 0.018 245)",
+      "--border-emphasis": "oklch(22% 0.04 245)",
+      "--accent": "oklch(22% 0.04 245)",
+      "--accent-recede": "oklch(86% 0.018 245)",
+      "--critical": "oklch(58% 0.21 28)",
+      "--warning": "oklch(75% 0.16 78)",
+      "--success": "oklch(62% 0.16 155)",
+      "--info": "oklch(60% 0.14 235)",
+      "--focus-ring": "oklch(75% 0.16 78)",
+      "--shadow-tint": "oklch(20% 0.04 245 / 0.12)",
+      "--font-sans": "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
+      "--font-display": "'IBM Plex Sans Condensed', 'IBM Plex Sans', system-ui, sans-serif",
+      "--font-mono": "'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",
+      "--font-serif": "'IBM Plex Serif', ui-serif, Georgia, serif",
+      "--radius-md": "2px",
+      "--radius-lg": "2px",
+      "--radius-card": "2px",
+      "--motion-fast": "120ms",
+      "--motion-normal": "180ms",
+      "--motion-slow": "320ms"
+    },
+    "dark": {
+      "--surface": "oklch(14% 0.04 245)",
+      "--surface-elevated": "oklch(20% 0.05 245)",
+      "--surface-recessed": "oklch(10% 0.04 245)",
+      "--text": "oklch(88% 0.018 85)",
+      "--text-emphasis": "oklch(98% 0.010 85)",
+      "--text-recede": "oklch(60% 0.022 245)",
+      "--text-on-accent": "oklch(14% 0.05 245)",
+      "--border": "oklch(28% 0.05 245)",
+      "--border-emphasis": "oklch(86% 0.018 85)",
+      "--accent": "oklch(75% 0.16 78)",
+      "--accent-recede": "oklch(28% 0.06 78)",
+      "--shadow-tint": "oklch(0% 0 0 / 0.5)"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "decoration-overlay",
+  "type": "registry:component",
+  "title": "Decoration Overlay",
+  "description": "Decoration overlay primitive — positioned-absolute decorative layer over a container. 4 variants (grain / texture / pattern / gradient). Shipped forward-looking per Phase 22 Cons. 7; ready for Boeing Watch and other aesthetic packs.",
+  "files": [
+    {
+      "path": "02_reference-packs/primitives/decoration-overlay/quoin.pack.json",
+      "type": "registry:file",
+      "target": "quoin/decoration-overlay/manifest.json"
+    },
+    {
+      "path": "02_reference-packs/primitives/decoration-overlay/primitives/index.json",
+      "type": "registry:file",
+      "target": "quoin/decoration-overlay/primitives.json"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/prim-decoration-overlay",
+    "quoinPackVersion": "1.0.0",
+    "usmlVersion": "^0.1.0",
+    "packType": "primitive",
+    "conformanceLevel": "Level 3"
+  }
+}

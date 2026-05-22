@@ -6,6 +6,62 @@ This file is the long-form anatomy reference for AI coding tools generating Quoi
 
 Quoin is a specification for UI semantics, with a reference implementation in HTML and CSS that demonstrates the specification works in practice. The specification covers: **anatomy contracts** (the structural definition of every UI pattern as a slot graph), **variant tokenization rules** (every visual choice expressed as a token-typed variant axis), **composition rules** (peer-pack consumption declared, never inlined), the **aesthetic-pack interface** (typed bundles of token-value overrides), **backend emission contracts** (the IR engine that powers cross-backend output), and **AI consumption surfaces** (the /llms.txt, /llms-full.txt, /registry.json, MCP server endpoints — all serialization views of the canonical IR). The specification draft publishes at Phase 23.5 closure as `Quoin-IR-Specification.md`. Until then, this document plus PHASES.md plus the pack-format spec are the authoritative working reference. The current implementation ships **22 patterns + 4 content primitives + 6 layout primitives + 3 aesthetic packs + 3 page templates + a translation skill** as the reference implementation. As source design systems adopt the specification (Phase 26 standards-track engagement, activated by Phase 23.5 closure), translations of those sources retire in favor of native publication.
 
+## Distribution surfaces (Phase 24.1)
+
+USML/Quoin is reachable from outside the repository through three primary surfaces. This section is for AI coding agents directly ingesting documentation.
+
+### npm install
+
+```bash
+npm install @harrow-haus/quoin           # the catalog + spec + schema + conformance report
+npm install @harrow-haus/quoin-mcp       # the MCP server (separate package)
+```
+
+Package exports addressable as `@harrow-haus/quoin/patterns/<name>`, `@harrow-haus/quoin/aesthetics/<name>`, `@harrow-haus/quoin/templates/<name>`, `@harrow-haus/quoin/schema`, `@harrow-haus/quoin/spec`, `@harrow-haus/quoin/conformance`, `@harrow-haus/quoin/registry`.
+
+The package is a **content package** — no JavaScript code in v0.1.0. AI agents consume pack manifests directly.
+
+### shadcn registry
+
+```bash
+npx shadcn@latest add \
+  --registry=https://harrowhaus.github.io/quoin/registry/index.json \
+  <item-name>
+```
+
+The registry hosts all 38 catalog items at `https://harrowhaus.github.io/quoin/registry/items/<name>.json`:
+
+- 32 components (22 production patterns + 4 content primitives + 6 layout primitives) — `registry:component` type
+- 3 styles (aesthetic packs) — `registry:style` type with `cssVars` derived from DTCG 2025.10 overrides
+- 3 blocks (templates) — `registry:block` type
+
+Peer-pack composition round-trips through `registryDependencies`. Running `shadcn add hero` auto-installs `button-system` (and any other declared peer). Optional peer packs are recorded under `meta.optionalDependencies` for explicit installation when needed (not auto-installed).
+
+Markdown projection of the registry for LLM consumers: `https://harrowhaus.github.io/quoin/registry/index.md`.
+
+### MCP server
+
+The `@harrow-haus/quoin-mcp` package implements an MCP server with stdio transport. Per the [MCP spec](https://modelcontextprotocol.io/), it exposes:
+
+- **Resources** at URIs `quoin://patterns/<name>`, `quoin://primitives/<name>`, `quoin://aesthetics/<name>`, `quoin://templates/<name>`. `resources/read` returns the pack manifest JSON.
+- **Tools:** `find_pattern(query: string, limit?: number)` — substring search across catalog item names, descriptions, and tags. Returns matches with URIs.
+
+Configuration snippets for Claude Code, Claude Desktop, Cursor, and generic MCP clients are in [`mcp/README.md`](mcp/README.md).
+
+### Direct file consumption
+
+```
+https://harrowhaus.github.io/quoin/llms.txt                              # short catalog summary
+https://harrowhaus.github.io/quoin/llms-full.txt                          # this document
+https://harrowhaus.github.io/quoin/registry/index.json                    # full shadcn registry
+https://harrowhaus.github.io/quoin/registry/items/<name>.json             # per-item registry entry
+https://harrowhaus.github.io/quoin/usml/                                  # USML 2026.05 spec HTML render
+```
+
+### Legacy registry (deprecated)
+
+`https://raw.githubusercontent.com/HarrowHaus/quoin/main/registry.json` (the Quoin-shaped registry shipped Phase 22.5.A) is **deprecated as of Phase 24.1**. Migrate to `/registry/index.json`. Legacy file supported through 2026.12; removed in 2027.x.
+
 ## Translation skill workflow (for AI consumption)
 
 When generating Quoin markup, you may encounter patterns whose anatomy was translated from an external source (W3C ARIA APG, Radix UI, Material Web Components, etc.). These patterns are functionally identical to natively-authored Quoin patterns from your consumption perspective — same anatomy tables, same composition rules, same ARIA contracts. The difference is in attribution: translated patterns' READMEs document the source and the planned retirement when the source publishes Quoin IR natively. You do not need to handle translated patterns differently when generating markup; the skill framework is operator-side maintenance work, not a consumer contract.

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tabs",
+  "type": "registry:component",
+  "title": "Tabs",
+  "description": "Tabs pattern. A tablist with two or more tabs that switch between matched tabpanels. Two activation modes (automatic vs manual) and two orientations (horizontal vs vertical) per ARIA APG. Translation from W3C ARIA Authoring Practices Guide. Phase 22.7.",
+  "files": [
+    {
+      "path": "patterns/tabs/quoin.pack.json",
+      "type": "registry:file",
+      "target": "quoin/tabs/manifest.json"
+    },
+    {
+      "path": "patterns/tabs/primitives/index.json",
+      "type": "registry:file",
+      "target": "quoin/tabs/primitives.json"
+    },
+    {
+      "path": "patterns/tabs/examples/index.html",
+      "type": "registry:file",
+      "target": "quoin/tabs/examples/index.html"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/pattern-tabs",
+    "quoinPackVersion": "1.0.0",
+    "usmlVersion": "^0.1.0",
+    "packType": "pattern",
+    "conformanceLevel": "Level 3",
+    "source": {
+      "system": "W3C ARIA Authoring Practices Guide",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "license": "W3C-Document-License",
+      "sourcePatternSlug": "tabs",
+      "captureDate": "2026-05-21",
+      "translationFraming": "transitional — to be retired in favor of native specification publication if ARIA APG publishes Quoin IR for this pattern"
+    }
+  }
+}

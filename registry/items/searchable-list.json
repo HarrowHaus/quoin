@@ -1,0 +1,32 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "searchable-list",
+  "type": "registry:component",
+  "title": "Searchable List",
+  "description": "Searchable list primitive — search input + filtered result list with combobox/listbox ARIA pattern. 3 variants (command-palette / autocomplete-results / filter-dropdown). Composes form-fields (input) + prim-label (optional result categories). Phase 22 Cons. 8.",
+  "files": [
+    {
+      "path": "02_reference-packs/primitives/searchable-list/quoin.pack.json",
+      "type": "registry:file",
+      "target": "quoin/searchable-list/manifest.json"
+    },
+    {
+      "path": "02_reference-packs/primitives/searchable-list/primitives/index.json",
+      "type": "registry:file",
+      "target": "quoin/searchable-list/primitives.json"
+    }
+  ],
+  "meta": {
+    "quoinPackName": "@quoin/prim-searchable-list",
+    "quoinPackVersion": "1.0.0",
+    "usmlVersion": "^0.1.0",
+    "packType": "primitive",
+    "conformanceLevel": "Level 3",
+    "optionalDependencies": [
+      "label"
+    ]
+  },
+  "registryDependencies": [
+    "form-fields"
+  ]
+}
