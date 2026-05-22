@@ -14,10 +14,8 @@ The phase does NOT submit to W3C. Per the D11 sequencing decision in the handoff
 
 ## Commits
 
-(Hash filled at commit-time; updated immediately after push.)
-
-- **Primary commit** — Phase 23.1 deliverables: USML-Specification.bs + spec/* + .github/workflows/spec-build.yml + README/THESIS bifurcation + PHASES.md update + this report.
-- **Follow-up commit** — fill closure-ref hash.
+- **`ca048e13ecfbdd205c6a695a404386818a6eedc5`** — phase-23.1 ships: USML Editor's Draft 2026.05 + reference impl conformance claim. 29 files, +2620/−32.
+- **Follow-up commit** — fill closure-ref hash in PHASES.md + this report.
 
 ## Shipped
 

@@ -321,7 +321,7 @@ The reframe does not retroactively change Phases 22.6 (Layout Primitives) or 22.
 | 15 | Canonical hosting URL | https://harrowhaus.github.io/quoin/usml/ via GitHub Pages |
 | 16 | Authoring tool (Bikeshed) | `USML-Specification.bs` source + `.github/workflows/spec-build.yml` action |
 
-**Closure ref:** _this commit_ (2026-05-21).
+**Closure ref:** commit `ca048e13ecfbdd205c6a695a404386818a6eedc5` (2026-05-21).
 
 **What unblocks:**
 - **Phase 23.2 (ingest interface specification)** — formalizes the source-adapter interface USML §Ingest interface sketches.
