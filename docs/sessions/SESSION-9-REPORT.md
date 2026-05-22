@@ -14,8 +14,8 @@ This is a deepening phase, not a change phase. The artifact that external implem
 
 ## Commits
 
-- **`<primary>`** — phase-23.2 ships: §7 formal contract + Source Adapter conformance class + attribution metadata + license clearance + canonical example + ingest test scaffold + conformance report update. (Hash filled below.)
-- **`<follow-up>`** — closure-ref hash backfill.
+- **`525a5bb98ea151b75ae72cd2f8b9b1491ec753e8`** — phase-23.2 ships: USML §7 ingest interface formalized + source adapter conformance class. 15 files, +905/−45.
+- **Follow-up commit** — closure-ref hash backfill in PHASES.md + this report.
 
 ## §7 transformation: sketch → formal contract
 

@@ -353,7 +353,7 @@ The reframe does not retroactively change Phases 22.6 (Layout Primitives) or 22.
 - **`spec/examples/README.md`** updated. Source-adapter-output.json listed.
 - **`spec/tests/README.md`** updated. USML Source Adapter class added to the conformance class table.
 
-**Closure ref:** _this commit_ (2026-05-21).
+**Closure ref:** commit `525a5bb98ea151b75ae72cd2f8b9b1491ec753e8` (2026-05-21).
 
 **Architectural truth surfaced during ingest formalization:**
 
