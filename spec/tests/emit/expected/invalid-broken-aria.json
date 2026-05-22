@@ -1,0 +1,6 @@
+{
+  "expectConformant": false,
+  "expectLevel": 2,
+  "expectViolation": "aria-roles-missing",
+  "rationale": "Emission claims Level 2 conformance but `fidelityEvidence.ariaRolesPresent` is false. ARIA preservation is required at Level 2 (and Level 3) per §6.2.C5 and §6.3.D2. The Backend Emitter conformance class MUST flag this as non-conformant for any Level 2 or Level 3 claim. The emitter could downgrade to Level 1 (where ARIA is optional) but the operational reality of a tabs pattern without `role=\"tab\"` makes the output unusable for screen-reader users; the spec does not prohibit Level 1 here but the emission would be uninteresting in practice."
+}

@@ -10,7 +10,8 @@ it is not exhaustive. Future versions will expand coverage substantially.
 |-------|-----------------|---------|
 | USML Anatomy Validator | `anatomy/` | Validates that an implementation correctly accepts conformant inputs and rejects non-conformant inputs |
 | USML Aesthetic-Pack Provider | `aesthetic-pack/` | Validates that an aesthetic pack conforms to DTCG 2025.10 and declares no anatomy |
-| USML Backend Emitter | `backend-emit/` | Validates that emitted output preserves anatomy + variants + composition + accessibility |
+| USML Backend Emitter (smoke) | `backend-emit/` | Smoke-scaffold from Phase 23.1: validates that emitted output preserves anatomy + variants + composition + accessibility. Pre-dates the §6 formalization. |
+| USML Backend Emitter (formal §6) | `emit/` | Validates that emissions satisfy §6.2 fidelity properties at the claimed conformance level (§6.3 Level 1/2/3) and that §6.5 attribution metadata is present at Level 3. **(Phase 23.3)** Complements the earlier smoke-scaffold at `backend-emit/`. |
 | USML Source Adapter | `ingest/` | Validates that translated patterns carry full §7.4 attribution metadata and that §7.5 license clearance correctly identifies incompatible licenses. **(Phase 23.2)** |
 
 ## Test fixture structure

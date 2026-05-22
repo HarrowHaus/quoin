@@ -1,0 +1,5 @@
+{
+  "expectConformant": true,
+  "expectLevel": 3,
+  "rationale": "All required §6.5 attribution fields present (emitter, emitterVersion, target, sourcePatternName, sourcePatternVersion, usmlVersion). All §6.2 fidelity properties evidenced as preserved. Attribution and fidelity together satisfy §6.3 Level 3 conformance."
+}

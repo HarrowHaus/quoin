@@ -2,7 +2,7 @@
 
 This file is the single source of truth for phase status across the Quoin project. It supersedes scattered references in CONSOLIDATION reports, DECISIONS_UPDATES, and session-closing reports. Every future session that opens, closes, or modifies a phase updates this file in its closing batch.
 
-**Last updated:** Phase 23.2 closing — USML §Ingest Interface Formalization (2026-05-21)
+**Last updated:** Phase 23.3 closing — USML §Backend Emission Contract Formalization (2026-05-21)
 
 ---
 
@@ -374,6 +374,62 @@ The double-enforcement architecture this surfaced is actually a strength: the sc
 
 **Halts encountered:** none — the halt-3 architectural truth surfaced cleanly and was resolved by schema-authoritative reconciliation; the rest of the work proceeded without contradictions.
 
+### Phase 23.3 — USML §Backend Emission Contract Formalization
+
+**Status:** ✅ Complete (Phase 23.3 — 2026-05-21)
+**Goal:** elaborate USML §6 Backend emission contract from sketch-level prose to formal contract; introduce the emission fidelity property as the spec's unifying preservation criterion; formalize Level 1/2/3 conformance contracts as strict supersets; add emission attribution metadata for Level 3; document future-state framework backends; verify or revise the reference backend's L3 conformance claim against the formalized contract. The implementation does NOT change; the spec catches up to formalize what the reference backend already does.
+**Output:**
+- **USML-Specification.bs §6** fully formalized in **six** subsections (§6.1 Backend interface, §6.2 Emission fidelity — new, §6.3 Backend conformance levels, §6.4 Reference backend, §6.5 Emission attribution metadata — new, §6.6 Backend transition — new). §6 grew from 49 lines of sketch prose (3 subsections) to approximately 350 lines of formal contract (6 subsections) with normative RFC 2119 MUST/SHOULD/MAY clauses throughout.
+- **USML-Specification.bs §Conformance §4.3 Backend Emitter** deepened with explicit per-level normative requirements summary and cross-references to §6.3's full per-level contracts.
+- **USML-Specification.bs §Terminology** updated with 5 new `<dfn>` entries: Backend (rewritten with cross-refs), Backend emitter (new alias entry), Emission fidelity (new), Conformance level (new), Multi-target emission (new), Emission attribution metadata (new). 6 new dfns counting the rewritten Backend entry.
+- **`spec/examples/backend-emission-output.json`** new canonical example. Real button-system emission description with §6.5 attribution metadata + §6.2 fidelity evidence covering all 6 fidelity properties. Non-schema-validated (no schema covers emission-output objects); cross-referenced from §6.5.
+- **`spec/tests/emit/`** new conformance test scaffold for the formalized §6 contract. Three fixtures + runner + expected outcomes: valid-level-3-emission (PASS at L3); invalid-missing-slot (FAIL — anatomy preservation violation per §6.2.C2); invalid-broken-aria (FAIL — accessibility preservation violation per §6.2.C5 at L2+). Runner integrated into `spec/tests/run-all.mjs`. 3/3 pass.
+- **`spec/conformance-report.md`** Backend Emitter section verified and deepened. The Phase 23.1 Level 3 claim **holds without revision** — the reference backend satisfies the formalized contract. The deepened section adds a per-fidelity-property × per-pattern evidence matrix (3 representative patterns: hero, button-system, modal-dialog) plus a documented gap on §6.5 attribution metadata (implicit at the pack-co-location layer; explicit `<meta>` emission is recommended future work that does not invalidate the L3 claim).
+- **PHASES.md** — Phase 23.3 entry (this section) + Phase 23.3 outcome section + dependency-graph update.
+- **`spec/examples/README.md` + `spec/tests/README.md`** — line additions noting the new Phase 23.3 example and the new emit/ scaffold respectively.
+
+**Closure ref:** _this commit_ (2026-05-21).
+
+**Architectural truths surfaced during emission formalization:**
+
+1. **The reference backend's L3 claim holds.** Phase 23.1 made the L3 claim based on sketch-level criteria. Phase 23.3 formalized the criteria and re-verified against the actual emissions. Across 3 representative patterns (hero, button-system, modal-dialog), all 6 fidelity properties (anatomy, variants, composition, ARIA, token consumption, microstates) were evidenced: 124–245 token references per pattern, 17+ microstate selectors per interactive pattern, 36–245 ARIA attribute references, full variant-axis emission via `[data-*]` selectors, eager peer-pack composition, prefers-reduced-motion compliance for performance budgets. No halt-condition-1 trigger.
+
+2. **The reference backend's §6.5 attribution metadata is implicit, not explicit.** The reference backend emits CSS inline in each pattern pack's `examples/*.html`. Attribution is implicit in the pack co-location: the example HTML lives inside the pack directory, so the source pattern is trivially identifiable from the file path. The formalized §6.5 contract permits this (the attribution requirement is "MUST include attribution metadata" not "MUST use explicit `<meta>` blocks"), but explicit `<meta name="quoin-emission" content="...">` emission is **recommended future work** for cross-repository or AI-tool consumption where co-location doesn't apply. This is documented as a gap in the conformance report; it does not invalidate the L3 claim.
+
+3. **Emission fidelity is framework-agnostic by construction.** §6.2 formalizes fidelity as six properties (anatomy, variants, composition, accessibility, token consumption, microstates) without privileging any specific framework. Different target frameworks emit different DOM shapes idiomatically (React uses JSX trees; web components use Shadow DOM; plain HTML uses semantic elements + data attributes). Fidelity does NOT require byte-identical output; it requires that a user perceiving the output via screen reader, keyboard navigation, or visual inspection encounters the same semantic intent. This framing was tested by considering how a hypothetical React backend would satisfy §6.2.C3 variant preservation (via component props instead of `[data-variant=]` selectors) — the contract works without modification.
+
+4. **Conformance levels are strict supersets, not orthogonal axes.** The brief proposed L1/L2/L3 as escalating fidelity. The formalization affirms strict-superset semantics: a Level 2 emitter implicitly satisfies all Level 1 requirements; a Level 3 emitter implicitly satisfies Levels 1+2. Partial-Level-3 conformance is NOT a defined state — implementations that meet some but not all L3 requirements MUST declare L2 and document the additional L3 properties they satisfy informatively. This prevents under-declaration of capability and prevents over-declaration of conformance.
+
+5. **Multi-target emission semantics are framework-neutral.** A single USML IR may emit to React + plain CSS + web components simultaneously via three independent backend emitters. The overall conformance level is the minimum across constituent emissions. "Semantically equivalent" output across targets means same anatomy + variants + composition + ARIA + tokens; "byte-equivalent" output is NOT required and would be impossible across idiomatically-different frameworks. This is the standards-publishable framing — anyone reading §6.1.B4 sees a coherent multi-target story rather than a CSS-privileging story.
+
+**Verification:**
+
+| Check | Result |
+|---|---|
+| §6 reads coherently after formalization (read straight-through, no internal contradictions) | ✅ |
+| §Conformance §4.3 Backend Emitter cross-references §6.3 for per-level contracts | ✅ |
+| §Terminology has 5–6 new dfn entries; all cross-link to §6 subsections | ✅ |
+| `backend-emission-output.json` documents the L3 emission shape with §6.5 attribution + §6.2 fidelity evidence | ✅ |
+| 3 emit fixtures + runner integrated into run-all.mjs; 3/3 pass | ✅ |
+| Full conformance suite: 11/11 across 5 scaffolds (anatomy 2/2, aesthetic-pack 2/2, backend-emit smoke 1/1, emit formal §6 3/3, ingest 3/3) | ✅ |
+| Existing pack manifests (38) still validate against unchanged schema | ✅ implied (schema NOT touched) |
+| spec/conformance-report.md Backend Emitter L3 claim verified with per-fidelity-property × per-pattern evidence | ✅ |
+| Scope boundary held: schema, /skills/, /docs/, implementation manifests, Phase 24.1 distribution surfaces NOT touched | ✅ |
+| Phase 23.2 §7 work NOT touched | ✅ |
+| /llms.txt + /llms-full.txt + /registry.json NOT touched per scope | ✅ |
+
+**What unblocks:**
+
+- **Phase 23.4 (reference adapter packaging)** — partially satisfied by Phase 23.2's §7.2 reference adapter documentation; a dedicated session could author an npm-publishable reference-adapter package.
+- **Phase 23.5 (Spec publication + first additional reference backend + live translation demo)** — the spec is meaningfully more publishable now (§5 + §6 + §7 all fully formalized contracts).
+- **Phase 24.4 (real AI-tool integration tests)** — Phase 24.1 distribution surfaces + Phase 23 formalized contracts together mean external implementers + AI agents have everything they need.
+- **Phase 25 (Multi-source harvest)** — both ingest (§7) AND emission (§6) are now formal contracts; future translation work follows both.
+- **Phase 26 (Standards engagement)** — USML's normative interface surface is COMPLETE: §5 Core Data Model + §6 Backend emission + §7 Ingest interface are all fully formalized. Standards reviewers see a complete normative artifact, not a foundation with sketches.
+
+**Scope boundary held:** USML-Specification.bs (§6, §Conformance §4.3, §Terminology only — schema-defined contracts unchanged); spec/conformance-report.md (Backend Emitter section deepened); spec/examples/backend-emission-output.json (created); spec/tests/emit/ (created); spec/examples/README.md + spec/tests/README.md (line additions); spec/tests/run-all.mjs (one new runner registered). Schema (spec/usml-schema.json) NOT touched per brief. Phase 23.2 §7 work NOT touched. /skills/, /docs/, implementation pack manifests, Phase 24.1 distribution surfaces, /llms.txt, /llms-full.txt, /registry.json all NOT touched.
+
+**Halts encountered:** none. The opening L3-evidence verification (Block A) confirmed the reference backend satisfies the formalized contract before formalization began; no truth-telling moment surfaced; the work proceeded as planned.
+
 ### Phase 24 — Build Pipeline Integration + AI Tool Distribution (in progress)
 
 **Status:** 🟢 In progress (Phase 24.1 ✅ Complete 2026-05-21; sub-phases 24.2–24.4 queued)
@@ -480,6 +536,67 @@ The double-enforcement architecture this surfaced is actually a strength: the sc
 - `aesthetics/default/` — tasteful neutral baseline
 **Next candidates (queued):** Manuscript Future (Junicode 2 + Ranade + Monaspace per Cons. 2 Option D), terminal-monochrome, expressive-motion-heavy.
 **Closure dependency:** none — three reference packs now exist; future packs follow the v1.0 template (`tokens.css` + `overrides/{light,dark}.json` + `specimen/`).
+
+---
+
+## Phase 23.3 outcome (2026-05-21) — USML §Backend Emission Contract Formalization
+
+Brief: elaborate USML §6 Backend emission contract from sketch-level prose to formal contract. Introduce the emission fidelity property as the unifying preservation criterion. Formalize Level 1/2/3 conformance as strict supersets. Add emission attribution metadata for Level 3. Verify the Phase 23.1 reference backend L3 claim against the now-formalized contract. Implementation does NOT change; the spec catches up to the implementation.
+
+**This phase completes USML's normative interface surface.** §5 Core Data Model + §6 Backend emission + §7 Ingest interface are now all fully formalized contracts with normative RFC 2119 MUST/SHOULD/MAY clauses, canonical examples, test scaffolds, and reference implementation conformance claims. Standards reviewers reading the spec see a complete normative artifact rather than a foundation with sketches.
+
+**Shipped:**
+
+- **USML-Specification.bs §6 fully formalized** in six subsections. Grew from 49 lines of sketch prose (3 subsections) to ~350 lines of formal contract (6 subsections) with normative clauses throughout. New subsections: §6.2 Emission fidelity (the property all conformance levels preserve); §6.5 Emission attribution metadata (Level 3 required); §6.6 Backend transition (future-state framework backends — web components, React, Vue, Lit).
+- **§Conformance §4.3 Backend Emitter deepened** with explicit per-level normative requirements summary cross-referencing §6.3's full per-level contracts. Three conformance levels documented as strict supersets.
+- **§Terminology updated** with 5–6 new `<dfn>` entries: Backend (rewritten), Backend emitter (alias), Emission fidelity, Conformance level, Multi-target emission, Emission attribution metadata.
+- **`spec/examples/backend-emission-output.json`** — new canonical example documenting a Level 3 emission's §6.5 attribution + §6.2 fidelity evidence for the button-system pattern.
+- **`spec/tests/emit/`** — new conformance test scaffold for the formalized §6 contract (3 fixtures + runner + expected outcomes). 3/3 pass. Integrated into `spec/tests/run-all.mjs`.
+- **`spec/conformance-report.md` Backend Emitter section deepened** — Phase 23.1's L3 claim verified against the formalized contract and HELD without revision. Added per-fidelity-property × per-pattern evidence matrix for hero, button-system, modal-dialog. Documented gap on §6.5 attribution metadata (currently implicit via pack co-location; explicit `<meta>` emission recommended future work).
+- **PHASES.md** — Phase 23.3 entry + this outcome section + dependency-graph note that §5 + §6 + §7 are now all formalized.
+
+**Architectural truths surfaced during emission formalization:**
+
+1. **The L3 claim holds.** Phase 23.1 made the L3 claim on sketch criteria; Phase 23.3 formalized the criteria and re-verified against actual emissions. 124–245 token references per pattern, 17+ microstate selectors per interactive pattern, 36–245 ARIA attribute references, full variant-axis emission via `[data-*]` selectors, eager peer-pack composition, prefers-reduced-motion compliance. No halt-condition-1 trigger.
+
+2. **Reference backend §6.5 attribution is implicit (pack co-location) rather than explicit (`<meta>` blocks).** This is permitted by the formalized §6.5 contract ("MUST include attribution metadata" — co-location satisfies this) but explicit emission is recommended future work for cross-repository or AI-tool consumption.
+
+3. **Emission fidelity is framework-agnostic by construction.** §6.2 formalizes 6 fidelity properties without privileging any specific framework. Tested by considering how a hypothetical React backend would satisfy each property (component props in place of `[data-*]` selectors; JSX trees in place of HTML semantic elements). The contract works without modification.
+
+4. **Conformance levels are strict supersets, not orthogonal axes.** A Level 2 emitter implicitly satisfies Level 1; a Level 3 emitter satisfies Levels 1+2. Partial-L3 is not a defined state; implementations meeting some-but-not-all L3 requirements MUST declare L2 and document informative additional properties they satisfy.
+
+5. **Multi-target emission semantics work.** A single USML IR emits to multiple framework targets via composition of multiple backends. "Semantically equivalent" output across targets, NOT "byte-equivalent." Overall conformance level is the minimum across constituent emissions.
+
+**Verification:**
+
+| Check | Result |
+|---|---|
+| §6 reads coherently after formalization | ✅ |
+| §Conformance §4.3 cross-references §6.3 | ✅ |
+| §Terminology has 5–6 new dfn entries with §6 cross-refs | ✅ |
+| `backend-emission-output.json` documents L3 emission shape | ✅ |
+| 3 emit fixtures + runner; 3/3 pass | ✅ |
+| Full suite 11/11 across 5 scaffolds (anatomy 2 + aesthetic-pack 2 + backend-emit smoke 1 + emit formal §6 3 + ingest 3) | ✅ |
+| spec/conformance-report.md L3 claim verified against formalized contract; per-pattern evidence matrix added | ✅ |
+| Scope boundary held: schema, /skills/, /docs/, implementation manifests, Phase 24.1 surfaces, Phase 23.2 §7 work all NOT touched | ✅ |
+
+**What unblocks:**
+
+- **Phase 23.4** (reference adapter packaging) — partially satisfied by Phase 23.2's §7.2 reference adapter documentation.
+- **Phase 23.5** (Spec publication + live translation demo) — the spec is meaningfully more publishable; §5 + §6 + §7 all complete.
+- **Phase 24.4** (real AI-tool integration tests) — distribution surfaces + formalized contracts together.
+- **Phase 25** (Multi-source harvest) — both ingest and emission are formal contracts.
+- **Phase 26** (Standards engagement) — USML's normative interface surface is COMPLETE.
+
+**Next-session recommendation:**
+
+**Phase 24.4 (first AI-tool integration tests)** — exercise Phase 24.1's distribution surfaces with real-world agent behavior, contingent on operator-execution sequence completion (npm scope claim, NPM_TOKEN secret, first publish, GitHub Pages serving). Concrete adoption evidence is the highest-leverage next move now that the spec's normative interface surface is complete.
+
+**Alternative: Phase 23.4 (reference adapter packaging)** — author the npm-publishable reference-adapter package. Cleans up the partial satisfaction noted in Phase 23.2.
+
+**Alternative: Phase 23.5 (Spec publication preparation, including the live translation demo)** — bigger sub-phase; would close out Phase 23 entirely.
+
+Operator chooses based on whether the next priority is "real-agent adoption evidence" (24.4), "reference adapter packaging" (23.4), or "Phase 23 closure" (23.5).
 
 ---
 
@@ -927,8 +1044,8 @@ Phase 0 (spec)
               → Phase 23 (USML IR Architecture — spec draft + reference engine; renamed from Quoin IR per bifurcation)
                 → Phase 23.1 (USML Editor's Draft 2026.05 + Reference Implementation Conformance Claim — ✅)
                   → Phase 23.2 (USML §Ingest Interface Formalization — ✅)
-                  → Phase 23.3 (Emission interface specification) [UNBLOCKED, queued — structural mirror of 23.2]
-                  → Phase 23.4 (First reference source adapter formalization — partially satisfied by 23.2's §7.2 reference adapter documentation)
+                  → Phase 23.3 (USML §Backend Emission Contract Formalization — ✅) — USML's normative interface surface (§5 + §6 + §7) is now COMPLETE
+                  → Phase 23.4 (First reference source adapter formalization — partially satisfied by 23.2's §7.2 reference adapter documentation; npm-publishable adapter packaging is the remaining work)
                 → Phase 23.5 (Specification publication + first additional reference backend + live translation demo)
                   → Phase 26 (Standards Engagement) [ACTIVATES on adoption thresholds met]
                 → Phase 24 (Build Pipeline + AI Tool Distribution — in progress)

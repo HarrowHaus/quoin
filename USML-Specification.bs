@@ -226,26 +226,49 @@ A USML Aesthetic-Pack Provider:
 
 <h4 id="conformance-backend-emitter">USML Backend Emitter</h4>
 
-A USML Backend Emitter is an implementation that consumes a USML Anatomy
-Graph and produces framework-specific output.
+A USML Backend Emitter is an implementation that consumes USML IR
+(Pattern objects plus optional aesthetic packs) and produces
+framework-specific output.
 
-A USML Backend Emitter:
+The full set of MUST/SHOULD/MAY statements defining Backend Emitter
+conformance is in [[#backend-emission-contract]]. The summary follows;
+refer to [[#backend-emission-contract]] for the normative detail:
 
-- MUST consume USML Anatomy Graph input conforming to this specification.
-- MUST produce framework-specific output (HTML, CSS, web components, React,
-    Vue, native frameworks, or other targets).
-- MUST preserve anatomy, variants, composition, and accessibility intent.
-    Emission MUST NOT alter the semantic structure declared by the input.
-- SHOULD emit token references that resolve at runtime or build time against
-    the active aesthetic-pack provider.
-- MAY declare partial conformance levels:
-    - **Level 1 — Anatomy only.** Emits the mandatory slot structure; does
-        not yet handle variants, microstates, or aesthetic-pack values.
-    - **Level 2 — Anatomy + variants.** Adds full variant axis handling.
-    - **Level 3 — Full conformance.** Adds aesthetic-pack token resolution,
-        ARIA attribute emission, microstate CSS, and performance-budget
-        enforcement.
-- MUST document its conformance level in implementer documentation.
+- MUST consume USML IR conforming to this specification (Pattern objects
+    per [[#core-data-model]]; aesthetic packs per
+    [[#aesthetic-pack-interface]]).
+- MUST produce framework-specific output in the declared target (HTML,
+    CSS, web components, React, Vue, native frameworks, or other).
+- MUST preserve **emission fidelity** per [[#emission-fidelity]] —
+    anatomy, variants, composition, accessibility, and token consumption.
+- MUST NOT alter the semantic structure declared by the input or strip
+    declared ARIA roles, states, or properties.
+- MUST NOT inline peer-pack contracts in violation of
+    [[#composition-rules]].
+- MUST declare its conformance level. Three levels are defined; each is
+    a strict superset of the previous:
+    - **Level 1 — Minimal** ([[#level-1-minimal-conformance]]): emits
+        every mandatory slot; identifies source pattern; MAY omit
+        conditional slots, variants, microstates, ARIA, aesthetic-pack
+        tokens.
+    - **Level 2 — Standard** ([[#level-2-standard-conformance]]): adds
+        conditional slots, all variant axes, required peer-pack
+        composition, ARIA roles + states.
+    - **Level 3 — Full** ([[#level-3-full-conformance]]): adds
+        microstates, aesthetic-pack token consumption with swap support,
+        performance-budget compliance where declared, and
+        [[#emission-attribution]] metadata.
+- MUST NOT under-claim or over-claim conformance level per
+    [[#conformance-level-reporting]].
+
+A Backend Emitter at Level 3 conformance SHOULD also declare which
+aesthetic packs it supports and at what fidelity (which token values it
+correctly resolves; which it falls back to defaults for).
+
+The Quoin reference backend claims Level 3 conformance for the plain
+HTML + CSS target per [[#reference-backend]]; full per-pattern evidence
+is documented at
+[`spec/conformance-report.md`](https://github.com/HarrowHaus/quoin/blob/main/spec/conformance-report.md).
 
 <h4 id="conformance-source-adapter">USML Source Adapter</h4>
 
@@ -632,52 +655,493 @@ distribution mechanisms.
 <!-- ════════════════════════════════════════════════════════════════════ -->
 <h2 id="backend-emission-contract">Backend emission contract</h2>
 
-A <dfn>USML Backend</dfn> is an implementation that consumes USML data model
-input and emits framework-specific output.
+The backend emission contract is the formal interface under which **backend
+emitters** consume USML IR (Pattern objects plus aesthetic packs) and
+produce framework-specific output. The contract specifies the backend
+emitter conformance class, the input/output expectations, the emission
+fidelity property that all conformant emissions preserve, the three
+conformance levels (L1 minimal / L2 standard / L3 full), the emission
+attribution metadata Level 3 emitters include in their output, and the
+future-state framework backends the reference implementation anticipates.
 
 <h3 id="backend-interface">Backend interface</h3>
 
-A USML Backend MUST:
+A <dfn>USML Backend Emitter</dfn> is an implementation that consumes USML
+IR (Pattern objects per [[#core-data-model]] plus optional aesthetic packs
+per [[#aesthetic-pack-interface]]) and produces framework-specific output.
 
-- Accept input in USML data model form (validated against `spec/usml-schema.json`).
-- Produce output in a target framework's native form (HTML+CSS, web
-    components, React, Vue, native frameworks).
-- Preserve the input's anatomy, variants, composition references, accessibility
-    contract, and microstate vocabulary.
+<h4 id="backend-emitter-conformance-class">Backend emitter conformance class</h4>
 
-A USML Backend MUST NOT:
+The USML Backend Emitter is a conformance class defined in
+[[#conformance-backend-emitter]]. The MUST/SHOULD/MAY statements in this
+section ([[#backend-emission-contract]]) collectively define what an
+implementation MUST satisfy to claim Backend Emitter conformance at a
+given level.
 
-- Alter the semantic structure declared by the input.
-- Introduce variant axes not declared in the input.
-- Strip accessibility roles or properties.
-- Inline peer-pack contracts in violation of [[#composition-rules]].
+A USML Backend Emitter:
 
-<h3 id="backend-fidelity-requirement">Fidelity requirement</h3>
+- MUST conform to one of three documented conformance levels
+    ([[#backend-conformance-levels]]: Level 1 minimal, Level 2 standard,
+    Level 3 full).
+- MUST preserve emission fidelity per [[#emission-fidelity]] across its
+    target framework.
+- SHOULD declare its target framework in implementer documentation.
+- SHOULD emit attribution metadata per [[#emission-attribution]] at
+    Level 3.
 
-USML's <dfn>fidelity requirement</dfn> states: given a USML data model input
-and an aesthetic pack, two conformant USML Backends targeting different
-frameworks MUST produce semantically equivalent output. "Semantically
-equivalent" is defined as: a user perceiving the output (via screen reader,
-keyboard navigation, or visual inspection) MUST encounter the same anatomy,
-the same variants, the same composition, the same ARIA roles, and the same
-aesthetic tokens.
+<h4 id="backend-input-contract">Input contract</h4>
 
-Visual differences between backends are permitted to the extent that
-framework conventions differ. Structural differences are not permitted.
+A USML Backend Emitter:
+
+- MUST accept USML IR as input: Pattern objects per [[#core-data-model]],
+    optionally accompanied by aesthetic pack objects per
+    [[#aesthetic-pack-interface]].
+- MAY accept additional non-normative input (build-time configuration,
+    target framework version, output directory paths, etc.).
+- MUST reject IR that fails schema validation against
+    [`spec/usml-schema.json`](https://github.com/HarrowHaus/quoin/blob/main/spec/usml-schema.json).
+
+<h4 id="backend-output-contract">Output contract</h4>
+
+A USML Backend Emitter:
+
+- MUST produce framework-specific output in its declared target.
+- MUST produce output that preserves the structural intent of the source
+    IR (the emission fidelity property defined in
+    [[#emission-fidelity]]).
+- MUST produce output that is valid in its target framework (emitted CSS
+    MUST be valid CSS; emitted JSX MUST be valid JSX; etc.).
+- MAY include framework-specific idiomatic patterns (CSS custom
+    properties for tokens; React components for patterns; Vue reactive
+    properties; etc.).
+- SHOULD include comments or metadata documenting the source USML
+    pattern and aesthetic pack the emission was generated from.
+
+<h4 id="backend-multi-target-emission">Multi-target emission</h4>
+
+A single USML IR MAY be emitted to multiple framework targets by
+composing multiple backend emitters. Multi-target emission is a common
+build-pipeline shape: a project may emit React for the client + plain
+CSS for documentation pages + web components for shared widgets.
+
+When multi-target emission is performed:
+
+- The output across targets MUST be **semantically equivalent at the
+    same conformance level**. A user perceiving the outputs (via screen
+    reader, keyboard navigation, or visual inspection) MUST encounter
+    the same anatomy, the same variants, the same composition, the same
+    ARIA roles, and the same aesthetic tokens.
+- The output across targets MAY produce framework-specific stylistic
+    differences. "Semantically equivalent" does not mean
+    "byte-equivalent" — different framework targets idiomatically
+    produce different DOM shapes for the same semantic intent.
+- Each target's emission MAY independently claim a conformance level;
+    the multi-target emission's overall level is the **minimum** across
+    its constituent emissions.
+
+<h4 id="backend-emitter-discovery">Backend emitter discovery</h4>
+
+Backend emitter implementations:
+
+- SHOULD declare themselves via package metadata (npm package keywords,
+    MCP server metadata, registry self-description).
+- MAY register themselves with a future USML implementations directory
+    (not normative in 2026.05).
+
+The Quoin reference backend ships in the Quoin reference implementation
+catalog; see [[#reference-backend]].
+
+<h3 id="emission-fidelity">Emission fidelity</h3>
+
+<dfn>Emission fidelity</dfn> is the formal property that backend output
+preserves the structural intent of the source USML IR across framework
+targets. It is the single criterion that unites all backend emitter
+conformance levels: even a Level 1 emitter MUST preserve fidelity for
+the subset of IR it emits.
+
+<h4 id="fidelity-scope">What fidelity preserves and what it does NOT preserve</h4>
+
+Emission fidelity preserves:
+
+- **Anatomy** — the slot graph with mandatory and conditional slots per
+    [[#anatomy-and-slots]].
+- **Variants** — the orthogonal modal dimensions per [[#variant-axes]].
+- **Composition** — the peer-pack references and consumption
+    relationships per [[#composition-rules]].
+- **Accessibility** — the ARIA roles, states, properties, and keyboard
+    support declared per [[#accessibility-contracts]].
+- **Token consumption** — token references resolved through the
+    aesthetic-pack interface per [[#aesthetic-pack-interface]].
+- **Microstates** (Level 3 only) — the per-element interaction state
+    vocabulary per [[#microstates]].
+
+Emission fidelity does NOT require:
+
+- Byte-identical output across backends. Different framework targets
+    idiomatically produce different DOM shapes; CSS class names may
+    differ; component prop names may follow target conventions.
+- Identical visual rendering. Aesthetic packs may bind different token
+    values; targets may use different default fonts or spacing.
+- Identical JavaScript runtime behavior. The backend emitter is not
+    required to ship JS that handles keyboard events; the emitter is
+    required to structure the output such that a keyboard contract can
+    be satisfied.
+
+<h4 id="fidelity-anatomy-preservation">Anatomy preservation</h4>
+
+A USML Backend Emitter:
+
+- MUST emit every mandatory slot from the source Pattern.
+- MUST emit every conditional slot when its gate is satisfied (per the
+    slot's `gatedBy` field in [[#anatomy-and-slots]]).
+- MAY reorder slots if the target framework requires it, provided
+    semantic position is preserved (a slot logically inside another
+    remains inside in the emitted DOM/component tree).
+- SHOULD preserve slot names as identifiers in the emitted output (CSS
+    class names, component prop names, etc.) where the target framework
+    supports it.
+
+<h4 id="fidelity-variant-preservation">Variant preservation</h4>
+
+A USML Backend Emitter:
+
+- MUST emit every variant axis declared in the source Pattern with a
+    corresponding mechanism in the target framework (CSS attribute
+    selectors `[data-variant="x"]`, component props `variant="x"`,
+    framework-specific variant mechanisms).
+- MUST emit variant values as queryable in the output (a consumer can
+    determine which variant is active by inspecting the emission).
+- MUST emit the universal `data-alignment` variant per
+    [[#universal-axes]].
+
+<h4 id="fidelity-composition-preservation">Composition preservation</h4>
+
+A USML Backend Emitter:
+
+- MUST honor every declared `peerPacks` reference in the source Pattern
+    by including, referencing, or composing the peer pack's emission
+    appropriately for the target framework.
+- MUST compose required peer packs eagerly (the peer pack's output is
+    included in the same emission run).
+- MAY compose optional peer packs (`optionalPeerPacks`) lazily (the
+    peer pack's output is referenced or stubbed; the consumer chooses
+    when to include).
+- MUST NOT inline peer-pack contracts in violation of
+    [[#composition-rules]].
+
+<h4 id="fidelity-accessibility-preservation">Accessibility preservation</h4>
+
+A USML Backend Emitter:
+
+- MUST emit every ARIA role declared in the source Pattern's
+    [[#accessibility-contracts]] as ARIA role attributes in the output
+    (or framework-equivalent: React's `role` prop, Vue's `:role`
+    binding, etc.).
+- MUST emit ARIA states declared in the source as reachable in the
+    emitted output (the structure permits state attributes; the emitter
+    is not required to manage state transitions in JS).
+- MUST emit output structured such that the keyboard support declared
+    in the source can be implemented against it (focus order, focusable
+    elements, tab indices).
+- MUST NOT strip ARIA roles or properties declared in the source.
+
+<h4 id="fidelity-token-consumption">Token consumption</h4>
+
+A USML Backend Emitter:
+
+- MUST resolve token references in the source Pattern through the
+    target framework's idiomatic mechanism (CSS custom properties; React
+    theme provider; native framework-specific token systems).
+- MUST emit token references that conform to DTCG 2025.10
+    [[!DTCG-2025.10]] consumption rules where the target framework
+    permits.
+- MUST permit aesthetic-pack swap: changing the active aesthetic pack
+    changes the resolved values without changing the emitted structure.
 
 <h3 id="backend-conformance-levels">Backend conformance levels</h3>
 
-A USML Backend MAY claim partial conformance per the levels defined in
-[[#conformance-backend-emitter]]:
+A USML Backend Emitter MUST conform to exactly one of three levels.
+Levels are strict supersets: a Level N emitter implicitly satisfies all
+requirements of levels 1 through N−1.
 
-- Level 1 — Anatomy only.
-- Level 2 — Anatomy + variants.
-- Level 3 — Full conformance (anatomy + variants + aesthetic-pack token
-    resolution + ARIA + microstates + performance budgets).
+<h4 id="level-1-minimal-conformance">Level 1: Minimal conformance</h4>
 
-The reference implementation's plain-CSS + HTML backend (in the Quoin
-catalog under `02_reference-packs/impl-raw-css/`) is a Level 3 conformance
-claim, subject to the conformance report at [`spec/conformance-report.md`](https://github.com/HarrowHaus/quoin/blob/main/spec/conformance-report.md).
+A Level 1 USML Backend Emitter:
+
+- MUST emit every mandatory slot from the source Pattern's anatomy
+    ([[#fidelity-anatomy-preservation]] for mandatory slots only).
+- MUST emit the source Pattern's name as identifiable metadata (a CSS
+    comment, a React component name, an HTML data attribute, etc.).
+- MAY omit conditional slots.
+- MAY omit variant axes (a Level 1 emitter MAY emit only the default
+    variant of each axis).
+- MAY omit microstates.
+- MAY omit ARIA contracts (the slot structure is preserved; ARIA
+    preservation is not yet required at Level 1).
+- MAY omit aesthetic pack token consumption (the emitter MAY use its
+    own defaults rather than reading aesthetic pack values).
+
+Level 1 represents a minimal-fidelity emitter — useful for prototypes,
+demonstration purposes, or backend implementations under active
+development. Level 1 conformant output is NOT recommended for production
+consumers who depend on full accessibility or aesthetic-pack swap.
+
+<h4 id="level-2-standard-conformance">Level 2: Standard conformance</h4>
+
+A Level 2 USML Backend Emitter satisfies all Level 1 requirements PLUS:
+
+- MUST emit every conditional slot, with the slot's gate condition
+    evaluable in the target framework
+    ([[#fidelity-anatomy-preservation]] for conditional slots).
+- MUST emit every variant axis declared in the source Pattern with
+    variants queryable per [[#fidelity-variant-preservation]].
+- MUST emit every declared peer pack reference with composition
+    resolved per [[#fidelity-composition-preservation]] (required
+    `peerPacks` composed eagerly).
+- MUST preserve ARIA roles and states per
+    [[#fidelity-accessibility-preservation]].
+
+Level 2 represents standard-fidelity emission — appropriate for
+production consumers who do not require microstate styling or
+aesthetic-pack swap but do require accessibility-correct output.
+
+<h4 id="level-3-full-conformance">Level 3: Full conformance</h4>
+
+A Level 3 USML Backend Emitter satisfies all Level 2 requirements PLUS:
+
+- MUST emit every microstate from the source Pattern's `microStates`
+    list (default, hover, active, focus, focus-visible, disabled,
+    loading, selected, expanded, collapsed, current, error, or other
+    declared microstates) per [[#microstates]].
+- MUST consume aesthetic pack tokens per
+    [[#fidelity-token-consumption]] (a Level 3 emitter respects the
+    aesthetic-pack interface and emits output that adapts to swapped
+    aesthetic packs at runtime or rebuild time).
+- MUST satisfy performance budgets where the source Pattern declares
+    them. Most patterns do not declare performance budgets; those that
+    do (per the implementation gates v3.G.14 conventions referenced in
+    [[#composition-rules]]) require the emitter to produce output
+    meeting the declared budget.
+- MUST include emission attribution metadata per
+    [[#emission-attribution]].
+
+Level 3 represents full-fidelity emission — appropriate for production
+consumers who require complete accessibility, microstate styling,
+aesthetic-pack swap, and traceability back to source patterns.
+
+<h4 id="conformance-level-reporting">Conformance level reporting</h4>
+
+A USML Backend Emitter:
+
+- MUST declare its conformance level in implementer documentation.
+- MUST NOT under-claim. An emitter claiming Level 2 MUST NOT produce
+    output that satisfies only Level 1. Consumers rely on the declared
+    level to determine what features to expect.
+- MUST NOT over-claim. An emitter at Level 3 MUST satisfy the strict
+    Level 3 contract; partial Level 3 conformance is NOT a defined
+    conformance state. Implementations that meet some but not all Level
+    3 requirements MUST declare Level 2 and document which Level 3
+    requirements they additionally satisfy (the documentation is
+    informative, not a redefined conformance level).
+
+<h3 id="reference-backend">Reference backend (Quoin plain CSS + HTML)</h3>
+
+The Quoin reference backend is the canonical example of a USML Backend
+Emitter implementation. It claims **Level 3 conformance** for the plain
+HTML + CSS target. The claim is documented in
+[`spec/conformance-report.md`](https://github.com/HarrowHaus/quoin/blob/main/spec/conformance-report.md)
+with per-pattern evidence.
+
+<h4 id="reference-backend-identity">Reference backend identity</h4>
+
+The reference backend is implemented as the **inline CSS within each
+pack manifest's example HTML files**. Each Quoin pattern at
+`/02_reference-packs/patterns/<name>/examples/<variant>.html` (or
+`/patterns/<name>/examples/<variant>.html` for editorial + translated
+patterns shipped in Phase 22.5+ and 22.7) contains a complete `<style>`
+block with the pattern's CSS emission. The example HTML files ARE the
+backend output; consumers can copy them or compile them into their
+build pipelines.
+
+The directory `02_reference-packs/impl-raw-css/` contains supporting
+emission tooling and conformance scaffolding; the actual emitted CSS
+ships inside each pattern's example HTML files.
+
+<h4 id="reference-backend-target">Target framework</h4>
+
+- **Target:** plain HTML5 + CSS3 with CSS custom properties for token
+    consumption.
+- **Required CSS features:** CSS custom properties (CSS Variables Level
+    1), CSS attribute selectors (CSS Selectors Level 4), CSS @media
+    queries, CSS @supports for progressive enhancement.
+- **JavaScript runtime:** NOT required by the reference backend itself.
+    Patterns that require JS for interaction (modal-dialog focus trap;
+    combobox keyboard navigation; tabs activation) ship optional
+    companion JS in their example files; the JS is not part of the
+    backend emission contract.
+
+<h4 id="reference-backend-emission-characteristics">Emission characteristics</h4>
+
+Per the reference backend's Level 3 conformance:
+
+- Each USML Pattern's example HTML emits one inline `<style>` block
+    containing: variant attribute selectors (`[data-variant="x"]`,
+    `[data-intent="primary"]`, etc.); microstate selectors (`:hover`,
+    `:focus-visible`, `[aria-disabled]`, etc.); slot styling; token
+    consumption via CSS custom properties (`var(--accent)`,
+    `var(--space-3)`, etc.).
+- Each USML Pattern's example HTML demonstrates the pattern in its
+    rendered form with all mandatory slots populated and at least one
+    representative variant exercised.
+- Each USML aesthetic pack provides CSS custom property values via
+    `:root` or `[data-aesthetic="<name>"]` selectors (see
+    [[#aesthetic-pack-interface]]).
+- Aesthetic-pack swap is achieved by changing which `data-aesthetic`
+    attribute or class is applied to a containing element; the
+    reference Phase 22.5.A swap demo at `/demos/aesthetic-swap/`
+    demonstrates this with `document.startViewTransition` for the
+    crossfade animation.
+
+<h4 id="reference-backend-conformance-evidence">Conformance evidence</h4>
+
+The reference backend's Level 3 conformance is evidenced per pattern in
+[`spec/conformance-report.md`](https://github.com/HarrowHaus/quoin/blob/main/spec/conformance-report.md).
+The evidence covers each fidelity property in
+[[#fidelity-scope]] for representative patterns (`hero`, `button-system`,
+`modal-dialog`, plus all translated patterns from Phase 22.7).
+
+<h3 id="emission-attribution">Emission attribution metadata</h3>
+
+A Level 3 USML Backend Emitter MUST include attribution metadata in its
+output documenting the emission's provenance. Attribution allows
+consumers to trace emitted output back to source patterns and the
+aesthetic packs consumed, which is particularly important for AI coding
+agents and design system tools that need to verify emission source.
+
+<h4 id="attribution-required-fields">Required attribution fields</h4>
+
+A Level 3 emitter's output MUST include the following metadata:
+
+| Field | Type | Meaning |
+|---|---|---|
+| `emitter` | string | The name of the backend emitter implementation (e.g., `@quoin/backend-plain-css`, `@harrow-haus/quoin-backend-react`). |
+| `emitterVersion` | string | The version of the backend emitter (semver). |
+| `target` | string | The target framework (e.g., `plain-css+html`, `react+tailwind`, `lit-web-component`). |
+| `sourcePatternName` | string | The name of the source USML Pattern (e.g., `@quoin/pattern-hero`). |
+| `sourcePatternVersion` | string | The version of the source USML Pattern at emission time (semver). |
+| `usmlVersion` | string | The version of USML the emission targets (e.g., `2026.05`). |
+
+A Level 3 emitter SHOULD include the following optional metadata:
+
+| Field | Type | Meaning |
+|---|---|---|
+| `aestheticPack` | string | The name of the aesthetic pack consumed for token values, if a specific pack was bound at emission time. |
+| `emittedAt` | string (ISO 8601 date) | When the emission was performed. |
+
+<h4 id="attribution-format-per-target">Attribution format per target</h4>
+
+The exact serialization of attribution metadata is target-framework
+specific. The required fields MUST appear in the output regardless of
+serialization. Recommended formats:
+
+- **CSS target:** a top-of-file comment block in CSS comment syntax
+    (`/* @emitter ... */`), or a `@property --quoin-emission-attribution`
+    declaration containing a JSON string.
+- **HTML target:** a `<meta name="quoin-emission" content="...">`
+    element in `<head>`, or an HTML comment block at the top of
+    `<body>`.
+- **React/JSX target:** a JSDoc comment block at the component
+    declaration, or a static `componentName.quoinEmission` property.
+- **Component manifest target** (web components, Custom Elements
+    Manifest [[CEM-2.1]]): a metadata object alongside the component
+    declaration.
+
+<h4 id="attribution-discovery">Attribution discovery</h4>
+
+Consumers of emitted output SHOULD be able to discover the attribution
+metadata programmatically:
+
+- A CSS consumer SHOULD be able to grep for `@emitter` comments or
+    `--quoin-emission-attribution` custom properties.
+- An HTML consumer SHOULD be able to query for
+    `<meta name="quoin-emission">`.
+- A JSX consumer SHOULD be able to read JSDoc tags.
+
+Attribution discovery is particularly important for:
+
+- **AI coding agents** that consume emitted output and need to trace
+    back to source patterns for further editing or context.
+- **Design system tools** that audit emissions for compliance or
+    consistency.
+- **Build pipelines** that verify emission integrity (the emitted
+    output is from the source patterns the build expects).
+
+<h3 id="backend-transition">Backend transition (future-state framework backends)</h3>
+
+The reference backend ships Level 3 conformance for plain CSS + HTML.
+Additional framework backends are anticipated but not yet implemented in
+the reference implementation as of USML 2026.05. This subsection
+documents the framework backends the reference implementation plans to
+ship and the authoring conventions external backend authors are
+encouraged to follow.
+
+<h4 id="planned-framework-backends">Planned framework backends</h4>
+
+The reference implementation anticipates the following framework backends:
+
+- **Web components backend** — emits patterns as Custom Elements with
+    Shadow DOM, declared via Custom Elements Manifest 2.1.0
+    [[CEM-2.1]]. Targets evergreen browsers with native Web Components
+    support.
+- **React backend** — emits patterns as React functional components
+    with TypeScript types, supporting both Server Components and Client
+    Components. Targets React 18+.
+- **Vue backend** — emits patterns as Vue Single-File Components with
+    TypeScript support. Targets Vue 3+.
+- **Lit backend** — emits patterns as Lit Element classes with
+    reactive properties. Targets Lit 3+.
+
+Native framework backends (iOS UIKit/SwiftUI, Android Jetpack Compose,
+etc.) are not anticipated in USML 2026.05; future versions may add
+specifications for native framework emission.
+
+<h4 id="backend-authoring-framework">Backend authoring framework</h4>
+
+External backend authors are encouraged to follow these conventions:
+
+- Backends SHOULD be authored as separate npm packages. The `@quoin/*`
+    namespace is reserved for Quoin's own implementations; other
+    organizations should use their own namespaces.
+- Backends SHOULD ship as standalone CLI tools (consumable as
+    `usml-emit-react my-pattern.json`) OR as build-pipeline plugins
+    (Vite plugins, webpack loaders, Rollup plugins, esbuild plugins).
+- Backends MUST consume USML Pattern objects validating against the
+    locked-at-emission-time schema (currently
+    [`spec/usml-schema.json`](https://github.com/HarrowHaus/quoin/blob/main/spec/usml-schema.json)
+    at 2026.05).
+- Backends MAY support multiple conformance levels and allow consumers
+    to select the level at emission time.
+
+<h4 id="backend-conformance-claim-ownership">Backend conformance claim ownership</h4>
+
+Each backend implementation maintains its own conformance report. The
+Quoin reference implementation only claims conformance for its own
+backends (currently just the reference plain-CSS + HTML backend). External
+backend implementations are encouraged to publish conformance reports
+following the same shape as
+[`spec/conformance-report.md`](https://github.com/HarrowHaus/quoin/blob/main/spec/conformance-report.md).
+
+A conformance report for an external backend should include:
+
+- Backend name, version, target framework.
+- Claimed conformance level.
+- Per-fidelity-property evidence (anatomy preservation; variant
+    preservation; composition preservation; accessibility preservation;
+    token consumption; microstates if Level 3).
+- Reference to test scaffolds the backend passes (the backend's own
+    test suite plus, when applicable, the USML conformance test
+    scaffold at
+    [`spec/tests/emit/`](https://github.com/HarrowHaus/quoin/tree/main/spec/tests/emit)).
 
 <!-- ════════════════════════════════════════════════════════════════════ -->
 <h2 id="ingest-interface">Ingest interface</h2>
@@ -1341,8 +1805,40 @@ conditional, and how composition references resolve.
 <dfn>Aesthetic pack</dfn> — a software artifact supplying token values
 consumed by a USML-conformant runtime. Conforms to [[!DTCG-2025.10]].
 
-<dfn>Backend</dfn> — a USML implementation that consumes USML data model
-input and emits framework-specific output.
+<dfn>Backend</dfn> — a USML implementation that consumes USML IR (Pattern
+objects plus aesthetic packs) and emits framework-specific output.
+Formal conformance class definition in
+[[#conformance-backend-emitter]]; interface contract in
+[[#backend-emission-contract]]. Synonymous with **backend emitter**.
+
+<dfn>Backend emitter</dfn> — see [[#conformance-backend-emitter]] and
+[[#backend-emission-contract]]. Synonymous with **backend**.
+
+<dfn>Emission fidelity</dfn> — the formal property that backend output
+preserves the structural intent of the source USML IR across framework
+targets. Defined in [[#emission-fidelity]]. Comprises anatomy,
+variants, composition, accessibility, token consumption, and (at Level
+3) microstates. Different framework targets MAY emit different DOM
+shapes idiomatically; fidelity does NOT require byte-identical output.
+
+<dfn>Conformance level</dfn> — one of Level 1 (minimal), Level 2
+(standard), or Level 3 (full), defining the strict subset of backend
+emission requirements an implementation satisfies. Defined per level in
+[[#backend-conformance-levels]]. Levels are strict supersets: a Level N
+implementation implicitly satisfies levels 1 through N−1.
+
+<dfn>Multi-target emission</dfn> — the emission of a single USML IR to
+multiple framework targets simultaneously via composition of multiple
+backend emitters. Defined in [[#backend-multi-target-emission]]. The
+overall conformance level is the minimum across constituent emissions.
+
+<dfn>Emission attribution metadata</dfn> — the metadata a Level 3
+emission includes documenting the backend emitter, target framework,
+source pattern, and aesthetic pack consumed. Defined in
+[[#emission-attribution]]. Required fields: `emitter`,
+`emitterVersion`, `target`, `sourcePatternName`, `sourcePatternVersion`,
+`usmlVersion`. Recommended optional fields: `aestheticPack`,
+`emittedAt`. Serialization is target-framework specific.
 
 <dfn>Composition reference</dfn> — a declaration in a Pattern that the pattern
 consumes another Pattern's slot through a `peerPacks` or `optionalPeerPacks`

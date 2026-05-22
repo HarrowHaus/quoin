@@ -1,0 +1,60 @@
+{
+  "$comment": "USML 2026.05 — canonical backend emission output example. Non-normative; documents the shape of a Level 3 conformant emission per §6.5 Emission attribution metadata. The actual emitted CSS + HTML for button-system lives inline in /02_reference-packs/patterns/button-system/examples/index.html; this document describes what that emission documents about itself when wearing its attribution metadata.",
+  "emittedFrom": {
+    "sourcePatternName": "@quoin/pattern-button-system",
+    "sourcePatternVersion": "1.0.0",
+    "sourcePatternURL": "https://github.com/HarrowHaus/quoin/tree/main/02_reference-packs/patterns/button-system",
+    "usmlVersion": "2026.05"
+  },
+  "target": "plain-css+html",
+  "conformanceLevel": 3,
+  "attribution": {
+    "emitter": "@quoin/backend-plain-css",
+    "emitterVersion": "0.1.0",
+    "target": "plain-css+html",
+    "sourcePatternName": "@quoin/pattern-button-system",
+    "sourcePatternVersion": "1.0.0",
+    "aestheticPack": "@quoin/aesthetic-default",
+    "emittedAt": "2026-05-21",
+    "usmlVersion": "2026.05"
+  },
+  "outputs": [
+    {
+      "path": "02_reference-packs/patterns/button-system/examples/index.html",
+      "kind": "html-with-inline-css",
+      "description": "Reference specimen for the button-system pattern. Contains: <style> block with token consumption (124 var(--...) references); variant attribute selectors ([data-intent=\"primary|secondary|ghost|destructive|link\"], [data-size=\"xs|sm|md|lg\"]); microstate selectors (:hover, :focus-visible, [aria-disabled]); slot styling; rendered HTML demonstrating the pattern in use."
+    }
+  ],
+  "fidelityEvidence": {
+    "anatomyPreservation": {
+      "mandatorySlotsEmitted": ["action-button"],
+      "conditionalSlotsEmitted": ["button-group"],
+      "evidence": "Specimen contains <button class=\"action-button\"> elements demonstrating every mandatory slot from the source Pattern's primitives/index.json."
+    },
+    "variantPreservation": {
+      "axesEmitted": ["data-intent", "data-size"],
+      "universalAxesEmitted": ["data-alignment"],
+      "evidence": "Specimen contains attribute selectors for every variant axis declared in the source Pattern. 124 selectors of form [data-*] confirm queryability."
+    },
+    "compositionPreservation": {
+      "peerPacksEmitted": ["@quoin/tokens-baseline"],
+      "evidence": "Specimen consumes tokens-baseline via :root CSS custom properties; no peer-pack contracts are inlined."
+    },
+    "accessibilityPreservation": {
+      "ariaRolesEmitted": ["button"],
+      "ariaStatesEmitted": ["aria-disabled", "aria-pressed"],
+      "evidence": "Specimen contains 36 ARIA attribute references. role=\"button\" and aria-disabled are present where the source's accessibility contract declares them."
+    },
+    "tokenConsumption": {
+      "tokenSystemMechanism": "CSS custom properties on :root",
+      "tokenReferencesEmitted": 124,
+      "aestheticPackSwapMechanism": "[data-aesthetic=\"<name>\"] selectors per Phase 22.5.A swap demo at /demos/aesthetic-swap/",
+      "evidence": "Specimen reads every token value via var(--token-name). Aesthetic pack at /aesthetics/default/tokens.css supplies values; swap demo exercises runtime swap."
+    },
+    "microstates": {
+      "emitted": ["default", "hover", "active", "focus", "focus-visible", "disabled"],
+      "evidence": "Specimen contains 17 microstate selectors covering the full standardized vocabulary for button patterns."
+    }
+  },
+  "_note": "This document is a non-normative description of an emission's shape. A USML Backend Emitter's actual emitted output (CSS, HTML, JSX, etc.) is target-specific and does not match this JSON document literally — this document describes WHAT the emission attests about itself when wearing its §6.5 attribution metadata."
+}

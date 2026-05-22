@@ -1,0 +1,6 @@
+{
+  "expectConformant": false,
+  "expectLevel": 2,
+  "expectViolation": "anatomy-mandatory-missing",
+  "rationale": "Emission claims Level 2 conformance but `fidelityEvidence.anatomyMandatoryPresent` is false. Anatomy preservation of mandatory slots is required at Level 1 (and all higher levels) per §6.2.C2 and §6.3.D1. The Backend Emitter conformance class MUST flag this as non-conformant regardless of claimed level."
+}

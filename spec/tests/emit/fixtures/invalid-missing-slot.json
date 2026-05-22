@@ -1,0 +1,35 @@
+{
+  "_comment": "Invalid: emission violates §6.2.C2 (anatomy preservation) — a mandatory slot from the source pattern is missing in the emitted output. Per §6.3 Level 1+ requirements, this MUST be flagged as non-conformant at any conformance level.",
+  "emittedFrom": {
+    "sourcePatternName": "@quoin/pattern-modal-dialog",
+    "sourcePatternVersion": "1.0.0",
+    "usmlVersion": "2026.05"
+  },
+  "target": "plain-css+html",
+  "conformanceLevel": 2,
+  "attribution": {
+    "emitter": "@example/broken-backend",
+    "emitterVersion": "0.0.1",
+    "target": "plain-css+html",
+    "sourcePatternName": "@quoin/pattern-modal-dialog",
+    "sourcePatternVersion": "1.0.0",
+    "usmlVersion": "2026.05"
+  },
+  "outputs": [
+    {
+      "path": "examples/index.html",
+      "kind": "html-with-inline-css"
+    }
+  ],
+  "fidelityEvidence": {
+    "anatomyMandatoryPresent": false,
+    "_failureNote": "Mandatory slot `modal-dialog-trigger` (or equivalent close affordance) was not emitted. Anatomy preservation fails at the most basic L1 requirement.",
+    "anatomyConditionalGated": true,
+    "variantsPresent": true,
+    "compositionResolved": true,
+    "ariaRolesPresent": true,
+    "ariaStatesPresent": true,
+    "tokenConsumptionPresent": false,
+    "microstatesPresent": false
+  }
+}

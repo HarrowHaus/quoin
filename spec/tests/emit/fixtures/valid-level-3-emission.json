@@ -1,0 +1,36 @@
+{
+  "_comment": "Valid Level 3 emission per USML §6. Contains complete §6.5 attribution metadata + complete §6.2 fidelity evidence covering anatomy, variants, composition, accessibility, token consumption, and microstates.",
+  "emittedFrom": {
+    "sourcePatternName": "@quoin/pattern-button-system",
+    "sourcePatternVersion": "1.0.0",
+    "usmlVersion": "2026.05"
+  },
+  "target": "plain-css+html",
+  "conformanceLevel": 3,
+  "attribution": {
+    "emitter": "@quoin/backend-plain-css",
+    "emitterVersion": "0.1.0",
+    "target": "plain-css+html",
+    "sourcePatternName": "@quoin/pattern-button-system",
+    "sourcePatternVersion": "1.0.0",
+    "aestheticPack": "@quoin/aesthetic-default",
+    "emittedAt": "2026-05-21",
+    "usmlVersion": "2026.05"
+  },
+  "outputs": [
+    {
+      "path": "examples/index.html",
+      "kind": "html-with-inline-css"
+    }
+  ],
+  "fidelityEvidence": {
+    "anatomyMandatoryPresent": true,
+    "anatomyConditionalGated": true,
+    "variantsPresent": true,
+    "compositionResolved": true,
+    "ariaRolesPresent": true,
+    "ariaStatesPresent": true,
+    "tokenConsumptionPresent": true,
+    "microstatesPresent": true
+  }
+}

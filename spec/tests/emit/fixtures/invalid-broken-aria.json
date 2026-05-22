@@ -1,0 +1,35 @@
+{
+  "_comment": "Invalid: emission violates §6.2.C5 (accessibility preservation) — an ARIA role declared in the source pattern's accessibility contract is not present in the emission. Per §6.3 Level 2+ requirements, ARIA preservation is mandatory; this MUST be flagged as non-conformant for any Level 2 or Level 3 claim.",
+  "emittedFrom": {
+    "sourcePatternName": "@quoin/pattern-tabs",
+    "sourcePatternVersion": "1.0.0",
+    "usmlVersion": "2026.05"
+  },
+  "target": "react+jsx",
+  "conformanceLevel": 2,
+  "attribution": {
+    "emitter": "@example/incomplete-react-backend",
+    "emitterVersion": "0.0.1",
+    "target": "react+jsx",
+    "sourcePatternName": "@quoin/pattern-tabs",
+    "sourcePatternVersion": "1.0.0",
+    "usmlVersion": "2026.05"
+  },
+  "outputs": [
+    {
+      "path": "src/Tabs.tsx",
+      "kind": "react-tsx-component"
+    }
+  ],
+  "fidelityEvidence": {
+    "anatomyMandatoryPresent": true,
+    "anatomyConditionalGated": true,
+    "variantsPresent": true,
+    "compositionResolved": true,
+    "ariaRolesPresent": false,
+    "_failureNote": "Source pattern @quoin/pattern-tabs declares role=\"tablist\", role=\"tab\", role=\"tabpanel\" in its accessibility contract. The emission renders <ul><li> elements without role attributes, violating §6.2.C5.",
+    "ariaStatesPresent": false,
+    "tokenConsumptionPresent": true,
+    "microstatesPresent": false
+  }
+}

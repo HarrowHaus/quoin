@@ -1,5 +1,6 @@
 // USML 2026.05 — runs all four conformance class scaffolds and reports
 // aggregate pass/fail. Source adapter scaffold added Phase 23.2.
+// Backend Emitter formal scaffold (under spec/tests/emit/) added Phase 23.3.
 
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
@@ -10,7 +11,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const runners = [
   ['anatomy', join(__dirname, 'anatomy', 'run.mjs')],
   ['aesthetic-pack', join(__dirname, 'aesthetic-pack', 'run.mjs')],
-  ['backend-emit', join(__dirname, 'backend-emit', 'run.mjs')],
+  ['backend-emit (smoke)', join(__dirname, 'backend-emit', 'run.mjs')],
+  ['emit (formal §6)', join(__dirname, 'emit', 'run.mjs')],
   ['ingest (source adapter)', join(__dirname, 'ingest', 'run.mjs')],
 ];
 
