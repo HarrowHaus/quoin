@@ -1,0 +1,15 @@
+{
+  "name": "@quoin/pattern-disclosure",
+  "version": "1.0.0",
+  "type": "pattern",
+  "quoinVersion": "^2026.05",
+  "description": "Valid disclosure-pattern manifest test fixture.",
+  "category": "application",
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT"
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^2026.05"
+  }
+}

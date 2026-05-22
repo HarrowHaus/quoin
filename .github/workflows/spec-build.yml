@@ -1,0 +1,50 @@
+name: USML spec build
+
+# Auto-builds USML-Specification.bs (Bikeshed source) on every push to main.
+# Output is committed to docs/usml/ for GitHub Pages serving at
+# https://harrowhaus.github.io/quoin/usml/.
+#
+# Phase 23.1 — Bikeshed toolchain decision per the savant-research-informed
+# handoff (Markdown is insufficient for standards-track artifacts; Bikeshed
+# is what WHATWG, CSSWG, and the C++ standards committee use).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "USML-Specification.bs"
+      - "spec/**"
+      - ".github/workflows/spec-build.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build USML spec with Bikeshed
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Bikeshed source -> HTML
+        uses: w3c/spec-prod@v2
+        with:
+          SOURCE: USML-Specification.bs
+          BUILD_FAIL_ON: nothing
+          # Output the built HTML into docs/usml/ so GitHub Pages can serve it.
+          DESTINATION: docs/usml/index.html
+          TOOLCHAIN: bikeshed
+
+      - name: Commit built HTML
+        run: |
+          if [ -n "$(git status --porcelain docs/usml/)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add docs/usml/
+            git commit -m "ci: rebuild USML spec [skip ci]"
+            git push
+          else
+            echo "No spec changes to commit."
+          fi

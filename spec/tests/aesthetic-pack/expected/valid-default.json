@@ -1,0 +1,5 @@
+{
+  "expectValid": true,
+  "expectType": "aesthetic",
+  "rationale": "type=aesthetic, declares only tokens-baseline as peer, no anatomy declared. Conforms to USML §4.3."
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://harrowhaus.github.io/quoin/usml/usml-schema.json",
+  "name": "@quoin/aesthetic-default",
+  "version": "1.0.0",
+  "type": "aesthetic",
+  "quoinVersion": "^2026.05",
+  "description": "Tasteful neutral baseline. Inter Variable + IBM Plex Mono; neutral grays + deep-blue accent. Canonical USML example demonstrating an aesthetic pack consuming DTCG 2025.10 token format. Declares zero anatomy per v3.G.20 — anatomy lives in pattern packs.",
+  "exports": {
+    "light": "./overrides/light.json",
+    "dark": "./overrides/dark.json",
+    "tokensCss": "./tokens.css"
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^2026.05"
+  },
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/aesthetics/default",
+    "tags": ["aesthetic", "neutral", "baseline", "canonical-example"]
+  }
+}

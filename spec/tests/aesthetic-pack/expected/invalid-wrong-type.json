@@ -1,0 +1,5 @@
+{
+  "expectValid": false,
+  "expectType": "aesthetic",
+  "rationale": "type field is 'pattern', not 'aesthetic'. Aesthetic-pack conformance class requires type='aesthetic' per USML §4.3. The conformance-class test asserts the type discriminator regardless of what the schema's anyOf says."
+}

@@ -1,0 +1,1195 @@
+<pre class='metadata'>
+Title: USML — UI Semantics Markup Language
+Shortname: usml
+Level: 1
+Status: w3c/CG-DRAFT
+Group: harrowhaus
+URL: https://harrowhaus.github.io/quoin/usml/
+Editor: Donald Pilger, Harrow Haus https://harrow.haus, donald@harrow.haus
+Abstract:
+    USML — UI Semantics Markup Language — defines the formal interface contract
+    between UI anatomy specification and aesthetic-pack supply, with backend
+    emission as a separate layer. The specification covers anatomy contracts
+    as typed slot graphs, variant tokenization rules, composition rules with
+    peer-pack references, the aesthetic-pack interface (consuming Design Tokens
+    Community Group format module 2025.10), backend emission contracts with
+    fidelity preservation, and AI consumption format. A reference implementation
+    (Quoin, at https://github.com/HarrowHaus/quoin) demonstrates the specification
+    works in HTML and CSS.
+Markup Shorthands: markdown yes, css no
+Repository: HarrowHaus/quoin
+Date: 2026-05-21
+Boilerplate: omit conformance, omit feedback-header
+Default Highlight: json
+Inline Github Issues: title
+</pre>
+
+<style>
+  /* USML draft — minimal layout polish on top of Bikeshed defaults. */
+  table { border-collapse: collapse; }
+  table th, table td { border: 1px solid #ccc; padding: 4px 8px; vertical-align: top; }
+  .note { background: #fff8dc; padding: 0.5em 1em; border-left: 4px solid #e8a33d; }
+  .issue { background: #fdf2ec; padding: 0.5em 1em; border-left: 4px solid #c75; }
+</style>
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<h2 id="status-of-this-document" class="no-num">Status of this document</h2>
+
+This is the **Editor's Draft 2026.05** of the USML (UI Semantics Markup
+Language) specification, authored at Harrow Haus by Donald Pilger.
+
+The draft is published at the canonical URL above and developed in public
+at the [HarrowHaus/quoin](https://github.com/HarrowHaus/quoin) repository.
+
+**This document is not yet a W3C Community Group Report.** It is an
+Editor's Draft intended for future submission to the W3C Generative UI
+Community Group (chartered January 2026, chairs Zuo Wang and Hai Rao) as
+an input document for the group's "intermediate representations or protocols
+for Generative UI" workstream. Submission is deferred until adoption-threshold
+criteria are met (see [[#adoption-thresholds]]).
+
+**License.** This specification is published under the [Creative Commons
+Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
+The reference implementation (Quoin) is published under MIT.
+
+**Authorship disclosure.** This specification was authored with substantial
+AI-agent assistance (Anthropic Claude). The editor takes human responsibility
+for every normative statement in this document. Authorship process is
+documented openly; standards reviewers and external implementers are invited
+to evaluate the artifact on its merits.
+
+**Date-versioning.** This specification uses date-versioning (2026.05, 2026.08,
+etc.) mirroring the Design Tokens Community Group precedent [[!DTCG-2025.10]].
+See [[#versioning-and-stability]] for the stability policy.
+
+<div class="note">
+**Note.** Per the strategic sequencing decision documented in
+[`PHASES.md`](https://github.com/HarrowHaus/quoin/blob/main/PHASES.md),
+USML does not seek First Public Working Draft status until adoption
+thresholds are met. The thresholds are: three named co-editors from
+different organizations; two independent partial implementations;
+adoption pull from at least one external design system; and an
+identified incubation venue (W3C Generative UI Community Group is the
+preferred candidate). See [[#adoption-thresholds]].
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<h2 id="introduction">Introduction</h2>
+
+UI design systems today are vertically integrated implementations without
+publishable specifications. Material, Carbon, Polaris, shadcn each ship
+working components, but the *anatomy contract* underneath those components
+is implicit, framework-bound, and not portable. A team adopting one such
+system inherits its implementation but cannot extract its underlying
+semantic model to use elsewhere. The result is the silo problem: switching
+between design systems means rewriting the application layer.
+
+USML inverts this relationship. The specification is the strategic product;
+the reference implementation proves the specification is workable. This is
+the same shape HTML occupies relative to web browsers: HTML is a W3C
+specification; Chrome, Firefox, and Safari are implementations. Browsers
+compete on implementation quality; they all implement the same HTML
+specification.
+
+USML defines an equivalent for UI semantics: what something *is* (a hero, a
+nav, a button, a modal — at the level of semantic intent and anatomy),
+independent of what it looks like (the aesthetic layer), what framework it
+renders in (the backend layer), and how AI tools generate it (the consumption
+layer).
+
+The specification's strongest novel claim is the **formal interface contract
+between UI anatomy specification and aesthetic-pack supply, with backend
+emission as a separate layer**. Adjacent concerns — token vocabulary, ARIA
+roles, web-components manifest, registry distribution, MCP delivery — are
+addressed by adjacent standards (DTCG 2025.10 [[!DTCG-2025.10]], WAI-ARIA 1.3
+[[!ARIA]], Custom Elements Manifest 2.1.0 [[CEM-2.1]], shadcn registry
+[[shadcn-registry]], MCP Apps [[MCP-APPS]]). USML interoperates with these
+rather than competing.
+
+<h3 id="goals">Goals</h3>
+
+- Define a publishable, machine-readable specification for UI anatomy that is
+    independent of any specific rendering framework.
+- Define the aesthetic-pack interface so token-value substitution composes
+    cleanly with anatomy contracts.
+- Define the backend emission contract so multiple framework implementations
+    can produce semantically equivalent output from a single source.
+- Define the AI consumption format so coding agents can generate
+    specification-conformant markup reliably.
+- Interoperate with existing adjacent standards (DTCG, ARIA, CEM, shadcn
+    registry, MCP) rather than replace them.
+
+<h3 id="non-goals">Non-goals</h3>
+
+- USML does not specify visual rendering details (colors, fonts, spacing).
+    These are aesthetic-pack concerns, governed by [[!DTCG-2025.10]].
+- USML does not specify framework-specific component lifecycle (React hooks,
+    Vue composition API). These are backend-emitter concerns.
+- USML does not specify animation timing or motion curves beyond reduced-motion
+    accommodation. These are aesthetic-pack concerns.
+- USML does not seek to replace ARIA. ARIA roles and properties are referenced
+    normatively; USML adds structural anatomy *above* ARIA, not below.
+- USML does not specify visual editor UI affordances (drag handles, resize
+    grips). These are tooling concerns outside the data model.
+
+<h3 id="lineage">Lineage</h3>
+
+USML builds on a lineage of prior work in semantic UI, design tokens,
+component manifests, and accessibility patterns:
+
+- [Every Layout](https://every-layout.dev/) (Heydon Pickering, Andy Bell) —
+    semantic layout primitives as composable building blocks. USML generalizes
+    this to all UI semantics, not only layout.
+- [Open Props](https://open-props.style/) (Adam Argyle, Google) — design
+    tokens libre and CDN-distributable. USML specifies the layer above tokens.
+- [shadcn/ui](https://ui.shadcn.com/) — demonstrated the copy-and-own pattern
+    distribution model and won the AI-tool default-generation race. USML
+    proposes the specification layer that shadcn could implement, making its
+    patterns aesthetic-swappable and multi-backend-emittable.
+- [Radix UI Primitives](https://www.radix-ui.com/primitives) — headless
+    behavioral primitives with styling separation. USML generalizes this from
+    React-bound primitives to framework-independent IR.
+- [WAI-ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/) —
+    canonical accessible patterns as reference HTML. USML's specification
+    absorbs and structures these patterns; ARIA APG serves as the first
+    reference source adapter.
+- [Design Tokens Community Group Format Module 2025.10](https://www.designtokens.org/tr/drafts/format/) —
+    the token vocabulary USML consumes verbatim for aesthetic-pack values.
+- [Custom Elements Manifest 2.1.0](https://github.com/webcomponents/custom-elements-manifest) —
+    web-component anatomy description format. USML bridges to CEM for
+    web-component-targeted backends.
+- Academic work on intent-based UI generation (Weave, PrototypeFlow,
+    SpecifyUI, WireGen, CrossTL [arXiv 2508.21256]) — confirms the strategic
+    direction.
+
+USML does not replace any of these. It provides the formal interface layer
+underneath them — the specification they can implement against to gain
+interoperability.
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<h2 id="conformance">Conformance</h2>
+
+<h3 id="document-conventions">Document conventions</h3>
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+"SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+document are to be interpreted as described in [BCP 14](https://www.rfc-editor.org/info/bcp14)
+[[!RFC2119]] [[!RFC8174]] when, and only when, they appear in all capitals,
+as shown here.
+
+Paragraphs prefixed with "Note:" are non-normative. Examples are non-normative
+unless explicitly marked otherwise.
+
+<h3 id="conformance-classes">Conformance classes</h3>
+
+USML defines three conformance classes. An implementation MAY conform to one,
+two, or all three. Conformance claims MUST identify the class and the level
+of conformance achieved.
+
+<h4 id="conformance-anatomy-validator">USML Anatomy Validator</h4>
+
+A USML Anatomy Validator is an implementation that accepts a USML Anatomy
+Graph (see [[#core-data-model]]) and reports whether it conforms to this
+specification.
+
+A USML Anatomy Validator:
+
+- MUST accept input conforming to the JSON Schema at `spec/usml-schema.json`
+    of this specification.
+- MUST validate the structural requirements in [[#core-data-model]].
+- MUST report violations with sufficient information to locate the violation
+    in the input (path, type, expected value or shape).
+- SHOULD report informational warnings for non-violations (e.g., deprecated
+    attribute names, missing optional metadata).
+- MAY accept additional vendor extensions beyond those defined in this
+    specification, provided the extensions do not override required fields.
+
+<h4 id="conformance-aesthetic-pack-provider">USML Aesthetic-Pack Provider</h4>
+
+A USML Aesthetic-Pack Provider is a software artifact (typically a package or
+a configuration file) that supplies token values consumed by a USML-conformant
+runtime.
+
+A USML Aesthetic-Pack Provider:
+
+- MUST conform to the Design Tokens Community Group Format Module 2025.10
+    [[!DTCG-2025.10]] for token value representation (`$value`, `$type`,
+    `$description`).
+- MUST declare in its manifest (see [[#aesthetic-pack-interface]]) which
+    variant-token slots it overrides.
+- MUST NOT declare anatomy, variants, composition, or accessibility behavior.
+    These concerns belong to USML Pattern packs.
+- SHOULD declare `dependsOn` and `conflictsWith` relationships with other
+    aesthetic packs for predictable composition.
+- MAY declare metadata for human-facing tooling (display name, description,
+    preview image URL, etc.).
+
+<h4 id="conformance-backend-emitter">USML Backend Emitter</h4>
+
+A USML Backend Emitter is an implementation that consumes a USML Anatomy
+Graph and produces framework-specific output.
+
+A USML Backend Emitter:
+
+- MUST consume USML Anatomy Graph input conforming to this specification.
+- MUST produce framework-specific output (HTML, CSS, web components, React,
+    Vue, native frameworks, or other targets).
+- MUST preserve anatomy, variants, composition, and accessibility intent.
+    Emission MUST NOT alter the semantic structure declared by the input.
+- SHOULD emit token references that resolve at runtime or build time against
+    the active aesthetic-pack provider.
+- MAY declare partial conformance levels:
+    - **Level 1 — Anatomy only.** Emits the mandatory slot structure; does
+        not yet handle variants, microstates, or aesthetic-pack values.
+    - **Level 2 — Anatomy + variants.** Adds full variant axis handling.
+    - **Level 3 — Full conformance.** Adds aesthetic-pack token resolution,
+        ARIA attribute emission, microstate CSS, and performance-budget
+        enforcement.
+- MUST document its conformance level in implementer documentation.
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<h2 id="core-data-model">Core Data Model</h2>
+
+The USML data model defines six primary types: **Pattern**, **Slot**,
+**VariantAxis**, **CompositionReference**, **AccessibilityContract**, and
+**Microstate**. Two ancillary types — **TokenReference** and
+**PatternMetadata** — appear in slot bindings and pack manifests respectively.
+The aesthetic-pack interface defines a separate type, **AestheticPack** (see
+[[#aesthetic-pack-interface]]).
+
+All types are formally specified in the JSON Schema at `spec/usml-schema.json`.
+Examples appear in `spec/examples/`.
+
+<h3 id="data-pattern">Pattern</h3>
+
+A <dfn>Pattern</dfn> is a named anatomy contract — the structural definition
+of a UI pattern as a slot graph plus declared variants, composition references,
+and accessibility binding.
+
+A Pattern MUST declare the following fields:
+
+- `name` — a string of the form `@<namespace>/pattern-<pattern-slug>` or
+    `@<namespace>/prim-<primitive-slug>`. The namespace identifies the
+    publisher (e.g., `@quoin`, `@material`, `@carbon`). The pattern-slug is
+    the anatomy-derived short identifier.
+- `version` — a semver string [[!SEMVER]] for the pattern pack version.
+- `type` — one of `"pattern"`, `"primitive"`, or `"template"`. See
+    [[#pattern-types]].
+- `quoinVersion` — the USML specification version the pattern conforms to
+    (e.g., `"^2026.05"`).
+- `description` — a one-paragraph human-readable description.
+- `anatomy` — see [[#anatomy-and-slots]].
+- `variants` — see [[#variant-axes]].
+- `composition` — see [[#composition-rules]].
+- `accessibility` — see [[#accessibility-contracts]].
+
+A Pattern MAY declare:
+
+- `metadata` — see [[#pattern-metadata]].
+- `microStates` — see [[#microstates]].
+- `peerPacks` — required peer pack composition (see [[#composition-rules]]).
+- `optionalPeerPacks` — variant-conditional peer pack composition (see
+    [[#composition-rules]]).
+- `polyfills` — runtime polyfill consumption declarations.
+
+<h4 id="pattern-types">Pattern types</h4>
+
+USML distinguishes three pattern subtypes:
+
+- A <dfn>pattern</dfn> (`type: "pattern"`) is a top-level user-facing UI
+    pattern (hero, nav, modal-dialog, etc.). Most catalog entries are this
+    type.
+- A <dfn>primitive</dfn> (`type: "primitive"`) is a reusable structural
+    building block consumed by patterns (label, sequence, decoration-overlay,
+    searchable-list, layout primitives like stack/cluster/center/grid).
+    Primitives have anatomy but typically smaller scope than patterns.
+- A <dfn>template</dfn> (`type: "template"`) is a composed page-level
+    arrangement of multiple patterns. Templates declare composition order and
+    customization points rather than fine-grained anatomy.
+
+The boundary between pattern and primitive is conventional, not enforced. A
+primitive becomes a pattern when it is rich enough to be consumed user-facing;
+a pattern becomes a primitive when it is decomposed into a reusable component
+of other patterns.
+
+<h4 id="data-pattern-naming">Pattern naming</h4>
+
+<div class="note">
+**Note (normative reference to existing gate v3.G.15).** The reference
+implementation enforces that emitted `data-pattern` attribute values use
+the **short form** `<pattern-name>-<slot>` (e.g., `hero-section`, not
+`pattern-hero-section`).
+</div>
+
+USML Backend Emitters MUST emit `data-pattern` attribute values in short
+form. The long form `pattern-<pattern>-<slot>` MUST NOT be emitted.
+
+`data-pattern` values MUST use single-dash separators between the pattern
+name and slot. Double-dash separators MUST NOT be used.
+
+<h3 id="anatomy-and-slots">Anatomy and slots</h3>
+
+A Pattern's <dfn>anatomy</dfn> is a typed graph of slots and their relationships.
+A <dfn>slot</dfn> is a named position within a pattern that may contain
+specific content or be filled by a peer pack.
+
+Each slot MUST declare:
+
+- `name` — a string of the form `<slot-name>` (slot names are local to the
+    pattern; the full identifier is `<pattern-name>-<slot-name>` when
+    emitted).
+- `gating` — one of `"mandatory"` (always present) or `"conditional"`
+    (present only when a variant axis or state has a specific value).
+- `role` — a human-readable description of what the slot is for.
+
+For conditional slots, the slot MUST additionally declare:
+
+- `gatedBy` — the variant axis name and value(s) that activate this slot
+    (e.g., `{ "axis": "variant", "values": ["video", "brand-photo"] }`).
+
+A slot MAY declare:
+
+- `attributes` — variant axes specific to this slot (see [[#variant-axes]]).
+- `tokens` — token references this slot consumes (see [[#token-references]]).
+- `structure` — the underlying HTML element this slot maps to (e.g.,
+    `"button"`, `"section"`, `"div"`).
+- `children` — the content model (`"flow-content"`, `"phrasing-content"`,
+    `"none"`).
+- `scope` — `"inline"` or `"block"`.
+- `meta` — implementation-specific metadata including `semanticStructure`
+    examples and `ariaPatterns` documentation.
+
+<h3 id="variant-axes">Variant axes</h3>
+
+A <dfn>variant axis</dfn> is an orthogonal modal dimension that a pattern
+exposes. Variant axes are expressed as `data-<axis-name>` HTML attributes on
+the slot they apply to.
+
+A variant axis declaration MUST include:
+
+- `name` — the axis name (e.g., `"variant"`, `"layout"`, `"size"`).
+- `values` — the enumerated permissible values.
+- `default` — the default value when the attribute is absent.
+- `specific` — boolean; `true` if this axis is pattern-specific, `false` if
+    it is a universal axis (see below).
+
+<h4 id="universal-axes">Universal variant axes</h4>
+
+USML defines one universal variant axis that all patterns implementing
+content alignment MUST use:
+
+- <dfn>data-alignment</dfn> — content alignment. Values: `"centered"`,
+    `"left"`, `"right"`, `"split-anchor"`. Default: `"centered"`.
+
+<div class="note">
+**Note (normative reference to existing gate v3.G.16).** The legacy
+attribute `data-register` for content alignment is deprecated. USML Backend
+Emitters MUST NOT emit `data-register` for content-alignment semantics.
+Patterns using `data-register` to express other semantics (e.g.,
+"compact/default/expanded" density registers) MAY continue to use it; the
+deprecation applies specifically to alignment usage.
+</div>
+
+<h4 id="variant-tokenization">Variant tokenization rules</h4>
+
+Every variant axis whose values produce visible token differences MUST be
+expressed such that each value corresponds to a defined token slot.
+
+For example, a `data-palette="cool"` value MUST correspond to a token-slot
+binding (e.g., the slot consumes `var(--accent)` and the aesthetic pack
+defines `--accent` differently in the `cool` palette).
+
+This rule is what enables aesthetic-pack swap: changing the active aesthetic
+pack changes the token values but not the variant declarations.
+
+<h3 id="composition-rules">Composition rules</h3>
+
+Patterns consume other patterns through declared <dfn>peer pack</dfn>
+references. A peer-pack reference declares that the consuming pattern's
+anatomy includes a slot filled by another pack's primitive or pattern.
+
+<h4 id="peerpacks">peerPacks (required composition)</h4>
+
+A Pattern's `peerPacks` field declares peer packs that EVERY variant
+specimen of the pattern consumes. Each peer-pack entry has:
+
+- key — the peer-pack name (e.g., `"@quoin/pattern-button-system"`).
+- value — the semver range the peer-pack must satisfy.
+
+USML Backend Emitters MUST consume declared peer packs through real
+composition: emitting the peer pack's canonical element with its canonical
+class or `data-pattern` value. Inlined contracts — re-implementing the peer
+pack's behavior under a local class name — MUST NOT be used.
+
+<div class="note">
+**Note (normative reference to existing gate v3.G.17).** This rule corresponds
+to the reference implementation's "composition reality" gate. Existing test
+infrastructure validates this requirement automatically.
+</div>
+
+<h4 id="optionalpeerpacks">optionalPeerPacks (variant-conditional composition)</h4>
+
+When a pattern consumes a peer pack only in some variants (not all variant
+specimens render the peer pack's primitives), the pattern MAY declare the
+peer pack under `optionalPeerPacks`.
+
+The semantics of `optionalPeerPacks`:
+
+- The peer pack MAY be consumed by some variants.
+- Validators MUST NOT require the peer pack's elements to appear in variants
+    that do not consume it.
+- The pattern's README MUST document which variants consume which optional
+    peer packs.
+
+<div class="note">
+**Note (normative reference to existing gate v3.G.21).** The reference
+implementation uses this distinction to avoid false-positive composition-reality
+enforcement on variants that don't consume a particular peer.
+</div>
+
+<h3 id="accessibility-contracts">Accessibility contracts</h3>
+
+A Pattern's `accessibility` field declares the ARIA roles, properties, states,
+and keyboard interactions the pattern implements.
+
+Required fields:
+
+- `role` — the ARIA role(s) the pattern's primary element carries (see
+    [[!ARIA]]).
+- `states` — the ARIA state attributes the pattern updates dynamically
+    (e.g., `aria-expanded`, `aria-selected`).
+- `keyboardSupport` — the keyboard interactions the pattern handles, with
+    expected behavior per key.
+
+USML implementations SHOULD cross-reference the WAI-ARIA Authoring Practices
+Guide [[ARIA-APG]] for the canonical interaction model.
+
+<h3 id="token-references">Token references</h3>
+
+A <dfn>token reference</dfn> is a reference to a design token whose value is
+supplied at runtime by an aesthetic pack.
+
+Token references in USML use the CSS custom-property form: `var(--<token-name>)`.
+
+USML implementations MUST resolve token references through a system
+compatible with the Design Tokens Community Group Format Module 2025.10
+[[!DTCG-2025.10]]. The token name maps to a DTCG token graph node where
+`$value` provides the value at lookup time and `$type` constrains the
+permissible value range.
+
+<h3 id="microstates">Microstates</h3>
+
+A <dfn>microstate</dfn> is a per-element interaction state. USML
+standardizes the following microstate vocabulary:
+
+- `default` — base state.
+- `hover` — pointer is over the element.
+- `active` — element is being activated (pressed, dragged).
+- `focus` — element has focus.
+- `focus-visible` — element has keyboard-visible focus (per CSS
+    `:focus-visible`).
+- `disabled` — element is disabled.
+- `loading` — element is in an asynchronous loading state.
+- `selected` — element is in a selected state (radiogroup item, listbox
+    option).
+- `expanded` — element is in an expanded state (disclosure trigger, combobox).
+- `collapsed` — element is in a collapsed state (paired with `expanded`).
+
+Patterns that exhibit other microstates MAY extend this vocabulary; the
+extension SHOULD be documented in the pattern's metadata.
+
+<h3 id="pattern-metadata">Pattern metadata</h3>
+
+Pattern metadata documents the human-facing attributes of the pattern.
+
+Required:
+
+- `author` — the publisher (organization or individual).
+- `license` — SPDX [[SPDX]] license identifier.
+
+Optional:
+
+- `homepage` — canonical documentation URL.
+- `tags` — search keywords.
+- `source` — for [translated patterns](#translated-patterns), the source
+    project's metadata.
+
+<h3 id="translated-patterns">Translated patterns</h3>
+
+A <dfn>translated pattern</dfn> is a Pattern whose anatomy was sourced from
+an external design system (e.g., ARIA APG, Radix UI, Material Web Components)
+via a [USML Source Adapter](#ingest-interface).
+
+A translated pattern MUST declare a `source` block under `metadata`:
+
+- `system` — the source project name (e.g., `"W3C ARIA Authoring Practices Guide"`).
+- `url` — canonical URL to the source pattern documentation.
+- `license` — SPDX identifier of the source pattern's license.
+- `sourcePatternSlug` — the source's identifier for the pattern.
+- `captureDate` — ISO date of the translation.
+- `translationFraming` — non-normative documentation of the transitional
+    framing (see [[#ingest-interface]]).
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<h2 id="aesthetic-pack-interface">Aesthetic-pack interface</h2>
+
+The aesthetic-pack interface is the formal contract between a USML Pattern
+(declaring anatomy and variant axes) and an aesthetic pack (supplying token
+values). This interface is USML's primary novel contribution.
+
+<h3 id="aesthetic-pack-format">Aesthetic-pack format</h3>
+
+An <dfn>aesthetic pack</dfn> is a software artifact (typically a package or
+configuration file) declaring:
+
+Required:
+
+- `name` — `@<namespace>/aesthetic-<aesthetic-slug>`.
+- `version` — semver string.
+- `type` — `"aesthetic"`.
+- `quoinVersion` — the USML specification version (e.g., `"^2026.05"`).
+- `tokenOverrides` — DTCG 2025.10 [[!DTCG-2025.10]] token document declaring
+    the values this pack supplies.
+
+Optional:
+
+- `metadata` — display name, description, preview URL, etc.
+- `dependsOn` — other aesthetic packs this pack composes with.
+- `conflictsWith` — aesthetic packs this pack is incompatible with.
+- `overrides-variant-token-slots` — explicit declaration of which baseline
+    variant-token slots this pack overrides.
+
+<h3 id="aesthetic-pack-scope">Aesthetic-pack scope</h3>
+
+An aesthetic pack MAY define values for any token the USML data model
+references.
+
+An aesthetic pack MUST NOT declare anatomy, variants, composition rules,
+or accessibility behavior. These are pattern-pack concerns.
+
+<div class="note">
+**Note (normative reference to existing gate v3.G.20).** This rule
+corresponds to the reference implementation's "variants in pattern packs;
+values in aesthetic packs" gate.
+</div>
+
+<h3 id="aesthetic-pack-composition">Aesthetic-pack composition</h3>
+
+Multiple aesthetic packs MAY be composed at runtime. The composition rule:
+
+- Aesthetic packs are applied in declaration order; later packs override
+    earlier packs for the same token slot.
+- Conflicting `dependsOn` / `conflictsWith` declarations MUST be reported by
+    the composing runtime as conformance violations.
+
+USML implementations SHOULD warn when two aesthetic packs override the same
+token to different values without one declaring `dependsOn` the other.
+
+<h3 id="aesthetic-pack-distribution">Aesthetic-pack distribution</h3>
+
+Aesthetic packs MAY be distributed as:
+
+- npm packages (`@<namespace>/aesthetic-<slug>`).
+- shadcn registry entries [[shadcn-registry]].
+- DTCG token documents [[!DTCG-2025.10]] published at HTTP URLs.
+
+USML does not prescribe a single distribution mechanism. USML Backend Emitters
+MUST be able to consume aesthetic packs from at least one of the above
+distribution mechanisms.
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<h2 id="backend-emission-contract">Backend emission contract</h2>
+
+A <dfn>USML Backend</dfn> is an implementation that consumes USML data model
+input and emits framework-specific output.
+
+<h3 id="backend-interface">Backend interface</h3>
+
+A USML Backend MUST:
+
+- Accept input in USML data model form (validated against `spec/usml-schema.json`).
+- Produce output in a target framework's native form (HTML+CSS, web
+    components, React, Vue, native frameworks).
+- Preserve the input's anatomy, variants, composition references, accessibility
+    contract, and microstate vocabulary.
+
+A USML Backend MUST NOT:
+
+- Alter the semantic structure declared by the input.
+- Introduce variant axes not declared in the input.
+- Strip accessibility roles or properties.
+- Inline peer-pack contracts in violation of [[#composition-rules]].
+
+<h3 id="backend-fidelity-requirement">Fidelity requirement</h3>
+
+USML's <dfn>fidelity requirement</dfn> states: given a USML data model input
+and an aesthetic pack, two conformant USML Backends targeting different
+frameworks MUST produce semantically equivalent output. "Semantically
+equivalent" is defined as: a user perceiving the output (via screen reader,
+keyboard navigation, or visual inspection) MUST encounter the same anatomy,
+the same variants, the same composition, the same ARIA roles, and the same
+aesthetic tokens.
+
+Visual differences between backends are permitted to the extent that
+framework conventions differ. Structural differences are not permitted.
+
+<h3 id="backend-conformance-levels">Backend conformance levels</h3>
+
+A USML Backend MAY claim partial conformance per the levels defined in
+[[#conformance-backend-emitter]]:
+
+- Level 1 — Anatomy only.
+- Level 2 — Anatomy + variants.
+- Level 3 — Full conformance (anatomy + variants + aesthetic-pack token
+    resolution + ARIA + microstates + performance budgets).
+
+The reference implementation's plain-CSS + HTML backend (in the Quoin
+catalog under `02_reference-packs/impl-raw-css/`) is a Level 3 conformance
+claim, subject to the conformance report at [`spec/conformance-report.md`](https://github.com/HarrowHaus/quoin/blob/main/spec/conformance-report.md).
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<h2 id="ingest-interface">Ingest interface</h2>
+
+The ingest interface defines how external sources are consumed into USML form.
+
+<h3 id="source-adapter">Source adapter</h3>
+
+A <dfn>USML Source Adapter</dfn> is an implementation that consumes an
+external source pattern in its native format and produces USML-conformant
+output.
+
+A USML Source Adapter MUST:
+
+- Accept input in at least one external format (HTML+CSS, web component
+    source, JSX/TSX, design spec, etc.).
+- Verify the source's license against an approved-source registry before
+    emission.
+- Produce a USML Pattern with a complete `metadata.source` block.
+- Document the extraction method, confidence level, and any judgment-based
+    decisions in the pattern's documentation.
+
+A USML Source Adapter SHOULD:
+
+- Report yield rate per source for future curation-priority adjustment.
+- Surface rejected translations (with rationale) to inform future harvest work.
+
+<h3 id="reference-source-adapter">Reference source adapter</h3>
+
+The Quoin reference implementation's [pattern-translator skill](https://github.com/HarrowHaus/quoin/blob/main/skills/quoin-pattern-translator.md)
+is the reference source-adapter implementation.
+
+<h3 id="native-publication">Native specification publication</h3>
+
+The translation skill is **transitional infrastructure**. The strategic
+expectation is that as USML gains adoption, external design systems will
+publish their anatomy in USML format directly, eliminating the need for
+translation.
+
+When a source publishes USML natively:
+
+- The source's USML output MUST validate against this specification's schema.
+- Existing translations of that source's patterns SHOULD be marked for
+    retirement.
+- The source's native publication becomes the authoritative anatomy
+    declaration; the Quoin translation pack becomes a re-export of the
+    source's publication.
+
+In the 2026.05 version of this specification, no source publishes USML
+natively. The procedure is documented to make the transition concrete when
+it occurs.
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<h2 id="ai-consumption-format">AI consumption format</h2>
+
+USML defines the format AI tools consume to generate USML-conformant markup.
+The AI consumption format is a serialization view of the canonical data
+model, not a separate specification.
+
+<h3 id="llms-txt">llms.txt format</h3>
+
+The `llms.txt` file at the root of a USML implementation is a concise
+human-readable summary of the catalog, following the [llmstxt.org](https://llmstxt.org/)
+convention.
+
+`llms.txt` SHOULD:
+
+- Document each pattern in one or two lines with a canonical specimen link.
+- Reference the canonical data model URL.
+- Update on every catalog change.
+
+<h3 id="llms-full-txt">llms-full.txt format</h3>
+
+The `llms-full.txt` file at the root of a USML implementation is the long-form
+anatomy documentation suitable for AI ingestion as training context.
+
+`llms-full.txt` SHOULD:
+
+- Document each pattern with its complete anatomy table.
+- Include slot, variant, microstate, ARIA contract, and composition lineage
+    information.
+- Be self-contained (not require additional fetches to be useful).
+
+<h3 id="registry-json">registry.json format</h3>
+
+The `registry.json` file at the root of a USML implementation is a
+shadcn-compatible registry serialization [[shadcn-registry]].
+
+`registry.json` SHOULD:
+
+- Enumerate every pattern in the catalog.
+- Include `type`, `name`, `description`, and `registryDependencies`.
+- Support shadcn CLI consumption (`npx shadcn@latest add @<namespace>/<pattern>`).
+
+<h3 id="mcp-server-interface">MCP server interface (informative)</h3>
+
+USML implementations MAY expose an MCP [[MCP-APPS]] server endpoint for
+runtime IR consumption. The MCP server interface is informative in v2026.05
+of this specification; future versions will normatively define the endpoint
+schema and content negotiation behavior.
+
+<h3 id="content-negotiation">Content negotiation</h3>
+
+USML implementations SHOULD support HTTP Accept-header negotiation on the
+canonical catalog URL:
+
+- `text/html` — human-readable browse view.
+- `application/json` — machine-readable catalog data (registry.json or full
+    pack manifest).
+- `text/markdown` — LLM-optimized prose summary.
+
+This pattern follows the shadcn precedent for content-negotiated catalogs.
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<h2 id="security-considerations">Security Considerations</h2>
+
+USML implementations process declarative pack data from local and remote
+sources. The following security considerations apply.
+
+<h3 id="security-supply-chain">Registry URLs as remote dependencies</h3>
+
+`registry.json` and aesthetic-pack distributions reference remote URLs.
+Consumers SHOULD:
+
+- Verify the source's provenance before consuming a pack.
+- Pin pack versions where reproducible builds are required.
+- Subscribe to source-pack security advisories when available.
+
+USML implementations MAY require subresource integrity hashes for remote
+pack distributions; the specification does not mandate them in v2026.05.
+
+<h3 id="security-prompt-injection">AI ingestion as prompt-injection surface</h3>
+
+The `llms-full.txt` and `registry.json` files are designed for AI agent
+ingestion. Untrusted or compromised distributions of these files could
+contain content designed to influence AI agent behavior (prompt injection).
+
+USML implementations:
+
+- SHOULD treat `llms-full.txt` and `registry.json` from untrusted sources
+    as untrusted data.
+- SHOULD validate any patterns referenced by these files against the USML
+    schema before consuming them.
+- MAY restrict AI agent ingestion to packs published by approved sources.
+
+<h3 id="security-css-injection">Aesthetic-pack value sanitization</h3>
+
+Aesthetic packs supply token values consumed in CSS contexts. Untrusted or
+maliciously-crafted token values could include CSS injection payloads
+(e.g., values containing `;` followed by additional declarations).
+
+USML Backend Emitters MUST sanitize aesthetic-pack token values before
+emitting them in CSS contexts. Sanitization SHOULD:
+
+- Validate values against the declared `$type` in the DTCG token graph.
+- Reject values containing CSS statement separators (`;`) outside of
+    declared multi-value contexts (e.g., `transform` values, `font` shorthands).
+- Reject values containing `expression(...)` or other deprecated CSS
+    constructs.
+
+<h3 id="security-source-adapter">Source-adapter attribution</h3>
+
+USML Source Adapters MAY emit attribution metadata in translated pack
+manifests. Consumers SHOULD verify the source license compatibility recorded
+in this metadata against their use-case licensing requirements.
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<h2 id="privacy-considerations">Privacy Considerations</h2>
+
+USML v2026.05 defines no privacy-impacting features. The data model contains
+no user identifiers, no tracking surfaces, and no telemetry hooks.
+
+Future versions of USML may define:
+
+- The MCP server interface, which involves runtime communication with AI
+    agents. Privacy considerations specific to MCP server identification,
+    user authentication, and request logging will be addressed at that time.
+- Telemetry conventions for measuring catalog consumption. Privacy
+    considerations specific to opt-in / opt-out, data minimization, and
+    retention will be addressed at that time.
+
+Implementations of USML v2026.05 MAY collect their own telemetry; the
+specification places no privacy requirements on such collection beyond
+applicable law.
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<h2 id="accessibility-considerations">Accessibility Considerations</h2>
+
+Beyond the normative WAI-ARIA 1.3 [[!ARIA]] roles, properties, and states
+referenced in pattern `accessibility` contracts, USML implementations SHOULD
+consider the following accessibility dimensions:
+
+<h3 id="a11y-cognitive">Cognitive accessibility</h3>
+
+- Pattern names SHOULD be expressed in clear, jargon-free language.
+- Documentation SHOULD avoid reliance on color alone to convey semantic
+    distinctions.
+
+<h3 id="a11y-reduced-motion">Reduced-motion accommodation</h3>
+
+USML aesthetic packs supply motion token values. Patterns animating content
+MUST honor the user's `prefers-reduced-motion` system preference, typically
+by collapsing animations to ≤1ms duration or to opacity-only fades when the
+preference indicates `reduce`.
+
+<h3 id="a11y-system-preferences">System-preference tokens</h3>
+
+Aesthetic packs SHOULD provide token values keyed by `prefers-color-scheme`
+(light/dark) and `prefers-contrast` (no-preference/more/less). Patterns
+referencing these tokens automatically adapt.
+
+<h3 id="a11y-ime">IME composition</h3>
+
+Patterns with text input slots (form-fields, combobox) MUST not interfere
+with native IME composition. Concretely:
+
+- Patterns MUST NOT capture or remap keyboard events during active IME
+    composition.
+- ARIA live regions MUST NOT announce IME intermediate composition states.
+
+<h3 id="a11y-voice-input">Voice-input bindings</h3>
+
+Patterns SHOULD provide stable `aria-label` discipline so voice-input tools
+can target interactive elements by their accessible name. Avoid icon-only
+controls without `aria-label`.
+
+<h3 id="a11y-dyslexia">Dyslexia-friendly variants</h3>
+
+Aesthetic packs MAY provide dyslexia-friendly token sets (high-contrast
+text, dyslexia-friendly typeface choices, increased letter spacing).
+Patterns referencing typography tokens automatically inherit these.
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<h2 id="internationalization-considerations">Internationalization Considerations</h2>
+
+USML implementations operating across locales MUST consider the following.
+
+<h3 id="i18n-rtl">RTL anatomy mirroring</h3>
+
+Patterns with directional anatomy (sidebar position, nav alignment, breadcrumb
+chevron direction) MUST mirror appropriately in right-to-left locales.
+
+USML's universal `data-alignment` axis (see [[#universal-axes]]) uses logical
+properties internally: `data-alignment="left"` corresponds to `inline-start`
+in LTR locales and `inline-end` in RTL locales. Backend emitters MUST use
+logical-property CSS where supported, with physical-property fallbacks where
+not.
+
+<h3 id="i18n-locale-spacing">Locale-specific spacing tokens</h3>
+
+Aesthetic packs MAY provide locale-specific spacing tokens for CJK vs Latin
+width semantics (full-width vs half-width spacing). Patterns referencing
+spacing tokens inherit these adjustments transparently.
+
+<h3 id="i18n-pluralization">Pluralization in slot content</h3>
+
+Slots containing user-facing strings (action labels, count indicators) MUST
+support pluralization via locale-aware backends. USML data model does not
+prescribe a pluralization mechanism; consumers SHOULD use the host
+framework's i18n facility.
+
+<h3 id="i18n-non-latin-typography">Non-Latin glyph metrics</h3>
+
+Aesthetic packs supplying typography tokens (font-family, font-size,
+line-height) SHOULD consider glyph metrics for the target locale. CJK glyph
+heights, Arabic baseline alignment, and Devanagari combining marks all have
+metric implications.
+
+<h3 id="i18n-vertical-script">Vertical script support</h3>
+
+USML v2026.05 does not prescribe vertical-script anatomy. Patterns rendered
+in vertical scripts (traditional Mongolian, traditional Chinese typesetting)
+MAY be supported by future versions; consumers requiring vertical-script
+support today SHOULD wrap USML patterns in CSS `writing-mode` containers.
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<h2 id="versioning-and-stability">Versioning and Stability</h2>
+
+USML uses date-versioning (YYYY.MM) mirroring the Design Tokens Community
+Group precedent [[!DTCG-2025.10]].
+
+<h3 id="version-cadence">Version cadence</h3>
+
+- Major version: rare structural changes. Identified by major year change
+    (e.g., 2027.04 may differ structurally from 2026.05).
+- Minor version: backward-compatible additions. Identified by month change
+    within the same year (e.g., 2026.08 vs 2026.05).
+- Editor's Draft versions are date-suffixed with the YYYY-MM-DD source date
+    in the "Date" metadata field.
+
+<h3 id="version-compatibility">Backward compatibility</h3>
+
+Within the same major version, USML implementations conforming to an earlier
+minor version MUST continue to validate against later minor-version schemas
+without modification. Later minor versions MAY add fields, MAY relax
+constraints, and MAY add new conformance levels; they MUST NOT remove fields
+or tighten constraints.
+
+Major-version changes MUST document migration paths for implementations
+conforming to the prior major version. The specification SHOULD provide a
+sunset period (typically 12 months) where both major versions are supported
+by the reference implementation.
+
+<h3 id="version-change-log">Change log</h3>
+
+Every version's change log appears in [[#changes]].
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<h2 id="conformance-test-suite">Conformance Test Suite</h2>
+
+A test conformance suite scaffold is provided at [`spec/tests/`](https://github.com/HarrowHaus/quoin/tree/main/spec/tests).
+The scaffold includes one valid and one invalid fixture per conformance class:
+
+- `spec/tests/anatomy/` — fixtures and expected outcomes for USML Anatomy
+    Validators.
+- `spec/tests/aesthetic-pack/` — fixtures and expected outcomes for USML
+    Aesthetic-Pack Providers.
+- `spec/tests/backend-emit/` — fixtures and expected outcomes for USML
+    Backend Emitters.
+
+Implementations SHOULD report their conformance level by running the suite
+and publishing the results.
+
+<div class="note">
+**Note.** The 2026.05 test suite is a scaffold, not exhaustive. Future
+versions will expand coverage substantially. Implementers are invited to
+contribute test fixtures.
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<h2 id="reference-implementation">Reference implementation conformance claim</h2>
+
+The Quoin reference implementation at https://github.com/HarrowHaus/quoin
+satisfies USML v2026.05 at the following conformance levels:
+
+- **USML Anatomy Validator** — Partial. The reference implementation validates
+    its own pack manifests against `spec/usml-schema.json`; external pack
+    validation is not yet exposed as a CLI tool.
+- **USML Aesthetic-Pack Provider** — Full. The three v1.0 aesthetic packs
+    (`@quoin/aesthetic-default`, `@quoin/aesthetic-boeing-watch`,
+    `@quoin/aesthetic-harrow-haus`) satisfy this conformance class.
+- **USML Backend Emitter** — Level 3 (plain-CSS + HTML backend). The reference
+    implementation's pattern catalog emits Level 3 output for all 22 patterns,
+    4 content primitives, and 6 layout primitives.
+
+The full conformance report is available at [`spec/conformance-report.md`](https://github.com/HarrowHaus/quoin/blob/main/spec/conformance-report.md).
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<h2 id="terminology">Terminology</h2>
+
+This section defines USML-specific terms. Terms defined here are referenced
+throughout the specification with `<dfn>` cross-references.
+
+<dfn>Anatomy</dfn> — the structural definition of a UI pattern as a typed
+slot graph.
+
+<dfn>Anatomy contract</dfn> — the formal anatomy declaration in a Pattern's
+data model. The contract specifies which slots are mandatory, which are
+conditional, and how composition references resolve.
+
+<dfn>Aesthetic pack</dfn> — a software artifact supplying token values
+consumed by a USML-conformant runtime. Conforms to [[!DTCG-2025.10]].
+
+<dfn>Backend</dfn> — a USML implementation that consumes USML data model
+input and emits framework-specific output.
+
+<dfn>Composition reference</dfn> — a declaration in a Pattern that the pattern
+consumes another Pattern's slot through a `peerPacks` or `optionalPeerPacks`
+entry.
+
+<dfn>Conditional slot</dfn> — a slot whose presence depends on a variant axis
+value or state.
+
+<dfn>Conformance class</dfn> — one of three USML implementation roles: Anatomy
+Validator, Aesthetic-Pack Provider, Backend Emitter.
+
+<dfn>Editor's Draft</dfn> — an in-development version of a USML specification
+draft, prior to community-group submission.
+
+<dfn>Mandatory slot</dfn> — a slot always present in every variant of a
+Pattern.
+
+<dfn>Microstate</dfn> — a per-element interaction state from the standardized
+USML microstate vocabulary.
+
+<dfn>Native publication</dfn> — the future state in which an external design
+system publishes its anatomy in USML format directly, replacing the need for
+translation.
+
+<dfn>Pattern</dfn> — a named USML anatomy contract. May have subtype
+`"pattern"`, `"primitive"`, or `"template"`.
+
+<dfn>Peer pack</dfn> — a Pattern consumed by another Pattern through a
+composition reference.
+
+<dfn>Primitive</dfn> — a Pattern subtype that is a reusable structural building
+block consumed by patterns.
+
+<dfn>Reference implementation</dfn> — the Quoin implementation at
+https://github.com/HarrowHaus/quoin that demonstrates USML works in HTML
+and CSS.
+
+<dfn>Slot</dfn> — a named position within a Pattern's anatomy.
+
+<dfn>Slot gate</dfn> — the variant axis value or state that activates a
+conditional slot.
+
+<dfn>Source adapter</dfn> — a USML implementation that consumes an external
+source pattern and produces USML-conformant output. Transitional
+infrastructure.
+
+<dfn>Specification</dfn> — this document.
+
+<dfn>Template</dfn> — a Pattern subtype that composes multiple patterns into
+a page-level arrangement.
+
+<dfn>Token reference</dfn> — a reference to a design token whose value is
+supplied at runtime by an aesthetic pack.
+
+<dfn>Translated pattern</dfn> — a Pattern whose anatomy was sourced from an
+external design system via a USML Source Adapter.
+
+<dfn>Variant axis</dfn> — an orthogonal modal dimension a Pattern exposes,
+expressed as a `data-*` attribute.
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<h2 id="adoption-thresholds">Adoption thresholds for standards-track submission</h2>
+
+This section is informative. It documents the criteria the USML editor has
+committed to meeting before submitting this specification to a standards body
+(W3C Community Group, W3C Working Group, ISO/IEC, OASIS, or equivalent).
+
+Submission criteria:
+
+1. **Three or more named co-editors** from different organizations have
+    signed on as specification editors.
+2. **Two or more independent partial implementations** exist beyond the
+    reference implementation. "Independent" means authored by a different
+    organization than the editor's.
+3. **Adoption pull from at least one external design system** — concretely,
+    one external design-system maintainer has either implemented USML
+    consumption, published USML-conformant anatomy, or publicly committed to
+    do so.
+4. **An incubation venue has been identified** for submission. The preferred
+    candidate is the W3C Generative UI Community Group (chartered January
+    2026); alternatives include the W3C Web Components Community Group, the
+    W3C Open UI Community Group, or a newly-chartered group.
+
+These criteria are derived from the W3C Recommendation Track Readiness Best
+Practices guidance, which states that specifications should not seek First
+Public Working Draft status without rough cross-stakeholder consensus,
+likely implementation, and likely use on the Web.
+
+Until these criteria are met, USML remains an Editor's Draft. The
+specification iterates publicly; community input is welcomed via GitHub
+issues at [HarrowHaus/quoin](https://github.com/HarrowHaus/quoin/issues).
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<h2 id="acknowledgments" class="no-num">Acknowledgments</h2>
+
+USML builds on the work of many prior contributors and standards efforts.
+The specification's lineage is documented in [[#lineage]] above.
+
+The editor thanks the following people and groups whose work directly
+influenced USML's data model:
+
+- Heydon Pickering and Andy Bell for [Every Layout](https://every-layout.dev/).
+- Adam Argyle for [Open Props](https://open-props.style/).
+- shadcn for [shadcn/ui](https://ui.shadcn.com/) and the registry model.
+- Jenna Smith and the Radix UI team.
+- The W3C ARIA Working Group and the WAI-ARIA Authoring Practices Guide
+    contributors.
+- Kaelig Deloumeau-Prigent and the [Design Tokens Community Group](https://www.designtokens.org/)
+    editors for DTCG 2025.10.
+- The Custom Elements Manifest contributors.
+
+This specification was authored at Harrow Haus, Rockford, Illinois, with
+substantial Anthropic Claude AI-agent assistance. The editor takes human
+responsibility for every normative statement.
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<h2 id="changes" class="no-num">Change Log</h2>
+
+<h3 id="changes-2026-05">USML 2026.05 — Editor's Draft</h3>
+
+- Initial Editor's Draft.
+- Defines: Conformance, Core Data Model, Aesthetic-Pack Interface, Backend
+    Emission Contract, Ingest Interface, AI Consumption Format, Security
+    Considerations, Privacy Considerations, Accessibility Considerations,
+    Internationalization Considerations, Versioning and Stability,
+    Conformance Test Suite (scaffold), Reference Implementation Conformance
+    Claim, Terminology, Adoption Thresholds.
+- Established USML/Quoin bifurcation: USML is the specification; Quoin is
+    the reference implementation.
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<pre class="biblio">
+{
+  "DTCG-2025.10": {
+    "title": "Design Tokens Format Module, Level 1 (2025.10)",
+    "authors": ["Design Tokens Community Group"],
+    "publisher": "W3C Community Group",
+    "href": "https://www.designtokens.org/tr/drafts/format/",
+    "date": "2025-10-28",
+    "status": "Editor's Draft"
+  },
+  "ARIA-APG": {
+    "title": "WAI-ARIA Authoring Practices Guide",
+    "publisher": "W3C Web Accessibility Initiative",
+    "href": "https://www.w3.org/WAI/ARIA/apg/"
+  },
+  "CEM-2.1": {
+    "title": "Custom Elements Manifest 2.1.0",
+    "publisher": "Web Components Community Group",
+    "href": "https://github.com/webcomponents/custom-elements-manifest"
+  },
+  "shadcn-registry": {
+    "title": "shadcn/ui Registry Schema",
+    "href": "https://ui.shadcn.com/schema/registry.json"
+  },
+  "MCP-APPS": {
+    "title": "Model Context Protocol Apps (SEP-1865)",
+    "publisher": "Agentic AI Foundation",
+    "href": "https://modelcontextprotocol.io/"
+  },
+  "OPEN-UI": {
+    "title": "W3C Open UI Community Group",
+    "publisher": "W3C",
+    "href": "https://open-ui.org/"
+  },
+  "A2UI": {
+    "title": "A2UI — Application-to-UI Protocol",
+    "publisher": "Google",
+    "href": "https://google.github.io/A2UI/"
+  },
+  "SEMVER": {
+    "title": "Semantic Versioning 2.0.0",
+    "authors": ["Tom Preston-Werner"],
+    "href": "https://semver.org/"
+  },
+  "SPDX": {
+    "title": "SPDX License List",
+    "publisher": "Linux Foundation",
+    "href": "https://spdx.org/licenses/"
+  }
+}
+</pre>

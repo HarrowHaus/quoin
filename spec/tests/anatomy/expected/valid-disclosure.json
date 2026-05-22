@@ -1,0 +1,4 @@
+{
+  "expectValid": true,
+  "rationale": "All required fields (name, version, type, quoinVersion, description) present; quoinVersion uses date-version range; peerPacks declares only tokens-baseline."
+}

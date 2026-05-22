@@ -1,0 +1,25 @@
+{
+  "_comment": "USML data-model input for the disclosure pattern. A USML Backend Emitter consumes this and produces framework-specific output. The expected output (see expected/hero-input.html) is the plain-CSS+HTML reference backend's emission.",
+  "patternRef": "@quoin/pattern-disclosure",
+  "patternVersion": "^1.0.0",
+  "variant": "default",
+  "slots": {
+    "disclosure-container": {
+      "data-state": "collapsed",
+      "children": [
+        {
+          "slot": "disclosure-trigger",
+          "text": "Show more",
+          "aria-expanded": "false",
+          "aria-controls": "disc-1-content"
+        },
+        {
+          "slot": "disclosure-content",
+          "id": "disc-1-content",
+          "hidden": true,
+          "text": "Disclosed content."
+        }
+      ]
+    }
+  }
+}

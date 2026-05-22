@@ -1,0 +1,8 @@
+{
+  "_comment": "Invalid aesthetic-pack: type=pattern but routed as aesthetic. The schema's AestheticPack branch requires type=aesthetic; the Pattern branch will accept type=pattern, so this fixture actually validates against Pattern. This fixture tests the conformance-class-specific rule: a pack with type=pattern is NOT a valid aesthetic-pack provider regardless of what the schema's anyOf says.",
+  "name": "@quoin/aesthetic-mislabelled",
+  "version": "1.0.0",
+  "type": "pattern",
+  "quoinVersion": "^2026.05",
+  "description": "Type field misdeclared. Schema-level anyOf accepts this as a Pattern, but the conformance check rejects it as an aesthetic-pack provider."
+}

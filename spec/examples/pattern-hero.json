@@ -1,0 +1,30 @@
+{
+  "$schema": "https://harrowhaus.github.io/quoin/usml/usml-schema.json",
+  "name": "@quoin/pattern-hero",
+  "version": "1.0.0",
+  "type": "pattern",
+  "quoinVersion": "^2026.05",
+  "description": "Unified hero pattern. 5 variants (type-only / animated / gradient-mesh / brand-photo / video) sharing a 6-slot anatomy. Canonical USML example demonstrating multi-variant patterns with peer-pack composition.",
+  "category": "marketing",
+  "variants": ["type-only", "animated", "gradient-mesh", "brand-photo", "video"],
+  "exports": {
+    "primitives": "./primitives/index.json"
+  },
+  "states": ["default", "loading", "playing", "paused"],
+  "microStates": ["default", "hover", "active", "focus", "focus-visible", "disabled"],
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/patterns/hero",
+    "tags": ["hero", "marketing", "p0", "canonical-example"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^2026.05",
+    "@quoin/pattern-button-system": "^1.0.0",
+    "@quoin/vocab-app-shell": "^0.2.0"
+  },
+  "optionalPeerPacks": {
+    "@quoin/prim-label": "^1.0.0",
+    "@quoin/prim-decoration-overlay": "^1.0.0"
+  }
+}

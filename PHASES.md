@@ -2,7 +2,7 @@
 
 This file is the single source of truth for phase status across the Quoin project. It supersedes scattered references in CONSOLIDATION reports, DECISIONS_UPDATES, and session-closing reports. Every future session that opens, closes, or modifies a phase updates this file in its closing batch.
 
-**Last updated:** Phase 22.7 closing — Pattern Translation Skill + Specification-Framing Documentation complete (2026-05-21)
+**Last updated:** Phase 23.1 closing — USML Editor's Draft 2026.05 + Reference Implementation Conformance Claim (2026-05-21)
 
 ---
 
@@ -280,12 +280,64 @@ The reframe does not retroactively change Phases 22.6 (Layout Primitives) or 22.
 
 ---
 
-### Phase 23 — Quoin IR Architecture (reframed: specification draft + reference engine)
+### Phase 23 — USML IR Architecture (specification draft + reference engine)
 
-**Status:** 🟡 Queued (reframed per Phase 23 Reframe section above)
-**Goal:** ship the canonical IR specification draft (`Quoin-IR-Specification.md`) accompanied by the reference IR engine that demonstrates the specification works. Sub-phases 23.1–23.5 per the reframe.
-**Closure dependency:** Phase 22 closure satisfied (the catalog architecture is stable; layout primitives and translation framework demonstrate the surfaces the IR must address).
-**Reference:** unification dossier `compass_artifact_wf-7fef8f90-73e7-412a-90b7-9bd9f5d55ef2_text_markdown.md` § 3.1 (the original IR architecture proposal, now reframed as the engine half of the deliverable; specification draft is the product half).
+**Status:** 🟢 In progress (Phase 23.1 ✅ Complete 2026-05-21; sub-phases 23.2–23.5 queued)
+**Goal:** ship the canonical USML specification draft (`USML-Specification.bs` at repo root; HTML output at https://harrowhaus.github.io/quoin/usml/) accompanied by the reference IR engine that demonstrates the specification works. The spec was renamed from "Quoin-IR-Specification.md" to "USML-Specification.bs" per the savant-research-informed bifurcation: USML is the specification; Quoin is the reference implementation.
+**Closure dependency:** Phase 22 closure satisfied. Phase 23.1 satisfied. Sub-phases continue.
+**Reference:** unification dossier `compass_artifact_wf-7fef8f90-73e7-412a-90b7-9bd9f5d55ef2_text_markdown.md` § 3.1 (original IR architecture proposal); savant-level research assessment `compass_artifact_wf-0f17f0b9-3e6c-4a76-97aa-fb990c4a145e_text_markdown.md` (which surfaced the USML/Quoin bifurcation and the 16 standards-readiness gaps).
+
+### Phase 23.1 — USML Editor's Draft 2026.05 + Reference Implementation Conformance Claim
+
+**Status:** ✅ Complete (Phase 23.1 — 2026-05-21)
+**Goal:** ship the USML Editor's Draft as a standards-ready specification in Bikeshed format, with the canonical hosting URL configured, all RFC 2119 normative vocabulary applied, all four mandatory considerations sections (Security/Privacy/Accessibility/i18n) authored, the reference implementation conformance claim documented, and the test conformance suite scaffolded. **The phase does NOT submit to W3C** — submission is deferred to Phase 26 after adoption thresholds are met (per the D11 sequencing decision in the handoff).
+**Output:**
+- **`USML-Specification.bs`** at repo root — Bikeshed source of the USML Editor's Draft 2026.05. ~800 lines. Sections: Status of this document; Introduction (Goals, Non-goals, Lineage); Conformance (Document conventions, three conformance classes); Core Data Model (Pattern, Slot, VariantAxis, Composition, Accessibility contracts, Token references, Microstates, Pattern metadata, Translated patterns); Aesthetic-pack interface; Backend emission contract; Ingest interface; AI consumption format; Security Considerations; Privacy Considerations; Accessibility Considerations; Internationalization Considerations; Versioning and Stability; Conformance Test Suite; Reference implementation conformance claim; Terminology; Adoption thresholds; Acknowledgments; Change Log; Bibliography (normative references RFC 2119, DTCG 2025.10, ARIA 1.3, HTML LS, JSON Schema 2020-12, SEMVER; informative references shadcn-registry, CEM 2.1, Open UI, A2UI, MCP-APPS, SPDX, ARIA-APG).
+- **`.github/workflows/spec-build.yml`** — GitHub Action using `w3c/spec-prod@v2` to auto-build the Bikeshed source on every push to main and commit output to `docs/usml/` for GitHub Pages serving.
+- **`spec/usml-schema.json`** — formal JSON Schema 2020-12 for the USML data model (Pattern / AestheticPack / Template via `anyOf`; QuoinVersion field accepts both legacy semver and new date-versioned ranges with deprecation note; Microstate vocabulary documented per spec §5.7).
+- **`spec/examples/`** — five canonical examples: pattern-hero (multi-variant with peer-pack composition), pattern-button-system (self-contained microstates), pattern-disclosure (translated pattern with full source attribution), aesthetic-default (DTCG-consuming pack), composition-graph (reverse-lineage documentation).
+- **`spec/tests/`** — test conformance scaffold with three runners (anatomy/, aesthetic-pack/, backend-emit/) plus aggregate `run-all.mjs`. 5/5 tests pass on the reference implementation.
+- **`spec/conformance-report.md`** — Quoin's claim against USML 2026.05: Anatomy Validator Partial, Aesthetic-Pack Provider Full, Backend Emitter Level 3 (plain-CSS).
+- **`README.md`** and **`THESIS.md`** — updated for USML/Quoin bifurcation throughout. Lead paragraphs now say "USML is the specification; Quoin is the reference implementation."
+- **PHASES.md** — this entry plus Phase 23 reframed to reference the bifurcation.
+**16 standards-readiness attributes addressed:**
+
+| # | Attribute | Addressed in |
+|---|-----------|--------------|
+| 1 | RFC 2119 conformance vocabulary | §Conformance §Document conventions; all-caps MUST/SHOULD/MAY throughout |
+| 2 | Security Considerations section | §Security Considerations (supply-chain, prompt-injection, CSS-injection, source-adapter attribution) |
+| 3 | Privacy Considerations section | §Privacy Considerations (no privacy-impacting features in v2026.05; future versions will reassess) |
+| 4 | Accessibility Considerations beyond ARIA | §Accessibility Considerations (cognitive, reduced-motion, system-preference, IME, voice-input, dyslexia-friendly) |
+| 5 | i18n Considerations | §Internationalization Considerations (RTL, locale-specific spacing, pluralization, non-Latin glyph metrics, vertical script) |
+| 6 | Normative references to adjacent standards | §Bibliography (RFC 2119, DTCG 2025.10, ARIA 1.3, HTML LS, JSON Schema 2020-12, SEMVER) + informative refs |
+| 7 | Conformance levels | §Conformance §Conformance Classes — three classes, Backend Emitter has Level 1/2/3 |
+| 8 | Test conformance suite stub | `spec/tests/` (3 runners + aggregate; 5/5 pass) |
+| 9 | Reference implementation conformance claim | `spec/conformance-report.md` |
+| 10 | Glossary completeness | §Terminology (24 `<dfn>` definitions) |
+| 11 | Examples coverage | `spec/examples/` (5 canonical examples) |
+| 12 | Versioning policy | §Versioning and Stability (date-versioning YYYY.MM, mirrors DTCG 2025.10) |
+| 13 | Change log discipline | §Change Log section |
+| 14 | Named editor | Donald Pilger, Harrow Haus, with contact info in metadata header |
+| 15 | Canonical hosting URL | https://harrowhaus.github.io/quoin/usml/ via GitHub Pages |
+| 16 | Authoring tool (Bikeshed) | `USML-Specification.bs` source + `.github/workflows/spec-build.yml` action |
+
+**Closure ref:** _this commit_ (2026-05-21).
+
+**What unblocks:**
+- **Phase 23.2 (ingest interface specification)** — formalizes the source-adapter interface USML §Ingest interface sketches.
+- **Phase 23.3 (emission interface specification)** — formalizes the backend-emitter interface USML §Backend emission contract sketches.
+- **Phase 23.4 (first reference source adapter formalization)** — formalizes the ARIA APG source adapter shipped in Phase 22.7 as a USML-conformant adapter.
+- **Phase 23.5 (specification publication + first additional reference backend + live translation demo)** — the FPED-equivalent milestone. Activates Phase 26.
+
+**Phase 26 (Standards Engagement) is NOT activated by Phase 23.1.** Phase 26 activation requires adoption thresholds documented in USML §Adoption Thresholds: 3+ named co-editors from different organizations; 2+ independent partial implementations; adoption pull from at least one external design system; an identified incubation venue (W3C Generative UI CG preferred).
+
+**Scope boundary:** Phase 23.1 owns `USML-Specification.bs`, `spec/`, `.github/workflows/spec-build.yml`, plus the discoverability-bifurcation updates to README.md, THESIS.md, and PHASES.md. The phase does NOT touch `/llms.txt`, `/llms-full.txt`, or `/registry.json` — comprehensive AI-consumption surface integration happens in Phase 23.5.
+
+**Halts encountered:** none.
+
+**Architectural truth surfaced during specification authoring:** the existing pack manifests' `quoinVersion` field uses semver ranges (`^0.1.0`), pre-dating USML's date-versioning policy introduced in this phase. The formal JSON Schema accommodates both legacy semver and new date-versioned formats with a documented deprecation note; the migration is opt-in (existing packs continue to validate; new packs SHOULD adopt date-versioning).
+
+**Naming clarification:** the savant-research assessment recommended bifurcating "Quoin" (implementation) from "USML" (specification) to match the HTML/Firefox precedent. This bifurcation is now locked: USML is the spec name; Quoin is the reference implementation name. All normative documents use USML; the implementation continues as Quoin.
 
 ### Phase 24 — Build Pipeline Integrations
 
@@ -337,6 +389,54 @@ The reframe does not retroactively change Phases 22.6 (Layout Primitives) or 22.
 - `aesthetics/default/` — tasteful neutral baseline
 **Next candidates (queued):** Manuscript Future (Junicode 2 + Ranade + Monaspace per Cons. 2 Option D), terminal-monochrome, expressive-motion-heavy.
 **Closure dependency:** none — three reference packs now exist; future packs follow the v1.0 template (`tokens.css` + `overrides/{light,dark}.json` + `specimen/`).
+
+---
+
+## Phase 23.1 outcome (2026-05-21) — USML Editor's Draft + Reference Implementation Conformance Claim
+
+Brief: ship the USML Editor's Draft 2026.05 in Bikeshed format with all 16 standards-readiness attributes addressed, the formal JSON Schema, canonical examples, test conformance scaffold, and the reference implementation conformance claim. Lock the USML/Quoin bifurcation throughout the discoverability surface. Do NOT submit to W3C — submission is deferred to Phase 26 after adoption thresholds are met.
+
+**Strategic context.** This phase incorporates the savant-research findings from `compass_artifact_wf-0f17f0b9-...`. The W3C UI Specification Schema Community Group closed 2026-05-21 (the same day this phase ships) after producing zero artifacts in 9 months. The W3C Generative UI Community Group (chartered Jan 2026, chairs Zuo Wang and Hai Rao, 21 participants including Fuqiao Xue and Steve Faulkner) sits in the same semantic-IR layer but has produced no draft content. The asymmetric strategic window is roughly 6-12 months. USML's Phase 23.1 makes the artifact exist with standards-readiness baked in; adoption (Phase 24-25) precedes engagement (Phase 26).
+
+**Shipped:**
+
+- **`USML-Specification.bs`** — the Editor's Draft 2026.05 in Bikeshed format. Authored standards-ready: RFC 2119 normative vocabulary, four mandatory considerations sections (Security / Privacy / Accessibility / i18n), three conformance classes with normative MUST/SHOULD statements, named editor (Donald Pilger), canonical hosting URL (https://harrowhaus.github.io/quoin/usml/), date-versioning policy (mirrors DTCG 2025.10 precedent), normative references to adjacent standards, a complete Terminology section with 24 `<dfn>` definitions, a Change Log, an Adoption Thresholds section documenting Phase 26 activation criteria.
+- **`spec/usml-schema.json`** — formal JSON Schema 2020-12. Three pack-type branches via `anyOf` (Pattern / AestheticPack / Template). QuoinVersion accepts both legacy semver (existing packs) and new date-versioned ranges (with deprecation note). All 29 existing pack manifests in the catalog validate against this schema.
+- **`spec/examples/`** — five canonical examples spanning the data-model breadth: pattern-hero (multi-variant + peer-pack composition), pattern-button-system (self-contained microstates), pattern-disclosure (translated pattern with source attribution), aesthetic-default (DTCG-consuming pack), composition-graph (reverse-lineage documentation). All four schema-validated examples round-trip cleanly.
+- **`spec/tests/`** — conformance scaffold with three runners (anatomy/, aesthetic-pack/, backend-emit/) + aggregate run-all.mjs. Two passing + one failing fixture per Anatomy + Aesthetic-Pack classes; one passing emission-shape fixture per Backend class. 5/5 tests pass against the reference implementation.
+- **`spec/conformance-report.md`** — Quoin's claim against USML 2026.05. Anatomy Validator: Partial (validates own manifests; external CLI tool not yet exposed). Aesthetic-Pack Provider: Full (three v1.0 packs satisfy §4.3). Backend Emitter: Level 3 (plain-CSS backend, all 32 directly-usable artifacts).
+- **`.github/workflows/spec-build.yml`** — GitHub Action wiring the `w3c/spec-prod@v2` action to build the Bikeshed source to `docs/usml/` for GitHub Pages serving on every main push.
+- **`README.md` + `THESIS.md`** — USML/Quoin bifurcation applied throughout. Lead paragraphs now read "USML is the specification; Quoin is the reference implementation." All subsequent references reconciled.
+
+**Architectural truth surfaced during specification authoring.** The existing pack manifests use `quoinVersion: "^0.1.0"` (semver range), pre-dating USML's date-versioning policy. The schema accommodates both formats via `anyOf`, with the legacy semver branch carrying a deprecation note encouraging new packs to adopt date-versioning. This is the kind of legacy-accommodation that surfaces only when a specification is authored against an existing implementation — and resolving it correctly (instead of breaking existing packs) is the kind of decision the bifurcation between specification and implementation makes evaluable.
+
+**Verification:**
+
+| Check | Result |
+|-------|--------|
+| `USML-Specification.bs` authored with all 16 standards-readiness attributes | ✅ |
+| `spec/usml-schema.json` parses (JSON Schema 2020-12) | ✅ |
+| 29 existing pack manifests validate against the schema (patterns + primitives + aesthetics + templates + reference packs) | ✅ |
+| Four canonical schema-validated examples round-trip | ✅ |
+| Test scaffold runs end-to-end (5/5 pass) | ✅ |
+| GitHub Action authored (build pipeline executes on next push) | ✅ |
+| Reference implementation conformance claim documented | ✅ |
+| README.md + THESIS.md updated for USML/Quoin bifurcation; no contradictions remain | ✅ |
+| Phase 23 reframed in PHASES.md; Phase 26 activation criteria documented | ✅ |
+| No discoverability-surface changes to /llms.txt, /llms-full.txt, /registry.json (deferred per scope boundary) | ✅ |
+
+**Strategic implications for downstream work:**
+
+- **The artifact now exists with standards-readiness baked in.** External implementers, design-system maintainers, and standards-body reviewers can evaluate USML on its merits. This is the credibility anchor adoption work (Phase 24-25) builds on.
+- **The bifurcation enables clean external messaging.** "USML 2026.05" is the spec name; "Quoin" is the reference implementation name; the relationship is HTML/Firefox by precedent.
+- **Phase 26 has a concrete activation gate.** Adoption thresholds in USML §Adoption Thresholds are explicit: 3+ co-editors / 2+ independent implementations / 1+ design-system adoption / incubation venue. Until those are met, the spec iterates publicly; submission waits.
+- **W3C Generative UI CG is the preferred incubation venue** when Phase 26 activates. The CG has W3C staff and accessibility-leader participation; joining as participant with USML as input document is higher leverage than competing externally.
+
+**Halts encountered:** none.
+
+**Next-session recommendation:** Phase 23.2 (Ingest interface specification) OR Phase 24 prep (adoption groundwork). Phase 23.2 elaborates USML §Ingest Interface from sketch to formal contract; this is the natural continuation of the spec-authoring track. Phase 24 prep starts shaping the build-pipeline + npm + AI-tool distribution surface that grows adoption.
+
+The operator chooses based on whether the next priority is "the spec deepens" (23.2) or "adoption infrastructure ships" (24 prep). Both are tractable; the brief's D11 sequencing decision says adoption-before-standards, which mildly favors 24 prep — but 23.2 is also adoption work in the sense that it sharpens the spec into something external implementers can target.
 
 ---
 
@@ -611,11 +711,15 @@ Phase 0 (spec)
                 → Harvest sessions [UNBLOCKED — operate against curated SOURCES.md registry under quality-gates framework]
                 → Phase 23 reframed (IR architecture → IR specification draft + reference engine)
                 → Phase 26 activation [QUEUED on Phase 23.5 closure — no longer indefinitely deferred]
-              → Phase 23 (Quoin IR Architecture — specification draft + reference engine)
-                → Phase 23.5 (specification publication + first translation demo)
-                  → Phase 26 (Standards Engagement) [ACTIVATED]
-                → Phase 24 (Build Pipeline + AI Tool Distribution) [BLOCKED on Phase 23]
-                → Phase 25 (Multi-Source Harvest) [BLOCKED on Phase 23]
+              → Phase 23 (USML IR Architecture — spec draft + reference engine; renamed from Quoin IR per bifurcation)
+                → Phase 23.1 (USML Editor's Draft 2026.05 + Reference Implementation Conformance Claim — ✅)
+                  → Phase 23.2 (Ingest interface specification) [UNBLOCKED, queued]
+                  → Phase 23.3 (Emission interface specification) [UNBLOCKED, queued]
+                  → Phase 23.4 (First reference source adapter formalization) [UNBLOCKED, queued]
+                → Phase 23.5 (Specification publication + first additional reference backend + live translation demo)
+                  → Phase 26 (Standards Engagement) [ACTIVATES on adoption thresholds met]
+                → Phase 24 (Build Pipeline + AI Tool Distribution) [BLOCKED on Phase 23 sub-phases]
+                → Phase 25 (Multi-Source Harvest) [BLOCKED on Phase 23 sub-phases]
               → Templates layer [BLOCKED on Cons. 4 nav unification]
             → Phase 5e (Launch) [BLOCKED on Phase 23 closure]
             → Catalog Extension [UNBLOCKED, ongoing]

@@ -1,0 +1,67 @@
+{
+  "$comment": "USML 2026.05 composition graph example. Non-normative; demonstrates the reverse-lineage relationships between three patterns. The graph shape itself is not a validated USML data-model object — it's a documentation artifact showing how peerPacks references resolve across the catalog.",
+  "graph": {
+    "nodes": [
+      { "id": "@quoin/pattern-hero", "type": "pattern" },
+      { "id": "@quoin/pattern-button-system", "type": "pattern" },
+      { "id": "@quoin/prim-label", "type": "primitive" },
+      { "id": "@quoin/prim-decoration-overlay", "type": "primitive" },
+      { "id": "@quoin/tokens-baseline", "type": "token" }
+    ],
+    "edges": [
+      {
+        "from": "@quoin/pattern-hero",
+        "to": "@quoin/pattern-button-system",
+        "relation": "peerPacks",
+        "variant": "all",
+        "consumedVia": "hero-actions slot consumes class='action-button'"
+      },
+      {
+        "from": "@quoin/pattern-hero",
+        "to": "@quoin/prim-label",
+        "relation": "optionalPeerPacks",
+        "variant": "type-only",
+        "consumedVia": "hero-eyebrow slot uses prim-label when an eyebrow badge is rendered"
+      },
+      {
+        "from": "@quoin/pattern-hero",
+        "to": "@quoin/prim-decoration-overlay",
+        "relation": "optionalPeerPacks",
+        "variant": "gradient-mesh, brand-photo, video",
+        "consumedVia": "hero-background slot composes decoration-overlay for grain/texture effects"
+      },
+      {
+        "from": "@quoin/pattern-hero",
+        "to": "@quoin/tokens-baseline",
+        "relation": "peerPacks",
+        "variant": "all",
+        "consumedVia": "all slots consume token references resolved against tokens-baseline"
+      },
+      {
+        "from": "@quoin/pattern-button-system",
+        "to": "@quoin/tokens-baseline",
+        "relation": "peerPacks",
+        "variant": "all",
+        "consumedVia": "all button-system slots consume token references"
+      },
+      {
+        "from": "@quoin/prim-label",
+        "to": "@quoin/tokens-baseline",
+        "relation": "peerPacks",
+        "variant": "all",
+        "consumedVia": "label tokens come from tokens-baseline"
+      }
+    ],
+    "reverseLineage": {
+      "@quoin/pattern-button-system": ["@quoin/pattern-hero (peerPacks)"],
+      "@quoin/prim-label": ["@quoin/pattern-hero (optionalPeerPacks, type-only variant)"],
+      "@quoin/prim-decoration-overlay": ["@quoin/pattern-hero (optionalPeerPacks, gradient-mesh/brand-photo/video variants)"],
+      "@quoin/tokens-baseline": ["@quoin/pattern-hero (peerPacks)", "@quoin/pattern-button-system (peerPacks)", "@quoin/prim-label (peerPacks)"]
+    }
+  },
+  "notes": [
+    "v3.G.17 enforces composition reality: where pattern-hero declares peerPacks to pattern-button-system, the hero's specimen MUST consume button-system through real composition (class='action-button'), not by re-implementing button styling.",
+    "v3.G.21 enforces optionalPeerPacks semantics: prim-label is consumed only by hero's type-only variant (for eyebrow badges), and prim-decoration-overlay is consumed only by gradient-mesh/brand-photo/video variants. Other variants must not be flagged for missing composition.",
+    "Reverse-lineage discipline (D.82) requires every consumed peer pack's README to list its consumers. The graph above is the canonical source of truth for those README tables."
+  ]
+}

@@ -1,0 +1,14 @@
+<!--
+  USML 2026.05 — expected backend emission for fixtures/hero-input.json,
+  using the plain-CSS + HTML reference backend.
+
+  Conformance check: this exact markup MUST be emittable by a Level 3
+  plain-CSS backend conformant to USML §4.4. Attribute names use the
+  short data-pattern form per §5.1; aria-* attributes preserve the
+  declared accessibility contract; structural elements match the
+  primitives/index.json declarations for @quoin/pattern-disclosure.
+-->
+<div data-pattern="disclosure-container" data-state="collapsed">
+  <button data-pattern="disclosure-trigger" type="button" aria-expanded="false" aria-controls="disc-1-content">Show more</button>
+  <div data-pattern="disclosure-content" id="disc-1-content" hidden>Disclosed content.</div>
+</div>

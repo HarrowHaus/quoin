@@ -1,0 +1,379 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://harrowhaus.github.io/quoin/usml/usml-schema.json",
+  "title": "USML 2026.05 — UI Semantics Markup Language Schema",
+  "description": "Formal JSON Schema for the USML data model. See USML-Specification.bs §5 (Core Data Model) for the normative narrative.",
+  "type": "object",
+  "$defs": {
+    "PatternName": {
+      "type": "string",
+      "pattern": "^@[a-z][a-z0-9-]*\\/(pattern|prim|template|aesthetic)-[a-z][a-z0-9-]*$",
+      "description": "Pattern name in the form @<namespace>/<type-prefix>-<slug>."
+    },
+    "Semver": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[A-Za-z0-9.-]+)?(\\+[A-Za-z0-9.-]+)?$",
+      "description": "Semantic Versioning 2.0.0 string."
+    },
+    "SemverRange": {
+      "type": "string",
+      "description": "Semver range expression (npm-compatible). Example: ^1.0.0, >=1.2.3 <2.0.0."
+    },
+    "QuoinVersion": {
+      "type": "string",
+      "anyOf": [
+        {
+          "pattern": "^[\\^~]?\\d{4}\\.\\d{2}$",
+          "description": "USML date-version range (e.g., ^2026.05). The preferred form post-USML 2026.05."
+        },
+        {
+          "pattern": "^[\\^~]?\\d+\\.\\d+(\\.\\d+)?$",
+          "description": "Legacy semver-range form (e.g., ^0.1.0). Accepted for backward compatibility with packs authored before USML 2026.05 introduced date-versioning. New packs SHOULD use date-versioned ranges."
+        }
+      ],
+      "description": "USML specification version range the pack targets. Accepts USML date-versioning (e.g., ^2026.05) or legacy semver (e.g., ^0.1.0) for backward compatibility."
+    },
+    "Microstate": {
+      "type": "string",
+      "description": "USML standardized microstate vocabulary is: default, hover, active, focus, focus-visible, disabled, loading, selected, expanded, collapsed, current, error. Patterns MAY extend this vocabulary per [[#microstates]]; the extension SHOULD be documented in the pattern's metadata. Schema does not enforce the enum to permit extension."
+    },
+    "Alignment": {
+      "type": "string",
+      "enum": ["centered", "left", "right", "split-anchor"],
+      "description": "USML universal alignment values. v3.G.16."
+    },
+    "VariantAxis": {
+      "type": "object",
+      "description": "An orthogonal modal dimension a pattern exposes.",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": ["string", "number"]
+          },
+          "minItems": 1,
+          "description": "Permissible values for this axis."
+        },
+        "default": {
+          "type": ["string", "number", "boolean"]
+        },
+        "specific": {
+          "type": "boolean",
+          "description": "True if this axis is pattern-specific; false if it is a universal axis."
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "required": ["values"]
+    },
+    "Slot": {
+      "type": "object",
+      "description": "A named position within a pattern's anatomy.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "category": {
+          "type": "string"
+        },
+        "gating": {
+          "type": "string",
+          "enum": ["mandatory", "conditional"]
+        },
+        "role": {
+          "type": "string"
+        },
+        "gatedBy": {
+          "type": "object",
+          "description": "Required when gating is 'conditional'. Identifies the variant axis and value(s) activating this slot.",
+          "properties": {
+            "axis": {
+              "type": "string"
+            },
+            "values": {
+              "type": "array",
+              "items": {
+                "type": ["string", "number", "boolean"]
+              }
+            }
+          },
+          "required": ["axis", "values"]
+        },
+        "attributes": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/VariantAxis"
+          }
+        },
+        "tokens": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Token references this slot consumes. Values are CSS custom-property expressions or token-graph paths."
+        },
+        "structure": {
+          "type": "object",
+          "properties": {
+            "element": {
+              "type": "string"
+            }
+          }
+        },
+        "children": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "string",
+          "enum": ["inline", "block"]
+        },
+        "meta": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "required": ["name", "role"]
+    },
+    "PeerPackEntry": {
+      "type": ["object", "string"],
+      "description": "Either a semver range string OR an object with detailed reference fields."
+    },
+    "PatternMetadataSource": {
+      "type": "object",
+      "description": "Source attribution for translated patterns.",
+      "properties": {
+        "system": { "type": "string" },
+        "url": { "type": "string", "format": "uri" },
+        "license": { "type": "string", "description": "SPDX license identifier." },
+        "sourcePatternSlug": { "type": "string" },
+        "captureDate": { "type": "string", "format": "date" },
+        "translationFraming": { "type": "string" }
+      },
+      "required": ["system", "url", "license"]
+    },
+    "PatternMetadata": {
+      "type": "object",
+      "properties": {
+        "author": { "type": "string" },
+        "license": { "type": "string", "description": "SPDX license identifier." },
+        "homepage": { "type": "string", "format": "uri" },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "source": { "$ref": "#/$defs/PatternMetadataSource" }
+      }
+    },
+    "Polyfill": {
+      "type": "object",
+      "properties": {
+        "purpose": { "type": "string" },
+        "source": { "type": "string", "format": "uri" },
+        "consumption": { "type": "string" }
+      }
+    },
+    "Pattern": {
+      "type": "object",
+      "description": "A USML Pattern manifest. Validates against the existing Quoin quoin.pack.json shape.",
+      "properties": {
+        "$schema": {
+          "type": "string"
+        },
+        "name": { "$ref": "#/$defs/PatternName" },
+        "version": { "$ref": "#/$defs/Semver" },
+        "type": {
+          "type": "string",
+          "enum": ["pattern", "primitive", "template", "aesthetic", "vocabulary", "implementation", "token"]
+        },
+        "quoinVersion": { "$ref": "#/$defs/QuoinVersion" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "variant": { "type": "string" },
+        "variants": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "exports": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        },
+        "states": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "microStates": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/Microstate" }
+        },
+        "metadata": { "$ref": "#/$defs/PatternMetadata" },
+        "peerPacks": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/PeerPackEntry" }
+        },
+        "optionalPeerPacks": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/PeerPackEntry" }
+        },
+        "polyfills": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/Polyfill" }
+        },
+        "consolidates": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "deprecates": {
+          "type": "string"
+        }
+      },
+      "required": ["name", "version", "type", "quoinVersion", "description"]
+    },
+    "AestheticPack": {
+      "type": "object",
+      "description": "A USML Aesthetic Pack. Supplies DTCG-conformant token values.",
+      "properties": {
+        "$schema": { "type": "string" },
+        "name": { "$ref": "#/$defs/PatternName" },
+        "version": { "$ref": "#/$defs/Semver" },
+        "type": { "const": "aesthetic" },
+        "quoinVersion": { "$ref": "#/$defs/QuoinVersion" },
+        "description": { "type": "string" },
+        "exports": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        },
+        "peerPacks": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/PeerPackEntry" }
+        },
+        "dependsOn": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "conflictsWith": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "overrides-variant-token-slots": {
+          "oneOf": [
+            { "type": "array", "items": { "type": "string" } },
+            { "type": "object", "additionalProperties": true }
+          ]
+        },
+        "metadata": { "$ref": "#/$defs/PatternMetadata" }
+      },
+      "required": ["name", "version", "type", "quoinVersion"]
+    },
+    "Template": {
+      "type": "object",
+      "description": "A USML Template manifest.",
+      "properties": {
+        "$schema": { "type": "string" },
+        "name": { "$ref": "#/$defs/PatternName" },
+        "version": { "type": "string" },
+        "type": { "const": "template" },
+        "quoinVersion": { "$ref": "#/$defs/QuoinVersion" },
+        "description": { "type": "string" },
+        "status": {
+          "type": "string",
+          "enum": ["draft", "scaffold", "complete"]
+        },
+        "composition": {
+          "type": "object",
+          "properties": {
+            "order": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "slot": { "type": "string" },
+                  "pack": { "type": "string" },
+                  "variant": { "type": "string" },
+                  "status": { "type": "string" }
+                },
+                "required": ["slot", "pack"]
+              }
+            }
+          }
+        },
+        "dependencies": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        },
+        "pendingDependencies": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        },
+        "recommendedAesthetics": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "customizationPoints": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "what": { "type": "string" },
+              "where": { "type": "string" }
+            },
+            "required": ["id", "what", "where"]
+          }
+        },
+        "exports": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        },
+        "metadata": { "$ref": "#/$defs/PatternMetadata" }
+      },
+      "required": ["name", "version", "type", "quoinVersion", "description"]
+    }
+  },
+  "anyOf": [
+    { "$ref": "#/$defs/Pattern" },
+    { "$ref": "#/$defs/AestheticPack" },
+    { "$ref": "#/$defs/Template" }
+  ],
+  "examples": [
+    {
+      "$schema": "https://harrow.haus/quoin/schema/pack.json",
+      "name": "@quoin/pattern-disclosure",
+      "version": "1.0.0",
+      "type": "pattern",
+      "quoinVersion": "^0.1.0",
+      "description": "Disclosure pattern. Translated from ARIA APG.",
+      "category": "application",
+      "metadata": {
+        "author": "Quoin",
+        "license": "MIT",
+        "source": {
+          "system": "W3C ARIA Authoring Practices Guide",
+          "url": "https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/",
+          "license": "W3C-Document-License",
+          "sourcePatternSlug": "disclosure",
+          "captureDate": "2026-05-21"
+        }
+      },
+      "peerPacks": {
+        "@quoin/tokens-baseline": "^0.1.0"
+      },
+      "optionalPeerPacks": {
+        "@quoin/prim-stack": "^1.0.0"
+      }
+    },
+    {
+      "$schema": "https://harrow.haus/quoin/schema/pack.json",
+      "name": "@quoin/aesthetic-default",
+      "version": "1.0.0",
+      "type": "aesthetic",
+      "quoinVersion": "^0.1.0",
+      "description": "Tasteful neutral baseline aesthetic.",
+      "metadata": {
+        "author": "Quoin",
+        "license": "MIT"
+      }
+    }
+  ]
+}

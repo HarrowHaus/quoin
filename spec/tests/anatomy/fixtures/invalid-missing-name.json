@@ -1,0 +1,7 @@
+{
+  "_comment": "Invalid: missing required `name` field. Test runner expects validation to fail with a 'must have required property name' error.",
+  "version": "1.0.0",
+  "type": "pattern",
+  "quoinVersion": "^2026.05",
+  "description": "Invalid manifest: name omitted."
+}

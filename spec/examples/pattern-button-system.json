@@ -1,0 +1,33 @@
+{
+  "$schema": "https://harrowhaus.github.io/quoin/usml/usml-schema.json",
+  "name": "@quoin/pattern-button-system",
+  "version": "1.0.0",
+  "type": "pattern",
+  "quoinVersion": "^2026.05",
+  "description": "Foundational button primitives — 5 intents (primary / secondary / ghost / destructive / link) × 4 sizes (xs / sm / md / lg) × 8 microstates. The single most-composed pattern in the catalog. Canonical USML example demonstrating microstates and self-contained anatomy with no peer-pack consumption.",
+  "category": "application",
+  "variants": ["primary", "secondary", "ghost", "destructive", "link"],
+  "exports": {
+    "primitives": "./primitives/index.json"
+  },
+  "states": ["default"],
+  "microStates": [
+    "default",
+    "hover",
+    "active",
+    "focus",
+    "focus-visible",
+    "disabled",
+    "loading",
+    "selected"
+  ],
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/patterns/button-system",
+    "tags": ["button", "foundation", "p0", "canonical-example"]
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^2026.05"
+  }
+}

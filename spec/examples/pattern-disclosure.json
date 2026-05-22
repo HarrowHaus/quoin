@@ -1,0 +1,34 @@
+{
+  "$schema": "https://harrowhaus.github.io/quoin/usml/usml-schema.json",
+  "name": "@quoin/pattern-disclosure",
+  "version": "1.0.0",
+  "type": "pattern",
+  "quoinVersion": "^2026.05",
+  "description": "Disclosure pattern. Button + toggled content region. Foundational expand/collapse anatomy. Canonical USML example demonstrating a translated pattern with full source attribution and transitional-framing metadata.",
+  "category": "application",
+  "exports": {
+    "primitives": "./primitives/index.json"
+  },
+  "states": ["expanded", "collapsed"],
+  "microStates": ["default", "hover", "active", "focus", "focus-visible", "disabled"],
+  "metadata": {
+    "author": "Quoin",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/patterns/disclosure",
+    "tags": ["disclosure", "expand-collapse", "translation", "aria-apg", "canonical-example"],
+    "source": {
+      "system": "W3C ARIA Authoring Practices Guide",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/",
+      "license": "W3C-Document-License",
+      "sourcePatternSlug": "disclosure",
+      "captureDate": "2026-05-21",
+      "translationFraming": "transitional — to be retired in favor of native specification publication if ARIA APG publishes USML for this pattern"
+    }
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^2026.05"
+  },
+  "optionalPeerPacks": {
+    "@quoin/prim-stack": "^1.0.0"
+  }
+}

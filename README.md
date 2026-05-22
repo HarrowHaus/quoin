@@ -20,11 +20,13 @@
 
 ## What Quoin is
 
-Quoin is a **specification for UI semantics, with a reference implementation in HTML and CSS** that demonstrates the specification works in practice. The specification captures what something *is* (a hero, a nav, a button, a modal — at the level of anatomy and intent) independently of what it looks like (aesthetic packs), what framework it renders in (backend emitters), and how AI tools generate it (consumption surfaces).
+**USML — UI Semantics Markup Language — is the specification for UI semantics. Quoin is the reference implementation in HTML and CSS that demonstrates USML works in practice.** This mirrors HTML/Firefox, ECMAScript/Node.js, ARIA/axe-core, DTCG/Style Dictionary: the spec is what's published and what standards bodies can ratify; the reference implementation proves the spec is workable.
+
+The specification captures what something *is* (a hero, a nav, a button, a modal — at the level of anatomy and intent) independently of what it looks like (aesthetic packs), what framework it renders in (backend emitters), and how AI tools generate it (consumption surfaces).
 
 Day to day, that means Quoin is a semantic CSS replacement: a vocabulary of named, accessibility-correct, aesthetically-neutral patterns — heroes, navs, forms, tables, modals, dialogs, editorial, layout primitives — that you compose into a site instead of authoring class strings. Each pattern is a slot-and-variant contract with declared microstates and ARIA hooks, and the visual identity rides on a separable aesthetic layer that swaps without touching the markup.
 
-For the strategic framing — why Quoin is a specification with a reference implementation, not "just another design system" — read [`THESIS.md`](THESIS.md).
+For the strategic framing — why USML is a specification with a reference implementation, not "just another design system" — read [`THESIS.md`](THESIS.md). For the in-progress USML draft and its formal JSON Schema, see [`USML-Specification.bs`](USML-Specification.bs) (Bikeshed source; HTML output at https://harrowhaus.github.io/quoin/usml/ when the build pipeline ships).
 
 ## Quick start
 
@@ -147,7 +149,10 @@ Then in your tool: `npx shadcn@latest add @quoin/hero`. The pattern lands in you
 
 Deep documentation — not required reading to use Quoin, but useful if you're contributing or building on top:
 
-- **[`THESIS.md`](THESIS.md)** — the strategic positioning document. Quoin as a specification with a reference implementation, the standards-track ambition, adoption modes, architectural commitments, lineage, tradeoffs, honest current state. Start here if you're a standards body reviewer, an academic researcher, an AI tool builder, or a design system maintainer evaluating whether to engage.
+- **[`THESIS.md`](THESIS.md)** — the strategic positioning document. USML as a specification with Quoin as a reference implementation, the standards-track ambition, adoption modes, architectural commitments, lineage, tradeoffs, honest current state. Start here if you're a standards body reviewer, an academic researcher, an AI tool builder, or a design system maintainer evaluating whether to engage.
+- **[`USML-Specification.bs`](USML-Specification.bs)** — the USML specification source (Bikeshed format). Editor's Draft 2026.05. Authored standards-ready (RFC 2119 vocabulary, Security/Privacy/Accessibility/i18n considerations, conformance classes, named editor, canonical URL, normative references, test scaffold) for future submission to the W3C Generative UI Community Group at Phase 26 when adoption thresholds are met.
+- **[`spec/usml-schema.json`](spec/usml-schema.json)** — formal JSON Schema for the USML data model. All existing pack manifests validate against this schema.
+- **[`spec/conformance-report.md`](spec/conformance-report.md)** — Quoin's conformance claim against USML 2026.05.
 - [`CHANGELOG.md`](CHANGELOG.md) — every shipped change, in reverse chronological order.
 - [`PHASE_GATES.md`](PHASE_GATES.md) — the architectural exit criteria for each phase of Quoin's development. Includes the v3.G.\* lock series.
 - [`HANDOFF.md`](HANDOFF.md) — the current state of the project, packaged for the next contributor.

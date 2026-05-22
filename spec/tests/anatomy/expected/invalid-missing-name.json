@@ -1,0 +1,5 @@
+{
+  "expectValid": false,
+  "expectError": "name",
+  "rationale": "Pattern manifest must declare `name` field per USML §5.1. The schema marks `name` as required; validator must reject."
+}
