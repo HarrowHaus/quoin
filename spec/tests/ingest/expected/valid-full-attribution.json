@@ -1,0 +1,5 @@
+{
+  "expectValid": true,
+  "expectSourceAdapterConformant": true,
+  "rationale": "All USML §7 MUST statements satisfied: schema validates (Anatomy Validator class satisfied per §7.1.1); metadata.source includes system + url + license (Translation Attribution per §7.4); license is W3C-Document-License which is on the approved-source list (License clearance per §7.5)."
+}

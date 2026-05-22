@@ -1,0 +1,6 @@
+{
+  "expectValid": false,
+  "expectSourceAdapterConformant": false,
+  "rationale": "Both schema validation AND Source Adapter conformance check reject this fixture. The schema's PatternMetadataSource declares system + url + license as `required`; the source block has only `system`, so schema validation fails. §7.4's required fields are therefore enforced at two layers — schema-level (machine-checkable) and Source Adapter conformance class-level (operational). The double enforcement is intentional: a USML Source Adapter satisfying the Anatomy Validator conformance class for its output (§7.1.1 MUST clause) automatically inherits the schema's enforcement of §7.4's required fields.",
+  "expectViolation": "metadata.source missing url and license per §7.4 (caught at both schema and adapter conformance layers)"
+}

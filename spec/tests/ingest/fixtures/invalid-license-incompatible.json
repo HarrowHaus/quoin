@@ -1,0 +1,20 @@
+{
+  "_comment": "Invalid: source license is 'All Rights Reserved' / commercial-only, which USML §7.5 forbids translating without explicit licensing agreement. A USML Source Adapter MUST NOT emit this Pattern. The Source Adapter conformance test asserts that license clearance rejects this case before emission.",
+  "name": "@example/pattern-borrowed",
+  "version": "1.0.0",
+  "type": "pattern",
+  "quoinVersion": "^2026.05",
+  "description": "Test fixture demonstrating license-clearance failure: source pattern is from a commercial-only design system (Tailwind UI hypothetical analog).",
+  "category": "application",
+  "metadata": {
+    "author": "Example Source Adapter",
+    "license": "MIT",
+    "source": {
+      "system": "Commercial Design System (hypothetical)",
+      "url": "https://example.com/commercial-design-system/patterns/borrowed",
+      "license": "All Rights Reserved — Commercial-Only — no derivative works permitted",
+      "sourcePatternSlug": "borrowed",
+      "captureDate": "2026-05-21"
+    }
+  }
+}

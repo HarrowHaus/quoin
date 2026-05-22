@@ -1,0 +1,35 @@
+{
+  "$schema": "https://harrowhaus.github.io/quoin/usml/usml-schema.json",
+  "$comment": "USML 2026.05 — canonical source-adapter output example. Real Pattern object emitted by the Quoin reference adapter (the translation skill at /skills/quoin-pattern-translator.md) when translating the W3C ARIA APG disclosure pattern. Demonstrates attribution-complete output per USML §7.4 Translation attribution metadata. Cross-referenced from USML-Specification.bs §translation-attribution.",
+  "name": "@quoin/pattern-disclosure",
+  "version": "1.0.0",
+  "type": "pattern",
+  "quoinVersion": "^2026.05",
+  "description": "Disclosure pattern. Button + toggled content region. Foundational expand/collapse anatomy. Canonical USML source-adapter output example demonstrating attribution-complete translation from the W3C ARIA Authoring Practices Guide.",
+  "category": "application",
+  "exports": {
+    "primitives": "./primitives/index.json"
+  },
+  "states": ["expanded", "collapsed"],
+  "microStates": ["default", "hover", "active", "focus", "focus-visible", "disabled"],
+  "metadata": {
+    "author": "Quoin (reference adapter, /skills/quoin-pattern-translator.md)",
+    "license": "MIT",
+    "homepage": "https://harrow.haus/quoin/patterns/disclosure",
+    "tags": ["disclosure", "expand-collapse", "translation", "aria-apg", "canonical-example", "source-adapter-output"],
+    "source": {
+      "system": "W3C ARIA Authoring Practices Guide",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/",
+      "license": "W3C-Document-License",
+      "sourcePatternSlug": "disclosure",
+      "captureDate": "2026-05-21",
+      "translationFraming": "transitional — this translation will be retired in favor of native specification publication if and when the W3C ARIA APG publishes USML-conformant Pattern objects directly per USML §7.6 Native publication compatibility"
+    }
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^2026.05"
+  },
+  "optionalPeerPacks": {
+    "@quoin/prim-stack": "^1.0.0"
+  }
+}

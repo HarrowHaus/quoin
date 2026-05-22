@@ -21,6 +21,7 @@ table below.
 | USML Anatomy Validator | Partial | The reference implementation validates its own pack manifests against `spec/usml-schema.json` and uses the result to gate pack admission. External-pack validation as a CLI tool is not yet exposed. |
 | USML Aesthetic-Pack Provider | Full | Three v1.0 aesthetic packs (`@quoin/aesthetic-default`, `@quoin/aesthetic-boeing-watch`, `@quoin/aesthetic-harrow-haus`) satisfy all requirements in USML §4.3. |
 | USML Backend Emitter | Level 3 (plain-CSS + HTML backend) | All 22 production patterns, 4 content primitives, and 6 layout primitives emit Level 3 conformant output via the reference implementation's plain-CSS backend. |
+| USML Source Adapter | Full (Phase 23.2) | The translation skill at `/skills/quoin-pattern-translator.md` is the reference adapter. Source registry at `/docs/sources/SOURCES.md` documents license-cleared sources. Three translated patterns (disclosure, combobox, tabs) emitted with full `metadata.source` attribution per §7.4. |
 
 ---
 
@@ -101,6 +102,41 @@ USML-conformant output at Level 3 for all 32 directly-usable artifacts
 **Path to expansion:** Phase 23.3 ships the emission interface specification.
 Phase 23.5 closes with the first additional reference backend. Phase 24
 expands to framework-targeted backends.
+
+### USML Source Adapter — Full conformance (Phase 23.2)
+
+**Claim:** The Quoin reference adapter satisfies all MUST and SHOULD
+statements of the USML Source Adapter conformance class as formalized in
+[USML §7 Ingest interface](../USML-Specification.bs).
+
+**Evidence per requirement:**
+
+| §7 requirement | Evidence |
+|----------------|----------|
+| MUST satisfy Anatomy Validator conformance class for output | All translated Patterns (`disclosure`, `combobox`, `tabs`) validate against `spec/usml-schema.json`. Reference: ingest scaffold at `spec/tests/ingest/`. |
+| MUST emit translation attribution metadata per §7.4 | All three translated Patterns carry `metadata.source` with `system`, `url`, and `license` fields populated. Reference: `patterns/disclosure/quoin.pack.json`, `patterns/combobox/quoin.pack.json`, `patterns/tabs/quoin.pack.json`. |
+| MUST perform license clearance per §7.5 | Source registry at `/docs/sources/SOURCES.md` documents license-cleared sources. ARIA APG (W3C-Document-License) is on the approved list. The three translated patterns each declare `metadata.source.license: "W3C-Document-License"`. |
+| MUST preserve source ARIA contract | Each translated Pattern's `primitives/index.json` documents ARIA roles, properties, and keyboard handling matching the ARIA APG reference. |
+| MUST NOT inline contracts from peer patterns | Each translated Pattern declares `peerPacks: { "@quoin/tokens-baseline": "^2026.05" }` (and `optionalPeerPacks` where applicable) rather than re-implementing peer-pack content. |
+| SHOULD declare supported source formats | Reference adapter documents supported formats at `/docs/translation/anatomy-extraction-rules.md`. Six format classes covered: HTML+CSS, web component, JSX/TSX, design spec, wireframe image, USML native IR. |
+| SHOULD report yield rate per source | Source registry tracks yield (3 successful translations from ARIA APG; no rejections). |
+| SHOULD surface rejected translations with rationale | Source registry includes a "rejected" section; current count is zero in 2026.05. |
+
+**Translated-Pattern roster (Phase 22.7 + Phase 23.2):**
+
+- `@quoin/pattern-disclosure` — translated 2026-05-21 from
+    https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
+- `@quoin/pattern-combobox` — translated 2026-05-21 from
+    https://www.w3.org/WAI/ARIA/apg/patterns/combobox/
+- `@quoin/pattern-tabs` — translated 2026-05-21 from
+    https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
+
+**Conformance scaffold:** `spec/tests/ingest/` ships three fixtures + a
+runner (Phase 23.2). The scaffold passes for all three: valid full
+attribution, invalid missing attribution, invalid license incompatibility.
+
+**No identified gap.** The reference adapter satisfies the full Source
+Adapter conformance class.
 
 ---
 

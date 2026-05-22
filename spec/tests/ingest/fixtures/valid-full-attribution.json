@@ -1,0 +1,24 @@
+{
+  "_comment": "Valid source-adapter output: all required attribution fields present, license is compatible (W3C-Document-License is on the approved list per Quoin's source registry).",
+  "name": "@example/pattern-disclosure",
+  "version": "1.0.0",
+  "type": "pattern",
+  "quoinVersion": "^2026.05",
+  "description": "Test fixture demonstrating source-adapter conformance with full attribution metadata.",
+  "category": "application",
+  "metadata": {
+    "author": "Example Source Adapter",
+    "license": "MIT",
+    "source": {
+      "system": "W3C ARIA Authoring Practices Guide",
+      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/",
+      "license": "W3C-Document-License",
+      "sourcePatternSlug": "disclosure",
+      "captureDate": "2026-05-21",
+      "translationFraming": "transitional — to be retired in favor of native specification publication if ARIA APG publishes USML-conformant Pattern objects directly"
+    }
+  },
+  "peerPacks": {
+    "@quoin/tokens-baseline": "^2026.05"
+  }
+}

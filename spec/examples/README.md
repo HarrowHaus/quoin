@@ -11,6 +11,7 @@ or more features of the USML data model. Every example validates against
 | `pattern-disclosure.json` | Translated pattern with full `metadata.source` attribution |
 | `aesthetic-default.json` | Aesthetic pack consuming DTCG 2025.10 token format |
 | `composition-graph.json` | Composition graph showing reverse-lineage between multiple patterns |
+| `source-adapter-output.json` | **(Phase 23.2)** Canonical attribution-complete output of a USML Source Adapter per §7 Ingest interface. Real disclosure-pattern translation by the Quoin reference adapter from W3C ARIA APG. |
 
 These examples are non-normative. They illustrate the schema in use; the
 normative requirements are in `USML-Specification.bs`.

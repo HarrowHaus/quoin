@@ -1,0 +1,16 @@
+{
+  "_comment": "Invalid: Pattern claims translation (presence of metadata.source) but the source block is incomplete — `url` and `license` are absent. USML §7.4 requires system + url + license at minimum. Source Adapter conformance class test asserts this fixture must be flagged.",
+  "name": "@example/pattern-mystery",
+  "version": "1.0.0",
+  "type": "pattern",
+  "quoinVersion": "^2026.05",
+  "description": "Test fixture demonstrating source-adapter non-conformance via incomplete attribution.",
+  "category": "application",
+  "metadata": {
+    "author": "Example Source Adapter",
+    "license": "MIT",
+    "source": {
+      "system": "Unknown Source"
+    }
+  }
+}

@@ -182,9 +182,9 @@ unless explicitly marked otherwise.
 
 <h3 id="conformance-classes">Conformance classes</h3>
 
-USML defines three conformance classes. An implementation MAY conform to one,
-two, or all three. Conformance claims MUST identify the class and the level
-of conformance achieved.
+USML defines four conformance classes. An implementation MAY conform to any
+subset. Conformance claims MUST identify the class and the level of
+conformance achieved.
 
 <h4 id="conformance-anatomy-validator">USML Anatomy Validator</h4>
 
@@ -246,6 +246,38 @@ A USML Backend Emitter:
         ARIA attribute emission, microstate CSS, and performance-budget
         enforcement.
 - MUST document its conformance level in implementer documentation.
+
+<h4 id="conformance-source-adapter">USML Source Adapter</h4>
+
+A USML Source Adapter is an implementation that consumes source patterns
+in their native format and produces USML-conformant Pattern objects.
+
+The full set of MUST/SHOULD/MAY statements defining Source Adapter
+conformance is in [[#ingest-interface]]. The summary follows; refer to
+[[#ingest-interface]] for the normative detail:
+
+- MUST satisfy the [[#conformance-anatomy-validator]] conformance class
+    for its output — every emitted Pattern object MUST validate against
+    `spec/usml-schema.json`.
+- MUST emit translation attribution metadata per
+    [[#translation-attribution]] for every translated Pattern.
+- MUST perform license clearance per [[#license-clearance]] before
+    emitting any translated Pattern.
+- MUST preserve the source pattern's accessibility contract per [[!ARIA]].
+- MUST NOT translate Patterns from sources with licenses that prohibit
+    derivative works.
+- SHOULD declare its supported source formats.
+- SHOULD report yield rate per source.
+- SHOULD surface rejected translations with rationale.
+
+A USML Source Adapter at **full conformance** satisfies all MUST and
+SHOULD statements above and in [[#ingest-interface]]. A USML Source
+Adapter at **partial conformance** satisfies all MUST statements and a
+documented subset of SHOULD statements; the omitted SHOULD statements
+MUST be documented in implementer documentation.
+
+The Quoin reference adapter claims full conformance per
+[`spec/conformance-report.md`](https://github.com/HarrowHaus/quoin/blob/main/spec/conformance-report.md).
 
 <!-- ════════════════════════════════════════════════════════════════════ -->
 <h2 id="core-data-model">Core Data Model</h2>
@@ -650,53 +682,353 @@ claim, subject to the conformance report at [`spec/conformance-report.md`](https
 <!-- ════════════════════════════════════════════════════════════════════ -->
 <h2 id="ingest-interface">Ingest interface</h2>
 
-The ingest interface defines how external sources are consumed into USML form.
+The ingest interface is the formal contract under which **source adapters**
+consume external source patterns and produce USML-conformant Pattern
+objects. The contract specifies the source adapter conformance class, the
+input/output expectations, the translation attribution metadata required
+on every translated Pattern, the license clearance procedure source
+adapters MUST perform, and the native-publication compatibility path that
+retires translations as external sources adopt USML directly.
 
-<h3 id="source-adapter">Source adapter</h3>
+<h3 id="source-adapter">Source adapter interface</h3>
 
-A <dfn>USML Source Adapter</dfn> is an implementation that consumes an
-external source pattern in its native format and produces USML-conformant
-output.
+A <dfn>USML Source Adapter</dfn> is an implementation that consumes source
+patterns in their native format and produces USML-conformant Pattern
+objects.
 
-A USML Source Adapter MUST:
+<h4 id="source-adapter-conformance-class">Source adapter conformance class</h4>
 
-- Accept input in at least one external format (HTML+CSS, web component
-    source, JSX/TSX, design spec, etc.).
-- Verify the source's license against an approved-source registry before
-    emission.
-- Produce a USML Pattern with a complete `metadata.source` block.
-- Document the extraction method, confidence level, and any judgment-based
-    decisions in the pattern's documentation.
+The USML Source Adapter is a conformance class defined in
+[[#conformance-source-adapter]]. The MUST/SHOULD/MAY statements in this
+section ([[#ingest-interface]]) collectively define what an implementation
+MUST satisfy to claim Source Adapter conformance.
 
-A USML Source Adapter SHOULD:
+A USML Source Adapter:
 
-- Report yield rate per source for future curation-priority adjustment.
-- Surface rejected translations (with rationale) to inform future harvest work.
+- MUST satisfy the [[#conformance-anatomy-validator]] conformance class
+    for its output — every emitted Pattern object MUST validate against
+    [`spec/usml-schema.json`](https://github.com/HarrowHaus/quoin/blob/main/spec/usml-schema.json).
+- MUST emit translation attribution metadata per [[#translation-attribution]]
+    for every translated Pattern.
+- MUST perform license clearance per [[#license-clearance]] before
+    emitting any translated Pattern.
+- SHOULD declare its supported source formats in implementer
+    documentation.
+- SHOULD report yield rate per source for future curation-priority
+    adjustment.
+- SHOULD surface rejected translations (with rationale) to inform future
+    harvest work.
+
+<h4 id="source-adapter-input-contract">Input contract</h4>
+
+A USML Source Adapter:
+
+- MUST accept input in at least one external source format.
+- MAY reject inputs in formats it does not declare support for.
+
+The external source formats anticipated in this version include:
+
+- **HTML + CSS reference** — a self-contained HTML file demonstrating the
+    source pattern with its complete styling.
+- **Web component source** — a Custom Element class definition with
+    `observedAttributes` and a shadow DOM template.
+- **JSX / TSX component source** — a React/Vue/Solid/Svelte component
+    source file with prop types declared.
+- **Design spec document** — a published anatomy specification (Material
+    Design guidelines, Polaris docs, Carbon design specs, etc.).
+- **Wireframe image** — a screenshot or rendered image of the source
+    pattern. Source adapters consuming this format MUST flag emitted
+    Patterns with reduced-confidence indicators.
+- **USML native IR** — a Pattern object the source design system
+    published directly per [[#native-publication]]. Source adapters
+    consuming this format MUST accept the Pattern verbatim (no translation
+    work) provided it validates against the schema.
+
+Format-specific extraction procedures are documented informatively in
+[`docs/translation/anatomy-extraction-rules.md`](https://github.com/HarrowHaus/quoin/blob/main/docs/translation/anatomy-extraction-rules.md).
+That document is informative; it describes how the Quoin reference
+adapter approaches per-format work. Other source adapters MAY take
+different approaches provided their output satisfies the requirements in
+this section.
+
+<h4 id="source-adapter-output-contract">Output contract</h4>
+
+A USML Source Adapter:
+
+- MUST emit Pattern objects conforming to [[#core-data-model]].
+- MUST include the `metadata.source` block (per
+    [[#translation-attribution]]) on every emitted Pattern.
+- MUST validate every emitted Pattern against
+    [`spec/usml-schema.json`](https://github.com/HarrowHaus/quoin/blob/main/spec/usml-schema.json)
+    before considering the translation complete.
+- MUST preserve the source pattern's ARIA contract per [[!ARIA]]; emitted
+    Patterns MUST NOT degrade accessibility relative to the source.
+- SHOULD include all the same Pattern fields a natively-authored Pattern
+    would include: anatomy, variants, composition, accessibility,
+    microStates, peerPacks, optionalPeerPacks, metadata.
+- MUST NOT emit Pattern objects whose accessibility contract conflicts
+    with USML's accessibility requirements (see
+    [[#accessibility-considerations]]).
+- MUST NOT inline contracts from peer patterns; instead, declare peer
+    packs via `peerPacks` or `optionalPeerPacks` per
+    [[#composition-rules]].
+
+<h4 id="source-adapter-discovery">Adapter discovery</h4>
+
+A USML Source Adapter:
+
+- SHOULD declare itself via package metadata (npm package keywords, MCP
+    server metadata, registry self-description) so that consumers can
+    discover it.
+- MAY register itself with a future USML implementations directory
+    (not normative in 2026.05).
+
+A non-normative reference adapter ships with the Quoin reference
+implementation — see [[#reference-source-adapter]].
 
 <h3 id="reference-source-adapter">Reference source adapter</h3>
 
-The Quoin reference implementation's [pattern-translator skill](https://github.com/HarrowHaus/quoin/blob/main/skills/quoin-pattern-translator.md)
-is the reference source-adapter implementation.
+The Quoin reference implementation's [pattern-translator
+skill](https://github.com/HarrowHaus/quoin/blob/main/skills/quoin-pattern-translator.md)
+is the canonical reference implementation of a USML Source Adapter.
+
+<h4 id="reference-adapter-identity">Reference adapter identity</h4>
+
+- **Implementation:** `/skills/quoin-pattern-translator.md` in the Quoin
+    reference implementation repository.
+- **Supported source formats (declared):** HTML + CSS reference (high
+    fidelity); web component source; JSX/TSX component source; design
+    spec document; wireframe image (with reduced-confidence flags).
+- **Source registry:** `/docs/sources/SOURCES.md` documents
+    license-cleared sources the reference adapter has approved for
+    translation.
+- **Extraction procedures:** `/docs/translation/anatomy-extraction-rules.md`
+    documents per-format extraction methods.
+- **Quality gates:** `/docs/translation/quality-gates.md` documents the
+    quality criteria the reference adapter applies before considering a
+    translation complete.
+
+<h4 id="reference-adapter-conformance-claim">Reference adapter conformance claim</h4>
+
+The Quoin reference adapter claims **full conformance** to the USML
+Source Adapter conformance class. The claim is documented in
+[`spec/conformance-report.md`](https://github.com/HarrowHaus/quoin/blob/main/spec/conformance-report.md).
+
+The reference adapter has produced 3 USML-conformant Pattern objects
+from ARIA APG [[ARIA-APG]] sources as of USML 2026.05:
+
+- `@quoin/pattern-disclosure` (translated from
+    https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/)
+- `@quoin/pattern-combobox` (translated from
+    https://www.w3.org/WAI/ARIA/apg/patterns/combobox/)
+- `@quoin/pattern-tabs` (translated from
+    https://www.w3.org/WAI/ARIA/apg/patterns/tabs/)
+
+Each translation carries complete `metadata.source` attribution per
+[[#translation-attribution]] and was license-cleared per
+[[#license-clearance]] before emission.
+
+<h4 id="reference-adapter-transitional-framing">Source-adapter transition (transitional framing)</h4>
+
+The Quoin reference adapter exists to bridge the period before external
+source design systems publish anatomy in USML format natively. As USML
+adoption grows and source design systems implement [[#native-publication]],
+the reference adapter becomes obsolete for those sources by design. The
+transition is gradual and source-by-source.
+
+The transition is documented from the consumer side via the
+<dfn>transitional translation</dfn> framing: every translated Pattern's
+documentation states that the translation will be retired when the source
+adopts native publication. See [[#translation-attribution]] for the
+attribution metadata that records this expectation.
+
+<h3 id="translation-attribution">Translation attribution metadata</h3>
+
+Every translated Pattern object MUST include a `metadata.source` field
+that records the source attribution. The field shape is defined by
+[`spec/usml-schema.json`](https://github.com/HarrowHaus/quoin/blob/main/spec/usml-schema.json)
+as the `PatternMetadataSource` type.
+
+<h4 id="attribution-fields">Required and optional attribution fields</h4>
+
+The `metadata.source` field is a structured object. In USML 2026.05 the
+field shape uses the following names (the schema is locked at 2026.05 per
+[[#versioning-and-stability]]):
+
+| Field | Required | Type | Meaning |
+|---|---|---|---|
+| `system` | **MUST** | string | The name of the source design system or pattern collection (e.g., "W3C ARIA Authoring Practices Guide"). |
+| `url` | **MUST** | string (URI) | The canonical URL of the source pattern documentation. |
+| `license` | **MUST** | string | The SPDX license identifier or descriptive license name (e.g., "W3C-Document-License", "MIT"). |
+| `sourcePatternSlug` | SHOULD | string | The source's identifier for the pattern (e.g., "disclosure", "combobox"). |
+| `captureDate` | SHOULD | string (ISO 8601 date) | When the translation was performed. |
+| `translationFraming` | MAY | string | Human-readable transitional-framing prose stating the translation will be retired if the source adopts native publication. |
+
+<div class="note">
+**Note — naming.** The field names above are normative for USML 2026.05.
+More descriptive synonyms (e.g., `sourceProject`, `sourceLicense`,
+`sourceURL`, `translatedAt`, `translationSkillVersion`, `notes`) are
+considered for a future minor version. Future versions MAY add such
+fields as aliases or replacements while retaining backward compatibility
+through the [[#versioning-and-stability]] policy. Implementations
+targeting 2026.05 MUST use the field names in the table above.
+</div>
+
+<h4 id="attribution-requirements">Attribution requirements</h4>
+
+A USML Source Adapter:
+
+- MUST emit all required fields above for every translated Pattern.
+- SHOULD emit recommended (`SHOULD`) fields when the information is
+    available.
+- MAY emit optional (`MAY`) fields and additional implementation-specific
+    metadata under `metadata.source` (the schema does not prohibit
+    additional properties, but Anatomy Validators MAY warn on
+    unrecognized fields).
+
+Consumers of translated Patterns:
+
+- SHOULD surface attribution to end users (e.g., in documentation, in
+    design system documentation pages).
+- MAY filter or query Patterns by source (e.g., "show me all patterns
+    translated from ARIA APG").
+
+<h4 id="attribution-display">Attribution display recommendations</h4>
+
+Documentation for translated Patterns SHOULD include:
+
+- A paragraph attributing the source design system, with a link to the
+    canonical source URL.
+- A distinction between the source's design opinions (which the
+    translation discards) and the source's anatomy (which the translation
+    preserves).
+- The transitional framing — that the translation will be retired in
+    favor of native publication if the source adopts USML directly.
+
+A canonical example demonstrating attribution-complete output is provided
+at [`spec/examples/source-adapter-output.json`](https://github.com/HarrowHaus/quoin/blob/main/spec/examples/source-adapter-output.json).
+
+<h3 id="license-clearance">License clearance procedure</h3>
+
+A USML Source Adapter MUST verify license compatibility before emitting
+any translated Pattern. License clearance is a prerequisite for
+emission, not a post-hoc audit.
+
+<h4 id="license-verification">License verification</h4>
+
+A USML Source Adapter:
+
+- MUST read the source's license declaration before any extraction work.
+- MUST determine whether the license permits derivative works (translation
+    is a derivative work).
+- MUST determine whether the license permits redistribution of the
+    translated form (USML packs are commonly distributed under MIT;
+    redistribution licensing must be reconciled).
+- MUST record the determination in the emitted Pattern's
+    `metadata.source.license` field.
+
+<h4 id="compatible-licenses">Compatible licenses</h4>
+
+The following license classes are commonly compatible with USML
+translation:
+
+- Public domain and CC0.
+- Creative Commons Attribution (CC-BY) — with required attribution
+    recorded in `metadata.source`.
+- Creative Commons Attribution-ShareAlike (CC-BY-SA) — with required
+    attribution and share-alike obligation documented.
+- MIT, Apache-2.0, BSD variants.
+- W3C Document License (the license under which ARIA APG is published).
+
+Source adapters SHOULD maintain a public source registry documenting
+which sources they have license-cleared. The Quoin reference adapter
+maintains such a registry at
+[`/docs/sources/SOURCES.md`](https://github.com/HarrowHaus/quoin/blob/main/docs/sources/SOURCES.md)
+(informative cross-reference; the registry format itself is not
+normative in USML 2026.05).
+
+<h4 id="incompatible-licenses">Incompatible licenses</h4>
+
+A USML Source Adapter:
+
+- MUST NOT translate Patterns from sources with licenses that prohibit
+    derivative works.
+- MUST NOT translate Patterns from sources with commercial-only
+    redistribution restrictions (e.g., Tailwind UI) without an explicit
+    licensing agreement.
+- MUST NOT default to translation from sources with unclear or abandoned
+    licensing. Operator decision is required; the determination MUST be
+    recorded.
+
+<h4 id="license-clearance-documentation">License clearance documentation</h4>
+
+When a translation is rejected on license-clearance grounds, the source
+adapter SHOULD document the rejection (with rationale) to inform future
+harvest decisions and to prevent re-attempting the same translation
+without re-clearance.
+
+The Quoin reference adapter's source registry includes a "rejected"
+section listing translations explicitly declined and the rationale.
 
 <h3 id="native-publication">Native specification publication</h3>
 
-The translation skill is **transitional infrastructure**. The strategic
-expectation is that as USML gains adoption, external design systems will
-publish their anatomy in USML format directly, eliminating the need for
-translation.
+A <dfn>native publication</dfn> occurs when a source design system emits
+USML-conformant Pattern objects directly, without translation. Native
+publication is the strategic horizon of the ingest interface: as USML
+adoption grows, translation infrastructure becomes obsolete for sources
+that publish natively.
 
-When a source publishes USML natively:
+<h4 id="native-publication-definition">Native publication definition</h4>
 
-- The source's USML output MUST validate against this specification's schema.
-- Existing translations of that source's patterns SHOULD be marked for
-    retirement.
-- The source's native publication becomes the authoritative anatomy
-    declaration; the Quoin translation pack becomes a re-export of the
-    source's publication.
+A source design system publishes USML natively when it:
 
-In the 2026.05 version of this specification, no source publishes USML
-natively. The procedure is documented to make the transition concrete when
-it occurs.
+- Emits Pattern objects directly from its canonical anatomy
+    documentation.
+- Distributes the Pattern objects through a USML-conformant channel:
+    JSON conforming to the schema, npm package, MCP resource, shadcn
+    registry entry per [[#registry-json]], or other channel that delivers
+    a USML-conformant Pattern object.
+
+<h4 id="native-publication-compatibility">Compatibility requirements</h4>
+
+A USML-natively-published Pattern object:
+
+- MUST conform to [[#core-data-model]].
+- MUST validate against
+    [`spec/usml-schema.json`](https://github.com/HarrowHaus/quoin/blob/main/spec/usml-schema.json).
+- MUST declare a `version` field at top level identifying the Pattern
+    pack's version (semver) and a `quoinVersion` field identifying the
+    USML version the Pattern targets.
+- SHOULD NOT include translation attribution metadata. The
+    `metadata.source` field is for translated Patterns; natively-published
+    Patterns are not translations and MUST NOT carry translation
+    attribution.
+
+A natively-published Pattern that does include a `metadata.source` field
+is interpreted as a re-publication of an upstream source's translation,
+not as a native publication by the publisher.
+
+<h4 id="native-publication-and-source-adapters">Native publication and source adapters</h4>
+
+When a source design system publishes USML natively:
+
+- Source adapters for that source are NOT required for the natively
+    published Patterns.
+- Source adapters MAY still exist for that source for Patterns not yet
+    natively published, or for legacy versions of the source.
+- Consumers SHOULD prefer the natively-published Patterns over
+    translation-derived equivalents when both are available.
+
+<h4 id="native-publication-and-quoin">Native publication and Quoin's reference adapter</h4>
+
+When a source the Quoin reference adapter currently translates publishes
+USML natively, Quoin's catalog SHOULD migrate to the native publication,
+retiring the corresponding translations. The migration is gradual and
+opt-in; both forms MAY coexist during a transition window.
+
+In USML 2026.05, no source publishes USML natively. The procedure
+documented here makes the transition concrete in advance so that the
+first native publication has a normative integration path.
 
 <!-- ════════════════════════════════════════════════════════════════════ -->
 <h2 id="ai-consumption-format">AI consumption format</h2>
@@ -1053,9 +1385,36 @@ and CSS.
 <dfn>Slot gate</dfn> — the variant axis value or state that activates a
 conditional slot.
 
-<dfn>Source adapter</dfn> — a USML implementation that consumes an external
-source pattern and produces USML-conformant output. Transitional
-infrastructure.
+<dfn>Source adapter</dfn> — a USML implementation that consumes source
+patterns in their native format and produces USML-conformant Pattern
+objects. Formal conformance class definition in [[#conformance-source-adapter]];
+interface contract in [[#ingest-interface]]. Transitional infrastructure
+relative to [[#native-publication]].
+
+<dfn>Native publication</dfn> — a source design system publishing
+USML-conformant Pattern objects directly, without translation. The
+strategic horizon of the [[#ingest-interface]]: as USML adoption grows,
+translation infrastructure becomes obsolete for sources that publish
+natively. Defined in [[#native-publication]].
+
+<dfn>Translation attribution metadata</dfn> — the `metadata.source` field
+of a translated Pattern object, containing `system`, `url`, `license`,
+and related fields per [[#translation-attribution]]. Required on every
+translated Pattern. The field shape matches the
+`PatternMetadataSource` type in
+[`spec/usml-schema.json`](https://github.com/HarrowHaus/quoin/blob/main/spec/usml-schema.json).
+
+<dfn>License clearance</dfn> — the verification a USML Source Adapter
+MUST perform before emitting a translated Pattern. Defined in
+[[#license-clearance]]. Verifies that the source's license permits
+derivative works and that the translated form's redistribution license
+is reconciled.
+
+<dfn>Transitional translation</dfn> — a translated Pattern that will be
+retired when the source design system implements [[#native-publication]].
+Every translated Pattern is implicitly transitional; the framing makes
+the retirement expectation explicit so that consumers can plan for the
+migration.
 
 <dfn>Specification</dfn> — this document.
 

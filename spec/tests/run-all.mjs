@@ -1,5 +1,5 @@
-// USML 2026.05 — runs all three conformance class scaffolds and reports
-// aggregate pass/fail.
+// USML 2026.05 — runs all four conformance class scaffolds and reports
+// aggregate pass/fail. Source adapter scaffold added Phase 23.2.
 
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
@@ -11,6 +11,7 @@ const runners = [
   ['anatomy', join(__dirname, 'anatomy', 'run.mjs')],
   ['aesthetic-pack', join(__dirname, 'aesthetic-pack', 'run.mjs')],
   ['backend-emit', join(__dirname, 'backend-emit', 'run.mjs')],
+  ['ingest (source adapter)', join(__dirname, 'ingest', 'run.mjs')],
 ];
 
 let allPass = true;

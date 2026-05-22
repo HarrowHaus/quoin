@@ -11,6 +11,7 @@ it is not exhaustive. Future versions will expand coverage substantially.
 | USML Anatomy Validator | `anatomy/` | Validates that an implementation correctly accepts conformant inputs and rejects non-conformant inputs |
 | USML Aesthetic-Pack Provider | `aesthetic-pack/` | Validates that an aesthetic pack conforms to DTCG 2025.10 and declares no anatomy |
 | USML Backend Emitter | `backend-emit/` | Validates that emitted output preserves anatomy + variants + composition + accessibility |
+| USML Source Adapter | `ingest/` | Validates that translated patterns carry full §7.4 attribution metadata and that §7.5 license clearance correctly identifies incompatible licenses. **(Phase 23.2)** |
 
 ## Test fixture structure
 

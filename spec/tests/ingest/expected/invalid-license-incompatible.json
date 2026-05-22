@@ -1,0 +1,6 @@
+{
+  "expectValid": true,
+  "expectSourceAdapterConformant": false,
+  "rationale": "Schema validation passes — `license` field is a free-form string and the schema does not enforce SPDX or whitelist matching. USML §7.5 License clearance requires the source adapter to reject commercial-only or no-derivative-works licenses BEFORE emission. Source Adapter conformance check rejects this fixture: license string 'All Rights Reserved — Commercial-Only — no derivative works permitted' is explicitly incompatible.",
+  "expectViolation": "metadata.source.license declares commercial-only / no-derivative-works restriction per §7.5"
+}
